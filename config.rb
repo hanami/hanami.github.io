@@ -25,22 +25,9 @@ with_layout :guides do
   page '/guides/*'
 end
 
-# Per-page layout changes:
-#
-# With no layout
-# page "/path/to/file.html", :layout => false
-#
-# With alternative layout
-# page "/path/to/file.html", :layout => :otherlayout
-#
-# A path which all have the same layout
-# with_layout :admin do
-#   page "/admin/*"
-# end
-
-# Proxy pages (http://middlemanapp.com/basics/dynamic-pages/)
-# proxy "/this-page-has-no-template.html", "/template-file.html", :locals => {
-#  :which_fake_page => "Rendering a fake page with a local variable" }
+with_layout :blog do
+  page '/blog/*'
+end
 
 ###
 # Helpers
@@ -48,6 +35,12 @@ end
 
 activate :directory_indexes
 activate :syntax, css_class: 'language-ruby'
+
+activate :blog do |blog|
+  blog.prefix    = 'blog'
+  blog.permalink = '{year}/{month}/{day}/{title}.html'
+end
+
 # Automatic image dimensions on image_tag helper
 # activate :automatic_image_sizes
 

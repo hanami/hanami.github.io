@@ -1,0 +1,23 @@
+---
+title: Lotus - Blog
+---
+
+<h1>Lotus Blog</h1>
+
+<section class="blog wrapper animated fadeIn">
+<div class="container-fluid">
+  <% blog.articles[0...5].each do |article| %>
+    <div class="col-lg-12 col-md-12 main">
+      <h2 class="page-header">
+        <%= article.title %>
+        <div class="meta">Posted by <strong class="author"><%= article.data.author %></strong> on <%= article.date.strftime("%B %d, %Y") %></div>
+      </h2>
+
+      <p class="lead"><%= article.data.excerpt %></p>
+
+      <%= link_to 'Read more…', article %>
+    </div>
+  </div>
+<% end %>
+</div>
+</section>

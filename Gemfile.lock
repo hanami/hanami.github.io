@@ -7,6 +7,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.7)
     autoprefixer-rails (5.1.5)
       execjs
       json
@@ -64,6 +65,10 @@ GEM
       middleman-sprockets (>= 3.1.2)
       sass (>= 3.4.0, < 4.0)
       uglifier (~> 2.5)
+    middleman-blog (3.5.3)
+      addressable (~> 2.3.5)
+      middleman-core (~> 3.2)
+      tzinfo (>= 0.3.0)
     middleman-core (3.3.8)
       activesupport (~> 4.1.0)
       bundler (~> 1.1)
@@ -135,6 +140,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3)
   middleman (~> 3.3)
+  middleman-blog (~> 3.5)
   middleman-livereload (~> 3.1)
   middleman-syntax (~> 2.0)
   redcarpet (~> 3.2)

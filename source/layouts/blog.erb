@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= current_page.data.title || "Lotus &dash; A complete web framework for Ruby" %></title>
+    <title><%= current_page.data.title || "Lotus &dash; Guides" %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="lotusrb-version" content="0.2.1">
@@ -26,7 +26,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Logo</a>
+          <a class="navbar-brand" href="index.html">Logo</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -39,16 +39,23 @@
       </div>
     </nav>
 
-    <section class="wrapper animated fadeIn">
-      <div class="container-fluid">
+    <section class="blog wrapper animated fadeIn">
+    <div class="container-fluid">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 main">
+        <!-- <img src="images/sample-photo.jpg" class="img-rounded img-responsive"> -->
+        <h1 class="page-header">
+          <%= current_page.data.title %>
+          <div class="meta">Posted by <strong><%= current_page.data.author %></strong> on <%= current_page.date.strftime("%B %d, %Y") %></div>
+        </h1>
 
-        <div class="row">
-          <div class="col-md-12 main">
-            <%= yield %>
-          </div>
-        </div>
+        <p class="lead"><%= current_page.data.excerpt %></p>
+        <hr>
+
+        <%= current_page.body %>
       </div>
-    </section>
+    </div>
+  </div>
+  </section>
 
     <section class="email-signup">
       <div class="container-fluid wrapper">
@@ -80,6 +87,7 @@
           </div>
         </div>
       </div>
+
       <div class="sub-footer wrapper">
         <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
         <br>
@@ -93,8 +101,9 @@
     </footer>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
     <%= javascript_include_tag 'application' %>
+
   </body>
 </html>
