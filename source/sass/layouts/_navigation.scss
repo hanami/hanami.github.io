@@ -1,0 +1,91 @@
+body.subpage {
+  padding-top: 92px;  //keep topbar nav from overlapping content
+}
+
+.menu-padding {
+  padding-top:212px;  //120 + navbar height
+}
+
+.navbar {
+  background-color: #fff;
+  @include box-shadow(0 1px 2px rgba(66,34,64,.1));
+  transition: all 0.3s ease-in-out;
+  padding: 19px 0;
+  a {
+    font-size: 1.125em; //18/16
+    font-weight: 500;
+    color: #512c4e;
+    &:hover,
+    &:focus {
+      color: lighten(#512c4e, 20%);
+      background-color: #fff!important;
+    }
+  }
+
+  .nav > li > a {
+    padding: .875em 1.375em; //18 30 /16
+  }
+
+  .nav > li > a:focus {
+    background-color: transparent!important;
+  }
+
+  .navbar-toggle {
+    margin: 13px 15px 13px 0;
+    .icon-bar {
+      background-color: #222;
+    }
+  }
+
+  a.navbar-brand {
+    background-image: url(../images/lotus-dark.png);
+    display: inline-block;
+    width: 183px;
+    height: 44px;
+    text-indent: -9999px;
+    position: relative;
+    top: 4px;
+  }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    a.navbar-brand {
+      background: url(../images/lotus-dark@2x.png);
+      background-size: 100%;
+    }
+  }
+
+  .btn-primary {
+    margin-left: 20px;
+  }
+}
+
+.navbar-header {
+  padding-left: 15px;
+}
+
+.navbar-nav {
+  .btn {
+    width: 90%;
+    margin: 0 5%;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-nav {
+    float: right;
+    .btn {
+      width: auto;
+      margin-left: 20px;
+    }
+  }
+}
+
+nav.navbar.shrink {
+  min-height: 35px;
+  padding: 6px 0;
+  .navbar-toggle {
+    margin: 8px 15px 8px 0;
+  }
+}
+
+

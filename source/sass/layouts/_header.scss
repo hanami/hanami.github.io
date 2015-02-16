@@ -1,0 +1,54 @@
+header.primary {
+  overflow: hidden;
+  border-top: 4px #9b5897 solid;
+  padding-top: 100px;
+  text-align: center;
+  min-height: 200px;
+  color: #fff;
+  background-color: #532d50;
+  @include background-image(linear-gradient(bottom, #41213f 0%, #583055 100%)); // gradient overlay
+  background-image: url(../images/tsunami_light.png);
+  background-size: auto;
+
+  a.logo {
+    background-image: url(../images/lotus-light-large.png);
+    display: inline-block;
+    width: 226px;
+    height: 54px;
+    text-indent: -9999px;
+    margin-bottom: 30px;
+  }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+     a.logo {
+        background: url(../images/lotus-light-large@2x.png);
+        background-size: 100%;
+     }
+  }
+
+  h1 {
+    color: #ce71c8;
+    margin: 0;
+  }
+
+  p.sub {
+    margin-top: 18px;
+    font-size: 18px;
+    line-height: 30px;
+  }
+
+  a.btn-primary {
+    margin-top: 20px;
+  }
+
+  //temp until code the css animation
+  img {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 983px;
+  }
+}
+
+//header.secondary (subpages)
