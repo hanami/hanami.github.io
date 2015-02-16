@@ -12,20 +12,15 @@
 <footer class="primary">
 <div class="container-fluid wrapper">
   <div class="row">
-    <a class="logo col-md-3" href="#">logo</a>
-    <div class="col-md-4">
-      <span class="date">January 01, 2015</span>
-      <h4>A new Roadmap for Lotus</h4>
-      <p>Last year was great, and 2015 brings new challenges to Lotus. When I released the first version back in June it was a wild, unexpected success. There was an uncommon hype for the initial version of a “yet another web framework for Ruby”.</p>
-      <a href="#">Read More</a>
-    </div>
-
-    <div class="col-md-4 col-md-offset-1">
-      <span class="date">October 23, 2014</span>
-      <h4>Introducing Lotus::Validations</h4>
-      <p>Data validation is an important piece in software architecture. It guarantees that the successive layers will operate on correct input. In the existing Ruby frameworks we’re used to see this...</p>
-      <a href="#">Read More</a>
-    </div>
+    <a class="logo col-md-3" href="/">logo</a>
+    <% articles(2).each do |article| %>
+      <div class="col-md-4">
+        <span class="date"><%= article_date(article) %></span>
+        <h4><%= article_title(article) %></h4>
+        <p><%= article_summary(article) %></p>
+        <%= link_to 'Read more...', article %>
+      </div>
+    <% end %>
   </div>
 </div>
 
