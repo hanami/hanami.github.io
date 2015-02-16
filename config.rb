@@ -1,3 +1,4 @@
+require 'rack/utils'
 require 'middleman-syntax'
 require 'bootstrap-sass'
 require 'compass/import-once/activate'
@@ -72,6 +73,36 @@ helpers do
 
   def article_summary(article)
     article.data.excerpt.gsub("\n", '<br>')
+  end
+
+  def article_image(article)
+    if article.data.image
+      image_tag(article_image_url(article), class: 'img-rounded img-responsive')
+    end
+  end
+
+  def article_image_url(article)
+    path = if article.data.image
+      article.path.gsub(/\.html/, '')
+    else
+      "/images"
+    end
+
+    "#{ path }/cover.jpg"
+  end
+
+  def absolute_url(page)
+    url = if page.respond_to?(:url)
+            page.url
+          else
+            page
+          end
+
+    "http://lotusrb.org#{ url }"
+  end
+
+  def encode_text(text)
+   ::Rack::Utils.escape(text)
   end
 end
 

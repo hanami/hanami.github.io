@@ -12293,3 +12293,12 @@ pre[class*="language-"] {
 #nav-link-install {
   color: #fff;
 }
+
+#social ul {
+  list-style-type: none;
+  vertical-align: middle;
+}
+
+#social ul li {
+  display: inline;
+}
