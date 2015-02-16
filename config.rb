@@ -52,6 +52,10 @@ configure :development do
   activate :livereload
 end
 
+activate :deploy do |deploy|
+  deploy.method = :git
+end
+
 # Methods defined in the helpers block are available in templates
 helpers do
   def articles(limit = 5)
