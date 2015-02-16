@@ -19,7 +19,8 @@ end
 # Page options, layouts, aliases and proxies
 ###
 
-page '/index.html', layout: 'home'
+page '/',         layout: 'home'
+page '/atom.xml', layout: false
 
 with_layout :guides do
   page '/guides/*'
