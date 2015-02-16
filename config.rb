@@ -21,6 +21,7 @@ end
 
 page '/',         layout: 'home'
 page '/atom.xml', layout: false
+page '/ml/*',     layout: false
 
 with_layout :guides do
   page '/guides/*'
