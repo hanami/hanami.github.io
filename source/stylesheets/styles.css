@@ -12088,6 +12088,7 @@ footer.primary .col-md-4 {
 }
 /* line 33, ../sass/layouts/_footer.scss */
 footer.primary .sub-footer .copyright {
+  font-size: 0.8em;
   color: #9e8f9c;
 }
 /* line 35, ../sass/layouts/_footer.scss */

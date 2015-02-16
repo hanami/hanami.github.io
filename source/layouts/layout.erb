@@ -6,6 +6,7 @@
     <title><%= current_page.data.title || "Lotus &dash; A complete web framework for Ruby" %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="lotusrb-version" content="0.2.1">
 
     <%= stylesheet_link_tag 'application' %>
     <%# <link rel="stylesheet" href="stylesheets/styles.css"> %>
@@ -24,12 +25,12 @@
     <![endif]-->
 
     <header class="primary container-fluid animated fadeIn">
-      <a class="logo" href="index.html" >lotus</a>
+      <a class="logo" href="index.html">lotus</a>
       <h1>A complete web framework for Ruby</h1>
       <p class="sub">Lotus brings back Object Oriented Programming to web development,<br />
       leveraging a stable API, minimal DSL and plain objects.</p>
 
-      <a href="#" class="btn btn-primary">Download v0.2.0</a>
+      <a href="https://rubygems.org/gems/lotusrb" target="_blank" class="btn btn-primary version">Download v{{version}}</a>
 
       <!-- terminal-window -->
       <div class="terminal-window animated bounceInUp">
@@ -48,9 +49,9 @@
       <!-- data -->
       <div class="terminal-data run-output">
        <br>
-        <span class="gray">[2015-02-08 11:18:54] INFO  WEBrick 1.3.1</span><br>
-        <span class="gray">[2015-02-08 11:18:54] INFO  ruby 2.1.2 (2014-05-08) [x86_64-darwin13.0]</span><br>
-        <span class="gray">[2015-02-08 11:18:54] INFO  WEBrick::HTTPServer#start: pid=52511 port=2300</span><br>
+       <span class="gray timestamp">{{timestamp}} INFO  WEBrick 1.3.1</span><br>
+       <span class="gray timestamp">{{timestamp}} INFO  ruby 2.2.0 (2014-12-25) [x86_64-darwin13]</span><br>
+       <span class="gray timestamp">{{timestamp}} INFO  WEBrick::HTTPServer#start: pid=75581 port=2300</span><br>
        <br>
       </div>
       <!-- .data -->
@@ -68,10 +69,11 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="ui-kit-docs.html">Docs</a></li>
-            <li><a href="#">Community</a></li>
-            <li><a href="ui-kit-blog.html">Blog</a></li>
-            <li><button type="button" class="btn btn-primary">Download v.0.2.0</button></li>
+            <li><a href="/guides">Guides</a></li>
+            <li><a href="/community">Community</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://github.com/lotus" target="_blank">Source Code</a></li>
+            <%# <li><button href="https://rubygems.org/gems/lotusrb" type="button" class="btn btn-primary version">Download v{{version}}</button></li> %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -82,14 +84,12 @@
         <article class="col-md-5 col-xs-12">
           <h3>Features</h3>
           <h2>Lotus is lightweight, fast and testable</h2>
-
           <p>Lotus is Open Source Software, which strives for simplicity, less DSLs, minimal conventions, more objects, zero monkey-patching and the separation of concerns between MVC layers.  It suggests best practices, but it leaves all the freedom to you, the developer, to build your own architecture, with your own objects.</p>
-
           <p>Lotus is made of standalone frameworks (controllers, views, etc.) and each one is shipped as an independent gem to emphasize the separation of concerns.</p>
         </article>
 
         <figure class="col-md-7 hidden-sm hidden-xs">
-          <img src="images/features.png" />
+          <%= image_tag 'features.png' %>
         </figure>
       </div>
     </section>
@@ -107,7 +107,7 @@
               <div class="framework">
                 <h4>Lotus</h4>
                 <p>Full stack web applications<br />
-                  <a href="#">Gem</a> • <a href="#">API</a> • <a href="#">Source Code</a>
+                  <a href="http://rubygems.org/gems/lotusrb" target="_blank">Gem</a> • <a href="http://rdoc.info/gems/lotusrb" target="_blank">API</a> • <a href="https://github.com/lotus/lotus" target="_blank">Source Code</a>
                 </p>
               </div>
             </article>
@@ -115,8 +115,8 @@
               <span class="number">_02</span>
               <div class="framework">
                 <h4>Lotus <strong>::</strong> Model</h4>
-                <p>Model layer for Lotus<br />
-                  <a href="#">Gem</a> • <a href="#">API</a> • <a href="#">Source Code</a>
+                <p>A persistence framework with entities, repositories, data mapper and query objects<br />
+                  <a href="http://rubygems.org/gems/lotus-model" target="_blank">Gem</a> • <a href="http://rdoc.info/gems/lotus-model" target="_blank">API</a> • <a href="https://github.com/lotus/model" target="_blank">Source Code</a>
                 </p>
               </div>
             </article>
@@ -124,8 +124,8 @@
               <span class="number">_03</span>
               <div class="framework">
                 <h4>Lotus <strong>::</strong> Router</h4>
-                <p>Rack compatible, lightweight and fast HTTP Router<br />
-                  <a href="#">Gem</a> • <a href="#">API</a> • <a href="#">Source Code</a>
+                <p>Rack compatible, lightweight and fast HTTP Router for Ruby<br />
+                  <a href="http://rubygems.org/gems/lotus-router" target="_blank">Gem</a> • <a href="http://rdoc.info/gems/lotus-router" target="_blank">API</a> • <a href="https://github.com/lotus/router" target="_blank">Source Code</a>
                 </p>
               </div>
             </article>
@@ -137,7 +137,7 @@
               <div class="framework">
                 <h4>Lotus <strong>::</strong> Utils</h4>
                 <p>Ruby core extensions and class utilities for Lotus<br />
-                  <a href="#">Gem</a> • <a href="#">API</a> • <a href="#">Source Code</a>
+                  <a href="http://rubygems.org/gems/lotus-utils" target="_blank">Gem</a> • <a href="http://rdoc.info/gems/lotus-utils" target="_blank">API</a> • <a href="https://github.com/lotus/utils" target="_blank">Source Code</a>
                 </p>
               </div>
             </article>
@@ -146,7 +146,7 @@
               <div class="framework">
                 <h4>Lotus <strong>::</strong> View</h4>
                 <p>View layer for Lotus<br />
-                  <a href="#">Gem</a> • <a href="#">API</a> • <a href="#">Source Code</a>
+                  <a href="http://rubygems.org/gems/lotus-view" target="_blank">Gem</a> • <a href="http://rdoc.info/gems/lotus-view" target="_blank">API</a> • <a href="https://github.com/lotus/view" target="_blank">Source Code</a>
                 </p>
               </div>
             </article>
@@ -154,8 +154,20 @@
               <span class="number">_06</span>
               <div class="framework">
                 <h4>Lotus <strong>::</strong> Controller</h4>
-                <p>Controller layer for Lotus<br />
-                  <a href="#">Gem</a> • <a href="#">API</a> • <a href="#">Source Code</a>
+                <p>Complete, fast and testable actions for Rack and Lotus<br />
+                  <a href="http://rubygems.org/gems/lotus-controller" target="_blank">Gem</a> • <a href="http://rdoc.info/gems/lotus-controller" target="_blank">API</a> • <a href="https://github.com/lotus/controller" target="_blank">Source Code</a>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="row">
+            <article class="col-sm-4">
+              <span class="number">_07</span>
+              <div class="framework">
+                <h4>Lotus <strong>::</strong> Validations</h4>
+                <p>Validations mixin for Ruby objects<br />
+                  <a href="http://rubygems.org/gems/lotus-validations" target="_blank">Gem</a> • <a href="http://rdoc.info/gems/lotus-validations" target="_blank">API</a> • <a href="https://github.com/lotus/validations" target="_blank">Source Code</a>
                 </p>
               </div>
             </article>
@@ -166,14 +178,16 @@
     <section class="cta">
       <div class="wrapper">
         <h3>Download</h3>
-        <h2>Get Started with the Lotus Framework</h2>
-        <a href="#" class="btn btn-primary">Download v0.2.0</a>
+        <h2>Get Started with Lotus</h2>
+        <a href="http://rubygems.org/gems/lotusrb" target="_blank" class="btn btn-primary version">Download v{{version}}</a>
 
+        <!--
         <article class="case-studies">
           <p>Check out who uses Lotus:</p>
-          <img class="dnsimple" src="images/dnssimple.png" />
-          <img class="envato" src="images/envato.png" />
+          <%= image_tag 'dnssimple.png' %>
+          <%= image_tag 'envato.png' %>
         </article>
+        -->
       </div>
     </section>
 
@@ -209,10 +223,13 @@
       </div>
 
       <div class="sub-footer wrapper">
-        <p class="copyright pull-left">© 2015 <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
+        <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
+        <br>
+        <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
+        <br> Maintained with <3 by the <a href="" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
         <ul class="social">
-          <li><a href="#" class="icon-twitter"></a></li>
-          <li><a href="#" class="icon-github"></a></li>
+          <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
+          <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
         </ul>
       </div>
     </footer>
