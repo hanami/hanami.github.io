@@ -2087,7 +2087,7 @@ a.bg-danger:hover {
 }
 
 /* line 138, ../../../.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/bootstrap-sass-3.3.3/assets/stylesheets/bootstrap/_type.scss */
-.page-header {
+div.doc-section > h1, .page-header {
   padding-bottom: 11px;
   margin: 48px 0 24px;
   border-bottom: 1px solid #eeeeee;
