@@ -189,58 +189,10 @@
       </div>
     </section>
 
-    <section class="email-signup">
-      <div class="container-fluid wrapper">
-
-      <form class="">
-        <input type="email" class="pull-left" id="" placeholder="Enter your email to get updates">
-        <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
-      </form>
-
-      </div>
-    </section>
-
-    <footer class="primary">
-      <div class="container-fluid wrapper">
-        <div class="row">
-          <a class="logo col-md-3" href="#">logo</a>
-          <div class="col-md-4">
-            <span class="date">January 01, 2015</span>
-            <h4>A new Roadmap for Lotus</h4>
-            <p>Last year was great, and 2015 brings new challenges to Lotus. When I released the first version back in June it was a wild, unexpected success. There was an uncommon hype for the initial version of a “yet another web framework for Ruby”.</p>
-            <a href="#">Read More</a>
-          </div>
-
-          <div class="col-md-4 col-md-offset-1">
-            <span class="date">October 23, 2014</span>
-            <h4>Introducing Lotus::Validations</h4>
-            <p>Data validation is an important piece in software architecture. It guarantees that the successive layers will operate on correct input. In the existing Ruby frameworks we’re used to see this...</p>
-            <a href="#">Read More</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="sub-footer wrapper">
-        <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
-        <br>
-        <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
-        <br> Maintained with <3 by the <a href="" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
-        <ul class="social">
-          <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
-          <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
-        </ul>
-      </div>
-    </footer>
-
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
-    <%= javascript_include_tag 'application' %>
+    <%= partial 'footer' %>
 
     <script>
       new WOW().init();
     </script>
-
   </body>
 </html>
