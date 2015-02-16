@@ -44,11 +44,11 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 main">
         <!-- <img src="images/sample-photo.jpg" class="img-rounded img-responsive"> -->
         <h1 class="page-header">
-          <%= current_page.data.title %>
-          <div class="meta">Posted by <strong><%= current_page.data.author %></strong> on <%= current_page.date.strftime("%B %d, %Y") %></div>
+          <%= article_title(current_page) %>
+          <div class="meta">Posted by <strong><%= article_author(current_page) %></strong> on <%= article_date(current_page) %></div>
         </h1>
 
-        <p class="lead"><%= current_page.data.excerpt %></p>
+        <p class="lead"><%= article_summary(current_page) %></p>
         <hr>
 
         <%= current_page.body %>

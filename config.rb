@@ -50,11 +50,28 @@ configure :development do
 end
 
 # Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
+helpers do
+  def articles(limit = 5)
+    blog.articles[0..limit]
+  end
+
+  def article_title(article)
+    article.data.title
+  end
+
+  def article_author(article)
+    article.data.author
+  end
+
+  def article_date(article)
+    date = article.date
+    date.strftime('%B %d, %Y')
+  end
+
+  def article_summary(article)
+    article.data.excerpt
+  end
+end
 
 set :css_dir,    'stylesheets'
 set :js_dir,     'javascripts'
