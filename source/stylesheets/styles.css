@@ -11548,10 +11548,6 @@ body.index section.frameworks h2 {
 body.index section.frameworks .row {
   padding-bottom: 78px;
 }
-/* line 113, ../sass/pages/_index.scss */
-body.index section.frameworks .row ~ .row {
-  padding-bottom: 0;
-}
 /* line 117, ../sass/pages/_index.scss */
 body.index section.frameworks span.number,
 body.index section.frameworks div.framework {
@@ -12292,4 +12288,8 @@ pre[class*="language-"] {
 /* line 134, ../sass/_prism.scss */
 .token.entity {
   cursor: help;
+}
+
+#nav-link-install {
+  color: #fff;
 }
