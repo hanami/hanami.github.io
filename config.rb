@@ -69,7 +69,7 @@ helpers do
   end
 
   def article_summary(article)
-    article.data.excerpt
+    article.data.excerpt.gsub("\n", '<br>')
   end
 end
 
