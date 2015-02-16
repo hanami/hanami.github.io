@@ -81,13 +81,13 @@ helpers do
 
   def article_image(article)
     if article.data.image
-      image_tag(article_image_url(article), class: 'img-rounded img-responsive')
+      %(<img src="#{ article_image_url(article) }" class="img-rounded img-responsive">)
     end
   end
 
   def article_image_url(article)
     path = if article.data.image
-      article.path.gsub(/\.html/, '')
+      article.url.gsub(/\.html/, '')
     else
       "/images"
     end
