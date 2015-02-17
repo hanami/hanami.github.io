@@ -49,11 +49,7 @@ $(window).load(function(){
 
 // Prepare timestamps for terminal animation
 $(window).load(function(){
-  var date      = new Date();
-  var month     = (date.getMonth()+1);
-  month         = month > 10 ? month : '0'+month;
-
-  var timestamp = "["+date.getFullYear()+"-"+month+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"]";
+  var timestamp = "[" + moment().format("YYYY-MM-DD HH:mm:ss") + "]";
 
   $('span.timestamp').each(function(i, element) {
     element = $(element);
