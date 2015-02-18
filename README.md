@@ -20,3 +20,9 @@
 ```shell
 % bundle exec middleman server
 ```
+
+## Deploy
+
+```shell
+% bundle exec middleman deploy --build-before
+```
