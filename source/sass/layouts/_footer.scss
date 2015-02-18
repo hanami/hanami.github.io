@@ -1,0 +1,81 @@
+footer.primary {
+  background-color: #52294f;
+  color: #fff;
+  padding-top: 120px;
+
+  a.logo {
+    background-image: url(../images/lotus-light.png);
+    display: inline-block;
+    margin: 0 45px 40px 15px;
+    width: 183px;
+    height: 44px;
+    text-indent: -9999px;
+  }
+
+  span.date {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  h4 {
+    font-size: 22px;
+    font-family: "futura-pt", sans-serif;
+    font-weight: 600;
+  }
+
+  .col-md-4 {
+    margin-bottom: 24px;
+  }
+
+  .sub-footer {
+    .copyright {
+      font-size: 0.8em;
+      color: #9e8f9c;
+      a {
+        color: #9e8f9c;
+        text-decoration: underline;
+        &:hover {
+          color: darken(#938f9c, 10%);
+        }
+      }
+    }
+    ul.social {
+      display: none;
+      li {
+        list-style-type: none;
+        float: left;
+        a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 24px;
+          margin-left: 24px;
+          &:hover {
+            color: darken(#fff, 15%);
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      ul.social {
+        display: inline-block;
+        float: right;
+      }
+    }
+  }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+     a.logo {
+        background: url(../images/lotus-light@2x.png);
+        background-size: 100%;
+     }
+  }
+
+  .sub-footer {
+    margin-top: 100px;
+    padding: 40px 15px;
+    border-top: 1px #603c5d solid;
+  }
+}

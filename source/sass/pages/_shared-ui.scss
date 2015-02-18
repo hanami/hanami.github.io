@@ -1,0 +1,42 @@
+// Import UI elements
+@import "modules/colors";
+@import "modules/typography";
+@import "modules/variables";
+@import "modules/animate";
+@import "modules/buttons";
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+a {
+  color: $gold;
+  &:hover {
+    color: darken($gold, 10%);
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.panel {
+  padding: 24px;
+}
+
+.wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+section {
+  padding: 120px 0 160px;
+}
+

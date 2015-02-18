@@ -1,0 +1,59 @@
+/*
+Error: File to import not found or unreadable: bootstrap-compass.
+       Load path: /Users/alantippins/Desktop/lotus-design
+        on line 2 of ./sass/styles.scss
+
+1: // Import Bootstrap Compass integration
+2: @import "bootstrap-compass";
+3: 
+4: // Import custom Bootstrap variables
+5: @import "bootstrap-variables";
+6: 
+7: // Import Bootstrap for Sass
+
+Backtrace:
+./sass/styles.scss:2
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/import_node.rb:66:in `rescue in import'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/import_node.rb:45:in `import'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/import_node.rb:28:in `imported_file'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/import_node.rb:37:in `css_import?'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:301:in `visit_import'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/stack.rb:79:in `block in with_base'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/stack.rb:115:in `with_frame'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/stack.rb:79:in `with_base'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:157:in `visit'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/visitors/perform.rb:8:in `visit'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/engine.rb:368:in `_render_with_sourcemap'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/engine.rb:285:in `render_with_sourcemap'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/plugin/compiler.rb:489:in `update_stylesheet'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/plugin/compiler.rb:293:in `watch'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/plugin.rb:108:in `method_missing'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/exec/sass_scss.rb:370:in `watch_or_update'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/exec/sass_scss.rb:50:in `process_result'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/exec/base.rb:52:in `parse'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/lib/sass/exec/base.rb:19:in `parse!'
+/Users/alantippins/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/sass-3.4.7/bin/sass:13:in `<top (required)>'
+/Users/alantippins/.rbenv/versions/2.1.2/bin/sass:23:in `load'
+/Users/alantippins/.rbenv/versions/2.1.2/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: bootstrap-compass.\A        Load path: /Users/alantippins/Desktop/lotus-design\A         on line 2 of ./sass/styles.scss\A \A 1: // Import Bootstrap Compass integration\A 2: @import \"bootstrap-compass\";\A 3: \A 4: // Import custom Bootstrap variables\A 5: @import \"bootstrap-variables\";\A 6: \A 7: // Import Bootstrap for Sass"; }

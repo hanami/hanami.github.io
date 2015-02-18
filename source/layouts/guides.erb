@@ -1,0 +1,55 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= current_page.data.title || "Lotus &dash; Guides" %></title>
+    <meta name="description" content="Lotus, a complete web framework for Ruby" />
+    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="lotusrb-version" content="0.2.1">
+    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+
+    <%= stylesheet_link_tag 'application' %>
+
+    <script src="//use.typekit.net/xhp5wmc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body class="subpage docs">
+    <%= partial 'header' %>
+
+    <section class="docs wrapper animated fadeIn">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 hidden-sm hidden-xs sidebar">
+
+            <ul class="nav nav-sidebar">
+              <li class="active">
+                <span class="heading">Getting Started</span>
+                <ul class="nav">
+                  <li class="active"><a href="/guides/getting-started">Getting started</a></li>
+                </ul>
+              </li>
+              <li>
+                <span class="heading">Introduction</span>
+                <ul class="nav">
+                  <li><a href="/guides/introduction">Introduction</a></li>
+                  <li><a href="/guides/philosophy">Philosophy</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="col-md-9 main">
+            <div class="doc-section">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%= partial 'footer' %>
+  </body>
+</html>
