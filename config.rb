@@ -77,7 +77,7 @@ helpers do
   end
 
   def article_summary(article)
-    article.data.excerpt.gsub("\n", '<br>')
+    article.data.excerpt
   end
 
   def article_image(article)
