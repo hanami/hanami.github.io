@@ -1,0 +1,49 @@
+#!/bin/bash
+
+command="$1"
+
+function _middleman {
+  local command="$@"
+  bundle exec middleman $command
+}
+
+function start_server {
+  _middleman server
+}
+
+function build_site {
+  _middleman build
+}
+
+function publish_site {
+  _middleman deploy --build-before
+}
+
+function print_help {
+  echo -e 'Usage:'
+  echo -e '\tbin/site [command]'
+  echo -e 'Available commands:'
+  echo -e '\tdevelop - Start the local server to develop the site'
+  echo -e '\tbuild   - Build the site locally'
+  echo -e '\tpublish - Build the site locally and publish'
+  echo -e '\thelp    - Print this help'
+}
+
+case "$command" in
+  'develop')
+    start_server
+    ;;
+  'build')
+    build_site
+    ;;
+  'publish')
+    publish_site
+    ;;
+  'help')
+    print_help
+    ;;
+  *) echo "Unrecognized command: $command"
+    print_help
+    exit 1
+    ;;
+esac
