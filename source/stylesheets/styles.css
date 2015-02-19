@@ -8541,7 +8541,7 @@ button.close {
 }
 /* line 1, ../sass/modules/_typography.scss */
 body {
-  font-family: "proxima-nova-soft", sans-serif;
+  font-family: "proxima-nova-soft", "proxima-nova-soft-1", "proxima-nova-soft-2", sans-serif;
   transition: all .2s linear;
   -o-transition: all .2s linear;
   -moz-transition: all .2s linear;
@@ -8562,7 +8562,7 @@ body {
 }
 /* line 21, ../sass/modules/_typography.scss */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "futura-pt", sans-serif;
+  font-family: "futura-pt", "futura-pt-1", "futura-pt-2", sans-serif;
   font-weight: 600;
 }
 
@@ -11566,7 +11566,7 @@ body.index section.frameworks h4 strong {
 body.index section.frameworks h4,
 body.index section.frameworks span.number {
   font-size: 24px;
-  font-family: "futura-pt", sans-serif;
+  font-family: "futura-pt", "futura-pt-1", "futura-pt-2", sans-serif;
   font-weight: 600;
 }
 /* line 137, ../sass/pages/_index.scss */
@@ -11608,7 +11608,7 @@ body.index section.cta .case-studies p {
   font-size: 1.5em;
   font-weight: 600;
   margin-bottom: 0;
-  font-family: "futura-pt", sans-serif;
+  font-family: "futura-pt", "futura-pt-1", "futura-pt-2", sans-serif;
 }
 /* line 180, ../sass/pages/_index.scss */
 body.index section.cta .case-studies img {
@@ -11645,7 +11645,7 @@ body.docs .sidebar .nav-sidebar > li {
 }
 /* line 29, ../sass/pages/_docs.scss */
 body.docs .sidebar .nav-sidebar .heading {
-  font-family: "futura-pt", sans-serif;
+  font-family: "futura-pt", "futura-pt-1", "futura-pt-2", sans-serif;
   font-size: 14px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -11673,7 +11673,7 @@ body.blog div.meta {
   margin-top: 12px;
   font-size: 14px;
   color: #918888;
-  font-family: "proxima-nova-soft", sans-serif;
+  font-family: "proxima-nova-soft", "proxima-nova-soft-1", "proxima-nova-soft-2", sans-serif;
 }
 
 /* line 8, ../sass/pages/_shared-ui.scss */
@@ -11991,7 +11991,7 @@ section.email-signup form {
 section.email-signup input[type="email"] {
   color: #fff;
   font-size: 1.4em;
-  font-family: "futura-pt", sans-serif;
+  font-family: "futura-pt", "futura-pt-1", "futura-pt-2", sans-serif;
   font-weight: 600;
   letter-spacing: 0.05em;
   line-height: normal;
@@ -12075,7 +12075,7 @@ footer.primary span.date {
 /* line 22, ../sass/layouts/_footer.scss */
 footer.primary h4 {
   font-size: 22px;
-  font-family: "futura-pt", sans-serif;
+  font-family: "futura-pt", "futura-pt-1", "futura-pt-2", sans-serif;
   font-weight: 600;
 }
 /* line 28, ../sass/layouts/_footer.scss */
@@ -12292,6 +12292,11 @@ pre[class*="language-"] {
 
 #nav-link-install {
   color: #fff;
+}
+
+#nav-link-install:hover,
+#nav-link-install:active {
+  color: #93508e;
 }
 
 #social ul {

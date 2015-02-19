@@ -1,5 +1,5 @@
 body {
-  font-family: "proxima-nova-soft", sans-serif;
+  font-family: "proxima-nova-soft", "proxima-nova-soft-1", "proxima-nova-soft-2", sans-serif;
   transition:all .2s linear;
   -o-transition:all .2s linear;
   -moz-transition:all .2s linear;
@@ -19,7 +19,7 @@ body {
 }
 
 h1,h2,h3,h4, h5, h6 {
-  font-family: "futura-pt", sans-serif;
+  font-family: "futura-pt", "futura-pt-1", "futura-pt-2", sans-serif;
   font-weight: 600;
 }
 
