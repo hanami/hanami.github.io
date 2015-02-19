@@ -23,7 +23,7 @@
        <summary>
          <%= article_summary(article) %>
        </summary>
-       <content type="html"><%= article.body %></content>
+       <content type="html"><![CDATA[<%= article.body %>]]</content>
      </entry>
    <% end %>
 </feed>
