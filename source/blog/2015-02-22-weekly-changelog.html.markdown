@@ -10,7 +10,7 @@ excerpt: >
 ## Releases
 
   * [New website](http://lotusrb.org)
-  * **Lotus::Model** `v0.2.1` [details](https://github.com/lotus/model/blob/master/CHANGELOG.md#v024---2015-02-20)
+  * **Lotus::Model** `v0.2.4` [details](https://github.com/lotus/model/blob/master/CHANGELOG.md#v024---2015-02-20)
 
 ## Completed
 
