@@ -60,7 +60,7 @@ end
 # Methods defined in the helpers block are available in templates
 helpers do
   def articles(limit = 5)
-    blog.articles[0..limit]
+    blog.articles[0...limit]
   end
 
   def article_title(article)
