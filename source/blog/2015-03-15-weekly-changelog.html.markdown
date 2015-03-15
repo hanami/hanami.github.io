@@ -2,7 +2,7 @@
 title: Weekly Changelog
 date: 2015-03-15 09:29 UTC
 tags: changelog
-author: Trung Lê 
+author: Trung Lê
 excerpt: >
   Changelog from Mar 8th to Mar 15th 2015
 ---
@@ -17,7 +17,7 @@ excerpt: >
   * Stop sending nil value to DB when creating new record [[details](https://github.com/lotus/model/pull/81)]
   * Use Lotus::Utils Boolean class within model [[details](https://github.com/lotus/model/pull/160)]
   * redirect_to now halt the request [[details](https://github.com/lotus/controller/pull/94)]
-  * Introduced `Lotus::Interactor` and `Lotus::Utils::BasicObject` [[details](https://github.com/lotus/utils/commit/0b83e837174eaa3684b7923f60ce609c65555c99)
+  * Introduced `Lotus::Interactor` and `Lotus::Utils::BasicObject` [[details](https://github.com/lotus/utils/commit/0b83e837174eaa3684b7923f60ce609c65555c99)]
   * Lotus::Helpers integration in Lotus [[details](https://github.com/lotus/lotus/pull/175)]
 
 ## Development
