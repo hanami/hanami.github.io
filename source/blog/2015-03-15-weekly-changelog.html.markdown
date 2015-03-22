@@ -26,7 +26,7 @@ excerpt: >
   * Action generator [[details](https://github.com/lotus/lotus/pull/166)]
   * Application generator [[details](https://github.com/lotus/lotus/pull/181)]
   * Form helpers [[details](https://github.com/lotus/helpers/pull/16)]
-  * Number formatting helpers [[details](https://github.com/lotus/helpers/pull/14)]
+  * Number formatting helpers [[details](https://github.com/lotus/helpers/pull/11)]
   * Custom validations [[details](https://github.com/lotus/validations/pull/49)]
   * Make flash session to persist between requests [[details](https://github.com/lotus/controller/pull/96)]
 
