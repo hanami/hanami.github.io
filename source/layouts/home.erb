@@ -7,7 +7,7 @@
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="lotusrb-version" content="0.2.1">
+    <meta name="lotusrb-version" content="0.3.0">
     <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
 
     <%= stylesheet_link_tag 'application' %>
@@ -31,7 +31,7 @@
       <p class="sub">Lotus brings back Object Oriented Programming to web development,<br />
       leveraging a stable API, minimal DSL and plain objects.</p>
 
-      <a href="https://rubygems.org/gems/lotusrb" target="_blank" class="btn btn-primary version">Install v{{version}}</a>
+      <a href="https://github.com/lotus/lotus" target="_blank" class="btn btn-primary version">Install v{{version}}</a>
 
       <!-- terminal-window -->
       <div class="terminal-window animated bounceInUp">
@@ -51,7 +51,7 @@
       <div class="terminal-data run-output">
        <br>
        <span class="gray timestamp">{{timestamp}} INFO  WEBrick 1.3.1</span><br>
-       <span class="gray timestamp">{{timestamp}} INFO  ruby 2.2.0 (2014-12-25) [x86_64-darwin13]</span><br>
+       <span class="gray timestamp">{{timestamp}} INFO  ruby 2.2.1 (2014-12-25) [x86_64-darwin13]</span><br>
        <span class="gray timestamp">{{timestamp}} INFO  WEBrick::HTTPServer#start: pid=75581 port=2300</span><br>
        <br>
       </div>
@@ -73,7 +73,7 @@
             <!-- <li><a href="/guides">Guides</a></li> -->
             <li><a href="/community">Community</a></li>
             <li><a href="/blog">Blog</a></li>
-            <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v{{version}}</a></li>
+            <li><a href="https://github.com/lotus/lotus" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v{{version}}</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -171,6 +171,15 @@
                 </p>
               </div>
             </article>
+            <article class="col-sm-4">
+              <span class="number">_08</span>
+              <div class="framework">
+                <h4>Lotus <strong>::</strong> Helpers</h4>
+                <p>View helpers for Ruby applications<br />
+                  <a href="http://rubygems.org/gems/lotus-helpers" target="_blank">Gem</a> • <a href="http://rdoc.info/gems/lotus-helpers" target="_blank">API</a> • <a href="https://github.com/lotus/helpers" target="_blank">Source Code</a>
+                </p>
+              </div>
+            </article>
           </div>
         </div>
     </section>
@@ -179,15 +188,13 @@
       <div class="wrapper">
         <h3>Install</h3>
         <h2>Get Started with Lotus</h2>
-        <a href="http://rubygems.org/gems/lotusrb" target="_blank" class="btn btn-primary version">Install v{{version}}</a>
+        <a href="https://github.com/lotus/lotus" target="_blank" class="btn btn-primary version">Install v{{version}}</a>
 
-        <!--
         <article class="case-studies">
           <p>Check out who uses Lotus:</p>
           <%= image_tag 'dnssimple.png' %>
-          <%= image_tag 'envato.png' %>
+          <%# <%= image_tag 'envato.png' %1> %>
         </article>
-        -->
       </div>
     </section>
 
