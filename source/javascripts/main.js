@@ -72,13 +72,13 @@ $(window).load(function(){
   {
     action: 'type',
     strings: ['lotus new bookshelf^400'],
-    output: '<span class="gray">27 files created successfully</span><br>&nbsp;',
+    output: '<span class="gray">21 files created successfully</span><br>&nbsp;',
     postDelay: 1000
   },
   {
     action: 'type',
     strings: ['cd bookshelf && bundle^400'],
-    output: '<span class="gray">24 gems installed successfully</span><br>&nbsp;',
+    output: '<span class="gray">Bundle complete! 6 Gemfile dependencies, 25 gems now installed.</span><br>&nbsp;',
     postDelay: 1000
   },
   {
