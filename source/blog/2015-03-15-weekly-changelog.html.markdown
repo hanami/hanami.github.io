@@ -9,7 +9,7 @@ excerpt: >
 
 ## Releases
 
-  * Bump lotus-model to v0.3.5
+  * lotus-utils to v0.3.5
 
 ## Completed
 

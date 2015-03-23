@@ -9,14 +9,7 @@ excerpt: >
 
 ## Releases
 
-  * Released lotusrb 0.3.0
-  * Released lotus-validations 0.3.0
-  * Released lotus-view 0.3.0
-  * Released lotus-controller 0.3.0
-  * Released lotus-model 0.3.0
-  * Released lotus-router 0.3.0
-  * Released lotus-utils 0.4.0
-  * Released lotus-helpers 0.1.0
+-
 
 ## Completed
 
