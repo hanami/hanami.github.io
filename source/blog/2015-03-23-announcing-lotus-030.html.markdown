@@ -39,7 +39,7 @@ We're not done yet, until we have talked about [Content Security Policy](http://
 
 It's an [attack](http://en.wikipedia.org/wiki/Clickjacking) that leads users to click on an invisible evil item. The trick is to embed a trusted web page via an iframe, so the user believes to interact with it, but instead their actions are hijacked by a harmful context.
 
-The solution is to send a [HTTP header](https://www.owasp.org/index.php/Clickjacking_Defense_Cheat_Sheet#X-Frame-Options_Header_Types) (`X-Frame-Options`) that regulates which source can embed your web application resources. **Again, Lotus is the first Ruby web framework that enables this defense by default**.
+The solution is to send a [HTTP header](https://www.owasp.org/index.php/Clickjacking_Defense_Cheat_Sheet#X-Frame-Options_Header_Types) (`X-Frame-Options`) that regulates which source can embed your web application resources. <del>**Again, Lotus is the first Ruby web framework that enables this defense by default**.</del>
 
 ## Features
 
