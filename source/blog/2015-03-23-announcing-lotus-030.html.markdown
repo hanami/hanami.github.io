@@ -88,4 +88,8 @@ We are already developing new functionalities for the next release: database mig
 
   <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.3.0" data-url="http://lotusrb.org/blog/2015/03/23/announcing-lotus-030.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
   <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015/03/23/announcing-lotus-030.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
 </div>
