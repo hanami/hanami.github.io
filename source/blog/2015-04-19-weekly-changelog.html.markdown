@@ -14,8 +14,8 @@ excerpt: >
 ## Completed
 
   * [Dmitry Tymchuk](https://github.com/dsnipe) Implementation of dirty check for entity [[details](https://github.com/lotus/model/pull/172)]
-  * [Miguel Molina](https://github.com/mvader) Add self.body to actions generated with --skip-view flag[[details](https://github.com/lotus/lotus/pull/206)]
-  * [Alfonso Uceda](https://github.com/AlfonsoUceda) Add self.body to actions generated with --skip-view flag[[details](https://github.com/lotus/validations/pull/55)]
+  * [Miguel Molina](https://github.com/mvader) Add self.body to actions generated with --skip-view flag [[details](https://github.com/lotus/lotus/pull/206)]
+  * [Alfonso Uceda](https://github.com/AlfonsoUceda) Fixed lotus entity integration bug [[details](https://github.com/lotus/validations/pull/55)]
 
 ## Development
 
