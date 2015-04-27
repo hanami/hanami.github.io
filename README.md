@@ -28,3 +28,7 @@ Available commands:
   publish - Build the site locally and publish
   help    - Print this help
 ```
+
+NOTE: There is an issue in which invoking `site` command with specified
+current directory, `./bin/site` won't publish the site correctly. Please
+invoke without `./`
