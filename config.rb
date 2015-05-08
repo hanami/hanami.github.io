@@ -104,7 +104,8 @@ helpers do
   # GUIDES
   #
 
-  GUIDES_ROOT = 'source/guides'.freeze
+  GUIDES_ROOT     = 'source/guides'.freeze
+  GUIDES_EDIT_URL = 'https://github.com/lotus/lotus.github.io/edit/build/'.freeze
 
   def guides_navigation
     result = ''
@@ -138,6 +139,11 @@ helpers do
     end
 
     result
+  end
+
+  def guides_edit_article(source)
+    url = GUIDES_EDIT_URL + source.gsub(Dir.pwd, '')
+    %(<a href="#{ url }" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>)
   end
 
   #

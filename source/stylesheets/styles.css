@@ -12307,3 +12307,8 @@ pre[class*="language-"] {
 #social ul li {
   display: inline;
 }
+
+#edit-guides-article {
+  float: right;
+  font-size: .8em;
+}
