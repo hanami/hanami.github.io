@@ -15,6 +15,7 @@ If we hit `/foo`, a `404` (Not Found) is returned.
 ### Fixed Matching
 
 ```ruby
+# apps/web/config/routes.rb
 get '/dashboard', to: "dashboard#index"
 ```
 
