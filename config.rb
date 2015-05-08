@@ -59,6 +59,10 @@ end
 
 # Methods defined in the helpers block are available in templates
 helpers do
+  #
+  # BLOG
+  #
+
   def articles(limit = 5)
     blog.articles[0...limit]
   end
@@ -95,6 +99,49 @@ helpers do
 
     "#{ path }/cover.jpg"
   end
+
+  #
+  # GUIDES
+  #
+
+  GUIDES_ROOT = 'source/guides'.freeze
+
+  def guides_navigation
+    result = ''
+
+    Dir.glob("#{ GUIDES_ROOT }/*").each do |section|
+      next unless ::File.directory?(section)
+      result << guides_section(section)
+    end
+
+    result
+  end
+
+  def guides_section(section)
+    title = section.sub("#{ GUIDES_ROOT }/", '').titleize
+
+    %(<li>
+  <span class="heading">#{ title }</span>
+  <ul class="nav">
+    #{ guides_section_articles(section) }
+  </ul>
+</li>)
+  end
+
+  def guides_section_articles(section)
+    result = ''
+    Dir.glob("#{ section }/*").each do |article|
+      article = article.gsub("#{ section }/", '').gsub(/\.md\z/, '')
+      url     = section.sub("#{ GUIDES_ROOT }", '') + article
+
+      result << %(<li class="active"><a href="#{ url }">#{ article.titleize }</a></li>)
+    end
+
+    result
+  end
+  #
+  # UTILS
+  #
 
   def absolute_url(page)
     url = if page.respond_to?(:url)
