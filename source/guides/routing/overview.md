@@ -1,8 +1,8 @@
 ---
-title: Lotus::Router - Introduction
+title: Lotus - Guides - Routing Overview
 ---
 
-# Introduction
+# Overview
 
 [Lotus::Router](https://github.com/lotus/router) is a Rack compatible, lightweight and fast HTTP Router for Ruby and Lotus.
 

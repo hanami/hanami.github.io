@@ -1,8 +1,8 @@
 ---
-title: Lotus::Router - Rack compatibility
+title: Lotus - Guides - Rack Integration
 ---
 
-# Rack compatibility
+# Rack Integration
 
 [Lotus::Router](https://github.com/lotus/router) is compatible with [Rack SPEC](http://www.rubydoc.info/github/rack/rack/master/file/SPEC) and so the endpoints that we use MUST be compliant as well.
 In the example above we use a `Proc`, where both the signature and the implementation are fitting our requirements.

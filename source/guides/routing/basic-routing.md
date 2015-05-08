@@ -1,5 +1,5 @@
 ---
-title: Lotus::Router - Basic Routing
+title: Lotus - Guides - Basic Routing
 ---
 
 # Basic Routing
