@@ -12312,3 +12312,14 @@ pre[class*="language-"] {
   float: right;
   font-size: .8em;
 }
+
+.convention {
+  padding: 1em;
+  background-color: #ffeeaf;
+  border: 1px solid #ffaa6b;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.convention:before {
+  content: "Convention: "
+}
