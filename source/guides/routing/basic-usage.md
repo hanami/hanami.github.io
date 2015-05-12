@@ -1,8 +1,8 @@
 ---
-title: Lotus - Guides - Basic Routing
+title: Lotus - Guides - Basic Usage
 ---
 
-# Basic Routing
+# Basic Usage
 
 ## Path matching
 
