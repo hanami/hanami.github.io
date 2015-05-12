@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Command Line: Routes</title>
+    <title>Lotus - Guides - Actions Basic Usage</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,29 +76,76 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/command-line/routes.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Command Line</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/basic-usage.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Basic Usage</h1>
 
-<h2>Routes</h2>
+<h2>Handle A Request</h2>
 
-<p>In order to print the routes defined by all the applications, use:</p>
-<pre class="language-ruby plaintext"><code>% bundle exec lotus routes
+<p>In the <a href="/guides/actions/overview">previous section</a>, we generated an action, let&rsquo;s use it.</p>
 
-                     GET, HEAD  /               Web::Controllers::Home::Index
-               books GET, HEAD  /books          Web::Controllers::Books::Index
-           new_books GET, HEAD  /books/new      Web::Controllers::Books::New
-               books POST       /books          Web::Controllers::Books::Create
-               books GET, HEAD  /books/:id      Web::Controllers::Books::Show
-          edit_books GET, HEAD  /books/:id/edit Web::Controllers::Books::Edit
-               books PATCH      /books/:id      Web::Controllers::Books::Update
-               books DELETE     /books/:id      Web::Controllers::Books::Destroy
-         new_account GET, HEAD  /account/new    Web::Controllers::Account::New
-             account POST       /account        Web::Controllers::Account::Create
-             account GET, HEAD  /account        Web::Controllers::Account::Show
-        edit_account GET, HEAD  /account/edit   Web::Controllers::Account::Edit
-             account PATCH      /account        Web::Controllers::Account::Update
-             account DELETE     /account        Web::Controllers::Account::Destroy
+<p>As first thing, we check our routes.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">get</span> <span class="s1">'/dashboard'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'dashboard#index'</span>
 </code></pre>
+
+<h3>View Rendering</h3>
+
+<p>Then we edit the corresponding template:</p>
+<pre class="language-ruby erb"><code># apps/web/templates/dashboard/index.html.erb
+<span class="nt">&lt;h1&gt;</span>Dashboard<span class="nt">&lt;/h1&gt;</span>
+</code></pre>
+
+<p>Here how Lotus handles an incoming request:</p>
+
+<ol>
+<li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code></li>
+<li>The application creates a new instance of <code>Web::Views::Dashboard::Index</code> and invokes <code>#render</code>.</li>
+<li>The application returns the response to the browser</li>
+</ol>
+
+<p class="convention">
+  For a given action named <code>Web::Controllers::Dashboard::Index</code>, a corresponding view MUST be present: <code>Web::Views::Dashboard::Index</code>.
+</p>
+
+<p>If we visit <code>/dashboard</code> we should see <code>&lt;h1&gt;Dashboard&lt;/h1&gt;</code> in our browser.</p>
+
+<h3>Bypass Rendering</h3>
+
+<p>By default an action takes care of the HTTP status code and response header, but not of the body of the response.
+As seen above, it delegates the corresponding view to render and set this value.</p>
+
+<p>Sometimes we want to bypass this process.
+For instance we want to return a simple body like <code>OK</code>.
+To involve a view in this case is a waste of CPU cycles.</p>
+
+<p>If we set the body of the response from an action, <strong>our application will ignore the view</strong>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s1">'OK'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Here how Lotus handles an incoming request in this case:</p>
+
+<ol>
+<li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code></li>
+<li>The application detects that a body is already set and doesn&rsquo;t instantiate the view</li>
+<li>The application returns the response to the browser</li>
+</ol>
+
+<p>If we visit <code>/dashboard</code> again, now we should see <code>OK</code>.</p>
+
+<p class="convention">
+  If the response body was already set by an action, the rendering process is bypassed.
+</p>
+
+<p>With direct body assignment, <strong>we can safely delete the corresponding view and template</strong>.</p>
 
             </div>
           </div>
