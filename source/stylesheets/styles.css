@@ -12321,5 +12321,16 @@ pre[class*="language-"] {
   font-weight: bold;
 }
 .convention:before {
-  content: "Convention: "
+  content: "Convention - "
+}
+
+.warning {
+  padding: 1em;
+  background-color: #f99caf;
+  border: 1px solid #f92c71;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.warning:before {
+  content: "ATTENTION - "
 }

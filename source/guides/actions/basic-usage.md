@@ -4,7 +4,7 @@ title: Lotus - Guides - Actions Basic Usage
 
 # Basic Usage
 
-## Handle A Request
+## Requests Handling
 
 In the [previous section](/guides/actions/overview), we generated an action, let's use it.
 
@@ -73,3 +73,61 @@ If we visit `/dashboard` again, now we should see `OK`.
 </p>
 
 With direct body assignment, **we can safely delete the corresponding view and template**.
+
+## Initialization
+
+Actions are instantiated for us by Lotus at the runtime: for each incoming request, we'll automatically get a new instance.
+Because actions are objects, **we can take control on their initialization** and eventually [_inject_ our dependencies](http://en.wikipedia.org/wiki/Dependency_injection).
+This is a really useful technique for unit test our actions.
+
+```ruby
+# apps/web/controllers/dashboard/index.rb
+module Web::Controllers::Dashboard
+  class Index
+    include Web::Action
+
+    def initialize(greeting: Greeting.new)
+      @greeting = greeting
+    end
+
+    def call(params)
+      self.body = @greeting.message
+    end
+  end
+end
+```
+
+There is a limitation that we should always keep in mind:
+
+<p class="warning">
+  Action initializer MUST have an arity of 0
+</p>
+
+The following initializers are valid
+
+```ruby
+# no arguments
+def initialize
+  # ...
+end
+
+# default arguments
+def initialize(greeting = Greeting.new)
+  # ...
+end
+
+# keyword arguments
+def initialize(greeting: Greeting.new)
+  # ...
+end
+
+# options
+def initialize(options = {})
+  # ...
+end
+
+# splat arguments
+def initialize(*args)
+  # ...
+end
+```
