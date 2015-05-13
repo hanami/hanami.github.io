@@ -61,6 +61,7 @@
                 <ul class="nav">
                   <li><a href="/guides/actions/overview">Overview</a></li>
                   <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/actions/parameters">Parameters</a></li>
                 </ul>
               </li>
 
@@ -79,7 +80,7 @@
               <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/basic-usage.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
               <h1>Basic Usage</h1>
 
-<h2>Handle A Request</h2>
+<h2>Requests Handling</h2>
 
 <p>In the <a href="/guides/actions/overview">previous section</a>, we generated an action, let&rsquo;s use it.</p>
 
@@ -146,6 +147,60 @@ To involve a view in this case is a waste of CPU cycles.</p>
 </p>
 
 <p>With direct body assignment, <strong>we can safely delete the corresponding view and template</strong>.</p>
+
+<h2>Initialization</h2>
+
+<p>Actions are instantiated for us by Lotus at the runtime: for each incoming request, we&rsquo;ll automatically get a new instance.
+Because actions are objects, <strong>we can take control on their initialization</strong> and eventually <a href="http://en.wikipedia.org/wiki/Dependency_injection"><em>inject</em> our dependencies</a>.
+This is a really useful technique for unit test our actions.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="ss">greeting: </span><span class="no">Greeting</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
+      <span class="vi">@greeting</span> <span class="o">=</span> <span class="n">greeting</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="vi">@greeting</span><span class="p">.</span><span class="nf">message</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>There is a limitation that we should always keep in mind:</p>
+
+<p class="warning">
+  Action initializer MUST have an arity of 0
+</p>
+
+<p>The following initializers are valid</p>
+<pre class="language-ruby ruby"><code><span class="c1"># no arguments</span>
+<span class="k">def</span> <span class="nf">initialize</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+
+<span class="c1"># default arguments</span>
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">greeting</span> <span class="o">=</span> <span class="no">Greeting</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+
+<span class="c1"># keyword arguments</span>
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="ss">greeting: </span><span class="no">Greeting</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+
+<span class="c1"># options</span>
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+
+<span class="c1"># splat arguments</span>
+<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre>
 
             </div>
           </div>

@@ -1,0 +1,368 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lotus - Guides - Action Parameters</title>
+    <meta name="description" content="Lotus, a complete web framework for Ruby" />
+    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="lotusrb-version" content="0.3.0">
+    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+
+    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+
+    <script src="//use.typekit.net/xhp5wmc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body class="subpage docs">
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav class="navbar navbar-fixed-top container-fluid">
+  <div class="wrapper container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!-- <li><a href="/guides">Guides</a></li> -->
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v{{version}}</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <section class="docs wrapper animated fadeIn">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 hidden-sm hidden-xs sidebar">
+            <ul class="nav nav-sidebar">
+              <li>
+                <span class="heading">Routing</span>
+                <ul class="nav">
+                  <li><a href="/guides/routing/overview">Overview</a></li>
+                  <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Actions</span>
+                <ul class="nav">
+                  <li><a href="/guides/actions/overview">Overview</a></li>
+                  <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/actions/parameters">Parameters</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Command Line</span>
+                <ul class="nav">
+                  <li><a href="/guides/command-line/routes">Routes</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="col-md-9 main">
+            <div class="doc-section">
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/parameters.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Action Parameters</h1>
+
+<p>Parameters are taken from the Rack env and passed as an argument to <code>#call</code>.
+They are similar to a Ruby Hash, but they offer an expanded set of features.</p>
+
+<h2>Sources</h2>
+
+<p>Params can come from:</p>
+
+<ul>
+<li><a href="/guides/routing/basic-usage">Router variables</a> (eg. <code>/books/:id</code>)</li>
+<li>Query string (eg. <code>/books?title=Lotus</code>), accessible as <code>params[:title]</code></li>
+<li>Request body (eg. a <code>POST</code> request to <code>/books</code>)</li>
+</ul>
+
+<h2>Access</h2>
+
+<p>To access the value of a param, we can use the <em>subscriber operator</em> <code>#[]</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s2">"Query string: </span><span class="si">#{</span> <span class="n">params</span><span class="p">[</span><span class="ss">:q</span><span class="p">]</span> <span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If we visit <code>/dashboard?q=foo</code>, we should see <code>Query string: foo</code>.</p>
+
+<h3>Indifferent Access</h3>
+
+<p>Until the version 2.2.0 of MRI (Matz Ruby Interpreter), symbols weren&rsquo;t garbage collected.
+Because params come from untrusted sources (the web), we cannot automatically symbolize their keys.
+This is a security mechanism to avoid an attack called <em>Symbol DoS</em>.</p>
+
+<p>Params are stored internally with string keys, but they offer a convenient access for symbols too.</p>
+<pre class="language-ruby ruby"><code><span class="n">params</span><span class="p">[</span><span class="ss">:q</span><span class="p">]</span>
+<span class="c1"># or</span>
+<span class="n">params</span><span class="p">[</span><span class="s1">'q'</span><span class="p">]</span>
+</code></pre>
+
+<p class="warning">
+  Indifferent Access may be removed future versions of Lotus in favor of symbol access only.
+</p>
+
+<h3>Nested Access</h3>
+
+<p>Params offer indifferent access to for nested values.</p>
+<pre class="language-ruby ruby"><code><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">][</span><span class="ss">:title</span><span class="p">]</span>
+<span class="c1"># or</span>
+<span class="n">params</span><span class="p">[</span><span class="s1">'book'</span><span class="p">][</span><span class="s1">'title'</span><span class="p">]</span>
+</code></pre>
+
+<p>Now, what happens if the parameter <code>:book</code> is missing in our current request?
+Because <code>params[:book]</code> is <code>nil</code>, we can&rsquo;t access <code>:title</code>.
+In this case Ruby will raise a <code>NoMethodError</code>.</p>
+
+<p>We have a safe solution for our problem: <code>#get</code>.
+It accepts a <strong>dot separated</strong> string, where each token represents a level in our nested structure.</p>
+<pre class="language-ruby ruby"><code><span class="n">params</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'book.title'</span><span class="p">)</span>           <span class="c1"># =&gt; "Lotus"</span>
+<span class="n">params</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'unknown.nested.param'</span><span class="p">)</span> <span class="c1"># =&gt; nil instead of NoMethodError</span>
+</code></pre>
+
+<h2>Whitelisting</h2>
+
+<p>In order to show how whitelisting works, let&rsquo;s create a new action:</p>
+<pre class="language-ruby shell"><code>bundle <span class="nb">exec </span>lotus generate action web signup#create
+</code></pre>
+
+<p>We want to provide self-registration for our users.
+We build an HTML form and this is the action that accepts the payload and stores it in the <code>users</code> table.
+That table has a boolean column <code>admin</code> to decide if a person has administration permissions.</p>
+
+<p>A malicious user can exploit this scenario, by sending this extra parameter to our application and become an admin.</p>
+
+<p>We can easily fix this problem, by filtering the allowed params that can comes inside our application.
+Please always remember that <strong>params represent untrusted input</strong>.</p>
+
+<p>We use <code>.params</code> to map the structure of the (nested) params.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/signup/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Signup</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="n">params</span> <span class="k">do</span>
+      <span class="n">param</span> <span class="ss">:email</span>
+      <span class="n">param</span> <span class="ss">:password</span>
+
+      <span class="n">param</span> <span class="ss">:address</span> <span class="k">do</span>
+        <span class="n">param</span> <span class="ss">:country</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="n">params</span><span class="p">[</span><span class="ss">:email</span><span class="p">]</span>             <span class="c1"># =&gt; "alice@example.org"</span>
+      <span class="nb">puts</span> <span class="n">params</span><span class="p">[</span><span class="ss">:password</span><span class="p">]</span>          <span class="c1"># =&gt; "secret"</span>
+      <span class="nb">puts</span> <span class="n">params</span><span class="p">[</span><span class="ss">:address</span><span class="p">][</span><span class="ss">:country</span><span class="p">]</span> <span class="c1"># =&gt; "Italy"</span>
+
+      <span class="nb">puts</span> <span class="n">params</span><span class="p">[</span><span class="ss">:admin</span><span class="p">]</span>             <span class="c1"># =&gt; nil</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Even if <code>admin</code> is sent inside the body of the request, it isn&rsquo;t accessible from <code>params</code>.</p>
+
+<h2>Validations &amp; Coercion</h2>
+
+<h3>Use Cases</h3>
+
+<p>In our example (called <em>&ldquo;Signup&rdquo;</em>), we want to make <code>password</code> a required param.</p>
+
+<p>Imagine we introduce a second feature: <em>&ldquo;Invitations&rdquo;</em>.
+An existing user can ask someone to join.
+Because the invitee will decide a password later on, we want to persist that <code>User</code> record without that value.</p>
+
+<p>If we put <code>password</code> validation in <code>User</code>, we need to handle these two use cases with a conditional.
+But in the long term, this approach is painful from a maintenance perspective.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># Example of poor style for validations</span>
+<span class="k">class</span> <span class="nc">User</span>
+  <span class="n">attribute</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">presence: </span><span class="p">{</span> <span class="ss">if: :password_required?</span> <span class="p">}</span>
+
+  <span class="kp">private</span>
+  <span class="k">def</span> <span class="nf">password_required?</span>
+     <span class="o">!</span><span class="n">invited_user?</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">admin_password_reset?</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We can see validations the set of rules for data correctness that we want for <strong>a specific use case</strong>.
+For us, an <code>User</code> can be persisted with or without a password, <strong>depending on the workflow</strong> that the it was routed into.</p>
+
+<h3>Boundaries</h3>
+
+<p>The second important aspect is that we use validations to prevent invalid inputs to propagate in our system.
+In an MVC architecture, the model layer is the <strong>farthest</strong> from the input.
+It&rsquo;s expensive to check the data right before we create a record in the database.</p>
+
+<p>If we <strong>consider correct data as a precondition</strong> before to start our workflow, we should stop unacceptable inputs as soon as possible.</p>
+
+<p>Think of the following method.
+We don&rsquo;t want to continue if the data is invalid for us.</p>
+<pre class="language-ruby ruby"><code><span class="k">def</span> <span class="nf">expensive_computation</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+  <span class="k">return</span> <span class="k">if</span> <span class="n">argument</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Usage</h3>
+
+<p>We can coerce the Ruby type, validate if a param is required, if included in range of values, etc..</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/signup/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Signup</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="no">MEGABYTE</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="n">params</span> <span class="k">do</span>
+      <span class="n">param</span> <span class="ss">:name</span><span class="p">,</span>             <span class="ss">presence: </span><span class="kp">true</span>
+      <span class="n">param</span> <span class="ss">:email</span><span class="p">,</span>            <span class="ss">presence: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">format: </span><span class="sr">/@/</span><span class="p">,</span> <span class="ss">confirmation: </span><span class="kp">true</span>
+      <span class="n">param</span> <span class="ss">:password</span><span class="p">,</span>         <span class="ss">presence: </span><span class="kp">true</span><span class="p">,</span>              <span class="ss">confirmation: </span><span class="kp">true</span>
+      <span class="n">param</span> <span class="ss">:terms_of_service</span><span class="p">,</span> <span class="ss">acceptance: </span><span class="kp">true</span>
+      <span class="n">param</span> <span class="ss">:avatar</span><span class="p">,</span>           <span class="ss">size: </span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="p">(</span><span class="no">MEGABYTE</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">param</span> <span class="ss">:age</span><span class="p">,</span>              <span class="ss">type: </span><span class="no">Integer</span><span class="p">,</span> <span class="ss">size: </span><span class="mi">18</span><span class="p">.</span><span class="nf">.</span><span class="mi">99</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span>
+        <span class="c1"># ...</span>
+      <span class="k">else</span>
+        <span class="c1"># ...</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Params validations are delegated under the hood to <a href="https://github.com/lotus/validations">Lotus::Validations</a>.
+Please check related docs for a complete list of options, and how to share code between validations.</p>
+
+<h2>Concrete Classes</h2>
+
+<p>The params DSL is really quick and intuitive but it has the drawback that it can be visually noisy and makes it hard to unit test them.
+An alternative usage is to extract a class and pass it as an argument to <code>.params</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/signup/my_params.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Signup</span>
+  <span class="k">class</span> <span class="nc">MyParams</span> <span class="o">&lt;</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span><span class="o">::</span><span class="no">Params</span>
+    <span class="no">MEGABYTE</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="n">param</span> <span class="ss">:name</span><span class="p">,</span>             <span class="ss">presence: </span><span class="kp">true</span>
+    <span class="n">param</span> <span class="ss">:email</span><span class="p">,</span>            <span class="ss">presence: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">format: </span><span class="sr">/@/</span><span class="p">,</span> <span class="ss">confirmation: </span><span class="kp">true</span>
+    <span class="n">param</span> <span class="ss">:password</span><span class="p">,</span>         <span class="ss">presence: </span><span class="kp">true</span><span class="p">,</span>              <span class="ss">confirmation: </span><span class="kp">true</span>
+    <span class="n">param</span> <span class="ss">:terms_of_service</span><span class="p">,</span> <span class="ss">acceptance: </span><span class="kp">true</span>
+    <span class="n">param</span> <span class="ss">:avatar</span><span class="p">,</span>           <span class="ss">size: </span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="p">(</span><span class="no">MEGABYTE</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">param</span> <span class="ss">:age</span><span class="p">,</span>              <span class="ss">type: </span><span class="no">Integer</span><span class="p">,</span> <span class="ss">size: </span><span class="mi">18</span><span class="p">.</span><span class="nf">.</span><span class="mi">99</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby plaintext"><code># apps/web/controllers/signup/create.rb
+require_relative './my_params'
+
+module Web::Controllers::Signup
+  class Create
+    include Web::Action
+    params MyParams
+
+    def call(params)
+      if params.valid?
+        # ...
+      else
+        # ...
+      end
+    end
+  end
+end
+</code></pre>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="email-signup">
+  <div class="container-fluid wrapper">
+    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
+      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="primary">
+  <div class="container-fluid wrapper">
+    <div class="row">
+      <a class="logo col-md-3" href="/">logo</a>
+        <div class="col-md-4">
+          <span class="date">April 27, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Apr 20th to Apr 27th 2015
+</p>
+          <a href="/blog/2015/04/27/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
+          <span class="date">April 19, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Apr 14th to Apr 19th 2015
+</p>
+          <a href="/blog/2015/04/19/weekly-changelog.html">Read more...</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="sub-footer wrapper">
+    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
+    <br>
+    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
+    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
+    <ul class="social">
+      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
+      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
