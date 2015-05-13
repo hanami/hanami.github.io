@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides</title>
+    <title>Lotus - Guides - Request & Response</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -78,16 +78,66 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/index.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1 class="page-header" id="guides">Lotus Guides</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/request-and-response.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Request</h1>
 
-<p class="lead">Sometimes you want to start some content with a lead paragraph. <strong>Note: In the current example each item in the sidebar is a seperate page.  You can also have all the content be on a single page and use the sidebar as anchor links.</strong></p>
+<p>In order to access the metadata coming from a HTTP request, an action has a private object <code>request</code> that derives from <code>Rack::Request</code>.
+Here an example of a few informations that we can introspect.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. </p>
-<pre class="language-ruby ruby"><code><span class="nb">puts</span> <span class="s2">"Some Ruby code"</span>
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">path_info</span>      <span class="c1"># =&gt; "/dashboard"</span>
+      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">request_method</span> <span class="c1"># =&gt; "GET"</span>
+      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">get?</span>           <span class="c1"># =&gt; true</span>
+      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">post?</span>          <span class="c1"># =&gt; false</span>
+      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">referer</span>        <span class="c1"># =&gt; http://example.com/</span>
+      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">user_agent</span>     <span class="c1"># =&gt; "Mozilla/5.0 Macintosh; ..."</span>
+      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">ip</span>             <span class="c1"># =&gt; "127.0.0.1"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
-<p>Or some <code>inline</code> code.</p>
+<p class="warning">
+  To instantiate a <code>request</code> for each incoming HTTP request can lead to a minor perf degradation.
+  As an alternative, Please consider to get the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
+</p>
+
+<h1>Response</h1>
+
+<p>The implicit return value of <code>#call</code> is a serialized <code>Rack::Response</code> (see <a href="http://rubydoc.info/github/rack/rack/master/Rack/Response#finish-instance_method">#finish</a>):</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># It will return [200, {}, [""]]</span>
+</code></pre>
+
+<p>It has private accessors to explicitly set status, headers and body:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="mi">201</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span>   <span class="o">=</span> <span class="s1">'Hi!'</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">headers</span><span class="p">.</span><span class="nf">merge!</span><span class="p">({</span> <span class="s1">'X-Custom'</span> <span class="o">=&gt;</span> <span class="s1">'OK'</span> <span class="p">})</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># It will return [201, { "X-Custom" =&gt; "OK" }, ["Hi!"]]</span>
+</code></pre>
 
             </div>
           </div>
