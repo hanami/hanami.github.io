@@ -2,7 +2,7 @@
 title: Lotus - Guides - Action Parameters
 ---
 
-# Action Parameters
+# Parameters
 
 Parameters are taken from the Rack env and passed as an argument to `#call`.
 They are similar to a Ruby Hash, but they offer an expanded set of features.

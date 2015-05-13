@@ -58,6 +58,7 @@ require 'omniauth'
 module Web::Controllers::Sessions
   class Create
     include Web::Action
+
     use OmniAuth::Builder {
       # ...
     }
@@ -75,6 +76,8 @@ We can use the following syntax to mount different middleware that require argum
 # apps/web/controllers/dashboard/index.rb
 module Web::Controllers::Dashboard
   class Index
+    include Web::Action
+
     use XMiddleware.new('x', 123)
     use YMiddleware.new
     use ZMiddleware
