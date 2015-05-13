@@ -89,65 +89,84 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/request-and-response.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Request</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/rack-integration.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Rack Integration</h1>
 
-<p>In order to access the metadata coming from a HTTP request, an action has a private object <code>request</code> that derives from <code>Rack::Request</code>.
-Here an example of a few informations that we can introspect.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+<h2>Rack Environment</h2>
 
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">path_info</span>      <span class="c1"># =&gt; "/dashboard"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">request_method</span> <span class="c1"># =&gt; "GET"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">get?</span>           <span class="c1"># =&gt; true</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">post?</span>          <span class="c1"># =&gt; false</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">referer</span>        <span class="c1"># =&gt; "http://example.com/"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">user_agent</span>     <span class="c1"># =&gt; "Mozilla/5.0 Macintosh; ..."</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">ip</span>             <span class="c1"># =&gt; "127.0.0.1"</span>
+<p>Actions offer a high level API built on top of Rack.
+If we need to access raw data from Rack environment, we can use <code>params.env</code>.</p>
+
+<h2>Rack Middleware</h2>
+
+<p>Lotus mounts a very thin default middleware stack.
+Additional components can be mounted globally, at the application level or locally.</p>
+
+<h3>Global Middleware</h3>
+
+<p>If we need a component that wraps all the applications (under <code>apps/</code>), we can edit <code>config.ru</code> at the root of the project.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># config.ru</span>
+<span class="nb">require</span> <span class="s1">'./config/environment'</span>
+<span class="nb">require</span> <span class="s1">'rack/auth/basic'</span>
+
+<span class="n">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Auth</span><span class="o">::</span><span class="no">Basic</span>
+<span class="n">run</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Container</span><span class="p">.</span><span class="nf">new</span>
+</code></pre>
+
+<h3>Application Middleware</h3>
+
+<p>If we need a component that&rsquo;s only used by a specific application (under <code>apps/</code>), we can add it to the configuration.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="nb">require</span> <span class="s1">'rack/auth/basic'</span>
+
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">middleware</span><span class="p">.</span><span class="nf">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Auth</span><span class="o">::</span><span class="no">Basic</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<p class="warning">
-  To instantiate a <code>request</code> for each incoming HTTP request can lead to a minor perf degradation.
-  As an alternative, please consider to get the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
-</p>
+<h3>Action Middleware</h3>
 
-<h1>Response</h1>
+<p>Sometimes we need a middleware only for a set of well known resources.
+If we mount it at the global or application level, the performance start to degrade.
+Actions allow to mount fine grained middleware stack.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/sessions/create.rb</span>
+<span class="nb">require</span> <span class="s1">'omniauth'</span>
 
-<p>The implicit return value of <code>#call</code> is a serialized <code>Rack::Response</code> (see <a href="http://rubydoc.info/github/rack/rack/master/Rack/Response#finish-instance_method">#finish</a>):</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Sessions</span>
+  <span class="k">class</span> <span class="nc">Create</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
+    <span class="n">use</span> <span class="no">OmniAuth</span><span class="o">::</span><span class="no">Builder</span> <span class="p">{</span>
+      <span class="c1"># ...</span>
+    <span class="p">}</span>
+
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
-
-<span class="c1"># It will return [200, {}, [""]]</span>
 </code></pre>
 
-<p>It has private accessors to explicitly set status, headers and body:</p>
+<p>We can use the following syntax to mount different middleware that require arguments.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
+    <span class="n">use</span> <span class="no">XMiddleware</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="mi">123</span><span class="p">)</span>
+    <span class="n">use</span> <span class="no">YMiddleware</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">use</span> <span class="no">ZMiddleware</span>
+
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="mi">201</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span>   <span class="o">=</span> <span class="s1">'Hi!'</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">headers</span><span class="p">.</span><span class="nf">merge!</span><span class="p">({</span> <span class="s1">'X-Custom'</span> <span class="o">=&gt;</span> <span class="s1">'OK'</span> <span class="p">})</span>
+      <span class="c1"># ...</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
-
-<span class="c1"># It will return [201, { "X-Custom" =&gt; "OK" }, ["Hi!"]]</span>
 </code></pre>
 
             </div>

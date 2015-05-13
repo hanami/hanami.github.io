@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Request & Response</title>
+    <title>Lotus - Guides - Action MIME Types</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,65 +89,123 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/request-and-response.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Request</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/mime-types.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>MIME Types</h1>
 
-<p>In order to access the metadata coming from a HTTP request, an action has a private object <code>request</code> that derives from <code>Rack::Request</code>.
-Here an example of a few informations that we can introspect.</p>
+<p>Actions have advanced features for MIME type detection, automatic headers, whitelisting etc..</p>
+
+<h2>Request Introspection</h2>
+
+<p>In order to understand which is the requested MIME type, an action looks at the <code>Accept</code> request header and exposes high level API: <code>#format</code> and <code>#accept?</code>.</p>
+
+<p>The first returns a symbol representation of the MIME type (eg. <code>:html</code>, <code>:json</code>, <code>:xml</code> etc..), while the second is a query method that accepts a MIME type string and checks if it&rsquo;s accepted by the current browser.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">path_info</span>      <span class="c1"># =&gt; "/dashboard"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">request_method</span> <span class="c1"># =&gt; "GET"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">get?</span>           <span class="c1"># =&gt; true</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">post?</span>          <span class="c1"># =&gt; false</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">referer</span>        <span class="c1"># =&gt; "http://example.com/"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">user_agent</span>     <span class="c1"># =&gt; "Mozilla/5.0 Macintosh; ..."</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">ip</span>             <span class="c1"># =&gt; "127.0.0.1"</span>
+      <span class="nb">puts</span> <span class="nb">format</span>                     <span class="c1"># =&gt; :html</span>
+
+      <span class="nb">puts</span> <span class="n">accept?</span><span class="p">(</span><span class="s1">'text/html'</span><span class="p">)</span>       <span class="c1"># =&gt; true</span>
+      <span class="nb">puts</span> <span class="n">accept?</span><span class="p">(</span><span class="s1">'application/png'</span><span class="p">)</span> <span class="c1"># =&gt; false</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<p class="warning">
-  To instantiate a <code>request</code> for each incoming HTTP request can lead to a minor perf degradation.
-  As an alternative, please consider to get the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
-</p>
+<h2>Automatic Content-Type</h2>
 
-<h1>Response</h1>
+<p>An action returns the <code>Content-Type</code> response header automatically according to the requested MIME Type and charset.</p>
 
-<p>The implicit return value of <code>#call</code> is a serialized <code>Rack::Response</code> (see <a href="http://rubydoc.info/github/rack/rack/master/Rack/Response#finish-instance_method">#finish</a>):</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+<p>If the client asks for <code>Accept: text/html,application/xhtml+xml,application/xml;q=0.9</code>, the action will return <code>Content-Type: text/html; charset=utf-8</code>.</p>
 
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<h3>Default Format</h3>
+
+<p>If a client asks for a generic <code>Accept: */*</code>, the action will fall back to the <strong>application default format</strong>.
+It&rsquo;s a setting that allows to safely handle cases like our example, the default value is <code>:html</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">default_format</span> <span class="ss">:json</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
-
-<span class="c1"># It will return [200, {}, [""]]</span>
 </code></pre>
 
-<p>It has private accessors to explicitly set status, headers and body:</p>
+<h3>Default Charset</h3>
+
+<p>Similarly, we can specify a different default charset to return.
+The standard value is <code>utf-8</code>, but we can change it in our settings.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">default_charset</span> <span class="s1">'koi8-r'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Override</h3>
+
+<p>There is a way we can force the returned <code>Content-Type</code>: use <code>#format=</code>.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="mi">201</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span>   <span class="o">=</span> <span class="s1">'Hi!'</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">headers</span><span class="p">.</span><span class="nf">merge!</span><span class="p">({</span> <span class="s1">'X-Custom'</span> <span class="o">=&gt;</span> <span class="s1">'OK'</span> <span class="p">})</span>
+      <span class="nb">puts</span> <span class="nb">self</span><span class="p">.</span><span class="nf">format</span> <span class="c1"># =&gt; :html</span>
+
+      <span class="c1"># force a different value</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">format</span>        <span class="o">=</span>  <span class="ss">:json</span>
+      <span class="nb">puts</span> <span class="nb">self</span><span class="p">.</span><span class="nf">format</span> <span class="c1"># =&gt; :json</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
+</code></pre>
 
-<span class="c1"># It will return [201, { "X-Custom" =&gt; "OK" }, ["Hi!"]]</span>
+<p>The example above will return <code>Content-Type: application/json; charset=utf-8</code>.</p>
+
+<h2>Whitelisting</h2>
+
+<p>We can also restrict the range of accepted MIME Types.
+If the incoming request doesn&rsquo;t satisfy this constraint, the application will return a <code>Not Acceptable</code> status (<code>406</code>).</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="n">accept</span> <span class="ss">:html</span><span class="p">,</span> <span class="ss">:json</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2>Register MIME Types</h2>
+
+<p>Lotus knows about more than 100 of the most common MIME types.
+However, we may want to add custom types in order to use them with <code>#format=</code> or <code>.accept</code>.</p>
+
+<p>In our application settings, we can use <code>controller.format</code>, which accepts a Hash where the key is the format symbol (<code>:custom</code>) and the value is a string expressed in the MIME type standard (<code>application/custom</code>).</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">controller</span><span class="p">.</span><span class="nf">format</span> <span class="ss">custom: </span><span class="s1">'application/custom'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
             </div>

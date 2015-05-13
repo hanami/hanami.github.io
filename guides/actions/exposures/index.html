@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Request & Response</title>
+    <title>Lotus - Guides - Action Exposures</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,66 +89,43 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/request-and-response.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Request</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/exposures.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Exposures</h1>
 
-<p>In order to access the metadata coming from a HTTP request, an action has a private object <code>request</code> that derives from <code>Rack::Request</code>.
-Here an example of a few informations that we can introspect.</p>
+<p>For complex use cases we may want to pass data to views, in order to present it to our users.
+Lotus puts emphasis on explicitness: data isn&rsquo;t shared between these two contexts unless we told it to do so.</p>
+
+<p>We use a simple and powerful mechanism to achieve our goal: <em><strong>exposures</strong></em>.
+They create a <em>getter</em> for the given name(s) and only the whitelisted instance variables are passed to the corresponding view.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="n">expose</span> <span class="ss">:greeting</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">path_info</span>      <span class="c1"># =&gt; "/dashboard"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">request_method</span> <span class="c1"># =&gt; "GET"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">get?</span>           <span class="c1"># =&gt; true</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">post?</span>          <span class="c1"># =&gt; false</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">referer</span>        <span class="c1"># =&gt; "http://example.com/"</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">user_agent</span>     <span class="c1"># =&gt; "Mozilla/5.0 Macintosh; ..."</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">ip</span>             <span class="c1"># =&gt; "127.0.0.1"</span>
+      <span class="vi">@greeting</span> <span class="o">=</span> <span class="s2">"Hello"</span>
+      <span class="vi">@foo</span>      <span class="o">=</span> <span class="mi">23</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<p class="warning">
-  To instantiate a <code>request</code> for each incoming HTTP request can lead to a minor perf degradation.
-  As an alternative, please consider to get the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
-</p>
-
-<h1>Response</h1>
-
-<p>The implicit return value of <code>#call</code> is a serialized <code>Rack::Response</code> (see <a href="http://rubydoc.info/github/rack/rack/master/Rack/Response#finish-instance_method">#finish</a>):</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+<p>In the example above we have exposed <code>:greeting</code>, but not <code>:foo</code>.
+Only the first can be used from the view and template.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
 
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-    <span class="k">end</span>
+    <span class="k">def</span> <span class="nf">welcome_message</span>
+      <span class="n">greeting</span> <span class="o">+</span> <span class="s2">" and welcome"</span>
+    <span class="n">edn</span>
   <span class="k">end</span>
 <span class="k">end</span>
-
-<span class="c1"># It will return [200, {}, [""]]</span>
 </code></pre>
 
-<p>It has private accessors to explicitly set status, headers and body:</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
-
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="mi">201</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span>   <span class="o">=</span> <span class="s1">'Hi!'</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">headers</span><span class="p">.</span><span class="nf">merge!</span><span class="p">({</span> <span class="s1">'X-Custom'</span> <span class="o">=&gt;</span> <span class="s1">'OK'</span> <span class="p">})</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="c1"># It will return [201, { "X-Custom" =&gt; "OK" }, ["Hi!"]]</span>
-</code></pre>
+<p>If we try to use <code>foo</code>, Ruby will raise a <code>NoMethodError</code>.</p>
 
             </div>
           </div>
