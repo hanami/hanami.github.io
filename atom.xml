@@ -4,13 +4,227 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-04-27T07:14:00+02:00</updated>
+   <updated>2015-05-15T17:09:00+02:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Announcing Lotus v0.3.1</title>
+       <id>http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html"/>
+       <updated>2015-05-15T17:09:00+02:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Lotus patch release: RESTful nested resource(s), dirty tracking and timestamps for entities, improved code generators, bug fixes.
+
+       </summary>
+       <content type="html"><![CDATA[<h2>Features</h2>
+
+<p>This patch release ships new features and improved code generators.</p>
+
+<h3>RESTful nested resource(s)</h3>
+
+<p>RESTful resource(s) can be nested with infinite levels.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
+  <span class="n">resource</span>  <span class="ss">:avatar</span>
+  <span class="n">resources</span> <span class="ss">:events</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This generates the following routes:</p>
+<pre class="language-ruby plaintext"><code>% lotus routes
+
+     new_user_avatar GET, HEAD  /users/:user_id/avatar/new
+         user_avatar POST       /users/:user_id/avatar
+         user_avatar GET, HEAD  /users/:user_id/avatar
+    edit_user_avatar GET, HEAD  /users/:user_id/avatar/edit
+         user_avatar PATCH      /users/:user_id/avatar
+         user_avatar DELETE     /users/:user_id/avatar
+         user_events GET, HEAD  /users/:user_id/events
+      new_user_event GET, HEAD  /users/:user_id/events/new
+         user_events POST       /users/:user_id/events
+          user_event GET, HEAD  /users/:user_id/events/:id
+     edit_user_event GET, HEAD  /users/:user_id/events/:id/edit
+          user_event PATCH      /users/:user_id/events/:id
+          user_event DELETE     /users/:user_id/events/:id
+               users GET, HEAD  /users
+            new_user GET, HEAD  /users/new
+               users POST       /users
+                user GET, HEAD  /users/:id
+           edit_user GET, HEAD  /users/:id/edit
+                user PATCH      /users/:id
+                user DELETE     /users/:id
+</code></pre>
+
+<p>The corresponding endpoints are actions like <code>Web::Controllers::Users::Avatar::Create</code> or <code>Web::Controllers::Users::Events::Show</code>.</p>
+
+<h3>Dirty Tracking</h3>
+
+<p>Entities can now track changed attributes and dirty status.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/user.rb</span>
+<span class="k">class</span> <span class="nc">User</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span><span class="o">::</span><span class="no">DirtyTracking</span>
+  <span class="n">attributes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:age</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This new feature is activated by including <code>Lotus::Entity::DirtyTracking</code>.
+It exposes <code>#changed?</code> and <code>#changed_attributes</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># Usage</span>
+<span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">name: </span><span class="s1">'L'</span><span class="p">)</span>
+<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span> <span class="c1"># =&gt; false</span>
+
+<span class="n">user</span><span class="p">.</span><span class="nf">age</span> <span class="o">=</span> <span class="mi">33</span>
+<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span>           <span class="c1"># =&gt; true</span>
+<span class="n">user</span><span class="p">.</span><span class="nf">changed_attributes</span> <span class="c1"># =&gt; {:age=&gt;33}</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span> <span class="c1"># =&gt; false</span>
+
+<span class="n">user</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="ss">name: </span><span class="s1">'Luca'</span><span class="p">)</span>
+<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span>           <span class="c1"># =&gt; true</span>
+<span class="n">user</span><span class="p">.</span><span class="nf">changed_attributes</span> <span class="c1"># =&gt; {:name=&gt;"Luca"}</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span> <span class="c1"># =&gt; false</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">changed?</span> <span class="c1"># =&gt; false</span>
+</code></pre>
+
+<p>When an entity is initialized and after it&rsquo;s created or updated, the state is clean.
+If we mutate the state with an assigment or with <code>Entity#update</code>, <code>#changed?</code> returns true.</p>
+
+<h3>Timestamps</h3>
+
+<p>If an entity has <code>:created_at</code> and/or <code>:updated_at</code> attributes, when it&rsquo;s persisted, the repository will take care of manage these values for us.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/user.rb</span>
+<span class="k">class</span> <span class="nc">User</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:created_at</span><span class="p">,</span> <span class="ss">:updated_at</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We have mapped both these attributes as <code>DateTime</code>.</p>
+<pre class="language-ruby ruby"><code>
+<span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">name: </span><span class="s1">'L'</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">created_at</span> <span class="c1"># =&gt; nil</span>
+<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">updated_at</span> <span class="c1"># =&gt; nil</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">created_at</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># =&gt; "2015-05-15T10:12:20+00:00"</span>
+<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">updated_at</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># =&gt; "2015-05-15T10:12:20+00:00"</span>
+
+<span class="n">user</span><span class="p">.</span><span class="nf">name</span> <span class="o">=</span> <span class="s2">"Luca"</span>
+<span class="n">user</span>      <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">created_at</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># =&gt; "2015-05-15T10:12:20+00:00"</span>
+<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">updated_at</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># =&gt; "2015-05-15T10:12:23+00:00"</span>
+</code></pre>
+
+<h3>Application Generator</h3>
+
+<p>Lotus default architecture is named <a href="https://github.com/lotus/lotus#container-architecture"><em>Container</em></a>, as it allows to run multiple Lotus (and Rack) applications within the same Ruby process.</p>
+
+<p>When we generate a new project with <code>lotus new bookshelf</code>, it creates a default application named <code>Web</code>, under <code>apps/web</code>.
+This architecture enforces a separation between components and it will make our life easier <a href="http://lucaguidi.com/2015/05/05/lotus-and-microservices.html">if we want extract microservices</a> at a later stage.</p>
+
+<p>If we want to introduce a new component in our container (eg. an admin pane, a metrics dashboard), we can use the new application generator.</p>
+<pre class="language-ruby plaintext"><code>lotus generate app admin
+</code></pre>
+
+<p>This command will add a new application named <code>Admin</code> under <code>apps/admin</code>, and it will be available under the <code>/admin</code> URL namespace.</p>
+
+<h3>Model Generator</h3>
+
+<p>This last feature is really helpful while developing our domain model.
+It generates an <strong>entity</strong>, a <strong>repository</strong> and the related <strong>test files</strong>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate model user
+  create  lib/bookshelf/entities/user.rb
+  create  lib/bookshelf/repositories/user_repository.rb
+  create  spec/bookshelf/entities/user_spec.rb
+  create  spec/bookshelf/repositories/user_repository_spec.rb
+</code></pre>
+
+<h2>What&rsquo;s Next</h2>
+
+<p>New features such as migrations, form helpers and improved security are under development right now.
+We&rsquo;re pushing to ship soon.</p>
+
+<div style="display: inline">
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.3.1" data-url="http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+]]></content>
+     </entry>
+     <entry>
+       <title>Weekly Changelog</title>
+       <id>http://lotusrb.org/blog/2015/05/15/weekly-changelog.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/05/15/weekly-changelog.html"/>
+       <updated>2015-05-15T14:56:00+02:00</updated>
+       <author>
+         <name>Trung Lê</name>
+       </author>
+       <summary>
+         Changelog from Apr 28th to May 15th 2015
+
+       </summary>
+       <content type="html"><![CDATA[<h2>Releases</h2>
+
+<ul>
+<li>Released lotusrb 0.3.1</li>
+<li>Released lotus-validations 0.3.1</li>
+<li>Released lotus-view 0.4.0</li>
+<li>Released lotus-controller 0.4.2</li>
+<li>Released lotus-model 0.3.1</li>
+<li>Released lotus-utils 0.4.2</li>
+</ul>
+
+<h2>Completed</h2>
+
+<ul>
+<li>[<a href="https://github.com/guilhermeFranco">Guilherme Franco</a>] Add block conditions to #where() for memory adapter [<a href="https://github.com/lotus/model/pull/180">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Added nested routes [<a href="https://github.com/lotus/router/pull/51">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Rack::Lint compatibility [<a href="https://github.com/lotus/controller/pull/108">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] String Singularization [<a href="https://github.com/lotus/utils/pull/73">details</a>]</li>
+<li>[<a href="https://github.com/nguyenngoc2505">Ngọc Nguyễn</a>] Add Lotus.env [<a href="https://github.com/lotus/lotus/pull/216">details</a>]</li>
+<li>[<a href="https://github.com/hieuk09">Hiếu Nguyễn</a>] Application generator [<a href="https://github.com/lotus/lotus/pull/214">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Fix internet explorer HTTP accept [<a href="https://github.com/lotus/controller/pull/105">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] String pluralization [<a href="https://github.com/lotus/utils/pull/72">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Ensure Attributes#to_h to force Hash values [<a href="https://github.com/lotus/utils/pull/74">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] When coerce Utils::Attributes to Hash don&rsquo;t rely on #to_h of the single values [<a href="https://github.com/lotus/utils/pull/76">details</a>]</li>
+<li>[<a href="https://github.com/peterberkenbosch">Peter Berkenbosch</a>] Add raw SQL support with execute() [<a href="https://github.com/lotus/model/pull/184">details</a>]</li>
+</ul>
+
+<h2>Development</h2>
+
+<ul>
+<li>[<a href="https://github.com/mymai91">My Mai</a>] [<a href="https://github.com/dondinhit">Dôn Đinh</a>] Introduce Lotus.root [<a href="https://github.com/lotus/lotus/pull/213">details</a>]</li>
+<li>[<a href="https://github.com/sungwoncho">Sung Won Cho</a>] Add Destroy CLI [<a href="https://github.com/lotus/lotus/pull/194">details</a>]</li>
+<li>[<a href="https://github.com/dsnipe">Dmitry Tymchuk</a>] Add repository timestamps [<a href="https://github.com/lotus/model/pull/169">details</a>]</li>
+<li>[<a href="https://github.com/joneslee85">Trung Lê</a>] Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
+<li>[<a href="https://github.com/tomkadwill">Tom Kadwill</a>] Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/11">details</a>]</li>
+<li>[<a href="https://github.com/rodzyn">Marcin Olichwirowicz</a>] Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
+</ul>
+
+<h2>Roadmap</h2>
+
+<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
+]]></content>
+     </entry>
      <entry>
        <title>Weekly Changelog</title>
        <id>http://lotusrb.org/blog/2015/04/27/weekly-changelog.html</id>
@@ -404,91 +618,6 @@ Lotus wants to increase the level of awareness around this topic and provide def
 <li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
 <li>Action generator [<a href="https://github.com/lotus/lotus/pull/166">details</a>]</li>
 <li>Lotus::Helpers integration in Lotus [<a href="https://github.com/lotus/lotus/pull/175">details</a>]</li>
-<li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/14">details</a>]</li>
-<li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
-</ul>
-
-<h2>Roadmap</h2>
-
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
-]]></content>
-     </entry>
-     <entry>
-       <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/03/01/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/03/01/weekly-changelog.html"/>
-       <updated>2015-03-01T16:44:00+01:00</updated>
-       <author>
-         <name>Luca Guidi</name>
-       </author>
-       <summary>
-         Changelog from Feb 23rd to Mar 1st 2015
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Releases</h2>
-
-<p>-</p>
-
-<h2>Completed</h2>
-
-<ul>
-<li>Database console [<a href="https://github.com/lotus/lotus/pull/152">details</a>]</li>
-<li>Default security headers [<a href="https://github.com/lotus/lotus/pull/159">details</a>]</li>
-<li>Initialize a Git repository when generate new applications [<a href="https://github.com/lotus/lotus/pull/163">details</a>]</li>
-<li>Generate a <code>.lotusrc</code> when generate new applications [<a href="https://github.com/lotus/lotus/pull/162">details</a>]</li>
-</ul>
-
-<h2>Development</h2>
-
-<ul>
-<li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>Action generator [<a href="https://github.com/lotus/lotus/pull/166">details</a>]</li>
-<li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/14">details</a>]</li>
-<li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
-</ul>
-
-<h2>Roadmap</h2>
-
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
-]]></content>
-     </entry>
-     <entry>
-       <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/02/22/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/02/22/weekly-changelog.html"/>
-       <updated>2015-02-22T11:03:00+01:00</updated>
-       <author>
-         <name>Luca Guidi</name>
-       </author>
-       <summary>
-         Changelog from Feb 16th to Feb 22th 2015
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Releases</h2>
-
-<ul>
-<li><a href="http://lotusrb.org">New website</a></li>
-<li><strong>Lotus::Model</strong> <code>v0.2.4</code> <a href="https://github.com/lotus/model/blob/master/CHANGELOG.md#v024---2015-02-20">details</a></li>
-</ul>
-
-<h2>Completed</h2>
-
-<ul>
-<li>Default response headers for <code>Lotus::Controller</code> [<a href="https://github.com/lotus/controller/pull/88">details</a>]</li>
-<li>View and Presenter autoescape [<a href="https://github.com/lotus/view/pull/60">details</a>]</li>
-<li><code>Lotus::Action::Params#get</code>: a safe API to access nested params (Example: <code>params.get(&#39;address.street&#39;)</code>) [<a href="https://github.com/lotus/controller/pull/89">details</a>]</li>
-<li><code>Lotus::Utils::String#titleize</code> [<a href="https://github.com/lotus/utils/pull/63">details</a>]</li>
-<li><code>Lotus::Utils::String#dasherize</code> [<a href="https://github.com/lotus/utils/pull/62">details</a>]</li>
-</ul>
-
-<h2>Development</h2>
-
-<ul>
-<li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>Database console [<a href="https://github.com/lotus/lotus/pull/152">details</a>]</li>
-<li>Default security headers [<a href="https://github.com/lotus/lotus/pull/159">details</a>]</li>
 <li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
 <li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/14">details</a>]</li>
 <li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>

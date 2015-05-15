@@ -3119,18 +3119,6 @@ $(window).scroll(function() {
   }
 });
 
-// Prepare version
-$(window).load(function(){
-  var version = $('meta[name=lotusrb-version]').attr('content');
-
-  $('.version').each(function(i, element) {
-    element = $(element);
-    var content = element.text().replace('{{version}}', version);
-
-    element.text(content);
-  });
-});
-
 // Prepare timestamps for terminal animation
 $(window).load(function(){
   var timestamp = "[" + moment().format("YYYY-MM-DD HH:mm:ss") + "]";

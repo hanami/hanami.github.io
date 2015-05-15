@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides</title>
+    <title>Lotus - Guides - Action Cookies</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -88,16 +88,88 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/index.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1 class="page-header" id="guides">Lotus Guides</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/cookies.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Cookies</h1>
 
-<p class="lead">Sometimes you want to start some content with a lead paragraph. <strong>Note: In the current example each item in the sidebar is a seperate page.  You can also have all the content be on a single page and use the sidebar as anchor links.</strong></p>
+<h2>Enable Cookies</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. </p>
-<pre class="language-ruby ruby"><code><span class="nb">puts</span> <span class="s2">"Some Ruby code"</span>
+<p>Lotus applies <em>&ldquo;batteries included, but not mounted&rdquo;</em> philosophy.
+Cookies are a feature that is present, but needs to be activated.</p>
+
+<p>In our application settings there is a line to uncomment.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">cookies</span> <span class="kp">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
-<p>Or some <code>inline</code> code.</p>
+<p>Since now on, cookies are automatically sent for each response.</p>
+
+<h3>Settings</h3>
+
+<p>With that configuration, We can specify options that will be set for all the cookies that we sent from our application.</p>
+
+<ul>
+<li><code>:domain</code> - <code>String</code> (<code>nil</code> by default), the domain</li>
+<li><code>:path</code> - <code>String</code> (<code>nil</code> by default), a relative URL</li>
+<li><code>:max_age</code> - <code>Integer</code> (<code>nil</code> by default), cookie duration expressed in seconds</li>
+<li><code>:secure</code> - <code>Boolean</code> (<code>true</code> by default if using SSL), restrict cookies to secure connections</li>
+<li><code>:httponly</code> - <code>Boolean</code> (<code>true</code> by default), restrict JavaScript access to cookies</li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Cookies behave like a Hash: we can read, assign and remove values.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">cookies</span><span class="p">[</span><span class="ss">:b</span><span class="p">]</span>         <span class="c1"># read</span>
+      <span class="n">cookies</span><span class="p">[</span><span class="ss">:a</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'foo'</span> <span class="c1"># assign</span>
+      <span class="n">cookies</span><span class="p">[</span><span class="ss">:c</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>   <span class="c1"># remove</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>When setting a value, a cookie can accept a <code>String</code> or a <code>Hash</code> to specify inline options.
+General settings are applied automatically, but these options can be used to override values case by case.</p>
+
+<h3>Example</h3>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">cookies</span> <span class="ss">max_age: </span><span class="mi">300</span> <span class="c1"># 5 minutes</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We&rsquo;re gonna set two cookies from the action: the first will inherit application configuration, while the second overrides the default value.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># Set-Cookie:a=foo; max-age=300; HttpOnly</span>
+      <span class="n">cookies</span><span class="p">[</span><span class="ss">:a</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'foo'</span>
+
+      <span class="c1"># Set-Cookie:b=bar; max-age=100; HttpOnly</span>
+      <span class="n">cookies</span><span class="p">[</span><span class="ss">:b</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">value: </span><span class="s1">'bar'</span><span class="p">,</span> <span class="ss">max_age: </span><span class="mi">100</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
 
             </div>
           </div>
