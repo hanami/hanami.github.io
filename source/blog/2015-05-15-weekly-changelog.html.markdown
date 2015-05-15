@@ -12,9 +12,9 @@ excerpt: >
   * Released lotusrb 0.3.1
   * Released lotus-validations 0.3.1
   * Released lotus-view 0.4.0
-  * Released lotus-controller 0.3.1
+  * Released lotus-controller 0.4.2
   * Released lotus-model 0.3.1
-  * Released lotus-utils 0.4.1
+  * Released lotus-utils 0.4.2
 
 ## Completed
 
