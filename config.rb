@@ -163,6 +163,10 @@ helpers do
   def encode_text(text)
    ::Rack::Utils.escape(text)
   end
+
+  def lotus_version
+    '0.3.1'
+  end
 end
 
 set :css_dir,    'stylesheets'
