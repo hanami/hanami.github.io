@@ -4,10 +4,105 @@ title: Lotus - Guides - Action Control Flow
 
 # Control Flow
 
-Using exceptions for control flow is expensive for Ruby VM.
-There is a lightweight alternative that our language supports: **signals** (see `throw` and `catch`).
+## Callbacks
+
+If we want to execute some logic before and/or after `#call` is executed, we can use a callback.
+It's useful to declutter code for common tasks like checking if a user is signed in, set a record, handle 404 responses or tidy up the response.
+
+The correspoding DSL methods are `before` and `after`.
+They accept a symbol that is the name of the method that we want to call, or an anonymous proc.
+
+### Methods
+
+```ruby
+# apps/web/controllers/dashboard/index.rb
+module Web::Controllers::Dashboard
+  class Index
+    include Web::Action
+    before :track_remote_ip
+
+    def call(params)
+      # ...
+    end
+
+    private
+    def track_remote_ip
+      @remote_ip = request.ip
+      # ...
+    end
+  end
+end
+```
+
+With the code above, we are tracking the remote IP address for analytics purposes.
+Because it isn't strictly related to our business logic, we move it in a callback.
+
+A callback method can optionally accept an argument: `params`.
+
+```ruby
+# apps/web/controllers/dashboard/index.rb
+module Web::Controllers::Dashboard
+  class Index
+    include Web::Action
+    before :validate_params
+
+    def call(params)
+      # ...
+    end
+
+    private
+    def validate_params(params)
+      # ...
+    end
+  end
+end
+```
+
+### Proc
+
+The examples above can be rewritten with anonymous procs.
+They are bound to the instance context of the action.
+
+```ruby
+# apps/web/controllers/dashboard/index.rb
+module Web::Controllers::Dashboard
+  class Index
+    include Web::Action
+    before { @remote_ip = request.ip }
+
+    def call(params)
+      # @remote_ip is available here
+      # ...
+    end
+  end
+end
+```
+
+A callback proc can bound an optional argument: `params`.
+
+```ruby
+# apps/web/controllers/dashboard/index.rb
+module Web::Controllers::Dashboard
+  class Index
+    include Web::Action
+    before {|params| params.valid? }
+
+    def call(params)
+      # ...
+    end
+  end
+end
+```
+
+<p class="warning">
+Don't use callbacks for model domain logic operations like sending emails.
+This is an antipattern that causes a lot of problems for code maintenance, testability and accidental side effects.
+</p>
 
 ## Halt
+
+Using exceptions for control flow is expensive for Ruby VM.
+There is a lightweight alternative that our language supports: **signals** (see `throw` and `catch`).
 
 Lotus take advantage of this mechanism to provide **faster control flow** in our actions via `#halt`.
 

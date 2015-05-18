@@ -45,7 +45,7 @@ module Web
 end
 ```
 
-Once included by an action, it will set a [before callback](/guides/actions/callbacks) that executes `:authenticate!` for each request.
+Once included by an action, it will set a [before callback](/guides/actions/control-flow) that executes `:authenticate!` for each request.
 If not logged in, a `401` is returned, otherwise the flow can go ahead and hit `#call`.
 It also exposes `current_user` for all the views (see [Exposures](/guides/actions/exposures)).
 
