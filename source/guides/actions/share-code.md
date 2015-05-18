@@ -71,6 +71,34 @@ end
 Code included via <code>prepare</code> is available for ALL the actions of an application.
 </p>
 
+### Skipping A Callback
+
+Let's say we have included `Authentication` globally, but want to skip the execution its callback for certain resources.
+A typical use case is to let unauthenticated requests to reach our sign in form.
+
+The solution is really simple and elegant at the same time: override that method.
+
+```ruby
+# apps/web/controllers/sessions/new.rb
+module Web::Controllers::Sessions
+  class New
+    include Web::Action
+
+    def call(params)
+      # ...
+    end
+
+    private
+    def authenticate!
+      # no-op
+    end
+  end
+end
+```
+
+The action will still try to invoke `:authenticate!`, because, technically speaking, **callbacks execution can't be skipped**.
+But if we override that method with an empty implementation, it does nothing and our non-signedin users can reach the wanted resource.
+
 ## Module Inclusion
 
 Imagine we have a RESTful resource named `books`.
