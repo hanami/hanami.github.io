@@ -67,8 +67,8 @@
                   <li><a href="/guides/actions/mime-types">MIME Types</a></li>
                   <li><a href="/guides/actions/cookies">Cookies</a></li>
                   <li><a href="/guides/actions/sessions">Sessions</a></li>
-                  <li><a href="/guides/actions/exceptions">Exceptions</a></li>
-                  <li><a href="/guides/actions/flow-control">Flow Control</a></li>
+                  <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
+                  <li><a href="/guides/actions/control-flow">Control Flow</a></li>
                   <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
                   <li><a href="/guides/actions/configuration">Configuration</a></li>
                   <li><a href="/guides/actions/share-code">Share Code</a></li>
@@ -141,13 +141,28 @@ Here an example of a few informations that we can introspect.</p>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
       <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="mi">201</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span>   <span class="o">=</span> <span class="s1">'Hi!'</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span>   <span class="o">=</span> <span class="s1">'Your resource has been created'</span>
       <span class="nb">self</span><span class="p">.</span><span class="nf">headers</span><span class="p">.</span><span class="nf">merge!</span><span class="p">({</span> <span class="s1">'X-Custom'</span> <span class="o">=&gt;</span> <span class="s1">'OK'</span> <span class="p">})</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="c1"># It will return [201, { "X-Custom" =&gt; "OK" }, ["Hi!"]]</span>
+<span class="c1"># It will return [201, { "X-Custom" =&gt; "OK" }, ["Your resource has been created"]]</span>
+</code></pre>
+
+<p>As shortcut we can use <code>#status</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">status</span> <span class="mi">201</span><span class="p">,</span> <span class="s2">"Your resource has been created"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># It will return [201, {}, ["Your resource has been created"]]</span>
 </code></pre>
 
             </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Actions Overview</title>
+    <title>Lotus - Guides - Action Sessions</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -88,80 +88,59 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/sessions.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Sessions</h1>
 
-<p>An action is an endpoint that handles incoming HTTP requests for a specific <a href="/guides/routing/overview">route</a>.
-In a Lotus application, an <strong>action is an object</strong>, while a <strong>controller is a Ruby module</strong> that groups them.</p>
+<h2>Enable Sessions</h2>
 
-<p>This design provides self contained actions, which don&rsquo;t share their context accidentally with other actions and it prevents gigantic controllers.
-It has several advantages in terms of testability and control of an action.</p>
-
-<h2>A Simple Action</h2>
-
-<p>When we create a new application, Lotus generates a basic action for us.
-Lotus ships a generator for actions, let&rsquo;s create one:</p>
-<pre class="language-ruby shell"><code>bundle <span class="nb">exec </span>lotus generate action web dashboard#index
+<p>Sessions are shipped with Lotus applications, but not enabled by default.
+If we want to turn on this feature, we just need to uncomment a line of code.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">sessions</span> <span class="ss">:cookie</span><span class="p">,</span> <span class="ss">secret: </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'WEB_SESSIONS_SECRET'</span><span class="p">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
-<p>Let&rsquo;s examine the action:</p>
+<p>The first argument is the name of the adapter for the session storage.
+The default value is <code>:cookie</code>, that uses <code>Rack::Session::Cookie</code>.</p>
+
+<p class="convention">
+The name of the session adapter is underscored version of the class name under <code>Rack::Session</code> namespace.
+Example: <code>:cookie</code> for <code>Rack::Session::Cookie</code>.
+</p>
+
+<p>We can use different a storage compatible with Rack sessions.
+Let&rsquo;s say we want to use Redis. We should bundle <code>redis-rack</code> and specify the name of the adapter: <code>:redis</code>.
+Lotus is able to autoload the adapter and use it when the application is started.</p>
+
+<p class="convention">
+Custom storages are autoloaded via <code>require "rack/session#{ adapter_name }"</code>.
+</p>
+
+<p>The second argument passed to <code>sessions</code> is a Hash of options that are <strong>passed to the adapter</strong>.
+We find only a default <code>:secret</code>, but we can specify all the values that are supported by the current adapter.</p>
+
+<h2>Usage</h2>
+
+<p>Sessions behave like a Hash: we can read, assign and remove values.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">sessions</span><span class="p">[</span><span class="ss">:b</span><span class="p">]</span>         <span class="c1"># read</span>
+      <span class="n">sessions</span><span class="p">[</span><span class="ss">:a</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'foo'</span> <span class="c1"># assign</span>
+      <span class="n">sessions</span><span class="p">[</span><span class="ss">:c</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>   <span class="c1"># remove</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
-
-<h3>Naming</h3>
-
-<p>That file begins with a module declaration.</p>
-
-<p>The first token is the name of our application: <code>Web</code>.
-Lotus can run multiple applications within the same Ruby process.
-They are located under <code>apps/</code>.
-Their name is used as a <strong>top-level module to contain inner components</strong> like actions and views, in order to <strong>avoid naming collisions</strong>.
-If we have another action <code>Home::Index</code> under an application <code>Admin</code>, the two of them can coexist inside the same codebase.</p>
-
-<p>The second token is a conventional name: <code>Controllers</code>.
-<strong>All the controllers are nested under it.</strong>
-This module is generated at the runtime for us, when the application starts.</p>
-
-<p class="convention">
-  For a given application named <code>Web</code>, controllers are available under <code>Web::Controllers</code>.
-</p>
-
-<p>The last bit is <code>Dashboard</code>, which is our controller.</p>
-
-<p>The whole action name is <code>Web::Controllers::Dashboard::Index</code>.</p>
-
-<h3> Action Module</h3>
-
-<p>Lotus philosophy emphatizes <em>composition over inheritance</em> and avoids the <a href="http://michaelfeathers.typepad.com/michael_feathers_blog/2013/01/the-framework-superclass-anti-pattern.html">framework superclass antipattern</a>.
-For this reason, all the components are provided as <strong>modules to include</strong> instead of base classes to inherit from.</p>
-
-<p>Like we said before, Lotus can run multiple apps within the same Ruby process.
-Each of them has its own configuration.
-To keep separated actions from an application named <code>Web</code> and an application named <code>Admin</code>, we include <code>Web::Action</code> and <code>Admin::Action</code> respectively.</p>
-
-<p>In our example, we have a directive <code>include Web::Action</code>.
-That means our action will behave according to the configuration of the <code>Web</code> application.</p>
-
-<p class="convention">
-  For a given application named <code>Web</code>, action mixin to include is <code>Web::Action</code>.
-</p>
-
-<h3>Interface</h3>
-
-<p>When we include <code>Web::Action</code>, we made our object compliant with <a href="https://github.com/lotus/controller">Lotus::Controller</a>&rsquo;s actions.
-We need to implement <code>#call</code>, which is a method that accepts only one argument: <code>params</code>.
-That is the object that carries the payload that comes from incoming HTTP requests from the <a href="/guides/routing/basic-routing">router</a>.</p>
-
-<p>This interface reminds us of Rack.
-Indeed, our action is compatible with that protocol.</p>
 
             </div>
           </div>

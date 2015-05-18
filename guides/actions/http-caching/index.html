@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Actions Overview</title>
+    <title>Lotus - Guides - Action HTTP Caching</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -88,80 +88,124 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/http-caching.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>HTTP Caching</h1>
 
-<p>An action is an endpoint that handles incoming HTTP requests for a specific <a href="/guides/routing/overview">route</a>.
-In a Lotus application, an <strong>action is an object</strong>, while a <strong>controller is a Ruby module</strong> that groups them.</p>
+<p>We refer to HTTP caching as the set of techiniques for HTTP 1.1 and implemented by browser vendors in order to make faster interactions with the server.
+There are a few headers that if sent, will enable these mechanisms.</p>
 
-<p>This design provides self contained actions, which don&rsquo;t share their context accidentally with other actions and it prevents gigantic controllers.
-It has several advantages in terms of testability and control of an action.</p>
+<p>Because these are advanced features, they must be enabled via <code>http_caching true</code> in our application settings (<code>apps/web/application.rb</code>).</p>
 
-<h2>A Simple Action</h2>
+<h2>Cache Control</h2>
 
-<p>When we create a new application, Lotus generates a basic action for us.
-Lotus ships a generator for actions, let&rsquo;s create one:</p>
-<pre class="language-ruby shell"><code>bundle <span class="nb">exec </span>lotus generate action web dashboard#index
-</code></pre>
-
-<p>Let&rsquo;s examine the action:</p>
+<p>Actions offer a DSL to set a special header <code>Cache-Control</code>.
+The first argument is a cache response directive like <code>:public</code> or <code>&quot;must-revalidate&quot;</code>, while the second argument is a set of options like <code>:max_age</code>.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
+    <span class="n">cache_control</span> <span class="ss">:public</span><span class="p">,</span> <span class="ss">max_age: </span><span class="mi">600</span>
+      <span class="c1"># =&gt; Cache-Control: public, max-age: 600</span>
+
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<h3>Naming</h3>
+<h2>Expires</h2>
 
-<p>That file begins with a module declaration.</p>
+<p>Another HTTP caching special header is: <code>Expires</code>.
+It can be used for retrocompatibility with old browsers which don&rsquo;t understand <code>Cache-Control</code>.</p>
 
-<p>The first token is the name of our application: <code>Web</code>.
-Lotus can run multiple applications within the same Ruby process.
-They are located under <code>apps/</code>.
-Their name is used as a <strong>top-level module to contain inner components</strong> like actions and views, in order to <strong>avoid naming collisions</strong>.
-If we have another action <code>Home::Index</code> under an application <code>Admin</code>, the two of them can coexist inside the same codebase.</p>
+<p>Lotus&rsquo; solution for <em>expire</em> combines support for all the browsers, by sending both the headers.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="n">expires</span> <span class="mi">60</span><span class="p">,</span> <span class="ss">:public</span><span class="p">,</span> <span class="ss">max_age: </span><span class="mi">300</span>
+      <span class="c1"># =&gt; Expires: Mon, 18 May 2015 09:19:18 GMT</span>
+      <span class="c1">#    Cache-Control: public, max-age: 300</span>
 
-<p>The second token is a conventional name: <code>Controllers</code>.
-<strong>All the controllers are nested under it.</strong>
-This module is generated at the runtime for us, when the application starts.</p>
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
 
-<p class="convention">
-  For a given application named <code>Web</code>, controllers are available under <code>Web::Controllers</code>.
-</p>
+<h2>Conditional GET</h2>
 
-<p>The last bit is <code>Dashboard</code>, which is our controller.</p>
+<p><em>Conditional GET</em> is a two steps workflow to inform browsers that a resource hasn&rsquo;t changed since the last visit.
+At the end of the first request, it receives special HTTP response headers to send back the next time it will come back.
+If that header matches the value that the server calculates, then the resource is still cached and a <code>304</code> status (Not Modified) is returned.</p>
 
-<p>The whole action name is <code>Web::Controllers::Dashboard::Index</code>.</p>
+<h3>ETag</h3>
 
-<h3> Action Module</h3>
+<p>The first way to match a resource freshness is to use an identifier (usually an MD5 token).
+Let&rsquo;s specify it with <code>fresh etag:</code>.</p>
 
-<p>Lotus philosophy emphatizes <em>composition over inheritance</em> and avoids the <a href="http://michaelfeathers.typepad.com/michael_feathers_blog/2013/01/the-framework-superclass-anti-pattern.html">framework superclass antipattern</a>.
-For this reason, all the components are provided as <strong>modules to include</strong> instead of base classes to inherit from.</p>
+<p>If the given identifier does NOT match <code>If-None-Match</code> request header, it will return a <code>200</code> and set <code>ETag</code> response header with that value.
+If it matches, the action will be halted and a <code>304</code> will be returned.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/users/show.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Users</span>
+  <span class="k">class</span> <span class="nc">Show</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
-<p>Like we said before, Lotus can run multiple apps within the same Ruby process.
-Each of them has its own configuration.
-To keep separated actions from an application named <code>Web</code> and an application named <code>Admin</code>, we include <code>Web::Action</code> and <code>Admin::Action</code> respectively.</p>
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@user</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+      <span class="n">fresh</span> <span class="ss">etag: </span><span class="n">etag</span>
 
-<p>In our example, we have a directive <code>include Web::Action</code>.
-That means our action will behave according to the configuration of the <code>Web</code> application.</p>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
 
-<p class="convention">
-  For a given application named <code>Web</code>, action mixin to include is <code>Web::Action</code>.
-</p>
+    <span class="kp">private</span>
 
-<h3>Interface</h3>
+    <span class="k">def</span> <span class="nf">etag</span>
+      <span class="s2">"</span><span class="si">#{</span> <span class="vi">@user</span><span class="p">.</span><span class="nf">id</span> <span class="si">}</span><span class="s2">-</span><span class="si">#{</span> <span class="vi">@user</span><span class="p">.</span><span class="nf">updated_at</span> <span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-<p>When we include <code>Web::Action</code>, we made our object compliant with <a href="https://github.com/lotus/controller">Lotus::Controller</a>&rsquo;s actions.
-We need to implement <code>#call</code>, which is a method that accepts only one argument: <code>params</code>.
-That is the object that carries the payload that comes from incoming HTTP requests from the <a href="/guides/routing/basic-routing">router</a>.</p>
+<span class="c1"># Case 1 (missing or non-matching If-None-Match)</span>
+<span class="c1"># GET /users/23</span>
+<span class="c1">#  =&gt; 200, ETag: 84e037c89f8d55442366c4492baddeae</span>
 
-<p>This interface reminds us of Rack.
-Indeed, our action is compatible with that protocol.</p>
+<span class="c1"># Case 2 (matching If-None-Match)</span>
+<span class="c1"># GET /users/23, If-None-Match: 84e037c89f8d55442366c4492baddeae</span>
+<span class="c1">#  =&gt; 304</span>
+</code></pre>
+
+<h3>Last Modified</h3>
+
+<p>The second way is to use a timestamp via <code>fresh last_modified:</code>.</p>
+
+<p>If the given timestamp does NOT match <code>If-Modified-Since</code> request header, it will return a <code>200</code> and set <code>Last-Modified</code> response header with that value.
+If it matches, the action will be halted and a <code>304</code> will be returned.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/users/show.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Users</span>
+  <span class="k">class</span> <span class="nc">Show</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@user</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+      <span class="n">fresh</span> <span class="ss">last_modified: </span><span class="vi">@user</span><span class="p">.</span><span class="nf">updated_at</span>
+
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># Case 1 (missing or non-matching Last-Modified)</span>
+<span class="c1"># GET /users/23</span>
+<span class="c1">#  =&gt; 200, Last-Modified: Mon, 18 May 2015 10:04:30 GMT</span>
+
+<span class="c1"># Case 2 (matching Last-Modified)</span>
+<span class="c1"># GET /users/23, If-Modified-Since: Mon, 18 May 2015 10:04:30 GMT</span>
+<span class="c1">#  =&gt; 304</span>
+</code></pre>
 
             </div>
           </div>
