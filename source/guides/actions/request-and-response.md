@@ -60,11 +60,27 @@ module Web::Controllers::Dashboard
 
     def call(params)
       self.status = 201
-      self.body   = 'Hi!'
+      self.body   = 'Your resource has been created'
       self.headers.merge!({ 'X-Custom' => 'OK' })
     end
   end
 end
 
-# It will return [201, { "X-Custom" => "OK" }, ["Hi!"]]
+# It will return [201, { "X-Custom" => "OK" }, ["Your resource has been created"]]
 ```
+
+As shortcut we can use `#status`.
+
+```ruby
+# apps/web/controllers/dashboard/index.rb
+module Web::Controllers::Dashboard
+  class Index
+    include Web::Action
+
+    def call(params)
+      status 201, "Your resource has been created"
+    end
+  end
+end
+
+# It will return [201, {}, ["Your resource has been created"]]
