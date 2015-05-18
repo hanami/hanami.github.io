@@ -70,7 +70,6 @@
                   <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
                   <li><a href="/guides/actions/control-flow">Control Flow</a></li>
                   <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
-                  <li><a href="/guides/actions/configuration">Configuration</a></li>
                   <li><a href="/guides/actions/share-code">Share Code</a></li>
                   <li><a href="/guides/actions/testing">Testing</a></li>
                 </ul>
@@ -91,10 +90,97 @@
               <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/control-flow.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
               <h1>Control Flow</h1>
 
-<p>Using exceptions for control flow is expensive for Ruby VM.
-There is a lightweight alternative that our language supports: <strong>signals</strong> (see <code>throw</code> and <code>catch</code>).</p>
+<h2>Callbacks</h2>
+
+<p>If we want to execute some logic before and/or after <code>#call</code> is executed, we can use a callback.
+It&rsquo;s useful to declutter code for common tasks like checking if a user is signed in, set a record, handle 404 responses or tidy up the response.</p>
+
+<p>The correspoding DSL methods are <code>before</code> and <code>after</code>.
+They accept a symbol that is the name of the method that we want to call, or an anonymous proc.</p>
+
+<h3>Methods</h3>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="n">before</span> <span class="ss">:track_remote_ip</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+    <span class="k">def</span> <span class="nf">track_remote_ip</span>
+      <span class="vi">@remote_ip</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">ip</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>With the code above, we are tracking the remote IP address for analytics purposes.
+Because it isn&rsquo;t strictly related to our business logic, we move it in a callback.</p>
+
+<p>A callback method can optionally accept an argument: <code>params</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="n">before</span> <span class="ss">:validate_params</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+    <span class="k">def</span> <span class="nf">validate_params</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Proc</h3>
+
+<p>The examples above can be rewritten with anonymous procs.
+They are bound to the instance context of the action.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="n">before</span> <span class="p">{</span> <span class="vi">@remote_ip</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">ip</span> <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># @remote_ip is available here</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>A callback proc can bound an optional argument: <code>params</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="n">before</span> <span class="p">{</span><span class="o">|</span><span class="n">params</span><span class="o">|</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span> <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p class="warning">
+Don&rsquo;t use callbacks for model domain logic operations like sending emails.
+This is an antipattern that causes a lot of problems for code maintenance, testability and accidental side effects.
+</p>
 
 <h2>Halt</h2>
+
+<p>Using exceptions for control flow is expensive for Ruby VM.
+There is a lightweight alternative that our language supports: <strong>signals</strong> (see <code>throw</code> and <code>catch</code>).</p>
 
 <p>Lotus take advantage of this mechanism to provide <strong>faster control flow</strong> in our actions via <code>#halt</code>.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>

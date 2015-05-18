@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Actions Basic Usage</title>
+    <title>Lotus - Guides - Action Share Code</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,128 +87,137 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/basic-usage.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Basic Usage</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/share-code.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Share Code</h1>
 
-<h2>Requests Handling</h2>
+<p>Actions as objects have a lot of advantages but they make code sharing less intuitive.
+This section shares a few techniques to make this possible.</p>
 
-<p>In the <a href="/guides/actions/overview">previous section</a>, we generated an action, let&rsquo;s use it.</p>
+<h2>Prepare</h2>
 
-<p>As first thing, we check our routes.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
-<span class="n">get</span> <span class="s1">'/dashboard'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'dashboard#index'</span>
-</code></pre>
+<p>In our settings (<code>apps/web/application.rb</code>), there is code block that allows to share the code for <strong>all the actions</strong> of our application.
+When an action includes the <code>Web::Action</code> module, that block code is yielded within the context of that class.
+This is heavily inspired by Ruby Module and its <code>included</code> hook.</p>
 
-<h3>View Rendering</h3>
+<p>Imagine we want to check if the current request comes from an authenticated user.</p>
 
-<p>Then we edit the corresponding template:</p>
-<pre class="language-ruby erb"><code># apps/web/templates/dashboard/index.html.erb
-<span class="nt">&lt;h1&gt;</span>Dashboard<span class="nt">&lt;/h1&gt;</span>
-</code></pre>
+<p>We craft a module in <code>apps/web/controllers/authentication.rb</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/authentication.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">module</span> <span class="nn">Authentication</span>
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+      <span class="n">action</span><span class="p">.</span><span class="nf">class_eval</span> <span class="k">do</span>
+        <span class="n">before</span> <span class="ss">:authenticate!</span>
+        <span class="n">expose</span> <span class="ss">:current_user</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
 
-<p>Here how Lotus handles an incoming request:</p>
+    <span class="kp">private</span>
 
-<ol>
-<li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code></li>
-<li>The application creates a new instance of <code>Web::Views::Dashboard::Index</code> and invokes <code>#render</code>.</li>
-<li>The application returns the response to the browser</li>
-</ol>
+    <span class="k">def</span> <span class="nf">authenticate!</span>
+      <span class="n">halt</span> <span class="mi">401</span> <span class="k">unless</span> <span class="n">authenticated?</span>
+    <span class="k">end</span>
 
-<p class="convention">
-  For a given action named <code>Web::Controllers::Dashboard::Index</code>, a corresponding view MUST be present: <code>Web::Views::Dashboard::Index</code>.
-</p>
+    <span class="k">def</span> <span class="nf">authenticated?</span>
+      <span class="o">!!</span><span class="n">current_user</span>
+    <span class="k">end</span>
 
-<p>If we visit <code>/dashboard</code> we should see <code>&lt;h1&gt;Dashboard&lt;/h1&gt;</code> in our browser.</p>
-
-<h3>Bypass Rendering</h3>
-
-<p>By default an action takes care of the HTTP status code and response header, but not of the body of the response.
-As seen above, it delegates the corresponding view to render and set this value.</p>
-
-<p>Sometimes we want to bypass this process.
-For instance we want to return a simple body like <code>OK</code>.
-To involve a view in this case is a waste of CPU cycles.</p>
-
-<p>If we set the body of the response from an action, <strong>our application will ignore the view</strong>.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
-
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="s1">'OK'</span>
+    <span class="k">def</span> <span class="nf">current_user</span>
+      <span class="vi">@current_user</span> <span class="o">||=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">])</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<p>Here how Lotus handles an incoming request in this case:</p>
+<p>Once included by an action, it will set a <a href="/guides/actions/control-flow">before callback</a> that executes <code>:authenticate!</code> for each request.
+If not logged in, a <code>401</code> is returned, otherwise the flow can go ahead and hit <code>#call</code>.
+It also exposes <code>current_user</code> for all the views (see <a href="/guides/actions/exposures">Exposures</a>).</p>
 
-<ol>
-<li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code></li>
-<li>The application detects that a body is already set and doesn&rsquo;t instantiate the view</li>
-<li>The application returns the response to the browser</li>
-</ol>
+<p>It will be really tedious to include this module for all the actions of our app.
+We can use <code>controller.prepare</code> for the scope.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'./controllers/authentication'</span>
 
-<p>If we visit <code>/dashboard</code> again, now we should see <code>OK</code>.</p>
-
-<p class="convention">
-  If the response body was already set by an action, the rendering process is bypassed.
-</p>
-
-<p>With direct body assignment, <strong>we can safely delete the corresponding view and template</strong>.</p>
-
-<h2>Initialization</h2>
-
-<p>Actions are instantiated for us by Lotus at the runtime: for each incoming request, we&rsquo;ll automatically get a new instance.
-Because actions are objects, <strong>we can take control on their initialization</strong> and eventually <a href="http://en.wikipedia.org/wiki/Dependency_injection"><em>inject</em> our dependencies</a>.
-This is a really useful technique for unit test our actions.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
-
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="ss">greeting: </span><span class="no">Greeting</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
-      <span class="vi">@greeting</span> <span class="o">=</span> <span class="n">greeting</span>
-    <span class="k">end</span>
-
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">self</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="vi">@greeting</span><span class="p">.</span><span class="nf">message</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="n">controller</span><span class="p">.</span><span class="nf">prepare</span> <span class="k">do</span>
+        <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Authentication</span>
+      <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
-
-<p>There is a limitation that we should always keep in mind:</p>
 
 <p class="warning">
-  Action initializer MUST have an arity of 0
+Code included via <code>prepare</code> is available for ALL the actions of an application.
 </p>
 
-<p>The following initializers are valid</p>
-<pre class="language-ruby ruby"><code><span class="c1"># no arguments</span>
-<span class="k">def</span> <span class="nf">initialize</span>
-  <span class="c1"># ...</span>
-<span class="k">end</span>
+<h3>Skipping A Callback</h3>
 
-<span class="c1"># default arguments</span>
-<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">greeting</span> <span class="o">=</span> <span class="no">Greeting</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
-  <span class="c1"># ...</span>
-<span class="k">end</span>
+<p>Let&rsquo;s say we have included <code>Authentication</code> globally, but want to skip the execution its callback for certain resources.
+A typical use case is to let unauthenticated requests to reach our sign in form.</p>
 
-<span class="c1"># keyword arguments</span>
-<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="ss">greeting: </span><span class="no">Greeting</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
-  <span class="c1"># ...</span>
-<span class="k">end</span>
+<p>The solution is really simple and elegant at the same time: override that method.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/sessions/new.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Sessions</span>
+  <span class="k">class</span> <span class="nc">New</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
-<span class="c1"># options</span>
-<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
-  <span class="c1"># ...</span>
-<span class="k">end</span>
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
 
-<span class="c1"># splat arguments</span>
-<span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-  <span class="c1"># ...</span>
+    <span class="kp">private</span>
+    <span class="k">def</span> <span class="nf">authenticate!</span>
+      <span class="c1"># no-op</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The action will still try to invoke <code>:authenticate!</code>, because, technically speaking, <strong>callbacks execution can&rsquo;t be skipped</strong>.
+But if we override that method with an empty implementation, it does nothing and our non-signedin users can reach the wanted resource.</p>
+
+<h2>Module Inclusion</h2>
+
+<p>Imagine we have a RESTful resource named <code>books</code>.
+There are several actions (<code>show</code>, <code>edit</code>, <code>update</code> and <code>destroy</code>), which need to find a specific book to perform their job.</p>
+
+<p>What if we want to DRY the code of all these actions?
+Ruby comes to our rescue.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/set_book.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">module</span> <span class="nn">SetBook</span>
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+      <span class="n">action</span><span class="p">.</span><span class="nf">class_eval</span> <span class="k">do</span>
+        <span class="n">before</span> <span class="ss">:set_book</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+
+    <span class="k">def</span> <span class="nf">set_book</span>
+      <span class="vi">@book</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+      <span class="n">halt</span> <span class="mi">404</span> <span class="k">if</span> <span class="vi">@book</span><span class="p">.</span><span class="nf">nil?</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We have defined a module for our behavior to share, let&rsquo;s include it all the actions that need it.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/update.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'./set_book'</span>
+
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Update</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+    <span class="kp">include</span> <span class="no">SetBook</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
