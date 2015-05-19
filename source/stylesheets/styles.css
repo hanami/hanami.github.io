@@ -12324,6 +12324,14 @@ pre[class*="language-"] {
   content: "Convention - "
 }
 
+.notice {
+  padding: 1em;
+  background-color: #afeeff;
+  border: 1px solid #6baaff;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
 .warning {
   padding: 1em;
   background-color: #f99caf;
