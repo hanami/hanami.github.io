@@ -12,11 +12,10 @@ It has several advantages in terms of testability and control of an action.
 
 ## A Simple Action
 
-When we create a new application, Lotus generates a basic action for us.
-Lotus ships a generator for actions, let's create one:
+Lotus ships a generator for actions, let's create a new one:
 
 ```shell
-bundle exec lotus generate action web dashboard#index
+lotus generate action web dashboard#index
 ```
 
 Let's examine the action:
