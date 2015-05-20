@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Routing Overview</title>
+    <title>Lotus - Guides - MIME Types</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,76 +102,69 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/routing/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/mime-types.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>MIME Types</h1>
 
-<p>Lotus applications use <a href="https://github.com/lotus/router">Lotus::Router</a> for routing: a Rack compatible, lightweight and fast HTTP router for Ruby.</p>
+<p>A view can handle several MIME Types. Before to dive into this subject, please consider to read how action handle <a href="/guides/actions/mime-types">MIME Types</a>.</p>
 
-<h2>Getting started</h2>
+<p>It&rsquo;s important to highlight the correlation between the <em>format</em> and template name.
+For a given MIME Type, Rack (and then Lotus) associate a <em>format</em> for it.
+XML is mapped from <code>application/xml</code> to <code>:xml</code>, HTML is <code>text/html</code> and becomes <code>:html</code> for us.</p>
 
-<p>With your favorite editor open <code>apps/web/config/routes.rb</code> and add the following line.</p>
-<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">env</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s1">'Hello from Lotus!'</span><span class="p">]]</span> <span class="p">}</span>
+<p class="convention">
+Format MUST be the first extension of the template file name. Eg <code>dashboard/index.html.*</code>.
+</p>
+
+<h2>Default Rendering</h2>
+
+<p>If our action (<code>Web::Controllers::Dashboard::Index</code>) is handling a JSON request, and we have defined a template for it (<code>apps/web/templates/dashboard/index.json.erb</code>), our view will use it for rendering.</p>
+<pre class="language-ruby erb"><code># apps/web/templates/dashboard/index.json.erb
+{"foo":"bar"}
+</code></pre>
+<pre class="language-ruby shell"><code><span class="gp">% </span>curl -H <span class="s2">"Accept: application/json"</span> http://localhost:2300/dashboard
+<span class="o">{</span><span class="s2">"foo"</span>:<span class="s2">"bar"</span><span class="o">}</span>
 </code></pre>
 
-<p>Then start the server with <code>bundle exec lotus server</code> and visit <a href="http://localhost:2300/hello">http://localhost:2300/hello</a>.
-You should see <code>Hello from Lotus!</code> in your browser.</p>
-
-<p>Let&rsquo;s explain what we just did.
-We created a <strong>route</strong>, an application can have many routes.
-Each route starts with an <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">HTTP verb</a> declaration, <code>get</code> in our case.
-Then we specify a relative URI (<code>/hello</code> for us) and the object that is responsible to respond to incoming requests.</p>
-
-<p>We can use most common HTTP verbs: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>, <code>TRACE</code> and <code>OPTIONS</code>.</p>
-<pre class="language-ruby ruby"><code><span class="n">endpoint</span> <span class="o">=</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">env</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s1">'Hello from Lotus!'</span><span class="p">]]</span> <span class="p">}</span>
-
-<span class="n">get</span>     <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">post</span>    <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">put</span>     <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">patch</span>   <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">delete</span>  <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">trace</span>   <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">options</span> <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
+<p>We&rsquo;re still able to request HTML format.</p>
+<pre class="language-ruby erb"><code># apps/web/templates/dashboard/index.html.erb
+<span class="nt">&lt;h1&gt;</span>Dashboard<span class="nt">&lt;/h1&gt;</span>
+</code></pre>
+<pre class="language-ruby shell"><code><span class="gp">% </span>curl -H <span class="s2">"Accept: text/html"</span> http://localhost:2300/dashboard
+&lt;h1&gt;Dashboard&lt;/h1&gt;
 </code></pre>
 
-<h2>Actions</h2>
+<p>In case we request an unsupported MIME Type, our application will raise an error.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>curl -H <span class="s2">"Accept: application/xml"</span> http://localhost:2300/dashboard
+Lotus::View::MissingTemplateError: Can<span class="s1">'t find template "dashboard/index" for "xml" format.
+</span></code></pre>
 
-<p>Full Rack integration is great, but the most common endpoint that we&rsquo;ll use in our web applications is an <strong>action</strong>.
-Actions are objects responsible to respond to incoming HTTP requests.
-They have a nested naming like <code>Web::Controllers::Home::Index</code>.
-This is a really long name to write, that&rsquo;s why Lotus has a <strong>naming convention</strong> for it: <code>&quot;home#index&quot;</code>.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
-<span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s2">"home#index"</span> <span class="c1"># =&gt; will route to Web::Controllers::Home::Index</span>
+<h2>View For Specific Format</h2>
+
+<p>This scenario works well if the presentational logic of a view can be applied for all the format templates that it handles.
+What if we want to have a <a href="/guides/views/basic-usage">custom rendering</a> or different presentational logic?</p>
+
+<p>We can inherit from our view and declare that our subclass only handle a specific format.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/json_index.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'./index'</span>
+
+<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
+  <span class="k">class</span> <span class="nc">JsonIndex</span> <span class="o">&lt;</span> <span class="no">Index</span>
+    <span class="nb">format</span> <span class="ss">:json</span>
+
+    <span class="k">def</span> <span class="nf">render</span>
+      <span class="no">JSON</span><span class="p">.</span><span class="nf">generate</span><span class="p">({</span><span class="ss">foo: </span><span class="s1">'bar'</span><span class="p">})</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
-<p>The first token is the name of the controller <code>&quot;home&quot;</code> is translated to <code>Home</code>.
-The same transformation will be applied to the name after the <code>#</code>: <code>&quot;index&quot;</code> to <code>Index</code>.</p>
+<p>JSON requests for <code>/dashboard</code>, will be handled by our <code>JsonIndex</code>.</p>
 
-<p>Lotus is able to figure out the namespace (<code>Web::Controllers</code>) and to compose the full class name.</p>
+<p class="notice">
+There is NO convention between the handled format and the class name. The important part is <code>format :json</code>.
+</p>
 
-<h2>Rack</h2>
-
-<p>Lotus is compatible with <a href="http://www.rubydoc.info/github/rack/rack/master/file/SPEC">Rack SPEC</a>, and so the endpoints that we use MUST be compliant as well.
-In the example above we used a <code>Proc</code> that was fitting our requirements.</p>
-
-<p>A valid endpoint can be an object, a class, an action, or an <strong>application</strong> that responds to <code>#call</code>.</p>
-<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/proc'</span><span class="p">,</span>       <span class="ss">to: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">env</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s1">'Hello from Lotus!'</span><span class="p">]]</span> <span class="p">}</span>
-<span class="n">get</span> <span class="s1">'/action'</span><span class="p">,</span>     <span class="ss">to: </span><span class="s2">"home#index"</span>
-<span class="n">get</span> <span class="s1">'/middleware'</span><span class="p">,</span> <span class="ss">to: </span><span class="no">Middleware</span>
-<span class="n">get</span> <span class="s1">'/rack-app'</span><span class="p">,</span>   <span class="ss">to: </span><span class="no">RackApp</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">get</span> <span class="s1">'/rails'</span><span class="p">,</span>      <span class="ss">to: </span><span class="no">ActionControllerSubclass</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span>
-</code></pre>
-
-<p>When we use a string, it tries to instantiate a class from it:</p>
-<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/rack-app'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'rack_app'</span> <span class="c1"># it will map to RackApp.new</span>
-</code></pre>
-
-<h3>Mounting Applications</h3>
-
-<p>If we want to mount an application, we should use <code>mount</code>.</p>
-<pre class="language-ruby ruby"><code><span class="n">mount</span> <span class="no">SinatraApp</span><span class="p">.</span><span class="nf">new</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/sinatra'</span>
-</code></pre>
-
-<p>All the HTTP requests starting with <code>/sinatra</code> will be routed to <code>SinatraApp</code>.</p>
+<p>With the example above we took advantadge of custom rendering to not use the template and let our serializer to return JSON for us.</p>
 
             </div>
           </div>

@@ -81,6 +81,7 @@
                   <li><a href="/guides/views/overview">Overview</a></li>
                   <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
                   <li><a href="/guides/views/templates">Templates</a></li>
+                  <li><a href="/guides/views/partials">Partials</a></li>
                   <li><a href="/guides/views/mime-types">MIME Types</a></li>
                   <li><a href="/guides/views/layouts">Layouts</a></li>
                   <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
@@ -106,6 +107,32 @@
 
 <p>A template is a file that describes the body of a response.
 It is rendered by bounding the context of a view and using a <em>template engine</em>.</p>
+
+<h2>Naming</h2>
+
+<p>For simplicity sake, there is a correlation between the view class name and the template file name.
+It&rsquo;s the translation of the name into a path: form <code>Dashboard::Index</code> to <code>dashboard/index</code>.</p>
+
+<p>The remaining part is made of multiple file extensions.
+The first is relative to the <strong><em>format</em></strong> and the latter is for the <em>template engine</em>.</p>
+
+<p class="convention">
+For a given <code>s::Dashboard::Index</code> view, there must be at least one template <code>dashboard/index.[format].[engine]</code> under the templates directory.
+</p>
+
+<h3>Custom Template</h3>
+
+<p>If we want to associate a different template to a view, we can use <code>.template</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+    <span class="n">template</span> <span class="s1">'home/index'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Our view will look for <code>apps/web/templates/home/index.*</code> template.</p>
 
 <h2>Engines</h2>
 

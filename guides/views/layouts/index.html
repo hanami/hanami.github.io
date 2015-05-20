@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Routing Overview</title>
+    <title>Lotus - Guides - View Layouts</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,76 +102,66 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/routing/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/layouts.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Layouts</h1>
 
-<p>Lotus applications use <a href="https://github.com/lotus/router">Lotus::Router</a> for routing: a Rack compatible, lightweight and fast HTTP router for Ruby.</p>
+<p>Layouts are special views.
+Their role is to render the <em>&ldquo;fixed&rdquo;</em> part of the HTML markup doesn&rsquo;t change from page to page.
+Think of the navigation, sidebar, header, footer, etc..</p>
 
-<h2>Getting started</h2>
-
-<p>With your favorite editor open <code>apps/web/config/routes.rb</code> and add the following line.</p>
-<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">env</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s1">'Hello from Lotus!'</span><span class="p">]]</span> <span class="p">}</span>
+<p>When we generate a new application, there is a default layout called <code>Web::Views::ApplicationLayout</code> with a <code>apps/web/templates/application.html.erb</code> template.
+It comes with a really basic HTML5 wireframe.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Web<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </code></pre>
 
-<p>Then start the server with <code>bundle exec lotus server</code> and visit <a href="http://localhost:2300/hello">http://localhost:2300/hello</a>.
-You should see <code>Hello from Lotus!</code> in your browser.</p>
+<p>The interesting part is <code>&lt;%= yield %&gt;</code>.
+It&rsquo;s replaced at the runtime with the output of a view.
+<strong>The order for a rendering is view first, layout as second step.</strong></p>
 
-<p>Let&rsquo;s explain what we just did.
-We created a <strong>route</strong>, an application can have many routes.
-Each route starts with an <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">HTTP verb</a> declaration, <code>get</code> in our case.
-Then we specify a relative URI (<code>/hello</code> for us) and the object that is responsible to respond to incoming requests.</p>
+<p>The context for a layout template is made of the layout and the current view.
+The latter has higher priority.</p>
 
-<p>We can use most common HTTP verbs: <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>, <code>TRACE</code> and <code>OPTIONS</code>.</p>
-<pre class="language-ruby ruby"><code><span class="n">endpoint</span> <span class="o">=</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">env</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s1">'Hello from Lotus!'</span><span class="p">]]</span> <span class="p">}</span>
+<p>Imagine to have the following line <code>&lt;title&gt;&lt;%= page_title %&gt;&lt;/title&gt;</code>.
+If both the layout and the view implement <code>#page_title</code>, Lotus will use the one from the view.</p>
 
-<span class="n">get</span>     <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">post</span>    <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">put</span>     <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">patch</span>   <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">delete</span>  <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">trace</span>   <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
-<span class="n">options</span> <span class="s1">'/hello'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">endpoint</span>
+<h2>Configure Layout</h2>
+
+<p>Default layout is defined in application&rsquo;s configuration.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="n">layout</span> <span class="ss">:application</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
-<h2>Actions</h2>
+<p class="convention">
+Lotus transform layout name in application&rsquo;s configuration, by appending the <code>Layout</code> suffix. Eg. <code>:application</code> for <code>Web::Views::ApplicationLayout</code>.
+</p>
 
-<p>Full Rack integration is great, but the most common endpoint that we&rsquo;ll use in our web applications is an <strong>action</strong>.
-Actions are objects responsible to respond to incoming HTTP requests.
-They have a nested naming like <code>Web::Controllers::Home::Index</code>.
-This is a really long name to write, that&rsquo;s why Lotus has a <strong>naming convention</strong> for it: <code>&quot;home#index&quot;</code>.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
-<span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s2">"home#index"</span> <span class="c1"># =&gt; will route to Web::Controllers::Home::Index</span>
+<p>If we want to disable a layout for a view, we can use a DSL for that.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+    <span class="n">layout</span> <span class="kp">nil</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
-<p>The first token is the name of the controller <code>&quot;home&quot;</code> is translated to <code>Home</code>.
-The same transformation will be applied to the name after the <code>#</code>: <code>&quot;index&quot;</code> to <code>Index</code>.</p>
+<p>If we want to turn off this feature entirely, we can set <code>layout nil</code> into the application&rsquo;s configuration.</p>
 
-<p>Lotus is able to figure out the namespace (<code>Web::Controllers</code>) and to compose the full class name.</p>
-
-<h2>Rack</h2>
-
-<p>Lotus is compatible with <a href="http://www.rubydoc.info/github/rack/rack/master/file/SPEC">Rack SPEC</a>, and so the endpoints that we use MUST be compliant as well.
-In the example above we used a <code>Proc</code> that was fitting our requirements.</p>
-
-<p>A valid endpoint can be an object, a class, an action, or an <strong>application</strong> that responds to <code>#call</code>.</p>
-<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/proc'</span><span class="p">,</span>       <span class="ss">to: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">env</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="s1">'Hello from Lotus!'</span><span class="p">]]</span> <span class="p">}</span>
-<span class="n">get</span> <span class="s1">'/action'</span><span class="p">,</span>     <span class="ss">to: </span><span class="s2">"home#index"</span>
-<span class="n">get</span> <span class="s1">'/middleware'</span><span class="p">,</span> <span class="ss">to: </span><span class="no">Middleware</span>
-<span class="n">get</span> <span class="s1">'/rack-app'</span><span class="p">,</span>   <span class="ss">to: </span><span class="no">RackApp</span><span class="p">.</span><span class="nf">new</span>
-<span class="n">get</span> <span class="s1">'/rails'</span><span class="p">,</span>      <span class="ss">to: </span><span class="no">ActionControllerSubclass</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span>
-</code></pre>
-
-<p>When we use a string, it tries to instantiate a class from it:</p>
-<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/rack-app'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'rack_app'</span> <span class="c1"># it will map to RackApp.new</span>
-</code></pre>
-
-<h3>Mounting Applications</h3>
-
-<p>If we want to mount an application, we should use <code>mount</code>.</p>
-<pre class="language-ruby ruby"><code><span class="n">mount</span> <span class="no">SinatraApp</span><span class="p">.</span><span class="nf">new</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/sinatra'</span>
-</code></pre>
-
-<p>All the HTTP requests starting with <code>/sinatra</code> will be routed to <code>SinatraApp</code>.</p>
+<h2>Content For</h2>
 
             </div>
           </div>
