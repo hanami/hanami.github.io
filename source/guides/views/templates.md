@@ -7,6 +7,34 @@ title: Lotus - Guides - View Templates
 A template is a file that describes the body of a response.
 It is rendered by bounding the context of a view and using a _template engine_.
 
+## Naming
+
+For simplicity sake, there is a correlation between the view class name and the template file name.
+It's the translation of the name into a path: form `Dashboard::Index` to `dashboard/index`.
+
+The remaining part is made of multiple file extensions.
+The first is relative to the **_format_** and the latter is for the _template engine_.
+
+<p class="convention">
+For a given <code>s::Dashboard::Index</code> view, there must be at least one template <code>dashboard/index.[format].[engine]</code> under the templates directory.
+</p>
+
+### Custom Template
+
+If we want to associate a different template to a view, we can use `.template`.
+
+```ruby
+# apps/web/views/dashboard/index.rb
+module Web::Views::Dashboard
+  class Index
+    include Web::View
+    template 'home/index'
+  end
+end
+```
+
+Our view will look for `apps/web/templates/home/index.*` template.
+
 ## Engines
 
 Lotus looks at the last extension of a template file name to decide which engine to use (eg `index.html.erb` will use ERb).
