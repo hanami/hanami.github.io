@@ -5,7 +5,7 @@ tags: announcements
 author: Luca Guidi
 image: true
 excerpt: >
-  Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Rake "environment" task, Lotus.root and bug fixes.
+  Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Lotus.root and bug fixes.
 ---
 
 ## Features
@@ -115,20 +115,6 @@ module Products
     def footer
       "contents for footer"
     end
-  end
-end
-```
-
-### Environment Rake Task
-
-If we need to run a Rake task and need the entire environment loaded, we can use `:environment` as a dependency.
-
-```ruby
-# Rakefile
-namespace :storage do
-  desc 'Clear local storage'
-  task clear: :environment do
-    # ...
   end
 end
 ```
