@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Weekly Changelog</title>
+    <title>Announcing Lotus v0.3.2</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,20 +15,20 @@
     <script>try{Typekit.load();}catch(e){}</script>
 
     <meta property="og:site_name"   content="Lotus"/>
-    <meta property="og:title"       content="Weekly Changelog">
-    <meta property="og:url"         content="http://lotusrb.org/blog/2015/03/01/weekly-changelog.html">
-    <meta property="og:description" content="Changelog from Feb 23rd to Mar 1st 2015
+    <meta property="og:title"       content="Announcing Lotus v0.3.2">
+    <meta property="og:url"         content="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html">
+    <meta property="og:description" content="Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Lotus.root and bug fixes.
 ">
-    <meta property="og:image"       content="http://lotusrb.org/images/cover.jpg">
+    <meta property="og:image"       content="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032/cover.jpg">
 
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:site"        content="@lotus_rb">
     <meta name="twitter:creator"     content="@lotus_rb">
-    <meta name="twitter:url"         content="http://lotusrb.org/blog/2015/03/01/weekly-changelog.html">
-    <meta name="twitter:title"       content="Weekly Changelog">
-    <meta name="twitter:description" content="Changelog from Feb 23rd to Mar 1st 2015
+    <meta name="twitter:url"         content="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html">
+    <meta name="twitter:title"       content="Announcing Lotus v0.3.2">
+    <meta name="twitter:description" content="Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Lotus.root and bug fixes.
 ">
-    <meta name="twitter:image:src"   content="http://lotusrb.org/images/cover.jpg">
+    <meta name="twitter:image:src"   content="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032/cover.jpg">
   </head>
   <body class="subpage blog">
     <!--[if lt IE 8]>
@@ -60,50 +60,141 @@
     <section class="blog wrapper animated fadeIn">
       <div class="container-fluid">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 main">
-          
+          <img src="/blog/2015/05/22/announcing-lotus-032/cover.jpg" class="img-rounded img-responsive">
 
           <h1 class="page-header">
-            Weekly Changelog
-            <div class="meta">Posted by <strong>Luca Guidi</strong> on March 01, 2015</div>
+            Announcing Lotus v0.3.2
+            <div class="meta">Posted by <strong>Luca Guidi</strong> on May 22, 2015</div>
           </h1>
 
-          <p class="lead">Changelog from Feb 23rd to Mar 1st 2015
+          <p class="lead">Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Lotus.root and bug fixes.
 </p>
           <hr>
 
-          <h2>Releases</h2>
+          <h2>Features</h2>
 
-<p>-</p>
+<p>This patch release ships new minor features.</p>
 
-<h2>Completed</h2>
+<h3>Automatic Secure Cookies</h3>
 
-<ul>
-<li>Database console [<a href="https://github.com/lotus/lotus/pull/152">details</a>]</li>
-<li>Default security headers [<a href="https://github.com/lotus/lotus/pull/159">details</a>]</li>
-<li>Initialize a Git repository when generate new applications [<a href="https://github.com/lotus/lotus/pull/163">details</a>]</li>
-<li>Generate a <code>.lotusrc</code> when generate new applications [<a href="https://github.com/lotus/lotus/pull/162">details</a>]</li>
-</ul>
+<p>According to the cookies RFC, we can specify a <code>Secure</code> option, to make a coookie available only under HTTPS.
+If we are using a crypted connection in production, Lotus will automatically send this option to increase security level.
+In development mode, where SSL is turned off, that value is omitted.</p>
 
-<h2>Development</h2>
+<p>We can manually handle this setting, according to our custom needs.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">cookies</span> <span class="ss">secure: </span><span class="kp">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
 
-<ul>
-<li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>Action generator [<a href="https://github.com/lotus/lotus/pull/166">details</a>]</li>
-<li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/14">details</a>]</li>
-<li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
-</ul>
+<h3>Action Routing Helpers</h3>
 
-<h2>Roadmap</h2>
+<p>There is a new API available for routes interaction.
+It&rsquo;s available as private method in actions and provides useful facilities to generate URLs for named routes.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Home</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">root_path</span>
+      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">root_url</span>
+
+      <span class="c1"># equivalent to</span>
+
+      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">path</span><span class="p">(</span><span class="ss">:root</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="ss">:root</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The same feature for views was already introduced by v0.3.0.</p>
+
+<h3>Action Send File</h3>
+
+<p>Another useful addition for actions is <code>#send_file</code>.
+It accepts a Ruby <code>File</code> objects and deliver to the client.
+It supports automatic MIME type handling, Conditional GET, HEAD requests and chunked responses (via <code>Range</code> header).</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Documents</span>
+  <span class="k">class</span> <span class="nc">Download</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">send_file</span> <span class="no">File</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'path/to/document.txt'</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Optional Content For Views</h3>
+
+<p>If we want to render optional contents such as sidebar links or page specific javascripts, we can use <code>#content</code>
+It accepts a key that represents a method that should be available within the rendering context.
+That context is made of the locals, and the methods that view and layout respond to.
+If the context can&rsquo;t dispatch that method, it returns <code>nil</code>.</p>
+
+<p>Given the following layout template.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">content</span> <span class="ss">:footer</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>We have two views, one responds to <code>#footer</code> (<code>Web::Views::Products::Show</code>) and the other doesn&rsquo;t (<code>Web::Views::Products::Index</code>).
+When the first is rendered, <code>content</code> gives back the returning value of <code>#footer</code>.
+In the other case, <code>content</code> returns <code>nil</code>.</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Products</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">Show</span>
+    <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span>
+
+    <span class="k">def</span> <span class="nf">footer</span>
+      <span class="s2">"contents for footer"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Lotus.root</h3>
+
+<p>We have introduced <code>Lotus.root</code> as facility to easily get the top level directory of the project.</p>
+
+<h2>Bug Fixes</h2>
+
+<p>This release comes with some bug fixes for code generators file naming, RSpec support and dirty tracking.</p>
+
+<div style="display: inline">
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.3.2" data-url="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
 
           <hr>
           <ul class="rrssb-buttons clearfix rrssb-1">
             <li class="rrssb-facebook" data-initwidth="14.285714285714286" data-size="63" style="width: 14.2857142857143%;">
             <!-- Replace with your URL. For best results, make sure you page has the proper FB Open Graph tags in header:
             https://developers.facebook.com/docs/opengraph/howtos/maximizing-distribution-media-content/ -->
-            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F03%2F01%2Fweekly-changelog.html" class="popup">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F05%2F22%2Fannouncing-lotus-032.html" class="popup">
               <span class="rrssb-icon">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
                 <path d="M27.825,4.783c0-2.427-2.182-4.608-4.608-4.608H4.783c-2.422,0-4.608,2.182-4.608,4.608v18.434
@@ -116,7 +207,7 @@
             </li>
             <li class="rrssb-twitter" data-initwidth="14.285714285714286" data-size="50" style="width: 14.2857142857143%;">
             <!-- Replace href with your Meta and URL information  -->
-            <a href="http://twitter.com/home?status=Weekly+Changelog+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F03%2F01%2Fweekly-changelog.html+%2Fvia+%40lotus_rb+%23lotusrb" class="popup">
+            <a href="http://twitter.com/home?status=Announcing+Lotus+v0.3.2+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F05%2F22%2Fannouncing-lotus-032.html+%2Fvia+%40lotus_rb+%23lotusrb" class="popup">
               <span class="rrssb-icon">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
                 <path d="M24.253,8.756C24.689,17.08,18.297,24.182,9.97,24.62c-3.122,0.162-6.219-0.646-8.861-2.32
@@ -131,7 +222,7 @@
             </a>
             </li>
             <li class="rrssb-reddit">
-            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F03%2F01%2Fweekly-changelog.html">
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F05%2F22%2Fannouncing-lotus-032.html">
               <span class="rrssb-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve"><g><path d="M11.794 15.316c0-1.029-0.835-1.895-1.866-1.895c-1.03 0-1.893 0.865-1.893 1.895s0.863 1.9 1.9 1.9 C10.958 17.2 11.8 16.3 11.8 15.316z"/><path d="M18.1 13.422c-1.029 0-1.895 0.864-1.895 1.895c0 1 0.9 1.9 1.9 1.865c1.031 0 1.869-0.836 1.869-1.865 C19.969 14.3 19.1 13.4 18.1 13.422z"/><path d="M17.527 19.791c-0.678 0.678-1.826 1.006-3.514 1.006c-0.004 0-0.009 0-0.014 0c-0.004 0-0.01 0-0.015 0 c-1.686 0-2.834-0.328-3.51-1.005c-0.264-0.265-0.693-0.265-0.958 0c-0.264 0.265-0.264 0.7 0 1 c0.943 0.9 2.4 1.4 4.5 1.402c0.005 0 0 0 0 0c0.005 0 0 0 0 0c2.066 0 3.527-0.459 4.47-1.402 c0.265-0.264 0.265-0.693 0.002-0.958C18.221 19.5 17.8 19.5 17.5 19.791z"/><path d="M27.707 13.267c0-1.785-1.453-3.237-3.236-3.237c-0.793 0-1.518 0.287-2.082 0.761c-2.039-1.295-4.646-2.069-7.438-2.219 l1.483-4.691l4.062 0.956c0.071 1.4 1.3 2.6 2.7 2.555c1.488 0 2.695-1.208 2.695-2.695C25.881 3.2 24.7 2 23.2 2 c-1.059 0-1.979 0.616-2.42 1.508l-4.633-1.091c-0.344-0.081-0.693 0.118-0.803 0.455l-1.793 5.7 C10.548 8.6 7.7 9.4 5.6 10.75C5.006 10.3 4.3 10 3.5 10.029c-1.785 0-3.237 1.452-3.237 3.2 c0 1.1 0.6 2.1 1.4 2.69c-0.04 0.272-0.061 0.551-0.061 0.831c0 2.3 1.3 4.4 3.7 5.9 c2.299 1.5 5.3 2.3 8.6 2.325c3.228 0 6.271-0.825 8.571-2.325c2.387-1.56 3.7-3.66 3.7-5.917 c0-0.26-0.016-0.514-0.051-0.768C27.088 15.5 27.7 14.4 27.7 13.267z M23.186 3.355c0.74 0 1.3 0.6 1.3 1.3 c0 0.738-0.6 1.34-1.34 1.34s-1.342-0.602-1.342-1.34C21.844 4 22.4 3.4 23.2 3.355z M1.648 13.3 c0-1.038 0.844-1.882 1.882-1.882c0.31 0 0.6 0.1 0.9 0.209c-1.049 0.868-1.813 1.861-2.26 2.9 C1.832 14.2 1.6 13.8 1.6 13.267z M21.773 21.57c-2.082 1.357-4.863 2.105-7.831 2.105c-2.967 0-5.747-0.748-7.828-2.105 c-1.991-1.301-3.088-3-3.088-4.782c0-1.784 1.097-3.484 3.088-4.784c2.081-1.358 4.861-2.106 7.828-2.106 c2.967 0 5.7 0.7 7.8 2.106c1.99 1.3 3.1 3 3.1 4.784C24.859 18.6 23.8 20.3 21.8 21.57z M25.787 14.6 c-0.432-1.084-1.191-2.095-2.244-2.977c0.273-0.156 0.59-0.245 0.928-0.245c1.035 0 1.9 0.8 1.9 1.9 C26.354 13.8 26.1 14.3 25.8 14.605z"/></g></svg>
               </span>
@@ -140,7 +231,7 @@
             </li>
             <li class="rrssb-googleplus" data-initwidth="14.285714285714286" data-size="55" style="width: 14.2857142857143%;">
             <!-- Replace href with your meta and URL information.  -->
-            <a href="https://plus.google.com/share?url=Weekly+Changelog+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F03%2F01%2Fweekly-changelog.html" class="popup">
+            <a href="https://plus.google.com/share?url=Announcing+Lotus+v0.3.2+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F05%2F22%2Fannouncing-lotus-032.html" class="popup">
               <span class="rrssb-icon">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
                 <g>

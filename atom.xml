@@ -4,13 +4,144 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-05-15T17:09:00+02:00</updated>
+   <updated>2015-05-22T09:14:00+02:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Announcing Lotus v0.3.2</title>
+       <id>http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html"/>
+       <updated>2015-05-22T09:14:00+02:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Lotus.root and bug fixes.
+
+       </summary>
+       <content type="html"><![CDATA[<h2>Features</h2>
+
+<p>This patch release ships new minor features.</p>
+
+<h3>Automatic Secure Cookies</h3>
+
+<p>According to the cookies RFC, we can specify a <code>Secure</code> option, to make a coookie available only under HTTPS.
+If we are using a crypted connection in production, Lotus will automatically send this option to increase security level.
+In development mode, where SSL is turned off, that value is omitted.</p>
+
+<p>We can manually handle this setting, according to our custom needs.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">cookies</span> <span class="ss">secure: </span><span class="kp">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Action Routing Helpers</h3>
+
+<p>There is a new API available for routes interaction.
+It&rsquo;s available as private method in actions and provides useful facilities to generate URLs for named routes.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Home</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">root_path</span>
+      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">root_url</span>
+
+      <span class="c1"># equivalent to</span>
+
+      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">path</span><span class="p">(</span><span class="ss">:root</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="ss">:root</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The same feature for views was already introduced by v0.3.0.</p>
+
+<h3>Action Send File</h3>
+
+<p>Another useful addition for actions is <code>#send_file</code>.
+It accepts a Ruby <code>File</code> objects and deliver to the client.
+It supports automatic MIME type handling, Conditional GET, HEAD requests and chunked responses (via <code>Range</code> header).</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Documents</span>
+  <span class="k">class</span> <span class="nc">Download</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">send_file</span> <span class="no">File</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'path/to/document.txt'</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Optional Content For Views</h3>
+
+<p>If we want to render optional contents such as sidebar links or page specific javascripts, we can use <code>#content</code>
+It accepts a key that represents a method that should be available within the rendering context.
+That context is made of the locals, and the methods that view and layout respond to.
+If the context can&rsquo;t dispatch that method, it returns <code>nil</code>.</p>
+
+<p>Given the following layout template.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">content</span> <span class="ss">:footer</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>We have two views, one responds to <code>#footer</code> (<code>Web::Views::Products::Show</code>) and the other doesn&rsquo;t (<code>Web::Views::Products::Index</code>).
+When the first is rendered, <code>content</code> gives back the returning value of <code>#footer</code>.
+In the other case, <code>content</code> returns <code>nil</code>.</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Products</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">Show</span>
+    <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span>
+
+    <span class="k">def</span> <span class="nf">footer</span>
+      <span class="s2">"contents for footer"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Lotus.root</h3>
+
+<p>We have introduced <code>Lotus.root</code> as facility to easily get the top level directory of the project.</p>
+
+<h2>Bug Fixes</h2>
+
+<p>This release comes with some bug fixes for code generators file naming, RSpec support and dirty tracking.</p>
+
+<div style="display: inline">
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.3.2" data-url="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+]]></content>
+     </entry>
      <entry>
        <title>Announcing Lotus v0.3.1</title>
        <id>http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html</id>
@@ -580,47 +711,6 @@ Lotus wants to increase the level of awareness around this topic and provide def
 <li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/11">details</a>]</li>
 <li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
 <li>Make flash session to persist between requests [<a href="https://github.com/lotus/controller/pull/96">details</a>]</li>
-</ul>
-
-<h2>Roadmap</h2>
-
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
-]]></content>
-     </entry>
-     <entry>
-       <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/03/08/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/03/08/weekly-changelog.html"/>
-       <updated>2015-03-08T10:29:00+01:00</updated>
-       <author>
-         <name>Luca Guidi</name>
-       </author>
-       <summary>
-         Changelog from Mar 2nd to Mar 8th 2015
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Releases</h2>
-
-<p>-</p>
-
-<h2>Completed</h2>
-
-<ul>
-<li>HttpOnly cookies by default [<a href="https://github.com/lotus/lotus/pull/176">details</a>], [<a href="https://github.com/lotus/controller/pull/91">details</a>]</li>
-<li>Application generator: <code>--database</code> argument to setup database configuration [<a href="https://github.com/lotus/lotus/pull/169">details</a>]</li>
-<li>Changed SQLite3 extension from <code>.db</code> to <code>.sqlite3</code> [<a href="https://github.com/lotus/lotus/pull/158">details</a>]</li>
-<li>Renamed <code>lotus dbconsole</code> to <code>lotus db console</code> [<a href="https://github.com/lotus/lotus/pull/167">details</a>]</li>
-</ul>
-
-<h2>Development</h2>
-
-<ul>
-<li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>Action generator [<a href="https://github.com/lotus/lotus/pull/166">details</a>]</li>
-<li>Lotus::Helpers integration in Lotus [<a href="https://github.com/lotus/lotus/pull/175">details</a>]</li>
-<li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/14">details</a>]</li>
-<li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
 </ul>
 
 <h2>Roadmap</h2>
