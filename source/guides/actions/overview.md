@@ -12,7 +12,7 @@ It has several advantages in terms of testability and control of an action.
 
 ## A Simple Action
 
-Lotus ships a generator for actions, let's create a new one:
+Lotus ships with a generator for actions, let's create a new one:
 
 ```shell
 lotus generate action web dashboard#index
@@ -44,7 +44,7 @@ If we have another action `Home::Index` under an application `Admin`, the two of
 
 The second token is a conventional name: `Controllers`.
 **All the controllers are nested under it.**
-This module is generated at the runtime for us, when the application starts.
+This module is generated at runtime for us, when the application starts.
 
 <p class="convention">
   For a given application named <code>Web</code>, controllers are available under <code>Web::Controllers</code>.
@@ -67,7 +67,7 @@ In our example, we have a directive `include Web::Action`.
 That means our action will behave according to the configuration of the `Web` application.
 
 <p class="convention">
-  For a given application named <code>Web</code>, action mixin to include is <code>Web::Action</code>.
+  For a given application named <code>Web</code>, the action mixin to include is <code>Web::Action</code>.
 </p>
 
 ### Interface
