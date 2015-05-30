@@ -47,6 +47,9 @@ GEM
     hooks (0.4.0)
       uber (~> 0.0.4)
     http_parser.rb (0.6.0)
+    httparty (0.13.4)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.2)
     kramdown (1.5.0)
@@ -99,6 +102,7 @@ GEM
       rouge (~> 1.0)
     minitest (5.5.1)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -147,6 +151,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 3.3)
+  httparty
   middleman (~> 3.3)
   middleman-blog (~> 3.5)
   middleman-deploy (~> 1.0)
