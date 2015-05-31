@@ -23,11 +23,11 @@ module Web
 end
 ```
 
-Since now on, cookies are automatically sent for each response.
+From now on, cookies are automatically sent for each response.
 
 ### Settings
 
-With that configuration, We can specify options that will be set for all the cookies that we sent from our application.
+With that configuration, We can specify options that will be set for all cookies we sent from our application.
 
   * `:domain` - `String` (`nil` by default), the domain
   * `:path` - `String` (`nil` by default), a relative URL

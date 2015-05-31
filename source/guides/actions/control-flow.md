@@ -35,7 +35,7 @@ end
 ```
 
 With the code above, we are tracking the remote IP address for analytics purposes.
-Because it isn't strictly related to our business logic, we move it in a callback.
+Because it isn't strictly related to our business logic, we move it to a callback.
 
 A callback method can optionally accept an argument: `params`.
 
@@ -101,7 +101,7 @@ This is an antipattern that causes a lot of problems for code maintenance, testa
 
 ## Halt
 
-Using exceptions for control flow is expensive for Ruby VM.
+Using exceptions for control flow is expensive for the Ruby VM.
 There is a lightweight alternative that our language supports: **signals** (see `throw` and `catch`).
 
 Lotus take advantage of this mechanism to provide **faster control flow** in our actions via `#halt`.
@@ -153,7 +153,7 @@ module Web::Controllers::Dashboard
 end
 ```
 
-`#halt` accepts a HTTP status code as first argument.
+`#halt` accepts a HTTP status code as the first argument.
 When used like this, the body of the response will be set with the corresponding message (eg. "Unauthorized" for `401`).
 
 An optional second argument can be passed to set a custom body.

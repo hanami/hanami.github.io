@@ -8,7 +8,7 @@ title: Lotus - Guides - Actions Basic Usage
 
 In the [previous section](/guides/actions/overview), we generated an action, let's use it.
 
-As first thing, we check our routes.
+First, we check our routes.
 
 ```ruby
 # apps/web/config/routes.rb
@@ -24,7 +24,7 @@ Then we edit the corresponding template:
 <h1>Dashboard</h1>
 ```
 
-Here how Lotus handles an incoming request:
+Here is how Lotus handles an incoming request:
 
   1. The router creates a new instance of `Web::Controllers::Dashboard::Index` and invokes `#call`
   2. The application creates a new instance of `Web::Views::Dashboard::Index` and invokes `#render`.
@@ -78,7 +78,7 @@ With direct body assignment, **we can safely delete the corresponding view and t
 
 Actions are instantiated for us by Lotus at the runtime: for each incoming request, we'll automatically get a new instance.
 Because actions are objects, **we can take control on their initialization** and eventually [_inject_ our dependencies](http://en.wikipedia.org/wiki/Dependency_injection).
-This is a really useful technique for unit test our actions.
+This is a really useful technique for unit testing our actions.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
@@ -97,13 +97,13 @@ module Web::Controllers::Dashboard
 end
 ```
 
-There is a limitation that we should always keep in mind:
+There is a limitation that we should always be kept in mind:
 
 <p class="warning">
-  Action initializer MUST have an arity of 0
+  Action initializer MUST have an arity of 0.
 </p>
 
-The following initializers are valid
+The following initializers are valid:
 
 ```ruby
 # no arguments
