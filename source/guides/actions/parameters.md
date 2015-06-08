@@ -32,7 +32,7 @@ module Web::Controllers::Dashboard
 end
 ```
 
-If we visit `/dashboard?q=foo`, we should see `Query string: foo`.
+If we visit `/dashboard?q=foo`, we should see the `Query string: foo`.
 
 ### Indifferent Access
 
@@ -49,12 +49,12 @@ params['q']
 ```
 
 <p class="warning">
-  Indifferent Access may be removed future versions of Lotus in favor of symbol access only.
+  Indifferent Access may be removed in future versions of Lotus in favor of symbol access only.
 </p>
 
 ### Nested Access
 
-Params offer indifferent access to for nested values.
+Params also offer indifferent access for nested values.
 
 ```ruby
 params[:book][:title]
@@ -62,7 +62,7 @@ params[:book][:title]
 params['book']['title']
 ```
 
-Now, what happens if the parameter `:book` is missing in our current request?
+Now, what happens if the parameter `:book` is missing from the request?
 Because `params[:book]` is `nil`, we can't access `:title`.
 In this case Ruby will raise a `NoMethodError`.
 
@@ -83,12 +83,12 @@ bundle exec lotus generate action web signup#create
 ```
 
 We want to provide self-registration for our users.
-We build an HTML form and this is the action that accepts the payload and stores it in the `users` table.
+We build a HTML form which is the action that accepts the payload and stores it in the `users` table.
 That table has a boolean column `admin` to decide if a person has administration permissions.
 
 A malicious user can exploit this scenario, by sending this extra parameter to our application and become an admin.
 
-We can easily fix this problem, by filtering the allowed params that can comes inside our application.
+We can easily fix this problem, by filtering the allowed params that are permitted inside our application.
 Please always remember that **params represent untrusted input**.
 
 We use `.params` to map the structure of the (nested) params.
@@ -155,10 +155,10 @@ The second important aspect is that we use validations to prevent invalid inputs
 In an MVC architecture, the model layer is the **farthest** from the input.
 It's expensive to check the data right before we create a record in the database.
 
-If we **consider correct data as a precondition** before to start our workflow, we should stop unacceptable inputs as soon as possible.
+If we **consider correct data as a precondition** before starting our workflow, we should stop unacceptable inputs as soon as possible.
 
 Think of the following method.
-We don't want to continue if the data is invalid for us.
+We don't want to continue if the data is invalid.
 
 ```ruby
 def expensive_computation(argument)
@@ -169,7 +169,7 @@ end
 
 ### Usage
 
-We can coerce the Ruby type, validate if a param is required, if included in range of values, etc..
+We can coerce the Ruby type, validate if a param is required, if included in a range of values, etc..
 
 ```ruby
 # apps/web/controllers/signup/create.rb
@@ -198,13 +198,13 @@ module Web::Controllers::Signup
 end
 ```
 
-Params validations are delegated under the hood to [Lotus::Validations](https://github.com/lotus/validations).
+Params validations are delegated, under the hood, to [Lotus::Validations](https://github.com/lotus/validations).
 Please check related docs for a complete list of options, and how to share code between validations.
 
 ## Concrete Classes
 
-The params DSL is really quick and intuitive but it has the drawback that it can be visually noisy and makes it hard to unit test them.
-An alternative usage is to extract a class and pass it as an argument to `.params`.
+The params DSL is really quick and intuitive but it has the drawback that it can be visually noisy and makes it hard to unit test.
+An alternative is to extract a class and pass it as an argument to `.params`.
 
 ```ruby
 # apps/web/controllers/signup/my_params.rb
