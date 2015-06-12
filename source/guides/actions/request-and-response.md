@@ -5,7 +5,7 @@ title: Lotus - Guides - Request & Response
 # Request
 
 In order to access the metadata coming from a HTTP request, an action has a private object `request` that derives from `Rack::Request`.
-Here an example of a few informations that we can introspect.
+Here an example of some information that we can introspect.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
@@ -28,8 +28,8 @@ end
 ```
 
 <p class="warning">
-  To instantiate a <code>request</code> for each incoming HTTP request can lead to a minor perf degradation.
-  As an alternative, please consider to get the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
+  Instantiating a <code>request</code> for each incoming HTTP request can lead to minor performance degradation.
+  As an alternative, please consider getting the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
 </p>
 
 # Response

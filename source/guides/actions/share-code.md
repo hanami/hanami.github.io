@@ -9,7 +9,7 @@ This section shares a few techniques to make this possible.
 
 ## Prepare
 
-In our settings (`apps/web/application.rb`), there is code block that allows to share the code for **all the actions** of our application.
+In our settings (`apps/web/application.rb`), there is a code block that allows us to share the code for **all the actions** of our application.
 When an action includes the `Web::Action` module, that block code is yielded within the context of that class.
 This is heavily inspired by Ruby Module and its `included` hook.
 
@@ -73,8 +73,8 @@ Code included via <code>prepare</code> is available for ALL the actions of an ap
 
 ### Skipping A Callback
 
-Let's say we have included `Authentication` globally, but want to skip the execution its callback for certain resources.
-A typical use case is to let unauthenticated requests to reach our sign in form.
+Let's say we have included `Authentication` globally, but want to skip the execution of its callback for certain resources.
+A typical use case is to redirect unauthenticated requests to our sign in form.
 
 The solution is really simple and elegant at the same time: override that method.
 
@@ -127,7 +127,7 @@ module Web::Controllers::Books
 end
 ```
 
-We have defined a module for our behavior to share, let's include it all the actions that need it.
+We have defined a module for our behavior to share, let's include it in all the actions that need it.
 
 ```ruby
 # apps/web/controllers/books/update.rb

@@ -4,12 +4,12 @@ title: Lotus - Guides - Action Testing
 
 # Testing
 
-Lotus pays a lot of attention for code testability and it offers advanced features to make our life easier.
+Lotus pays a lot of attention to code testability and it offers advanced features to make our lives easier.
 The framework supports Minitest (default) and RSpec.
 
 ## Unit Tests
 
-First of all, action can be unit tested.
+First of all, actions can be unit tested.
 That means we can instantiate, excercise and verify expectations **directly on actions instances**.
 
 ```ruby
@@ -41,7 +41,7 @@ All the dependencies and the application code (actions, views, entities, etc..) 
 **Boot time is slow in this case.**
 
 <p class="notice">
-The entire test suite can be ran via default Rake task. It loads all the dependencies, and the application code.
+The entire test suite can be run via default Rake task. It loads all the dependencies, and the application code.
 </p>
 
 The second scenario can be done via: `ruby -Ispec spec/web/controllers/dashboard/index_spec.rb` (or `rspec spec/web/controllers/dashboard/index_spec.rb` if we use RSpec).
@@ -49,8 +49,8 @@ When we run a single file example **only the framework and the application setti
 
 Please note the `require_relative` line in the example.
 It's **auto generated for us** and it's needed to load the current action under test.
-This mechanism allows to run unit tests in **isolation**.
-**Boot time a magnitude faster**.
+This mechanism allows us to run unit tests in **isolation**.
+**Boot time is magnitudes faster**.
 
 <p class="notice">
 A single unit test can be run directly. It only loads the dependencies, but not the application code.
@@ -111,9 +111,9 @@ Simulating request params and headers is simple for Lotus actions. We pass them 
 There are cases where we want to verify the internal state of an action.
 Imagine we have a classic user profile page, like depicted in the example above.
 The action asks for a record that corresponds to the given id, and then set a `@user` instance variable.
-How to verify that the record is the one that we are looking for?
+How do we verify that the record is the one that we are looking for?
 
-Because we want to make `@user` available to the outside world, we're gonna use an [_exposure_](/guides/actions/exposures).
+Because we want to make `@user` available to the outside world, we're going to use an [_exposure_](/guides/actions/exposures).
 They are used to pass a data payload between an action and the corresponding view.
 When we do `expose :user`, Lotus creates a getter (`#user`), so we can easily assert if the record is the right one.
 
@@ -163,12 +163,12 @@ The internal state of an action can be easily verified with <em>exposures</em>.
 
 ### Dependency Injection
 
-During unit testing, we may want to use mocks to make tests faster or to avoid to hit external systems like databases, file system or remote services.
+During unit testing, we may want to use mocks to make tests faster or to avoid hitting external systems like databases, file system or remote services.
 Because we can instantiate actions during tests, there is no need to use testing antipatterns (eg. `any_instance_of`, or `UserRepository.stub(:find)`).
 Instead, we can just specify which collaborators we want to use via _dependency injection_.
 
-Let's rewrite the test above to not hit the database.
-We're gonna use RSpec for this example as it has a nicer API for mocks (doubles).
+Let's rewrite the test above so that it does not hit the database.
+We're going to use RSpec for this example as it has a nicer API for mocks (doubles).
 
 ```ruby
 # spec/web/controllers/users/show_spec.rb
@@ -212,15 +212,15 @@ end
 ```
 
 <p class="warning">
-Please use carefully doubles in unit tests. Always verify that the mocks are in sync with the corresponding production code.
+Please be careful using doubles in unit tests. Always verify that the mocks are in a true representation of the corresponding production code.
 </p>
 
 ## Requests Tests
 
 Unit tests are a great tool to assert that low level interfaces works as expected.
-We always advice to combine them with integration tests.
+We always advise combining them with integration tests.
 
-In case of Lotus web applications, we can write features (aka acceptance tests) with Capybara, but what to use in case we are building HTTP APIs?
+In the case of Lotus web applications, we can write features (aka acceptance tests) with Capybara, but what do we use when we are building HTTP APIs?
 The tool that we suggest is `rack-test`.
 
 Imagine we have an API application mounted at `/api/v1` in our `Lotus::Container`.
@@ -252,7 +252,7 @@ end
 ```
 
 In this case we don't care too much about the internal state of the action, but about the output visible to the external world.
-This is why we haven't set `user` as an instance variable and neither we had exposed it.
+This is why we haven't set `user` as an instance variable and why we haven't exposed it.
 
 ```ruby
 # spec/api_v1/requests/users_spec.rb
