@@ -134,7 +134,7 @@ They accept a symbol that is the name of the method that we want to call, or an 
 </code></pre>
 
 <p>With the code above, we are tracking the remote IP address for analytics purposes.
-Because it isn&rsquo;t strictly related to our business logic, we move it in a callback.</p>
+Because it isn&rsquo;t strictly related to our business logic, we move it to a callback.</p>
 
 <p>A callback method can optionally accept an argument: <code>params</code>.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
@@ -194,7 +194,7 @@ This is an antipattern that causes a lot of problems for code maintenance, testa
 
 <h2>Halt</h2>
 
-<p>Using exceptions for control flow is expensive for Ruby VM.
+<p>Using exceptions for control flow is expensive for the Ruby VM.
 There is a lightweight alternative that our language supports: <strong>signals</strong> (see <code>throw</code> and <code>catch</code>).</p>
 
 <p>Lotus take advantage of this mechanism to provide <strong>faster control flow</strong> in our actions via <code>#halt</code>.</p>
@@ -242,7 +242,7 @@ When <code>halt</code> is used, the flow is interrupted and the control is passe
 <span class="k">end</span>
 </code></pre>
 
-<p><code>#halt</code> accepts a HTTP status code as first argument.
+<p><code>#halt</code> accepts a HTTP status code as the first argument.
 When used like this, the body of the response will be set with the corresponding message (eg. &ldquo;Unauthorized&rdquo; for <code>401</code>).</p>
 
 <p>An optional second argument can be passed to set a custom body.</p>
@@ -303,18 +303,18 @@ By default the status is set to <code>302</code>.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
-          <span class="date">May 22, 2015</span>
-          <h4>Announcing Lotus v0.3.2</h4>
-          <p>Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Lotus.root and bug fixes.
+          <span class="date">June 15, 2015</span>
+          <h4>Introducing Form Helpers</h4>
+          <p>New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.
 </p>
-          <a href="/blog/2015/05/22/announcing-lotus-032.html">Read more...</a>
+          <a href="/blog/2015/06/15/introducing-form-helpers.html">Read more...</a>
         </div>
         <div class="col-md-4">
-          <span class="date">May 15, 2015</span>
-          <h4>Announcing Lotus v0.3.1</h4>
-          <p>Lotus patch release: RESTful nested resource(s), dirty tracking and timestamps for entities, improved code generators, bug fixes.
+          <span class="date">May 31, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from May 16 2015 to May 31 2015
 </p>
-          <a href="/blog/2015/05/15/announcing-lotus-031.html">Read more...</a>
+          <a href="/blog/2015/05/31/weekly-changelog.html">Read more...</a>
         </div>
     </div>
   </div>

@@ -109,7 +109,7 @@
 
 <p>In the <a href="/guides/actions/overview">previous section</a>, we generated an action, let&rsquo;s use it.</p>
 
-<p>As first thing, we check our routes.</p>
+<p>First, we check our routes.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
 <span class="n">get</span> <span class="s1">'/dashboard'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'dashboard#index'</span>
 </code></pre>
@@ -121,7 +121,7 @@
 <span class="nt">&lt;h1&gt;</span>Dashboard<span class="nt">&lt;/h1&gt;</span>
 </code></pre>
 
-<p>Here how Lotus handles an incoming request:</p>
+<p>Here is how Lotus handles an incoming request:</p>
 
 <ol>
 <li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code></li>
@@ -177,7 +177,7 @@ To involve a view in this case is a waste of CPU cycles.</p>
 
 <p>Actions are instantiated for us by Lotus at the runtime: for each incoming request, we&rsquo;ll automatically get a new instance.
 Because actions are objects, <strong>we can take control on their initialization</strong> and eventually <a href="http://en.wikipedia.org/wiki/Dependency_injection"><em>inject</em> our dependencies</a>.
-This is a really useful technique for unit test our actions.</p>
+This is a really useful technique for unit testing our actions.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -194,13 +194,13 @@ This is a really useful technique for unit test our actions.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>There is a limitation that we should always keep in mind:</p>
+<p>There is a limitation that we should always be kept in mind:</p>
 
 <p class="warning">
-  Action initializer MUST have an arity of 0
+  Action initializer MUST have an arity of 0.
 </p>
 
-<p>The following initializers are valid</p>
+<p>The following initializers are valid:</p>
 <pre class="language-ruby ruby"><code><span class="c1"># no arguments</span>
 <span class="k">def</span> <span class="nf">initialize</span>
   <span class="c1"># ...</span>
@@ -250,18 +250,18 @@ This is a really useful technique for unit test our actions.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
-          <span class="date">May 22, 2015</span>
-          <h4>Announcing Lotus v0.3.2</h4>
-          <p>Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Lotus.root and bug fixes.
+          <span class="date">June 15, 2015</span>
+          <h4>Introducing Form Helpers</h4>
+          <p>New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.
 </p>
-          <a href="/blog/2015/05/22/announcing-lotus-032.html">Read more...</a>
+          <a href="/blog/2015/06/15/introducing-form-helpers.html">Read more...</a>
         </div>
         <div class="col-md-4">
-          <span class="date">May 15, 2015</span>
-          <h4>Announcing Lotus v0.3.1</h4>
-          <p>Lotus patch release: RESTful nested resource(s), dirty tracking and timestamps for entities, improved code generators, bug fixes.
+          <span class="date">May 31, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from May 16 2015 to May 31 2015
 </p>
-          <a href="/blog/2015/05/15/announcing-lotus-031.html">Read more...</a>
+          <a href="/blog/2015/05/31/weekly-changelog.html">Read more...</a>
         </div>
     </div>
   </div>

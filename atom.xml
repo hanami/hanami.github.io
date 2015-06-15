@@ -4,13 +4,344 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-05-22T09:14:00+02:00</updated>
+   <updated>2015-06-15T14:46:00+02:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Introducing Form Helpers</title>
+       <id>http://lotusrb.org/blog/2015/06/15/introducing-form-helpers.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/06/15/introducing-form-helpers.html"/>
+       <updated>2015-06-15T14:46:00+02:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.
+
+       </summary>
+       <content type="html"><![CDATA[<h2>Introduction</h2>
+
+<p>Lotus v0.4.0 (Jun 23), will include a new useful and highly requested feature: <strong>form helpers</strong>.</p>
+
+<p>It provides a powerful Ruby API to describe HTML5 forms, to be used both with views and templates. It ships with:</p>
+
+<ul>
+<li>Support for complex markup without the need of concatenation</li>
+<li>Auto closing HTML5 tags</li>
+<li>Support for view local variables</li>
+<li>Method override support (<code>PUT</code>/<code>PATCH</code>/<code>DELETE</code> HTTP verbs aren&rsquo;t understood by browsers)</li>
+<li>Automatic generation of HTML attributes for inputs: <code>id</code>, <code>name</code>, <code>value</code></li>
+<li>Allow to override automatic HTML attributes</li>
+<li>Read values from request params and/or given entities, to autofill <code>value</code> attributes</li>
+<li>Automatic selection of current value for radio button and select inputs</li>
+<li>CSRF Protection</li>
+<li>Infinite nested fields</li>
+<li>ORM Agnostic</li>
+</ul>
+
+<h2>Technical notes</h2>
+
+<h3>Zero monkey-patching</h3>
+
+<p>This feature has a similar syntax to other Ruby gems with the same purpose, but it has a different usage if compared with Rails or Padrino.</p>
+
+<p>Those frameworks allow a syntax like this:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">form_for</span> <span class="ss">:book</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:title</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>The code above <strong>isn&rsquo;t a valid ERB template</strong>. To make it work, Rails uses monkey-patches ERB, and Padrino supports only HAML with that syntax.</p>
+
+<p>One of the pillars of Lotus is <em>&ldquo;zero monkey-patch of Ruby core and stdlib&rdquo;</em>. We want to keep this principle for this feature too.</p>
+
+<h3>Template engine independent</h3>
+
+<p>Avoiding monkey-patching has a big advantage: <strong>form helpers are designed to be independent from the template engine</strong>. That means we can use Slim, HAML, or ERB and keep the same Ruby syntax.</p>
+
+<h3>One output block</h3>
+
+<p>The technical compromise for the principles described above is to use the form builder in an unique output block.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span> <span class="k">do</span>
+    <span class="n">text_field</span> <span class="ss">:title</span>
+
+    <span class="n">submit</span> <span class="s1">'Create'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>This will produce</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/books"</span> <span class="na">id=</span><span class="s">"book-form"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_csrf_token"</span> <span class="na">value=</span><span class="s">"0a800d6a8fc3c24e7eca319186beb287689a91c2a719f1cbb411f721cacd79d4"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"book[title]"</span> <span class="na">id=</span><span class="s">"book-id"</span> <span class="na">value=</span><span class="s">""</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Create<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<h3>Method in views</h3>
+
+<p>An <strong>alternative usage</strong> is to define a concrete method in a view and to use it in the template:</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">New</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+
+    <span class="k">def</span> <span class="nf">form</span>
+      <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span> <span class="k">do</span>
+        <span class="n">text_field</span> <span class="ss">:title</span>
+
+        <span class="n">submit</span> <span class="s1">'Create'</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">form</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<h2>Examples</h2>
+
+<h3>Basic usage</h3>
+
+<p>The API is really clean and concise, <strong>it doesn&rsquo;t require concatenation</strong> between the returning value of the block (<code>submit</code>) and the previous lines (<code>div</code>).</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'form-horizontal'</span> <span class="k">do</span>
+    <span class="n">div</span> <span class="k">do</span>
+      <span class="n">label</span>      <span class="ss">:title</span>
+      <span class="n">text_field</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'form-control'</span>
+    <span class="k">end</span>
+
+    <span class="n">submit</span> <span class="s1">'Create'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/books"</span> <span class="na">id=</span><span class="s">"book-form"</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">class=</span><span class="s">"form-horizontal"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_csrf_token"</span> <span class="na">value=</span><span class="s">"1825a0a7ea92bbe3fd60cc8b6a0ea00ce3c52030afbf4037370d937bc5248acb"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"book-title"</span><span class="nt">&gt;</span>Title<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"book[title]"</span> <span class="na">id=</span><span class="s">"book-title"</span> <span class="na">value=</span><span class="s">"Test Driven Development"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Create<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<h3>Method override</h3>
+
+<p>Browsers don&rsquo;t understand HTTP methods outside of <code>GET</code> and <code>POST</code>. On the other hand, Lotus embraces REST conventions, that goes beyond that two verbs. When we specify a method via <code>:method</code>, it adds a special hidden field <code>_method</code>, that&rsquo;s understood by the application.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">book_path</span><span class="p">(</span><span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">),</span> <span class="ss">method: :put</span> <span class="k">do</span>
+    <span class="n">text_field</span> <span class="ss">:title</span>
+
+    <span class="n">submit</span> <span class="s1">'Update'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/books/23"</span> <span class="na">id=</span><span class="s">"book-form"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_method"</span> <span class="na">value=</span><span class="s">"PUT"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_csrf_token"</span> <span class="na">value=</span><span class="s">"5f1029dd15981648a0882ec52028208410afeaeffbca8f88975ef199e2988ce7"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"book[title]"</span> <span class="na">id=</span><span class="s">"book-title"</span> <span class="na">value=</span><span class="s">"Test Driven Development"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Update<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<h3>CSRF Protection</h3>
+
+<p>Cross Site Request Forgery (CSRF) is one of the most common attacks on the web. Lotus offers a security mechanism based on a technique called: <em>Synchronizer Token Pattern</em>.</p>
+
+<p>When we enable sessions, it stores them to store a random token for each user.
+Forms are rendered with a special hidden field (<code>_csrf_token</code>) which contains this token.</p>
+
+<p>On form submission, Lotus matches this input with the value from the session. If they match, the request can continue. If not, it resets the sesssion and raises an exception.</p>
+
+<p>Developers can customize attack handling.</p>
+
+<h3>Nested fields</h3>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:delivery</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">deliveries_path</span> <span class="k">do</span>
+    <span class="n">text_field</span> <span class="ss">:customer_name</span>
+
+    <span class="n">fields_for</span> <span class="ss">:address</span> <span class="k">do</span>
+      <span class="n">text_field</span> <span class="ss">:city</span>
+    <span class="k">end</span>
+
+    <span class="n">submit</span> <span class="s1">'Create'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/deliveries"</span> <span class="na">id=</span><span class="s">"delivery-form"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_csrf_token"</span> <span class="na">value=</span><span class="s">"4800d585b3a802682ae92cb72eed1cdd2894da106fb4e9e25f8a262b862c52ce"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"delivery[customer_name]"</span> <span class="na">id=</span><span class="s">"delivery-customer-name"</span> <span class="na">value=</span><span class="s">""</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"delivery[address][city]"</span> <span class="na">id=</span><span class="s">"delivery-address-city"</span> <span class="na">value=</span><span class="s">""</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Create<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<h2>Automatic values</h2>
+
+<p>Form fields are <strong>automatically filled with the right value</strong>. Lotus looks up for explicit values passed in the form constructor and for the params of the current request. It compares the form hierarchy (including nested fields), with these two sources. For each match, it fills the associated value.</p>
+
+<h4>Example</h4>
+
+<p>Imagine we want to update data for <code>delivery</code>. We have two objects: <code>delivery</code> and <code>customer</code>, which are plain objects (no ORM involved). They respond to the following methods:</p>
+<pre class="language-ruby ruby"><code><span class="n">delivery</span><span class="p">.</span><span class="nf">id</span>   <span class="c1"># =&gt; 1</span>
+<span class="n">delivery</span><span class="p">.</span><span class="nf">code</span> <span class="c1"># =&gt; 123</span>
+
+<span class="n">customer</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># =&gt; "Luca"</span>
+
+<span class="n">customer</span><span class="p">.</span><span class="nf">address</span><span class="p">.</span><span class="nf">class</span> <span class="c1"># =&gt; Address</span>
+<span class="n">customer</span><span class="p">.</span><span class="nf">address</span><span class="p">.</span><span class="nf">city</span>  <span class="c1"># =&gt; "Rome"</span>
+</code></pre>
+
+<p>Let&rsquo;s compose the form.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:delivery</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">delivery_path</span><span class="p">(</span><span class="ss">id: </span><span class="n">delivery</span><span class="p">.</span><span class="nf">id</span><span class="p">),</span> <span class="ss">method: :patch</span><span class="p">,</span> <span class="ss">values: </span><span class="p">{</span><span class="ss">delivery: </span><span class="n">delivery</span><span class="p">,</span> <span class="ss">customer: </span><span class="n">customer</span><span class="p">}</span> <span class="k">do</span>
+    <span class="n">text_field</span> <span class="ss">:code</span>
+
+    <span class="n">fields_for</span> <span class="ss">:customer</span> <span class="k">do</span>
+      <span class="n">text_field</span> <span class="ss">:name</span>
+
+      <span class="n">fields_for</span> <span class="ss">:address</span> <span class="k">do</span>
+        <span class="n">text_field</span> <span class="ss">:city</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">submit</span> <span class="s1">'Update'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/deliveries/1"</span> <span class="na">id=</span><span class="s">"delivery-form"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_method"</span> <span class="na">value=</span><span class="s">"PATCH"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_csrf_token"</span> <span class="na">value=</span><span class="s">"4800d585b3a802682ae92cb72eed1cdd2894da106fb4e9e25f8a262b862c52ce"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"delivery[code]"</span> <span class="na">id=</span><span class="s">"delivery-code"</span> <span class="na">value=</span><span class="s">"123"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"delivery[customer][name]"</span> <span class="na">id=</span><span class="s">"delivery-customer-name"</span> <span class="na">value=</span><span class="s">"Luca"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"delivery[customer][address][city]"</span> <span class="na">id=</span><span class="s">"delivery-customer-address-city"</span> <span class="na">value=</span><span class="s">"Rome"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Update<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p>Please note the <code>:values</code> option that we pass to <code>#form_for</code>. It maps the <code>name</code> attributes that we have in the form with the objects that we want to use to fill the values. For instance <code>delivery[code]</code> corresponds to <code>delivery.code</code> (<code>123</code>), <code>delivery[customer][address][city]</code> to <code>customer.address.city</code> (<code>&quot;Rome&quot;</code>) and so on..</p>
+
+<h3>Read Values From Params</h3>
+
+<p><strong>Params are automatically passed to form helpers</strong>, to read values and try to autofill fields. If a value is present both in params and explicit values (<code>:values</code>), the first takes precendence. The reason is simple: params sometimes represent a failed form submission attempt.</p>
+
+<h4>Example</h4>
+
+<p>Imagine the form described above, and that our user enters <code>&quot;foo&quot;</code> as delivery code. This value isn&rsquo;t acceptable for our model domain rules, so we render again the form, presenting a validation error. Our params are now carrying on the values filled by our user. For instance: <code>params.get(&#39;delivery.code&#39;)</code> returns <code>&quot;foo&quot;</code>.</p>
+
+<p>Here how the form is rendered:</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/deliveries/1"</span> <span class="na">id=</span><span class="s">"delivery-form"</span> <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_method"</span> <span class="na">value=</span><span class="s">"PATCH"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_csrf_token"</span> <span class="na">value=</span><span class="s">"4800d585b3a802682ae92cb72eed1cdd2894da106fb4e9e25f8a262b862c52ce"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"delivery[code]"</span> <span class="na">id=</span><span class="s">"delivery-code"</span> <span class="na">value=</span><span class="s">"foo"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"delivery[customer][name]"</span> <span class="na">id=</span><span class="s">"delivery-customer-name"</span> <span class="na">value=</span><span class="s">"Luca"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"delivery[customer][address][city]"</span> <span class="na">id=</span><span class="s">"delivery-customer-address-city"</span> <span class="na">value=</span><span class="s">"Rome"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Update<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<h2>Release Date</h2>
+
+<p>Form helpers will be available with <code>lotusrb-0.4.0</code>, expected for <strong>June 23, 2015</strong>.</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Weekly Changelog</title>
+       <id>http://lotusrb.org/blog/2015/05/31/weekly-changelog.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/05/31/weekly-changelog.html"/>
+       <updated>2015-05-31T17:47:00+02:00</updated>
+       <author>
+         <name>Trung Lê</name>
+       </author>
+       <summary>
+         Changelog from May 16 2015 to May 31 2015
+
+       </summary>
+       <content type="html"><![CDATA[<h2>Releases</h2>
+
+<ul>
+<li>Released lotusrb 0.3.2</li>
+<li>Released lotus-controller 0.4.3</li>
+<li>Released lotus-view 0.4.1</li>
+<li>Released lotus-model 0.3.2</li>
+<li>Released lotus-utils 0.4.3</li>
+<li>Released lotus-validations 0.3.2</li>
+<li>Released lotus-router 0.4.0</li>
+<li>Released lotus-helpers 0.1.0</li>
+</ul>
+
+<h2>Completed</h2>
+
+<ul>
+<li>[<a href="https://github.com/nguyenngoc2505">Ngoc Nguyen</a>] Action generator doesn&rsquo;t respect Ruby file naming [<a href="https://github.com/lotus/lotus/pull/232">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Don&rsquo;t rely on config.before(:suite) to preload Lotus apps in testing [<a href="https://github.com/lotus/lotus/pull/231">details</a>]</li>
+<li>[<a href="https://github.com/nguyenngoc2505">Ngoc Nguyen</a>] Model generator creates wrong RSpec files [<a href="https://github.com/lotus/lotus/pull/230">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Added send_file method in action for sending files [<a href="https://github.com/lotus/controller/pull/112">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Introduced #content as API to render optional contents [<a href="https://github.com/lotus/view/pull/70">details</a>]</li>
+<li>[<a href="https://github.com/nguyenngoc2505">Ngoc Nguyen</a>] Model generator doesn&rsquo;t respect Ruby file naming [<a href="https://github.com/lotus/lotus/pull/229">details</a>]</li>
+<li>[<a href="https://github.com/francois">François Beausoleil</a>] Make TypeError messages even more useful [<a href="https://github.com/lotus/utils/pull/79">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Enhanced cookies syntax options [<a href="https://github.com/lotus/lotus/pull/227">details</a>]</li>
+<li>[<a href="https://github.com/deepj">deepj</a>] Introduce invalid? method as an opposite to valid? [<a href="https://github.com/lotus/validations/pull/64">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Fixed action generator, raise exception if action name isn&rsquo;t supplied [<a href="https://github.com/lotus/lotus/pull/223">details</a>]</li>
+<li>[<a href="https://github.com/dsnipe">Dmitry Tymchuk</a>] Fix for Dirty tracking inplace modifications [<a href="https://github.com/lotus/model/pull/187">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Add automatic :secure option [<a href="https://github.com/lotus/lotus/pull/222">details</a>]</li>
+<li>[<a href="https://github.com/deepj">deepj</a>] Test only against JRuby 9k on Travis [<a href="https://github.com/lotus/view/pull/67">details</a>]</li>
+<li>[<a href="https://github.com/deepj">deepj</a>] Fix failling deprecation_test.rb under JRuby 9000 [<a href="https://github.com/lotus/utils/pull/78">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Added automatically expires option if max_age option presents [<a href="https://github.com/lotus/controller/pull/110">details</a>]</li>
+<li>[<a href="https://github.com/jeremyf">Jeremy Friesen</a>] Wordsmithing README [<a href="https://github.com/lotus/controller/pull/109">details</a>]</li>
+<li>[<a href="https://github.com/jeremyf">Jeremy Friesen</a>] Wordsmithing [<a href="https://github.com/lotus/validations/pull/63">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Rack::Lint compatibility [<a href="https://github.com/lotus/controller/pull/108">details</a>]</li>
+<li>[<a href="https://github.com/jeremyf">Jeremy Friesen</a>] Wordsmithing [<a href="https://github.com/lotus/model/pull/185">details</a>]</li>
+<li>[<a href="https://github.com/jeremyf">Jeremy Friesen</a>] Wordsmithing the REAMDE.md typo [<a href="https://github.com/lotus/validations/pull/62">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Added routing helpers to actions [<a href="https://github.com/lotus/lotus/pull/219">details</a>]</li>
+<li>[<a href="https://github.com/peterberkenbosch">Peter Berkenbosch</a>] Add raw SQL support with execute() [<a href="https://github.com/lotus/model/pull/184">details</a>]</li>
+<li>[<a href="https://github.com/maqnouch">Mohammed Aqnouch</a>] Fix typos [<a href="https://github.com/lotus/lotus/pull/217">details</a>]</li>
+<li>[<a href="https://github.com/nguyenngoc2505">Ngoc Nguyen</a>] Add Lotus.env [<a href="https://github.com/lotus/lotus/pull/216">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] When coerce Utils::Attributes to Hash don&rsquo;t rely on #to_h of the single values [<a href="https://github.com/lotus/utils/pull/76">details</a>]</li>
+<li>[<a href="https://github.com/stsc3000">Steffen Schildknecht</a>] Add missing Lotus::Interactor include in examples [<a href="https://github.com/lotus/utils/pull/75">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Fix internet explorer HTTP accept [<a href="https://github.com/lotus/controller/pull/105">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Ensure Attributes#to_h to force Hash values [<a href="https://github.com/lotus/utils/pull/74">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Ensure nested attributes to have correct Hash serialization. [<a href="https://github.com/lotus/validations/pull/60">details</a>]</li>
+<li>[<a href="https://github.com/LeoTeam">Team Leo</a>] Refactor update timestamps [<a href="https://github.com/lotus/model/pull/182">details</a>]</li>
+</ul>
+
+<h2>Development</h2>
+
+<ul>
+<li>[<a href="https://github.com/Sdogruyol">Serdar Dogruyol</a>] Add Platform Control for Code Reloading [<a href="https://github.com/lotus/lotus/pull/238">details</a>]</li>
+<li>[<a href="https://github.com/sungwoncho">Sung Won Cho</a>] Add Destroy command [<a href="https://github.com/lotus/lotus/pull/194">details</a>]</li>
+<li>[<a href="https://github.com/smt116">Maciej Malecki</a>] Preload application in config/environment file. [<a href="https://github.com/lotus/lotus/pull/180">details</a>]</li>
+<li>[<a href="https://github.com/vinioliveira">Vinícius Oliveira</a>] CLI db migrate/rollback  [<a href="https://github.com/lotus/lotus/pull/161">details</a>]</li>
+<li>[<a href="https://github.com/thecatwasnot">Cole</a>] Adding migration generator [<a href="https://github.com/lotus/lotus/pull/139">details</a>]</li>
+<li>[<a href="https://github.com/joneslee85">Trung Lê</a>] Add Lotus::Model::Migration [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Implement SQL inner join [<a href="https://github.com/lotus/model/pull/102">details</a>]</li>
+<li>[<a href="https://github.com/heruku">Uku Taht</a>] Associations [<a href="https://github.com/lotus/model/pull/56">details</a>]</li>
+<li>[<a href="https://github.com/rodzyn">Marcin Olichwirowicz</a>] Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Form helper [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
+<li>[<a href="https://github.com/tomkadwill">Tom Kadwill</a>] Number formatting helper [<a href="https://github.com/lotus/helpers/pull/11">details</a>]</li>
+<li>[<a href="https://github.com/fuadsaud">Fuad Saud</a>] Add helper for word wrapping [<a href="https://github.com/lotus/helpers/pull/1">details</a>]</li>
+</ul>
+
+<h2>Roadmap</h2>
+
+<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
+]]></content>
+     </entry>
      <entry>
        <title>Announcing Lotus v0.3.2</title>
        <id>http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html</id>
@@ -628,94 +959,6 @@ Lotus wants to increase the level of awareness around this topic and provide def
   </script>
   <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
 </div>
-]]></content>
-     </entry>
-     <entry>
-       <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/03/22/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/03/22/weekly-changelog.html"/>
-       <updated>2015-03-22T09:10:00+01:00</updated>
-       <author>
-         <name>Trung Lê</name>
-       </author>
-       <summary>
-         Changelog from Mar 16th to Mar 22nd 2015
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Releases</h2>
-
-<p>-</p>
-
-<h2>Completed</h2>
-
-<ul>
-<li>Introduced action generator [<a href="https://github.com/lotus/lotus/pull/166">details</a>]</li>
-<li>Bumped lotus-model dependency to 0.3 for new app  [<a href="https://github.com/lotus/lotus/commit/a1a5ee00eaf1189906c625c7f8f72e8e248be02e">details</a>]</li>
-<li>Renamed <code>default_cookie_options</code> to <code>cookies</code> [<a href="https://github.com/lotus/controller/commit/0f851685e3f3dfe3c14c2f8a2bbbc414b7faa3d3">details</a>]</li>
-<li>Improved error messages for undefined method in view [<a href="https://github.com/lotus/view/pull/63">details</a>]</li>
-<li>Allow Action to disable layout [<a href="https://github.com/lotus/view/pull/65">details</a>]</li>
-<li>Make flash session to persist between requests [<a href="https://github.com/lotus/controller/pull/96">details</a>]</li>
-</ul>
-
-<h2>Development</h2>
-
-<ul>
-<li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>Application generator [<a href="https://github.com/lotus/lotus/pull/181">details</a>]</li>
-<li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/11">details</a>]</li>
-<li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
-</ul>
-
-<h2>Roadmap</h2>
-
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
-]]></content>
-     </entry>
-     <entry>
-       <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/03/15/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/03/15/weekly-changelog.html"/>
-       <updated>2015-03-15T10:29:00+01:00</updated>
-       <author>
-         <name>Trung Lê</name>
-       </author>
-       <summary>
-         Changelog from Mar 8th to Mar 15th 2015
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Releases</h2>
-
-<ul>
-<li>lotus-utils to v0.3.5</li>
-</ul>
-
-<h2>Completed</h2>
-
-<ul>
-<li>Allow specifying controller for resources routing [<a href="https://github.com/lotus/router/pull/45">details</a>]</li>
-<li>Stop sending nil value to DB when creating new record [<a href="https://github.com/lotus/model/pull/81">details</a>]</li>
-<li>Use Lotus::Utils Boolean class within model [<a href="https://github.com/lotus/model/pull/160">details</a>]</li>
-<li>redirect_to now halt the request [<a href="https://github.com/lotus/controller/pull/94">details</a>]</li>
-<li>Introduced <code>Lotus::Interactor</code> and <code>Lotus::Utils::BasicObject</code> [<a href="https://github.com/lotus/utils/commit/0b83e837174eaa3684b7923f60ce609c65555c99">details</a>]</li>
-<li>Lotus::Helpers integration in Lotus [<a href="https://github.com/lotus/lotus/pull/175">details</a>]</li>
-</ul>
-
-<h2>Development</h2>
-
-<ul>
-<li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>Action generator [<a href="https://github.com/lotus/lotus/pull/166">details</a>]</li>
-<li>Application generator [<a href="https://github.com/lotus/lotus/pull/181">details</a>]</li>
-<li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/11">details</a>]</li>
-<li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
-<li>Make flash session to persist between requests [<a href="https://github.com/lotus/controller/pull/96">details</a>]</li>
-</ul>
-
-<h2>Roadmap</h2>
-
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
 ]]></content>
      </entry>
 </feed>
