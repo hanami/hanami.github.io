@@ -55,7 +55,7 @@ end
 
 ## Conditional GET
 
-_Conditional GET_ is a two steps workflow to inform browsers that a resource hasn't changed since the last visit.
+_Conditional GET_ is a two step workflow to inform browsers that a resource hasn't changed since the last visit.
 At the end of the first request, it receives special HTTP response headers to send back the next time it will come back.
 If that header matches the value that the server calculates, then the resource is still cached and a `304` status (Not Modified) is returned.
 

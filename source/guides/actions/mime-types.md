@@ -8,7 +8,7 @@ Actions have advanced features for MIME type detection, automatic headers, white
 
 ## Request Introspection
 
-In order to understand which is the requested MIME type, an action looks at the `Accept` request header and exposes high level API: `#format` and `#accept?`.
+In order to understand what the requested MIME type is, an action looks at the `Accept` request header and exposes a high level API: `#format` and `#accept?`.
 
 The first returns a symbol representation of the MIME type (eg. `:html`, `:json`, `:xml` etc..), while the second is a query method that accepts a MIME type string and checks if it's accepted by the current browser.
 
