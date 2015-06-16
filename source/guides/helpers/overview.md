@@ -7,6 +7,24 @@ title: Lotus - Guides - Helpers Overview
 A Lotus view in an object that defines presentational logic.
 Helpers are modules designed to enrich views with a collection of useful features.
 
+This concept is probably familiar, if we know some Ruby basics.
+
+```ruby
+module Printable
+  def print
+    puts "..."
+  end
+end
+
+class Person
+  include Printable
+end
+
+Person.new.print
+```
+
+The same simple design is applied for views and helpers.
+
 Lotus ships with default included helpers, but we can define custom modules to add.
 
 ## Rendering Context

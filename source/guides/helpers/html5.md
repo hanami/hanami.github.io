@@ -46,7 +46,6 @@ It generates:
   * It accepts content as a block with nested markup builders (5)
   * It builds attributes from given hash (6)
   * it combines attributes and block (7)
-  
 
 ```ruby
 # 1
