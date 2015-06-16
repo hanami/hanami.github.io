@@ -36,6 +36,25 @@ end
 
 Our view responds to `#link_to`, because it includes `Lotus::Helpers::LinkToHelper`, a module that defines that concrete method.
 
+## Clean Context
+
+There are some helpers that have a huge interface.
+Think of the [HTML5](/guides/helpers/html5) or the [routing](/guides/helpers/routing) helpers, they provide hundreds of methods to map tags or application routes.
+
+Making them available directly in the view context, would be source of confusion, slow method dispatch times and name collisions.
+
+Imagine we have an application with 100 routes.
+Because Lotus provides both relative and abosolute URI facilities, if used directly, that would have mean to add **200 methods** to all the views.
+Which is overkilling.
+
+For this reason, certain helpers act as a proxy to access these large set of methods.
+
+```erb
+<%= routes.home_path %>
+```
+
+In this case we have **only one method** to add to our views, but it opens to infinite possibilities without perf penalties.
+
 ## Explicit Interfaces
 
 Lotus guides developers to design explicit and intention revealing interfaces for their objects.
@@ -71,3 +90,25 @@ To be used like this:
 ```
 
 This version is **visually simpler** and **testable**.
+
+## Disable Helpers
+
+Helpers aren't mandatory for Lotus applications.
+If we want to get rid of them, we just to need to remove two lines of code.
+
+```ruby
+# apps/web/application.rb
+require 'lotus/helpers' # REMOVE THIS LINE
+
+module Web
+  class Application < Lotus::Application
+    configure do
+      # ...
+
+      view.prepare do
+        include Lotus::Helpers # AND THIS ONE
+      end
+    end
+  end
+end
+```
