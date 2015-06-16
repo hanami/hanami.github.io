@@ -47,9 +47,9 @@ end
 
 ### Action Middleware
 
-Sometimes we need a middleware only for a set of well known resources.
-If we mount it at the global or application level, the performance start to degrade.
-Actions allow to mount fine grained middleware stack.
+Sometimes we need a middleware for a set of well known resources, only.
+If we mount it at the global or application level, the performance will start to degrade.
+Actions allow us to mount a fine grained middleware stack.
 
 ```ruby
 # apps/web/controllers/sessions/create.rb

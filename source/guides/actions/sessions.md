@@ -25,7 +25,7 @@ The first argument is the name of the adapter for the session storage.
 The default value is `:cookie`, that uses `Rack::Session::Cookie`.
 
 <p class="convention">
-The name of the session adapter is underscored version of the class name under <code>Rack::Session</code> namespace.
+The name of the session adapter is the underscored version of the class name under <code>Rack::Session</code> namespace.
 Example: <code>:cookie</code> for <code>Rack::Session::Cookie</code>.
 </p>
 
@@ -34,7 +34,7 @@ Let's say we want to use Redis. We should bundle `redis-rack` and specify the na
 Lotus is able to autoload the adapter and use it when the application is started.
 
 <p class="convention">
-Custom storages are autoloaded via <code>require "rack/session#{ adapter_name }"</code>.
+Custom storage technologies are autoloaded via <code>require "rack/session#{ adapter_name }"</code>.
 </p>
 
 The second argument passed to `sessions` is a Hash of options that are **passed to the adapter**.
