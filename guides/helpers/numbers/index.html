@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Command Line: Routes</title>
+    <title>Lotus - Guides - Number Helpers</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,28 +116,46 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/command-line/routes.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Command Line</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/helpers/numbers.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h2>Number Helpers</h2>
 
-<h2>Routes</h2>
+<p>Lotus offers a helpful way to present numbers via <code>#format_number</code>, a <strong>private method</strong> available only in views.</p>
 
-<p>In order to print the routes defined by all the applications, use:</p>
-<pre class="language-ruby plaintext"><code>% bundle exec lotus routes
+<h2>Usage</h2>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">Show</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
 
-                     GET, HEAD  /               Web::Controllers::Home::Index
-               books GET, HEAD  /books          Web::Controllers::Books::Index
-           new_books GET, HEAD  /books/new      Web::Controllers::Books::New
-               books POST       /books          Web::Controllers::Books::Create
-               books GET, HEAD  /books/:id      Web::Controllers::Books::Show
-          edit_books GET, HEAD  /books/:id/edit Web::Controllers::Books::Edit
-               books PATCH      /books/:id      Web::Controllers::Books::Update
-               books DELETE     /books/:id      Web::Controllers::Books::Destroy
-         new_account GET, HEAD  /account/new    Web::Controllers::Account::New
-             account POST       /account        Web::Controllers::Account::Create
-             account GET, HEAD  /account        Web::Controllers::Account::Show
-        edit_account GET, HEAD  /account/edit   Web::Controllers::Account::Edit
-             account PATCH      /account        Web::Controllers::Account::Update
-             account DELETE     /account        Web::Controllers::Account::Destroy
+    <span class="k">def</span> <span class="nf">download_count</span>
+      <span class="n">format_number</span> <span class="n">book</span><span class="p">.</span><span class="nf">download_count</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby erb"><code><span class="nt">&lt;span&gt;</span><span class="cp">&lt;%=</span> <span class="n">download_count</span> <span class="cp">%&gt;</span><span class="nt">&lt;/span&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;span&gt;</span>1,000,000<span class="nt">&lt;/span&gt;</span>
+</code></pre>
+
+<h3>Precision</h3>
+
+<p>The default precision is of <code>2</code>, but we can specify a different value with the homonym option.</p>
+<pre class="language-ruby ruby"><code><span class="n">format_number</span><span class="p">(</span><span class="no">Math</span><span class="o">::</span><span class="no">PI</span><span class="p">)</span>               <span class="c1"># =&gt; "3.14"</span>
+<span class="n">format_number</span><span class="p">(</span><span class="no">Math</span><span class="o">::</span><span class="no">PI</span><span class="p">,</span> <span class="ss">precision: </span><span class="mi">6</span><span class="p">)</span> <span class="c1"># =&gt; "3.141592"</span>
+</code></pre>
+
+<h3>Delimiter</h3>
+
+<p>The default thousands delimiter is <code>,</code>. We can use <code>:delimiter</code> for a different char.</p>
+<pre class="language-ruby ruby"><code><span class="n">format_number</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)</span>                 <span class="c1"># =&gt; "1,000,000"</span>
+<span class="n">format_number</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">,</span> <span class="ss">delimiter: </span><span class="s1">'.'</span><span class="p">)</span> <span class="c1"># =&gt; "1.000.000"</span>
+</code></pre>
+
+<h3>Separator</h3>
+
+<p>The default separator is <code>.</code>. We can use <code>:separator</code> for a different char.</p>
+<pre class="language-ruby ruby"><code><span class="n">format_number</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="mi">23</span><span class="p">)</span>                 <span class="c1"># =&gt; "1.23"</span>
+<span class="n">format_number</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="mi">23</span><span class="p">,</span> <span class="ss">separator: </span><span class="s1">','</span><span class="p">)</span> <span class="c1"># =&gt; "1,23"</span>
 </code></pre>
 
             </div>

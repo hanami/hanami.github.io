@@ -1,0 +1,360 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lotus - Guides - HTML5 Helpers</title>
+    <meta name="description" content="Lotus, a complete web framework for Ruby" />
+    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+
+    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+
+    <script src="//use.typekit.net/xhp5wmc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body class="subpage docs">
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav class="navbar navbar-fixed-top container-fluid">
+  <div class="wrapper container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!-- <li><a href="/guides">Guides</a></li> -->
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.3.2</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <section class="docs wrapper animated fadeIn">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 hidden-sm hidden-xs sidebar">
+            <ul class="nav nav-sidebar">
+              <li>
+                <span class="heading">Routing</span>
+                <ul class="nav">
+                  <li><a href="/guides/routing/overview">Overview</a></li>
+                  <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Actions</span>
+                <ul class="nav">
+                  <li><a href="/guides/actions/overview">Overview</a></li>
+                  <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/actions/parameters">Parameters</a></li>
+                  <li><a href="/guides/actions/request-and-response">Request & Response</a></li>
+                  <li><a href="/guides/actions/exposures">Exposures</a></li>
+                  <li><a href="/guides/actions/rack-integration">Rack Integration</a></li>
+                  <li><a href="/guides/actions/mime-types">MIME Types</a></li>
+                  <li><a href="/guides/actions/cookies">Cookies</a></li>
+                  <li><a href="/guides/actions/sessions">Sessions</a></li>
+                  <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
+                  <li><a href="/guides/actions/control-flow">Control Flow</a></li>
+                  <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
+                  <li><a href="/guides/actions/share-code">Share Code</a></li>
+                  <li><a href="/guides/actions/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Views</span>
+                <ul class="nav">
+                  <li><a href="/guides/views/overview">Overview</a></li>
+                  <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/views/templates">Templates</a></li>
+                  <li><a href="/guides/views/partials">Partials</a></li>
+                  <li><a href="/guides/views/mime-types">MIME Types</a></li>
+                  <li><a href="/guides/views/layouts">Layouts</a></li>
+                  <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
+                  <li><a href="/guides/views/share-code">Share Code</a></li>
+                  <li><a href="/guides/views/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Command Line</span>
+                <ul class="nav">
+                  <li><a href="/guides/command-line/routes">Routes</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="col-md-9 main">
+            <div class="doc-section">
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/helpers/html5.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h2>HTML5 Helpers</h2>
+
+<p>This helper makes available an HTML5 generator that is <strong>template engine indepentent</strong>.
+It&rsquo;s a <strong>private method for views and layouts</strong> called <code>#html</code>.</p>
+
+<h2>Usage</h2>
+
+<p>This is how it will look used with a layout:</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Views</span>
+  <span class="k">class</span> <span class="nc">ApplicationLayout</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Layout</span>
+
+    <span class="k">def</span> <span class="nf">sidebar</span>
+      <span class="n">html</span><span class="p">.</span><span class="nf">aside</span><span class="p">(</span><span class="ss">id: </span><span class="s1">'sidebar'</span><span class="p">)</span> <span class="k">do</span>
+        <span class="n">div</span> <span class="s1">'hello'</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">sidebar</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>It generates:</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;aside</span> <span class="na">id=</span><span class="s">"sidebar"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>hello<span class="nt">&lt;/hello&gt;</span>
+<span class="nt">&lt;/aside&gt;</span>
+</code></pre>
+
+<h2>Features</h2>
+
+<ul>
+<li>It knows how to close tags according to HTML5 spec (1)</li>
+<li>It accepts content as first argument (2)</li>
+<li>It accepts builder as first argument (3)</li>
+<li>It accepts content as block which returns a string (4)</li>
+<li>It accepts content as a block with nested markup builders (5)</li>
+<li>It builds attributes from given hash (6)</li>
+<li>it combines attributes and block (7)</li>
+</ul>
+<pre class="language-ruby ruby"><code><span class="c1"># 1</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span> <span class="c1"># =&gt; &lt;div&gt;&lt;/div&gt;</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">img</span> <span class="c1"># =&gt; &lt;img&gt;</span>
+
+<span class="c1"># 2</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">)</span> <span class="c1"># =&gt; &lt;div&gt;hello&lt;/div&gt;</span>
+
+<span class="c1"># 3</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span><span class="p">(</span><span class="n">html</span><span class="p">.</span><span class="nf">p</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">))</span> <span class="c1"># =&gt; &lt;div&gt;&lt;p&gt;hello&lt;/p&gt;&lt;/div&gt;</span>
+
+<span class="c1"># 4</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span> <span class="p">{</span> <span class="s1">'hello'</span> <span class="p">}</span>
+<span class="c1"># =&gt;</span>
+<span class="c1">#&lt;div&gt;</span>
+<span class="c1">#  hello</span>
+<span class="c1">#&lt;/div&gt;</span>
+
+<span class="c1"># 5</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span> <span class="k">do</span>
+  <span class="nb">p</span> <span class="s1">'hello'</span>
+<span class="k">end</span>
+<span class="c1"># =&gt;</span>
+<span class="c1">#&lt;div&gt;</span>
+<span class="c1">#  &lt;p&gt;hello&lt;/p&gt;</span>
+<span class="c1">#&lt;/div&gt;</span>
+
+<span class="c1"># 6</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="ss">id: </span><span class="s1">'el'</span><span class="p">,</span> <span class="s1">'data-x'</span><span class="p">:</span> <span class="s1">'y'</span><span class="p">)</span> <span class="c1"># =&gt; &lt;div id="el" data-x="y"&gt;hello&lt;/div&gt;</span>
+
+<span class="c1"># 7</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span><span class="p">(</span><span class="ss">id: </span><span class="s1">'yay'</span><span class="p">)</span> <span class="p">{</span> <span class="s1">'hello'</span> <span class="p">}</span>
+<span class="c1"># =&gt;</span>
+<span class="c1">#&lt;div id="yay"&gt;</span>
+<span class="c1">#  hello</span>
+<span class="c1">#&lt;/div&gt;</span>
+</code></pre>
+
+<p>It supports complex markup constructs, <strong>without the need of concatenate tags</strong>. In the following example, there are two <code>div</code> tags that we don&rsquo;t need link together.</p>
+<pre class="language-ruby ruby"><code><span class="n">html</span><span class="p">.</span><span class="nf">section</span><span class="p">(</span><span class="ss">id: </span><span class="s1">'container'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">div</span><span class="p">(</span><span class="ss">id: </span><span class="s1">'main'</span><span class="p">)</span> <span class="k">do</span>
+    <span class="nb">p</span> <span class="s1">'Main content'</span>
+  <span class="k">end</span>
+
+  <span class="n">div</span> <span class="k">do</span>
+    <span class="n">ul</span><span class="p">(</span><span class="ss">id: </span><span class="s1">'languages'</span><span class="p">)</span> <span class="k">do</span>
+      <span class="n">li</span> <span class="s1">'Italian'</span>
+      <span class="n">li</span> <span class="s1">'English'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># =&gt;</span>
+<span class="c1">#  &lt;section id="container"&gt;</span>
+<span class="c1">#    &lt;div id="main"&gt;</span>
+<span class="c1">#      &lt;p&gt;Main Content&lt;/p&gt;</span>
+<span class="c1">#    &lt;/div&gt;</span>
+<span class="c1">#</span>
+<span class="c1">#    &lt;div&gt;</span>
+<span class="c1">#      &lt;ul id="languages"&gt;</span>
+<span class="c1">#        &lt;li&gt;Italian&lt;/li&gt;</span>
+<span class="c1">#        &lt;li&gt;English&lt;/li&gt;</span>
+<span class="c1">#      &lt;/ul&gt;</span>
+<span class="c1">#    &lt;/div&gt;</span>
+<span class="c1">#  &lt;/section&gt;</span>
+</code></pre>
+
+<p>The result is a very clean Ruby API.</p>
+
+<h2>Custom tags</h2>
+
+<p>Lotus helpers support 100+ most common tags, such as <code>div</code>, <code>video</code> or <code>canvas</code>. 
+However, HTML5 is fast moving target so we wanted to provide an open interface to define <strong>new or custom tags</strong>.</p>
+
+<p>The API is really simple: <code>#tag</code> must be used for a self-closing tag, where <code>#empty_tag</code> does the opposite.</p>
+<pre class="language-ruby ruby"><code><span class="n">html</span><span class="p">.</span><span class="nf">tag</span><span class="p">(</span><span class="ss">:custom</span><span class="p">,</span> <span class="s1">'Foo'</span><span class="p">,</span> <span class="ss">id: </span><span class="s1">'next'</span><span class="p">)</span> <span class="c1"># =&gt; &lt;custom id="next"&gt;Foo&lt;/custom&gt;</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">empty_tag</span><span class="p">(</span><span class="ss">:xr</span><span class="p">,</span> <span class="ss">id: </span><span class="s1">'next'</span><span class="p">)</span>      <span class="c1"># =&gt; &lt;xr id="next"&gt;</span>
+</code></pre>
+
+<h2>Auto escape</h2>
+
+<p>The tag contents are automatically escaped for <strong>security</strong> reasons:</p>
+<pre class="language-ruby ruby"><code><span class="n">html</span><span class="p">.</span><span class="nf">div</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">)</span>         <span class="c1"># =&gt; &lt;div&gt;hello&lt;/hello&gt;</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span> <span class="p">{</span> <span class="s1">'hello'</span> <span class="p">}</span>      <span class="c1"># =&gt; &lt;div&gt;hello&lt;/hello&gt;</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span><span class="p">(</span><span class="n">html</span><span class="p">.</span><span class="nf">p</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">))</span> <span class="c1"># =&gt; &lt;div&gt;&lt;p&gt;hello&lt;/p&gt;&lt;/hello&gt;</span>
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span> <span class="k">do</span>
+  <span class="nb">p</span> <span class="s1">'hello'</span>
+<span class="k">end</span> <span class="c1"># =&gt; &lt;div&gt;&lt;p&gt;hello&lt;/p&gt;&lt;/hello&gt;</span>
+
+
+
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span><span class="p">(</span><span class="s2">"&lt;script&gt;alert('xss')&lt;/script&gt;"</span><span class="p">)</span>
+  <span class="c1"># =&gt;  "&lt;div&gt;&amp;lt;script&amp;gt;alert(&amp;apos;xss&amp;apos;)&amp;lt;&amp;#x2F;script&amp;gt;&lt;/div&gt;"</span>
+
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span> <span class="p">{</span> <span class="s2">"&lt;script&gt;alert('xss')&lt;/script&gt;"</span> <span class="p">}</span>
+  <span class="c1"># =&gt;  "&lt;div&gt;&amp;lt;script&amp;gt;alert(&amp;apos;xss&amp;apos;)&amp;lt;&amp;#x2F;script&amp;gt;&lt;/div&gt;"</span>
+
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span><span class="p">(</span><span class="n">html</span><span class="p">.</span><span class="nf">p</span><span class="p">(</span><span class="s2">"&lt;script&gt;alert('xss')&lt;/script&gt;"</span><span class="p">))</span>
+  <span class="c1"># =&gt; "&lt;div&gt;&lt;p&gt;&amp;lt;script&amp;gt;alert(&amp;apos;xss&amp;apos;)&amp;lt;&amp;#x2F;script&amp;gt;&lt;/p&gt;&lt;/div&gt;"</span>
+
+<span class="n">html</span><span class="p">.</span><span class="nf">div</span> <span class="k">do</span>
+  <span class="nb">p</span> <span class="s2">"&lt;script&gt;alert('xss')&lt;/script&gt;"</span>
+<span class="k">end</span>
+  <span class="c1"># =&gt; "&lt;div&gt;&lt;p&gt;&amp;lt;script&amp;gt;alert(&amp;apos;xss&amp;apos;)&amp;lt;&amp;#x2F;script&amp;gt;&lt;/p&gt;&lt;/div&gt;"</span>
+</code></pre>
+
+<p><strong>HTML attributes aren&rsquo;t automatically escaped</strong>, in case we need to use a value that comes from a user input, we suggest to use <code>#ha</code>, which is the escape helper designed for this case. See <a href="`/guides/helpers/escape`">Escape Helpers</a> for a deep explanation.</p>
+
+<h2>View Context</h2>
+
+<p>Local variables from views are available inside the nested blocks of HTML builder:</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">Show</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+
+    <span class="k">def</span> <span class="nf">title_widget</span>
+      <span class="n">html</span><span class="p">.</span><span class="nf">div</span> <span class="k">do</span>
+        <span class="n">h1</span> <span class="n">book</span><span class="p">.</span><span class="nf">title</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby erb"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">title_widget</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>The Work of Art in the Age of Mechanical Reproduction<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="email-signup">
+  <div class="container-fluid wrapper">
+    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
+      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="primary">
+  <div class="container-fluid wrapper">
+    <div class="row">
+      <a class="logo col-md-3" href="/">logo</a>
+        <div class="col-md-4">
+          <span class="date">June 15, 2015</span>
+          <h4>Introducing Form Helpers</h4>
+          <p>New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.
+</p>
+          <a href="/blog/2015/06/15/introducing-form-helpers.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
+          <span class="date">May 31, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from May 16 2015 to May 31 2015
+</p>
+          <a href="/blog/2015/05/31/weekly-changelog.html">Read more...</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="sub-footer wrapper">
+    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
+    <br>
+    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
+    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
+    <ul class="social">
+      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
+      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

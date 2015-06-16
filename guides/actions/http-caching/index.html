@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -152,7 +166,7 @@ It can be used for retrocompatibility with old browsers which don&rsquo;t unders
 
 <h2>Conditional GET</h2>
 
-<p><em>Conditional GET</em> is a two steps workflow to inform browsers that a resource hasn&rsquo;t changed since the last visit.
+<p><em>Conditional GET</em> is a two step workflow to inform browsers that a resource hasn&rsquo;t changed since the last visit.
 At the end of the first request, it receives special HTTP response headers to send back the next time it will come back.
 If that header matches the value that the server calculates, then the resource is still cached and a <code>304</code> status (Not Modified) is returned.</p>
 

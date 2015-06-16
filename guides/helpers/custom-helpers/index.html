@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Command Line: Routes</title>
+    <title>Lotus - Guides - Custom Helpers</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,29 +116,67 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/command-line/routes.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Command Line</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/helpers/custom-helpers.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h2>Custom Helpers</h2>
 
-<h2>Routes</h2>
+<p>In the <a href="/guides/helpers/overiew">overview</a> section, we introduced the design for helpers.
+They are modules that enrich views behaviors.
+Because they are just Ruby modules, <strong>we can create our own helpers</strong>.</p>
 
-<p>In order to print the routes defined by all the applications, use:</p>
-<pre class="language-ruby plaintext"><code>% bundle exec lotus routes
+<h3>Example</h3>
 
-                     GET, HEAD  /               Web::Controllers::Home::Index
-               books GET, HEAD  /books          Web::Controllers::Books::Index
-           new_books GET, HEAD  /books/new      Web::Controllers::Books::New
-               books POST       /books          Web::Controllers::Books::Create
-               books GET, HEAD  /books/:id      Web::Controllers::Books::Show
-          edit_books GET, HEAD  /books/:id/edit Web::Controllers::Books::Edit
-               books PATCH      /books/:id      Web::Controllers::Books::Update
-               books DELETE     /books/:id      Web::Controllers::Books::Destroy
-         new_account GET, HEAD  /account/new    Web::Controllers::Account::New
-             account POST       /account        Web::Controllers::Account::Create
-             account GET, HEAD  /account        Web::Controllers::Account::Show
-        edit_account GET, HEAD  /account/edit   Web::Controllers::Account::Edit
-             account PATCH      /account        Web::Controllers::Account::Update
-             account DELETE     /account        Web::Controllers::Account::Destroy
+<p>Imagine we need (for some reason) a helper that shuffles the characters of a string and we want it to be available in our views.</p>
+
+<p>As first thing, let&rsquo;s define the module.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># app/web/helpers/shuffler.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">module</span> <span class="nn">Helpers</span>
+    <span class="k">module</span> <span class="nn">Shuffler</span>
+      <span class="kp">private</span>
+      <span class="no">SEPARATOR</span> <span class="o">=</span> <span class="s1">''</span><span class="p">.</span><span class="nf">freeze</span>
+
+      <span class="k">def</span> <span class="nf">shuffle</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="n">string</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="no">Encoding</span><span class="o">::</span><span class="no">UTF_8</span><span class="p">,</span> <span class="ss">invalid: :replace</span><span class="p">).</span>
+          <span class="nf">split</span><span class="p">(</span><span class="no">SEPARATOR</span><span class="p">).</span><span class="nf">shuffle</span><span class="p">.</span><span class="nf">join</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
+
+<p class="notice">
+  There is NO convention between the file name and the name of the module.
+  We can define this code, where and how we want.
+</p>
+
+<p>Then let&rsquo;s add that directory to the load paths of the application, so it can be eagerly loaded.
+As third step, we include the module in all the views. See <a href="/guides/actions/share-code.md">View&rsquo;s Share Code</a> section for low level details.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+
+      <span class="n">load_paths</span> <span class="o">&lt;&lt;</span> <span class="p">[</span>
+        <span class="s1">'controllers'</span><span class="p">,</span>
+        <span class="s1">'views'</span><span class="p">,</span>
+        <span class="s1">'helpers'</span>
+      <span class="p">]</span>
+
+      <span class="c1"># ...</span>
+
+      <span class="n">view</span><span class="p">.</span><span class="nf">prepare</span> <span class="k">do</span>
+        <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Helpers</span>
+        <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Helpers</span><span class="o">::</span><span class="no">Shuffler</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p class="notice">
+  Please note that our custom helper will work even if we remove <code>include Lotus::Helpers</code> line, because it&rsquo;s just Ruby.
+</p>
 
             </div>
           </div>

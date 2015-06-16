@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -106,7 +120,7 @@
               <h1>Exception Handling</h1>
 
 <p>Actions have an elegant API for exception handling.
-The behavior changes according to the current Lotus environment and to the custom settings in our configuration.</p>
+The behavior changes according to the current Lotus environment and the custom settings in our configuration.</p>
 
 <h2>Default Behavior</h2>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
@@ -122,9 +136,9 @@ The behavior changes according to the current Lotus environment and to the custo
 </code></pre>
 
 <p>Exceptions are automatically caught when in production mode, but not in development.
-In the first case, for our example, the application returns a <code>500</code> (Internal Server Error), in the latter case, we&rsquo;ll see the stack trace and all the informations to debug the code.</p>
+In the first case, for our example, the application returns a <code>500</code> (Internal Server Error), in the latter case, we&rsquo;ll see the stack trace and all the information to debug the code.</p>
 
-<p>This behavior can be changed with <code>handle_exceptions</code> setting in <code>apps/web/application.rb</code>.</p>
+<p>This behavior can be changed with the <code>handle_exceptions</code> setting in <code>apps/web/application.rb</code>.</p>
 
 <h2>Custom HTTP Status</h2>
 
@@ -176,15 +190,15 @@ In our example, when <code>ArgumentError</code> is raised, it will be handled as
 <span class="k">end</span>
 </code></pre>
 
-<p>If we specify a symbol as value for <code>handle_exception</code>, it will be used to manage the exception.
+<p>If we specify a symbol as the value for <code>handle_exception</code>, it will be used to manage the exception.
 In our case we want to protect the action from unwanted access: only admins are allowed.</p>
 
 <p>When a <code>PermissionDenied</code> exception is raised, it will be handled by <code>:handle_permission_error</code>.
-It MUST accept a <code>exception</code> argument.
+It MUST accept an <code>exception</code> argument.
 That is the exception instance raised inside <code>#call</code>.</p>
 
 <p class="warning">
-When specify custom exception handler, it MUST accept an <code>exception</code> argument.
+When specifying a custom exception handler, it MUST accept an <code>exception</code> argument.
 </p>
 
             </div>

@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -124,7 +138,7 @@ If we want to turn on this feature, we just need to uncomment a line of code.</p
 The default value is <code>:cookie</code>, that uses <code>Rack::Session::Cookie</code>.</p>
 
 <p class="convention">
-The name of the session adapter is underscored version of the class name under <code>Rack::Session</code> namespace.
+The name of the session adapter is the underscored version of the class name under <code>Rack::Session</code> namespace.
 Example: <code>:cookie</code> for <code>Rack::Session::Cookie</code>.
 </p>
 
@@ -133,7 +147,7 @@ Let&rsquo;s say we want to use Redis. We should bundle <code>redis-rack</code> a
 Lotus is able to autoload the adapter and use it when the application is started.</p>
 
 <p class="convention">
-Custom storages are autoloaded via <code>require "rack/session#{ adapter_name }"</code>.
+Custom storage technologies are autoloaded via <code>require "rack/session#{ adapter_name }"</code>.
 </p>
 
 <p>The second argument passed to <code>sessions</code> is a Hash of options that are <strong>passed to the adapter</strong>.

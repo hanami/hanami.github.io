@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Command Line: Routes</title>
+    <title>Lotus - Guides - Routing Helpers</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,29 +116,58 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/command-line/routes.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Command Line</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/helpers/routing.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h2>Routing Helpers</h2>
 
-<h2>Routes</h2>
+<p>Routing helpers are made of one <strong>public method</strong> (<code>#routes</code>), available for actions, views and templates.
+It&rsquo;s a factory to generate <strong>relative</strong> or <strong>absolute URLs</strong>, starting from <a href="/guides/routing/basic-usage">named routes</a>.</p>
 
-<p>In order to print the routes defined by all the applications, use:</p>
-<pre class="language-ruby plaintext"><code>% bundle exec lotus routes
+<p class="convention">
+  For a given route named <code>:home</code>, we can use <code>home_path</code> or <code>home_url</code> to generate relative or absolute URLs, respectively.
+</p>
 
-                     GET, HEAD  /               Web::Controllers::Home::Index
-               books GET, HEAD  /books          Web::Controllers::Books::Index
-           new_books GET, HEAD  /books/new      Web::Controllers::Books::New
-               books POST       /books          Web::Controllers::Books::Create
-               books GET, HEAD  /books/:id      Web::Controllers::Books::Show
-          edit_books GET, HEAD  /books/:id/edit Web::Controllers::Books::Edit
-               books PATCH      /books/:id      Web::Controllers::Books::Update
-               books DELETE     /books/:id      Web::Controllers::Books::Destroy
-         new_account GET, HEAD  /account/new    Web::Controllers::Account::New
-             account POST       /account        Web::Controllers::Account::Create
-             account GET, HEAD  /account        Web::Controllers::Account::Show
-        edit_account GET, HEAD  /account/edit   Web::Controllers::Account::Edit
-             account PATCH      /account        Web::Controllers::Account::Update
-             account DELETE     /account        Web::Controllers::Account::Destroy
+<h2>Usage</h2>
+
+<p>Imagine we have the following routes for our application:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># web/apps/config/routes.rb</span>
+<span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span>    <span class="ss">to: </span><span class="s1">'home#index'</span><span class="p">,</span> <span class="ss">as: :home</span>
+<span class="n">get</span> <span class="s1">'/foo'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'foo#index'</span>
+
+<span class="n">resources</span> <span class="ss">:books</span>
 </code></pre>
+
+<h3>Relative URLs</h3>
+
+<p>We can do:</p>
+<pre class="language-ruby erb"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">&lt;%=</span> <span class="n">routes</span><span class="p">.</span><span class="nf">home_path</span> <span class="cp">%&gt;</span><span class="s">"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">&lt;%=</span> <span class="n">routes</span><span class="p">.</span><span class="nf">book_path</span> <span class="cp">%&gt;</span><span class="s">"</span><span class="nt">&gt;</span>Books<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre>
+
+<p>Which generates:</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/books"</span><span class="nt">&gt;</span>Books<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre>
+
+<p>We can&rsquo;t link <code>/foo</code>, because it isn&rsquo;t a named route (it lacks of the <code>:as</code> option).</p>
+
+<h3>Absolute URLs</h3>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+      <span class="n">redirect_to</span> <span class="n">routes</span><span class="p">.</span><span class="nf">book_url</span><span class="p">(</span><span class="ss">id: </span><span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>In the case above, we have passed a Hash as set of params that are required to generate the URL.</p>
 
             </div>
           </div>

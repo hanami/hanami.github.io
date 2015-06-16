@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -133,7 +147,7 @@ They are similar to a Ruby Hash, but they offer an expanded set of features.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>If we visit <code>/dashboard?q=foo</code>, we should see <code>Query string: foo</code>.</p>
+<p>If we visit <code>/dashboard?q=foo</code>, we should see the <code>Query string: foo</code>.</p>
 
 <h3>Indifferent Access</h3>
 
@@ -148,18 +162,18 @@ This is a security mechanism to avoid an attack called <em>Symbol DoS</em>.</p>
 </code></pre>
 
 <p class="warning">
-  Indifferent Access may be removed future versions of Lotus in favor of symbol access only.
+  Indifferent Access may be removed in future versions of Lotus in favor of symbol access only.
 </p>
 
 <h3>Nested Access</h3>
 
-<p>Params offer indifferent access to for nested values.</p>
+<p>Params also offer indifferent access for nested values.</p>
 <pre class="language-ruby ruby"><code><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">][</span><span class="ss">:title</span><span class="p">]</span>
 <span class="c1"># or</span>
 <span class="n">params</span><span class="p">[</span><span class="s1">'book'</span><span class="p">][</span><span class="s1">'title'</span><span class="p">]</span>
 </code></pre>
 
-<p>Now, what happens if the parameter <code>:book</code> is missing in our current request?
+<p>Now, what happens if the parameter <code>:book</code> is missing from the request?
 Because <code>params[:book]</code> is <code>nil</code>, we can&rsquo;t access <code>:title</code>.
 In this case Ruby will raise a <code>NoMethodError</code>.</p>
 
@@ -176,12 +190,12 @@ It accepts a <strong>dot separated</strong> string, where each token represents 
 </code></pre>
 
 <p>We want to provide self-registration for our users.
-We build an HTML form and this is the action that accepts the payload and stores it in the <code>users</code> table.
+We build a HTML form which is the action that accepts the payload and stores it in the <code>users</code> table.
 That table has a boolean column <code>admin</code> to decide if a person has administration permissions.</p>
 
 <p>A malicious user can exploit this scenario, by sending this extra parameter to our application and become an admin.</p>
 
-<p>We can easily fix this problem, by filtering the allowed params that can comes inside our application.
+<p>We can easily fix this problem, by filtering the allowed params that are permitted inside our application.
 Please always remember that <strong>params represent untrusted input</strong>.</p>
 
 <p>We use <code>.params</code> to map the structure of the (nested) params.</p>
@@ -244,10 +258,10 @@ For us, an <code>User</code> can be persisted with or without a password, <stron
 In an MVC architecture, the model layer is the <strong>farthest</strong> from the input.
 It&rsquo;s expensive to check the data right before we create a record in the database.</p>
 
-<p>If we <strong>consider correct data as a precondition</strong> before to start our workflow, we should stop unacceptable inputs as soon as possible.</p>
+<p>If we <strong>consider correct data as a precondition</strong> before starting our workflow, we should stop unacceptable inputs as soon as possible.</p>
 
 <p>Think of the following method.
-We don&rsquo;t want to continue if the data is invalid for us.</p>
+We don&rsquo;t want to continue if the data is invalid.</p>
 <pre class="language-ruby ruby"><code><span class="k">def</span> <span class="nf">expensive_computation</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
   <span class="k">return</span> <span class="k">if</span> <span class="n">argument</span><span class="p">.</span><span class="nf">nil?</span>
   <span class="c1"># ...</span>
@@ -256,7 +270,7 @@ We don&rsquo;t want to continue if the data is invalid for us.</p>
 
 <h3>Usage</h3>
 
-<p>We can coerce the Ruby type, validate if a param is required, if included in range of values, etc..</p>
+<p>We can coerce the Ruby type, validate if a param is required, if included in a range of values, etc..</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/signup/create.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Signup</span>
   <span class="k">class</span> <span class="nc">Create</span>
@@ -283,13 +297,13 @@ We don&rsquo;t want to continue if the data is invalid for us.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>Params validations are delegated under the hood to <a href="https://github.com/lotus/validations">Lotus::Validations</a>.
+<p>Params validations are delegated, under the hood, to <a href="https://github.com/lotus/validations">Lotus::Validations</a>.
 Please check related docs for a complete list of options, and how to share code between validations.</p>
 
 <h2>Concrete Classes</h2>
 
-<p>The params DSL is really quick and intuitive but it has the drawback that it can be visually noisy and makes it hard to unit test them.
-An alternative usage is to extract a class and pass it as an argument to <code>.params</code>.</p>
+<p>The params DSL is really quick and intuitive but it has the drawback that it can be visually noisy and makes it hard to unit test.
+An alternative is to extract a class and pass it as an argument to <code>.params</code>.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/signup/my_params.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Signup</span>
   <span class="k">class</span> <span class="nc">MyParams</span> <span class="o">&lt;</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span><span class="o">::</span><span class="no">Params</span>

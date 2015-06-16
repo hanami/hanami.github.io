@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Command Line: Routes</title>
+    <title>Lotus - Guides - View Share Code</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,29 +116,48 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/command-line/routes.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Command Line</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/share-code.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Share Code</h1>
 
-<h2>Routes</h2>
+<h2>Prepare</h2>
 
-<p>In order to print the routes defined by all the applications, use:</p>
-<pre class="language-ruby plaintext"><code>% bundle exec lotus routes
+<p>In our settings (<code>apps/web/application.rb</code>), there is code block that allows to share the code for <strong>all the views</strong> of our application.
+When a view includes the <code>Web::View</code> module, that block code is yielded within the context of that class.
+This is heavily inspired by Ruby Module and its <code>included</code> hook.</p>
 
-                     GET, HEAD  /               Web::Controllers::Home::Index
-               books GET, HEAD  /books          Web::Controllers::Books::Index
-           new_books GET, HEAD  /books/new      Web::Controllers::Books::New
-               books POST       /books          Web::Controllers::Books::Create
-               books GET, HEAD  /books/:id      Web::Controllers::Books::Show
-          edit_books GET, HEAD  /books/:id/edit Web::Controllers::Books::Edit
-               books PATCH      /books/:id      Web::Controllers::Books::Update
-               books DELETE     /books/:id      Web::Controllers::Books::Destroy
-         new_account GET, HEAD  /account/new    Web::Controllers::Account::New
-             account POST       /account        Web::Controllers::Account::Create
-             account GET, HEAD  /account        Web::Controllers::Account::Show
-        edit_account GET, HEAD  /account/edit   Web::Controllers::Account::Edit
-             account PATCH      /account        Web::Controllers::Account::Update
-             account DELETE     /account        Web::Controllers::Account::Destroy
+<p>Imagine we have an application that only renders JSON.
+For each view we should specify the handled format. This can be tedious to do by hand, but we can easily DRY our code.</p>
+
+<p>We craft a module in <code>apps/web/views/accept_json.rb</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/accept_json.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views</span>
+  <span class="k">module</span> <span class="nn">AcceptJson</span>
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+      <span class="n">view</span><span class="p">.</span><span class="nf">class_eval</span> <span class="k">do</span>
+        <span class="nb">format</span> <span class="ss">:json</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
+
+<p>Then we include in all the views of our application, via <code>view.prepare</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">view</span><span class="p">.</span><span class="nf">prepare</span> <span class="k">do</span>
+        <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">AcceptJson</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p class="warning">
+Code included via <code>prepare</code> is available for ALL the views of an application.
+</p>
 
             </div>
           </div>

@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -110,7 +124,7 @@ This section shares a few techniques to make this possible.</p>
 
 <h2>Prepare</h2>
 
-<p>In our settings (<code>apps/web/application.rb</code>), there is code block that allows to share the code for <strong>all the actions</strong> of our application.
+<p>In our settings (<code>apps/web/application.rb</code>), there is a code block that allows us to share the code for <strong>all the actions</strong> of our application.
 When an action includes the <code>Web::Action</code> module, that block code is yielded within the context of that class.
 This is heavily inspired by Ruby Module and its <code>included</code> hook.</p>
 
@@ -170,8 +184,8 @@ Code included via <code>prepare</code> is available for ALL the actions of an ap
 
 <h3>Skipping A Callback</h3>
 
-<p>Let&rsquo;s say we have included <code>Authentication</code> globally, but want to skip the execution its callback for certain resources.
-A typical use case is to let unauthenticated requests to reach our sign in form.</p>
+<p>Let&rsquo;s say we have included <code>Authentication</code> globally, but want to skip the execution of its callback for certain resources.
+A typical use case is to redirect unauthenticated requests to our sign in form.</p>
 
 <p>The solution is really simple and elegant at the same time: override that method.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/sessions/new.rb</span>
@@ -220,7 +234,7 @@ Ruby comes to our rescue.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>We have defined a module for our behavior to share, let&rsquo;s include it all the actions that need it.</p>
+<p>We have defined a module for our behavior to share, let&rsquo;s include it in all the actions that need it.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/update.rb</span>
 <span class="nb">require_relative</span> <span class="s1">'./set_book'</span>
 

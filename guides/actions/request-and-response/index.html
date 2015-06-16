@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -106,7 +120,7 @@
               <h1>Request</h1>
 
 <p>In order to access the metadata coming from a HTTP request, an action has a private object <code>request</code> that derives from <code>Rack::Request</code>.
-Here an example of a few informations that we can introspect.</p>
+Here an example of some information that we can introspect.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -127,8 +141,8 @@ Here an example of a few informations that we can introspect.</p>
 </code></pre>
 
 <p class="warning">
-  To instantiate a <code>request</code> for each incoming HTTP request can lead to a minor perf degradation.
-  As an alternative, please consider to get the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
+  Instantiating a <code>request</code> for each incoming HTTP request can lead to minor performance degradation.
+  As an alternative, please consider getting the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
 </p>
 
 <h1>Response</h1>

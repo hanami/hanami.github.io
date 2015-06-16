@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -109,7 +123,7 @@
 
 <h2>Request Introspection</h2>
 
-<p>In order to understand which is the requested MIME type, an action looks at the <code>Accept</code> request header and exposes high level API: <code>#format</code> and <code>#accept?</code>.</p>
+<p>In order to understand what the requested MIME type is, an action looks at the <code>Accept</code> request header and exposes a high level API: <code>#format</code> and <code>#accept?</code>.</p>
 
 <p>The first returns a symbol representation of the MIME type (eg. <code>:html</code>, <code>:json</code>, <code>:xml</code> etc..), while the second is a query method that accepts a MIME type string and checks if it&rsquo;s accepted by the current browser.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>

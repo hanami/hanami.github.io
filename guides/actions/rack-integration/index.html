@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -144,9 +158,9 @@ Additional components can be mounted globally, at the application level or local
 
 <h3>Action Middleware</h3>
 
-<p>Sometimes we need a middleware only for a set of well known resources.
-If we mount it at the global or application level, the performance start to degrade.
-Actions allow to mount fine grained middleware stack.</p>
+<p>Sometimes we need a middleware for a set of well known resources, only.
+If we mount it at the global or application level, the performance will start to degrade.
+Actions allow us to mount a fine grained middleware stack.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/sessions/create.rb</span>
 <span class="nb">require</span> <span class="s1">'omniauth'</span>
 

@@ -91,6 +91,20 @@
               </li>
 
               <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/routes">Routes</a></li>
@@ -161,7 +175,46 @@ Lotus transform layout name in application&rsquo;s configuration, by appending t
 
 <p>If we want to turn off this feature entirely, we can set <code>layout nil</code> into the application&rsquo;s configuration.</p>
 
-<h2>Content For</h2>
+<h2>Optional Content</h2>
+
+<p>There are some cases when we want to render a content only for certain resources.
+Think of some javascripts to include only in specific pages.</p>
+
+<p>Given the following template for a layout:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;footer&gt;</span>
+      <span class="cp">&lt;%=</span> <span class="n">content</span> <span class="ss">:javascripts</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;/footer&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>With following views:</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>and</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">Show</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+
+    <span class="k">def</span> <span class="nf">javascripts</span>
+      <span class="n">raw</span> <span class="sx">%(&lt;script src="/path/to/script.js"&gt;&lt;/script&gt;)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The first view doesn&rsquo;t respond to <code>#javascripts</code>, so it safely ignores it.
+Our second object (<code>Web::Views::Books::Show</code>) respond to that method, so the result will be included in the final markup.</p>
 
             </div>
           </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Command Line: Routes</title>
+    <title>Lotus - Guides - View Testing</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,28 +116,79 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/command-line/routes.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Command Line</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/testing.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>View Testing</h1>
 
-<h2>Routes</h2>
+<p>One of the advantages of views as objects is that we can unit test them.
+We can both understand if a specific presentational logic behaves correctly and/or assert if the rendered markup.</p>
 
-<p>In order to print the routes defined by all the applications, use:</p>
-<pre class="language-ruby plaintext"><code>% bundle exec lotus routes
+<p>For the following example we&rsquo;re gonna use RSpec for the concise syntax for test doubles.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/views/books/show_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/views/books/show'</span>
 
-                     GET, HEAD  /               Web::Controllers::Home::Index
-               books GET, HEAD  /books          Web::Controllers::Books::Index
-           new_books GET, HEAD  /books/new      Web::Controllers::Books::New
-               books POST       /books          Web::Controllers::Books::Create
-               books GET, HEAD  /books/:id      Web::Controllers::Books::Show
-          edit_books GET, HEAD  /books/:id/edit Web::Controllers::Books::Edit
-               books PATCH      /books/:id      Web::Controllers::Books::Update
-               books DELETE     /books/:id      Web::Controllers::Books::Destroy
-         new_account GET, HEAD  /account/new    Web::Controllers::Account::New
-             account POST       /account        Web::Controllers::Account::Create
-             account GET, HEAD  /account        Web::Controllers::Account::Show
-        edit_account GET, HEAD  /account/edit   Web::Controllers::Account::Edit
-             account PATCH      /account        Web::Controllers::Account::Update
-             account DELETE     /account        Web::Controllers::Account::Destroy
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Show</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="n">double</span><span class="p">(</span><span class="s1">'book'</span><span class="p">,</span> <span class="ss">price: </span><span class="mi">1</span><span class="o">.</span><span class="mo">00</span><span class="p">),</span> <span class="ss">current_user: </span><span class="n">user</span><span class="p">]</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/show.html.erb'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Home</span><span class="o">::</span><span class="no">Another</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>      <span class="p">{</span> <span class="n">double</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="n">admin?</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span> <span class="p">}</span>
+
+  <span class="n">describe</span> <span class="s2">"price"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">"returns formatted price"</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="nf">formatted_price</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="s2">"$1.00"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s2">"edit link"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">"doesn't show it by default"</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">rendered</span><span class="p">).</span><span class="nf">to_not</span> <span class="n">match</span> <span class="sx">%(&lt;a href=""&gt;edit&lt;/a&gt;)</span>
+    <span class="k">end</span>
+
+    <span class="n">context</span> <span class="s2">"when admin"</span> <span class="k">do</span>
+      <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="n">double</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="n">admin?</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+
+      <span class="n">it</span> <span class="s2">"shows it"</span> <span class="k">do</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">rendered</span><span class="p">).</span><span class="nf">to</span> <span class="n">match</span> <span class="sx">%(&lt;a href=""&gt;edit&lt;/a&gt;)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The first part of the test code above is about book&rsquo;s formatting price.
+This presentational logic is verified by asserting the returning value of <code>view.formatted_price</code>.</p>
+
+<p>The remaining code is about permissions related logic: the edit link must be rendered only if the current user is an admin.
+This is tested by looking at the output of the template.</p>
+
+<p class="notice">
+  Asserting presentational logic directly via view&rsquo;s methods, or indirectly via rendered markup are two EQUIVALENT ways.
+</p>
+
+<p>Let&rsquo;s have a look at the corresponding production code.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/books/show.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">Show</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+
+    <span class="k">def</span> <span class="nf">formatted_price</span>
+      <span class="s2">"$</span><span class="si">#{</span> <span class="n">format_number</span> <span class="n">book</span><span class="p">.</span><span class="nf">price</span> <span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">edit_link</span>
+      <span class="k">if</span> <span class="n">can_edit_book?</span>
+        <span class="n">link_to</span> <span class="s2">"Edit"</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">edit_book_path</span><span class="p">(</span><span class="ss">id: </span><span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+
+    <span class="k">def</span> <span class="nf">can_edit_book?</span>
+      <span class="n">current_user</span><span class="p">.</span><span class="nf">admin?</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
             </div>
