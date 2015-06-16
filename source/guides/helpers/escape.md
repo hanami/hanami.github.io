@@ -1,8 +1,8 @@
 ---
-title: Lotus - Guides - Escape Helpers
+title: Lotus - Guides - Markup Escape Helpers
 ---
 
-## Overview
+## Markup Escape Helpers
 
 **Views escape automatically the output of their methods.**
 There are complex situations that views can't cover properly and that require an extra attention from us.

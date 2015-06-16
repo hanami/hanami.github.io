@@ -2,7 +2,7 @@
 title: Lotus - Guides - HTML5 Helpers
 ---
 
-## Overview
+## HTML5 Helpers
 
 This helper makes available an HTML5 generator that is **template engine indepentent**.
 It's a **private method for views and layouts** called `#html`.

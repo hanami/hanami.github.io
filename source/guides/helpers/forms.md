@@ -2,7 +2,7 @@
 title: Lotus - Guides - Form Helpers
 ---
 
-## Overview
+## Form Helpers
 
 It provides a powerful Ruby API to describe HTML5 forms, to be used both with views and templates. It ships with:
 

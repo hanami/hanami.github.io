@@ -2,7 +2,7 @@
 title: Lotus - Guides - Number Helpers
 ---
 
-## Overview
+## Number Helpers
 
 Lotus offers a helpful way to present numbers via `#format_number`, a **private method** available only in views.
 

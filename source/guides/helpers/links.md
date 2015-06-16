@@ -1,8 +1,8 @@
 ---
-title: Lotus - Guides - Link Helper
+title: Lotus - Guides - Link Helpers
 ---
 
-## Overview
+## Link Helpers
 
 It provides a concise API to generate links.
 It's a **public method** called `#link_to`, that can be used both in **views** and **templates**.

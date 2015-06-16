@@ -2,7 +2,7 @@
 title: Lotus - Guides - Custom Helpers
 ---
 
-## Overview
+## Custom Helpers
 
 In the [overview](/guides/helpers/overiew) section, we introduced the design for helpers.
 They are modules that enrich views behaviors.

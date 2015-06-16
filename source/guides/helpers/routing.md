@@ -2,7 +2,7 @@
 title: Lotus - Guides - Routing Helpers
 ---
 
-## Overview
+## Routing Helpers
 
 Routing helpers are made of one **public method** (`#routes`), available for actions, views and templates.
 It's a factory to generate **relative** or **absolute URLs**, starting from [named routes](/guides/routing/basic-usage).
