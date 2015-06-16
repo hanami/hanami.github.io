@@ -66,4 +66,49 @@ end
 
 If we want to turn off this feature entirely, we can set `layout nil` into the application's configuration.
 
-## Content For
+## Optional Content
+
+There are some cases when we want to render a content only for certain resources.
+Think of some javascripts to include only in specific pages.
+
+Given the following template for a layout:
+
+```erb
+<!doctype HTML>
+<html>
+  <!-- ... -->
+  <body>
+    <!-- ... -->
+    <footer>
+      <%= content :javascripts %>
+    </footer>
+  </body>
+</html>
+```
+
+With following views:
+
+```ruby
+module Web::Views::Books
+  class Index
+    include Web::View
+  end
+end
+```
+
+and
+
+```ruby
+module Web::Views::Books
+  class Show
+    include Web::View
+
+    def javascripts
+      raw %(<script src="/path/to/script.js"></script>)
+    end
+  end
+end
+```
+
+The first view doesn't respond to `#javascripts`, so it safely ignores it.
+Our second object (`Web::Views::Books::Show`) respond to that method, so the result will be included in the final markup.
