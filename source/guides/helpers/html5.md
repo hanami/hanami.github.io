@@ -1,7 +1,6 @@
 ---
-title: Lotus - Guides - Helpers HTML5
+title: Lotus - Guides - HTML5 Helpers
 ---
-
 
 ## Overview
 
