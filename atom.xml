@@ -4,13 +4,154 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-06-15T14:46:00+02:00</updated>
+   <updated>2015-06-17T16:34:00+02:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Introducing Database Migrations</title>
+       <id>http://lotusrb.org/blog/2015/06/17/introducing-database-migrations.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/06/17/introducing-database-migrations.html"/>
+       <updated>2015-06-17T16:34:00+02:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         New feature for the upcoming v0.4.0: database migrations. Fast operations for schema: create, drop, migrate and prepare database. Keep migrations healthy with experimental feature.
+
+       </summary>
+       <content type="html"><![CDATA[<h2>Introduction</h2>
+
+<p>Lotus v0.4.0 (Jun 23) will ship a really useful feature: database migrations.</p>
+
+<p>It&rsquo;s a really fast way to manage database schema via Ruby.
+For a detailed explanation of the feature, please have a look at the related <a href="https://github.com/lotus/model/pull/196">pull</a> <a href="https://github.com/lotus/lotus/pull/256">requests</a>.</p>
+
+<h2>Command Line</h2>
+
+<p>Here&rsquo;s new CLI facilities to control database schema.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus new bookshelf --database<span class="o">=</span>postgres <span class="o">&amp;&amp;</span> <span class="nb">cd </span>bookshelf <span class="o">&amp;&amp;</span> bundle
+<span class="gp">% </span>lotus db
+Commands:
+  lotus db apply           <span class="c"># migrate, dump schema, delete migrations (experimental)</span>
+  lotus db console         <span class="c"># start DB console</span>
+  lotus db create          <span class="c"># create database for current environment</span>
+  lotus db drop            <span class="c"># drop database for current environment</span>
+  lotus db <span class="nb">help</span> <span class="o">[</span>COMMAND]  <span class="c"># Describe subcommands or one specific subcommand</span>
+  lotus db migrate         <span class="c"># migrate database for current environment</span>
+  lotus db prepare         <span class="c"># create and migrate database</span>
+  lotus db version         <span class="c"># current database version</span>
+</code></pre>
+
+<p>These commands modify the database for the current environnment.
+There are some <strong>safety mechanisms</strong>, for instance <code>db drop</code> will raise an error if ran in production mode.</p>
+
+<h3>Migration Generator</h3>
+
+<p>This upcoming version will ship with a migration generator.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate migration create_users
+    create  db/migrations/20150617145519_create_books.rb
+</code></pre>
+
+<p>Let&rsquo;s edit it:</p>
+<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+      <span class="n">foreign_key</span> <span class="ss">:author_id</span><span class="p">,</span> <span class="ss">:authors</span><span class="p">,</span> <span class="ss">on_delete: :cascade</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+
+      <span class="n">column</span> <span class="ss">:code</span><span class="p">,</span>  <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">size: </span><span class="mi">128</span>
+      <span class="n">column</span> <span class="ss">:title</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:price</span><span class="p">,</span> <span class="no">Integer</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">default: </span><span class="mi">100</span> <span class="c1"># cents</span>
+
+      <span class="n">check</span> <span class="p">{</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We use a <code>create_table</code> block to define the schema of that table.</p>
+
+<p>The first line is <code>primary_key :id</code>, which is a shortcut to create an autoincrement integer column.</p>
+
+<p>There is a foreign key definition with cascade deletion.
+The first argument is the name of the local column (<code>books.author_id</code>), while the second is the referenced table.</p>
+
+<p>Then we have three lines for columns.
+The first argument that we pass to <code>#column</code> is the name, then the type.
+The type can be a <strong>Ruby type</strong> such as <code>String</code> or <code>Integer</code> or a string that represent the <strong>native database type</strong> (eg. <code>&quot;varchar(32)&quot;</code> or <code>&quot;text[]&quot;</code>).</p>
+
+<p>As a last optional argument there is a Hash that specify some extra details for the column. For instance NULL or uniqueness constraints, the size (for strings) or the default value.</p>
+
+<p>The final line defines a database <strong>check</strong> to ensure that price will always be greater than zero.</p>
+
+<h3>Migrate</h3>
+
+<p>As first thing we need to create the database and then we can modify the schema.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus db create
+<span class="gp">% </span>lotus db migrate
+</code></pre>
+
+<p>When we run <code>db migrate</code>, it applies all the pending migrations under <code>db/migrations</code>.
+Our <code>books</code> table is now created. We can ask our application what&rsquo;s the current schema version.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus db version
+20150617145519
+</code></pre>
+
+<p>In case we want to target a specific database version, we can pass it as extra argument to <code>db migrate</code>.
+This is useful if we want to partially migrate the database, or rollback some changes.</p>
+
+<p>For instance, if we recognize an error in our just created migration, we can do:</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus db migrate 0 <span class="c"># get back to the initial version</span>
+<span class="gp">% </span>vim db/migrations/20150617145519_create_books.rb
+<span class="gp">% </span>lotus db migrate <span class="c"># run all the pending migrations again</span>
+</code></pre>
+
+<h3>Prepare</h3>
+
+<p>We&rsquo;re fan of system automations, for this reason we have added a new command to get our database ready for development, tests or CI: <code>db prepare</code>.</p>
+
+<p>It performs the following operations:</p>
+
+<ul>
+<li>Creates database</li>
+<li>Load schema structure, if present (see next section, <em>Apply</em>).</li>
+<li>Runs pending migrations</li>
+</ul>
+
+<p>If used with <code>db apply</code> it&rsquo;s <strong>really fast</strong> and it should be the <strong>preferred way</strong> to setup databases.</p>
+
+<h3>Apply</h3>
+
+<p>When an application is developed for years, it accumulates dozens or hundreds of migrations.
+This slows down database operations for development and tests (CI).</p>
+
+<p>We have introduced an <strong>experimental feature</strong>: <code>db apply</code>.
+By running this command, it:</p>
+
+<ul>
+<li>Runs pending migrations</li>
+<li>Dumps schema informations into <code>db/schema.sql</code></li>
+<li>Deletes all the migrations from <code>db/migrations</code></li>
+</ul>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus db apply
+<span class="gp">% </span>tree db/migrations
+
+0 directories, 0 files
+</code></pre>
+
+<h2>Release Date</h2>
+
+<p>Database migrations will be available with <code>lotusrb-0.4.0</code>, expected for <strong>June 23, 2015</strong>.</p>
+
+<div style="display: inline">
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+</div>
+]]></content>
+     </entry>
      <entry>
        <title>Introducing Form Helpers</title>
        <id>http://lotusrb.org/blog/2015/06/15/introducing-form-helpers.html</id>
@@ -861,104 +1002,6 @@ We&rsquo;re pushing to ship soon.</p>
 <h2>Roadmap</h2>
 
 <p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
-]]></content>
-     </entry>
-     <entry>
-       <title>Announcing Lotus v0.3.0</title>
-       <id>http://lotusrb.org/blog/2015/03/23/announcing-lotus-030.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/03/23/announcing-lotus-030.html"/>
-       <updated>2015-03-23T18:14:00+01:00</updated>
-       <author>
-         <name>Luca Guidi</name>
-       </author>
-       <summary>
-         This is the most exciting Lotus release ever. We have new features, improved security, and more real world use cases.
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Stability and adoption</h2>
-
-<p>Lotus is getting more and more stable. This is the result of real world feedback of products that we are following closely during their development with Lotus.</p>
-
-<p>The first company that we are happy to give a warm welcome in our family is <strong><a href="https://dnsimple.com">DNSimple</a></strong>.
-They are <a href="https://speakerdeck.com/weppos/maintaining-a-5yo-ruby-project-shark-edition">maintaining</a> a rock solid Ruby code base that uses Rails for their flagship product and Lotus for their next HTTP API.</p>
-
-<h2>Security</h2>
-
-<p>Security is a vital factor for companies and a sensitive subject for users. A product won&rsquo;t survive if not proven secure.</p>
-
-<p>The Web is an insecure place. As a Community, we need to build a Security culture.
-Lotus wants to increase the level of awareness around this topic and provide defense mechanisms to common attacks.</p>
-
-<p>Please remember that <strong>there isn&rsquo;t a silver bullet</strong> when we talk about security. Nearly all protections can be debunked by experienced attackers. Developers should use all the available tools to make hackers&rsquo; life harder.</p>
-
-<h3>XSS</h3>
-
-<p><a href="https://www.owasp.org/index.php/Cross-site_Scripting_%28XSS%29">XSS</a> (Cross Site Scripting) is one of the most <a href="https://www.owasp.org/index.php/Top10#OWASP_Top_10_for_2013">popular</a> threat for web applications. It&rsquo;s caused by unescaped malicious input, often sent with forms. Once the payload is on a web page, it can activate evil scripts to take over the control and eventually steal data (cookies).</p>
-
-<p>As first countermeasure, since now on, the output of views, helpers and presenters is <strong>escaped by default</strong>.</p>
-
-<p>Secondly, cookies will be sent with the <code>HttpOnly</code> option turned on. That means JavaScript won&rsquo;t be able to access them via <code>document.cookie</code>. If a malign script wants to steal data, it can&rsquo;t because the browser will stop it.</p>
-
-<p>We&rsquo;re not done yet, until we have talked about <a href="http://www.html5rocks.com/en/tutorials/security/content-security-policy/">Content Security Policy</a> (CSP). It&rsquo;s feature supported by modern browsers to regulate trusted sources of scripts, stylesheets, fonts. It&rsquo;s the ultimate defense against XSS and insecure script execution on the pages. Big products like GitHub, Twitter and GMail are using it. <strong>Lotus is the first Ruby web framework that makes CSP a default</strong>.</p>
-
-<h3>Clickhijacking</h3>
-
-<p>It&rsquo;s an <a href="http://en.wikipedia.org/wiki/Clickjacking">attack</a> that leads users to click on an invisible evil item. The trick is to embed a trusted web page via an iframe, so the user believes to interact with it, but instead their actions are hijacked by a harmful context.</p>
-
-<p>The solution is to send a <a href="https://www.owasp.org/index.php/Clickjacking_Defense_Cheat_Sheet#X-Frame-Options_Header_Types">HTTP header</a> (<code>X-Frame-Options</code>) that regulates which source can embed your web application resources. <del><strong>Again, Lotus is the first Ruby web framework that enables this defense by default</strong>.</del></p>
-
-<h2>Features</h2>
-
-<p>With this release we have shipped powerful features to make the experience with Lotus more and more frictionless.</p>
-
-<h3>Action generators</h3>
-
-<p>While developing a feature that requires an new endpoint, it can be inconvenient to write all the required code by hand. It just breaks the flow.</p>
-
-<p>To solve this problem, we have introduced <strong>a new command line utility</strong>: <code>lotus generate action</code>. It produces an action, a view, a template, a route and their related testing code.</p>
-
-<h3>Improved application generator</h3>
-
-<p>We have improved the application generator to allow Lotus applications to meet developers&rsquo; needs.</p>
-
-<p>The command now accepts <code>--database</code> command line argument to setup the database of choice. Example <code>lotus new bookshelf --database=postgresql</code>.</p>
-
-<p>Another point of extension is the <code>--test</code> argument. It generates setup code for Minitest (default) or RSpec. Example <code>lotus new bookshelf --test=rspec</code>.</p>
-
-<p>We added the chance to generate an application for existing code base. Think of <strong>a Ruby gem that needs a web UI</strong>, with <code>lotus new .</code> it&rsquo;s now possible.</p>
-
-<h3>Database console</h3>
-
-<p>As last command line facility, we want to introduce <code>lotus db console</code>, a database REPL.</p>
-
-<h3>Helpers</h3>
-
-<p>Today we have released a new framework in the Lotus family: <code>lotus-helpers</code>. By following our tradition, it&rsquo;s <strong>shipped as a standalone gem</strong> that can be used to enhance views, templates and helpers in Ruby applications, even outside of Lotus.</p>
-
-<p>It delivers a <strong>HTML5 markup generator</strong> and <strong>routing helpers</strong>. On the security front, it brings HTML, HTML attribute and URL <strong>escape functions</strong> that follow OWASP/ESAPI suggestions.</p>
-
-<h3>Additional features</h3>
-
-<p>Database transactions, <strong>Interactors</strong>, logger and safe nested param access are only a few of the <a href="https://github.com/lotus/lotus/blob/master/FEATURES.md">features</a> that are available as of today with 0.3.0.</p>
-
-<h3>Acknowledgments</h3>
-
-<p>We want to say thank you to Alfonso Uceda Pompa, Linus Pettersson, Huy Đỗ, Hiếu Nguyễn, Tom Kadwill, Jimmy Zhang, and all the <a href="/community">wonderful people</a> that are making Lotus a better place every day.</p>
-
-<h2>What&rsquo;s next</h2>
-
-<p>We are already developing new functionalities for the next release: database migrations, form helpers, number formatters, CSRF protection and <a href="http://bit.ly/lotusrb-roadmap">more</a>.</p>
-
-<div style="display: inline">
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.3.0" data-url="http://lotusrb.org/blog/2015/03/23/announcing-lotus-030.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2015/03/23/announcing-lotus-030.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>
 ]]></content>
      </entry>
 </feed>
