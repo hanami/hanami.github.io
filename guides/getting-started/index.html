@@ -1,0 +1,1076 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lotus - Guides - Getting Started</title>
+    <meta name="description" content="Lotus, a complete web framework for Ruby" />
+    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+
+    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+
+    <script src="//use.typekit.net/xhp5wmc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body class="subpage docs">
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav class="navbar navbar-fixed-top container-fluid">
+  <div class="wrapper container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <!-- <li><a href="/guides">Guides</a></li> -->
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.3.2</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <section class="docs wrapper animated fadeIn">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 hidden-sm hidden-xs sidebar">
+            <ul class="nav nav-sidebar">
+              <li>
+                <span class="heading">Getting Started</span>
+                <ul class="nav">
+                  <li><a href="/guides/getting-started">Getting Started</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Routing</span>
+                <ul class="nav">
+                  <li><a href="/guides/routing/overview">Overview</a></li>
+                  <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Actions</span>
+                <ul class="nav">
+                  <li><a href="/guides/actions/overview">Overview</a></li>
+                  <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/actions/parameters">Parameters</a></li>
+                  <li><a href="/guides/actions/request-and-response">Request & Response</a></li>
+                  <li><a href="/guides/actions/exposures">Exposures</a></li>
+                  <li><a href="/guides/actions/rack-integration">Rack Integration</a></li>
+                  <li><a href="/guides/actions/mime-types">MIME Types</a></li>
+                  <li><a href="/guides/actions/cookies">Cookies</a></li>
+                  <li><a href="/guides/actions/sessions">Sessions</a></li>
+                  <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
+                  <li><a href="/guides/actions/control-flow">Control Flow</a></li>
+                  <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
+                  <li><a href="/guides/actions/share-code">Share Code</a></li>
+                  <li><a href="/guides/actions/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Views</span>
+                <ul class="nav">
+                  <li><a href="/guides/views/overview">Overview</a></li>
+                  <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/views/templates">Templates</a></li>
+                  <li><a href="/guides/views/partials">Partials</a></li>
+                  <li><a href="/guides/views/mime-types">MIME Types</a></li>
+                  <li><a href="/guides/views/layouts">Layouts</a></li>
+                  <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
+                  <li><a href="/guides/views/share-code">Share Code</a></li>
+                  <li><a href="/guides/views/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Command Line</span>
+                <ul class="nav">
+                  <li><a href="/guides/command-line/routes">Routes</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="col-md-9 main">
+            <div class="doc-section">
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/getting-started.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Getting Started</h1>
+
+<p>Set up our first Lotus project and build a simple bookshelf application. We&rsquo;ll
+touch on all the major components of the Lotus framework, all guided by tests.</p>
+
+<h2>Prerequisites</h2>
+
+<p>Before we get started, let&rsquo;s get some prerequisites out of the way.
+First, we&rsquo;re going to assume we have basic knowledge of developing web applications.</p>
+
+<p>We should also be familiar with <a href="http://bundler.io">Bundler</a>, <a href="http://rake.rubyforge.org">Rake</a>, working with a terminal and building apps using the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model, View, Controller</a> paradigm.</p>
+
+<p>Lastly, in this guide we&rsquo;ll be using a <a href="http://www.postgresql.org">PostgreSQL</a> database.
+If we want to follow along, make sure we have a working installation of Ruby 2.2 and PostgreSQL 9.4 on our system.</p>
+
+<h2>Create a new Lotus project</h2>
+
+<p>To create a new Lotus project, we need to install the Lotus gem from Rubygems.
+Then we can use the new <code>lotus</code> executable to generate a new project:</p>
+<pre class="language-ruby plaintext"><code>% gem install lotusrb
+% lotus new bookshelf --database=postgres
+</code></pre>
+
+<p>This will create a new directory <code>bookshelf</code> in our current location.
+Let&rsquo;s see what it contains:</p>
+<pre class="language-ruby plaintext"><code>% cd bookshelf
+% tree -L 1
+.
+├── Gemfile
+├── Gemfile.lock
+├── Rakefile
+├── apps
+├── config
+├── config.ru
+├── db
+├── lib
+└── spec
+</code></pre>
+
+<p>Here&rsquo;s what we need to know:</p>
+
+<ul>
+<li><code>Gemfile</code> and <code>Gemfile.lock</code> are Bundler artifacts to manage Rubygems dependencies.</li>
+<li><code>Rakefile</code> is a descriptor for our Rake tasks.</li>
+<li><code>apps</code> contains one or more web applications compatible with Rack.
+Here we can find the first generated Lotus application called <code>Web</code>.
+It&rsquo;s the place where we find our controllers, views, routes and templates.</li>
+<li><code>config</code> contains configuration files.</li>
+<li><code>config.ru</code> is for Rack servers.</li>
+<li><code>db</code> contains our database schema and migrations.</li>
+<li><code>lib</code> contains our business logic and domain model, including entities and repositories.</li>
+<li><code>spec</code> contains our tests.</li>
+</ul>
+
+<p>Go ahead and install our gem dependencie with Bundler; then we can launch a development server:</p>
+<pre class="language-ruby plaintext"><code>% bundle install
+% bundle exec lotus server
+</code></pre>
+
+<p>And&hellip; bask in the glory of your first Lotus application at
+<a href="http://localhost:3000">http://localhost:2300</a>! We should see a screen similar to this:</p>
+
+<p><img src="screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
+
+<h2>Lotus Architectures</h2>
+
+<p>Lotus supports a few architecture to second the needs of the current project.
+The default one that we&rsquo;re going to explore is called <em>Container</em>, because <strong>it can host several Lotus (and Rack) applications in the same Ruby process</strong>.</p>
+
+<p>These applications live under <code>apps/</code>.
+Each of them can be a component of our product, such as the user facing web interface, the admin pane, metrics, HTTP API etc..</p>
+
+<p>All these parts are a <em>delivery mechanism</em> to the business logic that lives under <code>lib/</code>.
+This is the place where our models are defined, and interact each other to compose the <strong>features</strong> that our product provides.</p>
+
+<p>Lotus&rsquo; Container is heavily inspired by <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>.</p>
+
+<h2>Exploring App By Writing Our First Test</h2>
+
+<p>The opening screen we see when we point our browsers at our app now, is a
+built-in page used when there are no routes defined.</p>
+
+<p>Lotus encourages <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">Behavior Driven Development</a> (BDD) as a way to write web applications.
+In order to get our first custom page to display, we&rsquo;ll write a high-level feature test:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/visit_home_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
+
+<span class="n">describe</span> <span class="s1">'Visit home'</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'is successful'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/'</span>
+
+    <span class="n">page</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'Bookshelf'</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Note that, although Lotus is ready for a Behavior Driven Development workflow out of the box, <strong>it is in no way bound to any particular testing framework</strong> &ndash; nor does it come with special integrations or libraries.</p>
+
+<p>We&rsquo;ll go with <a href="https://github.com/seattlerb/minitest">Minitest</a> here (which is the default), but we can use <a href="http://rspec.info">RSpec</a> by creating the project with <code>--test=rspec</code> option.
+Lotus will then generate helpers and stub files for it.</p>
+
+<h3>Following A Request</h3>
+
+<p>Now we have a test, we can see it fail by running our tests:</p>
+<pre class="language-ruby html"><code>% rake test
+Run options: --seed 44759
+
+# Running:
+
+F
+
+Finished in 0.018611s, 53.7305 runs/s, 53.7305 assertions/s.
+
+  1) Failure:
+Homepage#test_0001_is successful [/Users/lotus/bookshelf/spec/web/features/visit_home_spec.rb:6]:
+Expected "<span class="cp">&lt;!DOCTYPE html&gt;</span>\n<span class="nt">&lt;html&gt;</span>\n  <span class="nt">&lt;head&gt;</span>\n    <span class="nt">&lt;title&gt;</span>Not Found<span class="nt">&lt;/title&gt;</span>\n  <span class="nt">&lt;/head&gt;</span>\n  <span class="nt">&lt;body&gt;</span>\n    <span class="nt">&lt;h1&gt;</span>Not Found<span class="nt">&lt;/h1&gt;</span>\n  <span class="nt">&lt;/body&gt;</span>\n<span class="nt">&lt;/html&gt;</span>\n" to include "Bookshelf".
+
+1 runs, 1 assertions, 1 failures, 0 errors, 0 skips
+</code></pre>
+
+<p>Our test obviously failed; now let&rsquo;s make it pass.
+Let&rsquo;s add step-by-step (<strong>only this time</strong>) all the code needed.</p>
+
+<p>As first thing we add a route:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'home#index'</span>
+</code></pre>
+
+<p>We&rsquo;ve pointed our application&rsquo;s root URL to the <code>index</code> action of the <code>home</code> controller (see the <a href="/guides/routing/overview">routing guide</a> for more information).
+Now let&rsquo;s create our first action.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Home</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This is an empty action that doesn&rsquo;t implement any business logic.
+Each action has a corresponding view, which is a Ruby object and needs to be added in order to complete the request.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/home/index.erb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Home</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>&hellip;which, in turn, is empty and does nothing more than render its template.
+This is the file we can edit to make our test pass. Make it look like this:</p>
+<pre class="language-ruby erb"><code># apps/web/templates/home/index.html.erb
+<span class="nt">&lt;h1&gt;</span>Bookshelf<span class="nt">&lt;/h1&gt;</span>
+</code></pre>
+
+<p>Save your changes, run your test again and it now pass. Great!</p>
+<pre class="language-ruby shell"><code>Run options: --seed 19286
+
+<span class="c"># Running:</span>
+
+.
+
+Finished <span class="k">in </span>0.011854s, 84.3600 runs/s, 168.7200 assertions/s.
+
+1 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+</code></pre>
+
+<h3>Of Containers And Apps</h3>
+
+<p>Did you wonder about the <code>Web</code> constant you saw referenced in the controllers and views?
+Where dit come from?
+Lotus uses a <em>&ldquo;Container&rdquo;</em> architecture by default, whereby a single project can contain multiple applications.
+Such applications might include a JSON API, an admin panel, a marketing website, and so forth.</p>
+
+<p>All these applications live under <code>apps/</code>, with the default application being called <code>web</code>.
+Lotus&rsquo; core frameworks are duplicated when the container boots, so configurations for different containers don&rsquo;t interfere with another.</p>
+
+<p>Let&rsquo;s recap what we&rsquo;ve seen so far: to get our own page on the screen, we followed the execution path of a request in Lotus through the router into a controller action, through a view, to a template file.</p>
+
+<p>We can find out more about <a href="/guides/routing/overview">routing</a>, <a href="/guides/actions/overview">actions</a> and <a href="/guides/views/overview">views</a> in their respective guides.</p>
+
+<h2>Generating New Actions</h2>
+
+<p>Let&rsquo;s use our new knowledge about the major Lotus components to add a new action.
+The purpose of our Bookshelf application is to manage books.</p>
+
+<p>We&rsquo;ll store books in our database and let user the manage them with our application.
+A first step would be to show a listing of all the books in our system.</p>
+
+<p>Let&rsquo;s write a new feature test for what we want to achieve:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/list_books_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
+
+<span class="n">describe</span> <span class="s1">'List books'</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'displays each book on the page'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/books'</span>
+
+    <span class="n">within</span> <span class="s1">'#books'</span> <span class="k">do</span>
+      <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_css?</span><span class="p">(</span><span class="s1">'.book'</span><span class="p">,</span> <span class="ss">count: </span><span class="mi">2</span><span class="p">),</span> <span class="s2">"Expected to find 2 books"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The test is simple enough, and obviously fails because the URL <code>/books</code> is not currently recognised in our application. We&rsquo;ll create a new controller action to remedy that.</p>
+
+<h3>Lotus Generators</h3>
+
+<p>Lotus ships with various <strong>generators</strong> to save on typing some of the code involved in adding new functionality.
+In our terminal, enter:</p>
+<pre class="language-ruby plaintext"><code>% lotus generate action web books#index
+</code></pre>
+
+<p>This will generate a new action <em>index</em> in the <em>books</em> controller of the <em>web</em> application.
+It gives us an empty action, view and template; it also adds a default route to <code>apps/web/config/routes.rb</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'book#index'</span>
+</code></pre>
+
+<p>To make our test pass, we need to edit our newly generated template file in <code>apps/web/templates/books/index.html.erb</code>:</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;h1&gt;</span>Bookshelf<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>All books<span class="nt">&lt;/h2&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"books"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"book"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Patterns of Enterprise Application Architecture<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>by <span class="nt">&lt;strong&gt;</span>Martin Fowler<span class="nt">&lt;/strong&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"book"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Test Driven Development<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>by <span class="nt">&lt;strong&gt;</span>Kent Beck<span class="nt">&lt;/strong&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+
+<p>Save your changes and see your tests pass!</p>
+
+<p>The terminology of controllers and actions might be confusing, so let&rsquo;s clear this up: actions form the basis of our Lotus applications; controllers are mere modules that group several actions together.
+So while the &ldquo;controller&rdquo; is <em>conceptually</em> present in our project, in practice we only deal with actions.</p>
+
+<p>We&rsquo;ve used a generator to create a new endpoint in our application.
+But one thing you may have noticed is that our new template contains the same <code>&lt;h1&gt;</code> as our <code>home/index.html.erb</code> template.
+Let&rsquo;s remedy that.</p>
+
+<h3>Layouts</h3>
+
+<p>To avoid repeating ourselves in every single template, we can use a layout.
+Open up the file <code>apps/web/templates/application.htm.erb</code> and edit it to look like this:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Bookshelf<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Bookshelf<span class="nt">&lt;/h1&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>Now you can remove the duplicate lines from the other templates.</p>
+
+<p>A <strong>layout</strong> is a template like any other view, but it is used to wrap your regular templates.
+The <code>yield</code> line is replaced with the contents of our regular template.
+It&rsquo;s the perfect place to put our repeating headers and footers.</p>
+
+<h2>Modeling Our Data With Entities</h2>
+
+<p>Hard-coding books in our templates is, admittedly, kind of cheating.
+Let&rsquo;s add some dynamic data to our application.</p>
+
+<p>We&rsquo;ll store books in our database and display them on our page.
+To do so, we need a way to read and write to our database.
+Enter entities and repositories:</p>
+
+<ul>
+<li>an <strong>entity</strong> is a domain object (eg. <code>Book</code>) uniquely identified by its identity.</li>
+<li>a <strong>repository</strong> mediates between entities and the persistence layer.</li>
+</ul>
+
+<p>Entities are totally unaware of database.
+This makes them <strong>lightweight</strong> and <strong>easy to test</strong>.</p>
+
+<p>For this reason we need a repository to persist the data that a <code>Book</code> carries on.
+Lotus uses the <a href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data Mapper</a> pattern.
+In this way we&rsquo;re able to save any Ruby object in a database.
+That means we can adapt Lotus to use existing Ruby projects and to provide a way to persist them.
+Read more about entities and repositories in the <a href="/guides/models/overview">models guide</a>.</p>
+
+<p>Lotus ships with a generator for models, so let&rsquo;s use it create a <code>Book</code> entitity and the corresponding repository:</p>
+<pre class="language-ruby plaintext"><code>% lotus generate model book
+create  lib/bookshelf/entities/book.rb
+create  lib/bookshelf/repositories/book_repository.rb
+create  spec/bookshelf/entities/book_spec.rb
+create  spec/bookshelf/repositories/book_repository_spec.rb
+</code></pre>
+
+<p>The generator gives us an entity, repository and accompanying test files.</p>
+
+<h3>Working with entities</h3>
+
+<p>An entity is something really close to a plain Ruby object, it doesn&rsquo;t know nothing about our database structure.
+We should focus on the behaviors that we want from it and only then, how to save it.</p>
+
+<p>For now, we want it to carry title and author informations.
+Let&rsquo;s add these attributes.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/book.rb</span>
+<span class="k">class</span> <span class="nc">Book</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:author</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This has added some simple getters and setters to our class.
+We can verify it all works as expected with a unit test:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/bookshelf/entities/book_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'spec_helper'</span>
+
+<span class="n">describe</span> <span class="no">Book</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'can be initialised with attributes'</span> <span class="k">do</span>
+    <span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'Refactoring'</span><span class="p">)</span>
+    <span class="n">book</span><span class="p">.</span><span class="nf">title</span><span class="p">.</span><span class="nf">must_equal</span> <span class="s1">'Refactoring'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Using Repositories</h3>
+
+<p>We can use repositories to read and write entities to our database.
+Of course, in order for that to work, we need to set up it.</p>
+
+<p>Lotus configurations are stored in env variables.
+This has proven to be a secure and standard way to handle credentials in deployment environments.</p>
+
+<p>In order to achieve a parity between development and production machines, we use env variables loaded from <code>.env</code> files (via <a href="https://github.com/bkeepers/dotenv">dotenv</a> gem).
+Our projects has three of them: <code>.env</code> is for general settings, while <code>.env.development</code> and <code>.env.test</code> are complete files for these two envs.</p>
+
+<p>For example, review <code>.env.development</code>:</p>
+<pre class="language-ruby plaintext"><code># Define ENV variables for development environment
+BOOKSHELF_DATABASE_URL="postgres://localhost/bookshelf_development"
+WEB_SESSIONS_SECRET="21aec7f7371228dd0d4da6a620a1a6b22889edcf0d4fb1c11b8080cd87146eda"
+</code></pre>
+
+<p>The database configured by default, called <code>bookshelf_development</code> running on <code>localhost</code>, should work fine for now.
+Lotus can create the database for us:</p>
+<pre class="language-ruby plaintext"><code>% lotus db create
+</code></pre>
+
+<h3>Migrations To Change Our Database Schema</h3>
+
+<p>Next, we need a table in our database to hold our book data.
+We can use a <strong>migration</strong> to make the required changes.
+Use the migration generator to create an empty migration:</p>
+<pre class="language-ruby plaintext"><code>% lotus generate migration create_books
+</code></pre>
+
+<p>This gives us a file named like <code>db/migrations/20150616120629_create_books.rb</code> that we can edit:</p>
+<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+      <span class="n">column</span> <span class="ss">:title</span><span class="p">,</span>      <span class="no">String</span><span class="p">,</span>   <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:author</span><span class="p">,</span>     <span class="no">String</span><span class="p">,</span>   <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:created_at</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:updated_at</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Lotus provides a DSL to describe changes to our database schema. You can read more
+about how migrations work in the <a href="/guides/migrations/overview">migrations&rsquo; guide</a>.</p>
+
+<p>In this case, we define a new table with columns for each of our entitie&rsquo;s attributes.
+Let&rsquo;s apply these changes to our database:</p>
+<pre class="language-ruby plaintext"><code>% lotus db migrate
+</code></pre>
+
+<p>Finally, we need to tell Lotus how to map entity attributes to database columns.
+Go ahead and open up <code>lib/bookshelf.rb</code>; in this file you&rsquo;ll find most of the project-wide configuration for <code>Lotus::Model</code>, including a section on mapping.
+Edit the commented-out example:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf.rb</span>
+<span class="c1"># ...</span>
+<span class="n">mapping</span> <span class="k">do</span>
+  <span class="n">collection</span> <span class="ss">:books</span> <span class="k">do</span>
+    <span class="n">entity</span>     <span class="no">Book</span>
+    <span class="n">repository</span> <span class="no">BookRepository</span>
+
+    <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>         <span class="no">Integer</span>
+    <span class="n">attribute</span> <span class="ss">:title</span><span class="p">,</span>      <span class="no">String</span>
+    <span class="n">attribute</span> <span class="ss">:author</span><span class="p">,</span>     <span class="no">String</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Playing With The Repository</h3>
+
+<p>With our mapping set up, we are ready to play around with our repository.
+We can use Lotus&rsquo; <code>console</code> command to launch IRb with our application pre-loaded, so we can use our objects:</p>
+<pre class="language-ruby plaintext"><code>% lotus console
+&gt;&gt; BookRepository.all
+=&gt; []
+&gt;&gt; book = Book.new(title: 'TDD', author: 'Kent Beck')
+=&gt; #&lt;Book:0x007f9af1d4b028 @title="TDD", @author="Kent Beck"&gt;
+&gt;&gt; BookRepository.create(book)
+=&gt; #&lt;Book:0x007f9af1d13ec0 @title="TDD", @author="Kent Beck" @id=1&gt;
+&gt;&gt; BookRepository.find(1)
+=&gt; #&lt;Book:0x007f9af1d13ec0 @title="TDD", @author="Kent Beck" @id=1&gt;
+</code></pre>
+
+<p>Lotus repositories have methods to load one or more entities from our database; and to create and update existing records.
+The repository is also the place where you would define new methods to implement custom queries.</p>
+
+<p>To recap, we&rsquo;ve seen how Lotus uses entities and repositories to model our data.
+Entities represent our behavior, while repositories use mappings to translate our entities to our data store.
+We can use migrations to apply changes to our database schema.</p>
+
+<h3>Displaying Dynamic Data</h3>
+
+<p>With our new experience with modelling data, we can get to work displaying dynamic data on our book listing page.
+Let&rsquo;s adjust the feature test we created earlier:</p>
+<pre class="language-ruby plaintext"><code># spec/web/features/list_books_spec.rb
+require 'features_helper'
+
+describe 'List books' do
+  before do
+    BookRepository.clear
+
+    BookRepository.create(Book.new(title: 'PoEEA', author: 'Martin Fowler'))
+    BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
+  end
+
+  it 'shows a book element for each book' do
+    visit '/books'
+    assert page.has_css?('.book', count: 2), "Expected to find 2 books"
+  end
+end
+</code></pre>
+
+<p>We actually create the required records in our test and then assert the correct number of book classes on the page.
+When we run this test, we will most likely see an error from our database connection &ndash; remember we only migrated our <em>development</em> database, and not yet our <em>test</em> database.
+Its connction strings is defined in <code>.env.test</code> and here&rsquo;s how you set it up:</p>
+<pre class="language-ruby plaintext"><code>% LOTUS_ENV=test lotus db prepare
+</code></pre>
+
+<p>Now we can go change our template and remove the static HTML.
+Our view needs to loop over all available records and render them.
+Let&rsquo;s write a test to force this change in our view:</p>
+<pre class="language-ruby ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/views/books/index'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">books: </span><span class="p">[]]</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/index.html.erb'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
+
+  <span class="n">it</span> <span class="s2">"exposes #books"</span> <span class="k">do</span>
+    <span class="n">view</span><span class="p">.</span><span class="nf">books</span><span class="p">.</span><span class="nf">must_equal</span> <span class="n">exposures</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:books</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'when there are no books'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s1">'shows a placeholder message'</span> <span class="k">do</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'&lt;p class="placeholder"&gt;There are no books yet.&lt;/p&gt;'</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'when there are books'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:book1</span><span class="p">)</span>     <span class="p">{</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'Refactoring'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Martin Fowler'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:book2</span><span class="p">)</span>     <span class="p">{</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'Domain Driven Design'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Eric Evans'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">books: </span><span class="p">[</span><span class="n">book1</span><span class="p">,</span> <span class="n">book2</span><span class="p">]]</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'lists them all'</span> <span class="k">do</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">scan</span><span class="p">(</span><span class="sr">/class="book"/</span><span class="p">).</span><span class="nf">count</span><span class="p">.</span><span class="nf">must_equal</span> <span class="mi">2</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'Refactoring'</span><span class="p">)</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'Domain Driven Design'</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'hides the placeholder message'</span> <span class="k">do</span>
+      <span class="n">view</span><span class="p">.</span><span class="nf">render</span><span class="p">.</span><span class="nf">wont_include</span><span class="p">(</span><span class="s1">'&lt;p class="placeholder"&gt;There are no books yet.&lt;/p&gt;'</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We specify that our index page will show a simple placeholder message when there are no books to display; when there are, it lists every one of them.
+Note how rendering a view with some data is relatively straight-forward.
+Lotus is designed around simple objects with minimal interfaces that are easy to test in isolation, yet still work great together.</p>
+
+<p>Let&rsquo;s rewrite our template to implement these requirements:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">books</span><span class="p">.</span><span class="nf">any?</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%</span> <span class="n">books</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">book</span><span class="o">|</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"book"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h2&gt;</span><span class="cp">&lt;%=</span> <span class="n">book</span><span class="p">.</span><span class="nf">title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h2&gt;</span>
+      <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">book</span><span class="p">.</span><span class="nf">author</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"placeholder"</span><span class="nt">&gt;</span>There are no books yet.<span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>If we run our feature test now, we&rsquo;ll see it fails — because our controller
+action does not actually <a href="/guides/actions/exposures"><em>expose</em></a> the books to our view. We can write a test for
+that change:</p>
+<pre class="language-ruby ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/controllers/books/index'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[]</span> <span class="p">}</span>
+
+  <span class="n">it</span> <span class="s2">"is successful"</span> <span class="k">do</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">200</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'exposes all books'</span> <span class="k">do</span>
+    <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">action</span><span class="p">.</span><span class="nf">exposures</span><span class="p">[</span><span class="ss">:books</span><span class="p">].</span><span class="nf">must_equal</span> <span class="p">[]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Writing tests for controller actions is basically two-fold: you either assert on the response object, which is a Rack-compatible array of status, headers and content; or on the action itself, which will contain exposures after we&rsquo;ve called it.
+Now we&rsquo;ve specified that the action exposes <code>:books</code>, we can implement our action:</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="n">expose</span> <span class="ss">:books</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@books</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">all</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>By using the <code>expose</code> method in our action class, we can expose the contents of our <code>@books</code> instance variable to the outside world, so that Lotus can pass it to the view.
+That&rsquo;s enough to make all our tests pass again!</p>
+
+<h2>Buiding Forms To Create Records</h2>
+
+<p>One of the last steps that remains to us is to actually make it possible to enter new books into the system.
+The plan is simple: we build a page with a form to enter details.</p>
+
+<p>When the user submits the form, we build a new entity, save it, and redirect the user back to the book listing.
+Here&rsquo;s that story expressed in a test:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/add_book_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
+
+<span class="n">describe</span> <span class="s1">'Books'</span> <span class="k">do</span>
+  <span class="n">after</span> <span class="k">do</span>
+    <span class="no">BookRepository</span><span class="p">.</span><span class="nf">clear</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'can create a new book'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/books/new'</span>
+
+    <span class="n">within</span> <span class="s1">'form#book-form'</span> <span class="k">do</span>
+      <span class="n">fill_in</span> <span class="s1">'Title'</span><span class="p">,</span>  <span class="ss">with: </span><span class="s1">'New book'</span>
+      <span class="n">fill_in</span> <span class="s1">'Author'</span><span class="p">,</span> <span class="ss">with: </span><span class="s1">'Some author'</span>
+
+      <span class="n">click_button</span> <span class="s1">'Create'</span>
+    <span class="k">end</span>
+
+    <span class="n">current_path</span><span class="p">.</span><span class="nf">must_equal</span><span class="p">(</span><span class="s1">'/books'</span><span class="p">)</span>
+    <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_content?</span><span class="p">(</span><span class="s1">'New book'</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Laying The Foundations For A Form</h3>
+
+<p>By now, we should be familiar with the working of actions, views and templates.</p>
+
+<p>We&rsquo;ll speed things up a little, so we can quickly get to the good parts.
+First, create a new action for our &ldquo;New Book&rdquo; page:</p>
+<pre class="language-ruby plaintext"><code>% lotus generate action web books#new --url=/books/new
+</code></pre>
+
+<p>This adds a new route to our app:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">get</span> <span class="s1">'/books/new'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#new'</span>
+</code></pre>
+
+<p>The interesting bit will be our new template, because we&rsquo;ll be using Lotus&rsquo; form builder to construct an HTML form around our <code>Book</code> entity.</p>
+
+<h3>Using Form Helpers</h3>
+
+<p>Let&rsquo;s use <a href="/guides/helpers/forms">form helpers</a> to build this form in <code>apps/web/templates/books/new.html.erb</code>:</p>
+<pre class="language-ruby erb"><code><span class="nt">&lt;h2&gt;</span>Add book<span class="nt">&lt;/h2&gt;</span>
+
+<span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="s1">'/books'</span> <span class="k">do</span>
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'input'</span> <span class="k">do</span>
+      <span class="n">label</span>      <span class="ss">:title</span>
+      <span class="n">text_field</span> <span class="ss">:title</span>
+    <span class="k">end</span>
+
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'intput'</span> <span class="k">do</span>
+      <span class="n">label</span>      <span class="ss">:author</span>
+      <span class="n">text_field</span> <span class="ss">:author</span>
+    <span class="k">end</span>
+
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'controls'</span> <span class="k">do</span>
+      <span class="n">submit</span> <span class="s1">'Create Book'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>We&rsquo;ve added <code>&lt;label&gt;</code> tags for our form fields, and wrapped each field in a
+container <code>&lt;div&gt;</code> using Lotus&rsquo; <a href="/guides/helpers/html5">HTML builder helper</a>.</p>
+
+<h3>Submitting Our Form</h3>
+
+<p>To submit our form, we need yet another action.
+Let&rsquo;s create a <code>Books::Create</code> action:</p>
+<pre class="language-ruby plaintext"><code>% lotus generate action web books#create
+</code></pre>
+
+<p>Let&rsquo;s change the HTTP method that our route will accept (<code>POST</code>).</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">post</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#create'</span>
+</code></pre>
+
+<h3>Implementing Create action</h3>
+
+<p>Our <code>books#create</code> action needs to do two things.
+Let&rsquo;s express them as unit tests:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/controllers/books/create_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/controllers/books/create'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'Confident Ruby'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Advi Grimm'</span> <span class="p">}]</span> <span class="p">}</span>
+
+  <span class="n">after</span> <span class="k">do</span>
+    <span class="no">BookRepository</span><span class="p">.</span><span class="nf">clear</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'creates a new book'</span> <span class="k">do</span>
+    <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">action</span><span class="p">.</span><span class="nf">book</span><span class="p">.</span><span class="nf">id</span><span class="p">.</span><span class="nf">wont_be_nil</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'redirects the user to the books listing'</span> <span class="k">do</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">302</span>
+    <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Location'</span><span class="p">].</span><span class="nf">must_equal</span> <span class="s1">'/books'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Making these tests pass is easy enough.
+We&rsquo;ve already seen how we can write entities to our database, and we can use <code>redirect_to</code> to implement our redirection:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">])</span>
+      <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+
+      <span class="n">redirect_to</span> <span class="s1">'/books'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This minimal implementation should suffice to make our tests pass.
+Congratulations!</p>
+
+<h3>Securing Our Form With Validations</h3>
+
+<p>Hold your horses! We need some extra measures to build a truly robust form.
+Imagine what would happen if the were to submit the form without entering any values?</p>
+
+<p>We could fill our database with bad data or see an exception for data integrity violations.
+We clearly need a way of keeping invalid data out of our system!</p>
+
+<p>To express our validations in a test, we need to wonder: what <em>would</em> happen if our validations failed?
+One option would be to re-render the <code>books#new</code> form, so we can give our users another shot at completing it correctly.
+Let&rsquo;s specify this behaviour as unit tests:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/apps/controllers/books/create_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/controllers/books/create'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span> <span class="k">do</span>
+  <span class="n">after</span> <span class="k">do</span>
+    <span class="no">BookRepository</span><span class="p">.</span><span class="nf">clear</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'with valid params'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'1984'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'George Orwell'</span> <span class="p">}]</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'creates a new book'</span> <span class="k">do</span>
+      <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">action</span><span class="p">.</span><span class="nf">book</span><span class="p">.</span><span class="nf">id</span><span class="p">.</span><span class="nf">wont_be_nil</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'redirects the user to the books listing'</span> <span class="k">do</span>
+      <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+      <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">302</span>
+      <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Location'</span><span class="p">].</span><span class="nf">must_equal</span> <span class="s1">'/books'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'with invalid params'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{}]</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'re-renders the books#new view'</span> <span class="k">do</span>
+      <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">200</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now our tests specify two alternative scenario&rsquo;s: our original happy path, and a new scenario in which validations fail.
+To make our tests pass, we need to implement validations.</p>
+
+<p>Although you can add validation rules to the entity, Lotus also allows you to define validation rules as close to the source of the input as possible, i.e. the action.
+Lotus controller actions can use the <code>params</code> class method to define acceptable incoming parameters.</p>
+
+<p>This approach both whitelists what params are used (others are discarded to prevent mass-assignment vulnerabilities from untrusted user input) <em>and</em> adds rules to define what values are acceptable — in this case we&rsquo;ve specified that the nested attributes for a book&rsquo;s title and author should be present.</p>
+
+<p>With our validations in place, we can limit our entity creation and redirection to cases where the incoming params are valid:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="n">params</span> <span class="k">do</span>
+      <span class="n">param</span> <span class="ss">:book</span> <span class="k">do</span>
+        <span class="n">param</span> <span class="ss">:title</span><span class="p">,</span>  <span class="ss">presence: </span><span class="kp">true</span>
+        <span class="n">param</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">presence: </span><span class="kp">true</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">])</span>
+        <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+
+        <span class="n">redirect_to</span> <span class="s1">'/books'</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>You may have noticed that there isn&rsquo;t an <code>else</code> condition to that <code>if</code> statement.
+What happens when params aren&rsquo;t valid?</p>
+
+<p>The control will pass to the corresponding view, which needs to be informed about which template to render.
+In this case <code>apps/web/templates/books/new.html.erb</code> will be used to render the form again.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/books/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+    <span class="n">template</span> <span class="s1">'books/new'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This approach will work nicely because Lotus&rsquo; form builder is smart enough to introspect the <code>params</code> in this action and populate the form fields with values found in the params.
+If the user fills in only one field before submitting, he is presented with his original input, saving him some frustration of typing his original input again.</p>
+
+<p>Run your tests again and see they are all passing again!</p>
+
+<h3>Displaying Validation Errors</h3>
+
+<p>Rather than just shoving the user a form under his nose when something has gone wrong, we should give him a hint of what&rsquo;s expected of him. Let&rsquo;s adapt our form to show a notice about invalid fields.</p>
+
+<p>First, we expect a list of errors to be included in the page when <code>params</code> contains errors:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/views/books/new_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/views/books/new'</span>
+
+<span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span>    <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Action</span><span class="o">::</span><span class="no">Params</span><span class="p">.</span><span class="nf">new</span><span class="p">({})</span> <span class="p">}</span>
+<span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">params: </span><span class="n">params</span><span class="p">]</span> <span class="p">}</span>
+<span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/index.html.erb'</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">New</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
+
+<span class="n">it</span> <span class="s1">'displays list of errors when params contains errors'</span> <span class="k">do</span>
+  <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span> <span class="c1"># trigger validations</span>
+
+  <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'There was a problem with your submission'</span><span class="p">)</span>
+  <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'title is required'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>In our template we can loop over <code>params.errors</code> (if there are any) and display a friendly message.
+Open up <code>apps/web/templates/books/new.html.erb</code>:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%</span> <span class="k">unless</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"errors"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>There was a problem with your submission<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="cp">&lt;%</span> <span class="n">params</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">error</span><span class="o">|</span> <span class="cp">%&gt;</span>
+        <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">error</span><span class="p">.</span><span class="nf">attribute_name</span> <span class="cp">%&gt;</span> is required<span class="nt">&lt;/li&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>As you can see, in this case we simply hard-code the error message &ldquo;is required&rdquo;, but you could inspect the error and customise your message per type of validation that failed.
+This will be improved in the near future.</p>
+
+<h3>Improving Our Use Of The Router</h3>
+
+<p>The last improvement we are going to make, is in the use of our router.
+Open up the routes file for the &ldquo;web&rdquo; application:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">post</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#create'</span>
+<span class="n">get</span> <span class="s1">'/books/new'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#new'</span>
+<span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#index'</span>
+<span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'home#index'</span>
+</code></pre>
+
+<p>Lotus provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:</p>
+<pre class="language-ruby ruby"><code><span class="n">resources</span> <span class="ss">:books</span>
+<span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'home#index'</span><span class="p">,</span> <span class="ss">as: :home</span>
+</code></pre>
+
+<p>To get a sense of what routes are defined, now we&rsquo;ve made this change, you can
+use the special command-line task <code>routes</code> to inspect the end result:</p>
+<pre class="language-ruby plaintext"><code>% lotus routes
+          GET, HEAD  /                Web::Controllers::Home::Index
+    books GET, HEAD  /books           Web::Controllers::Books::Index
+ new_book GET, HEAD  /books/new       Web::Controllers::Books::New
+    books POST       /books           Web::Controllers::Books::Create
+     book GET, HEAD  /books/:id       Web::Controllers::Books::Show
+edit_book GET, HEAD  /books/:id/edit  Web::Controllers::Books::Edit
+     book PATCH      /books/:id       Web::Controllers::Books::Update
+     book DELETE     /books/:id       Web::Controllers::Books::Destroy
+</code></pre>
+
+<p>The output for <code>lotus routes</code> shows you the name of the defined helper method (you can suffix this name with <code>_path</code> or <code>_url</code> and call it on the <code>routes</code> helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.</p>
+
+<p>Now we&rsquo;ve applied the <code>resources</code> helper method, we can take advantage of the named route methods.
+Remember how we built our form using <code>form_for</code>?</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="s2">"/books"</span> <span class="k">do</span>
+    <span class="c1"># ...</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>It&rsquo;s silly to include a hard-coded path in our template, when our router already is perfectly aware of the route to point the form to.
+We can use the <code>routes</code> helper method that is available in our views and actions to access route-specific helper methods:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span> <span class="k">do</span>
+    <span class="c1"># ...</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>We can make a similar change in <code>apps/controllers/books/create.rb</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">redirect_to</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_url</span>
+</code></pre>
+
+<h2>Wrapping Up</h2>
+
+<p><strong>Congratulations for completing your first Lotus project!</strong></p>
+
+<p>Let&rsquo;s review what we&rsquo;ve done: we&rsquo;ve traced requests through Lotus&rsquo; major frameworks to understand how they relate to each other; we&rsquo;ve seen how we can model our domain using entities and repositories; we&rsquo;ve seen solutions for building forms, maintaining our database schema, and validating user input.</p>
+
+<p>We&rsquo;ve come a long way, but there&rsquo;s still plenty more to explore.
+Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.info/gems/lotusrb">Lotus API documentation</a>, read the <a href="https://github.com/lotus">source code</a> and follow the <a href="/blog">blog</a>.</p>
+
+<p><strong>Above all, enjoy building amazing things!</strong></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="email-signup">
+  <div class="container-fluid wrapper">
+    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
+      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="primary">
+  <div class="container-fluid wrapper">
+    <div class="row">
+      <a class="logo col-md-3" href="/">logo</a>
+        <div class="col-md-4">
+          <span class="date">June 17, 2015</span>
+          <h4>Introducing Database Migrations</h4>
+          <p>New feature for the upcoming v0.4.0: database migrations. Fast operations for schema: create, drop, migrate and prepare database. Keep migrations healthy with experimental feature.
+</p>
+          <a href="/blog/2015/06/17/introducing-database-migrations.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
+          <span class="date">June 15, 2015</span>
+          <h4>Introducing Form Helpers</h4>
+          <p>New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.
+</p>
+          <a href="/blog/2015/06/15/introducing-form-helpers.html">Read more...</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="sub-footer wrapper">
+    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
+    <br>
+    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
+    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
+    <ul class="social">
+      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
+      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
