@@ -68,7 +68,7 @@ Go ahead and install our gem dependency with Bundler; then we can launch a devel
 And... bask in the glory of your first Lotus application at
 [http://localhost:2300](http://localhost:3000)! We should see a screen similar to this:
 
-<p><img src="screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
+<p><img src="/guides/screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
 
 ## Lotus Architectures
 
@@ -81,7 +81,7 @@ Each of them can be a component of our product, such as the user facing web inte
 All these parts are a _delivery mechanism_ to the business logic that lives under `lib/`.
 This is the place where our models are defined, and interact with each other to compose the **features** that our product provides.
 
-Lotus' Containers are heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
+Lotus Container arch is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
 ## Exploring App By Writing Our First Test
 
