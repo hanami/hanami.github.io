@@ -126,18 +126,18 @@
               <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/getting-started.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
               <h1>Getting Started</h1>
 
-<p>Set up our first Lotus project and build a simple bookshelf application. We&rsquo;ll
+<p>In this guide we will set up our first Lotus project and build a simple bookshelf application. We&rsquo;ll
 touch on all the major components of the Lotus framework, all guided by tests.</p>
 
 <h2>Prerequisites</h2>
 
 <p>Before we get started, let&rsquo;s get some prerequisites out of the way.
-First, we&rsquo;re going to assume we have basic knowledge of developing web applications.</p>
+First, we&rsquo;re going to assume a basic knowledge of developing web applications.</p>
 
-<p>We should also be familiar with <a href="http://bundler.io">Bundler</a>, <a href="http://rake.rubyforge.org">Rake</a>, working with a terminal and building apps using the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model, View, Controller</a> paradigm.</p>
+<p>You should also be familiar with <a href="http://bundler.io">Bundler</a>, <a href="http://rake.rubyforge.org">Rake</a>, working with a terminal and building apps using the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model, View, Controller</a> paradigm.</p>
 
 <p>Lastly, in this guide we&rsquo;ll be using a <a href="http://www.postgresql.org">PostgreSQL</a> database.
-If we want to follow along, make sure we have a working installation of Ruby 2.2 and PostgreSQL 9.4 on our system.</p>
+If you want to follow along, make sure you have a working installation of Ruby 2.2 and PostgreSQL 9.4 on your system.</p>
 
 <h2>Create a new Lotus project</h2>
 
@@ -167,7 +167,7 @@ Let&rsquo;s see what it contains:</p>
 
 <ul>
 <li><code>Gemfile</code> and <code>Gemfile.lock</code> are Bundler artifacts to manage Rubygems dependencies.</li>
-<li><code>Rakefile</code> is a descriptor for our Rake tasks.</li>
+<li><code>Rakefile</code> describes our Rake tasks.</li>
 <li><code>apps</code> contains one or more web applications compatible with Rack.
 Here we can find the first generated Lotus application called <code>Web</code>.
 It&rsquo;s the place where we find our controllers, views, routes and templates.</li>
@@ -178,7 +178,7 @@ It&rsquo;s the place where we find our controllers, views, routes and templates.
 <li><code>spec</code> contains our tests.</li>
 </ul>
 
-<p>Go ahead and install our gem dependencie with Bundler; then we can launch a development server:</p>
+<p>Go ahead and install our gem dependency with Bundler; then we can launch a development server:</p>
 <pre class="language-ruby plaintext"><code>% bundle install
 % bundle exec lotus server
 </code></pre>
@@ -186,25 +186,25 @@ It&rsquo;s the place where we find our controllers, views, routes and templates.
 <p>And&hellip; bask in the glory of your first Lotus application at
 <a href="http://localhost:3000">http://localhost:2300</a>! We should see a screen similar to this:</p>
 
-<p><img src="screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
+<p><img src="/guides/screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
 
 <h2>Lotus Architectures</h2>
 
-<p>Lotus supports a few architecture to second the needs of the current project.
+<p>Lotus supports a few different architectures to support the needs of the current project.
 The default one that we&rsquo;re going to explore is called <em>Container</em>, because <strong>it can host several Lotus (and Rack) applications in the same Ruby process</strong>.</p>
 
 <p>These applications live under <code>apps/</code>.
 Each of them can be a component of our product, such as the user facing web interface, the admin pane, metrics, HTTP API etc..</p>
 
 <p>All these parts are a <em>delivery mechanism</em> to the business logic that lives under <code>lib/</code>.
-This is the place where our models are defined, and interact each other to compose the <strong>features</strong> that our product provides.</p>
+This is the place where our models are defined, and interact with each other to compose the <strong>features</strong> that our product provides.</p>
 
-<p>Lotus&rsquo; Container is heavily inspired by <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>.</p>
+<p>Lotus Container arch is heavily inspired by <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>.</p>
 
 <h2>Exploring App By Writing Our First Test</h2>
 
-<p>The opening screen we see when we point our browsers at our app now, is a
-built-in page used when there are no routes defined.</p>
+<p>The opening screen we see when we point our browser at our app, is a
+default page which is displayed when there are no routes defined.</p>
 
 <p>Lotus encourages <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">Behavior Driven Development</a> (BDD) as a way to write web applications.
 In order to get our first custom page to display, we&rsquo;ll write a high-level feature test:</p>
@@ -227,7 +227,7 @@ Lotus will then generate helpers and stub files for it.</p>
 
 <h3>Following A Request</h3>
 
-<p>Now we have a test, we can see it fail by running our tests:</p>
+<p>Now we have a test, we can see it fail:</p>
 <pre class="language-ruby html"><code>% rake test
 Run options: --seed 44759
 
@@ -244,16 +244,16 @@ Expected "<span class="cp">&lt;!DOCTYPE html&gt;</span>\n<span class="nt">&lt;ht
 1 runs, 1 assertions, 1 failures, 0 errors, 0 skips
 </code></pre>
 
-<p>Our test obviously failed; now let&rsquo;s make it pass.
-Let&rsquo;s add step-by-step (<strong>only this time</strong>) all the code needed.</p>
+<p>Now let&rsquo;s make it pass.
+Lets add the code required to make this test pass, step-by-step.</p>
 
-<p>As first thing we add a route:</p>
+<p>The first thing we need to add is a route:</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
 <span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'home#index'</span>
 </code></pre>
 
-<p>We&rsquo;ve pointed our application&rsquo;s root URL to the <code>index</code> action of the <code>home</code> controller (see the <a href="/guides/routing/overview">routing guide</a> for more information).
-Now let&rsquo;s create our first action.</p>
+<p>The root we added pointed our application&rsquo;s root URL to the <code>index</code> action of the <code>home</code> controller (see the <a href="/guides/routing/overview">routing guide</a> for more information).
+Now we can create the index action.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Home</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -275,8 +275,8 @@ Each action has a corresponding view, which is a Ruby object and needs to be add
 <span class="k">end</span>
 </code></pre>
 
-<p>&hellip;which, in turn, is empty and does nothing more than render its template.
-This is the file we can edit to make our test pass. Make it look like this:</p>
+<p>&hellip;which, in turn, is empty and does nothing more than render it&rsquo;s template.
+This is the file we need to edit in order to make our test pass. All we need to do is add the bookshelf heading.</p>
 <pre class="language-ruby erb"><code># apps/web/templates/home/index.html.erb
 <span class="nt">&lt;h1&gt;</span>Bookshelf<span class="nt">&lt;/h1&gt;</span>
 </code></pre>
@@ -296,12 +296,12 @@ Finished <span class="k">in </span>0.011854s, 84.3600 runs/s, 168.7200 assertion
 <h3>Of Containers And Apps</h3>
 
 <p>Did you wonder about the <code>Web</code> constant you saw referenced in the controllers and views?
-Where dit come from?
+Where did it come from?
 Lotus uses a <em>&ldquo;Container&rdquo;</em> architecture by default, whereby a single project can contain multiple applications.
 Such applications might include a JSON API, an admin panel, a marketing website, and so forth.</p>
 
-<p>All these applications live under <code>apps/</code>, with the default application being called <code>web</code>.
-Lotus&rsquo; core frameworks are duplicated when the container boots, so configurations for different containers don&rsquo;t interfere with another.</p>
+<p>All these applications live under <code>apps/</code>, with the default application named <code>web</code>.
+Lotus&rsquo; core frameworks are duplicated when the container boots, so configurations for different containers don&rsquo;t interfere with others.</p>
 
 <p>Let&rsquo;s recap what we&rsquo;ve seen so far: to get our own page on the screen, we followed the execution path of a request in Lotus through the router into a controller action, through a view, to a template file.</p>
 
@@ -312,10 +312,10 @@ Lotus&rsquo; core frameworks are duplicated when the container boots, so configu
 <p>Let&rsquo;s use our new knowledge about the major Lotus components to add a new action.
 The purpose of our Bookshelf application is to manage books.</p>
 
-<p>We&rsquo;ll store books in our database and let user the manage them with our application.
+<p>We&rsquo;ll store books in our database and let the user manage them with our application.
 A first step would be to show a listing of all the books in our system.</p>
 
-<p>Let&rsquo;s write a new feature test for what we want to achieve:</p>
+<p>Let&rsquo;s write a new feature test describing what we want to achieve:</p>
 <pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/list_books_spec.rb</span>
 <span class="nb">require</span> <span class="s1">'features_helper'</span>
 
@@ -330,7 +330,7 @@ A first step would be to show a listing of all the books in our system.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>The test is simple enough, and obviously fails because the URL <code>/books</code> is not currently recognised in our application. We&rsquo;ll create a new controller action to remedy that.</p>
+<p>The test is simple enough, and obviously fails because the URL <code>/books</code> is not currently recognised in our application. We&rsquo;ll create a new controller action to fix that.</p>
 
 <h3>Lotus Generators</h3>
 
@@ -368,7 +368,7 @@ So while the &ldquo;controller&rdquo; is <em>conceptually</em> present in our pr
 
 <p>We&rsquo;ve used a generator to create a new endpoint in our application.
 But one thing you may have noticed is that our new template contains the same <code>&lt;h1&gt;</code> as our <code>home/index.html.erb</code> template.
-Let&rsquo;s remedy that.</p>
+Let&rsquo;s fix that.</p>
 
 <h3>Layouts</h3>
 
@@ -409,7 +409,7 @@ Enter entities and repositories:</p>
 <p>Entities are totally unaware of database.
 This makes them <strong>lightweight</strong> and <strong>easy to test</strong>.</p>
 
-<p>For this reason we need a repository to persist the data that a <code>Book</code> carries on.
+<p>For this reason we need a repository to persist the data that a <code>Book</code> depends on.
 Lotus uses the <a href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data Mapper</a> pattern.
 In this way we&rsquo;re able to save any Ruby object in a database.
 That means we can adapt Lotus to use existing Ruby projects and to provide a way to persist them.
@@ -427,10 +427,10 @@ create  spec/bookshelf/repositories/book_repository_spec.rb
 
 <h3>Working with entities</h3>
 
-<p>An entity is something really close to a plain Ruby object, it doesn&rsquo;t know nothing about our database structure.
+<p>An entity is something really close to a plain Ruby object, it doesn&rsquo;t know anything about our database structure.
 We should focus on the behaviors that we want from it and only then, how to save it.</p>
 
-<p>For now, we want it to carry title and author informations.
+<p>For now, we want it to carry title and author information.
 Let&rsquo;s add these attributes.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/book.rb</span>
 <span class="k">class</span> <span class="nc">Book</span>
@@ -482,7 +482,7 @@ Use the migration generator to create an empty migration:</p>
 <pre class="language-ruby plaintext"><code>% lotus generate migration create_books
 </code></pre>
 
-<p>This gives us a file named like <code>db/migrations/20150616120629_create_books.rb</code> that we can edit:</p>
+<p>This gives us a file name like <code>db/migrations/20150616120629_create_books.rb</code> that we can edit:</p>
 <pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
   <span class="n">change</span> <span class="k">do</span>
     <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
@@ -499,7 +499,7 @@ Use the migration generator to create an empty migration:</p>
 <p>Lotus provides a DSL to describe changes to our database schema. You can read more
 about how migrations work in the <a href="/guides/migrations/overview">migrations&rsquo; guide</a>.</p>
 
-<p>In this case, we define a new table with columns for each of our entitie&rsquo;s attributes.
+<p>In this case, we define a new table with columns for each of our entities&rsquo; attributes.
 Let&rsquo;s apply these changes to our database:</p>
 <pre class="language-ruby plaintext"><code>% lotus db migrate
 </code></pre>
@@ -545,7 +545,7 @@ We can use migrations to apply changes to our database schema.</p>
 
 <h3>Displaying Dynamic Data</h3>
 
-<p>With our new experience with modelling data, we can get to work displaying dynamic data on our book listing page.
+<p>With our new experience modelling data, we can get to work displaying dynamic data on our book listing page.
 Let&rsquo;s adjust the feature test we created earlier:</p>
 <pre class="language-ruby plaintext"><code># spec/web/features/list_books_spec.rb
 require 'features_helper'
@@ -567,7 +567,7 @@ end
 
 <p>We actually create the required records in our test and then assert the correct number of book classes on the page.
 When we run this test, we will most likely see an error from our database connection &ndash; remember we only migrated our <em>development</em> database, and not yet our <em>test</em> database.
-Its connction strings is defined in <code>.env.test</code> and here&rsquo;s how you set it up:</p>
+Its connection string is defined in <code>.env.test</code> and here&rsquo;s how you set it up:</p>
 <pre class="language-ruby plaintext"><code>% LOTUS_ENV=test lotus db prepare
 </code></pre>
 
@@ -670,7 +670,7 @@ That&rsquo;s enough to make all our tests pass again!</p>
 
 <h2>Buiding Forms To Create Records</h2>
 
-<p>One of the last steps that remains to us is to actually make it possible to enter new books into the system.
+<p>One of the last steps that remains is to actually make it possible to add new books to the system.
 The plan is simple: we build a page with a form to enter details.</p>
 
 <p>When the user submits the form, we build a new entity, save it, and redirect the user back to the book listing.
@@ -713,7 +713,7 @@ First, create a new action for our &ldquo;New Book&rdquo; page:</p>
 <span class="n">get</span> <span class="s1">'/books/new'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#new'</span>
 </code></pre>
 
-<p>The interesting bit will be our new template, because we&rsquo;ll be using Lotus&rsquo; form builder to construct an HTML form around our <code>Book</code> entity.</p>
+<p>The interesting bit will be our new template, because we&rsquo;ll be using Lotus&rsquo; form builder to construct a HTML form around our <code>Book</code> entity.</p>
 
 <h3>Using Form Helpers</h3>
 
@@ -806,7 +806,7 @@ Congratulations!</p>
 <h3>Securing Our Form With Validations</h3>
 
 <p>Hold your horses! We need some extra measures to build a truly robust form.
-Imagine what would happen if the were to submit the form without entering any values?</p>
+Imagine what would happen if the user were to submit the form without entering any values?</p>
 
 <p>We could fill our database with bad data or see an exception for data integrity violations.
 We clearly need a way of keeping invalid data out of our system!</p>
@@ -898,7 +898,7 @@ In this case <code>apps/web/templates/books/new.html.erb</code> will be used to 
 </code></pre>
 
 <p>This approach will work nicely because Lotus&rsquo; form builder is smart enough to introspect the <code>params</code> in this action and populate the form fields with values found in the params.
-If the user fills in only one field before submitting, he is presented with his original input, saving him some frustration of typing his original input again.</p>
+If the user fills in only one field before submitting, he is presented with his original input, saving him the frustration of typing his original input again.</p>
 
 <p>Run your tests again and see they are all passing again!</p>
 
@@ -939,7 +939,7 @@ Open up <code>apps/web/templates/books/new.html.erb</code>:</p>
 <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
 </code></pre>
 
-<p>As you can see, in this case we simply hard-code the error message &ldquo;is required&rdquo;, but you could inspect the error and customise your message per type of validation that failed.
+<p>As you can see, in this case we simply hard-code the error message &ldquo;is required&rdquo;, but you could inspect the error and customise your message for the specific validation that failed.
 This will be improved in the near future.</p>
 
 <h3>Improving Our Use Of The Router</h3>
@@ -982,7 +982,7 @@ Remember how we built our form using <code>form_for</code>?</p>
 <span class="cp">%&gt;</span>
 </code></pre>
 
-<p>It&rsquo;s silly to include a hard-coded path in our template, when our router already is perfectly aware of the route to point the form to.
+<p>It&rsquo;s silly to include a hard-coded path in our template, when our router is already perfectly aware of which route to point the form to.
 We can use the <code>routes</code> helper method that is available in our views and actions to access route-specific helper methods:</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
   <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span> <span class="k">do</span>
