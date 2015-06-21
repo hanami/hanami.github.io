@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Views Overview</title>
+    <title>Lotus - Guides - Migrations</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,67 +143,86 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/migrations/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Migrations</h1>
 
-<p>A view is an object that&rsquo;s responsible to render a template.</p>
+<p>Migrations are a feature that allows to manage database schema via Ruby.
+They come with some [command line facilities](/guides/command-line/database] that allow to perform database operations or to <a href="/guides/command-line/generators">generate</a> migrations.</p>
 
-<p>In a full stack Lotus application, an incoming HTTP request, goes through the <a href="/guides/routing/overview">router</a>, it instantiate and call an <a href="/guides/actions/overview">action</a>, which sets the status code and the headers for the response.
-The last bit is the body, which is set by the corresponding view&rsquo;s output.</p>
+<p>Migrations are only avaliable if our application uses the <a href="/guides/models/overview">SQL adapter</a>.</p>
 
-<h2>A Simple View</h2>
+<h2>Anatomy Of A Migration</h2>
 
-<p>Lotus ships a generator for actions that creates a view and a template.</p>
-<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate action web dashboard#index
-    insert  apps/web/config/routes.rb
-    create  spec/web/controllers/dashboard/index_spec.rb
-    create  apps/web/controllers/dashboard/index.rb
-    create  apps/web/views/dashboard/index.rb
-    create  apps/web/templates/dashboard/index.html.erb
-    create  spec/web/views/dashboard/index_spec.rb
-</code></pre>
+<p>Migrations are Ruby files stored by default under <code>db/migrations</code>.
+Their name is composed by a UTC timestamp and a snake case name (eg <code>db/migrations/20150621165604_create_books.rb</code>).</p>
+<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+      <span class="n">foreign_key</span> <span class="ss">:author_id</span><span class="p">,</span> <span class="ss">:authors</span><span class="p">,</span> <span class="ss">on_delete: :cascade</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
 
-<p>Look at the file naming, we have an action called <code>Web::Controllers::Dashboard::Index</code> (read about <a href="/guides/actions/overview">actions naming</a>).
-Our view has a similar name: <code>Web::Views::Dashboard::Index</code>.</p>
+      <span class="n">column</span> <span class="ss">:code</span><span class="p">,</span>  <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">size: </span><span class="mi">128</span>
+      <span class="n">column</span> <span class="ss">:title</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:price</span><span class="p">,</span> <span class="no">Integer</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">default: </span><span class="mi">100</span> <span class="c1"># cents</span>
 
-<p>Let&rsquo;s examine the view:</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+      <span class="n">check</span> <span class="p">{</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+    <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<h3>Naming</h3>
+<p>We use a <code>create_table</code> block to define the schema of that table.</p>
 
-<p>That file begins with a module declaration which is similar to the <a href="/guides/actions/overview">action naming structure</a>.
-The only difference is that we use <code>Views</code> module instead of <code>Controllers</code>.
-<strong>All the views are nested under it.</strong>
-This module is generated at the runtime for us, when the application starts.</p>
+<p>The first line is <code>primary_key :id</code>, which is a shortcut to create an autoincrement integer column.</p>
 
-<p class="convention">
-  For a given application named <code>Web</code>, views are available under <code>Web::Views</code>.
-</p>
+<p>There is a foreign key definition with cascade deletion.
+The first argument is the name of the local column (<code>books.author_id</code>), while the second is the referenced table.</p>
 
-<p><strong>This simmetry is really important at the run time.</strong>
-After the action has finished its job, the control passes to the framework which looks for the matching view.</p>
+<p>Then we have three lines for columns.
+The first argument that we pass to <code>#column</code> is the name, then the type.
+The type can be a <strong>Ruby type</strong> such as <code>String</code> or <code>Integer</code> or a string that represent the <strong>native database type</strong> (eg. <code>&quot;varchar(32)&quot;</code> or <code>&quot;text[]&quot;</code>).</p>
 
-<p class="convention">
-  For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
-</p>
+<p>As a last optional argument there is a Hash that specify some extra details for the column. For instance NULL or uniqueness constraints, the size (for strings) or the default value.</p>
 
-<h3>View Module</h3>
+<p>The final line defines a database <strong>check</strong> to ensure that price will always be greater than zero.</p>
 
-<p>All the main Lotus components are mixin to be included.
-Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.</p>
+<h2>Up/Down</h2>
 
-<p>In our example, we have a directive <code>include Web::View</code>.
-That means our view will behave according to the configuration of the <code>Web</code> application.</p>
+<p>When we &ldquo;migrate&rdquo; a database we are going into an <em>&ldquo;up&rdquo;</em> direction because we&rsquo;re adding alterations to it.
+Migrations modifications can be rolled back (<em>&ldquo;down&rdquo;</em> direction).</p>
 
-<p class="convention">
-  For a given application named <code>Web</code>, view mixin to include is <code>Web::View</code>.
-</p>
+<p>When we use <code>change</code> in our migrations, we&rsquo;re implicitly describing <em>&ldquo;up&rdquo;</em> modifications.
+Their counterpart can be inferred by <code>Lotus::Model</code> when we migrate <em>&ldquo;down&rdquo;</em> our database.</p>
+
+<p>Imagine we have the following code:</p>
+<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>When we use <code>create_table</code>, Lotus::Model will use <code>drop_table</code> in case we want to rollback this migration.</p>
+
+<p>In case we want to have concrete code for our <em>&ldquo;down&rdquo;</em> policy, we can use <code>up</code> and <code>down</code> blocks.</p>
+<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">up</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">down</span> <span class="k">do</span>
+    <span class="n">drop_table</span> <span class="ss">:books</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2>References</h2>
+
+<p>Lotus::Model uses <a href="http://sequel.jeremyevans.net/">Sequel</a> under the hood as database migration engine. If there is any aspect that isn&rsquo;t covered by our documentation or tests, please refer to <a href="http://sequel.jeremyevans.net/rdoc/files/doc/schema_modification_rdoc.html">Sequel documentation</a>.</p>
 
             </div>
           </div>

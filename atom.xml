@@ -112,7 +112,7 @@ This is useful if we want to partially migrate the database, or rollback some ch
 
 <h3>Prepare</h3>
 
-<p>We&rsquo;re fan of system automations, for this reason we have added a new command to get our database ready for development, tests or CI: <code>db prepare</code>.</p>
+<p>We&rsquo;re fan of system automation, for this reason we have added a new command to get our database ready for development, tests or CI: <code>db prepare</code>.</p>
 
 <p>It performs the following operations:</p>
 

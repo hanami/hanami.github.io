@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Views Overview</title>
+    <title>Lotus - Guides - Migrations Create Tables</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,67 +143,145 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/migrations/create-table.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Migrations</h1>
 
-<p>A view is an object that&rsquo;s responsible to render a template.</p>
+<h2>Create Tables</h2>
 
-<p>In a full stack Lotus application, an incoming HTTP request, goes through the <a href="/guides/routing/overview">router</a>, it instantiate and call an <a href="/guides/actions/overview">action</a>, which sets the status code and the headers for the response.
-The last bit is the body, which is set by the corresponding view&rsquo;s output.</p>
+<p>A table is defined via <code>#create_table</code>. This method accepts an two arguments: the <strong>name</strong> and a <strong>block</strong> that expresses the design.</p>
 
-<h2>A Simple View</h2>
+<p>Safe operation can be performed via <code>#create_table?</code>. It only creates the table if not exist.
+Force operation can be performed via <code>#create_table!</code>. It drops the existing table and creates from scratch.
+<strong>These operations shouldn&rsquo;t be used in migrations</strong>.</p>
 
-<p>Lotus ships a generator for actions that creates a view and a template.</p>
-<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate action web dashboard#index
-    insert  apps/web/config/routes.rb
-    create  spec/web/controllers/dashboard/index_spec.rb
-    create  apps/web/controllers/dashboard/index.rb
-    create  apps/web/views/dashboard/index.rb
-    create  apps/web/templates/dashboard/index.html.erb
-    create  spec/web/views/dashboard/index_spec.rb
+<h4>Column Definition</h4>
+
+<p>To define a column we use <code>#column</code>, followed by the <strong>name</strong>, the <strong>type</strong> and <strong>options</strong>.
+The name must be an unique identifier within the table.</p>
+
+<p>The type can be a Ruby type (eg <code>String</code>), a symbol that represent a Ruby type (eg <code>:string</code>)  , or a string that represents the raw database type (eg <code>&quot;varchar(255)&quot;</code>).</p>
+
+<h5>Type Definition</h5>
+
+<p>The following Ruby types are supported:</p>
+
+<ul>
+<li><code>String</code> (<code>varchar(255)</code>)</li>
+<li><code>Numeric</code> (<code>numeric</code>)</li>
+<li><code>Fixnum</code> (<code>integer</code>)</li>
+<li><code>Integer</code> (<code>integer</code>)</li>
+<li><code>Bignum</code> (<code>bigint</code>)</li>
+<li><code>Float</code> (<code>double precision</code>)</li>
+<li><code>BigDecimal</code> (<code>numeric</code>)</li>
+<li><code>Date</code> (<code>date</code>)</li>
+<li><code>DateTime</code> (<code>timestamp</code>)</li>
+<li><code>Time</code> (<code>timestamp</code>)</li>
+<li><code>TrueClass</code> (<code>boolean</code>)</li>
+<li><code>FalseClass</code> (<code>boolean</code>)</li>
+<li><code>File</code> (<code>blob</code>)</li>
+</ul>
+
+<p>Their translation from Ruby types to database types, may vary from database to database.</p>
+
+<h5>Options</h5>
+
+<p>It supports the following options:</p>
+
+<ul>
+<li><code>:default</code> (default value)</li>
+<li><code>:index</code> (create an index for the column)</li>
+<li><code>:null</code> (allow NULL values or not)</li>
+<li><code>:primary_key</code> (make the column primary key for the table)</li>
+<li><code>:unique</code> (add an uniqueness constraint for the column)</li>
+</ul>
+
+<h4>Primary Key</h4>
+
+<p>We can define <strong>primary keys</strong> with the following syntaxes:</p>
+<pre class="language-ruby ruby"><code><span class="n">column</span> <span class="ss">:id</span><span class="p">,</span> <span class="no">Integer</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">primary_key: </span><span class="kp">true</span>
+<span class="c1"># or just use this shortcut</span>
+<span class="n">primary_key</span> <span class="ss">:id</span>
 </code></pre>
 
-<p>Look at the file naming, we have an action called <code>Web::Controllers::Dashboard::Index</code> (read about <a href="/guides/actions/overview">actions naming</a>).
-Our view has a similar name: <code>Web::Views::Dashboard::Index</code>.</p>
+<h4>Foreign Keys</h4>
 
-<p>Let&rsquo;s examine the view:</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
-  <span class="k">end</span>
+<p><strong>Foreign keys</strong> are defined via <code>#foreign_key</code>, where we specify the <strong>name</strong> of the column, the <strong>referenced table</strong>, and a set of <strong>options</strong>.
+The following example creates an <code>author_id</code> column (integer) for <code>albums</code> and adds a foreign key.</p>
+<pre class="language-ruby ruby"><code><span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">foreign_key</span> <span class="ss">:author_id</span><span class="p">,</span> <span class="ss">:authors</span><span class="p">,</span> <span class="ss">on_delete: :cascade</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
 <span class="k">end</span>
 </code></pre>
 
-<h3>Naming</h3>
+<h5>Options</h5>
 
-<p>That file begins with a module declaration which is similar to the <a href="/guides/actions/overview">action naming structure</a>.
-The only difference is that we use <code>Views</code> module instead of <code>Controllers</code>.
-<strong>All the views are nested under it.</strong>
-This module is generated at the runtime for us, when the application starts.</p>
+<p>It accepts the following options:</p>
 
-<p class="convention">
-  For a given application named <code>Web</code>, views are available under <code>Web::Views</code>.
-</p>
+<ul>
+<li><code>:deferrable</code> (make the constraint check deferrable at the end of a transaction)</li>
+<li><code>:key</code> (the column in the associated table that this column references. Unnecessary if this column references the primary key of the associated table)</li>
+<li><code>:null</code> (allow NULL values or not)</li>
+<li><code>:type</code> (the column type)</li>
+<li><code>:on_delete</code> (action to take if the referenced record is deleted: <code>:restrict</code>, <code>:cascade</code>, <code>:set_null</code>, or <code>:set_default</code>)</li>
+<li><code>:on_update</code> (action to take if the referenced record is updated: <code>:restrict</code>, <code>:cascade</code>, <code>:set_null</code>, or <code>:set_default</code>)</li>
+</ul>
 
-<p><strong>This simmetry is really important at the run time.</strong>
-After the action has finished its job, the control passes to the framework which looks for the matching view.</p>
+<h4>Indexes</h4>
 
-<p class="convention">
-  For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
-</p>
+<p>Indexes are defined via <code>#index</code>. It accepts the <strong>name(s)</strong> of the column(s), and a set of <strong>options</strong>.</p>
+<pre class="language-ruby ruby"><code><span class="n">create_table</span> <span class="ss">:stores</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">column</span> <span class="ss">:code</span><span class="p">,</span> <span class="no">Integer</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+  <span class="n">column</span> <span class="ss">:lat</span><span class="p">,</span> <span class="no">Float</span>
+  <span class="n">column</span> <span class="ss">:lng</span><span class="p">,</span> <span class="no">Float</span>
 
-<h3>View Module</h3>
+  <span class="n">index</span> <span class="ss">:code</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span>
+  <span class="n">index</span> <span class="p">[</span><span class="ss">:lat</span><span class="p">,</span> <span class="ss">:lng</span><span class="p">],</span> <span class="ss">name: :stores_coords_index</span>
+<span class="k">end</span>
+</code></pre>
 
-<p>All the main Lotus components are mixin to be included.
-Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.</p>
+<h5>Options</h5>
 
-<p>In our example, we have a directive <code>include Web::View</code>.
-That means our view will behave according to the configuration of the <code>Web</code> application.</p>
+<p>It accepts the following options:</p>
 
-<p class="convention">
-  For a given application named <code>Web</code>, view mixin to include is <code>Web::View</code>.
-</p>
+<ul>
+<li><code>:unique</code> (uniqueness constraint)</li>
+<li><code>:name</code> (custom name)</li>
+<li><code>:type</code> (the type of index, supported by some databases)</li>
+<li><code>:where</code> (partial index, supported by some databases)</li>
+</ul>
+
+<h4>Constraints</h4>
+
+<p>We can define constraints on columns via <code>#constraint</code>. It accepts a <strong>name</strong> and a <strong>block</strong>.</p>
+<pre class="language-ruby ruby"><code><span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">column</span> <span class="ss">:age</span><span class="p">,</span> <span class="no">Integer</span>
+  <span class="n">constraint</span><span class="p">(</span><span class="ss">:adult_constraint</span><span class="p">)</span> <span class="p">{</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">18</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Please note that the block is evaluated in the context of the database engine, <strong>complex Ruby code doesn&rsquo;t work</strong>.
+Database functions are mapped to Ruby functions, but this reduces the portability of the migration.</p>
+<pre class="language-ruby ruby"><code><span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">column</span> <span class="ss">:password</span><span class="p">,</span> <span class="no">String</span>
+  <span class="n">constraint</span><span class="p">(</span><span class="ss">:password_length_constraint</span><span class="p">)</span> <span class="p">{</span> <span class="n">char_length</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">8</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4>Checks</h4>
+
+<p>Checks are similar to constraints, but they accept an <strong>anoymous block</strong> or a <strong>SQL raw string</strong>.</p>
+<pre class="language-ruby ruby"><code><span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">column</span> <span class="ss">:age</span><span class="p">,</span> <span class="no">Integer</span>
+  <span class="n">column</span> <span class="ss">:role</span><span class="p">,</span> <span class="no">String</span>
+
+  <span class="n">check</span> <span class="p">{</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">18</span> <span class="p">}</span>
+  <span class="n">check</span> <span class="sx">%(role IN("contributor", "manager", "owner"))</span>
+<span class="k">end</span>
+</code></pre>
 
             </div>
           </div>

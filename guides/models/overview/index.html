@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Views Overview</title>
+    <title>Lotus - Guides - Models Overview</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,67 +143,153 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/models/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Models</h1>
 
-<p>A view is an object that&rsquo;s responsible to render a template.</p>
+<p>Lotus&rsquo; model domain is implemented in a way that separates the behavior that we want to express (entities) from that persistence layer (repositories and database).
+This design helps to keep the inteface of our objects really small and, by consequence, fast and reusable.</p>
 
-<p>In a full stack Lotus application, an incoming HTTP request, goes through the <a href="/guides/routing/overview">router</a>, it instantiate and call an <a href="/guides/actions/overview">action</a>, which sets the status code and the headers for the response.
-The last bit is the body, which is set by the corresponding view&rsquo;s output.</p>
+<h2>Soft Dependency</h2>
 
-<h2>A Simple View</h2>
+<p>If we look at the <code>Gemfile</code> of our generated application, <code>lotus-model</code> gem is a separated entry.
+That means our applications don&rsquo;t depend on this framework.</p>
 
-<p>Lotus ships a generator for actions that creates a view and a template.</p>
-<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate action web dashboard#index
-    insert  apps/web/config/routes.rb
-    create  spec/web/controllers/dashboard/index_spec.rb
-    create  apps/web/controllers/dashboard/index.rb
-    create  apps/web/views/dashboard/index.rb
-    create  apps/web/templates/dashboard/index.html.erb
-    create  spec/web/views/dashboard/index_spec.rb
+<p><strong>We are free to bring our own ORM and/or persistency library.</strong></p>
+
+<h2>Adapters</h2>
+
+<p><code>Lotus::Model</code> is designed to expose high level operations to perform against a database.
+This allows to swap the storage, without affecting the code of our application.</p>
+
+<p>For this purpose the framework has a concept of <em>adapter</em>.
+It&rsquo;s layer of code that targets a specific data store and exposes a common set of operations.</p>
+
+<p>While we&rsquo;ll <strong>NEVER</strong> work with them directly, it&rsquo;s important to know that Lotus ships with three types of adapters:</p>
+
+<ul>
+<li>File System (default)</li>
+<li>Memory</li>
+<li>SQL</li>
+</ul>
+
+<p>File System is the default adapter, because it&rsquo;s a schema-less storage for quick prototyping.
+It helps us to focus on behavior without worrying about database migrations before starting to code our feature.</p>
+
+<p>We can use <code>--database</code> command line argument to specify the adapter that we want to use for newly created applications.</p>
+
+<p>It generates some code in <code>lib/bookshelf.rb</code> that sets the current adapter (<code>:sql</code>) and shows examples for the avaliable choices.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf.rb</span>
+<span class="c1"># ...</span>
+<span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="c1">##</span>
+  <span class="c1"># Database adapter</span>
+  <span class="c1">#</span>
+  <span class="c1"># Available choices:</span>
+  <span class="c1">#</span>
+  <span class="c1">#  * File System adapter</span>
+  <span class="c1">#    adapter type: :file_system, uri: 'memory://localhost/bookshelf_development'</span>
+  <span class="c1">#</span>
+  <span class="c1">#  * Memory adapter</span>
+  <span class="c1">#    adapter type: :memory, uri: 'memory://localhost/bookshelf_development'</span>
+  <span class="c1">#</span>
+  <span class="c1">#  * SQL adapter</span>
+  <span class="c1">#    adapter type: :sql, uri: 'sqlite://db/bookshelf_development.sqlite3'</span>
+  <span class="c1">#    adapter type: :sql, uri: 'postgres://localhost/bookshelf_development'</span>
+  <span class="c1">#    adapter type: :sql, uri: 'mysql://localhost/bookshelf_development'</span>
+  <span class="c1">#</span>
+  <span class="n">adapter</span> <span class="ss">type: :sql</span><span class="p">,</span> <span class="ss">uri: </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'BOOKSHELF_DATABASE_URL'</span><span class="p">]</span>
+
+  <span class="c1"># ...</span>
+<span class="k">end</span><span class="p">.</span><span class="nf">load!</span>
 </code></pre>
 
-<p>Look at the file naming, we have an action called <code>Web::Controllers::Dashboard::Index</code> (read about <a href="/guides/actions/overview">actions naming</a>).
-Our view has a similar name: <code>Web::Views::Dashboard::Index</code>.</p>
+<h2>Mapping</h2>
 
-<p>Let&rsquo;s examine the view:</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+<p>The partitioning between our application&rsquo;s domain and databases is resolved by using a data mapper.
+We use it to describe how each entity must be persisted.</p>
+
+<p>This can be unconvenient at the beginning, when we deal with a few entities and attributes, but as our codebase grows, we are in <strong>total control</strong> of how our code interacts with a database.</p>
+
+<p>Another strong point in favor of this choice is that <strong>we can persist nearly any Ruby object, even if it wasn&rsquo;t designed to do so</strong>.</p>
+
+<p>Our application comes with a default mapper in <code>lib/bookshelf.rb</code>, we can use it to specify our persistence preferences.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># ...</span>
+
+<span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">mapping</span> <span class="k">do</span>
+    <span class="n">collection</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="n">entity</span>     <span class="no">Book</span>
+      <span class="n">repository</span> <span class="no">BookRepository</span>
+
+      <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>    <span class="no">Integer</span>
+      <span class="n">attribute</span> <span class="ss">:title</span><span class="p">,</span> <span class="no">String</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span><span class="p">.</span><span class="nf">load!</span>
+</code></pre>
+
+<p>The first thing we should look at is <code>#collection</code>.
+It&rsquo;s the unique name of a set of coherent records or documents.
+For instance, if used with SQL adapter, it&rsquo;s the name of the database table.</p>
+
+<p>It accepts a block that allows us to associate an <a href="/guides/models/entities">entity</a> and a <a href="/guides/models/repositories">repository</a> with it.</p>
+
+<p>Then we list all the attributes from the <code>Book</code> entity that we want to persist and their Ruby type.</p>
+
+<h3>Entity vs Database Mismatching</h3>
+
+<p>Imagine we&rsquo;re building a Ruby library for Twitter, and we have a <code>Tweet</code> object that we want to save in our database.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Tweet</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">:text</span><span class="p">,</span> <span class="ss">:favorite_count</span><span class="p">,</span> <span class="ss">:retweet_count</span><span class="p">,</span>
+    <span class="ss">:lat</span><span class="p">,</span> <span class="ss">:lng</span><span class="p">,</span> <span class="ss">:reply</span><span class="p">,</span> <span class="ss">:retweet</span><span class="p">,</span> <span class="ss">:quoted</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attributes</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="c1"># ...</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<h3>Naming</h3>
+<p>It comes with a lot of data, but we&rsquo;re only interested to persist a subset of it (the first line defined by <code>attr_accessor</code>).</p>
+<pre class="language-ruby ruby"><code><span class="n">collection</span> <span class="ss">:tweets</span> <span class="k">do</span>
+  <span class="n">entity</span>     <span class="no">Tweet</span>
+  <span class="n">repository</span> <span class="no">TweetRepository</span>
 
-<p>That file begins with a module declaration which is similar to the <a href="/guides/actions/overview">action naming structure</a>.
-The only difference is that we use <code>Views</code> module instead of <code>Controllers</code>.
-<strong>All the views are nested under it.</strong>
-This module is generated at the runtime for us, when the application starts.</p>
+  <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>             <span class="no">Integer</span>
+  <span class="n">attribute</span> <span class="ss">:user_id</span><span class="p">,</span>        <span class="no">Integer</span>
+  <span class="n">attribute</span> <span class="ss">:text</span><span class="p">,</span>           <span class="no">String</span>
+  <span class="n">attribute</span> <span class="ss">:favorite_count</span><span class="p">,</span> <span class="no">Integer</span>
+  <span class="n">attribute</span> <span class="ss">:retweet_count</span><span class="p">,</span>  <span class="no">Integer</span>
+<span class="k">end</span>
+</code></pre>
 
-<p class="convention">
-  For a given application named <code>Web</code>, views are available under <code>Web::Views</code>.
-</p>
+<p>All the other attributes are just ignored by our repository.</p>
 
-<p><strong>This simmetry is really important at the run time.</strong>
-After the action has finished its job, the control passes to the framework which looks for the matching view.</p>
+<h3>Legacy Databases</h3>
 
-<p class="convention">
-  For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
-</p>
+<p>Until now we&rsquo;ve worked with the assumption of working with a new database, grown alongside with production code.
+If this isn&rsquo;t the case for us, we can use <em>data mapper</em> do resolve this mismatch.</p>
+<pre class="language-ruby sql"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">book_catalog</span> <span class="p">(</span>
+    <span class="n">_id</span> <span class="n">integer</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">s_title</span> <span class="n">text</span>
+<span class="p">);</span>
+</code></pre>
 
-<h3>View Module</h3>
+<p>Imagine we have the above Postgres table from our legacy database and we want to map it to our <code>Book</code> entity.</p>
+<pre class="language-ruby ruby"><code><span class="n">collection</span> <span class="ss">:book_catalog</span> <span class="k">do</span>
+  <span class="n">entity</span>     <span class="no">Book</span>
+  <span class="n">repository</span> <span class="no">BookRepository</span>
 
-<p>All the main Lotus components are mixin to be included.
-Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.</p>
+  <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>    <span class="no">Integer</span><span class="p">,</span> <span class="ss">as: :_id</span>
+  <span class="n">attribute</span> <span class="ss">:title</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span>  <span class="ss">as: :s_title</span>
+<span class="k">end</span>
+</code></pre>
 
-<p>In our example, we have a directive <code>include Web::View</code>.
-That means our view will behave according to the configuration of the <code>Web</code> application.</p>
+<p>The first thing that we notice is the correspondence between <code>#collection</code> name and the database table name.</p>
 
-<p class="convention">
-  For a given application named <code>Web</code>, view mixin to include is <code>Web::View</code>.
-</p>
+<p>Then the argument that we pass to <code>#attribute</code> is the name of the attribute from <code>Book</code>.
+If the database column name has the same attribute name we&rsquo;re done.
+In our case we need to use <code>:as</code> option, to indicate the database column that we want to map.</p>
 
             </div>
           </div>

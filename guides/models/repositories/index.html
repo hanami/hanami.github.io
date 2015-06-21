@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Views Overview</title>
+    <title>Lotus - Guides - Repositories</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,67 +143,163 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/models/repositories.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Repositories</h1>
 
-<p>A view is an object that&rsquo;s responsible to render a template.</p>
+<p>An object that mediates between entities and the persistence layer.
+It offers a standardized API to query and execute commands on a database.</p>
 
-<p>In a full stack Lotus application, an incoming HTTP request, goes through the <a href="/guides/routing/overview">router</a>, it instantiate and call an <a href="/guides/actions/overview">action</a>, which sets the status code and the headers for the response.
-The last bit is the body, which is set by the corresponding view&rsquo;s output.</p>
+<p>A repository is <strong>storage independent</strong>, all the queries and commands are
+delegated to the current adapter.</p>
 
-<h2>A Simple View</h2>
+<p>This architecture has several advantages:</p>
 
-<p>Lotus ships a generator for actions that creates a view and a template.</p>
-<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate action web dashboard#index
-    insert  apps/web/config/routes.rb
-    create  spec/web/controllers/dashboard/index_spec.rb
-    create  apps/web/controllers/dashboard/index.rb
-    create  apps/web/views/dashboard/index.rb
-    create  apps/web/templates/dashboard/index.html.erb
-    create  spec/web/views/dashboard/index_spec.rb
+<ul>
+<li><p>Applications depend on a standard API, instead of low level details
+(Dependency Inversion principle)</p></li>
+<li><p>Applications depend on a stable API, that doesn&rsquo;t change if the
+storage changes</p></li>
+<li><p>Developers can postpone storage decisions</p></li>
+<li><p>Confines persistence logic at a low level</p></li>
+<li><p>Multiple data sources can easily coexist in an application</p></li>
+</ul>
+
+<h2>Interface</h2>
+
+<p>When a class includes <code>Lotus::Repository</code>, it will receive the following interface:</p>
+
+<ul>
+<li><code>.persist(entity)</code> – Create or update an entity</li>
+<li><code>.create(entity)</code>  – Create a record for the given entity</li>
+<li><code>.update(entity)</code>  – Update the record corresponding to the given entity</li>
+<li><code>.delete(entity)</code>  – Delete the record corresponding to the given entity</li>
+<li><code>.all</code>   - Fetch all the entities from the collection</li>
+<li><code>.find</code>  - Fetch an entity from the collection by its ID</li>
+<li><code>.first</code> - Fetch the first entity from the collection</li>
+<li><code>.last</code>  - Fetch the last entity from the collection</li>
+<li><code>.clear</code> - Delete all the records from the collection</li>
+<li><code>.query</code> - Fabricates a query object</li>
+</ul>
+
+<p><strong>A collection is a homogenous set of records.</strong>
+It corresponds to a table for a SQL database or to a MongoDB collection.</p>
+
+<h2>Private Queries</h2>
+
+<p><strong>All the queries are private</strong>.
+This decision forces developers to define intention revealing API, instead of leaking storage API details outside of a repository.</p>
+
+<p>Look at the following code:</p>
+<pre class="language-ruby ruby"><code><span class="no">BookRepository</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">author_id: </span><span class="mi">23</span><span class="p">).</span><span class="nf">order</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">).</span><span class="nf">limit</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 </code></pre>
 
-<p>Look at the file naming, we have an action called <code>Web::Controllers::Dashboard::Index</code> (read about <a href="/guides/actions/overview">actions naming</a>).
-Our view has a similar name: <code>Web::Views::Dashboard::Index</code>.</p>
+<p>This is <strong>bad</strong> for a variety of reasons:</p>
 
-<p>Let&rsquo;s examine the view:</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+<ul>
+<li><p>The caller has an intimate knowledge of the internal mechanisms of the Repository.</p></li>
+<li><p>The caller works on several levels of abstraction.</p></li>
+<li><p>It doesn&rsquo;t express a clear intent, it&rsquo;s just a chain of methods.</p></li>
+<li><p>The caller can&rsquo;t be easily tested in isolation.</p></li>
+<li><p>If we change the storage, we are forced to change the code of the caller(s).</p></li>
+</ul>
+
+<p>There is a better way:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">most_recent_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="ss">limit: </span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">query</span> <span class="k">do</span>
+      <span class="n">where</span><span class="p">(</span><span class="ss">author_id: </span><span class="n">author</span><span class="p">.</span><span class="nf">id</span><span class="p">).</span>
+        <span class="nf">order</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">)</span>
+    <span class="k">end</span><span class="p">.</span><span class="nf">limit</span><span class="p">(</span><span class="n">limit</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<h3>Naming</h3>
+<p>This is a <strong>huge improvement</strong>, because:</p>
 
-<p>That file begins with a module declaration which is similar to the <a href="/guides/actions/overview">action naming structure</a>.
-The only difference is that we use <code>Views</code> module instead of <code>Controllers</code>.
-<strong>All the views are nested under it.</strong>
-This module is generated at the runtime for us, when the application starts.</p>
+<ul>
+<li><p>The caller doesn&rsquo;t know how the repository fetches the entities.</p></li>
+<li><p>The caller works on a single level of abstraction. It doesn&rsquo;t even know about records, only works with entities.</p></li>
+<li><p>It expresses a clear intent.</p></li>
+<li><p>The caller can be easily tested in isolation. It&rsquo;s just a matter of stubbing this method.</p></li>
+<li><p>If we change the storage, the callers aren&rsquo;t affected.</p></li>
+</ul>
 
-<p class="convention">
-  For a given application named <code>Web</code>, views are available under <code>Web::Views</code>.
-</p>
+<h2>Extended Example</h2>
 
-<p><strong>This simmetry is really important at the run time.</strong>
-After the action has finished its job, the control passes to the framework which looks for the matching view.</p>
+<p>Here is an extended example of a repository that uses the SQL adapter.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
 
-<p class="convention">
-  For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
-</p>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">most_recent_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="ss">limit: </span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">query</span> <span class="k">do</span>
+      <span class="n">where</span><span class="p">(</span><span class="ss">author_id: </span><span class="n">author</span><span class="p">.</span><span class="nf">id</span><span class="p">).</span>
+        <span class="nf">desc</span><span class="p">(</span><span class="ss">:id</span><span class="p">).</span>
+        <span class="nf">limit</span><span class="p">(</span><span class="n">limit</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-<h3>View Module</h3>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">most_recent_published_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">most_recent_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="n">limit</span><span class="p">).</span><span class="nf">published</span>
+  <span class="k">end</span>
 
-<p>All the main Lotus components are mixin to be included.
-Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.</p>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">published</span>
+    <span class="n">query</span> <span class="k">do</span>
+      <span class="n">where</span><span class="p">(</span><span class="ss">published: </span><span class="kp">true</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-<p>In our example, we have a directive <code>include Web::View</code>.
-That means our view will behave according to the configuration of the <code>Web</code> application.</p>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">drafts</span>
+    <span class="n">exclude</span> <span class="n">published</span>
+  <span class="k">end</span>
 
-<p class="convention">
-  For a given application named <code>Web</code>, view mixin to include is <code>Web::View</code>.
-</p>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">rank</span>
+    <span class="n">published</span><span class="p">.</span><span class="nf">desc</span><span class="p">(</span><span class="ss">:comments_count</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">best_article_ever</span>
+    <span class="n">rank</span><span class="p">.</span><span class="nf">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">comments_average</span>
+    <span class="n">query</span><span class="p">.</span><span class="nf">average</span><span class="p">(</span><span class="ss">:comments_count</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2>Reuse Code</h2>
+
+<p>You can also extract the common logic from your repository into a module to reuse it in other repositories.
+Here is a pagination example:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/pagination.rb</span>
+<span class="k">module</span> <span class="nn">Bookshelf</span>
+  <span class="k">module</span> <span class="nn">Repositories</span>
+    <span class="k">module</span> <span class="nn">Pagination</span>
+      <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">paginate</span><span class="p">(</span><span class="ss">limit: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">offset: </span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">query</span> <span class="k">do</span>
+          <span class="n">limit</span><span class="p">(</span><span class="n">limit</span><span class="p">).</span><span class="nf">offset</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="kp">include</span> <span class="no">Bookshelf</span><span class="o">::</span><span class="no">Repositories</span><span class="o">::</span><span class="no">Pagination</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">published</span>
+    <span class="n">query</span> <span class="k">do</span>
+      <span class="n">where</span><span class="p">(</span><span class="ss">published: </span><span class="kp">true</span><span class="p">)</span>
+    <span class="k">end</span><span class="p">.</span><span class="nf">paginate</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
 
             </div>
           </div>

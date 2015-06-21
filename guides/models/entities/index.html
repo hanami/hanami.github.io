@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Views Overview</title>
+    <title>Lotus - Guides - Entities</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,67 +143,76 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/models/entities.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Entities</h1>
 
-<p>A view is an object that&rsquo;s responsible to render a template.</p>
+<p>An <em>entity</em> is n object that is defined by its identity.
+See &ldquo;Domain Driven Design&rdquo; by Eric Evans.</p>
 
-<p>In a full stack Lotus application, an incoming HTTP request, goes through the <a href="/guides/routing/overview">router</a>, it instantiate and call an <a href="/guides/actions/overview">action</a>, which sets the status code and the headers for the response.
-The last bit is the body, which is set by the corresponding view&rsquo;s output.</p>
+<p>An entity is the core of an application, where the part of the domain logic is implemented.
+It&rsquo;s a small, cohesive object that expresses coherent and meaningful behaviors.</p>
 
-<h2>A Simple View</h2>
+<p>It deals with one and only one responsibility that is pertinent to the
+domain of the application, without caring about details such as persistence
+or validations.</p>
 
-<p>Lotus ships a generator for actions that creates a view and a template.</p>
-<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate action web dashboard#index
-    insert  apps/web/config/routes.rb
-    create  spec/web/controllers/dashboard/index_spec.rb
-    create  apps/web/controllers/dashboard/index.rb
-    create  apps/web/views/dashboard/index.rb
-    create  apps/web/templates/dashboard/index.html.erb
-    create  spec/web/views/dashboard/index_spec.rb
+<p>This simplicity of design allows developers to focus on behaviors, or
+message passing if you will, which is the quintessence of Object Oriented Programming.</p>
+
+<p>All the entities live under <code>lib/</code> directory of our application.</p>
+
+<h2>Interface</h2>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/book.rb</span>
+<span class="k">class</span> <span class="nc">Book</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="ss">:title</span>
+<span class="k">end</span>
 </code></pre>
 
-<p>Look at the file naming, we have an action called <code>Web::Controllers::Dashboard::Index</code> (read about <a href="/guides/actions/overview">actions naming</a>).
-Our view has a similar name: <code>Web::Views::Dashboard::Index</code>.</p>
+<p>When a class includes <code>Lotus::Entity</code> it receives the following interface:</p>
 
-<p>Let&rsquo;s examine the view:</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+<ul>
+<li><code>#id</code></li>
+<li><code>#id=</code></li>
+<li><code>#initialize(attributes = {})</code></li>
+</ul>
+
+<p><code>Lotus::Entity</code> also provides the <code>.attributes</code> for defining attribute accessors for the given names.</p>
+
+<p>If we expand the code above in <strong>pure Ruby</strong>, it would be:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Book</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:title</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attributes</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="vi">@id</span><span class="p">,</span> <span class="vi">@title</span> <span class="o">=</span> <span class="n">attributes</span><span class="p">.</span><span class="nf">values_at</span><span class="p">(</span><span class="ss">:id</span><span class="p">,</span> <span class="ss">:title</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
-<h3>Naming</h3>
+<p><strong>Lotus::Model</strong> ships <code>Lotus::Entity</code> for developers&rsquo;s convenience.</p>
 
-<p>That file begins with a module declaration which is similar to the <a href="/guides/actions/overview">action naming structure</a>.
-The only difference is that we use <code>Views</code> module instead of <code>Controllers</code>.
-<strong>All the views are nested under it.</strong>
-This module is generated at the runtime for us, when the application starts.</p>
+<p><strong>Lotus::Model</strong> depends on a narrow and well-defined interface for an Entity - <code>#id</code>, <code>#id=</code>, <code>#initialize(attributes={})</code>.
+If your object implements that interface then that object can be used as an Entity in the <strong>Lotus::Model</strong> framework.</p>
 
-<p class="convention">
-  For a given application named <code>Web</code>, views are available under <code>Web::Views</code>.
-</p>
+<p>However, we suggest to implement this interface by including <code>Lotus::Entity</code>, in case that future versions of the framework will expand it.</p>
 
-<p><strong>This simmetry is really important at the run time.</strong>
-After the action has finished its job, the control passes to the framework which looks for the matching view.</p>
+<p>See <a href="http://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency Inversion Principle</a> for more on interfaces.</p>
 
-<p class="convention">
-  For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
-</p>
+<h2>Inheritance</h2>
 
-<h3>View Module</h3>
+<p>When a class extends a <code>Lotus::Entity</code> class, it will also <em>inherit</em> its mother&rsquo;s attributes.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Book</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="ss">:title</span>
+<span class="k">end</span>
 
-<p>All the main Lotus components are mixin to be included.
-Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.</p>
+<span class="k">class</span> <span class="nc">NonFictionBook</span> <span class="o">&lt;</span> <span class="no">Book</span>
+  <span class="n">attributes</span> <span class="ss">:price</span>
+<span class="k">end</span>
+</code></pre>
 
-<p>In our example, we have a directive <code>include Web::View</code>.
-That means our view will behave according to the configuration of the <code>Web</code> application.</p>
-
-<p class="convention">
-  For a given application named <code>Web</code>, view mixin to include is <code>Web::View</code>.
-</p>
+<p>That is, <code>NonFictionBook</code>&rsquo;s attributes carry over <code>:title</code> attribute from <code>Book</code>,
+thus is <code>:id, :title, :price</code>.</p>
 
             </div>
           </div>

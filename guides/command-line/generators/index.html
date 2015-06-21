@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Views Overview</title>
+    <title>Lotus - Guides - Command Line: Generators</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,67 +143,60 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/overview.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Overview</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/command-line/generators.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Command Line</h1>
 
-<p>A view is an object that&rsquo;s responsible to render a template.</p>
+<h2>Genearators</h2>
 
-<p>In a full stack Lotus application, an incoming HTTP request, goes through the <a href="/guides/routing/overview">router</a>, it instantiate and call an <a href="/guides/actions/overview">action</a>, which sets the status code and the headers for the response.
-The last bit is the body, which is set by the corresponding view&rsquo;s output.</p>
+<p>Lotus has convenient code generators to speed up our development process.</p>
 
-<h2>A Simple View</h2>
+<h3>Applications</h3>
 
-<p>Lotus ships a generator for actions that creates a view and a template.</p>
-<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate action web dashboard#index
-    insert  apps/web/config/routes.rb
-    create  spec/web/controllers/dashboard/index_spec.rb
-    create  apps/web/controllers/dashboard/index.rb
-    create  apps/web/views/dashboard/index.rb
-    create  apps/web/templates/dashboard/index.html.erb
-    create  spec/web/views/dashboard/index_spec.rb
+<p>With the Container architecture, we can have multiple Lotus applications running under <code>apps/</code>.
+The default application is called <code>Web</code> and lives under <code>apps/web</code>.</p>
+
+<p>We can generate new applications for different compontents that we want to add to our project.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate app admin
 </code></pre>
 
-<p>Look at the file naming, we have an action called <code>Web::Controllers::Dashboard::Index</code> (read about <a href="/guides/actions/overview">actions naming</a>).
-Our view has a similar name: <code>Web::Views::Dashboard::Index</code>.</p>
+<p>It generates <code>Admin</code> application under <code>apps/web</code>.</p>
 
-<p>Let&rsquo;s examine the view:</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<h3>Actions</h3>
+
+<p>We can generate an action, the corresponding view, template, route and test code with one command.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action web books#show
 </code></pre>
 
-<h3>Naming</h3>
+<p>The first argument <code>web</code>, is the name of the target application in Container arch.
+<strong>It must be omitted if used with Application arch:</strong></p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action books#show
+</code></pre>
 
-<p>That file begins with a module declaration which is similar to the <a href="/guides/actions/overview">action naming structure</a>.
-The only difference is that we use <code>Views</code> module instead of <code>Controllers</code>.
-<strong>All the views are nested under it.</strong>
-This module is generated at the runtime for us, when the application starts.</p>
+<p>The argument <code>books#show</code> is the name of the controller and the action, respectively.</p>
 
-<p class="convention">
-  For a given application named <code>Web</code>, views are available under <code>Web::Views</code>.
-</p>
+<h4>Route</h4>
 
-<p><strong>This simmetry is really important at the run time.</strong>
-After the action has finished its job, the control passes to the framework which looks for the matching view.</p>
+<p>The generated route, is named after the controller name.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#show'</span>
+</code></pre>
 
-<p class="convention">
-  For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
-</p>
+<p>If we want to customize it, without editing our routes file, we can specify a <code>--url</code> argument.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action web books#show --url<span class="o">=</span>/books/:id
+</code></pre>
 
-<h3>View Module</h3>
+<p>This will generate the following route:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">get</span> <span class="s1">'/books/:id'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#show'</span>
+</code></pre>
 
-<p>All the main Lotus components are mixin to be included.
-Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.</p>
+<h3>Migrations</h3>
 
-<p>In our example, we have a directive <code>include Web::View</code>.
-That means our view will behave according to the configuration of the <code>Web</code> application.</p>
+<p>We can generate a migration.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate migration create_books
+</code></pre>
 
-<p class="convention">
-  For a given application named <code>Web</code>, view mixin to include is <code>Web::View</code>.
-</p>
+<p>It generates an empty migration with the UTC timestamp and the name we have specified: <code>db/migrations/20150621181347_create_books.rb</code>.</p>
 
             </div>
           </div>
