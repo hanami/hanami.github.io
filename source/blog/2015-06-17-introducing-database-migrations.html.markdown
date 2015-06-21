@@ -109,7 +109,7 @@ For instance, if we recognize an error in our just created migration, we can do:
 
 ### Prepare
 
-We're fan of system automations, for this reason we have added a new command to get our database ready for development, tests or CI: `db prepare`.
+We're fan of system automation, for this reason we have added a new command to get our database ready for development, tests or CI: `db prepare`.
 
 It performs the following operations:
 
