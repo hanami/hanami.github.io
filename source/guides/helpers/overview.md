@@ -23,21 +23,21 @@ end
 Person.new.print
 ```
 
-The same simple design is applied for views and helpers.
+The same simple design is applied to views and helpers.
 
-Lotus ships with default included helpers, but we can define custom modules to add.
+Lotus ships with default helpers, but we can also define custom helper modules.
 
 ## Rendering Context
 
-Views are Ruby objects that are responsible to render the associated template.
+Views are Ruby objects that are responsible for rendering the associated template.
 The context for this activity is defined only by the set of methods that a view can respond to.
 
 If a view has a method `#greeting`, we can use it like this: `<%= greeting %>`.
 
-This design has a few but important advantages:
+This design has a few important advantages:
 
-  * It facilitates debugging. In case of exception, we know that **the view is the only rendering context to inspect**.
-  * Ruby method dispatcher will be **fast**, as it doesn't need to lookup for many method sources.
+  * It facilitates debugging. In the case of an exception, we know that **the view is the only rendering context to inspect**.
+  * Ruby method dispatcher will be **fast**, as it doesn't need to do a lookup for many method sources.
 
 Consider the following code:
 
@@ -62,8 +62,8 @@ Think of the [HTML5](/guides/helpers/html5) or the [routing](/guides/helpers/rou
 Making them available directly in the view context, would be source of confusion, slow method dispatch times and name collisions.
 
 Imagine we have an application with 100 routes.
-Because Lotus provides both relative and abosolute URI facilities, if used directly, that would have mean to add **200 methods** to all the views.
-Which is overkilling.
+Because Lotus provides both relative and absolute URI facilities, if used directly, it would mean adding **200 methods** to all the views.
+Which is overkill.
 
 For this reason, certain helpers act as a proxy to access these large set of methods.
 
@@ -71,14 +71,14 @@ For this reason, certain helpers act as a proxy to access these large set of met
 <%= routes.home_path %>
 ```
 
-In this case we have **only one method** to add to our views, but it opens to infinite possibilities without perf penalties.
+In this case we have **only one method** to add to our views, but it opens an infinite number of possibilities without causing performance issues.
 
 ## Explicit Interfaces
 
 Lotus guides developers to design explicit and intention revealing interfaces for their objects.
-Almost all the default helpers, make available **private methods** to our views.
+Almost all the default helpers, make **private methods** available to our views.
 
-We want to avoid that complex expression will clutter our templates, and make sure that views will remain testable.
+We want to avoid complex expressions that will clutter our templates, and make sure that views remain testable.
 
 Here an example of **poor** and **untestable** code in a template.
 
