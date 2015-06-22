@@ -6,7 +6,7 @@ title: "Lotus - Guides - Command Line: Database"
 
 ## Database
 
-We can manage our database via command line.
+We can manage our database via the command line.
 
 **The following commands can be only used with the SQL adapter and with the following databases:**
 
@@ -56,7 +56,7 @@ We run `db migrate`, then the database _version_ becomes `20150613165900`, which
 % bundle exec lotus db migrate # Migrates to max migration (20150613165900)
 ```
 
-It acceps an optional argument, to specify the target version.
+It accepts an optional argument, to specify the target version.
 For instance, if we want to **rollback** the changes from `20150613165900_create_authors.rb`, we can migrate _**"down"**_.
 
 ```shell
@@ -84,7 +84,7 @@ This command SHOULD be used as a database setup command.
 ### Apply
 
 This is an experimental feature.
-When an application is developed after years, it accumulates dozens or hundreds of migrations, this slows down database operations for development and tests (CI).
+When an application is developed after years, it accumulates a large number of migrations, this slows down database operations for development and test (CI).
 
 Because it does destructive changes for files under SCM, this is only allowed in development mode.
 

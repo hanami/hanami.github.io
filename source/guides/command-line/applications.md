@@ -30,7 +30,7 @@ This will generate an `admin` project that uses the _Application_ architecture.
 The default storage used is a toy file system database.
 This is because we want to provide a quick prototyping tool.
 
-We can use `--database` argument to let Lotus to generate code for a specific data storage.
+We can use `--database` argument to let Lotus to generate code for a specific data store.
 
 It supports:
 
@@ -46,7 +46,7 @@ It supports:
 
 The default testing framework is Minitest.
 
-We can use `--test` argument to specify the following frameworks:
+We can use `--test` argument to specify the a different framework, from the list below:
 
   * `minitest` (default)
   * `rspec`
