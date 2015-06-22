@@ -54,6 +54,15 @@
               </li>
 
               <li>
+                <span class="heading">Architectures</span>
+                <ul class="nav">
+                  <li><a href="/guides/architectures/overview">Overview</a></li>
+                  <li><a href="/guides/architectures/container">Container</a></li>
+                  <li><a href="/guides/architectures/application">Application</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Routing</span>
                 <ul class="nav">
                   <li><a href="/guides/routing/overview">Overview</a></li>
@@ -134,7 +143,9 @@
                 <ul class="nav">
                   <li><a href="/guides/command-line/applications">Applications</a></li>
                   <li><a href="/guides/command-line/generators">Generators</a></li>
+                  <li><a href="/guides/command-line/database">Database</a></li>
                   <li><a href="/guides/command-line/routes">Routes</a></li>
+                  <li><a href="/guides/command-line/version">Version</a></li>
                 </ul>
               </li>
             </ul>
@@ -163,22 +174,22 @@ Helpers are modules designed to enrich views with a collection of useful feature
 <span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">print</span>
 </code></pre>
 
-<p>The same simple design is applied for views and helpers.</p>
+<p>The same simple design is applied to views and helpers.</p>
 
-<p>Lotus ships with default included helpers, but we can define custom modules to add.</p>
+<p>Lotus ships with default helpers, but we can also define custom helper modules.</p>
 
 <h2>Rendering Context</h2>
 
-<p>Views are Ruby objects that are responsible to render the associated template.
+<p>Views are Ruby objects that are responsible for rendering the associated template.
 The context for this activity is defined only by the set of methods that a view can respond to.</p>
 
 <p>If a view has a method <code>#greeting</code>, we can use it like this: <code>&lt;%= greeting %&gt;</code>.</p>
 
-<p>This design has a few but important advantages:</p>
+<p>This design has a few important advantages:</p>
 
 <ul>
-<li>It facilitates debugging. In case of exception, we know that <strong>the view is the only rendering context to inspect</strong>.</li>
-<li>Ruby method dispatcher will be <strong>fast</strong>, as it doesn&rsquo;t need to lookup for many method sources.</li>
+<li>It facilitates debugging. In the case of an exception, we know that <strong>the view is the only rendering context to inspect</strong>.</li>
+<li>Ruby method dispatcher will be <strong>fast</strong>, as it doesn&rsquo;t need to do a lookup for many method sources.</li>
 </ul>
 
 <p>Consider the following code:</p>
@@ -202,21 +213,21 @@ Think of the <a href="/guides/helpers/html5">HTML5</a> or the <a href="/guides/h
 <p>Making them available directly in the view context, would be source of confusion, slow method dispatch times and name collisions.</p>
 
 <p>Imagine we have an application with 100 routes.
-Because Lotus provides both relative and abosolute URI facilities, if used directly, that would have mean to add <strong>200 methods</strong> to all the views.
-Which is overkilling.</p>
+Because Lotus provides both relative and absolute URI facilities, if used directly, it would mean adding <strong>200 methods</strong> to all the views.
+Which is overkill.</p>
 
 <p>For this reason, certain helpers act as a proxy to access these large set of methods.</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">routes</span><span class="p">.</span><span class="nf">home_path</span> <span class="cp">%&gt;</span>
 </code></pre>
 
-<p>In this case we have <strong>only one method</strong> to add to our views, but it opens to infinite possibilities without perf penalties.</p>
+<p>In this case we have <strong>only one method</strong> to add to our views, but it opens an infinite number of possibilities without causing performance issues.</p>
 
 <h2>Explicit Interfaces</h2>
 
 <p>Lotus guides developers to design explicit and intention revealing interfaces for their objects.
-Almost all the default helpers, make available <strong>private methods</strong> to our views.</p>
+Almost all the default helpers, make <strong>private methods</strong> available to our views.</p>
 
-<p>We want to avoid that complex expression will clutter our templates, and make sure that views will remain testable.</p>
+<p>We want to avoid complex expressions that will clutter our templates, and make sure that views remain testable.</p>
 
 <p>Here an example of <strong>poor</strong> and <strong>untestable</strong> code in a template.</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">format_number</span> <span class="n">book</span><span class="p">.</span><span class="nf">downloads_count</span> <span class="cp">%&gt;</span>

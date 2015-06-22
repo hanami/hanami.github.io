@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - View Share Code</title>
+    <title>Lotus - Guides - Architectures: Application</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -154,48 +154,71 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/share-code.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Share Code</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/architectures/application.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Architectures</h1>
 
-<h2>Prepare</h2>
+<h2>Application</h2>
 
-<p>In our settings (<code>apps/web/application.rb</code>), there is code block that allows to share the code for <strong>all the views</strong> of our application.
-When a view includes the <code>Web::View</code> module, that block code is yielded within the context of that class.
-This is heavily inspired by Ruby Module and its <code>included</code> hook.</p>
+<p>This is an alternative Lotus architecture that should be used only at the later stage of a project, when we have already considered to extract a microservice.</p>
 
-<p>Imagine we have an application that only renders JSON.
-For each view we should specify the handled format. This can be tedious to do by hand, but we can easily DRY our code.</p>
+<p>Lotus applies the <a href="http://martinfowler.com/bliki/MonolithFirst.html">Monolith First</a> principle.
+In the early days of our product, we are moving fast and it&rsquo;s more convenient to keep all the components in the same repository and the same Ruby process.</p>
 
-<p>We craft a module in <code>apps/web/views/accept_json.rb</code>.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/accept_json.rb</span>
-<span class="k">module</span> <span class="nn">Web::Views</span>
-  <span class="k">module</span> <span class="nn">AcceptJson</span>
-    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
-      <span class="n">view</span><span class="p">.</span><span class="nf">class_eval</span> <span class="k">do</span>
-        <span class="nb">format</span> <span class="ss">:json</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<p>This is possible with Lotus <a href="/guides/architectures/container">Container architecture</a> and we <strong>strongly</strong> suggest to use it for new projects.</p>
+
+<p>Application architecture is suggested for small web components.</p>
+
+<p>To be more precise, it can handle well a large amount of code, and it has a structure really similar to Ruby on Rails applications.
+However, we want to offer a different guidance, where large projects should use different components (Container), instead of using the same component for everything.</p>
+
+<h3>Anatomy Of An Application</h3>
+
+<p>Let&rsquo;s use the application generator to create a new Lotus app.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus new admin --arch<span class="o">=</span>app
 </code></pre>
 
-<p>Then we include in all the views of our application, via <code>view.prepare</code>.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
-<span class="k">module</span> <span class="nn">Web</span>
-  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
-    <span class="n">configure</span> <span class="k">do</span>
-      <span class="c1"># ...</span>
-      <span class="n">view</span><span class="p">.</span><span class="nf">prepare</span> <span class="k">do</span>
-        <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">AcceptJson</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<p>We use the <code>--arch</code> CLI argument to specify that we want to use the Application architecture.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree -L 1
+.
+├── Gemfile
+├── Rakefile
+├── app
+├── config
+├── config.ru
+├── db
+├── lib
+├── public
+└── spec
+
+6 directories, 3 files
 </code></pre>
 
-<p class="warning">
-Code included via <code>prepare</code> is available for ALL the views of an application.
-</p>
+<p>We have almost all the directories that a <a href="/guides/architectures/container">Container</a> project has, the only difference is <code>app/</code>.
+While the other structure has an <code>apps/</code> directory, because it&rsquo;s designed to host more than one component, here we have only one.</p>
+
+<p>That directory is minimal: it hosts just a default <a href="/guides/views/layouts">layout</a> and the related template.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree app
+app
+├── controllers
+├── templates
+│   └── application.html.erb
+└── views
+    └── application_layout.rb
+</code></pre>
+
+<p>Our core application still lives in <code>lib/</code> because we still want to apply the <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>, but <code>application.rb</code> and <code>routes.rb</code> are placed under <code>config/</code>.</p>
+
+<h3>Extract A Microservice</h3>
+
+<p>Imagine we have built a product named <em>Bookshelf</em>, that is an online place where customers share their opinions about their readings, and they are also able to purchase books within our app.</p>
+
+<p>We run our business since three years now and it has a decent monthly revenue.
+During this amount of time we moved fast to implement a lot of features to make it appealing for the market.</p>
+
+<p>We went for the Container architecture, and now we have a few compontents such the admin pane, that were useful to keep in the same Ruby process, but now we want to move into a separated server.
+Theoretically all we need to do is to move it from <code>apps/admin</code> into a different repository and deploy it separately.</p>
+
+<p>However, there are some configuration files that we want to let Lotus generate for us.</p>
 
             </div>
           </div>

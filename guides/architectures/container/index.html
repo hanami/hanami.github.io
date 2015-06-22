@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - View Share Code</title>
+    <title>Lotus - Guides - Architectures: Container</title>
     <meta name="description" content="Lotus, a complete web framework for Ruby" />
     <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -154,48 +154,139 @@
 
           <div class="col-md-9 main">
             <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/share-code.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Share Code</h1>
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/architectures/container.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Architectures</h1>
 
-<h2>Prepare</h2>
+<h2>Container</h2>
 
-<p>In our settings (<code>apps/web/application.rb</code>), there is code block that allows to share the code for <strong>all the views</strong> of our application.
-When a view includes the <code>Web::View</code> module, that block code is yielded within the context of that class.
-This is heavily inspired by Ruby Module and its <code>included</code> hook.</p>
+<p>This is the default Lotus architecture.
+We <strong>strongly</strong> suggest to use it for your next product.</p>
 
-<p>Imagine we have an application that only renders JSON.
-For each view we should specify the handled format. This can be tedious to do by hand, but we can easily DRY our code.</p>
+<p>It applies two principles: <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a> and <a href="http://martinfowler.com/bliki/MonolithFirst.html">Monolith First</a>.</p>
 
-<p>We craft a module in <code>apps/web/views/accept_json.rb</code>.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/accept_json.rb</span>
-<span class="k">module</span> <span class="nn">Web::Views</span>
-  <span class="k">module</span> <span class="nn">AcceptJson</span>
-    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
-      <span class="n">view</span><span class="p">.</span><span class="nf">class_eval</span> <span class="k">do</span>
-        <span class="nb">format</span> <span class="ss">:json</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<h3>Clean Architecture</h3>
+
+<p>The main purpose of this architecture is to enforce a <strong>separation of concerns</strong> between the <strong>core</strong> of our product and the <strong>delivery mechanisms</strong>.
+The first is expressed by the set of <strong>use cases</strong> that our product implements, while the latter are interfaces to make these features available on the outside world.</p>
+
+<p>When we generate a new project we can find two important directories: <code>lib/</code> and <code>apps/</code>.
+They are home to the main parts described above.</p>
+
+<h4>Application Core</h4>
+
+<p>We implement a set of functionalities, without worrying about how they can be exposed on the outside world.
+This is the <strong>cornestone</strong> of our product, and we want to be careful on how we manage dependencies for it.</p>
+
+<p><code>Lotus::Model</code> is the default choice for persisting our Ruby objects.
+This is a <em>soft-dependency</em>, it can be removed from our <code>Gemfile</code> and replaced with something else.</p>
+
+<p>Let&rsquo;s have a look at how the <code>lib/</code> directory appears for a new generated project called <code>bookshelf</code> that uses <code>Lotus::Model</code>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree lib
+lib
+├── bookshelf
+│   ├── entities
+│   └── repositories
+├── bookshelf.rb
+└── config
+    └── mapping.rb
+
+4 directories, 2 files
 </code></pre>
 
-<p>Then we include in all the views of our application, via <code>view.prepare</code>.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
-<span class="k">module</span> <span class="nn">Web</span>
-  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
-    <span class="n">configure</span> <span class="k">do</span>
-      <span class="c1"># ...</span>
-      <span class="n">view</span><span class="p">.</span><span class="nf">prepare</span> <span class="k">do</span>
-        <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">AcceptJson</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<p>The idea is to develop our application like a Ruby gem.</p>
+
+<p>Indeed, by opening <code>lib/bookshelf.rb</code>, we find the <code>Bookshelf</code> module, which is the main namespace of our project.
+It&rsquo;s also the entry point for our application, when we require this file, we require and initialize all the code under <code>lib/</code>.</p>
+
+<p>There are two important directories:</p>
+
+<ul>
+<li><code>lib/bookshelf/entities</code></li>
+<li><code>lib/bookshelf/repositories</code></li>
+</ul>
+
+<p>They contain <a href="/guides/models/entities">entities</a> that are Ruby objects at the core of our model domain and they aren&rsquo;t aware of any persistence mechanism.
+For this purpose we have a separated concept <a href="/guides/models/repositories">repositories</a>, which are a mediator between our entities and the underlying database.</p>
+
+<p>For each entity named <code>Book</code> we can have a <code>BookRepository</code>.</p>
+
+<p>We can add as much as directories that we want, such as <code>lib/bookshelf/interactors</code> to implement our use cases.</p>
+
+<h4>Delivery Mechanisms</h4>
+
+<p>Lotus generates a default application named <code>Web</code>, which lives under <code>apps/web</code>.
+This application <strong>depends</strong> on the core of our product, as it uses entities, repositories and all the other objects defined there.</p>
+
+<p>It&rsquo;s used as web delivery mechanism, for our features.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree apps/web
+apps/web
+├── application.rb
+├── config
+│   └── routes.rb
+├── controllers
+├── public
+│   ├── javascripts
+│   └── stylesheets
+├── templates
+│   └── application.html.erb
+└── views
+    └── application_layout.rb
+
+7 directories, 4 files
 </code></pre>
 
-<p class="warning">
-Code included via <code>prepare</code> is available for ALL the views of an application.
-</p>
+<p>Let&rsquo;s have a quick look at this code.</p>
+
+<p>The file <code>apps/web/application.rb</code> contains a Lotus application named <code>Web::Application</code>, here we can configure all the settings for this <strong>component</strong> of our project.
+Directories such as <code>apps/web/controllers</code>, <code>views</code> and <code>templates</code> will contain our <a href="/guides/actions/overview">actions</a>, <a href="/guides/views/overview">views</a>, <a href="/guides/views/templates">templates</a>.</p>
+
+<p>Web assets such as javascripts and stylesheets will be automatically served by the application.</p>
+
+<h3>Monolith First</h3>
+
+<p>Our default application <code>Web</code> can be used as UI interface for our customers.
+At a certain point of our story, we want to manage our users with an admin pane.</p>
+
+<p>We know that the set of features that we&rsquo;re going to introduce, clearly don&rsquo;t belong to our main UI (<code>Web</code>).
+On the other hand, it&rsquo;s <strong>too early</strong> for us to implement a microservices architecture, only for the purpose of help our users to reset their password.</p>
+
+<p>Lotus has a solution for our problem: we can generate a new app that lives in the same Ruby process, but it&rsquo;s a separated component.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate app admin
+</code></pre>
+
+<p>This command MUST be ran from the root of our project. It will generate a new application (<code>Admin::Application</code>) under <code>apps/admin</code>.</p>
+
+<p>At the late stages of our product life, we can eventually decide to extract this into a standalone component.
+We just need to move everything under <code>apps/admin</code> into another repository and deploy it separately. See <a href="/guides/architectures/application">Application architecture</a> for more details.</p>
+
+<h3>Anatomy Of A Project</h3>
+
+<p>We have examined <code>lib/</code> and <code>apps/</code> until now, but there are other parts of a new generated project that deserve to be explained.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree -L 1
+.
+├── Gemfile
+├── Gemfile.lock
+├── Rakefile
+├── apps
+├── config
+├── config.ru
+├── db
+├── lib
+└── spec
+</code></pre>
+
+<p>Let&rsquo;s quickly introduce them:</p>
+
+<ul>
+<li><code>Gemfile</code> and <code>Gemfile.lock</code> are <a href="http://bundler.io">Bundler</a> artifacts</li>
+<li><code>Rakefile</code> describes Rake task for our project.</li>
+<li><code>config/</code> contains an important file <code>config/environment.rb</code>, which is the <strong>entry point</strong> for our project.
+By requiring it, we&rsquo;ll preload our dependencies (Ruby gems), Lotus frameworks and our code.</li>
+<li><code>config.ru</code> is a file that describes how a Rack server must run our applications.</li>
+<li><code>db/</code> contains database files (for File System adapter or SQLite).
+When our project uses a SQL database it also contains <code>db/migrations</code> and <code>db/schema.sql</code>.</li>
+<li><code>spec/</code> contains unit and acceptance tests.</li>
+</ul>
 
             </div>
           </div>

@@ -54,6 +54,15 @@
               </li>
 
               <li>
+                <span class="heading">Architectures</span>
+                <ul class="nav">
+                  <li><a href="/guides/architectures/overview">Overview</a></li>
+                  <li><a href="/guides/architectures/container">Container</a></li>
+                  <li><a href="/guides/architectures/application">Application</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Routing</span>
                 <ul class="nav">
                   <li><a href="/guides/routing/overview">Overview</a></li>
@@ -134,7 +143,9 @@
                 <ul class="nav">
                   <li><a href="/guides/command-line/applications">Applications</a></li>
                   <li><a href="/guides/command-line/generators">Generators</a></li>
+                  <li><a href="/guides/command-line/database">Database</a></li>
                   <li><a href="/guides/command-line/routes">Routes</a></li>
+                  <li><a href="/guides/command-line/version">Version</a></li>
                 </ul>
               </li>
             </ul>
@@ -475,12 +486,12 @@ We can verify it all works as expected with a unit test:</p>
 <h3>Using Repositories</h3>
 
 <p>We can use repositories to read and write entities to our database.
-Of course, in order for that to work, we need to set up it.</p>
+Of course, in order for that to work, we need to set it up.</p>
 
 <p>Lotus configurations are stored in env variables.
-This has proven to be a secure and standard way to handle credentials in deployment environments.</p>
+This has proven to be a secure and standardized way to handle credentials in deployment environments.</p>
 
-<p>In order to achieve a parity between development and production machines, we use env variables loaded from <code>.env</code> files (via <a href="https://github.com/bkeepers/dotenv">dotenv</a> gem).
+<p>In order to achieve parity between development and production machines, we use env variables loaded from <code>.env</code> files (via <a href="https://github.com/bkeepers/dotenv">dotenv</a> gem).
 Our projects has three of them: <code>.env</code> is for general settings, while <code>.env.development</code> and <code>.env.test</code> are complete files for these two envs.</p>
 
 <p>For example, review <code>.env.development</code>:</p>
