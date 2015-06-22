@@ -1,0 +1,74 @@
+---
+title: "Lotus - Guides - Architectures: Application"
+---
+
+# Architectures
+
+## Application
+
+This is an alternative Lotus architecture that should be used only at the later stage of a project, when we have already considered to extract a microservice.
+
+Lotus applies the [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html) principle.
+In the early days of our product, we are moving fast and it's more convenient to keep all the components in the same repository and the same Ruby process.
+
+This is possible with Lotus [Container architecture](/guides/architectures/container) and we **strongly** suggest to use it for new projects.
+
+Application architecture is suggested for small web components.
+
+To be more precise, it can handle well a large amount of code, and it has a structure really similar to Ruby on Rails applications.
+However, we want to offer a different guidance, where large projects should use different components (Container), instead of using the same component for everything.
+
+### Anatomy Of An Application
+
+Let's use the application generator to create a new Lotus app.
+
+```shell
+% lotus new admin --arch=app
+```
+
+We use the `--arch` CLI argument to specify that we want to use the Application architecture.
+
+```shell
+% tree -L 1
+.
+├── Gemfile
+├── Rakefile
+├── app
+├── config
+├── config.ru
+├── db
+├── lib
+├── public
+└── spec
+
+6 directories, 3 files
+```
+
+We have almost all the directories that a [Container](/guides/architectures/container) project has, the only difference is `app/`.
+While the other structure has an `apps/` directory, because it's designed to host more than one component, here we have only one.
+
+That directory is minimal: it hosts just a default [layout](/guides/views/layouts) and the related template.
+
+```shell
+% tree app
+app
+├── controllers
+├── templates
+│   └── application.html.erb
+└── views
+    └── application_layout.rb
+```
+
+Our core application still lives in `lib/` because we still want to apply the [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html), but `application.rb` and `routes.rb` are placed under `config/`.
+
+### Extract A Microservice
+
+Imagine we have built a product named _Bookshelf_, that is an online place where customers share their opinions about their readings, and they are also able to purchase books within our app.
+
+We run our business since three years now and it has a decent monthly revenue.
+During this amount of time we moved fast to implement a lot of features to make it appealing for the market.
+
+We went for the Container architecture, and now we have a few compontents such the admin pane, that were useful to keep in the same Ruby process, but now we want to move into a separated server.
+Theoretically all we need to do is to move it from `apps/admin` into a different repository and deploy it separately.
+
+However, there are some configuration files that we want to let Lotus generate for us.

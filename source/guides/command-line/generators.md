@@ -4,7 +4,7 @@ title: "Lotus - Guides - Command Line: Generators"
 
 # Command Line
 
-## Genearators
+## Generators
 
 Lotus has convenient code generators to speed up our development process.
 
