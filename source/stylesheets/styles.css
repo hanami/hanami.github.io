@@ -12342,3 +12342,8 @@ pre[class*="language-"] {
 .warning:before {
   content: "ATTENTION - "
 }
+.getting-started {
+  background-color: #fff;
+  color: #d3397e;
+  border-color: #c62c71;
+}
