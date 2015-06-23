@@ -7,21 +7,21 @@ title: "Lotus - Guides - Architectures: Container"
 ## Container
 
 This is the default Lotus architecture.
-We **strongly** suggest to use it for your next product.
+We **strongly** suggest using it for your next product.
 
-It applies two principles: [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html).
+It utilises two principles: [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html).
 
 ### Clean Architecture
 
 The main purpose of this architecture is to enforce a **separation of concerns** between the **core** of our product and the **delivery mechanisms**.
-The first is expressed by the set of **use cases** that our product implements, while the latter are interfaces to make these features available on the outside world.
+The first is expressed by the set of **use cases** that our product implements, while the latter are interfaces to make these features available to the outside world.
 
 When we generate a new project we can find two important directories: `lib/` and `apps/`.
 They are home to the main parts described above.
 
 #### Application Core
 
-We implement a set of functionalities, without worrying about how they can be exposed on the outside world.
+We implement a set of functionalities, without worrying about how they can be exposed to the outside world.
 This is the **cornestone** of our product, and we want to be careful on how we manage dependencies for it.
 
 `Lotus::Model` is the default choice for persisting our Ruby objects.
@@ -57,7 +57,7 @@ For this purpose we have a separated concept [repositories](/guides/models/repos
 
 For each entity named `Book` we can have a `BookRepository`.
 
-We can add as much as directories that we want, such as `lib/bookshelf/interactors` to implement our use cases.
+We can add as many directories that we want, such as `lib/bookshelf/interactors` to implement our use cases.
 
 #### Delivery Mechanisms
 
@@ -87,17 +87,17 @@ apps/web
 Let's have a quick look at this code.
 
 The file `apps/web/application.rb` contains a Lotus application named `Web::Application`, here we can configure all the settings for this **component** of our project.
-Directories such as `apps/web/controllers`, `views` and `templates` will contain our [actions](/guides/actions/overview), [views](/guides/views/overview), [templates](/guides/views/templates).
+Directories such as `apps/web/controllers`, `views` and `templates` will contain our [actions](/guides/actions/overview), [views](/guides/views/overview) and [templates](/guides/views/templates).
 
 Web assets such as javascripts and stylesheets will be automatically served by the application.
 
 ### Monolith First
 
-Our default application `Web` can be used as UI interface for our customers.
-At a certain point of our story, we want to manage our users with an admin pane.
+Our default application `Web` can be used as a UI interface for our customers.
+At a certain point in our story, we want to manage our users with an admin pane.
 
-We know that the set of features that we're going to introduce, clearly don't belong to our main UI (`Web`).
-On the other hand, it's **too early** for us to implement a microservices architecture, only for the purpose of help our users to reset their password.
+We know that the set of features that we're going to introduce, clearly doesn't belong to our main UI (`Web`).
+On the other hand, it's **too early** for us to implement a microservices architecture, only for the purpose of helping our users reset their password.
 
 Lotus has a solution for our problem: we can generate a new app that lives in the same Ruby process, but it's a separated component.
 
