@@ -21,7 +21,7 @@ They will be happy about today's release.
 
 ### Database Migrations
 
-Database migrations are a great way to manage schema for SQL storages.
+Database migrations is a great way to manage schema for SQL storages.
 We have introduced a generator for them and a set of shell commands for database operations.
 
 ```shell
