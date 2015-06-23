@@ -5,7 +5,7 @@ title: Lotus - Guides - Migrations
 # Migrations
 
 Migrations are a feature that allows to manage database schema via Ruby.
-They come with some [command line facilities](/guides/command-line/database] that allow to perform database operations or to [generate](/guides/command-line/generators) migrations.
+They come with some [command line facilities](/guides/command-line/database) that allow to perform database operations or to [generate](/guides/command-line/generators) migrations.
 
 Migrations are only avaliable if our application uses the [SQL adapter](/guides/models/overview).
 
