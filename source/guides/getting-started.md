@@ -604,7 +604,7 @@ end
 By using the `expose` method in our action class, we can expose the contents of our `@books` instance variable to the outside world, so that Lotus can pass it to the view.
 That's enough to make all our tests pass again!
 
-## Biding Forms To Create Records
+## Building Forms To Create Records
 
 One of the last steps that remains is to actually make it possible to add new books to the system.
 The plan is simple: we build a page with a form to enter details.
