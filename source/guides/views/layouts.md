@@ -5,7 +5,7 @@ title: Lotus - Guides - View Layouts
 # Layouts
 
 Layouts are special views.
-Their role is to render the _"fixed"_ part of the HTML markup doesn't change from page to page.
+Their role is to render the _"fixed"_ part of the HTML markup that doesn't change from page to page.
 Think of the navigation, sidebar, header, footer, etc..
 
 When we generate a new application, there is a default layout called `Web::Views::ApplicationLayout` with a `apps/web/templates/application.html.erb` template.
