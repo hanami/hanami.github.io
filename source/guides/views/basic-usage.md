@@ -108,7 +108,7 @@ end
 Once again our output is still the same, but the template isn't used at all.
 
 <p class="convention">
-If a view overrides <code>#render</code> the output MUST be a string that will the body of the response.
+If a view overrides <code>#render</code> the output MUST be a string that will be the body of the response.
 The template isn't used and it can be deleted.
 </p>
 
