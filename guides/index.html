@@ -31,10 +31,10 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <!-- <li><a href="/guides">Guides</a></li> -->
+        <li><a href="/guides">Guides</a></li>
         <li><a href="/community">Community</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.3.2</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.0</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -155,15 +155,49 @@
           <div class="col-md-9 main">
             <div class="doc-section">
               <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/index.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1 class="page-header" id="guides">Lotus Guides</h1>
+              <h1>Introduction</h1>
 
-<p class="lead">Sometimes you want to start some content with a lead paragraph. <strong>Note: In the current example each item in the sidebar is a seperate page.  You can also have all the content be on a single page and use the sidebar as anchor links.</strong></p>
+<h2>What is Lotus?</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. </p>
-<pre class="language-ruby ruby"><code><span class="nb">puts</span> <span class="s2">"Some Ruby code"</span>
-</code></pre>
+<p>Lotus is a Ruby MVC web framework comprised of many micro-libraries.
+It has a simple, stable API, a minimal DSL, and prioritises the use of plain objects over magical, over-complicated classes with too much responsibility.</p>
 
-<p>Or some <code>inline</code> code.</p>
+<p>The natural repercussion of using simple objects with clear responsibilities is more boilerplate code.
+Lotus provides ways to mitigate this extra legwork while maintaining the underlying implementation.</p>
+
+<h2>Why Choose Lotus?</h2>
+
+<p>Here are three compelling reasons to choose Lotus:</p>
+
+<h3>Lotus is Lightweight</h3>
+
+<p>Lotus&rsquo;s code is relatively short.
+It only concerns itself with the things that all web applications&mdash;regardless of implementation&mdash;need.</p>
+
+<p>Lotus ships with several optional modules and other libraries can also be included easily.</p>
+
+<h3>Lotus is Architecturally Sound</h3>
+
+<p>If you&rsquo;ve ever felt you&rsquo;re stretching against the &ldquo;Rails way&rdquo;, you&rsquo;ll appreciate Lotus.</p>
+
+<p>Lotus keeps controller actions class-based, making them easier to test in isolation.</p>
+
+<p>Lotus also encourages you to write your application logic in use cases objects (aka <em>interactors</em>).</p>
+
+<p>Views are separated from templates so the logic inside can be well-contained and tested in isolation.</p>
+
+<h3>Lotus is Threadsafe</h3>
+
+<p>Making use of green threads is a great way to boost the performance of your
+application. It shouldn&rsquo;t be hard to write thread-safe code, and Lotus (when
+the entire framework, or parts of it) is runtime threadsafe.</p>
+
+<h2>Guides</h2>
+
+<p>The guides explain high level Lotus components and how to configure, use and test them in a full stack application.
+The imaginary product that we&rsquo;ll mention is called <em>&ldquo;Bookshelf&rdquo;</em>: a online community to share readings and buy books.</p>
+
+<p>We have a <a href="/guides/getting-started">getting started guide</a>, to build our first application with Lotus.</p>
 
             </div>
           </div>
@@ -188,18 +222,18 @@
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">June 23, 2015</span>
+          <h4>Announcing Lotus v0.4.0</h4>
+          <p>Features: additional architecture, database migrations, HTML5 form helpers, CSRF Protection, Force SSL. New Core Team member, Rails Girls Summer of Code and Guides!
+</p>
+          <a href="/blog/2015/06/23/announcing-lotus-040.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">June 17, 2015</span>
           <h4>Introducing Database Migrations</h4>
           <p>New feature for the upcoming v0.4.0: database migrations. Fast operations for schema: create, drop, migrate and prepare database. Keep migrations healthy with experimental feature.
 </p>
           <a href="/blog/2015/06/17/introducing-database-migrations.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 15, 2015</span>
-          <h4>Introducing Form Helpers</h4>
-          <p>New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.
-</p>
-          <a href="/blog/2015/06/15/introducing-form-helpers.html">Read more...</a>
         </div>
     </div>
   </div>

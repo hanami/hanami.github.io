@@ -1,0 +1,455 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Announcing Lotus v0.4.0</title>
+    <meta name="description" content="Lotus, a complete web framework for Ruby" />
+    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+
+    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+
+    <script src="//use.typekit.net/xhp5wmc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <meta property="og:site_name"   content="Lotus"/>
+    <meta property="og:title"       content="Announcing Lotus v0.4.0">
+    <meta property="og:url"         content="http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html">
+    <meta property="og:description" content="Features: additional architecture, database migrations, HTML5 form helpers, CSRF Protection, Force SSL. New Core Team member, Rails Girls Summer of Code and Guides!
+">
+    <meta property="og:image"       content="http://lotusrb.org/blog/2015/06/23/announcing-lotus-040/cover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@lotus_rb">
+    <meta name="twitter:creator"     content="@lotus_rb">
+    <meta name="twitter:url"         content="http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html">
+    <meta name="twitter:title"       content="Announcing Lotus v0.4.0">
+    <meta name="twitter:description" content="Features: additional architecture, database migrations, HTML5 form helpers, CSRF Protection, Force SSL. New Core Team member, Rails Girls Summer of Code and Guides!
+">
+    <meta name="twitter:image:src"   content="http://lotusrb.org/blog/2015/06/23/announcing-lotus-040/cover.jpg">
+  </head>
+  <body class="subpage blog">
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav class="navbar navbar-fixed-top container-fluid">
+  <div class="wrapper container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/guides">Guides</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.0</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <section class="blog wrapper animated fadeIn">
+      <div class="container-fluid">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 main">
+          <img src="/blog/2015/06/23/announcing-lotus-040/cover.jpg" class="img-rounded img-responsive">
+
+          <h1 class="page-header">
+            Announcing Lotus v0.4.0
+            <div class="meta">Posted by <strong>Luca Guidi</strong> on June 23, 2015</div>
+          </h1>
+
+          <p class="lead">Features: additional architecture, database migrations, HTML5 form helpers, CSRF Protection, Force SSL. New Core Team member, Rails Girls Summer of Code and Guides!
+</p>
+          <hr>
+
+          <p>Before to dive into the details of this release, we want to say <strong>thank you</strong> to our beloved Community.
+In a year we went from an initial release with few features and people around Lotus, to a technology that is having an impact on the Ruby ecosystem.</p>
+
+<p>Without you this wouldn&rsquo;t be possible.</p>
+
+<h2>Features</h2>
+
+<p>We have listened to developers who are building applications with Lotus, the most two requested features were migrations and form helpers.
+They will be happy about today&rsquo;s release.</p>
+
+<h3>Database Migrations</h3>
+
+<p>Database migrations is a great way to manage schema for SQL storages.
+We have introduced a generator for them and a set of shell commands for database operations.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate migration create_books
+      create  db/migrations/20150623091551_create_books.rb
+</code></pre>
+
+<p>Let&rsquo;s edit it:</p>
+<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+      <span class="n">foreign_key</span> <span class="ss">:author_id</span><span class="p">,</span> <span class="ss">:authors</span><span class="p">,</span> <span class="ss">on_delete: :cascade</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+
+      <span class="n">column</span> <span class="ss">:code</span><span class="p">,</span>  <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">size: </span><span class="mi">128</span>
+      <span class="n">column</span> <span class="ss">:title</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:price</span><span class="p">,</span> <span class="no">Integer</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">default: </span><span class="mi">100</span> <span class="c1"># cents</span>
+
+      <span class="n">check</span> <span class="p">{</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We use an API to define schema changes and how to revert them.
+Methods like <code>#create_table</code>, <code>#primary_key</code> or <code>#column</code> are intuitive and feels like natural a translation from SQL to Ruby world.</p>
+
+<p>Then we can create and migrate with <code>lotus db create</code> and <code>lotus db migrate</code>, or use <code>lotus db prepare</code> as a shortcut.</p>
+
+<p><a href="/blog/2015/06/17/introducing-database-migrations.html">Read the full announcement</a>.</p>
+
+<h3>HTML5 Form Helpers</h3>
+
+<p>HTML5 forms helpers are a feature that we&rsquo;re really proud to ship today.
+They are a powerful Ruby API that <strong>doesn&rsquo;t require to monkey-patch ERb</strong>, they are <strong>template engine independent</strong> and the cleaner code solution for Ruby:</p>
+
+<ul>
+<li>Support for complex markup without the need of concatenation</li>
+<li>Auto closing HTML5 tags</li>
+<li>Support for view local variables</li>
+<li>Method override support (<code>PUT</code>/<code>PATCH</code>/<code>DELETE</code> HTTP verbs aren&rsquo;t understood by browsers)</li>
+<li>Automatic generation of HTML attributes for inputs: <code>id</code>, <code>name</code>, <code>value</code></li>
+<li>Allow to override automatic HTML attributes</li>
+<li>Read values from request params and/or given entities, to autofill <code>value</code> attributes</li>
+<li>Automatic selection of current value for radio button and select inputs</li>
+<li>CSRF Protection</li>
+<li>Infinite nested fields</li>
+<li>ORM Agnostic</li>
+</ul>
+
+<p>Here an example of form to create a book.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'form-horizontal'</span> <span class="k">do</span>
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'form-group'</span> <span class="k">do</span>
+      <span class="n">label</span>      <span class="ss">:title</span>
+      <span class="n">text_field</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'form-control'</span>
+    <span class="k">end</span>
+
+    <span class="n">submit</span> <span class="s1">'Create'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>It produces:</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/books"</span> <span class="na">id=</span><span class="s">"book-form"</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">class=</span><span class="s">"form-horizontal"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_csrf_token"</span> <span class="na">value=</span><span class="s">"e54fe87c03c8acb84f50826e969df4f00210af315f2e27e064741ecc09155a75"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"book-title"</span><span class="nt">&gt;</span>Title<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"book[title]"</span> <span class="na">id=</span><span class="s">"book-title"</span> <span class="na">value=</span><span class="s">""</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Create<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p><a href="/blog/2015/06/15/introducing-form-helpers.html">Read the full announcement</a>.</p>
+
+<h3>Application Architecture</h3>
+
+<p>Lotus is a modular web framework that can adapt to different scenarios: <strong>from small HTTP endpoints to large applications</strong>.</p>
+
+<p>We apply a great philosophy called <a href="http://martinfowler.com/bliki/MonolithFirst.html">Monolith First</a>.</p>
+
+<p>With our default architecture called <a href="/guides/architectures/container"><em>Container</em></a>, we can host several Lotus and Rack based apps <strong>within the same Ruby process</strong>.
+This helps to have fast code iterations when we develop a new product, without worrying about how it will be deployed.
+<strong>Microservices are too expensive at the beginning.</strong></p>
+
+<p>Lotus offers a gentle guidance to build component based softwares.
+Each application under <code>apps/</code> can be a customer facing UI, admin pane, HTTP API, metrics, etc..</p>
+
+<p>These modules use their own Ruby namespace, so they are ready to be extracted into separate deliverables at the later stages of our product.</p>
+
+<p>While the scenario depicted above helps to assemble large products, we sometimes have the need to add a small application to our existing environment.
+With today release we introduce <strong>a new architecture</strong> called: <a href="/guides/architectures/application"><em>Application</em></a>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus new admin --arch<span class="o">=</span>app
+</code></pre>
+
+<p>The command above will generate a new application that has a structure similar to Ruby on Rails.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree -L 1
+.
+├── Gemfile
+├── Rakefile
+├── app
+├── config
+├── config.ru
+├── db
+├── lib
+├── public
+└── spec
+
+6 directories, 3 files
+</code></pre>
+
+<p>The main difference here is that we still apply <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a> like we do with <em>Container</em>.
+That means the core of our application lives in <code>lib/</code>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree lib
+lib
+├── admin
+│   ├── entities
+│   └── repositories
+├── admin.rb
+└── config
+    └── mapping.rb
+
+4 directories, 2 files
+</code></pre>
+
+<h3>Security</h3>
+
+<p>Lotus commitment for a secure web continues with the introduction of two new features.</p>
+
+<h4>Force SSL</h4>
+
+<p>The first is about SSL.
+No one should deploy a product without taking care about the privacy of our users.
+Using an encrypted connection is the first step for a safe data transmission.</p>
+
+<p>We now support a mechanism to force secure connections in production environments.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">force_ssl</span> <span class="kp">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4>CSRF Protection</h4>
+
+<p>The second is a protection against <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">Cross Site Request Forgery (CSRF)</a> attacks.
+This is one of the most common threats for web applications, as of today Lotus apps have a defense mechanism for that.</p>
+
+<p>It&rsquo;s activated automatically when we enable sessions.</p>
+
+<h3>Breaking Changes</h3>
+
+<p>We care <strong>a lot</strong> about the stability of our public APIs, because it involves companies investment on Lotus.
+Each breaking change is thoughtfully evaluated and we wait for minor releases like this to make developers aware of them.</p>
+
+<p>Designing a large software like Lotus is hard and <strong>we make mistakes</strong>.
+Before to hit 1.0, we want to be sure that we have fixed them.</p>
+
+<h4>Environment Configurations</h4>
+
+<p>Until <code>0.3</code> environment configurations (<code>.env</code>) were placed under <code>config/</code> directory.
+For compatibility with other tools, now Lotus expects them at the root of the project. See the <a href="https://github.com/lotus/lotus/pull/242">change</a>.</p>
+
+<h4>Lotus::Interactor</h4>
+
+<p><code>Lotus::Interactor::Result</code> no longer makes available its instance variables automatically.
+We need to explicitly expose them. See the <a href="https://github.com/lotus/utils/pull/80">change</a>.</p>
+
+<h4>Pluralized RESTful Routes</h4>
+
+<p>RESTful Routes have now the correct pluralization and singularization for their names. See the <a href="https://github.com/lotus/router/pull/51">change</a>.</p>
+
+<h2>New Core Team Member</h2>
+
+<p>Today we&rsquo;re pleased to announce that <a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a> is joining our Core Team.</p>
+
+<p>I still remember when a few months ago Alfonso confessed in chat that he never did OSS before, but he wanted to start with Lotus.
+It took some time to get the first pull request accepted, but he put all his effort to reach the goal and he&rsquo;s now a committer.</p>
+
+<p>Alfonso is the proof that you can always start contributing to Open Source.</p>
+
+<h2>Rails Girls Summer of Code</h2>
+
+<p>One initiative that we&rsquo;re actively supporting to let new people to get involved with software development is <a href="http://railsgirlssummerofcode.org/">Rails Girls Summer of Code</a>.</p>
+
+<p>It&rsquo;s crowdfunded program to let students to be paid for their work in Open Source.
+We&rsquo;re a technology partner and big fans of RGSoC.</p>
+
+<p>It&rsquo;s gonna be a thrilling summer!</p>
+
+<h2>Community</h2>
+
+<p>We strive for an open Community, where <strong>everyone</strong> can feel <strong>safe and accepted</strong>.
+We have a <a href="/community">Code of Conduct</a> to handle any eventual controversy, but at the same time we&rsquo;re proactively leading by example.</p>
+
+<p>However, <strong>we have a problem here</strong>: our Core Team is made of three men.</p>
+
+<p>The lack of diversity worries us, and we recognize it as big problem to fix.
+Lotus has still a small Community, but we want to grow it right.</p>
+
+<p>We want to start a new chapter by talking with code charity organizations and individuals who are new to our industry.
+We want to hear their stories, we want to listen to their problems and understand how we can help.</p>
+
+<p>As last thing I want to say thank you to all the people who helped with this release: <a href="https://github.com/joneslee85">Trung Lê</a>, <a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>, <a href="https://github.com/mymai91">My Mai</a>, <a href="https://github.com/hieuk09">Hiếu Nguyễn</a>, <a href="https://github.com/nguyenngoc2505">Ngọc Nguyễn</a>, <a href="https://github.com/tomkadwill">Tom Kadwill</a>, <a href="https://github.com/avdgaag">Arjan van der Gaag</a>, <a href="https://github.com/jeremyf">Jeremy Friesen</a>, <a href="https://github.com/mjbellantoni">Matthew Bellantoni</a> and <a href="https://github.com/g3d">Bohdan V.</a>.</p>
+
+<h2>Guides</h2>
+
+<p>During the past months the most common request for new developers were about guides.
+Lotus brings new ideas that need to be explained to people who never get exposed to it.</p>
+
+<p>We want to be beginner friendly.
+We wrote a new extensive <a href="/guides">section</a> in our website to explain what&rsquo;s Lotus, what priciples it applies and <a href="/guides/getting-started">how to build the first application</a>.</p>
+
+<h2>Conclusion</h2>
+
+<p>Lotus can be considered today a good choice to build web applications with Ruby.
+We&rsquo;ll continue to deliver value and new features starting from tomorrow.</p>
+
+<p><a href="/guides/getting-started">Happy hacking</a>.</p>
+
+<div style="display: inline">
+
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.4.0" data-url="http://lotusrb.org/blog/2015-06-23-announcing-lotus-040.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015-06-23-announcing-lotus-040.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+
+          <hr>
+          <ul class="rrssb-buttons clearfix rrssb-1">
+            <li class="rrssb-facebook" data-initwidth="14.285714285714286" data-size="63" style="width: 14.2857142857143%;">
+            <!-- Replace with your URL. For best results, make sure you page has the proper FB Open Graph tags in header:
+            https://developers.facebook.com/docs/opengraph/howtos/maximizing-distribution-media-content/ -->
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F06%2F23%2Fannouncing-lotus-040.html" class="popup">
+              <span class="rrssb-icon">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
+                <path d="M27.825,4.783c0-2.427-2.182-4.608-4.608-4.608H4.783c-2.422,0-4.608,2.182-4.608,4.608v18.434
+                c0,2.427,2.181,4.608,4.608,4.608H14V17.379h-3.379v-4.608H14v-1.795c0-3.089,2.335-5.885,5.192-5.885h3.718v4.608h-3.726
+                c-0.408,0-0.884,0.492-0.884,1.236v1.836h4.609v4.608h-4.609v10.446h4.916c2.422,0,4.608-2.188,4.608-4.608V4.783z"></path>
+                </svg>
+              </span>
+              <span class="rrssb-text">facebook</span>
+            </a>
+            </li>
+            <li class="rrssb-twitter" data-initwidth="14.285714285714286" data-size="50" style="width: 14.2857142857143%;">
+            <!-- Replace href with your Meta and URL information  -->
+            <a href="http://twitter.com/home?status=Announcing+Lotus+v0.4.0+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F06%2F23%2Fannouncing-lotus-040.html+%2Fvia+%40lotus_rb+%23lotusrb" class="popup">
+              <span class="rrssb-icon">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
+                <path d="M24.253,8.756C24.689,17.08,18.297,24.182,9.97,24.62c-3.122,0.162-6.219-0.646-8.861-2.32
+                c2.703,0.179,5.376-0.648,7.508-2.321c-2.072-0.247-3.818-1.661-4.489-3.638c0.801,0.128,1.62,0.076,2.399-0.155
+                C4.045,15.72,2.215,13.6,2.115,11.077c0.688,0.275,1.426,0.407,2.168,0.386c-2.135-1.65-2.729-4.621-1.394-6.965
+                C5.575,7.816,9.54,9.84,13.803,10.071c-0.842-2.739,0.694-5.64,3.434-6.482c2.018-0.623,4.212,0.044,5.546,1.683
+                c1.186-0.213,2.318-0.662,3.329-1.317c-0.385,1.256-1.247,2.312-2.399,2.942c1.048-0.106,2.069-0.394,3.019-0.851
+                C26.275,7.229,25.39,8.196,24.253,8.756z"></path>
+                </svg>
+              </span>
+              <span class="rrssb-text">twitter</span>
+            </a>
+            </li>
+            <li class="rrssb-reddit">
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F06%2F23%2Fannouncing-lotus-040.html">
+              <span class="rrssb-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve"><g><path d="M11.794 15.316c0-1.029-0.835-1.895-1.866-1.895c-1.03 0-1.893 0.865-1.893 1.895s0.863 1.9 1.9 1.9 C10.958 17.2 11.8 16.3 11.8 15.316z"/><path d="M18.1 13.422c-1.029 0-1.895 0.864-1.895 1.895c0 1 0.9 1.9 1.9 1.865c1.031 0 1.869-0.836 1.869-1.865 C19.969 14.3 19.1 13.4 18.1 13.422z"/><path d="M17.527 19.791c-0.678 0.678-1.826 1.006-3.514 1.006c-0.004 0-0.009 0-0.014 0c-0.004 0-0.01 0-0.015 0 c-1.686 0-2.834-0.328-3.51-1.005c-0.264-0.265-0.693-0.265-0.958 0c-0.264 0.265-0.264 0.7 0 1 c0.943 0.9 2.4 1.4 4.5 1.402c0.005 0 0 0 0 0c0.005 0 0 0 0 0c2.066 0 3.527-0.459 4.47-1.402 c0.265-0.264 0.265-0.693 0.002-0.958C18.221 19.5 17.8 19.5 17.5 19.791z"/><path d="M27.707 13.267c0-1.785-1.453-3.237-3.236-3.237c-0.793 0-1.518 0.287-2.082 0.761c-2.039-1.295-4.646-2.069-7.438-2.219 l1.483-4.691l4.062 0.956c0.071 1.4 1.3 2.6 2.7 2.555c1.488 0 2.695-1.208 2.695-2.695C25.881 3.2 24.7 2 23.2 2 c-1.059 0-1.979 0.616-2.42 1.508l-4.633-1.091c-0.344-0.081-0.693 0.118-0.803 0.455l-1.793 5.7 C10.548 8.6 7.7 9.4 5.6 10.75C5.006 10.3 4.3 10 3.5 10.029c-1.785 0-3.237 1.452-3.237 3.2 c0 1.1 0.6 2.1 1.4 2.69c-0.04 0.272-0.061 0.551-0.061 0.831c0 2.3 1.3 4.4 3.7 5.9 c2.299 1.5 5.3 2.3 8.6 2.325c3.228 0 6.271-0.825 8.571-2.325c2.387-1.56 3.7-3.66 3.7-5.917 c0-0.26-0.016-0.514-0.051-0.768C27.088 15.5 27.7 14.4 27.7 13.267z M23.186 3.355c0.74 0 1.3 0.6 1.3 1.3 c0 0.738-0.6 1.34-1.34 1.34s-1.342-0.602-1.342-1.34C21.844 4 22.4 3.4 23.2 3.355z M1.648 13.3 c0-1.038 0.844-1.882 1.882-1.882c0.31 0 0.6 0.1 0.9 0.209c-1.049 0.868-1.813 1.861-2.26 2.9 C1.832 14.2 1.6 13.8 1.6 13.267z M21.773 21.57c-2.082 1.357-4.863 2.105-7.831 2.105c-2.967 0-5.747-0.748-7.828-2.105 c-1.991-1.301-3.088-3-3.088-4.782c0-1.784 1.097-3.484 3.088-4.784c2.081-1.358 4.861-2.106 7.828-2.106 c2.967 0 5.7 0.7 7.8 2.106c1.99 1.3 3.1 3 3.1 4.784C24.859 18.6 23.8 20.3 21.8 21.57z M25.787 14.6 c-0.432-1.084-1.191-2.095-2.244-2.977c0.273-0.156 0.59-0.245 0.928-0.245c1.035 0 1.9 0.8 1.9 1.9 C26.354 13.8 26.1 14.3 25.8 14.605z"/></g></svg>
+              </span>
+              <span class="rrssb-text">reddit</span>
+            </a>
+            </li>
+            <li class="rrssb-googleplus" data-initwidth="14.285714285714286" data-size="55" style="width: 14.2857142857143%;">
+            <!-- Replace href with your meta and URL information.  -->
+            <a href="https://plus.google.com/share?url=Announcing+Lotus+v0.4.0+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F06%2F23%2Fannouncing-lotus-040.html" class="popup">
+              <span class="rrssb-icon">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
+                <g>
+                <g>
+                <path d="M14.703,15.854l-1.219-0.948c-0.372-0.308-0.88-0.715-0.88-1.459c0-0.748,0.508-1.223,0.95-1.663
+                c1.42-1.119,2.839-2.309,2.839-4.817c0-2.58-1.621-3.937-2.399-4.581h2.097l2.202-1.383h-6.67c-1.83,0-4.467,0.433-6.398,2.027
+                C3.768,4.287,3.059,6.018,3.059,7.576c0,2.634,2.022,5.328,5.604,5.328c0.339,0,0.71-0.033,1.083-0.068
+                c-0.167,0.408-0.336,0.748-0.336,1.324c0,1.04,0.551,1.685,1.011,2.297c-1.524,0.104-4.37,0.273-6.467,1.562
+                c-1.998,1.188-2.605,2.916-2.605,4.137c0,2.512,2.358,4.84,7.289,4.84c5.822,0,8.904-3.223,8.904-6.41
+                c0.008-2.327-1.359-3.489-2.829-4.731H14.703z M10.269,11.951c-2.912,0-4.231-3.765-4.231-6.037c0-0.884,0.168-1.797,0.744-2.511
+                c0.543-0.679,1.489-1.12,2.372-1.12c2.807,0,4.256,3.798,4.256,6.242c0,0.612-0.067,1.694-0.845,2.478
+                c-0.537,0.55-1.438,0.948-2.295,0.951V11.951z M10.302,25.609c-3.621,0-5.957-1.732-5.957-4.142c0-2.408,2.165-3.223,2.911-3.492
+                c1.421-0.479,3.25-0.545,3.555-0.545c0.338,0,0.52,0,0.766,0.034c2.574,1.838,3.706,2.757,3.706,4.479
+                c-0.002,2.073-1.736,3.665-4.982,3.649L10.302,25.609z"></path>
+                <polygon points="23.254,11.89 23.254,8.521 21.569,8.521 21.569,11.89 18.202,11.89 18.202,13.604 21.569,13.604 21.569,17.004
+                23.254,17.004 23.254,13.604 26.653,13.604 26.653,11.89      "></polygon>
+                </g>
+                </g>
+                </svg>
+              </span>
+              <span class="rrssb-text">google+</span>
+            </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  <section class="email-signup">
+  <div class="container-fluid wrapper">
+    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
+      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="primary">
+  <div class="container-fluid wrapper">
+    <div class="row">
+      <a class="logo col-md-3" href="/">logo</a>
+        <div class="col-md-4">
+          <span class="date">June 23, 2015</span>
+          <h4>Announcing Lotus v0.4.0</h4>
+          <p>Features: additional architecture, database migrations, HTML5 form helpers, CSRF Protection, Force SSL. New Core Team member, Rails Girls Summer of Code and Guides!
+</p>
+          <a href="/blog/2015/06/23/announcing-lotus-040.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
+          <span class="date">June 17, 2015</span>
+          <h4>Introducing Database Migrations</h4>
+          <p>New feature for the upcoming v0.4.0: database migrations. Fast operations for schema: create, drop, migrate and prepare database. Keep migrations healthy with experimental feature.
+</p>
+          <a href="/blog/2015/06/17/introducing-database-migrations.html">Read more...</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="sub-footer wrapper">
+    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
+    <br>
+    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
+    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
+    <ul class="social">
+      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
+      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

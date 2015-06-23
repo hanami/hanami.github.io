@@ -4,13 +4,275 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-06-17T16:34:00+02:00</updated>
+   <updated>2015-06-23T10:23:00+02:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Announcing Lotus v0.4.0</title>
+       <id>http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html"/>
+       <updated>2015-06-23T10:23:00+02:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Features: additional architecture, database migrations, HTML5 form helpers, CSRF Protection, Force SSL. New Core Team member, Rails Girls Summer of Code and Guides!
+
+       </summary>
+       <content type="html"><![CDATA[<p>Before to dive into the details of this release, we want to say <strong>thank you</strong> to our beloved Community.
+In a year we went from an initial release with few features and people around Lotus, to a technology that is having an impact on the Ruby ecosystem.</p>
+
+<p>Without you this wouldn&rsquo;t be possible.</p>
+
+<h2>Features</h2>
+
+<p>We have listened to developers who are building applications with Lotus, the most two requested features were migrations and form helpers.
+They will be happy about today&rsquo;s release.</p>
+
+<h3>Database Migrations</h3>
+
+<p>Database migrations is a great way to manage schema for SQL storages.
+We have introduced a generator for them and a set of shell commands for database operations.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate migration create_books
+      create  db/migrations/20150623091551_create_books.rb
+</code></pre>
+
+<p>Let&rsquo;s edit it:</p>
+<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+      <span class="n">foreign_key</span> <span class="ss">:author_id</span><span class="p">,</span> <span class="ss">:authors</span><span class="p">,</span> <span class="ss">on_delete: :cascade</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+
+      <span class="n">column</span> <span class="ss">:code</span><span class="p">,</span>  <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">size: </span><span class="mi">128</span>
+      <span class="n">column</span> <span class="ss">:title</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:price</span><span class="p">,</span> <span class="no">Integer</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">default: </span><span class="mi">100</span> <span class="c1"># cents</span>
+
+      <span class="n">check</span> <span class="p">{</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We use an API to define schema changes and how to revert them.
+Methods like <code>#create_table</code>, <code>#primary_key</code> or <code>#column</code> are intuitive and feels like natural a translation from SQL to Ruby world.</p>
+
+<p>Then we can create and migrate with <code>lotus db create</code> and <code>lotus db migrate</code>, or use <code>lotus db prepare</code> as a shortcut.</p>
+
+<p><a href="/blog/2015/06/17/introducing-database-migrations.html">Read the full announcement</a>.</p>
+
+<h3>HTML5 Form Helpers</h3>
+
+<p>HTML5 forms helpers are a feature that we&rsquo;re really proud to ship today.
+They are a powerful Ruby API that <strong>doesn&rsquo;t require to monkey-patch ERb</strong>, they are <strong>template engine independent</strong> and the cleaner code solution for Ruby:</p>
+
+<ul>
+<li>Support for complex markup without the need of concatenation</li>
+<li>Auto closing HTML5 tags</li>
+<li>Support for view local variables</li>
+<li>Method override support (<code>PUT</code>/<code>PATCH</code>/<code>DELETE</code> HTTP verbs aren&rsquo;t understood by browsers)</li>
+<li>Automatic generation of HTML attributes for inputs: <code>id</code>, <code>name</code>, <code>value</code></li>
+<li>Allow to override automatic HTML attributes</li>
+<li>Read values from request params and/or given entities, to autofill <code>value</code> attributes</li>
+<li>Automatic selection of current value for radio button and select inputs</li>
+<li>CSRF Protection</li>
+<li>Infinite nested fields</li>
+<li>ORM Agnostic</li>
+</ul>
+
+<p>Here an example of form to create a book.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'form-horizontal'</span> <span class="k">do</span>
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'form-group'</span> <span class="k">do</span>
+      <span class="n">label</span>      <span class="ss">:title</span>
+      <span class="n">text_field</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'form-control'</span>
+    <span class="k">end</span>
+
+    <span class="n">submit</span> <span class="s1">'Create'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>It produces:</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/books"</span> <span class="na">id=</span><span class="s">"book-form"</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">class=</span><span class="s">"form-horizontal"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_csrf_token"</span> <span class="na">value=</span><span class="s">"e54fe87c03c8acb84f50826e969df4f00210af315f2e27e064741ecc09155a75"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"book-title"</span><span class="nt">&gt;</span>Title<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"book[title]"</span> <span class="na">id=</span><span class="s">"book-title"</span> <span class="na">value=</span><span class="s">""</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Create<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+
+<p><a href="/blog/2015/06/15/introducing-form-helpers.html">Read the full announcement</a>.</p>
+
+<h3>Application Architecture</h3>
+
+<p>Lotus is a modular web framework that can adapt to different scenarios: <strong>from small HTTP endpoints to large applications</strong>.</p>
+
+<p>We apply a great philosophy called <a href="http://martinfowler.com/bliki/MonolithFirst.html">Monolith First</a>.</p>
+
+<p>With our default architecture called <a href="/guides/architectures/container"><em>Container</em></a>, we can host several Lotus and Rack based apps <strong>within the same Ruby process</strong>.
+This helps to have fast code iterations when we develop a new product, without worrying about how it will be deployed.
+<strong>Microservices are too expensive at the beginning.</strong></p>
+
+<p>Lotus offers a gentle guidance to build component based softwares.
+Each application under <code>apps/</code> can be a customer facing UI, admin pane, HTTP API, metrics, etc..</p>
+
+<p>These modules use their own Ruby namespace, so they are ready to be extracted into separate deliverables at the later stages of our product.</p>
+
+<p>While the scenario depicted above helps to assemble large products, we sometimes have the need to add a small application to our existing environment.
+With today release we introduce <strong>a new architecture</strong> called: <a href="/guides/architectures/application"><em>Application</em></a>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus new admin --arch<span class="o">=</span>app
+</code></pre>
+
+<p>The command above will generate a new application that has a structure similar to Ruby on Rails.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree -L 1
+.
+├── Gemfile
+├── Rakefile
+├── app
+├── config
+├── config.ru
+├── db
+├── lib
+├── public
+└── spec
+
+6 directories, 3 files
+</code></pre>
+
+<p>The main difference here is that we still apply <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a> like we do with <em>Container</em>.
+That means the core of our application lives in <code>lib/</code>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree lib
+lib
+├── admin
+│   ├── entities
+│   └── repositories
+├── admin.rb
+└── config
+    └── mapping.rb
+
+4 directories, 2 files
+</code></pre>
+
+<h3>Security</h3>
+
+<p>Lotus commitment for a secure web continues with the introduction of two new features.</p>
+
+<h4>Force SSL</h4>
+
+<p>The first is about SSL.
+No one should deploy a product without taking care about the privacy of our users.
+Using an encrypted connection is the first step for a safe data transmission.</p>
+
+<p>We now support a mechanism to force secure connections in production environments.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">force_ssl</span> <span class="kp">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4>CSRF Protection</h4>
+
+<p>The second is a protection against <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">Cross Site Request Forgery (CSRF)</a> attacks.
+This is one of the most common threats for web applications, as of today Lotus apps have a defense mechanism for that.</p>
+
+<p>It&rsquo;s activated automatically when we enable sessions.</p>
+
+<h3>Breaking Changes</h3>
+
+<p>We care <strong>a lot</strong> about the stability of our public APIs, because it involves companies investment on Lotus.
+Each breaking change is thoughtfully evaluated and we wait for minor releases like this to make developers aware of them.</p>
+
+<p>Designing a large software like Lotus is hard and <strong>we make mistakes</strong>.
+Before to hit 1.0, we want to be sure that we have fixed them.</p>
+
+<h4>Environment Configurations</h4>
+
+<p>Until <code>0.3</code> environment configurations (<code>.env</code>) were placed under <code>config/</code> directory.
+For compatibility with other tools, now Lotus expects them at the root of the project. See the <a href="https://github.com/lotus/lotus/pull/242">change</a>.</p>
+
+<h4>Lotus::Interactor</h4>
+
+<p><code>Lotus::Interactor::Result</code> no longer makes available its instance variables automatically.
+We need to explicitly expose them. See the <a href="https://github.com/lotus/utils/pull/80">change</a>.</p>
+
+<h4>Pluralized RESTful Routes</h4>
+
+<p>RESTful Routes have now the correct pluralization and singularization for their names. See the <a href="https://github.com/lotus/router/pull/51">change</a>.</p>
+
+<h2>New Core Team Member</h2>
+
+<p>Today we&rsquo;re pleased to announce that <a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a> is joining our Core Team.</p>
+
+<p>I still remember when a few months ago Alfonso confessed in chat that he never did OSS before, but he wanted to start with Lotus.
+It took some time to get the first pull request accepted, but he put all his effort to reach the goal and he&rsquo;s now a committer.</p>
+
+<p>Alfonso is the proof that you can always start contributing to Open Source.</p>
+
+<h2>Rails Girls Summer of Code</h2>
+
+<p>One initiative that we&rsquo;re actively supporting to let new people to get involved with software development is <a href="http://railsgirlssummerofcode.org/">Rails Girls Summer of Code</a>.</p>
+
+<p>It&rsquo;s crowdfunded program to let students to be paid for their work in Open Source.
+We&rsquo;re a technology partner and big fans of RGSoC.</p>
+
+<p>It&rsquo;s gonna be a thrilling summer!</p>
+
+<h2>Community</h2>
+
+<p>We strive for an open Community, where <strong>everyone</strong> can feel <strong>safe and accepted</strong>.
+We have a <a href="/community">Code of Conduct</a> to handle any eventual controversy, but at the same time we&rsquo;re proactively leading by example.</p>
+
+<p>However, <strong>we have a problem here</strong>: our Core Team is made of three men.</p>
+
+<p>The lack of diversity worries us, and we recognize it as big problem to fix.
+Lotus has still a small Community, but we want to grow it right.</p>
+
+<p>We want to start a new chapter by talking with code charity organizations and individuals who are new to our industry.
+We want to hear their stories, we want to listen to their problems and understand how we can help.</p>
+
+<p>As last thing I want to say thank you to all the people who helped with this release: <a href="https://github.com/joneslee85">Trung Lê</a>, <a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>, <a href="https://github.com/mymai91">My Mai</a>, <a href="https://github.com/hieuk09">Hiếu Nguyễn</a>, <a href="https://github.com/nguyenngoc2505">Ngọc Nguyễn</a>, <a href="https://github.com/tomkadwill">Tom Kadwill</a>, <a href="https://github.com/avdgaag">Arjan van der Gaag</a>, <a href="https://github.com/jeremyf">Jeremy Friesen</a>, <a href="https://github.com/mjbellantoni">Matthew Bellantoni</a> and <a href="https://github.com/g3d">Bohdan V.</a>.</p>
+
+<h2>Guides</h2>
+
+<p>During the past months the most common request for new developers were about guides.
+Lotus brings new ideas that need to be explained to people who never get exposed to it.</p>
+
+<p>We want to be beginner friendly.
+We wrote a new extensive <a href="/guides">section</a> in our website to explain what&rsquo;s Lotus, what priciples it applies and <a href="/guides/getting-started">how to build the first application</a>.</p>
+
+<h2>Conclusion</h2>
+
+<p>Lotus can be considered today a good choice to build web applications with Ruby.
+We&rsquo;ll continue to deliver value and new features starting from tomorrow.</p>
+
+<p><a href="/guides/getting-started">Happy hacking</a>.</p>
+
+<div style="display: inline">
+
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.4.0" data-url="http://lotusrb.org/blog/2015-06-23-announcing-lotus-040.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015-06-23-announcing-lotus-040.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+]]></content>
+     </entry>
      <entry>
        <title>Introducing Database Migrations</title>
        <id>http://lotusrb.org/blog/2015/06/17/introducing-database-migrations.html</id>
@@ -944,54 +1206,6 @@ We&rsquo;re pushing to ship soon.</p>
 <li>Add Destroy CLI [<a href="https://github.com/lotus/lotus/pull/194">details</a>]</li>
 <li>Add repository timestamps [<a href="https://github.com/lotus/model/pull/169">details</a>]</li>
 <li>Implementation of dirty check for entity [<a href="https://github.com/lotus/model/pull/172">details</a>]</li>
-<li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>Application generator [<a href="https://github.com/lotus/lotus/pull/181">details</a>]</li>
-<li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/11">details</a>]</li>
-<li>Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
-</ul>
-
-<h2>Roadmap</h2>
-
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
-]]></content>
-     </entry>
-     <entry>
-       <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/03/29/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/03/29/weekly-changelog.html"/>
-       <updated>2015-03-29T11:40:00+02:00</updated>
-       <author>
-         <name>Trung Lê</name>
-       </author>
-       <summary>
-         Changelog from Mar 24th to Mar 29nd 2015
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Releases</h2>
-
-<ul>
-<li>Released lotusrb 0.3.0</li>
-<li>Released lotus-validations 0.3.0</li>
-<li>Released lotus-view 0.3.0</li>
-<li>Released lotus-controller 0.3.0</li>
-<li>Released lotus-model 0.3.0</li>
-<li>Released lotus-router 0.3.0</li>
-<li>Released lotus-utils 0.4.0</li>
-<li>Released lotus-helpers 0.1.0</li>
-</ul>
-
-<h2>Completed</h2>
-
-<ul>
-<li>Introduce link_to helper [<a href="https://github.com/lotus/helpers/pull/18">details</a>]</li>
-<li>Rename Query#desc to Query#reverse_order [<a href="https://github.com/lotus/model/pull/166">details</a>]</li>
-<li>Ensure to load routes when testing in isolation [<a href="https://github.com/lotus/lotus/pull/188">details</a>]</li>
-</ul>
-
-<h2>Development</h2>
-
-<ul>
 <li>Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
 <li>Application generator [<a href="https://github.com/lotus/lotus/pull/181">details</a>]</li>
 <li>Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
