@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Architectures"
+title: Lotus - Guides - Architectures
 ---
 
 # Architectures
