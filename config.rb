@@ -165,7 +165,7 @@ helpers do
   end
 
   def lotus_version
-    '0.3.2'
+    '0.4.0'
   end
 end
 
