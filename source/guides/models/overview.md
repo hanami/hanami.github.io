@@ -45,7 +45,7 @@ Lotus::Model.configure do
   # Available choices:
   #
   #  * File System adapter
-  #    adapter type: :file_system, uri: 'memory://localhost/bookshelf_development'
+  #    adapter type: :file_system, uri: 'file:///db/bookshelf_development'
   #
   #  * Memory adapter
   #    adapter type: :memory, uri: 'memory://localhost/bookshelf_development'
