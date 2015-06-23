@@ -472,7 +472,7 @@ We can use migrations to apply changes to our database schema.
 With our new experience modelling data, we can get to work displaying dynamic data on our book listing page.
 Let's adjust the feature test we created earlier:
 
-```
+```ruby
 # spec/web/features/list_books_spec.rb
 require 'features_helper'
 
