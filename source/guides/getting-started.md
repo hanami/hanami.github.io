@@ -319,7 +319,7 @@ In this way we're able to save any Ruby object in a database.
 That means we can adapt Lotus to use existing Ruby projects and to provide a way to persist them.
 Read more about entities and repositories in the [models guide](/guides/models/overview).
 
-Lotus ships with a generator for models, so let's use it create a `Book` entitity and the corresponding repository:
+Lotus ships with a generator for models, so let's use it create a `Book` entity and the corresponding repository:
 
 ```
 % lotus generate model book
@@ -472,7 +472,7 @@ We can use migrations to apply changes to our database schema.
 With our new experience modelling data, we can get to work displaying dynamic data on our book listing page.
 Let's adjust the feature test we created earlier:
 
-```
+```ruby
 # spec/web/features/list_books_spec.rb
 require 'features_helper'
 
@@ -604,7 +604,7 @@ end
 By using the `expose` method in our action class, we can expose the contents of our `@books` instance variable to the outside world, so that Lotus can pass it to the view.
 That's enough to make all our tests pass again!
 
-## Buiding Forms To Create Records
+## Building Forms To Create Records
 
 One of the last steps that remains is to actually make it possible to add new books to the system.
 The plan is simple: we build a page with a form to enter details.
@@ -671,7 +671,7 @@ Let's use [form helpers](/guides/helpers/forms) to build this form in `apps/web/
       text_field :title
     end
 
-    div class: 'intput' do
+    div class: 'input' do
       label      :author
       text_field :author
     end
