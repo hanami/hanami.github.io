@@ -97,7 +97,6 @@
                   <li><a href="/guides/views/overview">Overview</a></li>
                   <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
                   <li><a href="/guides/views/templates">Templates</a></li>
-                  <li><a href="/guides/views/partials">Partials</a></li>
                   <li><a href="/guides/views/mime-types">MIME Types</a></li>
                   <li><a href="/guides/views/layouts">Layouts</a></li>
                   <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
@@ -298,7 +297,7 @@ Now we can create the index action.</p>
 
 <p>This is an empty action that doesn&rsquo;t implement any business logic.
 Each action has a corresponding view, which is a Ruby object and needs to be added in order to complete the request.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/home/index.erb</span>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/home/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Views::Home</span>
   <span class="k">class</span> <span class="nc">Index</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
@@ -446,7 +445,7 @@ In this way we&rsquo;re able to save any Ruby object in a database.
 That means we can adapt Lotus to use existing Ruby projects and to provide a way to persist them.
 Read more about entities and repositories in the <a href="/guides/models/overview">models guide</a>.</p>
 
-<p>Lotus ships with a generator for models, so let&rsquo;s use it create a <code>Book</code> entitity and the corresponding repository:</p>
+<p>Lotus ships with a generator for models, so let&rsquo;s use it create a <code>Book</code> entity and the corresponding repository:</p>
 <pre class="language-ruby plaintext"><code>% lotus generate model book
 create  lib/bookshelf/entities/book.rb
 create  lib/bookshelf/repositories/book_repository.rb
@@ -578,22 +577,22 @@ We can use migrations to apply changes to our database schema.</p>
 
 <p>With our new experience modelling data, we can get to work displaying dynamic data on our book listing page.
 Let&rsquo;s adjust the feature test we created earlier:</p>
-<pre class="language-ruby plaintext"><code># spec/web/features/list_books_spec.rb
-require 'features_helper'
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/list_books_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
 
-describe 'List books' do
-  before do
-    BookRepository.clear
+<span class="n">describe</span> <span class="s1">'List books'</span> <span class="k">do</span>
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="no">BookRepository</span><span class="p">.</span><span class="nf">clear</span>
 
-    BookRepository.create(Book.new(title: 'PoEEA', author: 'Martin Fowler'))
-    BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
-  end
+    <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'PoEEA'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Martin Fowler'</span><span class="p">))</span>
+    <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'TDD'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Kent Beck'</span><span class="p">))</span>
+  <span class="k">end</span>
 
-  it 'shows a book element for each book' do
-    visit '/books'
-    assert page.has_css?('.book', count: 2), "Expected to find 2 books"
-  end
-end
+  <span class="n">it</span> <span class="s1">'shows a book element for each book'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/books'</span>
+    <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_css?</span><span class="p">(</span><span class="s1">'.book'</span><span class="p">,</span> <span class="ss">count: </span><span class="mi">2</span><span class="p">),</span> <span class="s2">"Expected to find 2 books"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 
 <p>We actually create the required records in our test and then assert the correct number of book classes on the page.
@@ -699,7 +698,7 @@ Now we&rsquo;ve specified that the action exposes <code>:books</code>, we can im
 <p>By using the <code>expose</code> method in our action class, we can expose the contents of our <code>@books</code> instance variable to the outside world, so that Lotus can pass it to the view.
 That&rsquo;s enough to make all our tests pass again!</p>
 
-<h2>Buiding Forms To Create Records</h2>
+<h2>Building Forms To Create Records</h2>
 
 <p>One of the last steps that remains is to actually make it possible to add new books to the system.
 The plan is simple: we build a page with a form to enter details.</p>
@@ -758,7 +757,7 @@ First, create a new action for our &ldquo;New Book&rdquo; page:</p>
       <span class="n">text_field</span> <span class="ss">:title</span>
     <span class="k">end</span>
 
-    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'intput'</span> <span class="k">do</span>
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'input'</span> <span class="k">do</span>
       <span class="n">label</span>      <span class="ss">:author</span>
       <span class="n">text_field</span> <span class="ss">:author</span>
     <span class="k">end</span>
@@ -794,7 +793,7 @@ Let&rsquo;s express them as unit tests:</p>
 <span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/controllers/books/create'</span>
 
 <span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span> <span class="k">do</span>
-  <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'Confident Ruby'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Advi Grimm'</span> <span class="p">}]</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'Confident Ruby'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Avdi Grimm'</span> <span class="p">}]</span> <span class="p">}</span>
 
   <span class="n">after</span> <span class="k">do</span>
     <span class="no">BookRepository</span><span class="p">.</span><span class="nf">clear</span>

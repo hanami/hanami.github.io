@@ -97,7 +97,6 @@
                   <li><a href="/guides/views/overview">Overview</a></li>
                   <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
                   <li><a href="/guides/views/templates">Templates</a></li>
-                  <li><a href="/guides/views/partials">Partials</a></li>
                   <li><a href="/guides/views/mime-types">MIME Types</a></li>
                   <li><a href="/guides/views/layouts">Layouts</a></li>
                   <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
@@ -159,7 +158,7 @@
 
 <h2>Database</h2>
 
-<p>We can manage our database via command line.</p>
+<p>We can manage our database via the command line.</p>
 
 <p><strong>The following commands can be only used with the SQL adapter and with the following databases:</strong></p>
 
@@ -203,7 +202,7 @@ db/migrations
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus db migrate <span class="c"># Migrates to max migration (20150613165900)</span>
 </code></pre>
 
-<p>It acceps an optional argument, to specify the target version.
+<p>It accepts an optional argument, to specify the target version.
 For instance, if we want to <strong>rollback</strong> the changes from <code>20150613165900_create_authors.rb</code>, we can migrate <em><strong>&ldquo;down&rdquo;</strong></em>.</p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus db migrate 20150613165259 <span class="c"># Migrates (down) to 20150613165259</span>
 </code></pre>
@@ -229,7 +228,7 @@ For instance, if we want to <strong>rollback</strong> the changes from <code>201
 <h3>Apply</h3>
 
 <p>This is an experimental feature.
-When an application is developed after years, it accumulates dozens or hundreds of migrations, this slows down database operations for development and tests (CI).</p>
+When an application is developed after years, it accumulates a large number of migrations, this slows down database operations for development and test (CI).</p>
 
 <p>Because it does destructive changes for files under SCM, this is only allowed in development mode.</p>
 

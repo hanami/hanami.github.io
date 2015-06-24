@@ -97,7 +97,6 @@
                   <li><a href="/guides/views/overview">Overview</a></li>
                   <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
                   <li><a href="/guides/views/templates">Templates</a></li>
-                  <li><a href="/guides/views/partials">Partials</a></li>
                   <li><a href="/guides/views/mime-types">MIME Types</a></li>
                   <li><a href="/guides/views/layouts">Layouts</a></li>
                   <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
@@ -159,17 +158,17 @@
 
 <h2>Application</h2>
 
-<p>This is an alternative Lotus architecture that should be used only at the later stage of a project, when we have already considered to extract a microservice.</p>
+<p>This is an alternative Lotus architecture that should be used only at the later stage of a project, when we have already considered extracting to microservices.</p>
 
 <p>Lotus applies the <a href="http://martinfowler.com/bliki/MonolithFirst.html">Monolith First</a> principle.
-In the early days of our product, we are moving fast and it&rsquo;s more convenient to keep all the components in the same repository and the same Ruby process.</p>
+In the early days of our product, we are moving fast and it&rsquo;s more convenient to keep all the components in the same repository and in the same Ruby process.</p>
 
-<p>This is possible with Lotus <a href="/guides/architectures/container">Container architecture</a> and we <strong>strongly</strong> suggest to use it for new projects.</p>
+<p>This is possible with Lotus <a href="/guides/architectures/container">Container architecture</a> and we <strong>strongly</strong> suggest using it for new projects.</p>
 
 <p>Application architecture is suggested for small web components.</p>
 
-<p>To be more precise, it can handle well a large amount of code, and it has a structure really similar to Ruby on Rails applications.
-However, we want to offer a different guidance, where large projects should use different components (Container), instead of using the same component for everything.</p>
+<p>To be more precise, it can handle a large amount of code, and it has a structure that is similar to Ruby on Rails applications.
+However, we want to offer a different approach, large projects should use different components (Container), instead of using the same component for everything.</p>
 
 <h3>Anatomy Of An Application</h3>
 
@@ -212,10 +211,9 @@ app
 
 <p>Imagine we have built a product named <em>Bookshelf</em>, that is an online place where customers share their opinions about their readings, and they are also able to purchase books within our app.</p>
 
-<p>We run our business since three years now and it has a decent monthly revenue.
-During this amount of time we moved fast to implement a lot of features to make it appealing for the market.</p>
+<p>We have been running our business for three years now. During this time we moved fast to implement new features intended to make it more appealing to the market.</p>
 
-<p>We went for the Container architecture, and now we have a few compontents such the admin pane, that were useful to keep in the same Ruby process, but now we want to move into a separated server.
+<p>We went for the Container architecture, and now we have a few components such the admin pane, that were useful to keep in the same Ruby process, but now we want to move to a separated server.
 Theoretically all we need to do is to move it from <code>apps/admin</code> into a different repository and deploy it separately.</p>
 
 <p>However, there are some configuration files that we want to let Lotus generate for us.</p>

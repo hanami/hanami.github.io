@@ -97,7 +97,6 @@
                   <li><a href="/guides/views/overview">Overview</a></li>
                   <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
                   <li><a href="/guides/views/templates">Templates</a></li>
-                  <li><a href="/guides/views/partials">Partials</a></li>
                   <li><a href="/guides/views/mime-types">MIME Types</a></li>
                   <li><a href="/guides/views/layouts">Layouts</a></li>
                   <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
@@ -160,21 +159,21 @@
 <h2>Container</h2>
 
 <p>This is the default Lotus architecture.
-We <strong>strongly</strong> suggest to use it for your next product.</p>
+We <strong>strongly</strong> suggest using it for your next product.</p>
 
-<p>It applies two principles: <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a> and <a href="http://martinfowler.com/bliki/MonolithFirst.html">Monolith First</a>.</p>
+<p>It utilises two principles: <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a> and <a href="http://martinfowler.com/bliki/MonolithFirst.html">Monolith First</a>.</p>
 
 <h3>Clean Architecture</h3>
 
 <p>The main purpose of this architecture is to enforce a <strong>separation of concerns</strong> between the <strong>core</strong> of our product and the <strong>delivery mechanisms</strong>.
-The first is expressed by the set of <strong>use cases</strong> that our product implements, while the latter are interfaces to make these features available on the outside world.</p>
+The first is expressed by the set of <strong>use cases</strong> that our product implements, while the latter are interfaces to make these features available to the outside world.</p>
 
 <p>When we generate a new project we can find two important directories: <code>lib/</code> and <code>apps/</code>.
 They are home to the main parts described above.</p>
 
 <h4>Application Core</h4>
 
-<p>We implement a set of functionalities, without worrying about how they can be exposed on the outside world.
+<p>We implement a set of functionalities, without worrying about how they can be exposed to the outside world.
 This is the <strong>cornestone</strong> of our product, and we want to be careful on how we manage dependencies for it.</p>
 
 <p><code>Lotus::Model</code> is the default choice for persisting our Ruby objects.
@@ -210,7 +209,7 @@ For this purpose we have a separated concept <a href="/guides/models/repositorie
 
 <p>For each entity named <code>Book</code> we can have a <code>BookRepository</code>.</p>
 
-<p>We can add as much as directories that we want, such as <code>lib/bookshelf/interactors</code> to implement our use cases.</p>
+<p>We can add as many directories that we want, such as <code>lib/bookshelf/interactors</code> to implement our use cases.</p>
 
 <h4>Delivery Mechanisms</h4>
 
@@ -238,17 +237,17 @@ apps/web
 <p>Let&rsquo;s have a quick look at this code.</p>
 
 <p>The file <code>apps/web/application.rb</code> contains a Lotus application named <code>Web::Application</code>, here we can configure all the settings for this <strong>component</strong> of our project.
-Directories such as <code>apps/web/controllers</code>, <code>views</code> and <code>templates</code> will contain our <a href="/guides/actions/overview">actions</a>, <a href="/guides/views/overview">views</a>, <a href="/guides/views/templates">templates</a>.</p>
+Directories such as <code>apps/web/controllers</code>, <code>views</code> and <code>templates</code> will contain our <a href="/guides/actions/overview">actions</a>, <a href="/guides/views/overview">views</a> and <a href="/guides/views/templates">templates</a>.</p>
 
 <p>Web assets such as javascripts and stylesheets will be automatically served by the application.</p>
 
 <h3>Monolith First</h3>
 
-<p>Our default application <code>Web</code> can be used as UI interface for our customers.
-At a certain point of our story, we want to manage our users with an admin pane.</p>
+<p>Our default application <code>Web</code> can be used as a UI interface for our customers.
+At a certain point in our story, we want to manage our users with an admin pane.</p>
 
-<p>We know that the set of features that we&rsquo;re going to introduce, clearly don&rsquo;t belong to our main UI (<code>Web</code>).
-On the other hand, it&rsquo;s <strong>too early</strong> for us to implement a microservices architecture, only for the purpose of help our users to reset their password.</p>
+<p>We know that the set of features that we&rsquo;re going to introduce, clearly doesn&rsquo;t belong to our main UI (<code>Web</code>).
+On the other hand, it&rsquo;s <strong>too early</strong> for us to implement a microservices architecture, only for the purpose of helping our users reset their password.</p>
 
 <p>Lotus has a solution for our problem: we can generate a new app that lives in the same Ruby process, but it&rsquo;s a separated component.</p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate app admin

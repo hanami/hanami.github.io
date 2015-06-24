@@ -97,7 +97,6 @@
                   <li><a href="/guides/views/overview">Overview</a></li>
                   <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
                   <li><a href="/guides/views/templates">Templates</a></li>
-                  <li><a href="/guides/views/partials">Partials</a></li>
                   <li><a href="/guides/views/mime-types">MIME Types</a></li>
                   <li><a href="/guides/views/layouts">Layouts</a></li>
                   <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
@@ -161,33 +160,33 @@
 It scales from <strong>single file HTTP endpoints</strong> to <strong>multiple Lotus (or Rack based) applications in the same Ruby process</strong>.</p>
 
 <p>Each application is a component to our product.
-It can be the user web facing UI, an admin pane, an HTTP API, metrics etc..</p>
+It can be the user web facing UI, an admin pane, a HTTP API, metrics etc..</p>
 
-<p>Splitting these parts since the early days of development, helps us to follow the <a href="http://martinfowler.com/bliki/MonolithFirst.html">monolith first</a> principles.
-We want to achieve fast times for our MVP, and have a tight feedback loop.
+<p>Splitting these parts from the beginning, helps us to follow the <a href="http://martinfowler.com/bliki/MonolithFirst.html">monolith first</a> principles.
+We want to achieve fast iterations for our MVP, and have a tight feedback loop.
 The most natural approach is to build all our components <strong>together</strong> in the same code base.</p>
 
-<p>Once our application grows in complexity we can think to extract each component into a standalone <a href="http://martinfowler.com/articles/microservices.html">microservice</a>.</p>
+<p>Once our application grows in complexity we decide to extract each component into a standalone <a href="http://martinfowler.com/articles/microservices.html">microservice</a>.</p>
 
 <h2>Container</h2>
 
-<p>To make this possible, Lotus default architecture is called <a href="/guides/architectures/container"><strong>Container</strong></a>.
+<p>To make this possible, Lotus&rsquo; default architecture is called <a href="/guides/architectures/container"><strong>Container</strong></a>.
 It hosts several applications in the same Ruby process.</p>
 
 <p>Each component (application) has its own Ruby namespace (eg <code>Web</code> or <code>Admin</code>) that is a strong boundary between them.
 When (and <strong>if</strong>) we want to extract one of them, we can easily do it.</p>
 
-<p>In other words, Lotus is providing gentle guidance to help building component based applications.
-We <strong>strongly</strong> suggest to start your next project with this architecture.</p>
+<p>In other words, Lotus is providing gentle guidance to help build component based applications.
+We <strong>strongly</strong> suggest starting your next project with this architecture.</p>
 
 <h2>Application</h2>
 
 <p><a href="/guides/architectures/application"><strong>Application</strong></a> architecture can be used for small components.</p>
 
 <p>Imagine we have build a big and successful product (with Container) that now needs a small application to report daily/weekly/monthly revenues.
-Instead of add yet another component to our main product, we can use a <strong>single purposed</strong> application (microservice) for our need.</p>
+Instead of adding yet another component to our main product, we can use a <strong>single purposed</strong> application (microservice) for our needs.</p>
 
-<p>We suggest to use this architecture only at the later stage of your product life.</p>
+<p>We suggest using this architecture only at the later stage of your products lifecycle.</p>
 
             </div>
           </div>

@@ -97,7 +97,6 @@
                   <li><a href="/guides/views/overview">Overview</a></li>
                   <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
                   <li><a href="/guides/views/templates">Templates</a></li>
-                  <li><a href="/guides/views/partials">Partials</a></li>
                   <li><a href="/guides/views/mime-types">MIME Types</a></li>
                   <li><a href="/guides/views/layouts">Layouts</a></li>
                   <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
@@ -163,18 +162,18 @@ It is rendered by bounding the context of a view and using a <em>template engine
 <h2>Naming</h2>
 
 <p>For simplicity sake, there is a correlation between the view class name and the template file name.
-It&rsquo;s the translation of the name into a path: form <code>Dashboard::Index</code> to <code>dashboard/index</code>.</p>
+It&rsquo;s the translation of the name into a path: from <code>Dashboard::Index</code> to <code>dashboard/index</code>.</p>
 
 <p>The remaining part is made of multiple file extensions.
-The first is relative to the <strong><em>format</em></strong> and the latter is for the <em>template engine</em>.</p>
+The first is relative to the <strong><em>format</em></strong> and the latter is for the <strong><em>template engine</em></strong>.</p>
 
 <p class="convention">
-For a given <code>s::Dashboard::Index</code> view, there must be at least one template <code>dashboard/index.[format].[engine]</code> under the templates directory.
+For a given view named <code>Web::Views::Dashboard::Index</code>, there must be at least one template <code>dashboard/index.[format].[engine]</code> under the templates directory.
 </p>
 
 <h3>Custom Template</h3>
 
-<p>If we want to associate a different template to a view, we can use <code>.template</code>.</p>
+<p>If we want to associate a different template to a view, we can use <code>template</code>.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -189,7 +188,7 @@ For a given <code>s::Dashboard::Index</code> view, there must be at least one te
 <h2>Engines</h2>
 
 <p>Lotus looks at the last extension of a template file name to decide which engine to use (eg <code>index.html.erb</code> will use ERb).
-The builtin rendering engine is <a href="http://en.wikipedia.org/wiki/ERuby">ERb</a>, but Lotus countless rendering engines out of the box.</p>
+The builtin rendering engine is <a href="http://en.wikipedia.org/wiki/ERuby">ERb</a>, but Lotus supports countless rendering engines out of the box.</p>
 
 <p>This is a list of the supported engines.
 They are listed in order of <strong>higher precedence</strong>, for a given extension.
