@@ -36,7 +36,7 @@ module Web::Views::Dashboard
 
     def welcome_message
       greeting + " and welcome"
-    edn
+    end
   end
 end
 ```
