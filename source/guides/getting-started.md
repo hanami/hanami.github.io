@@ -159,7 +159,7 @@ This is an empty action that doesn't implement any business logic.
 Each action has a corresponding view, which is a Ruby object and needs to be added in order to complete the request.
 
 ```ruby
-# apps/web/views/home/index.erb
+# apps/web/views/home/index.rb
 module Web::Views::Home
   class Index
     include Web::View
