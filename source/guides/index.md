@@ -35,7 +35,7 @@ Views are separated from templates so the logic inside can be well-contained and
 
 ### Lotus is Threadsafe
 
-Making use of green threads is a great way to boost the performance of your
+Making use of threads is a great way to boost the performance of your
 application. It shouldn't be hard to write thread-safe code, and Lotus (when
 the entire framework, or parts of it) is runtime threadsafe.
 
