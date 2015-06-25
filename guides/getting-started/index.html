@@ -214,7 +214,7 @@ It&rsquo;s the place where we find our controllers, views, routes and templates.
 </code></pre>
 
 <p>And&hellip; bask in the glory of your first Lotus application at
-<a href="http://localhost:3000">http://localhost:2300</a>! We should see a screen similar to this:</p>
+<a href="http://localhost:2300">http://localhost:2300</a>! We should see a screen similar to this:</p>
 
 <p><img src="/guides/screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
 
@@ -519,8 +519,6 @@ Use the migration generator to create an empty migration:</p>
       <span class="n">primary_key</span> <span class="ss">:id</span>
       <span class="n">column</span> <span class="ss">:title</span><span class="p">,</span>      <span class="no">String</span><span class="p">,</span>   <span class="ss">null: </span><span class="kp">false</span>
       <span class="n">column</span> <span class="ss">:author</span><span class="p">,</span>     <span class="no">String</span><span class="p">,</span>   <span class="ss">null: </span><span class="kp">false</span>
-      <span class="n">column</span> <span class="ss">:created_at</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
-      <span class="n">column</span> <span class="ss">:updated_at</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -668,6 +666,12 @@ that change:</p>
   <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[]</span> <span class="p">}</span>
 
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="no">BookRepository</span><span class="p">.</span><span class="nf">clear</span>
+
+    <span class="vi">@book</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'TDD'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Kent Beck'</span><span class="p">))</span>
+  <span class="k">end</span>
+
   <span class="n">it</span> <span class="s2">"is successful"</span> <span class="k">do</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">200</span>
@@ -675,7 +679,7 @@ that change:</p>
 
   <span class="n">it</span> <span class="s1">'exposes all books'</span> <span class="k">do</span>
     <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-    <span class="n">action</span><span class="p">.</span><span class="nf">exposures</span><span class="p">[</span><span class="ss">:books</span><span class="p">].</span><span class="nf">must_equal</span> <span class="p">[]</span>
+    <span class="n">action</span><span class="p">.</span><span class="nf">exposures</span><span class="p">[</span><span class="ss">:books</span><span class="p">].</span><span class="nf">must_equal</span> <span class="p">[</span><span class="vi">@book</span><span class="p">]</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
