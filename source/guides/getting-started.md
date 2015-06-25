@@ -66,7 +66,7 @@ Go ahead and install our gem dependency with Bundler; then we can launch a devel
 ```
 
 And... bask in the glory of your first Lotus application at
-[http://localhost:2300](http://localhost:3000)! We should see a screen similar to this:
+[http://localhost:2300](http://localhost:2300)! We should see a screen similar to this:
 
 <p><img src="/guides/screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
 
