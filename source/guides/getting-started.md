@@ -572,6 +572,12 @@ describe Web::Controllers::Books::Index do
   let(:action) { Web::Controllers::Books::Index.new }
   let(:params) { Hash[] }
 
+  before do
+    BookRepository.clear
+
+    @book = BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
+  end
+
   it "is successful" do
     response = action.call(params)
     response[0].must_equal 200
@@ -579,7 +585,7 @@ describe Web::Controllers::Books::Index do
 
   it 'exposes all books' do
     action.call(params)
-    action.exposures[:books].must_equal []
+    action.exposures[:books].must_equal [@book]
   end
 end
 ```
