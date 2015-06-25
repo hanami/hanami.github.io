@@ -502,6 +502,7 @@ Our view needs to loop over all available records and render them.
 Let's write a test to force this change in our view:
 
 ```ruby
+# spec/web/views/books/index_spec.rb
 require 'spec_helper'
 require_relative '../../../../apps/web/views/books/index'
 
@@ -563,6 +564,7 @@ action does not actually [_expose_](/guides/actions/exposures) the books to our 
 that change:
 
 ```ruby
+# spec/web/controllers/books/index_spec.rb
 require 'spec_helper'
 require_relative '../../../../apps/web/controllers/books/index'
 
@@ -592,6 +594,7 @@ Writing tests for controller actions is basically two-fold: you either assert on
 Now we've specified that the action exposes `:books`, we can implement our action:
 
 ```ruby
+# apps/web/controllers/books/index.rb
 module Web::Controllers::Books
   class Index
     include Web::Action
