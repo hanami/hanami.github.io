@@ -25,7 +25,7 @@ With `db create` we can create the database for the current env.
 % bundle exec lotus db create
 ```
 
-In order to preserve production data, this command can't be ran in that env.
+In order to preserve production data, this command can't be run in that env.
 
 ### Drop
 
@@ -35,7 +35,7 @@ With `db drop` we can drop the existing database for the current env.
 % bundle exec lotus db drop
 ```
 
-In order to preserve production data, this command can't be ran in that env.
+In order to preserve production data, this command can't be run in that env.
 
 ### Migrate
 
@@ -71,7 +71,7 @@ Prepares database for the current environment. It's only allowed in development 
 
 When we run db prepare it:
 
-  * Creates database
+  * Creates the database
   * Load SQL dump (if any, see `db apply`)
   * Run pending migrations
 
@@ -86,9 +86,9 @@ This command SHOULD be used as a database setup command.
 This is an experimental feature.
 When an application is developed after years, it accumulates a large number of migrations, this slows down database operations for development and test (CI).
 
-Because it does destructive changes for files under SCM, this is only allowed in development mode.
+Because it does destructive changes to files under SCM, this is only allowed in development mode.
 
-When we run db apply it:
+When we run `db apply`, it:
 
   * Runs pending migrations
   * Dumps a fresh schema into `db/schema.sql`
@@ -111,7 +111,7 @@ db/migrations
 └── 20150613165900_create_authors.rb
 ```
 
-When we migrate the database
+When we migrate the database:
 
 ```shell
 % bundle exec lotus db migrate
