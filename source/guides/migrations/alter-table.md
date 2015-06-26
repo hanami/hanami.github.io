@@ -32,7 +32,7 @@ The following syntaxes are **equivalent**.
 Lotus::Model.migration do
   change do
     add_column         :users, :email, String,  null: false, unique: true
-    set_column_default :users, visits_counts, default: 0
+    set_column_default :users, :visits_counts, default: 0
   end
 end
 ```
@@ -45,7 +45,7 @@ Lotus::Model.migration do
     alter_table :users do
       # `users` table is implicit within this block, so it can be omitted.
       add_column :email, String,  null: false, unique: true    
-      set_column_default visits_counts, default: 0
+      set_column_default :visits_counts, default: 0
     end
   end
 end
