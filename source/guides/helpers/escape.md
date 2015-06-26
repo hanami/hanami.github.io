@@ -29,7 +29,7 @@ Returns
 HTML attributes are more complex to escape, because they involve attribute delimitation chars (eg. single or double quotes).
 
 We have an extra helper for this specific task: `#escape_html_attribute` (aliased as `#ha`)
-**This should be used only when the value of an attribute comes from an user input.**
+**This should be used only when the value of an attribute comes from a user input.**
 
 ```erb
 <img="/path/to/avatar.png" title="<%= ha(user.name) %>'s Avatar">
@@ -38,7 +38,7 @@ We have an extra helper for this specific task: `#escape_html_attribute` (aliase
 ## Whitelisted URLs
 
 Imagine we have a feature in our application that allows users to link from their profile, a website.
-In the edit profile form we have a text field that accepts an URL.
+In the edit profile form we have a text field that accepts a URL.
 
 In the profile page we have a link like this:
 
@@ -47,7 +47,7 @@ In the profile page we have a link like this:
 ```
 
 A malicious user can edit their profile, by entering javascript code as the website URL.
-When somebody else clicks on that link, can receive an XSS attack.
+When somebody else clicks on that link, he can receive an XSS attack.
 
 Example:
 
