@@ -114,7 +114,7 @@ The API is really clean and concise, **it doesn't require concatenation** betwee
   <input type="hidden" name="_csrf_token" value="1825a0a7ea92bbe3fd60cc8b6a0ea00ce3c52030afbf4037370d937bc5248acb">
   <div>
     <label for="book-title">Title</label>
-    <input type="text" name="book[title]" id="book-title" value="Test Driven Development">
+    <input type="text" name="book[title]" id="book-title" value="Test Driven Development" class="form-control">
   </div>
 
   <button type="submit">Create</button>
@@ -149,7 +149,7 @@ Browsers don't understand HTTP methods outside of `GET` and `POST`. On the other
 
 Cross Site Request Forgery (CSRF) is one of the most common attacks on the web. Lotus offers a security mechanism based on a technique called: _Synchronizer Token Pattern_.
 
-When we enable sessions, it stores them to store a random token for each user.
+When we enable sessions, it uses them to store a random token for each user.
 Forms are rendered with a special hidden field (`_csrf_token`) which contains this token.
 
 On form submission, Lotus matches this input with the value from the session. If they match, the request can continue. If not, it resets the sesssion and raises an exception.
