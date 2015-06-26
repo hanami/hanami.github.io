@@ -6,18 +6,18 @@ title: Lotus - Guides - Migrations Create Tables
 
 ## Create Tables
 
-A table is defined via `#create_table`. This method accepts an two arguments: the **name** and a **block** that expresses the design.
+A table is defined via `#create_table`. This method accepts two arguments: the **name** and a **block** that expresses the design.
 
-Safe operation can be performed via `#create_table?`. It only creates the table if not exist.
-Force operation can be performed via `#create_table!`. It drops the existing table and creates from scratch.
+Safe operation can be performed via `#create_table?`. It only creates the table if it doesn't exist.
+Force operation can be performed via `#create_table!`. It drops the existing table and creates a new one from scratch.
 **These operations shouldn't be used in migrations**.
 
 #### Column Definition
 
 To define a column we use `#column`, followed by the **name**, the **type** and **options**.
-The name must be an unique identifier within the table.
+The name must be a unique identifier within the table.
 
-The type can be a Ruby type (eg `String`), a symbol that represent a Ruby type (eg `:string`)  , or a string that represents the raw database type (eg `"varchar(255)"`).
+The type can be a Ruby type (e.g. `String`), a symbol that represent a Ruby type (e.g. `:string`)  , or a string that represents the raw database type (e.g. `"varchar(255)"`).
 
 ##### Type Definition
 
@@ -37,7 +37,7 @@ The following Ruby types are supported:
   * `FalseClass` (`boolean`)
   * `File` (`blob`)
 
-Their translation from Ruby types to database types, may vary from database to database.
+Their translation from Ruby types to database types may vary from database to database.
 
 ##### Options
 
@@ -64,7 +64,7 @@ primary_key :id
 #### Foreign Keys
 
 **Foreign keys** are defined via `#foreign_key`, where we specify the **name** of the column, the **referenced table**, and a set of **options**.
-The following example creates an `author_id` column (integer) for `albums` and adds a foreign key.
+The following example creates an `author_id` column (integer) for `books` and adds a foreign key.
 
 ```ruby
 create_table :books do
