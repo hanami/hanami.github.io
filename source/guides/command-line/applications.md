@@ -46,7 +46,7 @@ It supports:
 
 The default testing framework is Minitest.
 
-We can use `--test` argument to specify the a different framework, from the list below:
+We can use `--test` argument to specify a different framework, from the list below:
 
   * `minitest` (default)
   * `rspec`
