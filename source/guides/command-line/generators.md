@@ -13,13 +13,13 @@ Lotus has convenient code generators to speed up our development process.
 With the Container architecture, we can have multiple Lotus applications running under `apps/`.
 The default application is called `Web` and lives under `apps/web`.
 
-We can generate new applications for different compontents that we want to add to our project.
+We can generate new applications for different components that we want to add to our project.
 
 ```shell
 % bundle exec lotus generate app admin
 ```
 
-It generates `Admin` application under `apps/web`.
+It generates `Admin` application under `apps/admin`.
 
 ### Actions
 
@@ -29,15 +29,15 @@ We can generate an action, the corresponding view, template, route and test code
 % bundle exec lotus generate action web books#show
 ```
 
-The first argument `web`, is the name of the target application in Container arch.
-**It must be omitted if used with Application arch:**
+The first argument `web`, is the name of the target application in a Container architecture.
+**It must be omitted if used within an Application architecture:**
 
 
 ```shell
 % bundle exec lotus generate action books#show
 ```
 
-The argument `books#show` is the name of the controller and the action, respectively.
+The argument `books#show` is the name of the controller and the action separated by the number sign (`#`).
 
 #### Route
 
