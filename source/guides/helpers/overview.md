@@ -4,10 +4,10 @@ title: Lotus - Guides - Helpers Overview
 
 # Overview
 
-A Lotus view in an object that defines presentational logic.
+A Lotus view is an object that defines presentational logic.
 Helpers are modules designed to enrich views with a collection of useful features.
 
-This concept is probably familiar, if we know some Ruby basics.
+This concept is probably familiar, if you know some Ruby basics.
 
 ```ruby
 module Printable
