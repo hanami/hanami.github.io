@@ -602,7 +602,8 @@ Its connection string is defined in <code>.env.test</code> and here&rsquo;s how 
 <p>Now we can go change our template and remove the static HTML.
 Our view needs to loop over all available records and render them.
 Let&rsquo;s write a test to force this change in our view:</p>
-<pre class="language-ruby ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/views/books/index_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'spec_helper'</span>
 <span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/views/books/index'</span>
 
 <span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span> <span class="k">do</span>
@@ -659,7 +660,8 @@ Lotus is designed around simple objects with minimal interfaces that are easy to
 <p>If we run our feature test now, we&rsquo;ll see it fails — because our controller
 action does not actually <a href="/guides/actions/exposures"><em>expose</em></a> the books to our view. We can write a test for
 that change:</p>
-<pre class="language-ruby ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/controllers/books/index_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'spec_helper'</span>
 <span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/controllers/books/index'</span>
 
 <span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span> <span class="k">do</span>
@@ -686,7 +688,8 @@ that change:</p>
 
 <p>Writing tests for controller actions is basically two-fold: you either assert on the response object, which is a Rack-compatible array of status, headers and content; or on the action itself, which will contain exposures after we&rsquo;ve called it.
 Now we&rsquo;ve specified that the action exposes <code>:books</code>, we can implement our action:</p>
-<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
   <span class="k">class</span> <span class="nc">Index</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 

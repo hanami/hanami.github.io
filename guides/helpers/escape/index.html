@@ -177,21 +177,21 @@ They are <strong>public methods</strong> that are available both in views and te
 <p>HTML attributes are more complex to escape, because they involve attribute delimitation chars (eg. single or double quotes).</p>
 
 <p>We have an extra helper for this specific task: <code>#escape_html_attribute</code> (aliased as <code>#ha</code>)
-<strong>This should be used only when the value of an attribute comes from an user input.</strong></p>
+<strong>This should be used only when the value of an attribute comes from a user input.</strong></p>
 <pre class="language-ruby erb"><code><span class="nt">&lt;img</span><span class="err">="/</span><span class="na">path</span><span class="err">/</span><span class="na">to</span><span class="err">/</span><span class="na">avatar</span><span class="err">.</span><span class="na">png</span><span class="err">"</span> <span class="na">title=</span><span class="s">"</span><span class="cp">&lt;%=</span> <span class="n">ha</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">name</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="s">'s Avatar"</span><span class="nt">&gt;</span>
 </code></pre>
 
 <h2>Whitelisted URLs</h2>
 
 <p>Imagine we have a feature in our application that allows users to link from their profile, a website.
-In the edit profile form we have a text field that accepts an URL.</p>
+In the edit profile form we have a text field that accepts a URL.</p>
 
 <p>In the profile page we have a link like this:</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">"Website"</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="nf">website_url</span> <span class="cp">%&gt;</span>
 </code></pre>
 
 <p>A malicious user can edit their profile, by entering javascript code as the website URL.
-When somebody else clicks on that link, can receive an XSS attack.</p>
+When somebody else clicks on that link, he can receive an XSS attack.</p>
 
 <p>Example:</p>
 <pre class="language-ruby html"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"javascript:alert('hack!');"</span><span class="nt">&gt;</span>Website<span class="nt">&lt;/a&gt;</span>

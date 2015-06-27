@@ -165,11 +165,11 @@
 <p>With the Container architecture, we can have multiple Lotus applications running under <code>apps/</code>.
 The default application is called <code>Web</code> and lives under <code>apps/web</code>.</p>
 
-<p>We can generate new applications for different compontents that we want to add to our project.</p>
+<p>We can generate new applications for different components that we want to add to our project.</p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate app admin
 </code></pre>
 
-<p>It generates <code>Admin</code> application under <code>apps/web</code>.</p>
+<p>It generates <code>Admin</code> application under <code>apps/admin</code>.</p>
 
 <h3>Actions</h3>
 
@@ -177,12 +177,12 @@ The default application is called <code>Web</code> and lives under <code>apps/we
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action web books#show
 </code></pre>
 
-<p>The first argument <code>web</code>, is the name of the target application in Container arch.
-<strong>It must be omitted if used with Application arch:</strong></p>
+<p>The first argument <code>web</code>, is the name of the target application in a Container architecture.
+<strong>It must be omitted if used within an Application architecture:</strong></p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action books#show
 </code></pre>
 
-<p>The argument <code>books#show</code> is the name of the controller and the action, respectively.</p>
+<p>The argument <code>books#show</code> is the name of the controller and the action separated by the number sign (<code>#</code>).</p>
 
 <h4>Route</h4>
 

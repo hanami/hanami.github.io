@@ -177,7 +177,7 @@ It uses an env var, defined in the <code>.env.*</code> files at the root of the 
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus db create
 </code></pre>
 
-<p>In order to preserve production data, this command can&rsquo;t be ran in that env.</p>
+<p>In order to preserve production data, this command can&rsquo;t be run in that env.</p>
 
 <h3>Drop</h3>
 
@@ -185,7 +185,7 @@ It uses an env var, defined in the <code>.env.*</code> files at the root of the 
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus db drop
 </code></pre>
 
-<p>In order to preserve production data, this command can&rsquo;t be ran in that env.</p>
+<p>In order to preserve production data, this command can&rsquo;t be run in that env.</p>
 
 <h3>Migrate</h3>
 
@@ -216,7 +216,7 @@ For instance, if we want to <strong>rollback</strong> the changes from <code>201
 <p>When we run db prepare it:</p>
 
 <ul>
-<li>Creates database</li>
+<li>Creates the database</li>
 <li>Load SQL dump (if any, see <code>db apply</code>)</li>
 <li>Run pending migrations</li>
 </ul>
@@ -230,9 +230,9 @@ For instance, if we want to <strong>rollback</strong> the changes from <code>201
 <p>This is an experimental feature.
 When an application is developed after years, it accumulates a large number of migrations, this slows down database operations for development and test (CI).</p>
 
-<p>Because it does destructive changes for files under SCM, this is only allowed in development mode.</p>
+<p>Because it does destructive changes to files under SCM, this is only allowed in development mode.</p>
 
-<p>When we run db apply it:</p>
+<p>When we run <code>db apply</code>, it:</p>
 
 <ul>
 <li>Runs pending migrations</li>
@@ -253,7 +253,7 @@ db/migrations
 └── 20150613165900_create_authors.rb
 </code></pre>
 
-<p>When we migrate the database</p>
+<p>When we migrate the database:</p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus db migrate
 </code></pre>
 

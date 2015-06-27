@@ -158,18 +158,18 @@
 
 <h2>Create Tables</h2>
 
-<p>A table is defined via <code>#create_table</code>. This method accepts an two arguments: the <strong>name</strong> and a <strong>block</strong> that expresses the design.</p>
+<p>A table is defined via <code>#create_table</code>. This method accepts two arguments: the <strong>name</strong> and a <strong>block</strong> that expresses the design.</p>
 
-<p>Safe operation can be performed via <code>#create_table?</code>. It only creates the table if not exist.
-Force operation can be performed via <code>#create_table!</code>. It drops the existing table and creates from scratch.
+<p>Safe operation can be performed via <code>#create_table?</code>. It only creates the table if it doesn&rsquo;t exist.
+Force operation can be performed via <code>#create_table!</code>. It drops the existing table and creates a new one from scratch.
 <strong>These operations shouldn&rsquo;t be used in migrations</strong>.</p>
 
 <h4>Column Definition</h4>
 
 <p>To define a column we use <code>#column</code>, followed by the <strong>name</strong>, the <strong>type</strong> and <strong>options</strong>.
-The name must be an unique identifier within the table.</p>
+The name must be a unique identifier within the table.</p>
 
-<p>The type can be a Ruby type (eg <code>String</code>), a symbol that represent a Ruby type (eg <code>:string</code>)  , or a string that represents the raw database type (eg <code>&quot;varchar(255)&quot;</code>).</p>
+<p>The type can be a Ruby type (e.g. <code>String</code>), a symbol that represent a Ruby type (e.g. <code>:string</code>)  , or a string that represents the raw database type (e.g. <code>&quot;varchar(255)&quot;</code>).</p>
 
 <h5>Type Definition</h5>
 
@@ -191,7 +191,7 @@ The name must be an unique identifier within the table.</p>
 <li><code>File</code> (<code>blob</code>)</li>
 </ul>
 
-<p>Their translation from Ruby types to database types, may vary from database to database.</p>
+<p>Their translation from Ruby types to database types may vary from database to database.</p>
 
 <h5>Options</h5>
 
@@ -216,7 +216,7 @@ The name must be an unique identifier within the table.</p>
 <h4>Foreign Keys</h4>
 
 <p><strong>Foreign keys</strong> are defined via <code>#foreign_key</code>, where we specify the <strong>name</strong> of the column, the <strong>referenced table</strong>, and a set of <strong>options</strong>.
-The following example creates an <code>author_id</code> column (integer) for <code>albums</code> and adds a foreign key.</p>
+The following example creates an <code>author_id</code> column (integer) for <code>books</code> and adds a foreign key.</p>
 <pre class="language-ruby ruby"><code><span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
   <span class="c1"># ...</span>
   <span class="n">foreign_key</span> <span class="ss">:author_id</span><span class="p">,</span> <span class="ss">:authors</span><span class="p">,</span> <span class="ss">on_delete: :cascade</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
