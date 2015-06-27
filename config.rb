@@ -57,6 +57,9 @@ activate :deploy do |deploy|
   deploy.branch = 'master'
 end
 
+set :url_root, 'http://lotusrb.org'
+activate :search_engine_sitemap
+
 # Methods defined in the helpers block are available in templates
 helpers do
   #
