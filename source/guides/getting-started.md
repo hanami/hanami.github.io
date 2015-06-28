@@ -756,10 +756,11 @@ module Web::Controllers::Books
   class Create
     include Web::Action
 
-    def call(params)
-      book = Book.new(params[:book])
-      BookRepository.create(book)
+    expose :book
 
+    def call(params)
+      @book = BookRepository.create(Book.new(params[:book]))
+      
       redirect_to '/books'
     end
   end
