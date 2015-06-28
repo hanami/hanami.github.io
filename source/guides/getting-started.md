@@ -243,7 +243,7 @@ This will generate a new action _index_ in the _books_ controller of the _web_ a
 It gives us an empty action, view and template; it also adds a default route to `apps/web/config/routes.rb`:
 
 ```ruby
-get '/books', to: 'book#index'
+get '/books', to: 'books#index'
 ```
 
 To make our test pass, we need to edit our newly generated template file in `apps/web/templates/books/index.html.erb`:
