@@ -4,7 +4,7 @@ title: Lotus - Guides - Custom Helpers
 
 ## Custom Helpers
 
-In the [overview](/guides/helpers/overiew) section, we introduced the design for helpers.
+In the [overview](/guides/helpers/overview) section, we introduced the design for helpers.
 They are modules that enrich views behaviors.
 Because they are just Ruby modules, **we can create our own helpers**.
 
