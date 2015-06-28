@@ -51,9 +51,9 @@ module Web::Controllers::Dashboard
     include Web::Action
 
     def call(params)
-      sessions[:b]         # read
-      sessions[:a] = 'foo' # assign
-      sessions[:c] = nil   # remove
+      session[:b]         # read
+      session[:a] = 'foo' # assign
+      session[:c] = nil   # remove
     end
   end
 end
