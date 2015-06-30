@@ -11751,7 +11751,7 @@ header.primary a.logo {
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   /* line 23, ../sass/layouts/_header.scss */
   header.primary a.logo {
-    background: url(../images/lotus-pride-large@2x.png);
+    background: url(../images/lotus-light-large@2x.png);
     background-size: 100%;
   }
 }
