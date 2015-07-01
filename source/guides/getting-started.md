@@ -727,6 +727,7 @@ require 'spec_helper'
 require_relative '../../../../apps/web/controllers/books/create'
 
 describe Web::Controllers::Books::Create do
+  let(:action) { Web::Controllers::Books::Create.new }
   let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
   after do
