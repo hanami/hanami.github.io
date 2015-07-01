@@ -3,7 +3,6 @@ title: Announcing Rails Girls Summer of Code x Lotus
 date: 2015-06-30 08:23 UTC
 tags: announcements
 author: Trung Lê
-image: true
 excerpt: >
   This year marks the first participitation of Lotus project
   with Rails Girls Summer of Code program to deliver the long
