@@ -782,7 +782,7 @@ One option would be to re-render the `books#new` form, so we can give our users 
 Let's specify this behaviour as unit tests:
 
 ```ruby
-# spec/web/apps/controllers/books/create_spec.rb
+# spec/web/controllers/books/create_spec.rb
 require 'spec_helper'
 require_relative '../../../../apps/web/controllers/books/create'
 
