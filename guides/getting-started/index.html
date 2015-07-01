@@ -371,7 +371,7 @@ In our terminal, enter:</p>
 
 <p>This will generate a new action <em>index</em> in the <em>books</em> controller of the <em>web</em> application.
 It gives us an empty action, view and template; it also adds a default route to <code>apps/web/config/routes.rb</code>:</p>
-<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'book#index'</span>
+<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#index'</span>
 </code></pre>
 
 <p>To make our test pass, we need to edit our newly generated template file in <code>apps/web/templates/books/index.html.erb</code>:</p>
@@ -498,6 +498,12 @@ Our projects has three of them: <code>.env</code> is for general settings, whil
 BOOKSHELF_DATABASE_URL="postgres://localhost/bookshelf_development"
 WEB_SESSIONS_SECRET="21aec7f7371228dd0d4da6a620a1a6b22889edcf0d4fb1c11b8080cd87146eda"
 </code></pre>
+
+<p>We can edit the database URL and add the database user and password if needed:</p>
+<pre class="language-ruby plaintext"><code>BOOKSHELF_DATABASE_URL="user:password@postgres://localhost/bookshelf_development"
+</code></pre>
+
+<p>The placeholders <strong><em>user</em></strong> and <strong><em>password</em></strong> should be replaced with the correct credentials.</p>
 
 <p>The database configured by default, called <code>bookshelf_development</code> running on <code>localhost</code>, should work fine for now.
 Lotus can create the database for us:</p>
@@ -827,9 +833,10 @@ We&rsquo;ve already seen how we can write entities to our database, and we can u
   <span class="k">class</span> <span class="nc">Create</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
+    <span class="n">expose</span> <span class="ss">:book</span>
+
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">])</span>
-      <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+      <span class="vi">@book</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">]))</span>
 
       <span class="n">redirect_to</span> <span class="s1">'/books'</span>
     <span class="k">end</span>
@@ -1066,18 +1073,18 @@ Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
-          <span class="date">June 23, 2015</span>
-          <h4>Announcing Lotus v0.4.0</h4>
-          <p>Features: additional architecture, database migrations, HTML5 form helpers, CSRF Protection, Force SSL. New Core Team member, Rails Girls Summer of Code and Guides!
+          <span class="date">June 30, 2015</span>
+          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
+          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
 </p>
-          <a href="/blog/2015/06/23/announcing-lotus-040.html">Read more...</a>
+          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
         <div class="col-md-4">
-          <span class="date">June 17, 2015</span>
-          <h4>Introducing Database Migrations</h4>
-          <p>New feature for the upcoming v0.4.0: database migrations. Fast operations for schema: create, drop, migrate and prepare database. Keep migrations healthy with experimental feature.
+          <span class="date">June 28, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 01 2015 to Jun 28 2015
 </p>
-          <a href="/blog/2015/06/17/introducing-database-migrations.html">Read more...</a>
+          <a href="/blog/2015/06/28/weekly-changelog.html">Read more...</a>
         </div>
     </div>
   </div>
