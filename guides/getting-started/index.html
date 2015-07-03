@@ -418,7 +418,7 @@ Open up the file <code>apps/web/templates/application.htm.erb</code> and edit it
 
 <p>Now you can remove the duplicate lines from the other templates.</p>
 
-<p>A <strong>layout</strong> is a template like any other view, but it is used to wrap your regular templates.
+<p>A <strong>layout</strong> is like any other template, but it is used to wrap your regular templates.
 The <code>yield</code> line is replaced with the contents of our regular template.
 It&rsquo;s the perfect place to put our repeating headers and footers.</p>
 
@@ -806,6 +806,7 @@ Let&rsquo;s express them as unit tests:</p>
 <span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/controllers/books/create'</span>
 
 <span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'Confident Ruby'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Avdi Grimm'</span> <span class="p">}]</span> <span class="p">}</span>
 
   <span class="n">after</span> <span class="k">do</span>
@@ -858,7 +859,7 @@ We clearly need a way of keeping invalid data out of our system!</p>
 <p>To express our validations in a test, we need to wonder: what <em>would</em> happen if our validations failed?
 One option would be to re-render the <code>books#new</code> form, so we can give our users another shot at completing it correctly.
 Let&rsquo;s specify this behaviour as unit tests:</p>
-<pre class="language-ruby ruby"><code><span class="c1"># spec/web/apps/controllers/books/create_spec.rb</span>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/controllers/books/create_spec.rb</span>
 <span class="nb">require</span> <span class="s1">'spec_helper'</span>
 <span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/controllers/books/create'</span>
 
@@ -868,6 +869,7 @@ Let&rsquo;s specify this behaviour as unit tests:</p>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s1">'with valid params'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
     <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'1984'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'George Orwell'</span> <span class="p">}]</span> <span class="p">}</span>
 
     <span class="n">it</span> <span class="s1">'creates a new book'</span> <span class="k">do</span>
@@ -1035,7 +1037,7 @@ We can use the <code>routes</code> helper method that is available in our views 
 <span class="cp">%&gt;</span>
 </code></pre>
 
-<p>We can make a similar change in <code>apps/controllers/books/create.rb</code>:</p>
+<p>We can make a similar change in <code>apps/web/controllers/books/create.rb</code>:</p>
 <pre class="language-ruby ruby"><code><span class="n">redirect_to</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_url</span>
 </code></pre>
 
