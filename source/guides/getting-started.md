@@ -794,6 +794,7 @@ describe Web::Controllers::Books::Create do
   end
 
   describe 'with valid params' do
+    let(:action) { Web::Controllers::Books::Create.new }
     let(:params) { Hash[book: { title: '1984', author: 'George Orwell' }] }
 
     it 'creates a new book' do
