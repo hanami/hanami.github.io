@@ -16,14 +16,18 @@ We can generate a new project via `lotus new`, followed by the name that we want
 
 The default architecture for a newly generated project is _Container_.
 
-We can use `--architecture` (aliased as `--arch`) to specify another value.
+We can use `--architecture` (aliased as `--arch`) to specify different architecture.
 
+It supporsts:
+
+  * `container` (default)
+  * `app`
+
+The following command will generate an `admin` project that uses the _Application_ architecture.
 
 ```shell
 % lotus new admin --arch=app
 ```
-
-This will generate an `admin` project that uses the _Application_ architecture.
 
 ### Database
 
