@@ -277,7 +277,7 @@ Let's fix that.
 ### Layouts
 
 To avoid repeating ourselves in every single template, we can use a layout.
-Open up the file `apps/web/templates/application.htm.erb` and edit it to look like this:
+Open up the file `apps/web/templates/application.html.erb` and edit it to look like this:
 
 ```rhtml
 <!doctype HTML>
