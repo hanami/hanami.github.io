@@ -384,7 +384,7 @@ WEB_SESSIONS_SECRET="21aec7f7371228dd0d4da6a620a1a6b22889edcf0d4fb1c11b8080cd871
 We can edit the database URL and add the database user and password if needed:
 
 ```
-BOOKSHELF_DATABASE_URL="user:password@postgres://localhost/bookshelf_development"
+BOOKSHELF_DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
 ```
 The placeholders **_user_** and **_password_** should be replaced with the correct credentials.
 
