@@ -34,7 +34,7 @@
         <li><a href="/guides">Guides</a></li>
         <li><a href="/community">Community</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.0</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.1</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -403,7 +403,7 @@ Let&rsquo;s fix that.</p>
 <h3>Layouts</h3>
 
 <p>To avoid repeating ourselves in every single template, we can use a layout.
-Open up the file <code>apps/web/templates/application.htm.erb</code> and edit it to look like this:</p>
+Open up the file <code>apps/web/templates/application.html.erb</code> and edit it to look like this:</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
@@ -500,7 +500,7 @@ WEB_SESSIONS_SECRET="21aec7f7371228dd0d4da6a620a1a6b22889edcf0d4fb1c11b8080cd871
 </code></pre>
 
 <p>We can edit the database URL and add the database user and password if needed:</p>
-<pre class="language-ruby plaintext"><code>BOOKSHELF_DATABASE_URL="user:password@postgres://localhost/bookshelf_development"
+<pre class="language-ruby plaintext"><code>BOOKSHELF_DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
 </code></pre>
 
 <p>The placeholders <strong><em>user</em></strong> and <strong><em>password</em></strong> should be replaced with the correct credentials.</p>
@@ -957,17 +957,26 @@ If the user fills in only one field before submitting, he is presented with his 
 <span class="nb">require</span> <span class="s1">'spec_helper'</span>
 <span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/views/books/new'</span>
 
-<span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span>    <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Action</span><span class="o">::</span><span class="no">Params</span><span class="p">.</span><span class="nf">new</span><span class="p">({})</span> <span class="p">}</span>
-<span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">params: </span><span class="n">params</span><span class="p">]</span> <span class="p">}</span>
-<span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/index.html.erb'</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">New</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
+<span class="k">class</span> <span class="nc">NewBookParams</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Action</span><span class="o">::</span><span class="no">Params</span>
+  <span class="n">param</span> <span class="ss">:book</span> <span class="k">do</span>
+    <span class="n">param</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">presence: </span><span class="kp">true</span>
+    <span class="n">param</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">presence: </span><span class="kp">true</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-<span class="n">it</span> <span class="s1">'displays list of errors when params contains errors'</span> <span class="k">do</span>
-  <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span> <span class="c1"># trigger validations</span>
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">New</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span>    <span class="p">{</span> <span class="no">NewBookParams</span><span class="p">.</span><span class="nf">new</span><span class="p">({})</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">params: </span><span class="n">params</span><span class="p">]</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/new.html.erb'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">New</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
 
-  <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'There was a problem with your submission'</span><span class="p">)</span>
-  <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'title is required'</span><span class="p">)</span>
+  <span class="n">it</span> <span class="s1">'displays list of errors when params contains errors'</span> <span class="k">do</span>
+    <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span> <span class="c1"># trigger validations</span>
+
+    <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'There was a problem with your submission'</span><span class="p">)</span>
+    <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'title is required'</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1038,7 +1047,7 @@ We can use the <code>routes</code> helper method that is available in our views 
 </code></pre>
 
 <p>We can make a similar change in <code>apps/web/controllers/books/create.rb</code>:</p>
-<pre class="language-ruby ruby"><code><span class="n">redirect_to</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_url</span>
+<pre class="language-ruby ruby"><code><span class="n">redirect_to</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span>
 </code></pre>
 
 <h2>Wrapping Up</h2>
@@ -1075,18 +1084,18 @@ Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 10, 2015</span>
+          <h4>Announcing Lotus v0.4.1</h4>
+          <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
+</p>
+          <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">June 30, 2015</span>
           <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
           <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
 </p>
           <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 28, 2015</span>
-          <h4>Weekly Changelog</h4>
-          <p>Changelog from Jun 01 2015 to Jun 28 2015
-</p>
-          <a href="/blog/2015/06/28/weekly-changelog.html">Read more...</a>
         </div>
     </div>
   </div>

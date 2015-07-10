@@ -4,13 +4,84 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-06-30T10:23:00+02:00</updated>
+   <updated>2015-07-10T19:16:00+02:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Announcing Lotus v0.4.1</title>
+       <id>http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html"/>
+       <updated>2015-07-10T19:16:00+02:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
+
+       </summary>
+       <content type="html"><![CDATA[<h2>Fixes</h2>
+
+<p>This patch release ships only with bug fixes.
+Thanks to all our contributors who have reported and fixed issues.</p>
+
+<h3>Container Architecture Routes</h3>
+
+<p><a href="https://github.com/theocodes">Thiago Felippe</a> and <a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a> fixed duplicated route segments for applications mounted in <a href="/guides/architectures/container">Lotus Container</a>.</p>
+
+<p>The following configuration was generating the <code>/admin</code> prefix twice:  <code>/admin/admin/dashboard</code> instead of <code>/admin/dashboard</code>.</p>
+<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Container</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="n">mount</span> <span class="no">Admin</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span> <span class="ss">at: </span><span class="sb">`/admin`</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Database Creation for PostgreSQL</h3>
+
+<p><a href="https://github.com/nickcoyne">Nick Coyne</a> fixed database creation for PostgreSQL.
+It now uses <code>createdb</code> when we do <code>lotus db create</code>.</p>
+
+<h3>Explicit Partial Search</h3>
+
+<p><a href="https://github.com/farrell">Farrel Lifson</a> suggested a patch to force explicit partial finding in case of name clash.</p>
+
+<h3>Apps In Console</h3>
+
+<p><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a> fixed application loading in <code>lotus console</code></p>
+
+<h3>Session Secret</h3>
+
+<p><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a> fixed generator for <a href="/guides/architectures/application">application arch</a> to generate session secret</p>
+
+<h3>Generators</h3>
+
+<p><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>, <a href="https://github.com/joneslee85">Trung Lê</a>, <a href="https://github.com/hieuk09">Hiếu Nguyễn</a> and <a href="https://github.com/mvader">Miguel Molina</a> fixed application and model generators when database name is mispelled or entity name is missing, respectively.</p>
+
+<h3>Session Middleware</h3>
+
+<p>I fixed Rack middleware in order to makes sessions available to other Rack components.</p>
+
+<h2>Roadmap For v0.5.0</h2>
+
+<p>A few days ago, we have <a href="http://bit.ly/lotusrb-roadmap-v050">published the roadmap for v0.5.0</a>, which is scheduled for <strong>Sep 23, 2015</strong>.
+It includes <strong>websockets</strong>, <strong>assets</strong>, <strong>mailers</strong>, <strong>associations</strong> and experimental features.
+Please join the discussion and let us to hear your opinion.
+Thank you!</p>
+
+<div style="display: inline">
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.4.1" data-url="http://lotusrb.org/blog/blog/2015/07/10/announcing-lotus-041.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/blog/2015/07/10/announcing-lotus-041.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+]]></content>
+     </entry>
      <entry>
        <title>Announcing Rails Girls Summer of Code x Lotus</title>
        <id>http://lotusrb.org/blog/2015/06/30/announcing-lotus-rgsoc.html</id>
@@ -1178,47 +1249,6 @@ We&rsquo;re pushing to ship soon.</p>
 
 <ul>
 <li>[<a href="https://github.com/mymai91">My Mai</a>] [<a href="https://github.com/dondinhit">Dôn Đinh</a>] Introduce Lotus.root [<a href="https://github.com/lotus/lotus/pull/213">details</a>]</li>
-<li>[<a href="https://github.com/sungwoncho">Sung Won Cho</a>] Add Destroy CLI [<a href="https://github.com/lotus/lotus/pull/194">details</a>]</li>
-<li>[<a href="https://github.com/dsnipe">Dmitry Tymchuk</a>] Add repository timestamps [<a href="https://github.com/lotus/model/pull/169">details</a>]</li>
-<li>[<a href="https://github.com/joneslee85">Trung Lê</a>] Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>[<a href="https://github.com/tomkadwill">Tom Kadwill</a>] Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/11">details</a>]</li>
-<li>[<a href="https://github.com/rodzyn">Marcin Olichwirowicz</a>] Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
-</ul>
-
-<h2>Roadmap</h2>
-
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
-]]></content>
-     </entry>
-     <entry>
-       <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/04/27/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/04/27/weekly-changelog.html"/>
-       <updated>2015-04-27T07:14:00+02:00</updated>
-       <author>
-         <name>Trung Lê</name>
-       </author>
-       <summary>
-         Changelog from Apr 20th to Apr 27th 2015
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Releases</h2>
-
-<p>-</p>
-
-<h2>Completed</h2>
-
-<ul>
-<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] String pluralization [<a href="https://github.com/lotus/utils/pull/72">details</a>]</li>
-</ul>
-
-<h2>Development</h2>
-
-<ul>
-<li>[<a href="https://github.com/guilhermeFranco">Guilherme Franco</a>] Add block conditions to #where() for memory adapter [<a href="https://github.com/lotus/model/pull/180">details</a>]</li>
-<li>[<a href="https://github.com/mymai91">My Mai</a>] [<a href="https://github.com/dondinhit">Dôn Đinh</a>] Introduce Lotus.root [<a href="https://github.com/lotus/lotus/pull/213">details</a>]</li>
-<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Added nested routes [<a href="https://github.com/lotus/router/pull/51">details</a>]</li>
 <li>[<a href="https://github.com/sungwoncho">Sung Won Cho</a>] Add Destroy CLI [<a href="https://github.com/lotus/lotus/pull/194">details</a>]</li>
 <li>[<a href="https://github.com/dsnipe">Dmitry Tymchuk</a>] Add repository timestamps [<a href="https://github.com/lotus/model/pull/169">details</a>]</li>
 <li>[<a href="https://github.com/joneslee85">Trung Lê</a>] Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>

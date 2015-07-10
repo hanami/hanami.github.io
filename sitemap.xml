@@ -121,6 +121,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html</loc>
+    <lastmod>2015-07-10T19:53:43+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>http://lotusrb.org/blog/</loc>
     <lastmod>2015-06-19T17:29:00+02:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -236,7 +242,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/command-line/applications/</loc>
-    <lastmod>2015-06-27T18:07:56+02:00</lastmod>
+    <lastmod>2015-07-10T19:13:38+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -266,7 +272,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/getting-started/</loc>
-    <lastmod>2015-07-03T09:48:13+02:00</lastmod>
+    <lastmod>2015-07-10T19:13:38+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
