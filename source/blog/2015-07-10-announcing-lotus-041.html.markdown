@@ -32,7 +32,7 @@ It now uses `createdb` when we do `lotus db create`.
 
 ### Explicit Partial Search
 
-[Farrel Lifson](https://github.com/farrell) suggested a patch to force explicit partial finding in case of name clash.
+[Farrel Lifson](http://github.com/farrel) suggested a patch to force explicit partial finding in case of name clash.
 
 ### Apps In Console
 
