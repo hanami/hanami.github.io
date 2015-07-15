@@ -59,7 +59,7 @@ If we want to disable a layout for a view, we can use a DSL for that.
 module Web::Views::Dashboard
   class Index
     include Web::View
-    layout nil
+    layout false
   end
 end
 ```
