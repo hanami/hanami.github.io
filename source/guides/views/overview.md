@@ -6,7 +6,7 @@ title: Lotus - Guides - Views Overview
 
 A view is an object that's responsible to render a template.
 
-In a full stack Lotus application, an incoming HTTP request, goes through the [router](/guides/routing/overview), it instantiate and call an [action](/guides/actions/overview), which sets the status code and the headers for the response.
+In a full stack Lotus application, an incoming HTTP request, goes through the [router](/guides/routing/overview), it instantiates and calls an [action](/guides/actions/overview), which sets the status code and the headers for the response.
 The last bit is the body, which is set by the corresponding view's output.
 
 ## A Simple View
@@ -48,8 +48,8 @@ This module is generated at the runtime for us, when the application starts.
   For a given application named <code>Web</code>, views are available under <code>Web::Views</code>.
 </p>
 
-**This simmetry is really important at the run time.**
-After the action has finished its job, the control passes to the framework which looks for the matching view.
+**This symmetry is really important at run time.**
+After the action has finished its job, control passes to the framework which looks for the matching view.
 
 <p class="convention">
   For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
@@ -57,12 +57,12 @@ After the action has finished its job, the control passes to the framework which
 
 ### View Module
 
-All the main Lotus components are mixin to be included.
+All the main Lotus components are mixins meant to be included.
 Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.
 
 In our example, we have a directive `include Web::View`.
 That means our view will behave according to the configuration of the `Web` application.
 
 <p class="convention">
-  For a given application named <code>Web</code>, view mixin to include is <code>Web::View</code>.
+  For a given application named <code>Web</code>, the view mixin to include is <code>Web::View</code>.
 </p>
