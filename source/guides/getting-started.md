@@ -35,7 +35,6 @@ Let's see what it contains:
 % tree -L 1
 .
 ├── Gemfile
-├── Gemfile.lock
 ├── Rakefile
 ├── apps
 ├── config
@@ -47,7 +46,7 @@ Let's see what it contains:
 
 Here's what we need to know:
 
-* `Gemfile` and `Gemfile.lock` are Bundler artifacts to manage Rubygems dependencies.
+* `Gemfile` is a Bundler artifact to manage Rubygems dependencies.
 * `Rakefile` describes our Rake tasks.
 * `apps` contains one or more web applications compatible with Rack.
   Here we can find the first generated Lotus application called `Web`.
