@@ -794,12 +794,13 @@ require 'spec_helper'
 require_relative '../../../../apps/web/controllers/books/create'
 
 describe Web::Controllers::Books::Create do
+  let(:action) { Web::Controllers::Books::Create.new }
+
   after do
     BookRepository.clear
   end
 
   describe 'with valid params' do
-    let(:action) { Web::Controllers::Books::Create.new }
     let(:params) { Hash[book: { title: '1984', author: 'George Orwell' }] }
 
     it 'creates a new book' do
