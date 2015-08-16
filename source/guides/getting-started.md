@@ -139,7 +139,7 @@ The first thing we need to add is a route:
 get '/', to: 'home#index'
 ```
 
-The root we added pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
+The root we pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
 Now we can create the index action.
 
 ```ruby
@@ -196,7 +196,7 @@ Lotus uses a _"Container"_ architecture by default, whereby a single project can
 Such applications might include a JSON API, an admin panel, a marketing website, and so forth.
 
 All these applications live under `apps/`, with the default application named `web`.
-Lotus' core frameworks are duplicated when the container boots, so configurations for different containers don't interfere with others.
+Lotus' core frameworks are duplicated when the container boots, so configurations for different applications don't interfere with others.
 
 Let's recap what we've seen so far: to get our own page on the screen, we followed the execution path of a request in Lotus through the router into a controller action, through a view, to a template file.
 

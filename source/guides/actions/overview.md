@@ -56,7 +56,7 @@ The whole action name is `Web::Controllers::Dashboard::Index`.
 
 ### Action Module
 
-Lotus philosophy emphatizes _composition over inheritance_ and avoids the [framework superclass antipattern](http://michaelfeathers.typepad.com/michael_feathers_blog/2013/01/the-framework-superclass-anti-pattern.html).
+Lotus philosophy emphasizes _composition over inheritance_ and avoids the [framework superclass antipattern](http://michaelfeathers.typepad.com/michael_feathers_blog/2013/01/the-framework-superclass-anti-pattern.html).
 For this reason, all the components are provided as **modules to include** instead of base classes to inherit from.
 
 Like we said before, Lotus can run multiple apps within the same Ruby process.
