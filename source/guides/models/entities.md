@@ -4,7 +4,7 @@ title: Lotus - Guides - Entities
 
 # Entities
 
-An _entity_ is n object that is defined by its identity.
+An _entity_ is an object that is defined by its identity.
 See ["Domain Driven Design" by Eric Evans.](http://youtube.com/watch?v=7MaYeudL9yo)
 
 An entity is the core of an application, where the part of the domain logic is implemented.
