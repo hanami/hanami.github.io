@@ -842,7 +842,7 @@ With our validations in place, we can limit our entity creation and redirection 
 module Web::Controllers::Books
   class Create
     include Web::Action
-    
+
     expose :book
 
     params do
@@ -895,12 +895,7 @@ First, we expect a list of errors to be included in the page when `params` conta
 require 'spec_helper'
 require_relative '../../../../apps/web/views/books/new'
 
-class NewBookParams < Lotus::Action::Params
-  param :book do
-    param :title, presence: true
-    param :author, presence: true
-  end
-end
+NewBookParams = Apps::Web::Controllers::Create::Params
 
 describe Web::Views::Books::New do
   let(:params)    { NewBookParams.new({}) }
