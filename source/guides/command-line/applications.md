@@ -18,7 +18,7 @@ The default architecture for a newly generated project is _Container_.
 
 We can use `--architecture` (aliased as `--arch`) to specify different architecture.
 
-It supporsts:
+It supports:
 
   * `container` (default)
   * `app`
