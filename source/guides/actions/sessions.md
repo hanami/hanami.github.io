@@ -6,7 +6,7 @@ title: Lotus - Guides - Action Sessions
 
 ## Enable Sessions
 
-Sessions are shipped with Lotus applications, but not enabled by default.
+Sessions are available in Lotus applications, but not enabled by default.
 If we want to turn on this feature, we just need to uncomment a line of code.
 
 ```ruby

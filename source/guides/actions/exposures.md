@@ -4,11 +4,11 @@ title: Lotus - Guides - Action Exposures
 
 # Exposures
 
-For complex use cases we may want to pass data to views, in order to present it to our users.
-Lotus puts emphasis on explicitness: data isn't shared between these two contexts unless we told it to do so.
+For complex use cases we may want to pass data to views in order to present it to our users.
+Lotus puts emphasis on explicitness: data isn't shared between the controller action and the view unless we tell it to do so.
 
 We use a simple and powerful mechanism to achieve our goal: _**exposures**_.
-They create a _getter_ for the given name(s) and only the whitelisted instance variables are passed to the corresponding view.
+Exposures create a _getter_ on the action for the given name(s) and only the whitelisted instance variables are made available to the corresponding view.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
@@ -26,7 +26,7 @@ end
 ```
 
 In the example above we have exposed `:greeting`, but not `:foo`.
-Only the first can be used from the view and template.
+Only `greeting` can be used from the view and template.
 
 ```ruby
 # apps/web/views/dashboard/index.rb

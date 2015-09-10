@@ -23,7 +23,7 @@ end
 ```
 
 Exceptions are automatically caught when in production mode, but not in development.
-In the first case, for our example, the application returns a `500` (Internal Server Error), in the latter case, we'll see the stack trace and all the information to debug the code.
+In production, for our example, the application returns a `500` (Internal Server Error); in development, we'll see the stack trace and all the information to debug the code.
 
 This behavior can be changed with the `handle_exceptions` setting in `apps/web/application.rb`.
 
@@ -45,12 +45,12 @@ module Web::Controllers::Dashboard
 end
 ```
 
-It accepts a Hash where the key is the exception to handle, and the value is the corresponding HTTP status code.
+`handle_exception` accepts a Hash where the key is the exception to handle, and the value is the corresponding HTTP status code.
 In our example, when `ArgumentError` is raised, it will be handled as a `400` (Bad Request).
 
 ## Custom Handlers
 
-If the mapping with a custom HTTP status doesn't fit our need, we can specify a custom handler and manage the exception by ourselves.
+If the mapping with a custom HTTP status doesn't fit our needs, we can specify a custom handler and manage the exception by ourselves.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
@@ -81,12 +81,11 @@ module Web::Controllers::Dashboard
 end
 ```
 
-If we specify a symbol as the value for `handle_exception`, it will be used to manage the exception.
-In our case we want to protect the action from unwanted access: only admins are allowed.
+If we specify the name of a method (as a symbol) as the value for `handle_exception`, this method will be used to resond to the exception.
+In the example above we want to protect the action from unwanted access: only admins are allowed.
 
-When a `PermissionDenied` exception is raised, it will be handled by `:handle_permission_error`.
-It MUST accept an `exception` argument.
-That is the exception instance raised inside `#call`.
+When a `PermissionDenied` exception is raised it will be handled by `:handle_permission_error`.
+It MUST accept an `exception` argument&mdash;the exception instance raised inside `#call`.
 
 <p class="warning">
 When specifying a custom exception handler, it MUST accept an <code>exception</code> argument.

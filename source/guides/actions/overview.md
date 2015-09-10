@@ -7,12 +7,12 @@ title: Lotus - Guides - Actions Overview
 An action is an endpoint that handles incoming HTTP requests for a specific [route](/guides/routing/overview).
 In a Lotus application, an **action is an object**, while a **controller is a Ruby module** that groups them.
 
-This design provides self contained actions, which don't share their context accidentally with other actions and it prevents gigantic controllers.
+This design provides self contained actions that don't share their context accidentally with other actions.  It also prevents gigantic controllers.
 It has several advantages in terms of testability and control of an action.
 
 ## A Simple Action
 
-Lotus ships with a generator for actions, let's create a new one:
+Lotus ships with a generator for actions. Let's create a new one:
 
 ```shell
 lotus generate action web dashboard#index
@@ -77,4 +77,4 @@ We need to implement `#call`, which is a method that accepts only one argument: 
 That is the object that carries the payload that comes from incoming HTTP requests from the [router](/guides/routing/basic-routing).
 
 This interface reminds us of Rack.
-Indeed, our action is compatible with that protocol.
+Indeed, our action is compatible with the Rack protocol.

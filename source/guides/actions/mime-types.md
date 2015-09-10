@@ -37,7 +37,7 @@ If the client asks for `Accept: text/html,application/xhtml+xml,application/xml;
 ### Default Format
 
 If a client asks for a generic `Accept: */*`, the action will fall back to the **application default format**.
-It's a setting that allows to safely handle cases like our example, the default value is `:html`.
+This is a setting that allows us to safely handle cases like our example; the default value is `:html`.
 
 ```ruby
 # apps/web/application.rb
@@ -117,7 +117,7 @@ end
 Lotus knows about more than 100 of the most common MIME types.
 However, we may want to add custom types in order to use them with `#format=` or `.accept`.
 
-In our application settings, we can use `controller.format`, which accepts a Hash where the key is the format symbol (`:custom`) and the value is a string expressed in the MIME type standard (`application/custom`).
+In our application settings we can use `controller.format`, which accepts a Hash where the key is the format symbol (`:custom`) and the value is a string expressed in the MIME type standard (`application/custom`).
 
 ```ruby
 # apps/web/application.rb

@@ -19,17 +19,17 @@ We can generate new applications for different components that we want to add to
 % bundle exec lotus generate app admin
 ```
 
-It generates `Admin` application under `apps/admin`.
+This generates an application named `Admin` under `apps/admin`.
 
 ### Actions
 
-We can generate an action, the corresponding view, template, route and test code with one command.
+We can generate an action along with the corresponding view, template, route and test code with one command.
 
 ```shell
 % bundle exec lotus generate action web books#show
 ```
 
-The first argument `web`, is the name of the target application in a Container architecture.
+The first argument, `web`, is the name of the target application in a Container architecture.
 **It must be omitted if used within an Application architecture:**
 
 
@@ -41,14 +41,14 @@ The argument `books#show` is the name of the controller and the action separated
 
 #### Route
 
-The generated route, is named after the controller name.
+The generated route is named after the controller name.
 
 ```ruby
 # apps/web/config/routes.rb
 get '/books', to: 'books#show'
 ```
 
-If we want to customize it, without editing our routes file, we can specify a `--url` argument.
+If we want to customize the route URL, without editing our routes file, we can specify a `--url` argument.
 
 ```shell
 % bundle exec lotus generate action web books#show --url=/books/:id
