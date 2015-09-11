@@ -81,7 +81,7 @@ module Web::Controllers::Dashboard
 end
 ```
 
-If we specify the name of a method (as a symbol) as the value for `handle_exception`, this method will be used to resond to the exception.
+If we specify the name of a method (as a symbol) as the value for `handle_exception`, this method will be used to respond to the exception.
 In the example above we want to protect the action from unwanted access: only admins are allowed.
 
 When a `PermissionDenied` exception is raised it will be handled by `:handle_permission_error`.
