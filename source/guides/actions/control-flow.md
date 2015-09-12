@@ -7,10 +7,10 @@ title: Lotus - Guides - Action Control Flow
 ## Callbacks
 
 If we want to execute some logic before and/or after `#call` is executed, we can use a callback.
-It's useful to declutter code for common tasks like checking if a user is signed in, set a record, handle 404 responses or tidy up the response.
+Callbacks are useful to declutter code for common tasks like checking if a user is signed in, set a record, handle 404 responses or tidy up the response.
 
 The correspoding DSL methods are `before` and `after`.
-They accept a symbol that is the name of the method that we want to call, or an anonymous proc.
+These methods each accept a symbol that is the name of the method that we want to call, or an anonymous proc.
 
 ### Methods
 
@@ -104,7 +104,7 @@ This is an antipattern that causes a lot of problems for code maintenance, testa
 Using exceptions for control flow is expensive for the Ruby VM.
 There is a lightweight alternative that our language supports: **signals** (see `throw` and `catch`).
 
-Lotus take advantage of this mechanism to provide **faster control flow** in our actions via `#halt`.
+Lotus takes advantage of this mechanism to provide **faster control flow** in our actions via `#halt`.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
@@ -132,7 +132,7 @@ Subsequent instructions will be entirely skipped.
 When <code>halt</code> is used, the flow is interrupted and the control is passed back to the framework.
 </p>
 
-That means it can be used to skip `#call` invokation entirely if we use it in a `before` callback.
+That means that `halt` can be used to skip `#call` invokation entirely if we use it in a `before` callback.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
@@ -153,7 +153,7 @@ module Web::Controllers::Dashboard
 end
 ```
 
-`#halt` accepts a HTTP status code as the first argument.
+`#halt` accepts an HTTP status code as the first argument.
 When used like this, the body of the response will be set with the corresponding message (eg. "Unauthorized" for `401`).
 
 An optional second argument can be passed to set a custom body.
@@ -176,7 +176,7 @@ end
 A special case of control flow management is relative to HTTP redirect.
 If we want to reroute a request to another resource we can use `redirect_to`.
 
-After it's invoked, it stops the control flow, and **subsequent lines aren't executed**.
+When `redirect_to` is invoked, control flow is stopped and **subsequent code in the action is not executed**.
 
 It accepts a string that represents an URI, and an optional `:status` argument.
 By default the status is set to `302`.
@@ -189,7 +189,7 @@ module Web::Controllers::Dashboard
 
     def call(params)
       redirect_to routes.root_path
-      # This line will never be executed
+      foo('bar') # This line will never be executed
     end
   end
 end

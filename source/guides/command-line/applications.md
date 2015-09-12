@@ -16,7 +16,7 @@ We can generate a new project via `lotus new`, followed by the name that we want
 
 The default architecture for a newly generated project is _Container_.
 
-We can use `--architecture` (aliased as `--arch`) to specify different architecture.
+We can use the `--architecture` argument (aliased as `--arch`) to specify a different architecture.
 
 It supports:
 
@@ -34,7 +34,7 @@ The following command will generate an `admin` project that uses the _Applicatio
 The default storage used is a toy file system database.
 This is because we want to provide a quick prototyping tool.
 
-We can use `--database` argument to let Lotus to generate code for a specific data store.
+We can use the `--database` argument to let Lotus to generate code for a specific data store.
 
 It supports:
 
@@ -50,7 +50,7 @@ It supports:
 
 The default testing framework is Minitest.
 
-We can use `--test` argument to specify a different framework, from the list below:
+We can use the `--test` argument to specify a different framework, from the list below:
 
   * `minitest` (default)
   * `rspec`

@@ -5,7 +5,7 @@ title: Lotus - Guides - Action HTTP Caching
 # HTTP Caching
 
 We refer to HTTP caching as the set of techiniques for HTTP 1.1 and implemented by browser vendors in order to make faster interactions with the server.
-There are a few headers that if sent, will enable these mechanisms.
+There are a few headers that, if sent, will enable these HTTP caching mechanisms.
 
 Because these are advanced features, they must be enabled via `http_caching true` in our application settings (`apps/web/application.rb`).
 
@@ -32,10 +32,10 @@ end
 
 ## Expires
 
-Another HTTP caching special header is: `Expires`.
+Another HTTP caching special header is `Expires`.
 It can be used for retrocompatibility with old browsers which don't understand `Cache-Control`.
 
-Lotus' solution for _expire_ combines support for all the browsers, by sending both the headers.
+Lotus' solution for _expire_ combines support for all the browsers by sending both the headers.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
@@ -56,16 +56,16 @@ end
 ## Conditional GET
 
 _Conditional GET_ is a two step workflow to inform browsers that a resource hasn't changed since the last visit.
-At the end of the first request, it receives special HTTP response headers to send back the next time it will come back.
-If that header matches the value that the server calculates, then the resource is still cached and a `304` status (Not Modified) is returned.
+At the end of the first request, the response includes special HTTP response headers that the browser will use next time it comes back.
+If the header matches the value that the server calculates, then the resource is still cached and a `304` status (Not Modified) is returned.
 
 ### ETag
 
 The first way to match a resource freshness is to use an identifier (usually an MD5 token).
 Let's specify it with `fresh etag:`.
 
-If the given identifier does NOT match `If-None-Match` request header, it will return a `200` and set `ETag` response header with that value.
-If it matches, the action will be halted and a `304` will be returned.
+If the given identifier does NOT match the `If-None-Match` request header, the request will return a `200` with an `ETag` response header with that value.
+If the header does match, the action will be halted and a `304` will be returned.
 
 ```ruby
 # apps/web/controllers/users/show.rb
@@ -101,8 +101,8 @@ end
 
 The second way is to use a timestamp via `fresh last_modified:`.
 
-If the given timestamp does NOT match `If-Modified-Since` request header, it will return a `200` and set `Last-Modified` response header with that value.
-If it matches, the action will be halted and a `304` will be returned.
+If the given timestamp does NOT match `If-Modified-Since` request header, it will return a `200` and set the `Last-Modified` response header with the timestamp value.
+If the timestamp does matche, the action will be halted and a `304` will be returned.
 
 ```ruby
 # apps/web/controllers/users/show.rb

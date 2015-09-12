@@ -102,7 +102,7 @@ But if we override that method with an empty implementation, it does nothing and
 ## Module Inclusion
 
 Imagine we have a RESTful resource named `books`.
-There are several actions (`show`, `edit`, `update` and `destroy`), which need to find a specific book to perform their job.
+There are several actions (`show`, `edit`, `update` and `destroy`) which need to find a specific book to perform their job.
 
 What if we want to DRY the code of all these actions?
 Ruby comes to our rescue.
@@ -127,7 +127,7 @@ module Web::Controllers::Books
 end
 ```
 
-We have defined a module for our behavior to share, let's include it in all the actions that need it.
+We have defined a module for our behavior to share. Let's include it in all the actions that need it.
 
 ```ruby
 # apps/web/controllers/books/update.rb

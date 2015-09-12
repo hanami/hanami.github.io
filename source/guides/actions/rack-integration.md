@@ -7,12 +7,12 @@ title: Lotus - Guides - Request & Response
 ## Rack Environment
 
 Actions offer a high level API built on top of Rack.
-If we need to access raw data from Rack environment, we can use `params.env`.
+If we need to access raw data from Rack environment we can use `params.env`.
 
 ## Rack Middleware
 
 Lotus mounts a very thin default middleware stack.
-Additional components can be mounted globally, at the application level or locally.
+Additional components can be mounted globally, at the application level, or locally.
 
 ### Global Middleware
 
@@ -29,7 +29,7 @@ run Lotus::Container.new
 
 ### Application Middleware
 
-If we need a component that's only used by a specific application (under `apps/`), we can add it to the configuration.
+If we need a component that's only used by a specific application (under `apps/`), we can add it to the application's configuration.
 
 ```ruby
 # apps/web/application.rb
@@ -47,8 +47,8 @@ end
 
 ### Action Middleware
 
-Sometimes we need a middleware for a set of well known resources, only.
-If we mount it at the global or application level, the performance will start to degrade.
+Sometimes we need a middleware only to be used for a set of well known resources.
+If we mount it at the global or application level the performance will start to degrade.
 Actions allow us to mount a fine grained middleware stack.
 
 ```ruby

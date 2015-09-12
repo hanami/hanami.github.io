@@ -32,7 +32,7 @@ module Web::Controllers::Dashboard
 end
 ```
 
-If we visit `/dashboard?q=foo`, we should see the `Query string: foo`.
+If we visit `/dashboard?q=foo`, we should see `Query string: foo`.
 
 ### Indifferent Access
 
@@ -83,15 +83,15 @@ bundle exec lotus generate action web signup#create
 ```
 
 We want to provide self-registration for our users.
-We build a HTML form which is the action that accepts the payload and stores it in the `users` table.
-That table has a boolean column `admin` to decide if a person has administration permissions.
+We build a HTML form which posts to an action that accepts the payload and stores it in the `users` table.
+That table has a boolean column `admin` to indicate whether a person has administration permissions.
 
-A malicious user can exploit this scenario, by sending this extra parameter to our application and become an admin.
+A malicious user can exploit this scenario by sending this extra parameter to our application, thereby making themselves an administrator.
 
-We can easily fix this problem, by filtering the allowed params that are permitted inside our application.
+We can easily fix this problem by filtering the allowed parameterss that are permitted inside our application.
 Please always remember that **params represent untrusted input**.
 
-We use `.params` to map the structure of the (nested) params.
+We use `.params` to map the structure of the (nested) parameters.
 
 ```ruby
 # apps/web/controllers/signup/create.rb
@@ -132,7 +132,7 @@ An existing user can ask someone to join.
 Because the invitee will decide a password later on, we want to persist that `User` record without that value.
 
 If we put `password` validation in `User`, we need to handle these two use cases with a conditional.
-But in the long term, this approach is painful from a maintenance perspective.
+But in the long term this approach is painful from a maintenance perspective.
 
 ```ruby
 # Example of poor style for validations
@@ -146,8 +146,9 @@ class User
 end
 ```
 
-We can see validations the set of rules for data correctness that we want for **a specific use case**.
-For us, an `User` can be persisted with or without a password, **depending on the workflow** that the it was routed into.
+We can see validations as the set of rules for data correctness that we want for **a specific use case**.
+For us, a `User` can be persisted with or without a password, **depending on the workflow** and the route through
+which the `User` is persisted.
 
 ### Boundaries
 
@@ -169,7 +170,7 @@ end
 
 ### Usage
 
-We can coerce the Ruby type, validate if a param is required, if included in a range of values, etc..
+We can coerce the Ruby type, validate if a param is required, determine if it is within a range of values, etc..
 
 ```ruby
 # apps/web/controllers/signup/create.rb
@@ -198,8 +199,8 @@ module Web::Controllers::Signup
 end
 ```
 
-Params validations are delegated, under the hood, to [Lotus::Validations](https://github.com/lotus/validations).
-Please check related docs for a complete list of options, and how to share code between validations.
+Parameter validations are delegated, under the hood, to [Lotus::Validations](https://github.com/lotus/validations).
+Please check the related documentation for a complete list of options and how to share code between validations.
 
 ## Concrete Classes
 

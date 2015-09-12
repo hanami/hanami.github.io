@@ -6,8 +6,8 @@ title: Lotus - Guides - Action Cookies
 
 ## Enable Cookies
 
-Lotus applies _"batteries included, but not mounted"_ philosophy.
-Cookies are a feature that is present, but needs to be activated.
+Lotus applies _"batteries included, but not installed"_ philosophy.
+Cookies are a feature that is present but needs to be activated.
 
 In our application settings there is a line to uncomment.
 
@@ -27,7 +27,7 @@ From now on, cookies are automatically sent for each response.
 
 ### Settings
 
-With that configuration, We can specify options that will be set for all cookies we sent from our application.
+With that configuration we can specify options that will be set for all cookies we send from our application.
 
   * `:domain` - `String` (`nil` by default), the domain
   * `:path` - `String` (`nil` by default), a relative URL
@@ -55,7 +55,7 @@ end
 ```
 
 When setting a value, a cookie can accept a `String` or a `Hash` to specify inline options.
-General settings are applied automatically, but these options can be used to override values case by case.
+General settings are applied automatically but these options can be used to override values case by case.
 
 ### Example
 
@@ -71,7 +71,7 @@ module Web
 end
 ```
 
-We're gonna set two cookies from the action: the first will inherit application configuration, while the second overrides the default value.
+We're going to set two cookies from the action: the first will inherit application configuration, while the second overrides the default value.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb

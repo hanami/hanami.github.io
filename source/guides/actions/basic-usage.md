@@ -6,9 +6,9 @@ title: Lotus - Guides - Actions Basic Usage
 
 ## Requests Handling
 
-In the [previous section](/guides/actions/overview), we generated an action, let's use it.
+In the [previous section](/guides/actions/overview), we generated an action.  Now let's use it.
 
-First, we check our routes.
+First, we check our routes:
 
 ```ruby
 # apps/web/config/routes.rb
@@ -26,9 +26,9 @@ Then we edit the corresponding template:
 
 Here is how Lotus handles an incoming request:
 
-  1. The router creates a new instance of `Web::Controllers::Dashboard::Index` and invokes `#call`
+  1. The router creates a new instance of `Web::Controllers::Dashboard::Index` and invokes `#call`.
   2. The application creates a new instance of `Web::Views::Dashboard::Index` and invokes `#render`.
-  3. The application returns the response to the browser
+  3. The application returns the response to the browser.
 
 <p class="convention">
   For a given action named <code>Web::Controllers::Dashboard::Index</code>, a corresponding view MUST be present: <code>Web::Views::Dashboard::Index</code>.
@@ -62,9 +62,9 @@ end
 
 Here how Lotus handles an incoming request in this case:
 
-  1. The router creates a new instance of `Web::Controllers::Dashboard::Index` and invokes `#call`
-  2. The application detects that a body is already set and doesn't instantiate the view
-  3. The application returns the response to the browser
+  1. The router creates a new instance of `Web::Controllers::Dashboard::Index` and invokes `#call`.
+  2. The application detects that a body is already set and doesn't instantiate the view.
+  3. The application returns the response to the browser.
 
 If we visit `/dashboard` again, now we should see `OK`.
 

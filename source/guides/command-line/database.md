@@ -15,31 +15,31 @@ We can manage our database via the command line.
   * SQLite3
 
 The [adapter](/guides/models/overview) is set in `lib/bookshelf.rb`.
-It uses an env var, defined in the `.env.*` files at the root of the project.
+It uses an environment variable, defined in the `.env.*` files at the root of the project.
 
 ### Create
 
-With `db create` we can create the database for the current env.
+With `db create` we can create the database for the current environment.
 
 ```shell
 % bundle exec lotus db create
 ```
 
-In order to preserve production data, this command can't be run in that env.
+In order to preserve production data, this command can't be run in the production environment.
 
 ### Drop
 
-With `db drop` we can drop the existing database for the current env.
+With `db drop` we can drop the existing database for the current environment.
 
 ```shell
 % bundle exec lotus db drop
 ```
 
-In order to preserve production data, this command can't be run in that env.
+In order to preserve production data, this command can't be run in the production environment.
 
 ### Migrate
 
-Run [migrations](/guides/migrations/overview) from `db/migrations`.
+With `db migrate` we can run [migrations](/guides/migrations/overview) found in `db/migrations`.
 
 Given the following migrations:
 
@@ -50,13 +50,13 @@ db/migrations
 └── 20150613165900_create_authors.rb
 ```
 
-We run `db migrate`, then the database _version_ becomes `20150613165900`, which is the max timestamp from the migrations above.
+We run `db migrate`, then the database _version_ becomes `20150613165900`, which is the maximum timestamp from the migrations above.
 
 ```shell
 % bundle exec lotus db migrate # Migrates to max migration (20150613165900)
 ```
 
-It accepts an optional argument, to specify the target version.
+This command accepts an optional argument to specify the target version.
 For instance, if we want to **rollback** the changes from `20150613165900_create_authors.rb`, we can migrate _**"down"**_.
 
 ```shell
@@ -67,7 +67,7 @@ For instance, if we want to **rollback** the changes from `20150613165900_create
 
 ### Prepare
 
-Prepares database for the current environment. It's only allowed in development and test mode.
+Prepares database for the current environment. This command can't be run in the production environment.
 
 When we run db prepare it:
 
@@ -98,7 +98,7 @@ When we run `db apply`, it:
 % bundle exec lotus db apply
 ```
 
-This command is available only in development mode.
+This command is available only in the development environment.
 
 ### Version
 
@@ -117,7 +117,7 @@ When we migrate the database:
 % bundle exec lotus db migrate
 ```
 
-Then we can ask for the current version:
+We can then ask for the current version:
 
 ```shell
 % bundle exec lotus db version
