@@ -22,7 +22,7 @@ They are home to the main parts described above.
 #### Application Core
 
 We implement a set of functionalities, without worrying about how they can be exposed to the outside world.
-This is the **cornestone** of our product, and we want to be careful on how we manage dependencies for it.
+This is the **cornerstone** of our product, and we want to be careful on how we manage dependencies for it.
 
 `Lotus::Model` is the default choice for persisting our Ruby objects.
 This is a _soft-dependency_, it can be removed from our `Gemfile` and replaced with something else.
