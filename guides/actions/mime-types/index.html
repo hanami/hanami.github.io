@@ -187,7 +187,7 @@
 <h3>Default Format</h3>
 
 <p>If a client asks for a generic <code>Accept: */*</code>, the action will fall back to the <strong>application default format</strong>.
-It&rsquo;s a setting that allows to safely handle cases like our example, the default value is <code>:html</code>.</p>
+This is a setting that allows us to safely handle cases like our example; the default value is <code>:html</code>.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
 
 <span class="k">module</span> <span class="nn">Web</span>
@@ -259,7 +259,7 @@ If the incoming request doesn&rsquo;t satisfy this constraint, the application w
 <p>Lotus knows about more than 100 of the most common MIME types.
 However, we may want to add custom types in order to use them with <code>#format=</code> or <code>.accept</code>.</p>
 
-<p>In our application settings, we can use <code>controller.format</code>, which accepts a Hash where the key is the format symbol (<code>:custom</code>) and the value is a string expressed in the MIME type standard (<code>application/custom</code>).</p>
+<p>In our application settings we can use <code>controller.format</code>, which accepts a Hash where the key is the format symbol (<code>:custom</code>) and the value is a string expressed in the MIME type standard (<code>application/custom</code>).</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
 
 <span class="k">module</span> <span class="nn">Web</span>
@@ -295,18 +295,18 @@ However, we may want to add custom types in order to use them with <code>#format
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

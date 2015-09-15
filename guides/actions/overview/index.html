@@ -159,12 +159,12 @@
 <p>An action is an endpoint that handles incoming HTTP requests for a specific <a href="/guides/routing/overview">route</a>.
 In a Lotus application, an <strong>action is an object</strong>, while a <strong>controller is a Ruby module</strong> that groups them.</p>
 
-<p>This design provides self contained actions, which don&rsquo;t share their context accidentally with other actions and it prevents gigantic controllers.
+<p>This design provides self contained actions that don&rsquo;t share their context accidentally with other actions.  It also prevents gigantic controllers.
 It has several advantages in terms of testability and control of an action.</p>
 
 <h2>A Simple Action</h2>
 
-<p>Lotus ships with a generator for actions, let&rsquo;s create a new one:</p>
+<p>Lotus ships with a generator for actions. Let&rsquo;s create a new one:</p>
 <pre class="language-ruby shell"><code>lotus generate action web dashboard#index
 </code></pre>
 
@@ -204,7 +204,7 @@ This module is generated at runtime for us, when the application starts.</p>
 
 <h3> Action Module</h3>
 
-<p>Lotus philosophy emphatizes <em>composition over inheritance</em> and avoids the <a href="http://michaelfeathers.typepad.com/michael_feathers_blog/2013/01/the-framework-superclass-anti-pattern.html">framework superclass antipattern</a>.
+<p>Lotus philosophy emphasizes <em>composition over inheritance</em> and avoids the <a href="http://michaelfeathers.typepad.com/michael_feathers_blog/2013/01/the-framework-superclass-anti-pattern.html">framework superclass antipattern</a>.
 For this reason, all the components are provided as <strong>modules to include</strong> instead of base classes to inherit from.</p>
 
 <p>Like we said before, Lotus can run multiple apps within the same Ruby process.
@@ -225,7 +225,7 @@ We need to implement <code>#call</code>, which is a method that accepts only one
 That is the object that carries the payload that comes from incoming HTTP requests from the <a href="/guides/routing/basic-routing">router</a>.</p>
 
 <p>This interface reminds us of Rack.
-Indeed, our action is compatible with that protocol.</p>
+Indeed, our action is compatible with the Rack protocol.</p>
 
             </div>
           </div>
@@ -250,18 +250,18 @@ Indeed, our action is compatible with that protocol.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

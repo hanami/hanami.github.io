@@ -158,8 +158,8 @@
 
 <h2>Enable Cookies</h2>
 
-<p>Lotus applies <em>&ldquo;batteries included, but not mounted&rdquo;</em> philosophy.
-Cookies are a feature that is present, but needs to be activated.</p>
+<p>Lotus applies <em>&ldquo;batteries included, but not installed&rdquo;</em> philosophy.
+Cookies are a feature that is present but needs to be activated.</p>
 
 <p>In our application settings there is a line to uncomment.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
@@ -177,7 +177,7 @@ Cookies are a feature that is present, but needs to be activated.</p>
 
 <h3>Settings</h3>
 
-<p>With that configuration, We can specify options that will be set for all cookies we sent from our application.</p>
+<p>With that configuration we can specify options that will be set for all cookies we send from our application.</p>
 
 <ul>
 <li><code>:domain</code> - <code>String</code> (<code>nil</code> by default), the domain</li>
@@ -205,7 +205,7 @@ Cookies are a feature that is present, but needs to be activated.</p>
 </code></pre>
 
 <p>When setting a value, a cookie can accept a <code>String</code> or a <code>Hash</code> to specify inline options.
-General settings are applied automatically, but these options can be used to override values case by case.</p>
+General settings are applied automatically but these options can be used to override values case by case.</p>
 
 <h3>Example</h3>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
@@ -219,7 +219,7 @@ General settings are applied automatically, but these options can be used to ove
 <span class="k">end</span>
 </code></pre>
 
-<p>We&rsquo;re gonna set two cookies from the action: the first will inherit application configuration, while the second overrides the default value.</p>
+<p>We&rsquo;re going to set two cookies from the action: the first will inherit application configuration, while the second overrides the default value.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -259,18 +259,18 @@ General settings are applied automatically, but these options can be used to ove
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

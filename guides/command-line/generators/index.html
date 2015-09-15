@@ -169,15 +169,15 @@ The default application is called <code>Web</code> and lives under <code>apps/we
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate app admin
 </code></pre>
 
-<p>It generates <code>Admin</code> application under <code>apps/admin</code>.</p>
+<p>This generates an application named <code>Admin</code> under <code>apps/admin</code>.</p>
 
 <h3>Actions</h3>
 
-<p>We can generate an action, the corresponding view, template, route and test code with one command.</p>
+<p>We can generate an action along with the corresponding view, template, route and test code with one command.</p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action web books#show
 </code></pre>
 
-<p>The first argument <code>web</code>, is the name of the target application in a Container architecture.
+<p>The first argument, <code>web</code>, is the name of the target application in a Container architecture.
 <strong>It must be omitted if used within an Application architecture:</strong></p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action books#show
 </code></pre>
@@ -186,12 +186,12 @@ The default application is called <code>Web</code> and lives under <code>apps/we
 
 <h4>Route</h4>
 
-<p>The generated route, is named after the controller name.</p>
+<p>The generated route is named after the controller name.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
 <span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#show'</span>
 </code></pre>
 
-<p>If we want to customize it, without editing our routes file, we can specify a <code>--url</code> argument.</p>
+<p>If we want to customize the route URL, without editing our routes file, we can specify a <code>--url</code> argument.</p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action web books#show --url<span class="o">=</span>/books/:id
 </code></pre>
 
@@ -231,18 +231,18 @@ The default application is called <code>Web</code> and lives under <code>apps/we
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

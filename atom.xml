@@ -4,13 +4,80 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-07-10T19:16:00+02:00</updated>
+   <updated>2015-07-12T14:42:00+02:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Weekly Changelog</title>
+       <id>http://lotusrb.org/blog/2015/07/12/weekly-changelog.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/07/12/weekly-changelog.html"/>
+       <updated>2015-07-12T14:42:00+02:00</updated>
+       <author>
+         <name>Trung Lê</name>
+       </author>
+       <summary>
+         Changelog from Jun 29 2015 to Jul 12 2015
+
+       </summary>
+       <content type="html"><![CDATA[<h2>Releases</h2>
+
+<ul>
+<li>Released lotusrb 0.4.1</li>
+<li>Released lotus-controller 0.4.4</li>
+<li>Released lotus-view 0.4.3</li>
+<li>Released lotus-model 0.4.1</li>
+<li>Released lotus-utils 0.5.1</li>
+<li>Released lotus-validations 0.3.2</li>
+<li>Released lotus-router 0.4.2</li>
+<li>Released lotus-helpers 0.2.0</li>
+</ul>
+
+<h2>Completed</h2>
+
+<ul>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] When add a middleware prepend it [<a href="https://github.com/lotus/lotus/pull/302">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Fixed model generator [<a href="https://github.com/lotus/lotus/pull/301">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Ensure action generator works with (double) quoted or escaped name [<a href="https://github.com/lotus/lotus/pull/300">details</a>]</li>
+<li>[<a href="https://github.com/mvader">Miguel Molina</a>] Add a database check in the new app generator [<a href="https://github.com/lotus/lotus/pull/298">details</a>]</li>
+<li>[<a href="https://github.com/joneslee85">Trung Lê</a>] Add &ndash;db as the second alias for &ndash;database app generator arg [<a href="https://github.com/lotus/lotus/pull/289">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Fixed random csrf test fail [<a href="https://github.com/lotus/lotus/pull/280">details</a>]</li>
+<li>[<a href="https://github.com/theocodes">Theo Felippe</a>] PathPrefix relative_join bug [<a href="https://github.com/lotus/router/pull/64">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Fix load container in lotus console [<a href="https://github.com/lotus/lotus/pull/279">details</a>]</li>
+<li>[<a href="https://github.com/farrel">Farrel Lifson</a>] Search for partial template under view template directory [<a href="https://github.com/lotus/view/pull/73">details</a>]</li>
+<li>[<a href="https://github.com/nickcoyne">Nick Coyne</a>] Use createdb to create database [<a href="https://github.com/lotus/model/pull/200">details</a>]</li>
+<li>[<a href="https://github.com/khaiql">Scott Lê</a>] Add text<em>area helper to form</em>for [<a href="https://github.com/lotus/helpers/pull/21">details</a>]</li>
+<li>[<a href="https://github.com/vyper">Leonardo Saraiva</a>] Fixing lotus routes when architecture is application [<a href="https://github.com/lotus/lotus/pull/272">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] [#267] fix secret when generate new app with app architecture option [<a href="https://github.com/lotus/lotus/pull/268">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Removed slice web env database url [<a href="https://github.com/lotus/lotus/pull/260">details</a>]</li>
+<li>[<a href="https://github.com/hieuk09">Hiếu Nguyễn</a>] Application Architecture [<a href="https://github.com/lotus/lotus/pull/259">details</a>]</li>
+<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Database migrations [<a href="https://github.com/lotus/lotus/pull/256">details</a>]</li>
+<li>[<a href="https://github.com/mjbellantoni">Matthew Bellantoni</a>] Fixes bug #113 where Params are incorrectly converted to hashes. [<a href="https://github.com/lotus/controller/pull/115">details</a>]</li>
+</ul>
+
+<h2>Development</h2>
+
+<ul>
+<li>[<a href="https://github.com/benlovell">Ben Lovell</a>] Some RSpec idioms [<a href="https://github.com/lotus/lotus/pull/294">details</a>]</li>
+<li>[<a href="https://github.com/joneslee85">Trung Lê</a>] Generate env.rake and load all tasks in lib/tasks [<a href="https://github.com/lotus/lotus/pull/290">details</a>]</li>
+<li>[<a href="https://github.com/sungwoncho">Sung Won Cho</a>] Add Destroy command [<a href="https://github.com/lotus/lotus/pull/194">details</a>]</li>
+<li>[<a href="https://github.com/smt116">Maciej Malecki</a>] Preload application in config/environment file. [<a href="https://github.com/lotus/lotus/pull/180">details</a>]</li>
+<li>[<a href="https://github.com/lotus">Lotus</a>] Implement command/query separation for Repository, by introducing #fetch [<a href="https://github.com/lotus/model/pull/207">details</a>]</li>
+<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] [WIP] support joins [<a href="https://github.com/lotus/model/pull/205">details</a>]</li>
+<li>[<a href="https://github.com/lotus">Lotus</a>] Implement SQL inner join [<a href="https://github.com/lotus/model/pull/102">details</a>]</li>
+<li>[<a href="https://github.com/heruku">Uku Taht</a>] Associations [<a href="https://github.com/lotus/model/pull/56">details</a>]</li>
+<li>[<a href="https://github.com/rodzyn">Marcin Olichwirowicz</a>] Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
+<li>[<a href="https://github.com/fuadsaud">Fuad Saud</a>] Add helper for word wrapping [<a href="https://github.com/lotus/helpers/pull/1">details</a>]</li>
+</ul>
+
+<h2>Roadmap</h2>
+
+<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
+]]></content>
+     </entry>
      <entry>
        <title>Announcing Lotus v0.4.1</title>
        <id>http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html</id>
@@ -1204,62 +1271,6 @@ We&rsquo;re pushing to ship soon.</p>
   </script>
   <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
 </div>
-]]></content>
-     </entry>
-     <entry>
-       <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/05/15/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/05/15/weekly-changelog.html"/>
-       <updated>2015-05-15T14:56:00+02:00</updated>
-       <author>
-         <name>Trung Lê</name>
-       </author>
-       <summary>
-         Changelog from Apr 28th to May 15th 2015
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Releases</h2>
-
-<ul>
-<li>Released lotusrb 0.3.1</li>
-<li>Released lotus-validations 0.3.1</li>
-<li>Released lotus-view 0.4.0</li>
-<li>Released lotus-controller 0.4.2</li>
-<li>Released lotus-model 0.3.1</li>
-<li>Released lotus-utils 0.4.2</li>
-</ul>
-
-<h2>Completed</h2>
-
-<ul>
-<li>[<a href="https://github.com/guilhermeFranco">Guilherme Franco</a>] Add block conditions to #where() for memory adapter [<a href="https://github.com/lotus/model/pull/180">details</a>]</li>
-<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Added nested routes [<a href="https://github.com/lotus/router/pull/51">details</a>]</li>
-<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] Rack::Lint compatibility [<a href="https://github.com/lotus/controller/pull/108">details</a>]</li>
-<li>[<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>] String Singularization [<a href="https://github.com/lotus/utils/pull/73">details</a>]</li>
-<li>[<a href="https://github.com/nguyenngoc2505">Ngọc Nguyễn</a>] Add Lotus.env [<a href="https://github.com/lotus/lotus/pull/216">details</a>]</li>
-<li>[<a href="https://github.com/hieuk09">Hiếu Nguyễn</a>] Application generator [<a href="https://github.com/lotus/lotus/pull/214">details</a>]</li>
-<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Fix internet explorer HTTP accept [<a href="https://github.com/lotus/controller/pull/105">details</a>]</li>
-<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] String pluralization [<a href="https://github.com/lotus/utils/pull/72">details</a>]</li>
-<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Ensure Attributes#to_h to force Hash values [<a href="https://github.com/lotus/utils/pull/74">details</a>]</li>
-<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] When coerce Utils::Attributes to Hash don&rsquo;t rely on #to_h of the single values [<a href="https://github.com/lotus/utils/pull/76">details</a>]</li>
-<li>[<a href="https://github.com/peterberkenbosch">Peter Berkenbosch</a>] Add raw SQL support with execute() [<a href="https://github.com/lotus/model/pull/184">details</a>]</li>
-</ul>
-
-<h2>Development</h2>
-
-<ul>
-<li>[<a href="https://github.com/mymai91">My Mai</a>] [<a href="https://github.com/dondinhit">Dôn Đinh</a>] Introduce Lotus.root [<a href="https://github.com/lotus/lotus/pull/213">details</a>]</li>
-<li>[<a href="https://github.com/sungwoncho">Sung Won Cho</a>] Add Destroy CLI [<a href="https://github.com/lotus/lotus/pull/194">details</a>]</li>
-<li>[<a href="https://github.com/dsnipe">Dmitry Tymchuk</a>] Add repository timestamps [<a href="https://github.com/lotus/model/pull/169">details</a>]</li>
-<li>[<a href="https://github.com/joneslee85">Trung Lê</a>] Database migrations [<a href="https://github.com/lotus/model/pull/144">details</a>]</li>
-<li>[<a href="https://github.com/jodosha">Luca Guidi</a>] Form helpers [<a href="https://github.com/lotus/helpers/pull/16">details</a>]</li>
-<li>[<a href="https://github.com/tomkadwill">Tom Kadwill</a>] Number formatting helpers [<a href="https://github.com/lotus/helpers/pull/11">details</a>]</li>
-<li>[<a href="https://github.com/rodzyn">Marcin Olichwirowicz</a>] Custom validations [<a href="https://github.com/lotus/validations/pull/49">details</a>]</li>
-</ul>
-
-<h2>Roadmap</h2>
-
-<p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
 ]]></content>
      </entry>
 </feed>

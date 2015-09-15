@@ -159,10 +159,10 @@
 <h2>Callbacks</h2>
 
 <p>If we want to execute some logic before and/or after <code>#call</code> is executed, we can use a callback.
-It&rsquo;s useful to declutter code for common tasks like checking if a user is signed in, set a record, handle 404 responses or tidy up the response.</p>
+Callbacks are useful to declutter code for common tasks like checking if a user is signed in, set a record, handle 404 responses or tidy up the response.</p>
 
 <p>The correspoding DSL methods are <code>before</code> and <code>after</code>.
-They accept a symbol that is the name of the method that we want to call, or an anonymous proc.</p>
+These methods each accept a symbol that is the name of the method that we want to call, or an anonymous proc.</p>
 
 <h3>Methods</h3>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
@@ -248,7 +248,7 @@ This is an antipattern that causes a lot of problems for code maintenance, testa
 <p>Using exceptions for control flow is expensive for the Ruby VM.
 There is a lightweight alternative that our language supports: <strong>signals</strong> (see <code>throw</code> and <code>catch</code>).</p>
 
-<p>Lotus take advantage of this mechanism to provide <strong>faster control flow</strong> in our actions via <code>#halt</code>.</p>
+<p>Lotus takes advantage of this mechanism to provide <strong>faster control flow</strong> in our actions via <code>#halt</code>.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -274,7 +274,7 @@ Subsequent instructions will be entirely skipped.</p>
 When <code>halt</code> is used, the flow is interrupted and the control is passed back to the framework.
 </p>
 
-<p>That means it can be used to skip <code>#call</code> invokation entirely if we use it in a <code>before</code> callback.</p>
+<p>That means that <code>halt</code> can be used to skip <code>#call</code> invokation entirely if we use it in a <code>before</code> callback.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -293,7 +293,7 @@ When <code>halt</code> is used, the flow is interrupted and the control is passe
 <span class="k">end</span>
 </code></pre>
 
-<p><code>#halt</code> accepts a HTTP status code as the first argument.
+<p><code>#halt</code> accepts an HTTP status code as the first argument.
 When used like this, the body of the response will be set with the corresponding message (eg. &ldquo;Unauthorized&rdquo; for <code>401</code>).</p>
 
 <p>An optional second argument can be passed to set a custom body.</p>
@@ -314,7 +314,7 @@ When used like this, the body of the response will be set with the corresponding
 <p>A special case of control flow management is relative to HTTP redirect.
 If we want to reroute a request to another resource we can use <code>redirect_to</code>.</p>
 
-<p>After it&rsquo;s invoked, it stops the control flow, and <strong>subsequent lines aren&rsquo;t executed</strong>.</p>
+<p>When <code>redirect_to</code> is invoked, control flow is stopped and <strong>subsequent code in the action is not executed</strong>.</p>
 
 <p>It accepts a string that represents an URI, and an optional <code>:status</code> argument.
 By default the status is set to <code>302</code>.</p>
@@ -325,7 +325,7 @@ By default the status is set to <code>302</code>.</p>
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
       <span class="n">redirect_to</span> <span class="n">routes</span><span class="p">.</span><span class="nf">root_path</span>
-      <span class="c1"># This line will never be executed</span>
+      <span class="n">foo</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">)</span> <span class="c1"># This line will never be executed</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -354,18 +354,18 @@ By default the status is set to <code>302</code>.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

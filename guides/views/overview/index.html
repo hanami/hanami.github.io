@@ -158,7 +158,7 @@
 
 <p>A view is an object that&rsquo;s responsible to render a template.</p>
 
-<p>In a full stack Lotus application, an incoming HTTP request, goes through the <a href="/guides/routing/overview">router</a>, it instantiate and call an <a href="/guides/actions/overview">action</a>, which sets the status code and the headers for the response.
+<p>In a full stack Lotus application, an incoming HTTP request, goes through the <a href="/guides/routing/overview">router</a>, it instantiates and calls an <a href="/guides/actions/overview">action</a>, which sets the status code and the headers for the response.
 The last bit is the body, which is set by the corresponding view&rsquo;s output.</p>
 
 <h2>A Simple View</h2>
@@ -196,8 +196,8 @@ This module is generated at the runtime for us, when the application starts.</p>
   For a given application named <code>Web</code>, views are available under <code>Web::Views</code>.
 </p>
 
-<p><strong>This simmetry is really important at the run time.</strong>
-After the action has finished its job, the control passes to the framework which looks for the matching view.</p>
+<p><strong>This symmetry is really important at run time.</strong>
+After the action has finished its job, control passes to the framework which looks for the matching view.</p>
 
 <p class="convention">
   For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
@@ -205,14 +205,14 @@ After the action has finished its job, the control passes to the framework which
 
 <h3>View Module</h3>
 
-<p>All the main Lotus components are mixin to be included.
+<p>All the main Lotus components are mixins meant to be included.
 Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.</p>
 
 <p>In our example, we have a directive <code>include Web::View</code>.
 That means our view will behave according to the configuration of the <code>Web</code> application.</p>
 
 <p class="convention">
-  For a given application named <code>Web</code>, view mixin to include is <code>Web::View</code>.
+  For a given application named <code>Web</code>, the view mixin to include is <code>Web::View</code>.
 </p>
 
             </div>
@@ -238,18 +238,18 @@ That means our view will behave according to the configuration of the <code>Web<
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

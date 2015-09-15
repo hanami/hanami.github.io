@@ -184,7 +184,7 @@ They are similar to a Ruby Hash, but they offer an expanded set of features.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>If we visit <code>/dashboard?q=foo</code>, we should see the <code>Query string: foo</code>.</p>
+<p>If we visit <code>/dashboard?q=foo</code>, we should see <code>Query string: foo</code>.</p>
 
 <h3>Indifferent Access</h3>
 
@@ -227,15 +227,15 @@ It accepts a <strong>dot separated</strong> string, where each token represents 
 </code></pre>
 
 <p>We want to provide self-registration for our users.
-We build a HTML form which is the action that accepts the payload and stores it in the <code>users</code> table.
-That table has a boolean column <code>admin</code> to decide if a person has administration permissions.</p>
+We build a HTML form which posts to an action that accepts the payload and stores it in the <code>users</code> table.
+That table has a boolean column <code>admin</code> to indicate whether a person has administration permissions.</p>
 
-<p>A malicious user can exploit this scenario, by sending this extra parameter to our application and become an admin.</p>
+<p>A malicious user can exploit this scenario by sending this extra parameter to our application, thereby making themselves an administrator.</p>
 
-<p>We can easily fix this problem, by filtering the allowed params that are permitted inside our application.
+<p>We can easily fix this problem by filtering the allowed parameterss that are permitted inside our application.
 Please always remember that <strong>params represent untrusted input</strong>.</p>
 
-<p>We use <code>.params</code> to map the structure of the (nested) params.</p>
+<p>We use <code>.params</code> to map the structure of the (nested) parameters.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/signup/create.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Signup</span>
   <span class="k">class</span> <span class="nc">Create</span>
@@ -274,7 +274,7 @@ An existing user can ask someone to join.
 Because the invitee will decide a password later on, we want to persist that <code>User</code> record without that value.</p>
 
 <p>If we put <code>password</code> validation in <code>User</code>, we need to handle these two use cases with a conditional.
-But in the long term, this approach is painful from a maintenance perspective.</p>
+But in the long term this approach is painful from a maintenance perspective.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># Example of poor style for validations</span>
 <span class="k">class</span> <span class="nc">User</span>
   <span class="n">attribute</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">presence: </span><span class="p">{</span> <span class="ss">if: :password_required?</span> <span class="p">}</span>
@@ -286,8 +286,9 @@ But in the long term, this approach is painful from a maintenance perspective.</
 <span class="k">end</span>
 </code></pre>
 
-<p>We can see validations the set of rules for data correctness that we want for <strong>a specific use case</strong>.
-For us, an <code>User</code> can be persisted with or without a password, <strong>depending on the workflow</strong> that the it was routed into.</p>
+<p>We can see validations as the set of rules for data correctness that we want for <strong>a specific use case</strong>.
+For us, a <code>User</code> can be persisted with or without a password, <strong>depending on the workflow</strong> and the route through
+which the <code>User</code> is persisted.</p>
 
 <h3>Boundaries</h3>
 
@@ -307,7 +308,7 @@ We don&rsquo;t want to continue if the data is invalid.</p>
 
 <h3>Usage</h3>
 
-<p>We can coerce the Ruby type, validate if a param is required, if included in a range of values, etc..</p>
+<p>We can coerce the Ruby type, validate if a param is required, determine if it is within a range of values, etc..</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/signup/create.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Signup</span>
   <span class="k">class</span> <span class="nc">Create</span>
@@ -334,8 +335,8 @@ We don&rsquo;t want to continue if the data is invalid.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>Params validations are delegated, under the hood, to <a href="https://github.com/lotus/validations">Lotus::Validations</a>.
-Please check related docs for a complete list of options, and how to share code between validations.</p>
+<p>Parameter validations are delegated, under the hood, to <a href="https://github.com/lotus/validations">Lotus::Validations</a>.
+Please check the related documentation for a complete list of options and how to share code between validations.</p>
 
 <h2>Concrete Classes</h2>
 
@@ -397,18 +398,18 @@ end
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

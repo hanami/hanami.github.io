@@ -158,9 +158,9 @@
 
 <h2>Requests Handling</h2>
 
-<p>In the <a href="/guides/actions/overview">previous section</a>, we generated an action, let&rsquo;s use it.</p>
+<p>In the <a href="/guides/actions/overview">previous section</a>, we generated an action.  Now let&rsquo;s use it.</p>
 
-<p>First, we check our routes.</p>
+<p>First, we check our routes:</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
 <span class="n">get</span> <span class="s1">'/dashboard'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'dashboard#index'</span>
 </code></pre>
@@ -175,9 +175,9 @@
 <p>Here is how Lotus handles an incoming request:</p>
 
 <ol>
-<li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code></li>
+<li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code>.</li>
 <li>The application creates a new instance of <code>Web::Views::Dashboard::Index</code> and invokes <code>#render</code>.</li>
-<li>The application returns the response to the browser</li>
+<li>The application returns the response to the browser.</li>
 </ol>
 
 <p class="convention">
@@ -211,9 +211,9 @@ To involve a view in this case is a waste of CPU cycles.</p>
 <p>Here how Lotus handles an incoming request in this case:</p>
 
 <ol>
-<li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code></li>
-<li>The application detects that a body is already set and doesn&rsquo;t instantiate the view</li>
-<li>The application returns the response to the browser</li>
+<li>The router creates a new instance of <code>Web::Controllers::Dashboard::Index</code> and invokes <code>#call</code>.</li>
+<li>The application detects that a body is already set and doesn&rsquo;t instantiate the view.</li>
+<li>The application returns the response to the browser.</li>
 </ol>
 
 <p>If we visit <code>/dashboard</code> again, now we should see <code>OK</code>.</p>
@@ -301,18 +301,18 @@ This is a really useful technique for unit testing our actions.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

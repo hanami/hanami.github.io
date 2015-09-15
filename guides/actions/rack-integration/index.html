@@ -159,12 +159,12 @@
 <h2>Rack Environment</h2>
 
 <p>Actions offer a high level API built on top of Rack.
-If we need to access raw data from Rack environment, we can use <code>params.env</code>.</p>
+If we need to access raw data from Rack environment we can use <code>params.env</code>.</p>
 
 <h2>Rack Middleware</h2>
 
 <p>Lotus mounts a very thin default middleware stack.
-Additional components can be mounted globally, at the application level or locally.</p>
+Additional components can be mounted globally, at the application level, or locally.</p>
 
 <h3>Global Middleware</h3>
 
@@ -179,7 +179,7 @@ Additional components can be mounted globally, at the application level or local
 
 <h3>Application Middleware</h3>
 
-<p>If we need a component that&rsquo;s only used by a specific application (under <code>apps/</code>), we can add it to the configuration.</p>
+<p>If we need a component that&rsquo;s only used by a specific application (under <code>apps/</code>), we can add it to the application&rsquo;s configuration.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
 <span class="nb">require</span> <span class="s1">'rack/auth/basic'</span>
 
@@ -195,8 +195,8 @@ Additional components can be mounted globally, at the application level or local
 
 <h3>Action Middleware</h3>
 
-<p>Sometimes we need a middleware for a set of well known resources, only.
-If we mount it at the global or application level, the performance will start to degrade.
+<p>Sometimes we need a middleware only to be used for a set of well known resources.
+If we mount it at the global or application level the performance will start to degrade.
 Actions allow us to mount a fine grained middleware stack.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/sessions/create.rb</span>
 <span class="nb">require</span> <span class="s1">'omniauth'</span>
@@ -256,18 +256,18 @@ Actions allow us to mount a fine grained middleware stack.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

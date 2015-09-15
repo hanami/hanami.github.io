@@ -173,7 +173,7 @@ The behavior changes according to the current Lotus environment and the custom s
 </code></pre>
 
 <p>Exceptions are automatically caught when in production mode, but not in development.
-In the first case, for our example, the application returns a <code>500</code> (Internal Server Error), in the latter case, we&rsquo;ll see the stack trace and all the information to debug the code.</p>
+In production, for our example, the application returns a <code>500</code> (Internal Server Error); in development, we&rsquo;ll see the stack trace and all the information to debug the code.</p>
 
 <p>This behavior can be changed with the <code>handle_exceptions</code> setting in <code>apps/web/application.rb</code>.</p>
 
@@ -193,12 +193,12 @@ In the first case, for our example, the application returns a <code>500</code> (
 <span class="k">end</span>
 </code></pre>
 
-<p>It accepts a Hash where the key is the exception to handle, and the value is the corresponding HTTP status code.
+<p><code>handle_exception</code> accepts a Hash where the key is the exception to handle, and the value is the corresponding HTTP status code.
 In our example, when <code>ArgumentError</code> is raised, it will be handled as a <code>400</code> (Bad Request).</p>
 
 <h2>Custom Handlers</h2>
 
-<p>If the mapping with a custom HTTP status doesn&rsquo;t fit our need, we can specify a custom handler and manage the exception by ourselves.</p>
+<p>If the mapping with a custom HTTP status doesn&rsquo;t fit our needs, we can specify a custom handler and manage the exception by ourselves.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">PermissionDenied</span> <span class="o">&lt;</span> <span class="no">StandardError</span>
@@ -227,12 +227,11 @@ In our example, when <code>ArgumentError</code> is raised, it will be handled as
 <span class="k">end</span>
 </code></pre>
 
-<p>If we specify a symbol as the value for <code>handle_exception</code>, it will be used to manage the exception.
-In our case we want to protect the action from unwanted access: only admins are allowed.</p>
+<p>If we specify the name of a method (as a symbol) as the value for <code>handle_exception</code>, this method will be used to respond to the exception.
+In the example above we want to protect the action from unwanted access: only admins are allowed.</p>
 
-<p>When a <code>PermissionDenied</code> exception is raised, it will be handled by <code>:handle_permission_error</code>.
-It MUST accept an <code>exception</code> argument.
-That is the exception instance raised inside <code>#call</code>.</p>
+<p>When a <code>PermissionDenied</code> exception is raised it will be handled by <code>:handle_permission_error</code>.
+It MUST accept an <code>exception</code> argument&mdash;the exception instance raised inside <code>#call</code>.</p>
 
 <p class="warning">
 When specifying a custom exception handler, it MUST accept an <code>exception</code> argument.
@@ -261,18 +260,18 @@ When specifying a custom exception handler, it MUST accept an <code>exception</c
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

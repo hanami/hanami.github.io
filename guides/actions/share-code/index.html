@@ -248,7 +248,7 @@ But if we override that method with an empty implementation, it does nothing and
 <h2>Module Inclusion</h2>
 
 <p>Imagine we have a RESTful resource named <code>books</code>.
-There are several actions (<code>show</code>, <code>edit</code>, <code>update</code> and <code>destroy</code>), which need to find a specific book to perform their job.</p>
+There are several actions (<code>show</code>, <code>edit</code>, <code>update</code> and <code>destroy</code>) which need to find a specific book to perform their job.</p>
 
 <p>What if we want to DRY the code of all these actions?
 Ruby comes to our rescue.</p>
@@ -271,7 +271,7 @@ Ruby comes to our rescue.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>We have defined a module for our behavior to share, let&rsquo;s include it in all the actions that need it.</p>
+<p>We have defined a module for our behavior to share. Let&rsquo;s include it in all the actions that need it.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/update.rb</span>
 <span class="nb">require_relative</span> <span class="s1">'./set_book'</span>
 
@@ -310,18 +310,18 @@ Ruby comes to our rescue.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

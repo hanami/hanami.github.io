@@ -156,11 +156,11 @@
               <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/exposures.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
               <h1>Exposures</h1>
 
-<p>For complex use cases we may want to pass data to views, in order to present it to our users.
-Lotus puts emphasis on explicitness: data isn&rsquo;t shared between these two contexts unless we told it to do so.</p>
+<p>For complex use cases we may want to pass data to views in order to present it to our users.
+Lotus puts emphasis on explicitness: data isn&rsquo;t shared between the controller action and the view unless we tell it to do so.</p>
 
 <p>We use a simple and powerful mechanism to achieve our goal: <em><strong>exposures</strong></em>.
-They create a <em>getter</em> for the given name(s) and only the whitelisted instance variables are passed to the corresponding view.</p>
+Exposures create a <em>getter</em> on the action for the given name(s) and only the whitelisted instance variables are made available to the corresponding view.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -176,7 +176,7 @@ They create a <em>getter</em> for the given name(s) and only the whitelisted ins
 </code></pre>
 
 <p>In the example above we have exposed <code>:greeting</code>, but not <code>:foo</code>.
-Only the first can be used from the view and template.</p>
+Only <code>greeting</code> can be used from the view and template.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Views::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -214,18 +214,18 @@ Only the first can be used from the view and template.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

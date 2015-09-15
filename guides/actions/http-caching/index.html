@@ -157,7 +157,7 @@
               <h1>HTTP Caching</h1>
 
 <p>We refer to HTTP caching as the set of techiniques for HTTP 1.1 and implemented by browser vendors in order to make faster interactions with the server.
-There are a few headers that if sent, will enable these mechanisms.</p>
+There are a few headers that, if sent, will enable these HTTP caching mechanisms.</p>
 
 <p>Because these are advanced features, they must be enabled via <code>http_caching true</code> in our application settings (<code>apps/web/application.rb</code>).</p>
 
@@ -182,10 +182,10 @@ The first argument is a cache response directive like <code>:public</code> or <c
 
 <h2>Expires</h2>
 
-<p>Another HTTP caching special header is: <code>Expires</code>.
+<p>Another HTTP caching special header is <code>Expires</code>.
 It can be used for retrocompatibility with old browsers which don&rsquo;t understand <code>Cache-Control</code>.</p>
 
-<p>Lotus&rsquo; solution for <em>expire</em> combines support for all the browsers, by sending both the headers.</p>
+<p>Lotus&rsquo; solution for <em>expire</em> combines support for all the browsers by sending both the headers.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/dashboard/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Dashboard</span>
   <span class="k">class</span> <span class="nc">Index</span>
@@ -204,16 +204,16 @@ It can be used for retrocompatibility with old browsers which don&rsquo;t unders
 <h2>Conditional GET</h2>
 
 <p><em>Conditional GET</em> is a two step workflow to inform browsers that a resource hasn&rsquo;t changed since the last visit.
-At the end of the first request, it receives special HTTP response headers to send back the next time it will come back.
-If that header matches the value that the server calculates, then the resource is still cached and a <code>304</code> status (Not Modified) is returned.</p>
+At the end of the first request, the response includes special HTTP response headers that the browser will use next time it comes back.
+If the header matches the value that the server calculates, then the resource is still cached and a <code>304</code> status (Not Modified) is returned.</p>
 
 <h3>ETag</h3>
 
 <p>The first way to match a resource freshness is to use an identifier (usually an MD5 token).
 Let&rsquo;s specify it with <code>fresh etag:</code>.</p>
 
-<p>If the given identifier does NOT match <code>If-None-Match</code> request header, it will return a <code>200</code> and set <code>ETag</code> response header with that value.
-If it matches, the action will be halted and a <code>304</code> will be returned.</p>
+<p>If the given identifier does NOT match the <code>If-None-Match</code> request header, the request will return a <code>200</code> with an <code>ETag</code> response header with that value.
+If the header does match, the action will be halted and a <code>304</code> will be returned.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/users/show.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Users</span>
   <span class="k">class</span> <span class="nc">Show</span>
@@ -247,8 +247,8 @@ If it matches, the action will be halted and a <code>304</code> will be returned
 
 <p>The second way is to use a timestamp via <code>fresh last_modified:</code>.</p>
 
-<p>If the given timestamp does NOT match <code>If-Modified-Since</code> request header, it will return a <code>200</code> and set <code>Last-Modified</code> response header with that value.
-If it matches, the action will be halted and a <code>304</code> will be returned.</p>
+<p>If the given timestamp does NOT match <code>If-Modified-Since</code> request header, it will return a <code>200</code> and set the <code>Last-Modified</code> response header with the timestamp value.
+If the timestamp does matche, the action will be halted and a <code>304</code> will be returned.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/users/show.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Users</span>
   <span class="k">class</span> <span class="nc">Show</span>
@@ -295,18 +295,18 @@ If it matches, the action will be halted and a <code>304</code> will be returned
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>

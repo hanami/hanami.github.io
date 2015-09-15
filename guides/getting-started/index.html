@@ -183,7 +183,6 @@ Let&rsquo;s see what it contains:</p>
 % tree -L 1
 .
 ├── Gemfile
-├── Gemfile.lock
 ├── Rakefile
 ├── apps
 ├── config
@@ -196,7 +195,7 @@ Let&rsquo;s see what it contains:</p>
 <p>Here&rsquo;s what we need to know:</p>
 
 <ul>
-<li><code>Gemfile</code> and <code>Gemfile.lock</code> are Bundler artifacts to manage Rubygems dependencies.</li>
+<li><code>Gemfile</code> is a Bundler artifact to manage Rubygems dependencies.</li>
 <li><code>Rakefile</code> describes our Rake tasks.</li>
 <li><code>apps</code> contains one or more web applications compatible with Rack.
 Here we can find the first generated Lotus application called <code>Web</code>.
@@ -282,7 +281,7 @@ Lets add the code required to make this test pass, step-by-step.</p>
 <span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'home#index'</span>
 </code></pre>
 
-<p>The root we added pointed our application&rsquo;s root URL to the <code>index</code> action of the <code>home</code> controller (see the <a href="/guides/routing/overview">routing guide</a> for more information).
+<p>The root we pointed our application&rsquo;s root URL to the <code>index</code> action of the <code>home</code> controller (see the <a href="/guides/routing/overview">routing guide</a> for more information).
 Now we can create the index action.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Home</span>
@@ -331,7 +330,7 @@ Lotus uses a <em>&ldquo;Container&rdquo;</em> architecture by default, whereby a
 Such applications might include a JSON API, an admin panel, a marketing website, and so forth.</p>
 
 <p>All these applications live under <code>apps/</code>, with the default application named <code>web</code>.
-Lotus&rsquo; core frameworks are duplicated when the container boots, so configurations for different containers don&rsquo;t interfere with others.</p>
+Lotus&rsquo; core frameworks are duplicated when the container boots, so configurations for different applications don&rsquo;t interfere with others.</p>
 
 <p>Let&rsquo;s recap what we&rsquo;ve seen so far: to get our own page on the screen, we followed the execution path of a request in Lotus through the router into a controller action, through a view, to a template file.</p>
 
@@ -500,10 +499,16 @@ WEB_SESSIONS_SECRET="21aec7f7371228dd0d4da6a620a1a6b22889edcf0d4fb1c11b8080cd871
 </code></pre>
 
 <p>We can edit the database URL and add the database user and password if needed:</p>
-<pre class="language-ruby plaintext"><code>BOOKSHELF_DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
+<pre class="language-ruby plaintext"><code># It follows the format below:
+BOOKSHELF_DATABASE_URL="[ADAPTER]://[DATABASE_USER]:[DATABASE_USER_PASSWORD]@[HOST]:[PORT]/[DATABASE_NAME]"
+
+# Example:
+BOOKSHELF_DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
 </code></pre>
 
 <p>The placeholders <strong><em>user</em></strong> and <strong><em>password</em></strong> should be replaced with the correct credentials.</p>
+
+<p>You may want to change <code>localhost</code> for <code>127.0.0.1</code> if you&rsquo;re using Linux.</p>
 
 <p>The database configured by default, called <code>bookshelf_development</code> running on <code>localhost</code>, should work fine for now.
 Lotus can create the database for us:</p>
@@ -864,12 +869,13 @@ Let&rsquo;s specify this behaviour as unit tests:</p>
 <span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/controllers/books/create'</span>
 
 <span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+
   <span class="n">after</span> <span class="k">do</span>
     <span class="no">BookRepository</span><span class="p">.</span><span class="nf">clear</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s1">'with valid params'</span> <span class="k">do</span>
-    <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
     <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'1984'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'George Orwell'</span> <span class="p">}]</span> <span class="p">}</span>
 
     <span class="n">it</span> <span class="s1">'creates a new book'</span> <span class="k">do</span>
@@ -910,6 +916,8 @@ Lotus controller actions can use the <code>params</code> class method to define 
   <span class="k">class</span> <span class="nc">Create</span>
     <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
 
+    <span class="n">expose</span> <span class="ss">:book</span>
+
     <span class="n">params</span> <span class="k">do</span>
       <span class="n">param</span> <span class="ss">:book</span> <span class="k">do</span>
         <span class="n">param</span> <span class="ss">:title</span><span class="p">,</span>  <span class="ss">presence: </span><span class="kp">true</span>
@@ -919,8 +927,7 @@ Lotus controller actions can use the <code>params</code> class method to define 
 
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span>
-        <span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">])</span>
-        <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+        <span class="vi">@book</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">]))</span>
 
         <span class="n">redirect_to</span> <span class="s1">'/books'</span>
       <span class="k">end</span>
@@ -1084,18 +1091,18 @@ Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 10, 2015</span>
           <h4>Announcing Lotus v0.4.1</h4>
           <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
 </p>
           <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">June 30, 2015</span>
-          <h4>Announcing Rails Girls Summer of Code x Lotus</h4>
-          <p>This year marks the first participitation of Lotus project with Rails Girls Summer of Code program to deliver the long awaited mailer feature that has been set to be released along the roadmap for version 0.5.0.
-</p>
-          <a href="/blog/2015/06/30/announcing-lotus-rgsoc.html">Read more...</a>
         </div>
     </div>
   </div>
