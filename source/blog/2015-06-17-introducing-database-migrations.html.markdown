@@ -40,7 +40,7 @@ There are some **safety mechanisms**, for instance `db drop` will raise an error
 This upcoming version will ship with a migration generator.
 
 ```shell
-% lotus generate migration create_users
+% lotus generate migration create_books
     create  db/migrations/20150617145519_create_books.rb
 ```
 
