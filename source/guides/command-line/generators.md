@@ -39,6 +39,12 @@ The first argument, `web`, is the name of the target application in a Container 
 
 The argument `books#show` is the name of the controller and the action separated by the number sign (`#`).
 
+If you wish to generate only the action, without the view and template, you can do that by using the `--skip-view`.
+
+```shell
+% bundle exec lotus generate action web books#show --skip-view
+```
+
 #### Route
 
 The generated route is named after the controller name.
