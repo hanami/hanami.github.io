@@ -61,6 +61,16 @@ This will generate the following route:
 get '/books/:id', to: 'books#show'
 ```
 
+### Models
+
+We can generate a model.
+
+```shell
+% bundle exec lotus generate model book
+```
+
+It generates an entity with the corresponding repository and test code.
+
 ### Migrations
 
 We can generate a migration.
