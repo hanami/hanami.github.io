@@ -34,7 +34,7 @@ An action returns the `Content-Type` response header automatically according to 
 
 If the client asks for `Accept: text/html,application/xhtml+xml,application/xml;q=0.9`, the action will return `Content-Type: text/html; charset=utf-8`.
 
-### Default Format
+### Default Request Format
 
 If a client asks for a generic `Accept: */*`, the action will fall back to the **application default format**.
 This is a setting that allows us to safely handle cases like our example; the default value is `:html`.
@@ -46,7 +46,25 @@ module Web
   class Application < Lotus::Application
     configure do
       # ...
-      default_format :json
+      default_request_format :json
+    end
+  end
+end
+```
+
+### Default Response Format
+
+If we are building a JSON API app, it can be useful to specify a `:json` as default MIME Type for the response.
+The default value is `:html`.
+
+```ruby
+# apps/web/application.rb
+
+module Web
+  class Application < Lotus::Application
+    configure do
+      # ...
+      default_response_format :json
     end
   end
 end

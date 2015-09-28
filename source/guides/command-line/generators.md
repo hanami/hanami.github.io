@@ -86,3 +86,26 @@ We can generate a migration.
 ```
 
 It generates an empty migration with the UTC timestamp and the name we have specified: `db/migrations/20150621181347_create_books.rb`.
+
+### Mailers
+
+We can generate a mailer.
+
+```shell
+% bundle exec lotus generate mailer welcome
+```
+
+It creates the following files:
+
+```shell
+% tree lib/
+lib
+├── bookshelf
+│   # ...
+│   ├── mailers
+│   │   ├── templates
+│   │   │   ├── welcome.html.erb
+│   │   │   └── welcome.txt.erb
+│   │   └── welcome.rb # Mailers::Welcome
+# ...
+```
