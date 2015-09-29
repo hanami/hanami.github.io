@@ -105,7 +105,7 @@ Lotus has a solution for our problem: we can generate a new app that lives in th
 % bundle exec lotus generate app admin
 ```
 
-This command MUST be ran from the root of our project. It will generate a new application (`Admin::Application`) under `apps/admin`.
+This command MUST be run from the root of our project. It will generate a new application (`Admin::Application`) under `apps/admin`.
 
 At the late stages of our product life, we can eventually decide to extract this into a standalone component.
 We just need to move everything under `apps/admin` into another repository and deploy it separately. See [Application architecture](/guides/architectures/application) for more details.
