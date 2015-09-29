@@ -8,7 +8,7 @@ title: Lotus - Guides - Basic Usage
 
 In [our initial example](/guides/routing/overview) we have introduced a really basic relative URI: `/hello`.
 This is what we call _fixed path matching_.
-The reason is that the segment is responsible to respond only to the **exact match**.
+It is called this because the segment is responsible for responding only to an **exact match**.
 If we visit `/hello`, we get a response.
 If we hit `/foo`, a `404` (Not Found) is returned.
 
@@ -50,7 +50,7 @@ get '/authors/:id', id: /\d+/, to: 'authors#show'
 ### Optional Tokens
 
 Sometimes we want to specify an optional token as part of our URI.
-It should be expressed between round parenthesis.
+It should be expressed between round parentheses.
 If present, it will be available as param in the Rack env, otherwise it will be missing, but the endpoint will be still hit.
 
 ```ruby
