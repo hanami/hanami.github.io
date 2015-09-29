@@ -7,7 +7,7 @@ title: Lotus - Guides - Basic Usage
 ## Path matching
 
 In [our initial example](/guides/routing/overview) we have introduced a really basic relative URI: `/hello`.
-This is what we call a _fixed path matching_.
+This is what we call _fixed path matching_.
 The reason is that the segment is responsible to respond only to the **exact match**.
 If we visit `/hello`, we get a response.
 If we hit `/foo`, a `404` (Not Found) is returned.
