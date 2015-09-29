@@ -83,7 +83,7 @@ It generates
 
 ### Remove Routes
 
-In case we don't need all the default routes we can use `:only` and pass one or more names.
+In case we don't need all the default routes we can use `:only` and pass one or more action names.
 We can also black list routes with `:except`.
 
 ```ruby
