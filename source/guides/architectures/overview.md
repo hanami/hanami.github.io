@@ -31,7 +31,7 @@ We **strongly** suggest starting your next project with this architecture.
 
 [**Application**](/guides/architectures/application) architecture can be used for small components.
 
-Imagine we have build a big and successful product (with Container) that now needs a small application to report daily/weekly/monthly revenues.
+Imagine we have built a big and successful product (with Container) that now needs a small application to report daily/weekly/monthly revenues.
 Instead of adding yet another component to our main product, we can use a **single purposed** application (microservice) for our needs.
 
 We suggest using this architecture only at the later stage of your products lifecycle.

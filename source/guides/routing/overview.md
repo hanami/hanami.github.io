@@ -39,7 +39,7 @@ options '/hello', to: endpoint
 ## Actions
 
 Full Rack integration is great, but the most common endpoint that we'll use in our web applications is an **action**.
-Actions are objects responsible to respond to incoming HTTP requests.
+Actions are objects responsible for responding to incoming HTTP requests.
 They have a nested naming like `Web::Controllers::Home::Index`.
 This is a really long name to write, that's why Lotus has a **naming convention** for it: `"home#index"`.
 

@@ -7,8 +7,8 @@ title: Lotus - Guides - Basic Usage
 ## Path matching
 
 In [our initial example](/guides/routing/overview) we have introduced a really basic relative URI: `/hello`.
-This is what we call a _fixed path matching_.
-The reason is that the segment is responsible to respond only to the **exact match**.
+This is what we call _fixed path matching_.
+It is called this because the segment is responsible for responding only to an **exact match**.
 If we visit `/hello`, we get a response.
 If we hit `/foo`, a `404` (Not Found) is returned.
 
@@ -50,7 +50,7 @@ get '/authors/:id', id: /\d+/, to: 'authors#show'
 ### Optional Tokens
 
 Sometimes we want to specify an optional token as part of our URI.
-It should be expressed between round parenthesis.
+It should be expressed between round parentheses.
 If present, it will be available as param in the Rack env, otherwise it will be missing, but the endpoint will be still hit.
 
 ```ruby
@@ -59,7 +59,7 @@ get '/books(.:format)', to: 'books#show'
 
 ### Wildcard Matching
 
-Imagine to serve static files from a user repository.
+Imagine we want to to serve static files from a user repository.
 It would be impossible to know in advance which files are stored and to prepare routes accordingly.
 
 To solve this problem, Lotus supports _wildcard matching_.
@@ -70,7 +70,7 @@ get '/files/*', to: 'files#show'
 
 ## Named Routes
 
-We can specify an unique name for each route, in order to generates paths from the router or to test them.
+We can specify a unique name for each route, in order to generates paths from the router or to test them.
 
 ```ruby
 get '/hello',     to: 'greet#index', as: :greeting
@@ -96,7 +96,7 @@ Absolute URL generation is dependent on `scheme`, `host` and `port` settings in 
 
 ### Routing Helpers
 
-Generating routes from `Web::Routes` is helpful, because that module can be accessed from everywhere.
+Generating routes from `Web::Routes` is helpful, because that module can be accessed from anywhere.
 However, this syntax is noisy.
 
 Lotus has _routing helpers_ available as `routes` in: **actions**, **views** and **templates**.
