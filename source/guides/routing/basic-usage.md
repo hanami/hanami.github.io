@@ -96,7 +96,7 @@ Absolute URL generation is dependent on `scheme`, `host` and `port` settings in 
 
 ### Routing Helpers
 
-Generating routes from `Web::Routes` is helpful, because that module can be accessed from everywhere.
+Generating routes from `Web::Routes` is helpful, because that module can be accessed from anywhere.
 However, this syntax is noisy.
 
 Lotus has _routing helpers_ available as `routes` in: **actions**, **views** and **templates**.
