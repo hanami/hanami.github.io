@@ -8,7 +8,7 @@ In the [previous section](/guides/mailers/overview), we generated a mailer, let'
 
 ## Informations
 
-As first thing we need to specify sender and recipient(s) and the subject of the email.
+Firstly, we need to specify sender and recipient(s) and the subject of the email.
 For this purpose a mailer expose three methods: `.from`, `.to` and `.subject`.
 
 They all accept a string, but `.to` can also accept an array of strings in order to set multiple recipients.

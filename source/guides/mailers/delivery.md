@@ -42,7 +42,7 @@ The same priciple applies if we want only to send textual emails, just remove HT
 
 ## Configuration
 
-In order to specify the gateway to use for our email messages, we can use `delivery_method` configuration.
+In order to specify the gateway to use for our email messages, we can use `delivery` configuration.
 
 ### Built-in Methods
 
@@ -63,8 +63,10 @@ The second optional argument is a set of arbitrary configurations that we want t
 # ...
 Lotus::Mailer.configure do
   # ...
-  delivery_method do
-    production :stmp,
+  delivery do
+    development :test
+    test        :test
+    production  :stmp,
       address:              "smtp.gmail.com",
       port:                 587,
       domain:               "bookshelf.org",
@@ -95,7 +97,7 @@ require 'lib/mailers/mandrill_delivery_method'
 
 Lotus::Mailer.configure do
   # ...
-  delivery_method do
+  delivery do
     production MandrillDeliveryMethod
       api_key: ENV['MANDRILL_API_KEY']
   end
