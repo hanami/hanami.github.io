@@ -370,7 +370,7 @@ Lotus configurations are stored in env variables.
 This has proven to be a secure and standardized way to handle credentials in deployment environments.
 
 In order to achieve parity between development and production machines, we use env variables loaded from `.env` files (via [dotenv](https://github.com/bkeepers/dotenv) gem).
-Our projects has three of them: `.env` is for general settings, while `.env.development` and `.env.test` are complete files for these two envs.
+Our project has three of them: `.env` is for general settings, while `.env.development` and `.env.test` are complete files for these two envs.
 
 For example, review `.env.development`:
 
