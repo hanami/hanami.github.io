@@ -23,7 +23,7 @@ Let's have a look at what is shipped with this version.
 ### Mailers
 
 Inês & Rosa (aka [DEIGirls](https://twitter.com/teamdeigirls)), are the [Rails Girls Summer of Code](http://railsgirlssummerofcode.org) students who worked on mailers.
-During these three months, they learned about Ruby, Lotus and they shipped their first gem: `lotus-mailer`.
+During these three months, mentored by [Trung Lê](https://github.com/joneslee85), they learned about Ruby, Lotus and they shipped their first gem: `lotus-mailer`.
 This is a huge achievement for all of us!
 
 We have introduced a generator, which creates a mailer, the test code and two associated templates for multipart delivery.

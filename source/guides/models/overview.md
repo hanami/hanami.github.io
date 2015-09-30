@@ -159,3 +159,50 @@ The first thing that we notice is the correspondence between `#collection` name 
 Then the argument that we pass to `#attribute` is the name of the attribute from `Book`.
 If the database column name has the same attribute name we're done.
 In our case we need to use `:as` option, to indicate the database column that we want to map.
+
+### Custom Coercions
+
+Lotus data mapper supports the most common Ruby data type such as `String`, `Integer`, or `DateTime`.
+Sometimes, this simple approach is not enough to solve the database impedance mismatch on types.
+
+Imagine we have a `Book#tags`, a collection of strings that we want to store as a [Postgres array](http://www.postgresql.org/docs/9.1/static/arrays.html).
+If we use `Array` builtin type, our tags aren't properly translated into a format that is compatible with our column type.
+
+The solution to this problem is to define a custom coercer.
+
+```ruby
+# lib/ext/pg_array.rb
+require 'lotus/model/coercer'
+require 'sequel/extensions/pg_array'
+
+class PGArray < Lotus::Model::Coercer
+  def self.dump(value)
+    ::Sequel.pg_array(value, :varchar)
+  end
+
+  def self.load(value)
+    ::Kernel.Array(value) unless value.nil?
+  end
+end
+```
+
+```ruby
+# lib/bookshelf.rb
+require_relative './ext/pg_array'
+# ...
+
+Lotus::Model.configure do
+  # ...
+  mapping do
+    # ...
+    collection :articles do
+      attribute :id,   Integer
+      attribute :tags, PGArray
+    end
+  end
+end.load!
+```
+
+<p class="warning">
+  A custom coercer **MUST** respond to <code>.dump(value)</code> for serialization and to <code>.load(value)</code> for deserialization.
+</p>
