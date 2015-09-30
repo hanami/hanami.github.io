@@ -34,7 +34,7 @@
         <li><a href="/guides">Guides</a></li>
         <li><a href="/community">Community</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.1</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.5.0</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -138,6 +138,18 @@
               </li>
 
               <li>
+                <span class="heading">Mailers</span>
+                <ul class="nav">
+                  <li><a href="/guides/mailers/overview">Overview</a></li>
+                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/mailers/templates">Templates</a></li>
+                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
+                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
+                  <li><a href="/guides/mailers/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/applications">Applications</a></li>
@@ -183,6 +195,8 @@ storage changes</p></li>
 <li><code>.create(entity)</code>  – Create a record for the given entity</li>
 <li><code>.update(entity)</code>  – Update the record corresponding to the given entity</li>
 <li><code>.delete(entity)</code>  – Delete the record corresponding to the given entity</li>
+<li><code>.fetch(raw)</code>  – Fetch raw datasets for the given raw query string (eg. SQL)</li>
+<li><code>.execute(raw)</code>  – Execute raw command (eg. SQL)</li>
 <li><code>.all</code>   - Fetch all the entities from the collection</li>
 <li><code>.find</code>  - Fetch an entity from the collection by its ID</li>
 <li><code>.first</code> - Fetch the first entity from the collection</li>
@@ -237,6 +251,60 @@ This decision forces developers to define intention revealing API, instead of le
 <li><p>The caller can be easily tested in isolation. It&rsquo;s just a matter of stubbing this method.</p></li>
 <li><p>If we change the storage, the callers aren&rsquo;t affected.</p></li>
 </ul>
+
+<h2>Raw Queries &amp; Commands</h2>
+
+<p>A repository can perform queries and commands by accepting raw query language expressions.</p>
+
+<h3>Fetch</h3>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">raw_all</span>
+    <span class="n">fetch</span><span class="p">(</span><span class="s2">"SELECT * FROM books"</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_all_titles</span>
+    <span class="n">fetch</span><span class="p">(</span><span class="s2">"SELECT title FROM books"</span><span class="p">).</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">book</span><span class="o">|</span>
+      <span class="n">book</span><span class="p">[</span><span class="ss">:title</span><span class="p">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">max_price</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">fetch</span><span class="p">(</span><span class="s2">"SELECT price FROM books"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">book</span><span class="o">|</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">book</span><span class="p">[</span><span class="ss">:price</span><span class="p">]</span> <span class="k">if</span> <span class="n">book</span><span class="p">[</span><span class="ss">:price</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">result</span>
+    <span class="k">end</span>
+
+    <span class="n">result</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>When <code>.fetch</code> is used, the returning value is NOT a collection of entities (eg. <code>Book</code>), BUT an array of hashes that represents the <strong>raw result set</strong>.</p>
+
+<p class="warning">
+  Do NOT use user input with <code>.fetch</code>, because it makes your app vulnerable to SQL Injection.
+</p>
+
+<h3>Execute</h3>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">reset_download_count</span>
+    <span class="n">execute</span><span class="p">(</span><span class="s2">"UPDATE books SET download_count = 0"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>To ensure a command/query separation, <code>.execute</code> doesn&rsquo;t have a returning value.</p>
+
+<p class="warning">
+  Do NOT use user input with <code>.execute</code>, because it makes your app vulnerable to SQL Injection.
+</p>
 
 <h2>Extended Example</h2>
 
@@ -334,18 +402,18 @@ Here is a pagination example:</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">September 30, 2015</span>
+          <h4>Announcing Lotus v0.5.0</h4>
+          <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 12, 2015</span>
           <h4>Weekly Changelog</h4>
           <p>Changelog from Jun 29 2015 to Jul 12 2015
 </p>
           <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">July 10, 2015</span>
-          <h4>Announcing Lotus v0.4.1</h4>
-          <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
-</p>
-          <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
         </div>
     </div>
   </div>

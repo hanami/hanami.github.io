@@ -3150,7 +3150,7 @@ $(window).load(function(){
   {
     action: 'type',
     strings: ['cd bookshelf && bundle^400'],
-    output: '<span class="gray">Bundle complete! 6 Gemfile dependencies, 25 gems now installed.</span><br>&nbsp;',
+    output: '<span class="gray">Bundle complete! 6 Gemfile dependencies, 27 gems now installed.</span><br>&nbsp;',
     postDelay: 1000
   },
   {

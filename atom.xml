@@ -4,13 +4,200 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-07-12T14:42:00+02:00</updated>
+   <updated>2015-09-30T09:11:00+02:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Announcing Lotus v0.5.0</title>
+       <id>http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html"/>
+       <updated>2015-09-30T09:11:00+02:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+
+       </summary>
+       <content type="html"><![CDATA[<p>This new Lotus release is an important step towards 1.0!</p>
+
+<p>In the past months we talked with people at conferences, meetups, events, you all are eagerly looking for a <strong>production ready version</strong>.
+This makes us proud of Lotus and we are determined to get there.</p>
+
+<p>That&rsquo;s why we have decided to <strong>postpone</strong> a few announced features like WebSocket and experimental code reloading.</p>
+
+<h2>Features</h2>
+
+<p>Let&rsquo;s have a look at what is shipped with this version.</p>
+
+<h3>Mailers</h3>
+
+<p>Inês &amp; Rosa (aka <a href="https://twitter.com/teamdeigirls">DEIGirls</a>), are the <a href="http://railsgirlssummerofcode.org">Rails Girls Summer of Code</a> students who worked on mailers.
+During these three months, mentored by <a href="https://github.com/joneslee85">Trung Lê</a>, they learned about Ruby, Lotus and they shipped their first gem: <code>lotus-mailer</code>.
+This is a huge achievement for all of us!</p>
+
+<p>We have introduced a generator, which creates a mailer, the test code and two associated templates for multipart delivery.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate mailer forgot_password
+      create  spec/bookshelf/mailers/forgot_password_spec.rb
+      create  lib/bookshelf/mailers/forgot_password.rb
+      create  lib/bookshelf/mailers/templates/forgot_password.txt.erb
+      create  lib/bookshelf/mailers/templates/forgot_password.html.erb
+</code></pre>
+
+<p>For simplicity, each mailer can handle <strong>only one use case (feature)</strong>.
+If in our application we need to send emails for several features like: <em>&ldquo;confirm your email address&rdquo;</em> or <em>&ldquo;forgot password&rdquo;</em>, we will have <code>Mailers::ConfirmEmailAddress</code> and <code>Mailers::ForgotPassword</code> <strong>instead</strong> of a generic <code>UserMailer</code> that manages all these use cases.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/mailers/forgot_password.rb</span>
+<span class="k">class</span> <span class="nc">Mailers</span><span class="o">::</span><span class="no">ForgotPassword</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Mailer</span>
+
+  <span class="n">from</span>    <span class="s1">'noreply@lotusrb.org'</span>
+  <span class="n">to</span>      <span class="s1">'user@example.com'</span>
+  <span class="n">subject</span> <span class="s1">'Hello'</span>
+<span class="k">end</span>
+
+<span class="c1"># Usage</span>
+<span class="no">Mailers</span><span class="o">::</span><span class="no">ForgotPassword</span><span class="p">.</span><span class="nf">deliver</span>
+</code></pre>
+
+<p><a href="https://github.com/lotus/mailer">Lotus::Mailer</a> is built on top of the rock solid <code>mail</code> <a href="https://github.com/mikel/mail">gem</a> by Mikel Lindsaar.</p>
+
+<p><a href="/guides/mailers/overview">Read the guides</a></p>
+
+<h3>Custom Data Mapper Coercions</h3>
+
+<p>Lotus data mapper supports the most common Ruby data type such as <code>String</code>, <code>Integer</code>, or <code>DateTime</code>.
+Sometimes, this simple approach is not enough to solve the database impedance mismatch on types.</p>
+
+<p>Imagine we have a <code>Book#tags</code>, a collection of strings that we want to store as a <a href="http://www.postgresql.org/docs/9.1/static/arrays.html">Postgres array</a>.
+If we use <code>Array</code> builtin type, our tags aren&rsquo;t properly translated into a format that is compatible with our column type.</p>
+
+<p>The solution to this problem is to define a custom coercer.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/ext/pg_array.rb</span>
+<span class="nb">require</span> <span class="s1">'lotus/model/coercer'</span>
+<span class="nb">require</span> <span class="s1">'sequel/extensions/pg_array'</span>
+
+<span class="k">class</span> <span class="nc">PGArray</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="o">::</span><span class="no">Coercer</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="o">::</span><span class="no">Sequel</span><span class="p">.</span><span class="nf">pg_array</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="ss">:varchar</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">load</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="o">::</span><span class="no">Kernel</span><span class="o">.</span><span class="no">Array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">unless</span> <span class="n">value</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'./ext/pg_array'</span>
+<span class="c1"># ...</span>
+
+<span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">mapping</span> <span class="k">do</span>
+    <span class="c1"># ...</span>
+    <span class="n">collection</span> <span class="ss">:articles</span> <span class="k">do</span>
+      <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>   <span class="no">Integer</span>
+      <span class="n">attribute</span> <span class="ss">:tags</span><span class="p">,</span> <span class="no">PGArray</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span><span class="p">.</span><span class="nf">load!</span>
+</code></pre>
+
+<p><a href="/guides/models/overview">Read the guides</a></p>
+
+<h3>Command / Query Separation</h3>
+
+<p>When the powerful repositories API doesn&rsquo;t fit our needs, we can send raw command and queries to the database.
+Until now there was a generic <code>.execute</code> to use. Both the signature and the semantic of this method, became too complex, so we decided to add <code>.fetch</code>.</p>
+
+<p>It returns a <strong>raw dataset</strong> from the database.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">raw_all</span>
+    <span class="n">fetch</span><span class="p">(</span><span class="s2">"SELECT * FROM books"</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_all_titles</span>
+    <span class="n">fetch</span><span class="p">(</span><span class="s2">"SELECT title FROM books"</span><span class="p">).</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">book</span><span class="o">|</span>
+      <span class="n">book</span><span class="p">[</span><span class="ss">:title</span><span class="p">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We changed <code>.execute</code> send a raw command and return <code>nil</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">reset_download_count</span>
+    <span class="n">execute</span><span class="p">(</span><span class="s2">"UPDATE books SET download_count = 0"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><a href="/guides/models/repositories">Read the guides</a></p>
+
+<h3>Minor Changes</h3>
+
+<p>Thanks to <a href="https://github.com/theocodes">Theo Felippe</a> for the MIME type detection work and to <a href="https://github.com/manuwell">Wellington Santos</a> for a better exception handling.
+To <a href="https://github.com/pascalbetz">Pascal Betz</a>, <a href="https://github.com/josemota">José Mota</a>, <a href="https://github.com/awochna">Alex Wochna</a> and <a href="https://github.com/khaiql">Scott Le</a> for their form helper enhancements, while <a href="https://github.com/vyper">Leonardo Saraiva</a> wrote an expanded version of <code>#link_to</code>.</p>
+
+<p><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a> added SQL joins, <a href="https://github.com/g3d">Bohdan V.</a> and <a href="https://github.com/ziggurat">Manuel Corrales</a> fixed small Lotus::Model issues, while <a href="https://github.com/brennovich">Brenno Costa</a> worked on JRuby support!</p>
+
+<p>We&rsquo;re thankful for the improvements and fixes that <a href="https://github.com/benlovell">Ben Lovell</a>, <a href="https://github.com/rpanachi">Rodrigo Panachi</a>, <a href="https://github.com/SleeplessByte">Derk-Jan Karrenbeld</a>, <a href="https://github.com/huynhquancam">Cam Huynh</a> and <a href="https://github.com/andrii">Andrii Ponomarov</a> did on <code>lotusrb</code>.</p>
+
+<h3>Deprecations</h3>
+
+<h4>Default Format</h4>
+
+<p>We deprecated <code>default_format</code> in favor of <code>default_request_format</code>.</p>
+
+<p>We also introduced <code>default_response_format</code> to force a MIME Type, without the need of specify it for each action.
+It defaults to <code>:html</code>, but if you are building a JSON API, you may find useful to set it to <code>:json</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="c1"># ...</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># If you are using this:</span>
+      <span class="n">default_format</span> <span class="ss">:xml</span>
+
+      <span class="c1"># Please rename into:</span>
+      <span class="n">default_request_format</span> <span class="ss">:xml</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2>Hack Day</h2>
+
+<p>Did you always wanted to play with Lotus but you keep saying: <em>&ldquo;I don&rsquo;t have time&rdquo;</em>?</p>
+
+<p>As Lotus will approach to 1.0, we&rsquo;ll need your help, your feedback.. and your fun! So, here&rsquo;s the deal.. we&rsquo;re organizing a Hack Day later this year!</p>
+
+<p>⬇️ If you want to get alerted, please consider to subscribe to our <a href="http://lotusrb.org/mailing-list/">mailing list</a> using the form below. ⬇️</p>
+
+<p><strong>Until then, happy hacking!</strong></p>
+
+<div style="display: inline">
+
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.5.0" data-url="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+]]></content>
+     </entry>
      <entry>
        <title>Weekly Changelog</title>
        <id>http://lotusrb.org/blog/2015/07/12/weekly-changelog.html</id>
@@ -553,7 +740,7 @@ There are some <strong>safety mechanisms</strong>, for instance <code>db drop</c
 <h3>Migration Generator</h3>
 
 <p>This upcoming version will ship with a migration generator.</p>
-<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate migration create_users
+<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate migration create_books
     create  db/migrations/20150617145519_create_books.rb
 </code></pre>
 
@@ -1110,164 +1297,6 @@ In the other case, <code>content</code> returns <code>nil</code>.</p>
   <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
   <script type="text/javascript">
     reddit_url = "http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>
-]]></content>
-     </entry>
-     <entry>
-       <title>Announcing Lotus v0.3.1</title>
-       <id>http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html"/>
-       <updated>2015-05-15T17:09:00+02:00</updated>
-       <author>
-         <name>Luca Guidi</name>
-       </author>
-       <summary>
-         Lotus patch release: RESTful nested resource(s), dirty tracking and timestamps for entities, improved code generators, bug fixes.
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Features</h2>
-
-<p>This patch release ships new features and improved code generators.</p>
-
-<h3>RESTful nested resource(s)</h3>
-
-<p>RESTful resource(s) can be nested with infinite levels.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
-<span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
-  <span class="n">resource</span>  <span class="ss">:avatar</span>
-  <span class="n">resources</span> <span class="ss">:events</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>This generates the following routes:</p>
-<pre class="language-ruby plaintext"><code>% lotus routes
-
-     new_user_avatar GET, HEAD  /users/:user_id/avatar/new
-         user_avatar POST       /users/:user_id/avatar
-         user_avatar GET, HEAD  /users/:user_id/avatar
-    edit_user_avatar GET, HEAD  /users/:user_id/avatar/edit
-         user_avatar PATCH      /users/:user_id/avatar
-         user_avatar DELETE     /users/:user_id/avatar
-         user_events GET, HEAD  /users/:user_id/events
-      new_user_event GET, HEAD  /users/:user_id/events/new
-         user_events POST       /users/:user_id/events
-          user_event GET, HEAD  /users/:user_id/events/:id
-     edit_user_event GET, HEAD  /users/:user_id/events/:id/edit
-          user_event PATCH      /users/:user_id/events/:id
-          user_event DELETE     /users/:user_id/events/:id
-               users GET, HEAD  /users
-            new_user GET, HEAD  /users/new
-               users POST       /users
-                user GET, HEAD  /users/:id
-           edit_user GET, HEAD  /users/:id/edit
-                user PATCH      /users/:id
-                user DELETE     /users/:id
-</code></pre>
-
-<p>The corresponding endpoints are actions like <code>Web::Controllers::Users::Avatar::Create</code> or <code>Web::Controllers::Users::Events::Show</code>.</p>
-
-<h3>Dirty Tracking</h3>
-
-<p>Entities can now track changed attributes and dirty status.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/user.rb</span>
-<span class="k">class</span> <span class="nc">User</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span><span class="o">::</span><span class="no">DirtyTracking</span>
-  <span class="n">attributes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:age</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>This new feature is activated by including <code>Lotus::Entity::DirtyTracking</code>.
-It exposes <code>#changed?</code> and <code>#changed_attributes</code>.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># Usage</span>
-<span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">name: </span><span class="s1">'L'</span><span class="p">)</span>
-<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span> <span class="c1"># =&gt; false</span>
-
-<span class="n">user</span><span class="p">.</span><span class="nf">age</span> <span class="o">=</span> <span class="mi">33</span>
-<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span>           <span class="c1"># =&gt; true</span>
-<span class="n">user</span><span class="p">.</span><span class="nf">changed_attributes</span> <span class="c1"># =&gt; {:age=&gt;33}</span>
-
-<span class="n">user</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span> <span class="c1"># =&gt; false</span>
-
-<span class="n">user</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="ss">name: </span><span class="s1">'Luca'</span><span class="p">)</span>
-<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span>           <span class="c1"># =&gt; true</span>
-<span class="n">user</span><span class="p">.</span><span class="nf">changed_attributes</span> <span class="c1"># =&gt; {:name=&gt;"Luca"}</span>
-
-<span class="n">user</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-<span class="n">user</span><span class="p">.</span><span class="nf">changed?</span> <span class="c1"># =&gt; false</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
-<span class="n">result</span><span class="p">.</span><span class="nf">changed?</span> <span class="c1"># =&gt; false</span>
-</code></pre>
-
-<p>When an entity is initialized and after it&rsquo;s created or updated, the state is clean.
-If we mutate the state with an assigment or with <code>Entity#update</code>, <code>#changed?</code> returns true.</p>
-
-<h3>Timestamps</h3>
-
-<p>If an entity has <code>:created_at</code> and/or <code>:updated_at</code> attributes, when it&rsquo;s persisted, the repository will take care of manage these values for us.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/user.rb</span>
-<span class="k">class</span> <span class="nc">User</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span>
-  <span class="n">attributes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:created_at</span><span class="p">,</span> <span class="ss">:updated_at</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>We have mapped both these attributes as <code>DateTime</code>.</p>
-<pre class="language-ruby ruby"><code>
-<span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">name: </span><span class="s1">'L'</span><span class="p">)</span>
-<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">created_at</span> <span class="c1"># =&gt; nil</span>
-<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">updated_at</span> <span class="c1"># =&gt; nil</span>
-
-<span class="n">user</span> <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">created_at</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># =&gt; "2015-05-15T10:12:20+00:00"</span>
-<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">updated_at</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># =&gt; "2015-05-15T10:12:20+00:00"</span>
-
-<span class="n">user</span><span class="p">.</span><span class="nf">name</span> <span class="o">=</span> <span class="s2">"Luca"</span>
-<span class="n">user</span>      <span class="o">=</span> <span class="no">UserRepository</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">created_at</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># =&gt; "2015-05-15T10:12:20+00:00"</span>
-<span class="nb">puts</span> <span class="n">user</span><span class="p">.</span><span class="nf">updated_at</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># =&gt; "2015-05-15T10:12:23+00:00"</span>
-</code></pre>
-
-<h3>Application Generator</h3>
-
-<p>Lotus default architecture is named <a href="https://github.com/lotus/lotus#container-architecture"><em>Container</em></a>, as it allows to run multiple Lotus (and Rack) applications within the same Ruby process.</p>
-
-<p>When we generate a new project with <code>lotus new bookshelf</code>, it creates a default application named <code>Web</code>, under <code>apps/web</code>.
-This architecture enforces a separation between components and it will make our life easier <a href="http://lucaguidi.com/2015/05/05/lotus-and-microservices.html">if we want extract microservices</a> at a later stage.</p>
-
-<p>If we want to introduce a new component in our container (eg. an admin pane, a metrics dashboard), we can use the new application generator.</p>
-<pre class="language-ruby plaintext"><code>lotus generate app admin
-</code></pre>
-
-<p>This command will add a new application named <code>Admin</code> under <code>apps/admin</code>, and it will be available under the <code>/admin</code> URL namespace.</p>
-
-<h3>Model Generator</h3>
-
-<p>This last feature is really helpful while developing our domain model.
-It generates an <strong>entity</strong>, a <strong>repository</strong> and the related <strong>test files</strong>.</p>
-<pre class="language-ruby shell"><code><span class="gp">% </span>lotus generate model user
-  create  lib/bookshelf/entities/user.rb
-  create  lib/bookshelf/repositories/user_repository.rb
-  create  spec/bookshelf/entities/user_spec.rb
-  create  spec/bookshelf/repositories/user_repository_spec.rb
-</code></pre>
-
-<h2>What&rsquo;s Next</h2>
-
-<p>New features such as migrations, form helpers and improved security are under development right now.
-We&rsquo;re pushing to ship soon.</p>
-
-<div style="display: inline">
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.3.1" data-url="http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html";
   </script>
   <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
 </div>

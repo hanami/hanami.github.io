@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/06/17/introducing-database-migrations.html</loc>
-    <lastmod>2015-06-21T19:30:31+02:00</lastmod>
+    <lastmod>2015-09-28T09:28:36+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -129,6 +129,12 @@
   <url>
     <loc>http://lotusrb.org/blog/2015/07/12/weekly-changelog.html</loc>
     <lastmod>2015-07-12T10:37:11+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html</loc>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -182,7 +188,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/mime-types/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -236,13 +242,13 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/architectures/container/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/architectures/overview/</loc>
-    <lastmod>2015-06-24T16:16:07+02:00</lastmod>
+    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -260,13 +266,13 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/command-line/generators/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/command-line/routes/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2015-09-28T09:51:33+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -308,7 +314,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/links/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -333,6 +339,42 @@
   <url>
     <loc>http://lotusrb.org/guides/</loc>
     <lastmod>2015-06-27T18:07:56+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/mailers/basic-usage/</loc>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/mailers/delivery/</loc>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/mailers/overview/</loc>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/mailers/share-code/</loc>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/mailers/templates/</loc>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/mailers/testing/</loc>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -362,31 +404,31 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/models/overview/</loc>
-    <lastmod>2015-06-24T16:16:07+02:00</lastmod>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/models/repositories/</loc>
-    <lastmod>2015-06-21T18:15:56+02:00</lastmod>
+    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/routing/basic-usage/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/routing/overview/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/routing/restful-resources/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

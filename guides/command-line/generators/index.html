@@ -34,7 +34,7 @@
         <li><a href="/guides">Guides</a></li>
         <li><a href="/community">Community</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.1</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.5.0</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -138,6 +138,18 @@
               </li>
 
               <li>
+                <span class="heading">Mailers</span>
+                <ul class="nav">
+                  <li><a href="/guides/mailers/overview">Overview</a></li>
+                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/mailers/templates">Templates</a></li>
+                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
+                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
+                  <li><a href="/guides/mailers/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/applications">Applications</a></li>
@@ -184,6 +196,10 @@ The default application is called <code>Web</code> and lives under <code>apps/we
 
 <p>The argument <code>books#show</code> is the name of the controller and the action separated by the number sign (<code>#</code>).</p>
 
+<p>If you wish to generate only the action, without the view and template, you can do that by using the <code>--skip-view</code>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate action web books#show --skip-view
+</code></pre>
+
 <h4>Route</h4>
 
 <p>The generated route is named after the controller name.</p>
@@ -200,6 +216,14 @@ The default application is called <code>Web</code> and lives under <code>apps/we
 <span class="n">get</span> <span class="s1">'/books/:id'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#show'</span>
 </code></pre>
 
+<h3>Models</h3>
+
+<p>We can generate a model.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate model book
+</code></pre>
+
+<p>It generates an entity with the corresponding repository and test code.</p>
+
 <h3>Migrations</h3>
 
 <p>We can generate a migration.</p>
@@ -207,6 +231,25 @@ The default application is called <code>Web</code> and lives under <code>apps/we
 </code></pre>
 
 <p>It generates an empty migration with the UTC timestamp and the name we have specified: <code>db/migrations/20150621181347_create_books.rb</code>.</p>
+
+<h3>Mailers</h3>
+
+<p>We can generate a mailer.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate mailer welcome
+</code></pre>
+
+<p>It creates the following files:</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree lib/
+lib
+├── bookshelf
+│   <span class="c"># ...</span>
+│   ├── mailers
+│   │   ├── templates
+│   │   │   ├── welcome.html.erb
+│   │   │   └── welcome.txt.erb
+│   │   └── welcome.rb <span class="c"># Mailers::Welcome</span>
+<span class="c"># ...</span>
+</code></pre>
 
             </div>
           </div>
@@ -231,18 +274,18 @@ The default application is called <code>Web</code> and lives under <code>apps/we
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">September 30, 2015</span>
+          <h4>Announcing Lotus v0.5.0</h4>
+          <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 12, 2015</span>
           <h4>Weekly Changelog</h4>
           <p>Changelog from Jun 29 2015 to Jul 12 2015
 </p>
           <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">July 10, 2015</span>
-          <h4>Announcing Lotus v0.4.1</h4>
-          <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
-</p>
-          <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
         </div>
     </div>
   </div>

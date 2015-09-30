@@ -34,7 +34,7 @@
         <li><a href="/guides">Guides</a></li>
         <li><a href="/community">Community</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.1</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.5.0</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -138,6 +138,18 @@
               </li>
 
               <li>
+                <span class="heading">Mailers</span>
+                <ul class="nav">
+                  <li><a href="/guides/mailers/overview">Overview</a></li>
+                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/mailers/templates">Templates</a></li>
+                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
+                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
+                  <li><a href="/guides/mailers/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/applications">Applications</a></li>
@@ -159,8 +171,8 @@
 <h2>Path matching</h2>
 
 <p>In <a href="/guides/routing/overview">our initial example</a> we have introduced a really basic relative URI: <code>/hello</code>.
-This is what we call a <em>fixed path matching</em>.
-The reason is that the segment is responsible to respond only to the <strong>exact match</strong>.
+This is what we call <em>fixed path matching</em>.
+It is called this because the segment is responsible for responding only to an <strong>exact match</strong>.
 If we visit <code>/hello</code>, we get a response.
 If we hit <code>/foo</code>, a <code>404</code> (Not Found) is returned.</p>
 
@@ -194,14 +206,14 @@ If a request can satisfy all of them, we&rsquo;re good, otherwise a <code>404</c
 <h3>Optional Tokens</h3>
 
 <p>Sometimes we want to specify an optional token as part of our URI.
-It should be expressed between round parenthesis.
+It should be expressed between round parentheses.
 If present, it will be available as param in the Rack env, otherwise it will be missing, but the endpoint will be still hit.</p>
 <pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/books(.:format)'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#show'</span>
 </code></pre>
 
 <h3>Wildcard Matching</h3>
 
-<p>Imagine to serve static files from a user repository.
+<p>Imagine we want to to serve static files from a user repository.
 It would be impossible to know in advance which files are stored and to prepare routes accordingly.</p>
 
 <p>To solve this problem, Lotus supports <em>wildcard matching</em>.</p>
@@ -210,7 +222,7 @@ It would be impossible to know in advance which files are stored and to prepare 
 
 <h2>Named Routes</h2>
 
-<p>We can specify an unique name for each route, in order to generates paths from the router or to test them.</p>
+<p>We can specify a unique name for each route, in order to generates paths from the router or to test them.</p>
 <pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/hello'</span><span class="p">,</span>     <span class="ss">to: </span><span class="s1">'greet#index'</span><span class="p">,</span> <span class="ss">as: :greeting</span>
 <span class="n">get</span> <span class="s1">'/books/:id'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#show'</span><span class="p">,</span>  <span class="ss">as: :book</span>
 </code></pre>
@@ -230,7 +242,7 @@ We can use it to generate a relative or absolute URI for our route.</p>
 
 <h3>Routing Helpers</h3>
 
-<p>Generating routes from <code>Web::Routes</code> is helpful, because that module can be accessed from everywhere.
+<p>Generating routes from <code>Web::Routes</code> is helpful, because that module can be accessed from anywhere.
 However, this syntax is noisy.</p>
 
 <p>Lotus has <em>routing helpers</em> available as <code>routes</code> in: <strong>actions</strong>, <strong>views</strong> and <strong>templates</strong>.</p>
@@ -286,18 +298,18 @@ However, this syntax is noisy.</p>
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">September 30, 2015</span>
+          <h4>Announcing Lotus v0.5.0</h4>
+          <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 12, 2015</span>
           <h4>Weekly Changelog</h4>
           <p>Changelog from Jun 29 2015 to Jul 12 2015
 </p>
           <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">July 10, 2015</span>
-          <h4>Announcing Lotus v0.4.1</h4>
-          <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
-</p>
-          <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
         </div>
     </div>
   </div>

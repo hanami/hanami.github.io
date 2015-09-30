@@ -1,0 +1,380 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Announcing Lotus v0.5.0</title>
+    <meta name="description" content="Lotus, a complete web framework for Ruby" />
+    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+
+    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+
+    <script src="//use.typekit.net/xhp5wmc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <meta property="og:site_name"   content="Lotus"/>
+    <meta property="og:title"       content="Announcing Lotus v0.5.0">
+    <meta property="og:url"         content="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html">
+    <meta property="og:description" content="Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+">
+    <meta property="og:image"       content="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050/cover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@lotus_rb">
+    <meta name="twitter:creator"     content="@lotus_rb">
+    <meta name="twitter:url"         content="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html">
+    <meta name="twitter:title"       content="Announcing Lotus v0.5.0">
+    <meta name="twitter:description" content="Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+">
+    <meta name="twitter:image:src"   content="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050/cover.jpg">
+  </head>
+  <body class="subpage blog">
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav class="navbar navbar-fixed-top container-fluid">
+  <div class="wrapper container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/guides">Guides</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.5.0</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <section class="blog wrapper animated fadeIn">
+      <div class="container-fluid">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 main">
+          <img src="/blog/2015/09/30/announcing-lotus-050/cover.jpg" class="img-rounded img-responsive">
+
+          <h1 class="page-header">
+            Announcing Lotus v0.5.0
+            <div class="meta">Posted by <strong>Luca Guidi</strong> on September 30, 2015</div>
+          </h1>
+
+          <p class="lead">Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <hr>
+
+          <p>This new Lotus release is an important step towards 1.0!</p>
+
+<p>In the past months we talked with people at conferences, meetups, events, you all are eagerly looking for a <strong>production ready version</strong>.
+This makes us proud of Lotus and we are determined to get there.</p>
+
+<p>That&rsquo;s why we have decided to <strong>postpone</strong> a few announced features like WebSocket and experimental code reloading.</p>
+
+<h2>Features</h2>
+
+<p>Let&rsquo;s have a look at what is shipped with this version.</p>
+
+<h3>Mailers</h3>
+
+<p>Inês &amp; Rosa (aka <a href="https://twitter.com/teamdeigirls">DEIGirls</a>), are the <a href="http://railsgirlssummerofcode.org">Rails Girls Summer of Code</a> students who worked on mailers.
+During these three months, mentored by <a href="https://github.com/joneslee85">Trung Lê</a>, they learned about Ruby, Lotus and they shipped their first gem: <code>lotus-mailer</code>.
+This is a huge achievement for all of us!</p>
+
+<p>We have introduced a generator, which creates a mailer, the test code and two associated templates for multipart delivery.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus generate mailer forgot_password
+      create  spec/bookshelf/mailers/forgot_password_spec.rb
+      create  lib/bookshelf/mailers/forgot_password.rb
+      create  lib/bookshelf/mailers/templates/forgot_password.txt.erb
+      create  lib/bookshelf/mailers/templates/forgot_password.html.erb
+</code></pre>
+
+<p>For simplicity, each mailer can handle <strong>only one use case (feature)</strong>.
+If in our application we need to send emails for several features like: <em>&ldquo;confirm your email address&rdquo;</em> or <em>&ldquo;forgot password&rdquo;</em>, we will have <code>Mailers::ConfirmEmailAddress</code> and <code>Mailers::ForgotPassword</code> <strong>instead</strong> of a generic <code>UserMailer</code> that manages all these use cases.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/mailers/forgot_password.rb</span>
+<span class="k">class</span> <span class="nc">Mailers</span><span class="o">::</span><span class="no">ForgotPassword</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Mailer</span>
+
+  <span class="n">from</span>    <span class="s1">'noreply@lotusrb.org'</span>
+  <span class="n">to</span>      <span class="s1">'user@example.com'</span>
+  <span class="n">subject</span> <span class="s1">'Hello'</span>
+<span class="k">end</span>
+
+<span class="c1"># Usage</span>
+<span class="no">Mailers</span><span class="o">::</span><span class="no">ForgotPassword</span><span class="p">.</span><span class="nf">deliver</span>
+</code></pre>
+
+<p><a href="https://github.com/lotus/mailer">Lotus::Mailer</a> is built on top of the rock solid <code>mail</code> <a href="https://github.com/mikel/mail">gem</a> by Mikel Lindsaar.</p>
+
+<p><a href="/guides/mailers/overview">Read the guides</a></p>
+
+<h3>Custom Data Mapper Coercions</h3>
+
+<p>Lotus data mapper supports the most common Ruby data type such as <code>String</code>, <code>Integer</code>, or <code>DateTime</code>.
+Sometimes, this simple approach is not enough to solve the database impedance mismatch on types.</p>
+
+<p>Imagine we have a <code>Book#tags</code>, a collection of strings that we want to store as a <a href="http://www.postgresql.org/docs/9.1/static/arrays.html">Postgres array</a>.
+If we use <code>Array</code> builtin type, our tags aren&rsquo;t properly translated into a format that is compatible with our column type.</p>
+
+<p>The solution to this problem is to define a custom coercer.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/ext/pg_array.rb</span>
+<span class="nb">require</span> <span class="s1">'lotus/model/coercer'</span>
+<span class="nb">require</span> <span class="s1">'sequel/extensions/pg_array'</span>
+
+<span class="k">class</span> <span class="nc">PGArray</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="o">::</span><span class="no">Coercer</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="o">::</span><span class="no">Sequel</span><span class="p">.</span><span class="nf">pg_array</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="ss">:varchar</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">load</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="o">::</span><span class="no">Kernel</span><span class="o">.</span><span class="no">Array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">unless</span> <span class="n">value</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'./ext/pg_array'</span>
+<span class="c1"># ...</span>
+
+<span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">mapping</span> <span class="k">do</span>
+    <span class="c1"># ...</span>
+    <span class="n">collection</span> <span class="ss">:articles</span> <span class="k">do</span>
+      <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>   <span class="no">Integer</span>
+      <span class="n">attribute</span> <span class="ss">:tags</span><span class="p">,</span> <span class="no">PGArray</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span><span class="p">.</span><span class="nf">load!</span>
+</code></pre>
+
+<p><a href="/guides/models/overview">Read the guides</a></p>
+
+<h3>Command / Query Separation</h3>
+
+<p>When the powerful repositories API doesn&rsquo;t fit our needs, we can send raw command and queries to the database.
+Until now there was a generic <code>.execute</code> to use. Both the signature and the semantic of this method, became too complex, so we decided to add <code>.fetch</code>.</p>
+
+<p>It returns a <strong>raw dataset</strong> from the database.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">raw_all</span>
+    <span class="n">fetch</span><span class="p">(</span><span class="s2">"SELECT * FROM books"</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_all_titles</span>
+    <span class="n">fetch</span><span class="p">(</span><span class="s2">"SELECT title FROM books"</span><span class="p">).</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">book</span><span class="o">|</span>
+      <span class="n">book</span><span class="p">[</span><span class="ss">:title</span><span class="p">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We changed <code>.execute</code> send a raw command and return <code>nil</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">reset_download_count</span>
+    <span class="n">execute</span><span class="p">(</span><span class="s2">"UPDATE books SET download_count = 0"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><a href="/guides/models/repositories">Read the guides</a></p>
+
+<h3>Minor Changes</h3>
+
+<p>Thanks to <a href="https://github.com/theocodes">Theo Felippe</a> for the MIME type detection work and to <a href="https://github.com/manuwell">Wellington Santos</a> for a better exception handling.
+To <a href="https://github.com/pascalbetz">Pascal Betz</a>, <a href="https://github.com/josemota">José Mota</a>, <a href="https://github.com/awochna">Alex Wochna</a> and <a href="https://github.com/khaiql">Scott Le</a> for their form helper enhancements, while <a href="https://github.com/vyper">Leonardo Saraiva</a> wrote an expanded version of <code>#link_to</code>.</p>
+
+<p><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a> added SQL joins, <a href="https://github.com/g3d">Bohdan V.</a> and <a href="https://github.com/ziggurat">Manuel Corrales</a> fixed small Lotus::Model issues, while <a href="https://github.com/brennovich">Brenno Costa</a> worked on JRuby support!</p>
+
+<p>We&rsquo;re thankful for the improvements and fixes that <a href="https://github.com/benlovell">Ben Lovell</a>, <a href="https://github.com/rpanachi">Rodrigo Panachi</a>, <a href="https://github.com/SleeplessByte">Derk-Jan Karrenbeld</a>, <a href="https://github.com/huynhquancam">Cam Huynh</a> and <a href="https://github.com/andrii">Andrii Ponomarov</a> did on <code>lotusrb</code>.</p>
+
+<h3>Deprecations</h3>
+
+<h4>Default Format</h4>
+
+<p>We deprecated <code>default_format</code> in favor of <code>default_request_format</code>.</p>
+
+<p>We also introduced <code>default_response_format</code> to force a MIME Type, without the need of specify it for each action.
+It defaults to <code>:html</code>, but if you are building a JSON API, you may find useful to set it to <code>:json</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="c1"># ...</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># If you are using this:</span>
+      <span class="n">default_format</span> <span class="ss">:xml</span>
+
+      <span class="c1"># Please rename into:</span>
+      <span class="n">default_request_format</span> <span class="ss">:xml</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2>Hack Day</h2>
+
+<p>Did you always wanted to play with Lotus but you keep saying: <em>&ldquo;I don&rsquo;t have time&rdquo;</em>?</p>
+
+<p>As Lotus will approach to 1.0, we&rsquo;ll need your help, your feedback.. and your fun! So, here&rsquo;s the deal.. we&rsquo;re organizing a Hack Day later this year!</p>
+
+<p>⬇️ If you want to get alerted, please consider to subscribe to our <a href="http://lotusrb.org/mailing-list/">mailing list</a> using the form below. ⬇️</p>
+
+<p><strong>Until then, happy hacking!</strong></p>
+
+<div style="display: inline">
+
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.5.0" data-url="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+
+          <hr>
+          <ul class="rrssb-buttons clearfix rrssb-1">
+            <li class="rrssb-facebook" data-initwidth="14.285714285714286" data-size="63" style="width: 14.2857142857143%;">
+            <!-- Replace with your URL. For best results, make sure you page has the proper FB Open Graph tags in header:
+            https://developers.facebook.com/docs/opengraph/howtos/maximizing-distribution-media-content/ -->
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F09%2F30%2Fannouncing-lotus-050.html" class="popup">
+              <span class="rrssb-icon">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
+                <path d="M27.825,4.783c0-2.427-2.182-4.608-4.608-4.608H4.783c-2.422,0-4.608,2.182-4.608,4.608v18.434
+                c0,2.427,2.181,4.608,4.608,4.608H14V17.379h-3.379v-4.608H14v-1.795c0-3.089,2.335-5.885,5.192-5.885h3.718v4.608h-3.726
+                c-0.408,0-0.884,0.492-0.884,1.236v1.836h4.609v4.608h-4.609v10.446h4.916c2.422,0,4.608-2.188,4.608-4.608V4.783z"></path>
+                </svg>
+              </span>
+              <span class="rrssb-text">facebook</span>
+            </a>
+            </li>
+            <li class="rrssb-twitter" data-initwidth="14.285714285714286" data-size="50" style="width: 14.2857142857143%;">
+            <!-- Replace href with your Meta and URL information  -->
+            <a href="http://twitter.com/home?status=Announcing+Lotus+v0.5.0+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F09%2F30%2Fannouncing-lotus-050.html+%2Fvia+%40lotus_rb+%23lotusrb" class="popup">
+              <span class="rrssb-icon">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
+                <path d="M24.253,8.756C24.689,17.08,18.297,24.182,9.97,24.62c-3.122,0.162-6.219-0.646-8.861-2.32
+                c2.703,0.179,5.376-0.648,7.508-2.321c-2.072-0.247-3.818-1.661-4.489-3.638c0.801,0.128,1.62,0.076,2.399-0.155
+                C4.045,15.72,2.215,13.6,2.115,11.077c0.688,0.275,1.426,0.407,2.168,0.386c-2.135-1.65-2.729-4.621-1.394-6.965
+                C5.575,7.816,9.54,9.84,13.803,10.071c-0.842-2.739,0.694-5.64,3.434-6.482c2.018-0.623,4.212,0.044,5.546,1.683
+                c1.186-0.213,2.318-0.662,3.329-1.317c-0.385,1.256-1.247,2.312-2.399,2.942c1.048-0.106,2.069-0.394,3.019-0.851
+                C26.275,7.229,25.39,8.196,24.253,8.756z"></path>
+                </svg>
+              </span>
+              <span class="rrssb-text">twitter</span>
+            </a>
+            </li>
+            <li class="rrssb-reddit">
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F09%2F30%2Fannouncing-lotus-050.html">
+              <span class="rrssb-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve"><g><path d="M11.794 15.316c0-1.029-0.835-1.895-1.866-1.895c-1.03 0-1.893 0.865-1.893 1.895s0.863 1.9 1.9 1.9 C10.958 17.2 11.8 16.3 11.8 15.316z"/><path d="M18.1 13.422c-1.029 0-1.895 0.864-1.895 1.895c0 1 0.9 1.9 1.9 1.865c1.031 0 1.869-0.836 1.869-1.865 C19.969 14.3 19.1 13.4 18.1 13.422z"/><path d="M17.527 19.791c-0.678 0.678-1.826 1.006-3.514 1.006c-0.004 0-0.009 0-0.014 0c-0.004 0-0.01 0-0.015 0 c-1.686 0-2.834-0.328-3.51-1.005c-0.264-0.265-0.693-0.265-0.958 0c-0.264 0.265-0.264 0.7 0 1 c0.943 0.9 2.4 1.4 4.5 1.402c0.005 0 0 0 0 0c0.005 0 0 0 0 0c2.066 0 3.527-0.459 4.47-1.402 c0.265-0.264 0.265-0.693 0.002-0.958C18.221 19.5 17.8 19.5 17.5 19.791z"/><path d="M27.707 13.267c0-1.785-1.453-3.237-3.236-3.237c-0.793 0-1.518 0.287-2.082 0.761c-2.039-1.295-4.646-2.069-7.438-2.219 l1.483-4.691l4.062 0.956c0.071 1.4 1.3 2.6 2.7 2.555c1.488 0 2.695-1.208 2.695-2.695C25.881 3.2 24.7 2 23.2 2 c-1.059 0-1.979 0.616-2.42 1.508l-4.633-1.091c-0.344-0.081-0.693 0.118-0.803 0.455l-1.793 5.7 C10.548 8.6 7.7 9.4 5.6 10.75C5.006 10.3 4.3 10 3.5 10.029c-1.785 0-3.237 1.452-3.237 3.2 c0 1.1 0.6 2.1 1.4 2.69c-0.04 0.272-0.061 0.551-0.061 0.831c0 2.3 1.3 4.4 3.7 5.9 c2.299 1.5 5.3 2.3 8.6 2.325c3.228 0 6.271-0.825 8.571-2.325c2.387-1.56 3.7-3.66 3.7-5.917 c0-0.26-0.016-0.514-0.051-0.768C27.088 15.5 27.7 14.4 27.7 13.267z M23.186 3.355c0.74 0 1.3 0.6 1.3 1.3 c0 0.738-0.6 1.34-1.34 1.34s-1.342-0.602-1.342-1.34C21.844 4 22.4 3.4 23.2 3.355z M1.648 13.3 c0-1.038 0.844-1.882 1.882-1.882c0.31 0 0.6 0.1 0.9 0.209c-1.049 0.868-1.813 1.861-2.26 2.9 C1.832 14.2 1.6 13.8 1.6 13.267z M21.773 21.57c-2.082 1.357-4.863 2.105-7.831 2.105c-2.967 0-5.747-0.748-7.828-2.105 c-1.991-1.301-3.088-3-3.088-4.782c0-1.784 1.097-3.484 3.088-4.784c2.081-1.358 4.861-2.106 7.828-2.106 c2.967 0 5.7 0.7 7.8 2.106c1.99 1.3 3.1 3 3.1 4.784C24.859 18.6 23.8 20.3 21.8 21.57z M25.787 14.6 c-0.432-1.084-1.191-2.095-2.244-2.977c0.273-0.156 0.59-0.245 0.928-0.245c1.035 0 1.9 0.8 1.9 1.9 C26.354 13.8 26.1 14.3 25.8 14.605z"/></g></svg>
+              </span>
+              <span class="rrssb-text">reddit</span>
+            </a>
+            </li>
+            <li class="rrssb-googleplus" data-initwidth="14.285714285714286" data-size="55" style="width: 14.2857142857143%;">
+            <!-- Replace href with your meta and URL information.  -->
+            <a href="https://plus.google.com/share?url=Announcing+Lotus+v0.5.0+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F09%2F30%2Fannouncing-lotus-050.html" class="popup">
+              <span class="rrssb-icon">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
+                <g>
+                <g>
+                <path d="M14.703,15.854l-1.219-0.948c-0.372-0.308-0.88-0.715-0.88-1.459c0-0.748,0.508-1.223,0.95-1.663
+                c1.42-1.119,2.839-2.309,2.839-4.817c0-2.58-1.621-3.937-2.399-4.581h2.097l2.202-1.383h-6.67c-1.83,0-4.467,0.433-6.398,2.027
+                C3.768,4.287,3.059,6.018,3.059,7.576c0,2.634,2.022,5.328,5.604,5.328c0.339,0,0.71-0.033,1.083-0.068
+                c-0.167,0.408-0.336,0.748-0.336,1.324c0,1.04,0.551,1.685,1.011,2.297c-1.524,0.104-4.37,0.273-6.467,1.562
+                c-1.998,1.188-2.605,2.916-2.605,4.137c0,2.512,2.358,4.84,7.289,4.84c5.822,0,8.904-3.223,8.904-6.41
+                c0.008-2.327-1.359-3.489-2.829-4.731H14.703z M10.269,11.951c-2.912,0-4.231-3.765-4.231-6.037c0-0.884,0.168-1.797,0.744-2.511
+                c0.543-0.679,1.489-1.12,2.372-1.12c2.807,0,4.256,3.798,4.256,6.242c0,0.612-0.067,1.694-0.845,2.478
+                c-0.537,0.55-1.438,0.948-2.295,0.951V11.951z M10.302,25.609c-3.621,0-5.957-1.732-5.957-4.142c0-2.408,2.165-3.223,2.911-3.492
+                c1.421-0.479,3.25-0.545,3.555-0.545c0.338,0,0.52,0,0.766,0.034c2.574,1.838,3.706,2.757,3.706,4.479
+                c-0.002,2.073-1.736,3.665-4.982,3.649L10.302,25.609z"></path>
+                <polygon points="23.254,11.89 23.254,8.521 21.569,8.521 21.569,11.89 18.202,11.89 18.202,13.604 21.569,13.604 21.569,17.004
+                23.254,17.004 23.254,13.604 26.653,13.604 26.653,11.89      "></polygon>
+                </g>
+                </g>
+                </svg>
+              </span>
+              <span class="rrssb-text">google+</span>
+            </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  <section class="email-signup">
+  <div class="container-fluid wrapper">
+    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
+      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="primary">
+  <div class="container-fluid wrapper">
+    <div class="row">
+      <a class="logo col-md-3" href="/">logo</a>
+        <div class="col-md-4">
+          <span class="date">September 30, 2015</span>
+          <h4>Announcing Lotus v0.5.0</h4>
+          <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
+          <span class="date">July 12, 2015</span>
+          <h4>Weekly Changelog</h4>
+          <p>Changelog from Jun 29 2015 to Jul 12 2015
+</p>
+          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="sub-footer wrapper">
+    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
+    <br>
+    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
+    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
+    <ul class="social">
+      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
+      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

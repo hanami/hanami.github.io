@@ -34,7 +34,7 @@
         <li><a href="/guides">Guides</a></li>
         <li><a href="/community">Community</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.1</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.5.0</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -138,6 +138,18 @@
               </li>
 
               <li>
+                <span class="heading">Mailers</span>
+                <ul class="nav">
+                  <li><a href="/guides/mailers/overview">Overview</a></li>
+                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/mailers/templates">Templates</a></li>
+                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
+                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
+                  <li><a href="/guides/mailers/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/applications">Applications</a></li>
@@ -184,7 +196,7 @@
 
 <p>If the client asks for <code>Accept: text/html,application/xhtml+xml,application/xml;q=0.9</code>, the action will return <code>Content-Type: text/html; charset=utf-8</code>.</p>
 
-<h3>Default Format</h3>
+<h3>Default Request Format</h3>
 
 <p>If a client asks for a generic <code>Accept: */*</code>, the action will fall back to the <strong>application default format</strong>.
 This is a setting that allows us to safely handle cases like our example; the default value is <code>:html</code>.</p>
@@ -194,7 +206,23 @@ This is a setting that allows us to safely handle cases like our example; the de
   <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
     <span class="n">configure</span> <span class="k">do</span>
       <span class="c1"># ...</span>
-      <span class="n">default_format</span> <span class="ss">:json</span>
+      <span class="n">default_request_format</span> <span class="ss">:json</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3>Default Response Format</h3>
+
+<p>If we are building a JSON API app, it can be useful to specify a <code>:json</code> as default MIME Type for the response.
+The default value is <code>:html</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">default_response_format</span> <span class="ss">:json</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -295,18 +323,18 @@ However, we may want to add custom types in order to use them with <code>#format
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">September 30, 2015</span>
+          <h4>Announcing Lotus v0.5.0</h4>
+          <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 12, 2015</span>
           <h4>Weekly Changelog</h4>
           <p>Changelog from Jun 29 2015 to Jul 12 2015
 </p>
           <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">July 10, 2015</span>
-          <h4>Announcing Lotus v0.4.1</h4>
-          <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
-</p>
-          <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
         </div>
     </div>
   </div>

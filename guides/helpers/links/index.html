@@ -34,7 +34,7 @@
         <li><a href="/guides">Guides</a></li>
         <li><a href="/community">Community</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.4.1</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.5.0</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -138,6 +138,18 @@
               </li>
 
               <li>
+                <span class="heading">Mailers</span>
+                <ul class="nav">
+                  <li><a href="/guides/mailers/overview">Overview</a></li>
+                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/mailers/templates">Templates</a></li>
+                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
+                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
+                  <li><a href="/guides/mailers/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/applications">Applications</a></li>
@@ -165,11 +177,19 @@ It&rsquo;s a <strong>public method</strong> called <code>#link_to</code>, that c
 The first is the content of the tag, the second is the path, an the third is a Hash that represent a set of HTML attributes that we may want to specify.</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Home'</span><span class="p">,</span> <span class="s1">'/'</span> <span class="cp">%&gt;</span>
 <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Profile'</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">profile_path</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'btn'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'Your profile'</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span>
+  <span class="n">link_to</span><span class="p">(</span><span class="n">routes</span><span class="p">.</span><span class="nf">profile_path</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'avatar'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'Your profile'</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">img</span><span class="p">(</span><span class="ss">src: </span><span class="n">user</span><span class="p">.</span><span class="nf">avatar</span><span class="p">.</span><span class="nf">url</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
 </code></pre>
 
 <p>Output:</p>
 <pre class="language-ruby html"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span>
 <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/profile"</span> <span class="na">class=</span><span class="s">"btn"</span> <span class="na">title=</span><span class="s">"Your profile"</span><span class="nt">&gt;</span>Profile<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/profile"</span> <span class="na">class=</span><span class="s">"avatar"</span> <span class="na">title=</span><span class="s">"Your profile"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/images/avatars/23.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
 </code></pre>
 
 <p>Alternatively, the content can be expressed as a given block.</p>
@@ -226,18 +246,18 @@ Please visit the <a href="/guides/helpers/escape">Markup Escape</a> section for 
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">September 30, 2015</span>
+          <h4>Announcing Lotus v0.5.0</h4>
+          <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">July 12, 2015</span>
           <h4>Weekly Changelog</h4>
           <p>Changelog from Jun 29 2015 to Jul 12 2015
 </p>
           <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">July 10, 2015</span>
-          <h4>Announcing Lotus v0.4.1</h4>
-          <p>Lotus patch release: Fix container routes, Rack middleware sessions and CLI commands.
-</p>
-          <a href="/blog/2015/07/10/announcing-lotus-041.html">Read more...</a>
         </div>
     </div>
   </div>
