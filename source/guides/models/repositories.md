@@ -32,6 +32,8 @@ When a class includes `Lotus::Repository`, it will receive the following interfa
   * `.create(entity)`  – Create a record for the given entity
   * `.update(entity)`  – Update the record corresponding to the given entity
   * `.delete(entity)`  – Delete the record corresponding to the given entity
+  * `.fetch(raw)`  – Fetch raw datasets for the given raw query string (eg. SQL)
+  * `.execute(raw)`  – Execute raw command (eg. SQL)
   * `.all`   - Fetch all the entities from the collection
   * `.find`  - Fetch an entity from the collection by its ID
   * `.first` - Fetch the first entity from the collection
@@ -93,6 +95,64 @@ This is a **huge improvement**, because:
   * The caller can be easily tested in isolation. It's just a matter of stubbing this method.
 
   * If we change the storage, the callers aren't affected.
+
+## Raw Queries & Commands
+
+A repository can perform queries and commands by accepting raw query language expressions.
+
+### Fetch
+
+```ruby
+# lib/bookshelf/repositories/book_repository.rb
+class BookRepository
+  include Lotus::Repository
+
+  def self.raw_all
+    fetch("SELECT * FROM books")
+  end
+
+  def self.find_all_titles
+    fetch("SELECT title FROM books").map do |book|
+      book[:title]
+    end
+  end
+
+  def self.max_price
+    result = 0
+
+    fetch("SELECT price FROM books") do |book|
+      result = book[:price] if book[:price] > result
+    end
+
+    result
+  end
+end
+```
+
+When `.fetch` is used, the returning value is NOT a collection of entities (eg. `Book`), BUT an array of hashes that represents the **raw result set**.
+
+<p class="warning">
+  Do NOT use user input with <code>.fetch</code>, because it makes your app vulnerable to SQL Injection.
+</p>
+
+### Execute
+
+```ruby
+# lib/bookshelf/repositories/book_repository.rb
+class BookRepository
+  include Lotus::Repository
+
+  def self.reset_download_count
+    execute("UPDATE books SET download_count = 0")
+  end
+end
+```
+
+To ensure a command/query separation, `.execute` doesn't have a returning value.
+
+<p class="warning">
+  Do NOT use user input with <code>.execute</code>, because it makes your app vulnerable to SQL Injection.
+</p>
 
 ## Extended Example
 

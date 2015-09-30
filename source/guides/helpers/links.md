@@ -15,6 +15,11 @@ The first is the content of the tag, the second is the path, an the third is a H
 ```erb
 <%= link_to 'Home', '/' %>
 <%= link_to 'Profile', routes.profile_path, class: 'btn', title: 'Your profile' %>
+<%=
+  link_to(routes.profile_path, class: 'avatar', title: 'Your profile') do
+    img(src: user.avatar.url)
+  end
+%>
 ```
 
 Output:
@@ -22,6 +27,9 @@ Output:
 ```html
 <a href="/">Home</a>
 <a href="/profile" class="btn" title="Your profile">Profile</a>
+<a href="/profile" class="avatar" title="Your profile">
+  <img src="/images/avatars/23.png">
+</a>
 ```
 
 Alternatively, the content can be expressed as a given block.
