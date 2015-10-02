@@ -284,7 +284,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/getting-started/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2015-10-02T13:56:35+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -525,6 +525,12 @@
   <url>
     <loc>http://lotusrb.org/ml/0005/issue/</loc>
     <lastmod>2015-06-23T17:00:46+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/ml/0006/issue/</loc>
+    <lastmod>2015-10-02T14:58:44+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
