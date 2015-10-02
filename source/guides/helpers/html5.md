@@ -33,7 +33,7 @@ It generates:
 
 ```html
 <aside id="sidebar">
-  <div>hello</hello>
+  <div>hello</div>
 </aside>
 ```
 
