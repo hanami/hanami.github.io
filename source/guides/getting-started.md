@@ -551,7 +551,7 @@ describe Web::Views::Books::Index do
     end
 
     it 'hides the placeholder message' do
-      view.render.wont_include('<p class="placeholder">There are no books yet.</p>')
+      rendered.wont_include('<p class="placeholder">There are no books yet.</p>')
     end
   end
 end
