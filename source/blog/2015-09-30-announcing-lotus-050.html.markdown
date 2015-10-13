@@ -143,11 +143,11 @@ end
 ### Minor Changes
 
 Thanks to [Theo Felippe](https://github.com/theocodes) for the MIME type detection work and to [Wellington Santos](https://github.com/manuwell) for a better exception handling.
-To [Pascal Betz](https://github.com/pascalbetz), [José Mota](https://github.com/josemota), [Alex Wochna](https://github.com/awochna) and [Scott Le](https://github.com/khaiql) for their form helper enhancements, while [Leonardo Saraiva](https://github.com/vyper) wrote an expanded version of `#link_to`.
+To [Pascal Betz](https://github.com/pascalbetz), [José Mota](https://github.com/josemota), [Alex Wochna](https://github.com/awochna) and [Khải Lê](https://github.com/khaiql) for their form helper enhancements, while [Leonardo Saraiva](https://github.com/vyper) wrote an expanded version of `#link_to`.
 
 [Alfonso Uceda](https://github.com/AlfonsoUceda) added SQL joins, [Bohdan V.](https://github.com/g3d) and [Manuel Corrales](https://github.com/ziggurat) fixed small Lotus::Model issues, while [Brenno Costa](https://github.com/brennovich) worked on JRuby support!
 
-We're thankful for the improvements and fixes that [Ben Lovell](https://github.com/benlovell), [Rodrigo Panachi](https://github.com/rpanachi), [Derk-Jan Karrenbeld](https://github.com/SleeplessByte), [Cam Huynh](https://github.com/huynhquancam) and [Andrii Ponomarov](https://github.com/andrii) did on `lotusrb`.
+We're thankful for the improvements and fixes that [Ben Lovell](https://github.com/benlovell), [Rodrigo Panachi](https://github.com/rpanachi), [Derk-Jan Karrenbeld](https://github.com/SleeplessByte), [Cẩm Huỳnh](https://github.com/huynhquancam) and [Andrii Ponomarov](https://github.com/andrii) did on `lotusrb`.
 
 ### Deprecations
 
