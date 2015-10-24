@@ -385,6 +385,11 @@ It gives us an empty action, view and template; it also adds a default route to 
 <pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#index'</span>
 </code></pre>
 
+<p>If you&rsquo;re using ZSH, you may get <code>zsh: no matches found: books#new</code>. In that case, you can use:
+<code>
+% lotus generate action web books/index
+</code></p>
+
 <p>To make our test pass, we need to edit our newly generated template file in <code>apps/web/templates/books/index.html.erb</code>:</p>
 <pre class="language-ruby html"><code><span class="nt">&lt;h1&gt;</span>Bookshelf<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;h2&gt;</span>All books<span class="nt">&lt;/h2&gt;</span>
@@ -657,7 +662,7 @@ Let&rsquo;s write a test to force this change in our view:</p>
     <span class="k">end</span>
 
     <span class="n">it</span> <span class="s1">'hides the placeholder message'</span> <span class="k">do</span>
-      <span class="n">view</span><span class="p">.</span><span class="nf">render</span><span class="p">.</span><span class="nf">wont_include</span><span class="p">(</span><span class="s1">'&lt;p class="placeholder"&gt;There are no books yet.&lt;/p&gt;'</span><span class="p">)</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">wont_include</span><span class="p">(</span><span class="s1">'&lt;p class="placeholder"&gt;There are no books yet.&lt;/p&gt;'</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -1128,6 +1133,16 @@ Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.
       <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
       <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
     </ul>
+  </div>
+
+  <div id="sponsors" class="sub-footer wrapper row">
+    <div class="col-xs-6 col-md-4">
+      <a href="https://dnsimple.com" target="_blank">
+        <img src="/images/sponsors/dnsimple.png" />
+      </a>
+    </div>
+    <div class="col-xs-6 col-md-8">
+    </div>
   </div>
 </footer>
 
