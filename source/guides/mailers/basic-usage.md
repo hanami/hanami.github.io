@@ -9,7 +9,7 @@ In the [previous section](/guides/mailers/overview), we generated a mailer, let'
 ## Informations
 
 Firstly, we need to specify sender and recipient(s) and the subject of the email.
-For this purpose a mailer expose three methods: `.from`, `.to` and `.subject`.
+For this purpose a mailer exposes three methods: `.from`, `.to` and `.subject`.
 
 They all accept a string, but `.to` can also accept an array of strings in order to set multiple recipients.
 
@@ -33,7 +33,7 @@ end
 
 You may have noticed that have a hardcoded value can be useful to set the sender, but it doesn't work well for the rest of the details.
 
-If pass a **symbol as argument**, it will interpreted as a **method** that we want to use for that information.
+If pass a **symbol as argument**, it will be interpreted as a **method** that we want to use for that information.
 
 
 ```ruby

@@ -7,7 +7,7 @@ title: Lotus - Guides - Custom Error Pages
 When a non successful request is returned, there are some special pages that an application presents to users.
 They have a generic graphic and some basic informations like the HTTP status code and the message.
 
-Lotus allow to customize them on an application basis.
+Lotus allows to customize them on an application basis.
 We need to create a template with the corresponding HTTP code as filename (eg. `apps/web/templates/500.html.erb`).
 
 Since now on, all the side errors will be presented using that template.

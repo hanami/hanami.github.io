@@ -18,7 +18,7 @@ module Web::Controllers::Dashboard
       puts request.request_method # => "GET"
       puts request.get?           # => true
       puts request.post?          # => false
-      puts request.xht?           # => false
+      puts request.xhr?           # => false
       puts request.referer        # => "http://example.com/"
       puts request.user_agent     # => "Mozilla/5.0 Macintosh; ..."
       puts request.ip             # => "127.0.0.1"

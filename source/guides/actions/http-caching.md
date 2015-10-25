@@ -4,7 +4,7 @@ title: Lotus - Guides - Action HTTP Caching
 
 # HTTP Caching
 
-We refer to HTTP caching as the set of techiniques for HTTP 1.1 and implemented by browser vendors in order to make faster interactions with the server.
+We refer to HTTP caching as the set of techniques for HTTP 1.1 and implemented by browser vendors in order to make faster interactions with the server.
 There are a few headers that, if sent, will enable these HTTP caching mechanisms.
 
 Because these are advanced features, they must be enabled via `http_caching true` in our application settings (`apps/web/application.rb`).
@@ -102,7 +102,7 @@ end
 The second way is to use a timestamp via `fresh last_modified:`.
 
 If the given timestamp does NOT match `If-Modified-Since` request header, it will return a `200` and set the `Last-Modified` response header with the timestamp value.
-If the timestamp does matche, the action will be halted and a `304` will be returned.
+If the timestamp does match, the action will be halted and a `304` will be returned.
 
 ```ruby
 # apps/web/controllers/users/show.rb

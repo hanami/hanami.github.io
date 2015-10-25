@@ -29,12 +29,12 @@ The name of the session adapter is the underscored version of the class name und
 Example: <code>:cookie</code> for <code>Rack::Session::Cookie</code>.
 </p>
 
-We can use different a storage compatible with Rack sessions.
+We can use a different storage compatible with Rack sessions.
 Let's say we want to use Redis. We should bundle `redis-rack` and specify the name of the adapter: `:redis`.
 Lotus is able to autoload the adapter and use it when the application is started.
 
 <p class="convention">
-Custom storage technologies are autoloaded via <code>require "rack/session#{ adapter_name }"</code>.
+Custom storage technologies are autoloaded via <code>require "rack/session/#{ adapter_name }"</code>.
 </p>
 
 The second argument passed to `sessions` is a Hash of options that are **passed to the adapter**.
