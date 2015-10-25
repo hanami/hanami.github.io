@@ -70,7 +70,7 @@ get '/files/*', to: 'files#show'
 
 ## Named Routes
 
-We can specify a unique name for each route, in order to generates paths from the router or to test them.
+We can specify a unique name for each route, in order to generate paths from the router or to test them.
 
 ```ruby
 get '/hello',     to: 'greet#index', as: :greeting

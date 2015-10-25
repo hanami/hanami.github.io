@@ -6,7 +6,7 @@ title: Lotus - Guides - View Share Code
 
 ## Prepare
 
-In our settings (`apps/web/application.rb`), there is code block that allows to share the code for **all the views** of our application.
+In our settings (`apps/web/application.rb`), there is a code block that allows to share the code for **all the views** of our application.
 When a view includes the `Web::View` module, that block code is yielded within the context of that class.
 This is heavily inspired by Ruby Module and its `included` hook.
 

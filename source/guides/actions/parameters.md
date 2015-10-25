@@ -88,7 +88,7 @@ That table has a boolean column `admin` to indicate whether a person has adminis
 
 A malicious user can exploit this scenario by sending this extra parameter to our application, thereby making themselves an administrator.
 
-We can easily fix this problem by filtering the allowed parameterss that are permitted inside our application.
+We can easily fix this problem by filtering the allowed parameters that are permitted inside our application.
 Please always remember that **params represent untrusted input**.
 
 We use `.params` to map the structure of the (nested) parameters.

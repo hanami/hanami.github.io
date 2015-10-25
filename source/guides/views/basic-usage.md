@@ -48,7 +48,7 @@ module Web::Views::Dashboard
 end
 ```
 
-The view now respond to `#title` by implementing it as a concrete method.
+The view now responds to `#title` by implementing it as a concrete method.
 We still see `<h1>Dashboard</h1>` when we visit `/dashboard`.
 
 ### Exposures

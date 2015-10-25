@@ -49,7 +49,7 @@ end
 ```
 
 <p class="convention">
-Lotus transform layout name in application's configuration, by appending the <code>Layout</code> suffix. Eg. <code>:application</code> for <code>Web::Views::ApplicationLayout</code>.
+Lotus transforms layout name in application's configuration, by appending the <code>Layout</code> suffix. Eg. <code>:application</code> for <code>Web::Views::ApplicationLayout</code>.
 </p>
 
 If we want to disable a layout for a view, we can use a DSL for that.
@@ -111,4 +111,4 @@ end
 ```
 
 The first view doesn't respond to `#javascripts`, so it safely ignores it.
-Our second object (`Web::Views::Books::Show`) respond to that method, so the result will be included in the final markup.
+Our second object (`Web::Views::Books::Show`) responds to that method, so the result will be included in the final markup.

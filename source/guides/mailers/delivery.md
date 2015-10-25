@@ -7,7 +7,7 @@ title: Lotus - Guides - Mailers Delivery
 ## Multipart Delivery
 
 By default a mailer delivers a multipart email, that has a HTML and a text part.
-This is the reason why the generators creates two templates.
+This is the reason why the generator creates two templates.
 
 To render both the templates and deliver them as a multipart message, we simply do:
 
@@ -28,13 +28,13 @@ Mailers::Welcome.deliver(format: :html)
 Mailers::Welcome.deliver(format: :txt)
 ```
 
-By using only one format, it will render and delivery only the specified template.
+By using only one format, it will render and deliver only the specified template.
 
 ## Remove Templates
 
-If in our application, we want only to delivery HTML templates, we can **safely** remove textual templates (`.txt` extension) and every time we will do `Mailers::Welcome.deliver` it will only send the HTML message.
+If in our application, we want only to deliver HTML templates, we can **safely** remove textual templates (`.txt` extension) and every time we will do `Mailers::Welcome.deliver` it will only send the HTML message.
 
-The same priciple applies if we want only to send textual emails, just remove HTML templates (`.html` extension).
+The same principle applies if we want only to send textual emails, just remove HTML templates (`.html` extension).
 
 <p class="warning">
   At the delivery time, a mailer MUST have at least one template available.

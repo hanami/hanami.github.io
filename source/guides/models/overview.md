@@ -5,7 +5,7 @@ title: Lotus - Guides - Models Overview
 # Models
 
 Lotus' model domain is implemented in a way that separates the behavior that we want to express (entities) from that persistence layer (repositories and database).
-This design helps to keep the inteface of our objects really small and, by consequence, fast and reusable.
+This design helps to keep the interface of our objects really small and, by consequence, fast and reusable.
 
 ## Soft Dependency
 

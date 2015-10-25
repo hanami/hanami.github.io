@@ -69,11 +69,11 @@ For instance, if we want to **rollback** the changes from `20150613165900_create
 
 Prepares database for the current environment. This command can't be run in the production environment.
 
-When we run db prepare it:
+When we run `db prepare` it:
 
   * Creates the database
-  * Load SQL dump (if any, see `db apply`)
-  * Run pending migrations
+  * Loads SQL dump (if any, see `db apply`)
+  * Runs pending migrations
 
 ```shell
 % bundle exec lotus db prepare

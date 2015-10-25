@@ -217,7 +217,7 @@ Please be careful using doubles in unit tests. Always verify that the mocks are 
 
 ## Requests Tests
 
-Unit tests are a great tool to assert that low level interfaces works as expected.
+Unit tests are a great tool to assert that low level interfaces work as expected.
 We always advise combining them with integration tests.
 
 In the case of Lotus web applications, we can write features (aka acceptance tests) with Capybara, but what do we use when we are building HTTP APIs?

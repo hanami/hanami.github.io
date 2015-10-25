@@ -23,7 +23,7 @@ The following methods are available for table alterations:
   * `#set_column_allow_null` (accepts the **name** of the column)
   * `#set_column_not_null` (accepts the **name** of the column)
 
-Those methods accepts the **name of the target table as first argument**, then the other args.
+Those methods accept the **name of the target table as first argument**, then the other args.
 There is a convenient shortcut for this: `#alter_table`. It accepts the **name of the table** and a **block** that describes the alterations.
 
 The following syntaxes are **equivalent**.

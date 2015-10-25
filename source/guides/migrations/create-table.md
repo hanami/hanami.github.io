@@ -17,7 +17,7 @@ Force operation can be performed via `#create_table!`. It drops the existing tab
 To define a column we use `#column`, followed by the **name**, the **type** and **options**.
 The name must be a unique identifier within the table.
 
-The type can be a Ruby type (e.g. `String`), a symbol that represent a Ruby type (e.g. `:string`)  , or a string that represents the raw database type (e.g. `"varchar(255)"`).
+The type can be a Ruby type (e.g. `String`), a symbol that represents a Ruby type (e.g. `:string`)  , or a string that represents the raw database type (e.g. `"varchar(255)"`).
 
 ##### Type Definition
 
@@ -95,7 +95,7 @@ create_table :stores do
   column :code, Integer, null: false
   column :lat, Float
   column :lng, Float
-  
+
   index :code, unique: true
   index [:lat, :lng], name: :stores_coords_index
 end
@@ -136,14 +136,14 @@ end
 
 #### Checks
 
-Checks are similar to constraints, but they accept an **anoymous block** or a **SQL raw string**.
+Checks are similar to constraints, but they accept an **anonymous block** or a **SQL raw string**.
 
 ```ruby
 create_table :users do
   # ...
   column :age, Integer
   column :role, String
-  
+
   check { age > 18 }
   check %(role IN("contributor", "manager", "owner"))
 end

@@ -4,7 +4,7 @@ title: Lotus - Guides - MIME Types
 
 # MIME Types
 
-A view can handle several MIME Types. Before to dive into this subject, please consider to read how action handle [MIME Types](/guides/actions/mime-types).
+A view can handle several MIME Types. Before to dive into this subject, please consider to read how actions handle [MIME Types](/guides/actions/mime-types).
 
 It's important to highlight the correlation between the _format_ and template name.
 For a given MIME Type, Rack (and then Lotus) associate a _format_ for it.
@@ -52,7 +52,7 @@ Lotus::View::MissingTemplateError: Can't find template "dashboard/index" for "xm
 This scenario works well if the presentational logic of a view can be applied for all the format templates that it handles.
 What if we want to have a [custom rendering](/guides/views/basic-usage) or different presentational logic?
 
-We can inherit from our view and declare that our subclass only handle a specific format.
+We can inherit from our view and declare that our subclass only handles a specific format.
 
 ```ruby
 # apps/web/views/dashboard/json_index.rb
@@ -75,4 +75,4 @@ JSON requests for `/dashboard`, will be handled by our `JsonIndex`.
 There is NO convention between the handled format and the class name. The important part is <code>format :json</code>.
 </p>
 
-With the example above we took advantadge of custom rendering to not use the template and let our serializer to return JSON for us.
+With the example above we took advantage of custom rendering to not use the template and let our serializer to return JSON for us.

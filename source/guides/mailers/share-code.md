@@ -11,7 +11,7 @@ When a mailer includes the `Lotus::Mailer` module, that block code is yielded wi
 This is heavily inspired by Ruby Module and its `included` hook.
 
 Imagine we want to set a default sender for all the mailers.
-Instead of specify it for each mailer, we can use a DRY approach.
+Instead of specifying it for each mailer, we can use a DRY approach.
 
 We create a module:
 

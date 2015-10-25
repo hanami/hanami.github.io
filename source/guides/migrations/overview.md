@@ -40,9 +40,9 @@ The first argument is the name of the local column (`books.author_id`), while th
 
 Then we have three lines for columns.
 The first argument that we pass to `#column` is the name, then the type.
-The type can be a **Ruby type** such as `String` or `Integer` or a string that represent the **native database type** (eg. `"varchar(32)"` or `"text[]"`).
+The type can be a **Ruby type** such as `String` or `Integer` or a string that represents the **native database type** (eg. `"varchar(32)"` or `"text[]"`).
 
-As a last optional argument there is a Hash that specify some extra details for the column. For instance NULL or uniqueness constraints, the size (for strings) or the default value.
+As a last optional argument there is a Hash that specifies some extra details for the column. For instance NULL or uniqueness constraints, the size (for strings) or the default value.
 
 The final line defines a database **check** to ensure that price will always be greater than zero.
 

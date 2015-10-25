@@ -10,7 +10,7 @@ It's a **public method** called `#link_to`, that can be used both in **views** a
 ## Usage
 
 It accepts two mandatory and one optional arguments.
-The first is the content of the tag, the second is the path, an the third is a Hash that represent a set of HTML attributes that we may want to specify.
+The first is the content of the tag, the second is the path, an the third is a Hash that represents a set of HTML attributes that we may want to specify.
 
 ```erb
 <%= link_to 'Home', '/' %>
