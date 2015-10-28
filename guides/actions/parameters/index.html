@@ -244,7 +244,7 @@ That table has a boolean column <code>admin</code> to indicate whether a person 
 
 <p>A malicious user can exploit this scenario by sending this extra parameter to our application, thereby making themselves an administrator.</p>
 
-<p>We can easily fix this problem by filtering the allowed parameterss that are permitted inside our application.
+<p>We can easily fix this problem by filtering the allowed parameters that are permitted inside our application.
 Please always remember that <strong>params represent untrusted input</strong>.</p>
 
 <p>We use <code>.params</code> to map the structure of the (nested) parameters.</p>
@@ -440,7 +440,8 @@ end
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

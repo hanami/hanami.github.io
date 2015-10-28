@@ -168,7 +168,7 @@
               <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/actions/http-caching.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
               <h1>HTTP Caching</h1>
 
-<p>We refer to HTTP caching as the set of techiniques for HTTP 1.1 and implemented by browser vendors in order to make faster interactions with the server.
+<p>We refer to HTTP caching as the set of techniques for HTTP 1.1 and implemented by browser vendors in order to make faster interactions with the server.
 There are a few headers that, if sent, will enable these HTTP caching mechanisms.</p>
 
 <p>Because these are advanced features, they must be enabled via <code>http_caching true</code> in our application settings (<code>apps/web/application.rb</code>).</p>
@@ -260,7 +260,7 @@ If the header does match, the action will be halted and a <code>304</code> will 
 <p>The second way is to use a timestamp via <code>fresh last_modified:</code>.</p>
 
 <p>If the given timestamp does NOT match <code>If-Modified-Since</code> request header, it will return a <code>200</code> and set the <code>Last-Modified</code> response header with the timestamp value.
-If the timestamp does matche, the action will be halted and a <code>304</code> will be returned.</p>
+If the timestamp does match, the action will be halted and a <code>304</code> will be returned.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/users/show.rb</span>
 <span class="k">module</span> <span class="nn">Web::Controllers::Users</span>
   <span class="k">class</span> <span class="nc">Show</span>
@@ -337,7 +337,8 @@ If the timestamp does matche, the action will be halted and a <code>304</code> w
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

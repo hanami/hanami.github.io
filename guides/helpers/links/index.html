@@ -174,7 +174,7 @@ It&rsquo;s a <strong>public method</strong> called <code>#link_to</code>, that c
 <h2>Usage</h2>
 
 <p>It accepts two mandatory and one optional arguments.
-The first is the content of the tag, the second is the path, an the third is a Hash that represent a set of HTML attributes that we may want to specify.</p>
+The first is the content of the tag, the second is the path, an the third is a Hash that represents a set of HTML attributes that we may want to specify.</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Home'</span><span class="p">,</span> <span class="s1">'/'</span> <span class="cp">%&gt;</span>
 <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Profile'</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">profile_path</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'btn'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'Your profile'</span> <span class="cp">%&gt;</span>
 <span class="cp">&lt;%=</span>
@@ -276,7 +276,8 @@ Please visit the <a href="/guides/helpers/escape">Markup Escape</a> section for 
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

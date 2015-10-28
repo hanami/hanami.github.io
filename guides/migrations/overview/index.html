@@ -202,9 +202,9 @@ The first argument is the name of the local column (<code>books.author_id</code>
 
 <p>Then we have three lines for columns.
 The first argument that we pass to <code>#column</code> is the name, then the type.
-The type can be a <strong>Ruby type</strong> such as <code>String</code> or <code>Integer</code> or a string that represent the <strong>native database type</strong> (eg. <code>&quot;varchar(32)&quot;</code> or <code>&quot;text[]&quot;</code>).</p>
+The type can be a <strong>Ruby type</strong> such as <code>String</code> or <code>Integer</code> or a string that represents the <strong>native database type</strong> (eg. <code>&quot;varchar(32)&quot;</code> or <code>&quot;text[]&quot;</code>).</p>
 
-<p>As a last optional argument there is a Hash that specify some extra details for the column. For instance NULL or uniqueness constraints, the size (for strings) or the default value.</p>
+<p>As a last optional argument there is a Hash that specifies some extra details for the column. For instance NULL or uniqueness constraints, the size (for strings) or the default value.</p>
 
 <p>The final line defines a database <strong>check</strong> to ensure that price will always be greater than zero.</p>
 
@@ -299,7 +299,8 @@ Their counterpart can be inferred by <code>Lotus::Model</code> when we migrate <
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

@@ -171,7 +171,7 @@
 <h2>Multipart Delivery</h2>
 
 <p>By default a mailer delivers a multipart email, that has a HTML and a text part.
-This is the reason why the generators creates two templates.</p>
+This is the reason why the generator creates two templates.</p>
 
 <p>To render both the templates and deliver them as a multipart message, we simply do:</p>
 <pre class="language-ruby ruby"><code><span class="no">Mailers</span><span class="o">::</span><span class="no">Welcome</span><span class="p">.</span><span class="nf">deliver</span>
@@ -188,13 +188,13 @@ According to this configuration, we want to selectively send only the wanted for
 <span class="no">Mailers</span><span class="o">::</span><span class="no">Welcome</span><span class="p">.</span><span class="nf">deliver</span><span class="p">(</span><span class="ss">format: :txt</span><span class="p">)</span>
 </code></pre>
 
-<p>By using only one format, it will render and delivery only the specified template.</p>
+<p>By using only one format, it will render and deliver only the specified template.</p>
 
 <h2>Remove Templates</h2>
 
-<p>If in our application, we want only to delivery HTML templates, we can <strong>safely</strong> remove textual templates (<code>.txt</code> extension) and every time we will do <code>Mailers::Welcome.deliver</code> it will only send the HTML message.</p>
+<p>If in our application, we want only to deliver HTML templates, we can <strong>safely</strong> remove textual templates (<code>.txt</code> extension) and every time we will do <code>Mailers::Welcome.deliver</code> it will only send the HTML message.</p>
 
-<p>The same priciple applies if we want only to send textual emails, just remove HTML templates (<code>.html</code> extension).</p>
+<p>The same principle applies if we want only to send textual emails, just remove HTML templates (<code>.html</code> extension).</p>
 
 <p class="warning">
   At the delivery time, a mailer MUST have at least one template available.
@@ -346,7 +346,8 @@ At the low level, <strong>Lotus::Mailer</strong> uses this rock solid library.</
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

@@ -175,7 +175,7 @@ When a mailer includes the <code>Lotus::Mailer</code> module, that block code is
 This is heavily inspired by Ruby Module and its <code>included</code> hook.</p>
 
 <p>Imagine we want to set a default sender for all the mailers.
-Instead of specify it for each mailer, we can use a DRY approach.</p>
+Instead of specifying it for each mailer, we can use a DRY approach.</p>
 
 <p>We create a module:</p>
 <pre class="language-ruby ruby"><code><span class="c1"># lib/mailers/default_sender.rb</span>
@@ -256,7 +256,8 @@ Code included via <code>prepare</code> is available for ALL the mailers of an ap
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

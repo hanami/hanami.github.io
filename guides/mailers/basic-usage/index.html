@@ -173,7 +173,7 @@
 <h2>Informations</h2>
 
 <p>Firstly, we need to specify sender and recipient(s) and the subject of the email.
-For this purpose a mailer expose three methods: <code>.from</code>, <code>.to</code> and <code>.subject</code>.</p>
+For this purpose a mailer exposes three methods: <code>.from</code>, <code>.to</code> and <code>.subject</code>.</p>
 
 <p>They all accept a string, but <code>.to</code> can also accept an array of strings in order to set multiple recipients.</p>
 <pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Mailers</span><span class="o">::</span><span class="no">Welcome</span>
@@ -195,7 +195,7 @@ For this purpose a mailer expose three methods: <code>.from</code>, <code>.to</c
 
 <p>You may have noticed that have a hardcoded value can be useful to set the sender, but it doesn&rsquo;t work well for the rest of the details.</p>
 
-<p>If pass a <strong>symbol as argument</strong>, it will interpreted as a <strong>method</strong> that we want to use for that information.</p>
+<p>If pass a <strong>symbol as argument</strong>, it will be interpreted as a <strong>method</strong> that we want to use for that information.</p>
 <pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Mailers</span><span class="o">::</span><span class="no">Welcome</span>
   <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Mailer</span>
 
@@ -311,7 +311,8 @@ For instance, we passed <code>:user</code> key, and we can use <code>user</code>
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

@@ -180,7 +180,7 @@ Here an example of some information that we can introspect.</p>
       <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">request_method</span> <span class="c1"># =&gt; "GET"</span>
       <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">get?</span>           <span class="c1"># =&gt; true</span>
       <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">post?</span>          <span class="c1"># =&gt; false</span>
-      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">xht?</span>           <span class="c1"># =&gt; false</span>
+      <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">xhr?</span>           <span class="c1"># =&gt; false</span>
       <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">referer</span>        <span class="c1"># =&gt; "http://example.com/"</span>
       <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">user_agent</span>     <span class="c1"># =&gt; "Mozilla/5.0 Macintosh; ..."</span>
       <span class="nb">puts</span> <span class="n">request</span><span class="p">.</span><span class="nf">ip</span>             <span class="c1"># =&gt; "127.0.0.1"</span>
@@ -295,7 +295,8 @@ Here an example of some information that we can introspect.</p>
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

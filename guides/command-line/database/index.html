@@ -225,12 +225,12 @@ For instance, if we want to <strong>rollback</strong> the changes from <code>201
 
 <p>Prepares database for the current environment. This command can&rsquo;t be run in the production environment.</p>
 
-<p>When we run db prepare it:</p>
+<p>When we run <code>db prepare</code> it:</p>
 
 <ul>
 <li>Creates the database</li>
-<li>Load SQL dump (if any, see <code>db apply</code>)</li>
-<li>Run pending migrations</li>
+<li>Loads SQL dump (if any, see <code>db apply</code>)</li>
+<li>Runs pending migrations</li>
 </ul>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus db prepare
 </code></pre>
@@ -327,7 +327,8 @@ db/migrations
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

@@ -181,7 +181,7 @@ Force operation can be performed via <code>#create_table!</code>. It drops the e
 <p>To define a column we use <code>#column</code>, followed by the <strong>name</strong>, the <strong>type</strong> and <strong>options</strong>.
 The name must be a unique identifier within the table.</p>
 
-<p>The type can be a Ruby type (e.g. <code>String</code>), a symbol that represent a Ruby type (e.g. <code>:string</code>)  , or a string that represents the raw database type (e.g. <code>&quot;varchar(255)&quot;</code>).</p>
+<p>The type can be a Ruby type (e.g. <code>String</code>), a symbol that represents a Ruby type (e.g. <code>:string</code>)  , or a string that represents the raw database type (e.g. <code>&quot;varchar(255)&quot;</code>).</p>
 
 <h5>Type Definition</h5>
 
@@ -294,7 +294,7 @@ Database functions are mapped to Ruby functions, but this reduces the portabilit
 
 <h4>Checks</h4>
 
-<p>Checks are similar to constraints, but they accept an <strong>anoymous block</strong> or a <strong>SQL raw string</strong>.</p>
+<p>Checks are similar to constraints, but they accept an <strong>anonymous block</strong> or a <strong>SQL raw string</strong>.</p>
 <pre class="language-ruby ruby"><code><span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span>
   <span class="c1"># ...</span>
   <span class="n">column</span> <span class="ss">:age</span><span class="p">,</span> <span class="no">Integer</span>
@@ -358,7 +358,8 @@ Database functions are mapped to Ruby functions, but this reduces the portabilit
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

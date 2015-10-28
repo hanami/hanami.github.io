@@ -209,7 +209,7 @@ If both the layout and the view implement <code>#page_title</code>, Lotus will u
 </code></pre>
 
 <p class="convention">
-Lotus transform layout name in application&rsquo;s configuration, by appending the <code>Layout</code> suffix. Eg. <code>:application</code> for <code>Web::Views::ApplicationLayout</code>.
+Lotus transforms layout name in application&rsquo;s configuration, by appending the <code>Layout</code> suffix. Eg. <code>:application</code> for <code>Web::Views::ApplicationLayout</code>.
 </p>
 
 <p>If we want to disable a layout for a view, we can use a DSL for that.</p>
@@ -263,7 +263,7 @@ Think of some javascripts to include only in specific pages.</p>
 </code></pre>
 
 <p>The first view doesn&rsquo;t respond to <code>#javascripts</code>, so it safely ignores it.
-Our second object (<code>Web::Views::Books::Show</code>) respond to that method, so the result will be included in the final markup.</p>
+Our second object (<code>Web::Views::Books::Show</code>) responds to that method, so the result will be included in the final markup.</p>
 
             </div>
           </div>
@@ -318,7 +318,8 @@ Our second object (<code>Web::Views::Books::Show</code>) respond to that method,
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

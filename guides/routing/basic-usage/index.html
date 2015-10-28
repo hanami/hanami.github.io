@@ -222,7 +222,7 @@ It would be impossible to know in advance which files are stored and to prepare 
 
 <h2>Named Routes</h2>
 
-<p>We can specify a unique name for each route, in order to generates paths from the router or to test them.</p>
+<p>We can specify a unique name for each route, in order to generate paths from the router or to test them.</p>
 <pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/hello'</span><span class="p">,</span>     <span class="ss">to: </span><span class="s1">'greet#index'</span><span class="p">,</span> <span class="ss">as: :greeting</span>
 <span class="n">get</span> <span class="s1">'/books/:id'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#show'</span><span class="p">,</span>  <span class="ss">as: :book</span>
 </code></pre>
@@ -328,7 +328,8 @@ However, this syntax is noisy.</p>
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

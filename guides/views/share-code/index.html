@@ -170,7 +170,7 @@
 
 <h2>Prepare</h2>
 
-<p>In our settings (<code>apps/web/application.rb</code>), there is code block that allows to share the code for <strong>all the views</strong> of our application.
+<p>In our settings (<code>apps/web/application.rb</code>), there is a code block that allows to share the code for <strong>all the views</strong> of our application.
 When a view includes the <code>Web::View</code> module, that block code is yielded within the context of that class.
 This is heavily inspired by Ruby Module and its <code>included</code> hook.</p>
 
@@ -261,7 +261,8 @@ Code included via <code>prepare</code> is available for ALL the views of an appl
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">

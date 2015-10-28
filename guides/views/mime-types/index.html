@@ -168,7 +168,7 @@
               <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/views/mime-types.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
               <h1>MIME Types</h1>
 
-<p>A view can handle several MIME Types. Before to dive into this subject, please consider to read how action handle <a href="/guides/actions/mime-types">MIME Types</a>.</p>
+<p>A view can handle several MIME Types. Before to dive into this subject, please consider to read how actions handle <a href="/guides/actions/mime-types">MIME Types</a>.</p>
 
 <p>It&rsquo;s important to highlight the correlation between the <em>format</em> and template name.
 For a given MIME Type, Rack (and then Lotus) associate a <em>format</em> for it.
@@ -206,7 +206,7 @@ Lotus::View::MissingTemplateError: Can<span class="s1">'t find template "dashboa
 <p>This scenario works well if the presentational logic of a view can be applied for all the format templates that it handles.
 What if we want to have a <a href="/guides/views/basic-usage">custom rendering</a> or different presentational logic?</p>
 
-<p>We can inherit from our view and declare that our subclass only handle a specific format.</p>
+<p>We can inherit from our view and declare that our subclass only handles a specific format.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/dashboard/json_index.rb</span>
 <span class="nb">require_relative</span> <span class="s1">'./index'</span>
 
@@ -227,7 +227,7 @@ What if we want to have a <a href="/guides/views/basic-usage">custom rendering</
 There is NO convention between the handled format and the class name. The important part is <code>format :json</code>.
 </p>
 
-<p>With the example above we took advantadge of custom rendering to not use the template and let our serializer to return JSON for us.</p>
+<p>With the example above we took advantage of custom rendering to not use the template and let our serializer to return JSON for us.</p>
 
             </div>
           </div>
@@ -282,7 +282,8 @@ There is NO convention between the handled format and the class name. The import
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
       <a href="https://dnsimple.com/resolving/lotus" target="_blank">
-        <img src="/images/sponsors/dnsimple.png" />
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
     </div>
     <div class="col-xs-6 col-md-8">
