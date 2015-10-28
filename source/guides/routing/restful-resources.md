@@ -370,49 +370,49 @@ end
   </tr>
   <tr>
     <td>GET</td>
-    <td>/accounts/:account_id/api_keys</td>
+    <td>/account/api_keys</td>
     <td>Account::ApiKeys::Index</td>
     <td>:index</td>
     <td>:account_api_keys</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/accounts/:account_id/api_keys/:id</td>
+    <td>/account/api_keys/:id</td>
     <td>Account::ApiKeys::Show</td>
     <td>:show</td>
     <td>:account_api_key</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/accounts/:account_id/api_keys/new</td>
+    <td>/account/api_keys/new</td>
     <td>Account::ApiKeys::New</td>
     <td>:new</td>
     <td>:new_account_api_key</td>
   </tr>
   <tr>
     <td>POST</td>
-    <td>/accounts/:account_id/api_keys</td>
+    <td>/account/api_keys</td>
     <td>Account::ApiKeys::Create</td>
     <td>:create</td>
     <td>:create_account_api_keys</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/accounts/:account_id/api_keys/:id/edit</td>
+    <td>/account/api_keys/:id/edit</td>
     <td>Account::ApiKeys::Edit</td>
     <td>:edit</td>
     <td>:edit_account_api_key</td>
   </tr>
   <tr>
     <td>PATCH</td>
-    <td>/accounts/:account_id/api_keys/:id</td>
+    <td>/account/api_keys/:id</td>
     <td>Account::ApiKeys::Update</td>
     <td>:update</td>
     <td>:account_api_key</td>
   </tr>
   <tr>
     <td>DELETE</td>
-    <td>/accounts/:account_id/api_keys/:id</td>
+    <td>/account/api_keys/:id</td>
     <td>Account::ApiKeys::Destroy</td>
     <td>:destroy</td>
     <td>:account_api_key</td>
@@ -439,42 +439,42 @@ end
   </tr>
   <tr>
     <td>GET</td>
-    <td>/accounts/:account_id/avatar</td>
+    <td>/account/avatar</td>
     <td>Account::Avatar::Show</td>
     <td>:show</td>
     <td>:account_avatar</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/accounts/:account_id/avatar/new</td>
+    <td>/account/avatar/new</td>
     <td>Account::Avatar::New</td>
     <td>:new</td>
     <td>:new_account_avatar</td>
   </tr>
   <tr>
     <td>POST</td>
-    <td>/accounts/:account_id/avatar</td>
+    <td>/account/avatar</td>
     <td>Account::Avatar::Create</td>
     <td>:create</td>
     <td>:create_account_avatar</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td>/accounts/:account_id/avatar/edit</td>
+    <td>/account/avatar/edit</td>
     <td>Account::Avatar::Edit</td>
     <td>:edit</td>
     <td>:edit_account_avatar</td>
   </tr>
   <tr>
     <td>PATCH</td>
-    <td>/accounts/:account_id/avatar</td>
+    <td>/account/avatar</td>
     <td>Account::Avatar::Update</td>
     <td>:update</td>
     <td>:account_avatar</td>
   </tr>
   <tr>
     <td>DELETE</td>
-    <td>/accounts/:account_id/avatar</td>
+    <td>/account/avatar</td>
     <td>Account::Avatar::Destroy</td>
     <td>:destroy</td>
     <td>:account_avatar</td>
