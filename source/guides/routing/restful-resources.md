@@ -263,7 +263,7 @@ end
     <td>/books/:book_id/reviews</td>
     <td>Books::Reviews::Create</td>
     <td>:create</td>
-    <td>:create_book_reviews</td>
+    <td>:book_reviews</td>
   </tr>
   <tr>
     <td>GET</td>
@@ -325,7 +325,7 @@ end
     <td>/books/:book_id/cover</td>
     <td>Books::Cover::Create</td>
     <td>:create</td>
-    <td>:create_book_cover</td>
+    <td>:book_cover</td>
   </tr>
   <tr>
     <td>GET</td>
@@ -394,7 +394,7 @@ end
     <td>/account/api_keys</td>
     <td>Account::ApiKeys::Create</td>
     <td>:create</td>
-    <td>:create_account_api_keys</td>
+    <td>:account_api_keys</td>
   </tr>
   <tr>
     <td>GET</td>
@@ -456,7 +456,7 @@ end
     <td>/account/avatar</td>
     <td>Account::Avatar::Create</td>
     <td>:create</td>
-    <td>:create_account_avatar</td>
+    <td>:account_avatar</td>
   </tr>
   <tr>
     <td>GET</td>
