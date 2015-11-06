@@ -24,7 +24,7 @@ describe Mailers::Welcome do
 
   it "delivers welcome email" do
     Mailers::Welcome.deliver(user: user)
-    mail = Lotus::Mailer.deliveries
+    mail = Lotus::Mailer.deliveries.last
 
     mail.to.must_equal             [user.email]
     mail.body.encoded.must_include "Hello, #{ user.name }"
