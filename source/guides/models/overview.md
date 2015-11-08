@@ -33,7 +33,7 @@ It helps us to focus on behavior without worrying about database migrations befo
 
 We can use `--database` command line argument to specify the adapter that we want to use for newly created applications.
 
-It generates some code in `lib/bookshelf.rb` that sets the current adapter (`:sql`) and shows examples for the avaliable choices.
+It generates some code in `lib/bookshelf.rb` that sets the current adapter (`:sql`) and shows examples for the available choices.
 
 ```ruby
 # lib/bookshelf.rb
@@ -66,7 +66,7 @@ end.load!
 The partitioning between our application's domain and databases is resolved by using a data mapper.
 We use it to describe how each entity must be persisted.
 
-This can be unconvenient at the beginning, when we deal with a few entities and attributes, but as our codebase grows, we are in **total control** of how our code interacts with a database.
+This can be inconvenient at the beginning, when we deal with a few entities and attributes, but as our codebase grows, we are in **total control** of how our code interacts with a database.
 
 Another strong point in favor of this choice is that **we can persist nearly any Ruby object, even if it wasn't designed to do so**.
 
