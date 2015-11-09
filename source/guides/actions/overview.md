@@ -74,7 +74,7 @@ That means our action will behave according to the configuration of the `Web` ap
 
 When we include `Web::Action`, we made our object compliant with [Lotus::Controller](https://github.com/lotus/controller)'s actions.
 We need to implement `#call`, which is a method that accepts only one argument: `params`.
-That is the object that carries the payload that comes from incoming HTTP requests from the [router](/guides/routing/basic-routing).
+That is the object that carries the payload that comes from incoming HTTP requests from the [router](/guides/routing/basic-usage).
 
 This interface reminds us of Rack.
 Indeed, our action is compatible with the Rack protocol.
