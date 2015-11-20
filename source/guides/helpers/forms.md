@@ -90,6 +90,25 @@ end
 <%= form %>
 ```
 
+### Supported methods
+
+* color_field
+* date_field
+* datetime_field
+* datetime_local_field
+* email_field
+* hidden_field
+* file_field
+* fields_for
+* form_for
+* label
+* text_area
+* text_field
+* password_field
+* radio_button
+* select
+* submit
+
 ## Examples
 
 ### Basic usage
