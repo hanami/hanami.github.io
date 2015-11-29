@@ -37,7 +37,7 @@ end
 </p>
 
 Then let's add that directory to the load paths of the application, so it can be eagerly loaded.
-As third step, we include the module in all the views. See [View's Share Code](/guides/actions/share-code.md) section for low level details.
+As third step, we include the module in all the views. See [View's Share Code](/guides/views/share-code) section for low level details.
 
 ```ruby
 # apps/web/application.rb
