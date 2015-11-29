@@ -719,7 +719,7 @@ Let's create a `Books::Create` action:
 % lotus generate action web books#create
 ```
 
-Let's change the HTTP method that our route will accept (`POST`).
+This adds a new route to our app:
 
 ```ruby
 # apps/web/config/routes.rb

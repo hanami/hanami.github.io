@@ -67,6 +67,16 @@ This will generate the following route:
 get '/books/:id', to: 'books#show'
 ```
 
+The default HTTP method is `GET`, except for actions named:
+
+- `create`, which will use `POST`
+- `update`, which will use `PATCH`
+- `destroy`, which will use `DELETE`
+
+This should help you route using [RESTful resources](/guides/routing/restful-resources).
+
+You can also set the HTTP method by specifying a `--method` argument when calling `lotus generate action`.
+
 ### Models
 
 We can generate a model.
