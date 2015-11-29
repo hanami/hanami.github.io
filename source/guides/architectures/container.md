@@ -96,7 +96,7 @@ Web assets such as javascripts and stylesheets will be automatically served by t
 Our default application `Web` can be used as a UI interface for our customers.
 At a certain point in our story, we want to manage our users with an admin pane.
 
-We know that the set of features that we're going to introduce, clearly doesn't belong to our main UI (`Web`).
+We know that the set of features that we're going to introduce doesn't belong to our main UI (`Web`).
 On the other hand, it's **too early** for us to implement a microservices architecture, only for the purpose of helping our users reset their password.
 
 Lotus has a solution for our problem: we can generate a new app that lives in the same Ruby process, but it's a separated component.

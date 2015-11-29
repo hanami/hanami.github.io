@@ -227,7 +227,7 @@ describe 'List books' do
 end
 ```
 
-The test is simple enough, and obviously fails because the URL `/books` is not currently recognised in our application. We'll create a new controller action to fix that.
+The test is simple enough, and fails because the URL `/books` is not currently recognised in our application. We'll create a new controller action to fix that.
 
 ### Lotus Generators
 
@@ -369,7 +369,7 @@ end
 ### Using Repositories
 
 We can use repositories to read and write entities to our database.
-Of course, in order for that to work, we need to set it up.
+In order for that to work, we need to set it up.
 
 Lotus configurations are stored in env variables.
 This has proven to be a secure and standardized way to handle credentials in deployment environments.
@@ -506,7 +506,7 @@ describe 'List books' do
 end
 ```
 
-We actually create the required records in our test and then assert the correct number of book classes on the page.
+We create the required records in our test and then assert the correct number of book classes on the page.
 When we run this test, we will most likely see an error from our database connection -- remember we only migrated our _development_ database, and not yet our _test_ database.
 Its connection string is defined in `.env.test` and here's how you set it up:
 
@@ -630,7 +630,7 @@ That's enough to make all our tests pass again!
 
 ## Building Forms To Create Records
 
-One of the last steps that remains is to actually make it possible to add new books to the system.
+One of the last remaining steps is to make it possible to add new books to the system.
 The plan is simple: we build a page with a form to enter details.
 
 When the user submits the form, we build a new entity, save it, and redirect the user back to the book listing.
@@ -847,7 +847,7 @@ With our validations in place, we can limit our entity creation and redirection 
 module Web::Controllers::Books
   class Create
     include Web::Action
-    
+
     expose :book
 
     params do
