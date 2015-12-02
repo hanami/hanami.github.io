@@ -66,7 +66,7 @@ Lotus::Mailer.configure do
   delivery do
     development :test
     test        :test
-    production  :stmp,
+    production  :smtp,
       address:              "smtp.gmail.com",
       port:                 587,
       domain:               "bookshelf.org",
