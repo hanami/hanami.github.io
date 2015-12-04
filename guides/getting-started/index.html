@@ -371,7 +371,7 @@ A first step would be to show a listing of all the books in our system.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>The test is simple enough, and obviously fails because the URL <code>/books</code> is not currently recognised in our application. We&rsquo;ll create a new controller action to fix that.</p>
+<p>The test is simple enough, and fails because the URL <code>/books</code> is not currently recognised in our application. We&rsquo;ll create a new controller action to fix that.</p>
 
 <h3>Lotus Generators</h3>
 
@@ -501,7 +501,7 @@ We can verify it all works as expected with a unit test:</p>
 <h3>Using Repositories</h3>
 
 <p>We can use repositories to read and write entities to our database.
-Of course, in order for that to work, we need to set it up.</p>
+In order for that to work, we need to set it up.</p>
 
 <p>Lotus configurations are stored in env variables.
 This has proven to be a secure and standardized way to handle credentials in deployment environments.</p>
@@ -621,7 +621,7 @@ Let&rsquo;s adjust the feature test we created earlier:</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>We actually create the required records in our test and then assert the correct number of book classes on the page.
+<p>We create the required records in our test and then assert the correct number of book classes on the page.
 When we run this test, we will most likely see an error from our database connection &ndash; remember we only migrated our <em>development</em> database, and not yet our <em>test</em> database.
 Its connection string is defined in <code>.env.test</code> and here&rsquo;s how you set it up:</p>
 <pre class="language-ruby plaintext"><code>% LOTUS_ENV=test lotus db prepare
@@ -735,7 +735,7 @@ That&rsquo;s enough to make all our tests pass again!</p>
 
 <h2>Building Forms To Create Records</h2>
 
-<p>One of the last steps that remains is to actually make it possible to add new books to the system.
+<p>One of the last remaining steps is to make it possible to add new books to the system.
 The plan is simple: we build a page with a form to enter details.</p>
 
 <p>When the user submits the form, we build a new entity, save it, and redirect the user back to the book listing.
@@ -1137,7 +1137,7 @@ Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.
 
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
-      <a href="https://dnsimple.com/resolving/lotus" target="_blank">
+      <a href="http://dnsimple.link/resolving-lotus" target="_blank">
         <span>Resolving with<br/></span>
         <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>

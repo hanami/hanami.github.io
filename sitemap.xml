@@ -194,7 +194,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/overview/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -242,7 +242,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/architectures/container/</loc>
-    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
+    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -284,13 +284,13 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/getting-started/</loc>
-    <lastmod>2015-10-24T11:20:53+02:00</lastmod>
+    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/custom-helpers/</loc>
-    <lastmod>2015-07-01T09:33:07+02:00</lastmod>
+    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -302,7 +302,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/forms/</loc>
-    <lastmod>2015-06-27T18:07:56+02:00</lastmod>
+    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -350,7 +350,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/mailers/delivery/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -374,7 +374,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/mailers/testing/</loc>
-    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -404,7 +404,7 @@
   </url>
   <url>
     <loc>http://lotusrb.org/guides/models/overview/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

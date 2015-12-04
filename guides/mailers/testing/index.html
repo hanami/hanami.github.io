@@ -186,7 +186,7 @@ Please make sure to <strong>clear</strong> them in testing setup.</p>
 
   <span class="n">it</span> <span class="s2">"delivers welcome email"</span> <span class="k">do</span>
     <span class="no">Mailers</span><span class="o">::</span><span class="no">Welcome</span><span class="p">.</span><span class="nf">deliver</span><span class="p">(</span><span class="ss">user: </span><span class="n">user</span><span class="p">)</span>
-    <span class="n">mail</span> <span class="o">=</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Mailer</span><span class="p">.</span><span class="nf">deliveries</span>
+    <span class="n">mail</span> <span class="o">=</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Mailer</span><span class="p">.</span><span class="nf">deliveries</span><span class="p">.</span><span class="nf">last</span>
 
     <span class="n">mail</span><span class="p">.</span><span class="nf">to</span><span class="p">.</span><span class="nf">must_equal</span>             <span class="p">[</span><span class="n">user</span><span class="p">.</span><span class="nf">email</span><span class="p">]</span>
     <span class="n">mail</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">encoded</span><span class="p">.</span><span class="nf">must_include</span> <span class="s2">"Hello, </span><span class="si">#{</span> <span class="n">user</span><span class="p">.</span><span class="nf">name</span> <span class="si">}</span><span class="s2">"</span>
@@ -246,7 +246,7 @@ Please make sure to <strong>clear</strong> them in testing setup.</p>
 
   <div id="sponsors" class="sub-footer wrapper row">
     <div class="col-xs-6 col-md-4">
-      <a href="https://dnsimple.com/resolving/lotus" target="_blank">
+      <a href="http://dnsimple.link/resolving-lotus" target="_blank">
         <span>Resolving with<br/></span>
         <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
       </a>
