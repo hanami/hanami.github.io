@@ -63,7 +63,7 @@ module Web::Views::Dashboard
     format :json
 
     def render
-      JSON.generate({foo: 'bar'})
+      raw JSON.generate({foo: 'bar'})
     end
   end
 end
