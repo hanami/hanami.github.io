@@ -884,14 +884,14 @@ module Web::Views::Books
 end
 ```
 
-This approach will work nicely because Lotus' form builder is smart enough to introspect the `params` in this action and populate the form fields with values found in the params.
-If the user fills in only one field before submitting, he is presented with his original input, saving him the frustration of typing his original input again.
+This approach will work nicely because Lotus' form builder is smart enough to inspect the `params` in this action and populate the form fields with values found in the params.
+If the user fills in only one field before submitting, they are presented with their original input, saving them the frustration of typing it again.
 
 Run your tests again and see they are all passing again!
 
 ### Displaying Validation Errors
 
-Rather than just shoving the user a form under his nose when something has gone wrong, we should give him a hint of what's expected of him. Let's adapt our form to show a notice about invalid fields.
+Rather than just shoving the user a form under their nose when something has gone wrong, we should give them a hint of what's expected of them. Let's adapt our form to show a notice about invalid fields.
 
 First, we expect a list of errors to be included in the page when `params` contains errors:
 
