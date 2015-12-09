@@ -47,7 +47,7 @@ In the profile page we have a link like this:
 ```
 
 A malicious user can edit their profile, by entering javascript code as the website URL.
-When somebody else clicks on that link, he can receive an XSS attack.
+When somebody else clicks on that link, they can receive an XSS attack.
 
 Example:
 
