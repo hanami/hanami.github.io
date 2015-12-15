@@ -7,8 +7,6 @@ title: Lotus - Guides - Action HTTP Caching
 We refer to HTTP caching as the set of techniques for HTTP 1.1 and implemented by browser vendors in order to make faster interactions with the server.
 There are a few headers that, if sent, will enable these HTTP caching mechanisms.
 
-Because these are advanced features, they must be enabled via `http_caching true` in our application settings (`apps/web/application.rb`).
-
 ## Cache Control
 
 Actions offer a DSL to set a special header `Cache-Control`.
