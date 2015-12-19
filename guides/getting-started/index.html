@@ -967,14 +967,14 @@ In this case <code>apps/web/templates/books/new.html.erb</code> will be used to 
 <span class="k">end</span>
 </code></pre>
 
-<p>This approach will work nicely because Lotus&rsquo; form builder is smart enough to introspect the <code>params</code> in this action and populate the form fields with values found in the params.
-If the user fills in only one field before submitting, he is presented with his original input, saving him the frustration of typing his original input again.</p>
+<p>This approach will work nicely because Lotus&rsquo; form builder is smart enough to inspect the <code>params</code> in this action and populate the form fields with values found in the params.
+If the user fills in only one field before submitting, they are presented with their original input, saving them the frustration of typing it again.</p>
 
 <p>Run your tests again and see they are all passing again!</p>
 
 <h3>Displaying Validation Errors</h3>
 
-<p>Rather than just shoving the user a form under his nose when something has gone wrong, we should give him a hint of what&rsquo;s expected of him. Let&rsquo;s adapt our form to show a notice about invalid fields.</p>
+<p>Rather than just shoving the user a form under their nose when something has gone wrong, we should give them a hint of what&rsquo;s expected of them. Let&rsquo;s adapt our form to show a notice about invalid fields.</p>
 
 <p>First, we expect a list of errors to be included in the page when <code>params</code> contains errors:</p>
 <pre class="language-ruby ruby"><code><span class="c1"># spec/web/views/books/new_spec.rb</span>
