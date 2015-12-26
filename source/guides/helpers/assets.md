@@ -371,7 +371,7 @@ https://123.cloudfront.net/assets/application-9ab4d1f57027f0d40738ab8ab70aba86.c
 
 ## Content Security Policy
 
-When using **absolute URLs as sources** or when we use a CDN, we can ran into errors because our browser refute to load assets due to security restrictions (aka _"Content Security Policy"_).
+When using **absolute URLs as sources** or when we use a CDN, we can run into errors because our browser refute to load assets due to security restrictions (aka _"Content Security Policy"_).
 
 To fix them, we need to adjust security settings in our application.
 

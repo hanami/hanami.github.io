@@ -38,7 +38,7 @@ end
 Once _CDN mode_ is on, all the [asset helpers](/guides/helpers/assets) will return **absolute URLs**.
 
 ```erb
-<%= stylesheet 'application.css' %>
+<%= stylesheet 'application' %>
 ```
 
 ```html

@@ -27,7 +27,9 @@ module Web
     end
 
     configure :production do
-      compile false
+      assets do
+        compile false
+      end
     end
   end
 end
@@ -52,7 +54,9 @@ module Web
     end
 
     configure :production do
-      digest true
+      assets do
+        digest true
+      end
     end
   end
 end
@@ -71,7 +75,7 @@ If enabled, [assets helpers](/guides/helpers/assets) will generate checksum rela
 ## Serve Static Assets
 
 It can dinamically serve them during development.
-It mounts `Lotus::Static` middleware in project Rack stack. This this component is conditionally activated, if the environment variable `SERVE_STATIC_ASSETS` equals to `true`.
+It mounts `Lotus::Static` middleware in project Rack stack. This component is conditionally activated, if the environment variable `SERVE_STATIC_ASSETS` equals to `true`.
 
 By default, new projects are generated with this feature enabled in _development_ and _test_ mode, via their corresponding `.env.*` files.
 
@@ -200,14 +204,14 @@ end
 This will add `apps/web/vendor/assets` and all its subdirectories.
 
 <p class="warning">
-Lotus looks recursively to the assets sources. In order to NOT accidentally disclose sensitive files like secrets or source code, please make sure that these sources directories ONLY contain web assets.
+  Lotus looks recursively to the assets sources. In order to NOT accidentally disclose sensitive files like secrets or source code, please make sure that these sources directories ONLY contain web assets.
 </p>
 
 ## Third Party Gems
 
 Lotus allows to use [Rubygems](https://rubygems.org) as a way to distribute web assets and make them available to Lotus applications.
 
-Third party gems can be maintained by developers who want to bring frontent frameworks support to Lotus.
+Third party gems can be maintained by developers who want to bring frontend frameworks support to Lotus.
 Let's say we want to build an `lotus-emberjs` gem.
 
 ```shell

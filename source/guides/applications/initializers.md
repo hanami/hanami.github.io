@@ -4,8 +4,7 @@ title: Lotus - Guides - Applications Initializers
 
 # Initializers
 
-Each single Lotus application within a project can have one or more custom initializers.
-They are **optional**.
+Each single Lotus application within a project can **optionally** have one or more custom initializers.
 
 <p class="notice">
   Initializers are optional

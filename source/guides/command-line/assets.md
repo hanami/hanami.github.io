@@ -125,5 +125,6 @@ public
 ```
 
 <p class="convention">
-  The structure of the output directories in <code>public/assets</code>, reflects the path prefix of each application. For an application <code>Admin</code> mounted at <code>/admin</code>, the assets will be placed under <code>public/assets/admin</code> and reachable at <code>/assets/admin/application-28a6b886de2372ee3922fcaf3f78f2d8.js</code>.
+  The structure of the output directories in <code>public/assets</code>, reflects the path prefix of each application. The default application named <code>Web</code>, is mounted at <code>/</code>, so the output directory is <code>public/assets</code> and their base URL is <code>/assets</code> (eg. <code>/assets/application-28a6b886de2372ee3922fcaf3f78f2d8.js</code>).
+  Simirarly, for an application <code>Admin</code> mounted at <code>/admin</code>, the assets will be placed under <code>public/assets/admin</code> and reachable at <code>/assets/admin/application-28a6b886de2372ee3922fcaf3f78f2d8.js</code>.
 </p>
