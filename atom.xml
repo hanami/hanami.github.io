@@ -4,13 +4,188 @@
    <subtitle>Lotus framework blog</subtitle>
    <link href="http://lotusrb.org/atom.xml" rel="self"/>
    <link href="http://lotusrb.org/blog"/>
-   <updated>2015-09-30T09:11:00+02:00</updated>
+   <updated>2015-12-29T17:12:00+01:00</updated>
    <id>http://lotusrb.org/blog</id>
    <author>
      <name>Lotus</name>
      <email>admin@lotusrb.org</email>
    </author>
 
+     <entry>
+       <title>Introducing Assets</title>
+       <id>http://lotusrb.org/blog/2015/12/29/introducing-assets.html</id>
+       <link rel="alternate" href="http://lotusrb.org/blog/2015/12/29/introducing-assets.html"/>
+       <updated>2015-12-29T17:12:00+01:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
+
+       </summary>
+       <content type="html"><![CDATA[<p>After one year of development, we&rsquo;re proud to announce that the upcoming release of Lotus (<code>v0.6.0</code>) will ship with a new set of facilities for assets management.</p>
+
+<h2>Helpers</h2>
+
+<p>A bunch of <strong>new helpers</strong> is available for your views and templates, with the purpose of building rich web pages:</p>
+
+<ul>
+<li><code>javascript</code></li>
+<li><code>stylesheet</code></li>
+<li><code>favicon</code></li>
+<li><code>image</code></li>
+<li><code>video</code></li>
+<li><code>audio</code></li>
+<li><code>asset_path</code></li>
+<li><code>asset_url</code></li>
+</ul>
+
+<p>They will assist in the process of writing tidy templates and output complex HTML tags for assets.</p>
+
+<p>Here&rsquo;s a basic example:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Assets example<span class="nt">&lt;/title&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">stylesheet</span> <span class="s1">'reset'</span><span class="p">,</span> <span class="s1">'grid'</span><span class="p">,</span> <span class="s1">'main'</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+
+  <span class="nt">&lt;body&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'https://code.jquery.com/jquery-2.1.4.min.js'</span><span class="p">,</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'modals'</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>And the result.</p>
+<pre class="language-ruby html"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Assets example<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/reset.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/grid.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/main.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+
+  <span class="nt">&lt;body&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-2.1.4.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/application.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/modals.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<h2>Preprocessors</h2>
+
+<p>Lotus now supports assets preprocessors.
+You can write stylesheets with <a href="http://sass-lang.com">Sass</a> or javascripts with <a href="http://es6-features.org">ES6</a> syntax and let the framework to lazy compile them during development of precompile all of them at the deploy time.</p>
+
+<p>We use <a href="https://github.com/rtomayko/tilt">Tilt</a> to provide support for the most common libraries, such as <a href="http://lesscss.org">Less</a>, <a href="https://jsx.github.io">JSX</a>, <a href="http://coffeescript.org">CoffeScript</a>, <a href="http://opalrb.org">Opal</a>, <a href="http://handlebarsjs.com">Handlebars</a>, <a href="https://github.com/rails/jbuilder">JBuilder</a>, etc..
+In order to use one or more of them, be sure to include the corresponding gem into your <code>Gemfile</code> and require the library.</p>
+
+<p>Please note that some engines may require <a href="https://nodejs.org/en">Node.js</a>.</p>
+
+<h3>EcmaScript 6</h3>
+
+<p>We strongly suggest to use <a href="http://es6-features.org/">EcmaScript 6</a> for your next project.
+It is not yet fully <a href="https://kangax.github.io/compat-table/es6/">supported</a> by browser vendors, but it&rsquo;s the future of JavaScript.</p>
+
+<p>As of today, you need to transpile ES6 code into something understandable by current browsers, which is ES5.
+For this purpose we support <a href="https://babeljs.io">Babel</a>. Make sure to require <code>&#39;lotus/assets/es6&#39;</code> to enable it.</p>
+
+<h2>Sources</h2>
+
+<p>Each application under <code>apps/</code> in a Lotus project, can have its own set of assets sources.
+The default directory is <code>assets</code>, for instance <code>apps/web/assets</code>.</p>
+
+<p>You can add other directories if you need to vendor assets, eg: <code>apps/web/vendor/assets</code>.</p>
+
+<h2>Third Party Gems</h2>
+
+<p>Developers can maintain gems that distribute assets for Lotus. For instance <code>lotus-ember</code> or <code>lotus-jquery</code>.</p>
+
+<p>As a gem developer, you must add one or more paths, where the assets are stored inside the gem.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/lotus/jquery.rb</span>
+<span class="no">Lotus</span><span class="o">::</span><span class="no">Assets</span><span class="p">.</span><span class="nf">sources</span> <span class="o">&lt;&lt;</span> <span class="s1">'/path/to/jquery'</span>
+</code></pre>
+
+<h2>Deployment</h2>
+
+<p>This release will ship with a new command: <code>lotus assets precompile</code>; which can be used to at the deploy time.</p>
+
+<p>Assets are loaded from the sources of each application (including third party gems) and preprocessed or copied into the public directory of the project.</p>
+
+<p>Each asset is compressed compressed using <a href="http://yui.github.io/yuicompressor">YUI Compressor</a> (which requires <strong>Java 1.4+</strong>).
+With this step we shrink the file size, to let browser to download them faster.</p>
+
+<p>As last step, we produce another version of the same file that includes the checksum of the assets in the name (see the example below).
+With this trick, we ensure that browsers will always cache the right version of a given asset.</p>
+
+<p>Example:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/application-d1829dc353b734e3adc24855693b70f9.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+<h3>Heroku</h3>
+
+<p>Assets precompilation just works with Heroku.
+We introduced private Rake tasks to make sure that Lotus can be easily deployed.</p>
+
+<p>Now you can generate a new project and deploy it in <strong>5 minutes</strong>!</p>
+
+<h3>No Bundling</h3>
+
+<p>We <strong>don&rsquo;t bundle</strong> together all the assets in one gigantic output file.
+There are a few reasons for this. First of all, <strong>simplicity</strong>.</p>
+
+<p>Bundling together dozens of assets, would require a complex dependency system that <strong>slows down your deploys</strong>.</p>
+
+<p>It also demands you to maintain the dependencies between assets.
+With Lotus design, you just &ldquo;<em>require</em>&rdquo; assets by adding them to the markup.
+If your <code>users.js</code> depends on jQuery, you do: <code>&lt;%= javascript &#39;jquery&#39;, &#39;users&#39; %&gt;</code> and that&rsquo;s it.</p>
+
+<p>There also another reason for not bundling them togheter: <strong>HTTP/2</strong>.
+This new version of the protocol is already supported by most popular browsers and it will be shipped soon with Nginx.</p>
+
+<p>This changes the way client and server communicate over the wire.
+Connections will be more efficient with the usage of socket multiplexing.</p>
+
+<p>When we have one huge asset for all the javascripts of our application, this output file will change soon, because for each modification we need to recompile it in production.
+This action invalidates the old version of <code>application.js</code>, and will force the browser to download the entire file from scratch, instead of only the diff.
+That makes assets bundling an antipattern for HTTP/2.</p>
+
+<p>So why build a slow and complex dependency system that will be soon useless because of HTTP/2?</p>
+
+<h2>Content Delivery Networks (CDN)</h2>
+
+<p>Lotus allows to serve assets via a Content Delivery Network.
+What you need to do, is to specify the CDN URL to the application and then the helpers will return the CDN absolute URL for an asset.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://123.cloudfront.net/assets/application-d1829dc353b734e3adc24855693b70f9.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+<h2>Release Date</h2>
+
+<p>All these features can be used with Lotus full stack applications starting from <code>v0.6.0</code>, that will be released on <strong>Jan 12th, 2016</strong>.
+If you can&rsquo;t wait, try it with <a href="https://github.com/lotus/lotus">master branch</a> and let us to know!</p>
+
+<div style="display: inline">
+
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Introducing Assets for Lotus (Ruby)" data-url="http://lotusrb.org/blog/2015/12/29/introducing-assets.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015/12/21/announcing-lotus-assets.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+]]></content>
+     </entry>
      <entry>
        <title>Announcing Lotus v0.5.0</title>
        <id>http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html</id>
@@ -1169,137 +1344,6 @@ Forms are rendered with a special hidden field (<code>_csrf_token</code>) which 
 <h2>Roadmap</h2>
 
 <p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
-]]></content>
-     </entry>
-     <entry>
-       <title>Announcing Lotus v0.3.2</title>
-       <id>http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html"/>
-       <updated>2015-05-22T09:14:00+02:00</updated>
-       <author>
-         <name>Luca Guidi</name>
-       </author>
-       <summary>
-         Lotus patch release: Automatic secure cookies, action file send and routing helpers, optional contents for views, Lotus.root and bug fixes.
-
-       </summary>
-       <content type="html"><![CDATA[<h2>Features</h2>
-
-<p>This patch release ships new minor features.</p>
-
-<h3>Automatic Secure Cookies</h3>
-
-<p>According to the cookies RFC, we can specify a <code>Secure</code> option, to make a coookie available only under HTTPS.
-If we are using a crypted connection in production, Lotus will automatically send this option to increase security level.
-In development mode, where SSL is turned off, that value is omitted.</p>
-
-<p>We can manually handle this setting, according to our custom needs.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
-<span class="k">module</span> <span class="nn">Web</span>
-  <span class="k">class</span> <span class="nc">Application</span>
-    <span class="n">configure</span> <span class="k">do</span>
-      <span class="c1"># ...</span>
-      <span class="n">cookies</span> <span class="ss">secure: </span><span class="kp">true</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-
-<h3>Action Routing Helpers</h3>
-
-<p>There is a new API available for routes interaction.
-It&rsquo;s available as private method in actions and provides useful facilities to generate URLs for named routes.</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Home</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
-
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">root_path</span>
-      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">root_url</span>
-
-      <span class="c1"># equivalent to</span>
-
-      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">path</span><span class="p">(</span><span class="ss">:root</span><span class="p">)</span>
-      <span class="nb">puts</span> <span class="n">routes</span><span class="p">.</span><span class="nf">url</span><span class="p">(</span><span class="ss">:root</span><span class="p">)</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-
-<p>The same feature for views was already introduced by v0.3.0.</p>
-
-<h3>Action Send File</h3>
-
-<p>Another useful addition for actions is <code>#send_file</code>.
-It accepts a Ruby <code>File</code> objects and deliver to the client.
-It supports automatic MIME type handling, Conditional GET, HEAD requests and chunked responses (via <code>Range</code> header).</p>
-<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
-<span class="k">module</span> <span class="nn">Web::Controllers::Documents</span>
-  <span class="k">class</span> <span class="nc">Download</span>
-    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
-
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-      <span class="n">send_file</span> <span class="no">File</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'path/to/document.txt'</span><span class="p">)</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-
-<h3>Optional Content For Views</h3>
-
-<p>If we want to render optional contents such as sidebar links or page specific javascripts, we can use <code>#content</code>
-It accepts a key that represents a method that should be available within the rendering context.
-That context is made of the locals, and the methods that view and layout respond to.
-If the context can&rsquo;t dispatch that method, it returns <code>nil</code>.</p>
-
-<p>Given the following layout template.</p>
-<pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="c">&lt;!-- ... --&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="c">&lt;!-- ... --&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">content</span> <span class="ss">:footer</span> <span class="cp">%&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre>
-
-<p>We have two views, one responds to <code>#footer</code> (<code>Web::Views::Products::Show</code>) and the other doesn&rsquo;t (<code>Web::Views::Products::Index</code>).
-When the first is rendered, <code>content</code> gives back the returning value of <code>#footer</code>.
-In the other case, <code>content</code> returns <code>nil</code>.</p>
-<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Products</span>
-  <span class="k">class</span> <span class="nc">Index</span>
-    <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span>
-  <span class="k">end</span>
-
-  <span class="k">class</span> <span class="nc">Show</span>
-    <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span>
-
-    <span class="k">def</span> <span class="nf">footer</span>
-      <span class="s2">"contents for footer"</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
-
-<h3>Lotus.root</h3>
-
-<p>We have introduced <code>Lotus.root</code> as facility to easily get the top level directory of the project.</p>
-
-<h2>Bug Fixes</h2>
-
-<p>This release comes with some bug fixes for code generators file naming, RSpec support and dirty tracking.</p>
-
-<div style="display: inline">
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.3.2" data-url="http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>
 ]]></content>
      </entry>
 </feed>

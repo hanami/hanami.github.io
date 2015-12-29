@@ -302,6 +302,8 @@ If this isn&rsquo;t the case for us, we can use <em>data mapper</em> do resolve 
   <span class="n">entity</span>     <span class="no">Book</span>
   <span class="n">repository</span> <span class="no">BookRepository</span>
 
+  <span class="n">identity</span> <span class="ss">:_id</span>
+
   <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>    <span class="no">Integer</span><span class="p">,</span> <span class="ss">as: :_id</span>
   <span class="n">attribute</span> <span class="ss">:title</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span>  <span class="ss">as: :s_title</span>
 <span class="k">end</span>
@@ -312,6 +314,9 @@ If this isn&rsquo;t the case for us, we can use <em>data mapper</em> do resolve 
 <p>Then the argument that we pass to <code>#attribute</code> is the name of the attribute from <code>Book</code>.
 If the database column name has the same attribute name we&rsquo;re done.
 In our case we need to use <code>:as</code> option, to indicate the database column that we want to map.</p>
+
+<p>Lotus collections assume the primary key for a table is the <code>id</code> column, but this example uses <code>_id</code> instead. We can
+change the primary key for a collection by using the <code>identity</code> setting which takes a single column name.</p>
 
 <h3>Custom Coercions</h3>
 
@@ -379,18 +384,18 @@ If we use <code>Array</code> builtin type, our tags aren&rsquo;t properly transl
     <div class="row">
       <a class="logo col-md-3" href="/">logo</a>
         <div class="col-md-4">
+          <span class="date">December 29, 2015</span>
+          <h4>Introducing Assets</h4>
+          <p>Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
+</p>
+          <a href="/blog/2015/12/29/introducing-assets.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
           <span class="date">September 30, 2015</span>
           <h4>Announcing Lotus v0.5.0</h4>
           <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
 </p>
           <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">July 12, 2015</span>
-          <h4>Weekly Changelog</h4>
-          <p>Changelog from Jun 29 2015 to Jul 12 2015
-</p>
-          <a href="/blog/2015/07/12/weekly-changelog.html">Read more...</a>
         </div>
     </div>
   </div>
