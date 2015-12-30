@@ -8,7 +8,7 @@ excerpt: >
   Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
 ---
 
-After one year of development, we're proud to announce that the upcoming release of Lotus (`v0.6.0`) will ship with a new set of facilities for assets management.
+We're proud to announce that the upcoming release of Lotus (`v0.6.0`) will ship with a new set of facilities for assets management.
 
 ## Helpers
 
@@ -23,7 +23,8 @@ A bunch of **new helpers** is available for your views and templates, with the p
   * `asset_path`
   * `asset_url`
 
-They will assist in the process of writing tidy templates and output complex HTML tags for assets.
+They have the role of assist you in the process of keeping your templates tidy.
+At the same time, they are able to output structured HTML and manage complex URL logic.
 
 Here's a basic example:
 
@@ -106,7 +107,7 @@ This release will ship with a new command: `lotus assets precompile`; which can 
 
 Assets are loaded from the sources of each application (including third party gems) and preprocessed or copied into the public directory of the project.
 
-Each asset is compressed compressed using [YUI Compressor](http://yui.github.io/yuicompressor) (which requires **Java 1.4+**).
+Each asset is compressed using [YUI Compressor](http://yui.github.io/yuicompressor) (which requires **Java 1.4+**).
 With this step we shrink the file size, to let browser to download them faster.
 
 As last step, we produce another version of the same file that includes the checksum of the assets in the name (see the example below).
@@ -127,7 +128,7 @@ Example:
 Assets precompilation just works with Heroku.
 We introduced private Rake tasks to make sure that Lotus can be easily deployed.
 
-Now you can generate a new project and deploy it in **5 minutes**!
+Now in just **5 minutes** you can generate a new project and deploy it!
 
 ### No Bundling
 
@@ -146,9 +147,16 @@ This new version of the protocol is already supported by most popular browsers a
 This changes the way client and server communicate over the wire.
 Connections will be more efficient with the usage of socket multiplexing.
 
-When we have one huge asset for all the javascripts of our application, this output file will change soon, because for each modification we need to recompile it in production.
-This action invalidates the old version of `application.js`, and will force the browser to download the entire file from scratch, instead of only the diff.
-That makes assets bundling an antipattern for HTTP/2.
+When we have one huge asset for all the javascripts of our application, this output file will change often.
+For each modification in development, we need to recompile it in production.
+
+This action invalidates the old version of `application-ad414f0188b91004debebbe5df37ca05.js`, because it contains stale data.
+So we need to generate a new version, let say `application-d1829dc353b734e3adc24855693b70f9.js`.
+
+At this point the application uses this new file and the browser gets the entire file from scratch.
+Even for a small change, we're forcing the client to download kilobytes or even megabytes of unmofified javascript code.
+
+With HTTP/2 it's more efficient to keep small files and let the browser to download only stale resources.
 
 So why build a slow and complex dependency system that will be soon useless because of HTTP/2?
 
