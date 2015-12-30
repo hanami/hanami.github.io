@@ -23,7 +23,7 @@
          Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
 
        </summary>
-       <content type="html"><![CDATA[<p>After one year of development, we&rsquo;re proud to announce that the upcoming release of Lotus (<code>v0.6.0</code>) will ship with a new set of facilities for assets management.</p>
+       <content type="html"><![CDATA[<p>We&rsquo;re proud to announce that the upcoming release of Lotus (<code>v0.6.0</code>) will ship with a new set of facilities for assets management.</p>
 
 <h2>Helpers</h2>
 
@@ -40,7 +40,8 @@
 <li><code>asset_url</code></li>
 </ul>
 
-<p>They will assist in the process of writing tidy templates and output complex HTML tags for assets.</p>
+<p>They have the role of assist you in the process of keeping your templates tidy.
+At the same time, they are able to output structured HTML and manage complex URL logic.</p>
 
 <p>Here&rsquo;s a basic example:</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
@@ -117,7 +118,7 @@ The default directory is <code>assets</code>, for instance <code>apps/web/assets
 
 <p>Assets are loaded from the sources of each application (including third party gems) and preprocessed or copied into the public directory of the project.</p>
 
-<p>Each asset is compressed compressed using <a href="http://yui.github.io/yuicompressor">YUI Compressor</a> (which requires <strong>Java 1.4+</strong>).
+<p>Each asset is compressed using <a href="http://yui.github.io/yuicompressor">YUI Compressor</a> (which requires <strong>Java 1.4+</strong>).
 With this step we shrink the file size, to let browser to download them faster.</p>
 
 <p>As last step, we produce another version of the same file that includes the checksum of the assets in the name (see the example below).
@@ -134,7 +135,7 @@ With this trick, we ensure that browsers will always cache the right version of 
 <p>Assets precompilation just works with Heroku.
 We introduced private Rake tasks to make sure that Lotus can be easily deployed.</p>
 
-<p>Now you can generate a new project and deploy it in <strong>5 minutes</strong>!</p>
+<p>Now in just <strong>5 minutes</strong> you can generate a new project and deploy it!</p>
 
 <h3>No Bundling</h3>
 
@@ -153,9 +154,16 @@ This new version of the protocol is already supported by most popular browsers a
 <p>This changes the way client and server communicate over the wire.
 Connections will be more efficient with the usage of socket multiplexing.</p>
 
-<p>When we have one huge asset for all the javascripts of our application, this output file will change soon, because for each modification we need to recompile it in production.
-This action invalidates the old version of <code>application.js</code>, and will force the browser to download the entire file from scratch, instead of only the diff.
-That makes assets bundling an antipattern for HTTP/2.</p>
+<p>When we have one huge asset for all the javascripts of our application, this output file will change often.
+For each modification in development, we need to recompile it in production.</p>
+
+<p>This action invalidates the old version of <code>application-ad414f0188b91004debebbe5df37ca05.js</code>, because it contains stale data.
+So we need to generate a new version, let say <code>application-d1829dc353b734e3adc24855693b70f9.js</code>.</p>
+
+<p>At this point the application uses this new file and the browser gets the entire file from scratch.
+Even for a small change, we&rsquo;re forcing the client to download kilobytes or even megabytes of unmofified javascript code.</p>
+
+<p>With HTTP/2 it&rsquo;s more efficient to keep small files and let the browser to download only stale resources.</p>
 
 <p>So why build a slow and complex dependency system that will be soon useless because of HTTP/2?</p>
 
