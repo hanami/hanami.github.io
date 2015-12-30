@@ -398,6 +398,8 @@ The placeholders **_user_** and **_password_** should be replaced with the corre
 
 You may want to change `localhost` for `127.0.0.1` if you're using Linux.
 
+You may decide to use a different adapter, if you do make sure that you update your Gemfile to include the adapter of your choice and run bundle install.
+
 The database configured by default, called `bookshelf_development` running on `localhost`, should work fine for now.
 Lotus can create the database for us:
 

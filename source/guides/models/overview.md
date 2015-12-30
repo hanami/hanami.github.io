@@ -149,6 +149,8 @@ collection :book_catalog do
   entity     Book
   repository BookRepository
 
+  identity :_id
+
   attribute :id,    Integer, as: :_id
   attribute :title, String,  as: :s_title
 end
@@ -159,6 +161,9 @@ The first thing that we notice is the correspondence between `#collection` name 
 Then the argument that we pass to `#attribute` is the name of the attribute from `Book`.
 If the database column name has the same attribute name we're done.
 In our case we need to use `:as` option, to indicate the database column that we want to map.
+
+Lotus collections assume the primary key for a table is the `id` column, but this example uses `_id` instead. We can
+change the primary key for a collection by using the `identity` setting which takes a single column name.
 
 ### Custom Coercions
 
