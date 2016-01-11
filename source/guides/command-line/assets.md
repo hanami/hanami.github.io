@@ -18,11 +18,7 @@ This command is useful for **deployment** purposes.
 
 The first step it precompiles and copies all the assets from all the applications and third party gems under `public/assets/` directory.
 
-Then it minifies all the javascripts and stylesheets, in order to save browsers bandwidth.
-
-<p class="warning">
-  Minification is based on YUI Compressor which requires Java 1.4+
-</p>
+Then it [compress](/guides/assets/compressors) all the javascripts and stylesheets, in order to save browsers bandwidth.
 
 As last thing, it generates a copy of each asset, by appending its checksum to the file name.
 This trick makes assets cacheable by browsers.

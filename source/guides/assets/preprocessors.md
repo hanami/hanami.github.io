@@ -90,4 +90,8 @@ We strongly suggest to use [EcmaScript 6](http://es6-features.org/) for your nex
 It isn't fully [supported](https://kangax.github.io/compat-table/es6/) yet by browser vendors, but this is changing quickly.
 
 As of today, you need to transpile ES6 code into something understandable by current browsers, which is ES5.
-For this purpose we support [Babel](https://babeljs.io). Make sure to require `'lotus/assets/es6'` to enable ES6 support.
+For this purpose we support [Babel](https://babeljs.io).
+
+<p class="notice">
+  Babel requires Node.js.
+</p>
