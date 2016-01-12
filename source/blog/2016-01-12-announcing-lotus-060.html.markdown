@@ -1,6 +1,6 @@
 ---
 title: Announcing Lotus v0.6.0
-date: 2016-01-12 15:42 UTC
+date: 2016-01-12 12:57 UTC
 tags: announcements
 author: Luca Guidi
 image: true
