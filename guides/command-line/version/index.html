@@ -34,7 +34,7 @@
         <li><a href="/guides">Guides</a></li>
         <li><a href="/community">Community</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.5.0</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.6.0</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -59,6 +59,14 @@
                   <li><a href="/guides/architectures/overview">Overview</a></li>
                   <li><a href="/guides/architectures/container">Container</a></li>
                   <li><a href="/guides/architectures/application">Application</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Applications</span>
+                <ul class="nav">
+                  <li><a href="/guides/applications/initializers">Initializers</a></li>
+                  <li><a href="/guides/applications/rake">Rake</a></li>
                 </ul>
               </li>
 
@@ -130,6 +138,7 @@
                   <li><a href="/guides/helpers/html5">HTML5</a></li>
                   <li><a href="/guides/helpers/forms">Forms</a></li>
                   <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/assets">Assets</a></li>
                   <li><a href="/guides/helpers/links">Links</a></li>
                   <li><a href="/guides/helpers/escape">Markup Escape</a></li>
                   <li><a href="/guides/helpers/numbers">Numbers</a></li>
@@ -150,13 +159,32 @@
               </li>
 
               <li>
+                <span class="heading">Assets</span>
+                <ul class="nav">
+                  <li><a href="/guides/assets/overview">Overview</a></li>
+                  <li><a href="/guides/assets/preprocessors">Preprocessors</a></li>
+                  <li><a href="/guides/assets/compressors">Compressors</a></li>
+                  <li><a href="/guides/assets/content-delivery-network">Content Delivery Network (CDN)</a></li>
+                </ul>
+              </li>
+
+              <li>
                 <span class="heading">Command Line</span>
                 <ul class="nav">
                   <li><a href="/guides/command-line/applications">Applications</a></li>
                   <li><a href="/guides/command-line/generators">Generators</a></li>
+                  <li><a href="/guides/command-line/destroy">Destroy</a></li>
                   <li><a href="/guides/command-line/database">Database</a></li>
+                  <li><a href="/guides/command-line/assets">Assets</a></li>
                   <li><a href="/guides/command-line/routes">Routes</a></li>
                   <li><a href="/guides/command-line/version">Version</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Upgrade Notes</span>
+                <ul class="nav">
+                  <li><a href="/guides/upgrade-notes/v060">v0.6.0</a></li>
                 </ul>
               </li>
             </ul>
@@ -172,7 +200,7 @@
 
 <p>By running <code>lotus version</code> we can see the current version of the framework that we are using.</p>
 <pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus version
-v0.5.0
+v0.6.0
 </code></pre>
 
             </div>

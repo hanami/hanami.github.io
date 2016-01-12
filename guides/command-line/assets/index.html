@@ -1,0 +1,390 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lotus - Guides - Command Line: Assets</title>
+    <meta name="description" content="Lotus, a complete web framework for Ruby" />
+    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+
+    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+
+    <script src="//use.typekit.net/xhp5wmc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body class="subpage docs">
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav class="navbar navbar-fixed-top container-fluid">
+  <div class="wrapper container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/guides">Guides</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.6.0</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <section class="docs wrapper animated fadeIn">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 hidden-sm hidden-xs sidebar">
+            <ul class="nav nav-sidebar">
+              <li>
+                <span class="heading">Getting Started</span>
+                <ul class="nav">
+                  <li><a href="/guides/getting-started">Getting Started</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Architectures</span>
+                <ul class="nav">
+                  <li><a href="/guides/architectures/overview">Overview</a></li>
+                  <li><a href="/guides/architectures/container">Container</a></li>
+                  <li><a href="/guides/architectures/application">Application</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Applications</span>
+                <ul class="nav">
+                  <li><a href="/guides/applications/initializers">Initializers</a></li>
+                  <li><a href="/guides/applications/rake">Rake</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Routing</span>
+                <ul class="nav">
+                  <li><a href="/guides/routing/overview">Overview</a></li>
+                  <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Actions</span>
+                <ul class="nav">
+                  <li><a href="/guides/actions/overview">Overview</a></li>
+                  <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/actions/parameters">Parameters</a></li>
+                  <li><a href="/guides/actions/request-and-response">Request & Response</a></li>
+                  <li><a href="/guides/actions/exposures">Exposures</a></li>
+                  <li><a href="/guides/actions/rack-integration">Rack Integration</a></li>
+                  <li><a href="/guides/actions/mime-types">MIME Types</a></li>
+                  <li><a href="/guides/actions/cookies">Cookies</a></li>
+                  <li><a href="/guides/actions/sessions">Sessions</a></li>
+                  <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
+                  <li><a href="/guides/actions/control-flow">Control Flow</a></li>
+                  <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
+                  <li><a href="/guides/actions/share-code">Share Code</a></li>
+                  <li><a href="/guides/actions/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Views</span>
+                <ul class="nav">
+                  <li><a href="/guides/views/overview">Overview</a></li>
+                  <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/views/templates">Templates</a></li>
+                  <li><a href="/guides/views/mime-types">MIME Types</a></li>
+                  <li><a href="/guides/views/layouts">Layouts</a></li>
+                  <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
+                  <li><a href="/guides/views/share-code">Share Code</a></li>
+                  <li><a href="/guides/views/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Models</span>
+                <ul class="nav">
+                  <li><a href="/guides/models/overview">Overview</a></li>
+                  <li><a href="/guides/models/entities">Entities</a></li>
+                  <li><a href="/guides/models/repositories">Repositories</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Migrations</span>
+                <ul class="nav">
+                  <li><a href="/guides/migrations/overview">Overview</a></li>
+                  <li><a href="/guides/migrations/create-table">Create Table</a></li>
+                  <li><a href="/guides/migrations/alter-table">Alter Table</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/assets">Assets</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Mailers</span>
+                <ul class="nav">
+                  <li><a href="/guides/mailers/overview">Overview</a></li>
+                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/mailers/templates">Templates</a></li>
+                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
+                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
+                  <li><a href="/guides/mailers/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Assets</span>
+                <ul class="nav">
+                  <li><a href="/guides/assets/overview">Overview</a></li>
+                  <li><a href="/guides/assets/preprocessors">Preprocessors</a></li>
+                  <li><a href="/guides/assets/compressors">Compressors</a></li>
+                  <li><a href="/guides/assets/content-delivery-network">Content Delivery Network (CDN)</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Command Line</span>
+                <ul class="nav">
+                  <li><a href="/guides/command-line/applications">Applications</a></li>
+                  <li><a href="/guides/command-line/generators">Generators</a></li>
+                  <li><a href="/guides/command-line/destroy">Destroy</a></li>
+                  <li><a href="/guides/command-line/database">Database</a></li>
+                  <li><a href="/guides/command-line/assets">Assets</a></li>
+                  <li><a href="/guides/command-line/routes">Routes</a></li>
+                  <li><a href="/guides/command-line/version">Version</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Upgrade Notes</span>
+                <ul class="nav">
+                  <li><a href="/guides/upgrade-notes/v060">v0.6.0</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="col-md-9 main">
+            <div class="doc-section">
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/command-line/assets.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h1>Command Line</h1>
+
+<h2>Assets</h2>
+
+<p>We can manage assets via the command line.</p>
+
+<h3>Precompile</h3>
+
+<p>This command is useful for <strong>deployment</strong> purposes.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>lotus assets precompile
+</code></pre>
+
+<p>The first step it precompiles and copies all the assets from all the applications and third party gems under <code>public/assets/</code> directory.</p>
+
+<p>Then it <a href="/guides/assets/compressors">compress</a> all the javascripts and stylesheets, in order to save browsers bandwidth.</p>
+
+<p>As last thing, it generates a copy of each asset, by appending its checksum to the file name.
+This trick makes assets cacheable by browsers.</p>
+
+<p>It generates a digest manifest that lists all the assets and their checksum counterpart.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>cat public/assets.json
+<span class="o">{</span>
+  <span class="c"># ...</span>
+  <span class="s2">"/assets/application.css"</span>:<span class="s2">"/assets/application-9ab4d1f57027f0d40738ab8ab70aba86.css"</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>This is used by assets helpers to resolve an asset name into a relative path.</p>
+
+<h3>Example</h3>
+
+<p>Let&rsquo;s say we have a project with three applications: <code>admin</code>, <code>metrics</code> and <code>web</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># config/environment.rb</span>
+<span class="c1"># ...</span>
+<span class="no">Lotus</span><span class="o">::</span><span class="no">Container</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="n">mount</span> <span class="no">Metrics</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/metrics'</span>
+  <span class="n">mount</span> <span class="no">Admin</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span>   <span class="ss">at: </span><span class="s1">'/admin'</span>
+  <span class="n">mount</span> <span class="no">Web</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span>     <span class="ss">at: </span><span class="s1">'/'</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>They have the following sources:</p>
+
+<ul>
+<li>Admin: <code>apps/admin/assets</code></li>
+<li>Metrics: <code>apps/metrics/assets</code></li>
+<li>Web: <code>apps/web/assets</code>, <code>apps/web/vendor/assets</code></li>
+</ul>
+
+<p>Furtermore, they all depend on Ember.js, which is distributed by an imaginary gem named <code>lotus-ember</code>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree .
+├── apps
+│   ├── admin
+│   │   ├── assets
+│   │   │   └── js
+│   │   │       ├── application.js
+│   │   │       └── zepto.js
+<span class="c"># ...</span>
+│   ├── metrics
+│   │   ├── assets
+│   │   │   └── javascripts
+│   │   │       └── dashboard.js.es6
+<span class="c"># ...</span>
+│   └── web
+│       ├── assets
+│       │   ├── images
+│       │   │   └── bookshelf.jpg
+│       │   └── javascripts
+│       │       └── application.js
+<span class="c"># ...</span>
+│       └── vendor
+│           └── assets
+│               └── javascripts
+│                   └── jquery.js
+<span class="c"># ...</span>
+</code></pre>
+
+<p>When we run <code>lotus assets precompile</code> on our server, here&rsquo;s the output.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree public
+public
+├── assets
+│   ├── admin
+│   │   ├── application-28a6b886de2372ee3922fcaf3f78f2d8.js
+│   │   ├── application.js
+│   │   ├── ember-b2d6de1e99c79a0e52cf5c205aa2e07a.js
+│   │   ├── ember-source-e74117fc6ba74418b2601ffff9eb1568.js
+│   │   ├── ember-source.js
+│   │   ├── ember.js
+│   │   ├── zepto-ca736a378613d484138dec4e69be99b6.js
+│   │   └── zepto.js
+│   ├── application-d1829dc353b734e3adc24855693b70f9.js
+│   ├── application.js
+│   ├── bookshelf-237ecbedf745af5a477e380f0232039a.jpg
+│   ├── bookshelf.jpg
+│   ├── ember-b2d6de1e99c79a0e52cf5c205aa2e07a.js
+│   ├── ember-source-e74117fc6ba74418b2601ffff9eb1568.js
+│   ├── ember-source.js
+│   ├── ember.js
+│   ├── jquery-05277a4edea56b7f82a4c1442159e183.js
+│   ├── jquery.js
+│   └── metrics
+│       ├── dashboard-7766a63ececc63a7a629bfb0666e9c62.js
+│       ├── dashboard.js
+│       ├── ember-b2d6de1e99c79a0e52cf5c205aa2e07a.js
+│       ├── ember-source-e74117fc6ba74418b2601ffff9eb1568.js
+│       ├── ember-source.js
+│       └── ember.js
+└── assets.json
+</code></pre>
+
+<p class="convention">
+  The structure of the output directories in <code>public/assets</code>, reflects the path prefix of each application. The default application named <code>Web</code>, is mounted at <code>/</code>, so the output directory is <code>public/assets</code> and their base URL is <code>/assets</code> (eg. <code>/assets/application-28a6b886de2372ee3922fcaf3f78f2d8.js</code>).
+  Simirarly, for an application <code>Admin</code> mounted at <code>/admin</code>, the assets will be placed under <code>public/assets/admin</code> and reachable at <code>/assets/admin/application-28a6b886de2372ee3922fcaf3f78f2d8.js</code>.
+</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="email-signup">
+  <div class="container-fluid wrapper">
+    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
+      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="primary">
+  <div class="container-fluid wrapper">
+    <div class="row">
+      <a class="logo col-md-3" href="/">logo</a>
+        <div class="col-md-4">
+          <span class="date">December 29, 2015</span>
+          <h4>Introducing Assets</h4>
+          <p>Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
+</p>
+          <a href="/blog/2015/12/29/introducing-assets.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
+          <span class="date">September 30, 2015</span>
+          <h4>Announcing Lotus v0.5.0</h4>
+          <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="sub-footer wrapper">
+    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
+    <br>
+    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
+    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
+    <ul class="social">
+      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
+      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
+    </ul>
+  </div>
+
+  <div id="sponsors" class="sub-footer wrapper row">
+    <div class="col-xs-6 col-md-4">
+      <a href="http://dnsimple.link/resolving-lotus" target="_blank">
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+      </a>
+    </div>
+    <div class="col-xs-6 col-md-8">
+    </div>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

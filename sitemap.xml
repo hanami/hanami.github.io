@@ -2,541 +2,607 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://lotusrb.org/blog/2015/01/01/a-new-roadmap-for-lotus.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/02/22/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/03/01/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/03/08/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/03/15/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/03/22/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/03/23/announcing-lotus-030.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/03/29/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/04/13/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/04/19/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/04/27/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/05/15/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/05/22/announcing-lotus-032.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/05/31/weekly-changelog.html</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/06/15/introducing-form-helpers.html</loc>
-    <lastmod>2015-06-22T17:48:17+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/06/17/introducing-database-migrations.html</loc>
-    <lastmod>2015-09-28T09:28:36+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html</loc>
-    <lastmod>2015-06-23T18:25:40+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/06/28/weekly-changelog.html</loc>
-    <lastmod>2015-07-01T09:33:07+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/06/30/announcing-lotus-rgsoc.html</loc>
-    <lastmod>2015-07-01T09:51:17+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html</loc>
-    <lastmod>2015-07-12T10:37:11+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/07/12/weekly-changelog.html</loc>
-    <lastmod>2015-07-12T10:37:11+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html</loc>
-    <lastmod>2015-10-24T11:20:53+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/2015/12/29/introducing-assets.html</loc>
-    <lastmod>2015-12-30T14:11:18+01:00</lastmod>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/blog/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/community/</loc>
-    <lastmod>2015-06-20T09:49:47+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/basic-usage/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/control-flow/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/cookies/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/exception-handling/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/exposures/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/http-caching/</loc>
-    <lastmod>2015-12-19T19:03:17+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/mime-types/</loc>
-    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/overview/</loc>
-    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/parameters/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/rack-integration/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/request-and-response/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/sessions/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/share-code/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/actions/testing/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/applications/initializers/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/applications/rake/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/architectures/application/</loc>
-    <lastmod>2015-06-24T16:16:07+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/architectures/container/</loc>
-    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/architectures/overview/</loc>
-    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/assets/compressors/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/assets/content-delivery-network/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/assets/overview/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/assets/preprocessors/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/command-line/applications/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/command-line/assets/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/command-line/database/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/command-line/destroy/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/command-line/generators/</loc>
-    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/command-line/routes/</loc>
-    <lastmod>2015-09-28T09:51:33+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/command-line/version/</loc>
-    <lastmod>2015-06-22T14:09:07+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/getting-started/</loc>
-    <lastmod>2015-12-29T19:46:33+01:00</lastmod>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/helpers/assets/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/custom-helpers/</loc>
-    <lastmod>2015-12-19T19:03:36+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/escape/</loc>
-    <lastmod>2015-12-19T19:03:17+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/forms/</loc>
-    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/html5/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/links/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/numbers/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/overview/</loc>
-    <lastmod>2015-06-27T18:07:56+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/helpers/routing/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/</loc>
-    <lastmod>2015-06-27T18:07:56+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/mailers/basic-usage/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/mailers/delivery/</loc>
-    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/mailers/overview/</loc>
-    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/mailers/share-code/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/mailers/templates/</loc>
-    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/mailers/testing/</loc>
-    <lastmod>2015-12-04T12:20:46+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/migrations/alter-table/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/migrations/create-table/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/migrations/overview/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/models/entities/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/models/overview/</loc>
-    <lastmod>2015-12-29T19:46:33+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/models/repositories/</loc>
-    <lastmod>2015-09-30T15:57:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/routing/basic-usage/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/routing/overview/</loc>
-    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/routing/restful-resources/</loc>
-    <lastmod>2015-09-30T15:56:51+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/guides/upgrade-notes/v060/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/views/basic-usage/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/views/custom-error-pages/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/views/layouts/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/views/mime-types/</loc>
-    <lastmod>2015-12-19T19:03:17+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/views/overview/</loc>
-    <lastmod>2015-09-15T11:20:14+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/views/share-code/</loc>
-    <lastmod>2015-10-28T10:00:27+01:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/views/templates/</loc>
-    <lastmod>2015-06-24T16:16:07+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/guides/views/testing/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/hackday/</loc>
-    <lastmod>2015-09-15T11:45:44+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/mailing-list/</loc>
-    <lastmod>2015-07-01T09:33:07+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/ml/0001/issue/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/ml/0002/issue/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/ml/0003/issue/</loc>
-    <lastmod>2015-06-19T17:29:00+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/ml/0004/issue/</loc>
-    <lastmod>2015-06-22T17:54:07+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/ml/0005/issue/</loc>
-    <lastmod>2015-06-23T17:00:46+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://lotusrb.org/ml/0006/issue/</loc>
-    <lastmod>2015-10-02T14:58:44+02:00</lastmod>
+    <lastmod>2016-01-12T11:55:21+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://lotusrb.org/ml/0007/issue/</loc>
+    <lastmod>2016-01-12T13:54:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

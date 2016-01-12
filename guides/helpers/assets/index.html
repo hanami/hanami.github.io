@@ -1,0 +1,575 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lotus - Guides - Assets Helpers</title>
+    <meta name="description" content="Lotus, a complete web framework for Ruby" />
+    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+
+    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+
+    <script src="//use.typekit.net/xhp5wmc.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body class="subpage docs">
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav class="navbar navbar-fixed-top container-fluid">
+  <div class="wrapper container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/guides">Guides</a></li>
+        <li><a href="/community">Community</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.6.0</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <section class="docs wrapper animated fadeIn">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 hidden-sm hidden-xs sidebar">
+            <ul class="nav nav-sidebar">
+              <li>
+                <span class="heading">Getting Started</span>
+                <ul class="nav">
+                  <li><a href="/guides/getting-started">Getting Started</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Architectures</span>
+                <ul class="nav">
+                  <li><a href="/guides/architectures/overview">Overview</a></li>
+                  <li><a href="/guides/architectures/container">Container</a></li>
+                  <li><a href="/guides/architectures/application">Application</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Applications</span>
+                <ul class="nav">
+                  <li><a href="/guides/applications/initializers">Initializers</a></li>
+                  <li><a href="/guides/applications/rake">Rake</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Routing</span>
+                <ul class="nav">
+                  <li><a href="/guides/routing/overview">Overview</a></li>
+                  <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Actions</span>
+                <ul class="nav">
+                  <li><a href="/guides/actions/overview">Overview</a></li>
+                  <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/actions/parameters">Parameters</a></li>
+                  <li><a href="/guides/actions/request-and-response">Request & Response</a></li>
+                  <li><a href="/guides/actions/exposures">Exposures</a></li>
+                  <li><a href="/guides/actions/rack-integration">Rack Integration</a></li>
+                  <li><a href="/guides/actions/mime-types">MIME Types</a></li>
+                  <li><a href="/guides/actions/cookies">Cookies</a></li>
+                  <li><a href="/guides/actions/sessions">Sessions</a></li>
+                  <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
+                  <li><a href="/guides/actions/control-flow">Control Flow</a></li>
+                  <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
+                  <li><a href="/guides/actions/share-code">Share Code</a></li>
+                  <li><a href="/guides/actions/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Views</span>
+                <ul class="nav">
+                  <li><a href="/guides/views/overview">Overview</a></li>
+                  <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/views/templates">Templates</a></li>
+                  <li><a href="/guides/views/mime-types">MIME Types</a></li>
+                  <li><a href="/guides/views/layouts">Layouts</a></li>
+                  <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
+                  <li><a href="/guides/views/share-code">Share Code</a></li>
+                  <li><a href="/guides/views/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Models</span>
+                <ul class="nav">
+                  <li><a href="/guides/models/overview">Overview</a></li>
+                  <li><a href="/guides/models/entities">Entities</a></li>
+                  <li><a href="/guides/models/repositories">Repositories</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Migrations</span>
+                <ul class="nav">
+                  <li><a href="/guides/migrations/overview">Overview</a></li>
+                  <li><a href="/guides/migrations/create-table">Create Table</a></li>
+                  <li><a href="/guides/migrations/alter-table">Alter Table</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Helpers</span>
+                <ul class="nav">
+                  <li><a href="/guides/helpers/overview">Overview</a></li>
+                  <li><a href="/guides/helpers/html5">HTML5</a></li>
+                  <li><a href="/guides/helpers/forms">Forms</a></li>
+                  <li><a href="/guides/helpers/routing">Routing</a></li>
+                  <li><a href="/guides/helpers/assets">Assets</a></li>
+                  <li><a href="/guides/helpers/links">Links</a></li>
+                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
+                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Mailers</span>
+                <ul class="nav">
+                  <li><a href="/guides/mailers/overview">Overview</a></li>
+                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+                  <li><a href="/guides/mailers/templates">Templates</a></li>
+                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
+                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
+                  <li><a href="/guides/mailers/testing">Testing</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Assets</span>
+                <ul class="nav">
+                  <li><a href="/guides/assets/overview">Overview</a></li>
+                  <li><a href="/guides/assets/preprocessors">Preprocessors</a></li>
+                  <li><a href="/guides/assets/compressors">Compressors</a></li>
+                  <li><a href="/guides/assets/content-delivery-network">Content Delivery Network (CDN)</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Command Line</span>
+                <ul class="nav">
+                  <li><a href="/guides/command-line/applications">Applications</a></li>
+                  <li><a href="/guides/command-line/generators">Generators</a></li>
+                  <li><a href="/guides/command-line/destroy">Destroy</a></li>
+                  <li><a href="/guides/command-line/database">Database</a></li>
+                  <li><a href="/guides/command-line/assets">Assets</a></li>
+                  <li><a href="/guides/command-line/routes">Routes</a></li>
+                  <li><a href="/guides/command-line/version">Version</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <span class="heading">Upgrade Notes</span>
+                <ul class="nav">
+                  <li><a href="/guides/upgrade-notes/v060">v0.6.0</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="col-md-9 main">
+            <div class="doc-section">
+              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/helpers/assets.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
+              <h2>Assets Helpers</h2>
+
+<p>These helpers are HTML5 generators that target specific assets features.</p>
+
+<p>They are following the settings of the application that uses them.
+For instance, if we have a project with two applications <code>Web</code> and <code>Admin</code> mounted at <code>/</code> and <code>/admin</code>, respectively, all the asset URLs will respect these prefixes.</p>
+
+<p>They also respect <a href="/guides/assets/overview"><em>Digest mode</em></a> and <a href="/guides/assets/content-delivery-network"><em>CDN mode</em></a> for each application.</p>
+
+<p>The following helpers are available for views and templates:</p>
+
+<ul>
+<li><code>javascript</code></li>
+<li><code>stylesheet</code></li>
+<li><code>favicon</code></li>
+<li><code>image</code></li>
+<li><code>video</code></li>
+<li><code>audio</code></li>
+<li><code>asset_path</code></li>
+<li><code>asset_url</code></li>
+</ul>
+
+<h2>Usage</h2>
+
+<h3><code>javascript</code></h3>
+
+<p>It generates a <code>&lt;script&gt;</code> tag for the given source(s).
+A source can be the file name without the extension, or an absolute URL.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'https://code.jquery.com/jquery-2.1.1.min.js'</span><span class="p">,</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-2.1.1.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/application.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+<h3><code>stylesheet</code></h3>
+
+<p>It generates a <code>&lt;link&gt;</code> tag for the given source(s).
+A source can be the file name without the extension, or an absolute URL.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">stylesheet</span> <span class="s1">'reset'</span><span class="p">,</span> <span class="s1">'grid'</span><span class="p">,</span> <span class="s1">'main'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/reset.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/grid.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/main.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<h3><code>favicon</code></h3>
+
+<p>It generates a <code>&lt;link&gt;</code> tag for the application favicon.</p>
+
+<p>By default it looks at <code>/assets/favicon.ico</code>.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">favicon</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/favicon.ico"</span> <span class="na">rel=</span><span class="s">"shortcut icon"</span> <span class="na">type=</span><span class="s">"image/x-icon"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<p>We can specify a source name and HTML attributes.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">favicon</span> <span class="s1">'favicon.png'</span><span class="p">,</span> <span class="ss">rel: </span><span class="s1">'icon'</span><span class="p">,</span> <span class="ss">type: </span><span class="s1">'image/png'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">type=</span><span class="s">"image/png"</span> <span class="na">href=</span><span class="s">"/assets/favicon.png"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<h3><code>image</code></h3>
+
+<p>It generates a <code>&lt;img&gt;</code> tag for the given source.
+A source can be the file name with the extension, or an absolute URL.</p>
+
+<p>The <code>alt</code> attribute is set automatically from file name.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">image</span> <span class="s1">'logo.png'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/assets/logo.png"</span> <span class="na">alt=</span><span class="s">"Logo"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<p>We can specify arbitrary HTML attributes.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">image</span> <span class="s1">'logo.png'</span><span class="p">,</span> <span class="ss">alt: </span><span class="s1">'Application Logo'</span><span class="p">,</span> <span class="ss">id: </span><span class="s1">'logo'</span><span class="p">,</span> <span class="ss">class: </span><span class="s1">'background'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/assets/logo.png"</span> <span class="na">alt=</span><span class="s">"Application Logo"</span> <span class="na">id=</span><span class="s">"logo"</span> <span class="na">class=</span><span class="s">"background"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<h3><code>video</code></h3>
+
+<p>It generates a <code>&lt;video&gt;</code> tag for the given source.
+A source can be the file name with the extension, or an absolute URL.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">video</span> <span class="s1">'movie.mp4'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;video</span> <span class="na">src=</span><span class="s">"/assets/movie.mp4"</span><span class="nt">&gt;&lt;/video&gt;</span>
+</code></pre>
+
+<p>We can specify arbitrary HTML attributes.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">video</span> <span class="s1">'movie.mp4'</span><span class="p">,</span> <span class="ss">autoplay: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">controls: </span><span class="kp">true</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;video</span> <span class="na">autoplay=</span><span class="s">"autoplay"</span> <span class="na">controls=</span><span class="s">"controls"</span> <span class="na">src=</span><span class="s">"/assets/movie.mp4"</span><span class="nt">&gt;&lt;/video&gt;</span>
+</code></pre>
+
+<p>It accepts a block for fallback message.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">video</span><span class="p">(</span><span class="s1">'movie.mp4'</span><span class="p">)</span> <span class="k">do</span>
+    <span class="s2">"Your browser does not support the video tag"</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;video</span> <span class="na">src=</span><span class="s">"/assets/movie.mp4"</span><span class="nt">&gt;</span>
+  Your browser does not support the video tag
+<span class="nt">&lt;/video&gt;</span>
+</code></pre>
+
+<p>It accepts a block to specify tracks.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">video</span><span class="p">(</span><span class="s1">'movie.mp4'</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">track</span> <span class="ss">kind: </span><span class="s1">'captions'</span><span class="p">,</span> <span class="ss">src: </span><span class="n">asset_path</span><span class="p">(</span><span class="s1">'movie.en.vtt'</span><span class="p">),</span> <span class="ss">srclang: </span><span class="s1">'en'</span><span class="p">,</span> <span class="ss">label: </span><span class="s1">'English'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;video</span> <span class="na">src=</span><span class="s">"/assets/movie.mp4"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;track</span> <span class="na">kind=</span><span class="s">"captions"</span> <span class="na">src=</span><span class="s">"/assets/movie.en.vtt"</span> <span class="na">srclang=</span><span class="s">"en"</span> <span class="na">label=</span><span class="s">"English"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/video&gt;</span>
+</code></pre>
+
+<p>It accepts a block to specify multiple sources.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">video</span> <span class="k">do</span>
+    <span class="n">text</span> <span class="s2">"Your browser does not support the video tag"</span>
+    <span class="n">source</span> <span class="ss">src: </span><span class="n">asset_path</span><span class="p">(</span><span class="s1">'movie.mp4'</span><span class="p">),</span> <span class="ss">type: </span><span class="s1">'video/mp4'</span>
+    <span class="n">source</span> <span class="ss">src: </span><span class="n">asset_path</span><span class="p">(</span><span class="s1">'movie.ogg'</span><span class="p">),</span> <span class="ss">type: </span><span class="s1">'video/ogg'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;video&gt;</span>
+  Your browser does not support the video tag
+  <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"/assets/movie.mp4"</span> <span class="na">type=</span><span class="s">"video/mp4"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"/assets/movie.ogg"</span> <span class="na">type=</span><span class="s">"video/ogg"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/video&gt;</span>
+</code></pre>
+
+<h3><code>audio</code></h3>
+
+<p>It generates a <code>&lt;audio&gt;</code> tag for the given source.
+A source can be the file name with the extension, or an absolute URL.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">audio</span> <span class="s1">'song.ogg'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;audio</span> <span class="na">src=</span><span class="s">"/assets/song.ogg"</span><span class="nt">&gt;&lt;/audio&gt;</span>
+</code></pre>
+
+<p>We can specify arbitrary HTML attributes.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">audio</span> <span class="s1">'song.ogg'</span><span class="p">,</span> <span class="ss">autoplay: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">controls: </span><span class="kp">true</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;audio</span> <span class="na">autoplay=</span><span class="s">"autoplay"</span> <span class="na">controls=</span><span class="s">"controls"</span> <span class="na">src=</span><span class="s">"/assets/song.ogg"</span><span class="nt">&gt;&lt;/audio&gt;</span>
+</code></pre>
+
+<p>It accepts a block for fallback message.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">audio</span><span class="p">(</span><span class="s1">'song.ogg'</span><span class="p">)</span> <span class="k">do</span>
+    <span class="s2">"Your browser does not support the audio tag"</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;audio</span> <span class="na">src=</span><span class="s">"/assets/song.ogg"</span><span class="nt">&gt;</span>
+  Your browser does not support the audio tag
+<span class="nt">&lt;/audio&gt;</span>
+</code></pre>
+
+<p>It accepts a block to specify tracks.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">audio</span><span class="p">(</span><span class="s1">'song.ogg'</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">track</span> <span class="ss">kind: </span><span class="s1">'captions'</span><span class="p">,</span> <span class="ss">src: </span><span class="n">asset_path</span><span class="p">(</span><span class="s1">'movie.en.vtt'</span><span class="p">),</span> <span class="ss">srclang: </span><span class="s1">'en'</span><span class="p">,</span> <span class="ss">label: </span><span class="s1">'English'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;audio</span> <span class="na">src=</span><span class="s">"/assets/song.ogg"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;track</span> <span class="na">kind=</span><span class="s">"captions"</span> <span class="na">src=</span><span class="s">"/assets/movie.en.vtt"</span> <span class="na">srclang=</span><span class="s">"en"</span> <span class="na">label=</span><span class="s">"English"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/audio&gt;</span>
+</code></pre>
+
+<p>It accepts a block to specify multiple sources.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">audio</span> <span class="k">do</span>
+    <span class="n">text</span> <span class="s2">"Your browser does not support the audio tag"</span>
+    <span class="n">source</span> <span class="ss">src: </span><span class="n">asset_path</span><span class="p">(</span><span class="s1">'song.ogg'</span><span class="p">),</span> <span class="ss">type: </span><span class="s1">'audio/mp4'</span>
+    <span class="n">source</span> <span class="ss">src: </span><span class="n">asset_path</span><span class="p">(</span><span class="s1">'movie.ogg'</span><span class="p">),</span> <span class="ss">type: </span><span class="s1">'audio/ogg'</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;audio&gt;</span>
+  Your browser does not support the audio tag
+  <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"/assets/song.ogg"</span> <span class="na">type=</span><span class="s">"audio/mp4"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"/assets/movie.ogg"</span> <span class="na">type=</span><span class="s">"audio/ogg"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/audio&gt;</span>
+</code></pre>
+
+<h3><code>asset_path</code></h3>
+
+<p>Returns a <strong>relative URL</strong> for the given asset name.</p>
+
+<p><strong>This is used internally by the other helpers, so the following rules apply to all of them.</strong></p>
+
+<h4>Asset Name</h4>
+
+<p>When the argument is a relative name, it returns a relative URL.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">asset_path</span> <span class="s1">'application.js'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code>/assets/application.js
+</code></pre>
+
+<h4>Absolute URL</h4>
+
+<p>When an absolute URL is given, it&rsquo;s <strong>always</strong> returned as it is, even if <em>Digest</em> or <em>CDN</em> mode are on.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">asset_path</span> <span class="s1">'https://code.jquery.com/jquery-2.1.1.min.js'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code>https://code.jquery.com/jquery-2.1.1.min.js
+</code></pre>
+
+<h4>Digest Mode</h4>
+
+<p>When <a href="/guides/assets/overview"><em>Digest Mode</em></a> is on (usually in <em>production</em> env), the relative URL contains a checksum suffix.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">asset_path</span> <span class="s1">'application.css'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code>/assets/application-9ab4d1f57027f0d40738ab8ab70aba86.css
+</code></pre>
+
+<h4>CDN Mode</h4>
+
+<p>When <a href="/guides/assets/content-delivery-network"><em>CDN Mode</em></a> is on (usually in <em>production</em> env), it returns an absolute URL that reference the CDN settings.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">asset_path</span> <span class="s1">'application.css'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code>https://123.cloudfront.net/assets/application-9ab4d1f57027f0d40738ab8ab70aba86.css
+</code></pre>
+
+<p class="notice">
+  In the example above we have a checksum suffix, because CDN vendors suggest to use this strategy while using their product.
+</p>
+
+<h3><code>asset_url</code></h3>
+
+<p>Returns an <strong>absolute URL</strong> for the given asset name.</p>
+
+<p>To build the URL it uses <code>scheme</code>, <code>host</code>, <code>port</code> from your application settings in combination of CDN settings.</p>
+
+<h4>Asset Name</h4>
+
+<p>When the argument is a relative name, it returns an absolute URL.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">asset_url</span> <span class="s1">'application.js'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code>https://bookshelf.org/assets/application.js
+</code></pre>
+
+<h4>Absolute URL</h4>
+
+<p>When an absolute URL is given, it&rsquo;s <strong>always</strong> returned as it is, even if <em>Digest</em> or <em>CDN</em> mode are on.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">asset_url</span> <span class="s1">'https://code.jquery.com/jquery-2.1.1.min.js'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code>https://code.jquery.com/jquery-2.1.1.min.js
+</code></pre>
+
+<h4>Digest Mode</h4>
+
+<p>When <a href="/guides/assets/overview"><em>Digest Mode</em></a> is on (usually in <em>production</em> env), the relative URL contains a checksum suffix.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">asset_url</span> <span class="s1">'application.css'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code>https://bookshelf.org/assets/application-9ab4d1f57027f0d40738ab8ab70aba86.css
+</code></pre>
+
+<h4>CDN Mode</h4>
+
+<p>When <a href="/guides/assets/content-delivery-network"><em>CDN Mode</em></a> is on (usually in <em>production</em> env), it returns an absolute URL that reference the CDN settings.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">asset_url</span> <span class="s1">'application.css'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code>https://123.cloudfront.net/assets/application-9ab4d1f57027f0d40738ab8ab70aba86.css
+</code></pre>
+
+<p class="notice">
+  In the example above we have a checksum suffix, because CDN vendors suggest to use this strategy while using their product.
+</p>
+
+<h2>Content Security Policy</h2>
+
+<p>When using <strong>absolute URLs as sources</strong> or when we use a CDN, we can run into errors because our browser refute to load assets due to security restrictions (aka <em>&ldquo;Content Security Policy&rdquo;</em>).</p>
+
+<p>To fix them, we need to adjust security settings in our application.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+
+      <span class="c1"># If we're using our own CDN</span>
+      <span class="n">security</span><span class="p">.</span><span class="nf">content_security_policy</span> <span class="s2">"default-src https://123.cloudfront.net;"</span>
+
+      <span class="c1"># Or if we're just using jQuery public CDN</span>
+      <span class="c1"># security.content_security_policy "default-src none; script-src 'self' https://code.jquery.com;"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>To learn more about Content Security Policy usage, please read:</p>
+
+<ul>
+<li><a href="http://content-security-policy.com">http://content-security-policy.com</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Using_Content_Security_Policy">https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Using<em>Content</em>Security_Policy</a></li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="email-signup">
+  <div class="container-fluid wrapper">
+    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
+      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer class="primary">
+  <div class="container-fluid wrapper">
+    <div class="row">
+      <a class="logo col-md-3" href="/">logo</a>
+        <div class="col-md-4">
+          <span class="date">December 29, 2015</span>
+          <h4>Introducing Assets</h4>
+          <p>Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
+</p>
+          <a href="/blog/2015/12/29/introducing-assets.html">Read more...</a>
+        </div>
+        <div class="col-md-4">
+          <span class="date">September 30, 2015</span>
+          <h4>Announcing Lotus v0.5.0</h4>
+          <p>Features: Mailers, custom data mapper coercions, command / query separation. Rails Girls Summer of Code and Hack Day!
+</p>
+          <a href="/blog/2015/09/30/announcing-lotus-050.html">Read more...</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="sub-footer wrapper">
+    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
+    <br>
+    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
+    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
+    <ul class="social">
+      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
+      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
+    </ul>
+  </div>
+
+  <div id="sponsors" class="sub-footer wrapper row">
+    <div class="col-xs-6 col-md-4">
+      <a href="http://dnsimple.link/resolving-lotus" target="_blank">
+        <span>Resolving with<br/></span>
+        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+      </a>
+    </div>
+    <div class="col-xs-6 col-md-8">
+    </div>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

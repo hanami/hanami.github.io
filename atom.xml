@@ -94,7 +94,7 @@ In order to use one or more of them, be sure to include the corresponding gem in
 It is not yet fully <a href="https://kangax.github.io/compat-table/es6/">supported</a> by browser vendors, but it&rsquo;s the future of JavaScript.</p>
 
 <p>As of today, you need to transpile ES6 code into something understandable by current browsers, which is ES5.
-For this purpose we support <a href="https://babeljs.io">Babel</a>. Make sure to require <code>&#39;lotus/assets/es6&#39;</code> to enable it.</p>
+For this purpose we support <a href="https://babeljs.io">Babel</a>. <strike>Make sure to require <code>&#39;lotus/assets/es6&#39;</code> to enable it.</strike></p>
 
 <h2>Sources</h2>
 
@@ -118,7 +118,7 @@ The default directory is <code>assets</code>, for instance <code>apps/web/assets
 
 <p>Assets are loaded from the sources of each application (including third party gems) and preprocessed or copied into the public directory of the project.</p>
 
-<p>Each asset is compressed using <a href="http://yui.github.io/yuicompressor">YUI Compressor</a> (which requires <strong>Java 1.4+</strong>).
+<p>Each asset is compressed using <strike><a href="http://yui.github.io/yuicompressor">YUI Compressor</a> (which requires <strong>Java 1.4+</strong>)</strike> one of the supported engines: YUI, UglifyJS2, Google Closure, Sass.
 With this step we shrink the file size, to let browser to download them faster.</p>
 
 <p>As last step, we produce another version of the same file that includes the checksum of the assets in the name (see the example below).
