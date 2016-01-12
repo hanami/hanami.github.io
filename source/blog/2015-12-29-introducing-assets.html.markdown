@@ -81,7 +81,7 @@ We strongly suggest to use [EcmaScript 6](http://es6-features.org/) for your nex
 It is not yet fully [supported](https://kangax.github.io/compat-table/es6/) by browser vendors, but it's the future of JavaScript.
 
 As of today, you need to transpile ES6 code into something understandable by current browsers, which is ES5.
-For this purpose we support [Babel](https://babeljs.io). Make sure to require `'lotus/assets/es6'` to enable it.
+For this purpose we support [Babel](https://babeljs.io). <strike>Make sure to require `'lotus/assets/es6'` to enable it.</strike>
 
 ## Sources
 
@@ -107,7 +107,7 @@ This release will ship with a new command: `lotus assets precompile`; which can 
 
 Assets are loaded from the sources of each application (including third party gems) and preprocessed or copied into the public directory of the project.
 
-Each asset is compressed using [YUI Compressor](http://yui.github.io/yuicompressor) (which requires **Java 1.4+**).
+Each asset is compressed using <strike>[YUI Compressor](http://yui.github.io/yuicompressor) (which requires **Java 1.4+**)</strike> one of the supported engines: YUI, UglifyJS2, Google Closure, Sass.
 With this step we shrink the file size, to let browser to download them faster.
 
 As last step, we produce another version of the same file that includes the checksum of the assets in the name (see the example below).

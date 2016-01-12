@@ -4,8 +4,8 @@ title: Lotus - Guides - Getting Started
 
 # Getting Started
 
-In this guide we will set up our first Lotus project and build a simple bookshelf application. We'll
-touch on all the major components of the Lotus framework, all guided by tests.
+In this guide we will set up our first Lotus project and build a simple bookshelf project.
+We'll touch on all the major components of the Lotus framework, all guided by tests.
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ Go ahead and install our gem dependency with Bundler; then we can launch a devel
 % bundle exec lotus server
 ```
 
-And... bask in the glory of your first Lotus application at
+And... bask in the glory of your first Lotus project at
 [http://localhost:2300](http://localhost:2300)! We should see a screen similar to this:
 
 <p><img src="/guides/screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
@@ -205,9 +205,9 @@ We can find out more about [routing](/guides/routing/overview), [actions](/guide
 ## Generating New Actions
 
 Let's use our new knowledge about the major Lotus components to add a new action.
-The purpose of our Bookshelf application is to manage books.
+The purpose of our Bookshelf project is to manage books.
 
-We'll store books in our database and let the user manage them with our application.
+We'll store books in our database and let the user manage them with our project.
 A first step would be to show a listing of all the books in our system.
 
 Let's write a new feature test describing what we want to achieve:
