@@ -9,7 +9,7 @@ excerpt: >
 ---
 
 This new release makes Lotus a complete web framework for Ruby.
-It ships with the last important set of features for assets.
+It ships with the last important set of features that we planned: assets.
 
 **We have now everything we need to build web applications with Lotus.**
 
@@ -52,12 +52,23 @@ We can use them as requirement for our Rake tasks:
 # Rakefile
 # ...
 
+task print_info: :preload do
+  puts ENV['LOTUS_ENV']
+  puts defined?(UserRepository)
+end
+
 task clear_users: :environment do
   UserRepository.clear
 end
 ```
 
-We can invoke this new taks with:
+We can invoke these new taks with:
+
+```shell
+bundle exec rake print_info
+# => "development"
+# => nil
+```
 
 ```shell
 bundle exec rake clear_users
@@ -80,9 +91,11 @@ Thanks to [Tadeu Valentt](https://github.com/t4deu) and [Lucas Allan](https://gi
 
 Pluralizations can be [customized](https://github.com/lotus/utils/pull/90) by adding exceptions to default inflections.
 
+Action generator is now [smarter](https://github.com/lotus/lotus/pull/414) and it can generate a route with the right HTTP verb, according to our REST conventions. Thanks to [Sean Collins](https://github.com/cllns).
+
 Special thanks goes to [Tadeu Valentt](https://github.com/t4deu), [Pascal Betz](https://github.com/pascalbetz), [Andrey Deryabin](https://github.com/aderyabin), [Anton Davydov](https://github.com/davydovanton), [Caius Durling](https://github.com/caius), [Jason Charnes](https://github.com/jasoncharnes), [Sean Collins](https://github.com/cllns), and [Ken Gullaksen](https://github.com/kenglxn) for their work to make our CLI stronger than ever.
 
-Thanks to [Neil Matatall](https://github.com/oreoshake) to prevent timing attacks for CSRF tokens comparision, [David Strauß](https://github.com/stravid) for making body parsing compatible with JSON API, [Karim Tarek](https://github.com/karimmtarek) and [Liam Dawson](https://github.com/liamdawson) for exception normalization across all our gems, [Vladislav Zarakovsky](https://github.com/vlazar) for making Force SSL compliant with Rack SPEC, while [Bernardo Farah](https://github.com/berfarah) fixed chunked responses, to [Karim Kiatlottiavi](https://github.com/constXife) for fixing HTML escape encoding, to [Rodrigo Panachi](https://github.com/rpanachi) for fixing CSRF form, to [Hélio Costa](https://github.com/hlegius) and [Pascal Betz](https://github.com/pascalbetz) for fixing how validations treat blank strings, to [Cam Huynh](https://github.com/huynhquancam) for making `#html` helper to accept blocks.
+Thanks to [Neil Matatall](https://github.com/oreoshake) to prevent timing attacks for CSRF tokens comparision, [David Strauß](https://github.com/stravid) for making body parsing compatible with JSON API, [Karim Tarek](https://github.com/karimmtarek) and [Liam Dawson](https://github.com/liamdawson) for exception normalization across all our gems, [Vladislav Zarakovsky](https://github.com/vlazar) for making Force SSL compliant with Rack SPEC, while [Bernardo Farah](https://github.com/berfarah) fixed chunked responses, to [Karim Kiatlottiavi](https://github.com/constXife) for fixing HTML escape encoding, to [Rodrigo Panachi](https://github.com/rpanachi) for fixing CSRF form, to [Hélio Costa](https://github.com/hlegius) and [Pascal Betz](https://github.com/pascalbetz) for fixing how validations treat blank strings, to [Cẩm Huỳnh](https://github.com/huynhquancam) for making `#html` helper to accept blocks.
 
 We're thankful for the help that [Hiếu Nguyễn](https://github.com/hieuk09), [Taylor Finnell](https://github.com/taylorfinnell), [Andrey Deryabin](https://github.com/aderyabin), [Cainã Costa](https://github.com/cfcosta), [Shin-ichi Ueda](https://github.com/skyriser), [Martin Rubi](https://github.com/cabeza-de-termo) offered for other minor improvement and fixes.
 
@@ -91,12 +104,13 @@ We're thankful for the help that [Hiếu Nguyễn](https://github.com/hieuk09), 
 ### Ruby 2.0 &amp; 2.1
 
 Ruby 2.0 and 2.1 are now deprecated.
-We took this decision because MRI 2.0 will reach End Of Life (EOL) next month and because keeping 2.1 around would mean to keep our internals complex because of _"safe indifferent access"_.
+We took this decision because MRI 2.0 will reach End Of Life (EOL) next month and because keeping 2.1 around would mean to leave our internals complex because of _"safe indifferent access"_.
 
 Prior to MRI 2.2, `Symbol` instances weren't garbage collected.
-This has caused security problems for Ruby applications, because if not properly filtered, untrusted input could've been lead to attacks where the server memory got entirely consumed by Ruby VM due to `Symbol` abuse.
+This has caused security problems for Ruby applications.
+If not properly filtered, untrusted input could've been lead to attacks where the server memory is entirely consumed by Ruby VM due to `Symbol` abuse.
 
-To prevent this kind of attacks, we always used strings for incoming HTTP parameters.
+To prevent this kind of attack, we always used strings for incoming HTTP parameters.
 At the same time, we wanted to offer convenient access to these params via symbols (eg `params[:id]`).
 To make this possible we had to carefully filter and convert data over and over.
 
@@ -107,7 +121,8 @@ At the same time we can provide minor perf improvements due to the lack of these
 
 There are several breaking changes due to assets features.
 
-**Please make sure to read the detailed [upgrade guide](/guides/upgrade-notes/v060) that we prepared.**
+**If you're upgrading from an earlier version, please make sure to read the detailed [upgrade guide](/guides/upgrade-notes/v060) that we prepared.**
+It will take a few minutes to get up and running again.
 
 ## What's Next?
 
@@ -117,7 +132,7 @@ We want to make **stronger** and **flexible** the way we validate and persist da
 We recognized it's **too verbose** to always require **database mapping** even if it can be avoided (eg with SQL databases).
 It's **not necessary** to instantiate an entity to write a record, repositories can **directly accept data** and persist it.
 
-In other words, we want to **simplify** our day to day life with Lotus.
+We want to **simplify** our day to day life with Lotus.
 
 <div style="display: inline">
 
