@@ -145,6 +145,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>http://lotusrb.org/blog/2016/01/12/announcing-lotus-060.html</loc>
+    <lastmod>2016-01-12T13:58:49+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>http://lotusrb.org/blog/</loc>
     <lastmod>2016-01-12T11:55:21+01:00</lastmod>
     <changefreq>monthly</changefreq>
