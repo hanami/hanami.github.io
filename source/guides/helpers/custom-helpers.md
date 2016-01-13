@@ -23,8 +23,9 @@ module Web
       SEPARATOR = ''.freeze
 
       def shuffle(string)
-        string.encode(Encoding::UTF_8, invalid: :replace).
-          split(SEPARATOR).shuffle.join
+        string
+          .encode(Encoding::UTF_8, invalid: :replace)
+          .split(SEPARATOR).shuffle.join
       end
     end
   end
