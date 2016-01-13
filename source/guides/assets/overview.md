@@ -74,7 +74,7 @@ If enabled, [assets helpers](/guides/helpers/assets) will generate checksum rela
 
 ## Serve Static Assets
 
-It can dinamically serve them during development.
+It can dynamically serve them during development.
 It mounts `Lotus::Static` middleware in project Rack stack. This component is conditionally activated, if the environment variable `SERVE_STATIC_ASSETS` equals to `true`.
 
 By default, new projects are generated with this feature enabled in _development_ and _test_ mode, via their corresponding `.env.*` files.
