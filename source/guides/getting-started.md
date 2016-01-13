@@ -748,7 +748,9 @@ describe Web::Controllers::Books::Create do
 
   it 'creates a new book' do
     action.call(params)
-    BookRepository.all.count.wont_equal 0
+
+    action.book.id.wont_be_nil
+    action.book.title.must_equal params[:book][:title]
   end
 
   it 'redirects the user to the books listing' do
