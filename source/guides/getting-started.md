@@ -742,13 +742,13 @@ describe Web::Controllers::Books::Create do
   let(:action) { Web::Controllers::Books::Create.new }
   let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
-  after do
+  before do
     BookRepository.clear
   end
 
   it 'creates a new book' do
     action.call(params)
-    action.book.id.wont_be_nil
+    BookRepository.all.count.wont_equal 0
   end
 
   it 'redirects the user to the books listing' do
