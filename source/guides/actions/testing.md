@@ -10,7 +10,7 @@ The framework supports Minitest (default) and RSpec.
 ## Unit Tests
 
 First of all, actions can be unit tested.
-That means we can instantiate, excercise and verify expectations **directly on actions instances**.
+That means we can instantiate, exercise and verify expectations **directly on actions instances**.
 
 ```ruby
 # spec/web/controllers/dashboard/index_spec.rb
