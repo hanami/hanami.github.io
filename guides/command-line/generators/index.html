@@ -244,6 +244,18 @@ The default application is called <code>Web</code> and lives under <code>apps/we
 <span class="n">get</span> <span class="s1">'/books/:id'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#show'</span>
 </code></pre>
 
+<p>The default HTTP method is <code>GET</code>, except for actions named:</p>
+
+<ul>
+<li><code>create</code>, which will use <code>POST</code></li>
+<li><code>update</code>, which will use <code>PATCH</code></li>
+<li><code>destroy</code>, which will use <code>DELETE</code></li>
+</ul>
+
+<p>This should help you route using <a href="/guides/routing/restful-resources">RESTful resources</a>.</p>
+
+<p>You can also set the HTTP method by specifying a <code>--method</code> argument when calling <code>lotus generate action</code>.</p>
+
 <h3>Models</h3>
 
 <p>We can generate a model.</p>
