@@ -119,3 +119,33 @@
 div.app-block-footer {
   margin-top: 5em;
 }
+
+div.container-blog h1 {
+  color: #685D9F;
+  font-weight: 300;
+}
+
+div.container-blog h2 {
+  font-weight: 400;
+}
+
+p.summary {
+  font-size: 1.4em;
+}
+
+div.container-article h2 {
+  font-weight: 600;
+}
+
+div.container-article h3 {
+  font-weight: 400;
+}
+
+p.lead {
+  margin-top: 3em;
+  font-size: 2em;
+}
+
+div.article-body {
+  font-size: 1.4em;
+}

@@ -157,14 +157,3 @@ It generates an **entity**, a **repository** and the related **test files**.
 
 New features such as migrations, form helpers and improved security are under development right now.
 We're pushing to ship soon.
-
-<div style="display: inline">
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.3.1" data-url="http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2015/05/15/announcing-lotus-031.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>

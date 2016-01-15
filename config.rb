@@ -89,7 +89,7 @@ helpers do
 
   def article_image(article)
     if article.data.image
-      %(<img src="#{ article_image_url(article) }" class="img-rounded img-responsive">)
+      %(<img src="#{ article_image_url(article) }">)
     end
   end
 
