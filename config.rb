@@ -145,8 +145,8 @@ helpers do
   end
 
   def guides_edit_article(source)
-    url = GUIDES_EDIT_URL + source.gsub(Dir.pwd, '')
-    %(<a href="#{ url }" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>)
+    url = GUIDES_EDIT_URL + source.gsub("#{ Dir.pwd }/", '')
+    %(<span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"><a href="#{ url }" target="_blank"></a></span>)
   end
 
   #
