@@ -1,5 +1,5 @@
 ---
-title: "Lotus - Guides - Command Line: Database"
+title: "Hanami | Guides - Command Line: Database"
 ---
 
 # Command Line
@@ -22,7 +22,7 @@ It uses an environment variable, defined in the `.env.*` files at the root of th
 With `db create` we can create the database for the current environment.
 
 ```shell
-% bundle exec lotus db create
+% bundle exec hanami db create
 ```
 
 In order to preserve production data, this command can't be run in the production environment.
@@ -32,7 +32,7 @@ In order to preserve production data, this command can't be run in the productio
 With `db drop` we can drop the existing database for the current environment.
 
 ```shell
-% bundle exec lotus db drop
+% bundle exec hanami db drop
 ```
 
 In order to preserve production data, this command can't be run in the production environment.
@@ -53,14 +53,14 @@ db/migrations
 We run `db migrate`, then the database _version_ becomes `20150613165900`, which is the maximum timestamp from the migrations above.
 
 ```shell
-% bundle exec lotus db migrate # Migrates to max migration (20150613165900)
+% bundle exec hanami db migrate # Migrates to max migration (20150613165900)
 ```
 
 This command accepts an optional argument to specify the target version.
 For instance, if we want to **rollback** the changes from `20150613165900_create_authors.rb`, we can migrate _**"down"**_.
 
 ```shell
-% bundle exec lotus db migrate 20150613165259 # Migrates (down) to 20150613165259
+% bundle exec hanami db migrate 20150613165259 # Migrates (down) to 20150613165259
 ```
 
 **This command is available in ALL the environments and ALL the SQL databases.**
@@ -76,7 +76,7 @@ When we run `db prepare` it:
   * Runs pending migrations
 
 ```shell
-% bundle exec lotus db prepare
+% bundle exec hanami db prepare
 ```
 
 This command SHOULD be used as a database setup command.
@@ -95,7 +95,7 @@ When we run `db apply`, it:
   * Deletes all the migrations from `db/migrations`
 
 ```shell
-% bundle exec lotus db apply
+% bundle exec hanami db apply
 ```
 
 This command is available only in the development environment.
@@ -114,12 +114,12 @@ db/migrations
 When we migrate the database:
 
 ```shell
-% bundle exec lotus db migrate
+% bundle exec hanami db migrate
 ```
 
 We can then ask for the current version:
 
 ```shell
-% bundle exec lotus db version
+% bundle exec hanami db version
 20150613165900
 ```

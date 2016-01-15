@@ -1,18 +1,18 @@
 ---
-title: Lotus - Guides - Action Sessions
+title: Hanami | Guides - Action Sessions
 ---
 
 # Sessions
 
 ## Enable Sessions
 
-Sessions are available in Lotus applications, but not enabled by default.
+Sessions are available in Hanami applications, but not enabled by default.
 If we want to turn on this feature, we just need to uncomment a line of code.
 
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       sessions :cookie, secret: ENV['WEB_SESSIONS_SECRET']
@@ -31,7 +31,7 @@ Example: <code>:cookie</code> for <code>Rack::Session::Cookie</code>.
 
 We can use a different storage compatible with Rack sessions.
 Let's say we want to use Redis. We should bundle `redis-rack` and specify the name of the adapter: `:redis`.
-Lotus is able to autoload the adapter and use it when the application is started.
+Hanami is able to autoload the adapter and use it when the application is started.
 
 <p class="convention">
 Custom storage technologies are autoloaded via <code>require "rack/session/#{ adapter_name }"</code>.

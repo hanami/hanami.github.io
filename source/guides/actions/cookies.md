@@ -1,12 +1,12 @@
 ---
-title: Lotus - Guides - Action Cookies
+title: Hanami | Guides - Action Cookies
 ---
 
 # Cookies
 
 ## Enable Cookies
 
-Lotus applies _"batteries included, but not installed"_ philosophy.
+Hanami applies _"batteries included, but not installed"_ philosophy.
 Cookies are a feature that is present but needs to be activated.
 
 In our application settings there is a line to uncomment.
@@ -14,7 +14,7 @@ In our application settings there is a line to uncomment.
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       cookies true
@@ -62,7 +62,7 @@ General settings are applied automatically but these options can be used to over
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       cookies max_age: 300 # 5 minutes

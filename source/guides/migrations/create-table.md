@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Migrations Create Tables
+title: Hanami | Guides - Migrations Create Tables
 ---
 
 # Migrations

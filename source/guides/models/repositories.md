@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Repositories
+title: Hanami | Guides - Repositories
 ---
 
 # Repositories
@@ -26,7 +26,7 @@ This architecture has several advantages:
 
 ## Interface
 
-When a class includes `Lotus::Repository`, it will receive the following interface:
+When a class includes `Hanami::Repository`, it will receive the following interface:
 
   * `.persist(entity)` – Create or update an entity
   * `.create(entity)`  – Create a record for the given entity
@@ -73,7 +73,7 @@ There is a better way:
 # lib/bookshelf/repositories/book_repository.rb
 
 class BookRepository
-  include Lotus::Repository
+  include Hanami::Repository
 
   def self.most_recent_by_author(author, limit: 8)
     query do
@@ -105,7 +105,7 @@ A repository can perform queries and commands by accepting raw query language ex
 ```ruby
 # lib/bookshelf/repositories/book_repository.rb
 class BookRepository
-  include Lotus::Repository
+  include Hanami::Repository
 
   def self.raw_all
     fetch("SELECT * FROM books")
@@ -140,7 +140,7 @@ When `.fetch` is used, the returning value is NOT a collection of entities (eg. 
 ```ruby
 # lib/bookshelf/repositories/book_repository.rb
 class BookRepository
-  include Lotus::Repository
+  include Hanami::Repository
 
   def self.reset_download_count
     execute("UPDATE books SET download_count = 0")
@@ -161,7 +161,7 @@ Here is an extended example of a repository that uses the SQL adapter.
 ```ruby
 # lib/bookshelf/repositories/book_repository.rb
 class BookRepository
-  include Lotus::Repository
+  include Hanami::Repository
 
   def self.most_recent_by_author(author, limit: 8)
     query do
@@ -222,7 +222,7 @@ end
 ```ruby
 # lib/bookshelf/repositories/book_repository.rb
 class BookRepository
-  include Lotus::Repository
+  include Hanami::Repository
   include Bookshelf::Repositories::Pagination
 
   def self.published

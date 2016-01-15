@@ -1,20 +1,20 @@
 ---
-title: Lotus - Guides - Views Overview
+title: Hanami | Guides - Views Overview
 ---
 
 # Overview
 
 A view is an object that's responsible to render a template.
 
-In a full stack Lotus application, an incoming HTTP request, goes through the [router](/guides/routing/overview), it instantiates and calls an [action](/guides/actions/overview), which sets the status code and the headers for the response.
+In a full stack Hanami application, an incoming HTTP request, goes through the [router](/guides/routing/overview), it instantiates and calls an [action](/guides/actions/overview), which sets the status code and the headers for the response.
 The last bit is the body, which is set by the corresponding view's output.
 
 ## A Simple View
 
-Lotus ships a generator for actions that creates a view and a template.
+Hanami ships a generator for actions that creates a view and a template.
 
 ```shell
-% lotus generate action web dashboard#index
+% hanami generate action web dashboard#index
     insert  apps/web/config/routes.rb
     create  spec/web/controllers/dashboard/index_spec.rb
     create  apps/web/controllers/dashboard/index.rb
@@ -52,13 +52,13 @@ This module is generated at the runtime for us, when the application starts.
 After the action has finished its job, control passes to the framework which looks for the matching view.
 
 <p class="convention">
-  For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Lotus will look for a corresponding <code>Web::Views::Home::Index</code> view.
+  For a given action named <code>Web::Controllers::Home::Index</code> which is handling a request, Hanami will look for a corresponding <code>Web::Views::Home::Index</code> view.
 </p>
 
 ### View Module
 
-All the main Lotus components are mixins meant to be included.
-Because a Lotus Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.
+All the main Hanami components are mixins meant to be included.
+Because a Hanami Container can run multiple applications within the same Ruby process, the configurations of these different components should be kept separated.
 
 In our example, we have a directive `include Web::View`.
 That means our view will behave according to the configuration of the `Web` application.

@@ -1,12 +1,12 @@
 ---
-title: Lotus - Guides - Assets Preprocessors
+title: Hanami | Guides - Assets Preprocessors
 ---
 
 # Assets
 
 ## Preprocessors
 
-Lotus is able to run assets preprocessors and **lazily compile** them under `public/assets`.
+Hanami is able to run assets preprocessors and **lazily compile** them under `public/assets`.
 
 Imagine to have `application.css.scss` in `apps/web/assets/stylesheets` and `reset.css` under
 `apps/web/vendor/stylesheets`.
@@ -29,7 +29,7 @@ The second one is optional and it's for a preprocessor: `.scss` for Sass.
 require 'sass'
 
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
 
@@ -70,7 +70,7 @@ For performance reasons, this feature is turned off in _production_ env, where w
 
 ### Preprocessors Engines
 
-Lotus uses [Tilt](https://github.com/rtomayko/tilt) to provide support for the most common preprocessors, such as [Sass](http://sass-lang.com/) (including `sassc-ruby`), [Less](http://lesscss.org/), ES6, [JSX](https://jsx.github.io/), [CoffeScript](http://coffeescript.org), [Opal](http://opalrb.org), [Handlebars](http://handlebarsjs.com), [JBuilder](https://github.com/rails/jbuilder).
+Hanami uses [Tilt](https://github.com/rtomayko/tilt) to provide support for the most common preprocessors, such as [Sass](http://sass-lang.com/) (including `sassc-ruby`), [Less](http://lesscss.org/), ES6, [JSX](https://jsx.github.io/), [CoffeScript](http://coffeescript.org), [Opal](http://opalrb.org), [Handlebars](http://handlebarsjs.com), [JBuilder](https://github.com/rails/jbuilder).
 
 In order to use one or more of them, be sure to include the corresponding gem into your `Gemfile` and require the library.
 

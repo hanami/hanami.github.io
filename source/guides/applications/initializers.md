@@ -1,10 +1,10 @@
 ---
-title: Lotus - Guides - Applications Initializers
+title: Hanami | Guides - Applications Initializers
 ---
 
 # Initializers
 
-Each single Lotus application within a project can **optionally** have one or more custom initializers.
+Each single Hanami application within a project can **optionally** have one or more custom initializers.
 
 <p class="notice">
   Initializers are optional

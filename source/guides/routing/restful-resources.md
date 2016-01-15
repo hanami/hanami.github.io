@@ -1,10 +1,10 @@
 ---
-title: Lotus - Guides - RESTful Resource(s)
+title: Hanami | Guides - RESTful Resource(s)
 ---
 
 # REST
 
-Lotus has native [REST](http://en.wikipedia.org/wiki/Representational_state_transfer) support.
+Hanami has native [REST](http://en.wikipedia.org/wiki/Representational_state_transfer) support.
 
 At the routing level, there are two methods that can be used to declare them: `resources` and `resource`.
 The former is for plural resources, the latter for singular ones.

@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Action HTTP Caching
+title: Hanami | Guides - Action HTTP Caching
 ---
 
 # HTTP Caching
@@ -33,7 +33,7 @@ end
 Another HTTP caching special header is `Expires`.
 It can be used for retrocompatibility with old browsers which don't understand `Cache-Control`.
 
-Lotus' solution for _expire_ combines support for all the browsers by sending both the headers.
+Hanami's solution for _expire_ combines support for all the browsers by sending both the headers.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb

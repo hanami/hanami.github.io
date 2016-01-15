@@ -1,10 +1,10 @@
 ---
-title: Lotus - Guides - Assets Overview
+title: Hanami | Guides - Assets Overview
 ---
 
 # Assets
 
-Lotus supports powerful features for web assets.
+Hanami supports powerful features for web assets.
 
 ## Configuration
 
@@ -18,7 +18,7 @@ It's turned on by default in _development_ and _test_ environments, but turned o
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       assets do
@@ -37,7 +37,7 @@ end
 
 ### Digest Mode
 
-In order to force browsers to cache the right copy of an asset, during the deploy, Lotus creates a copy of each file by [appending its checksum](/guides/command-line/assets) to the file name.
+In order to force browsers to cache the right copy of an asset, during the deploy, Hanami creates a copy of each file by [appending its checksum](/guides/command-line/assets) to the file name.
 
 We can control this feature via application configuration.
 It's turned on by default only in _production_ environment.
@@ -45,7 +45,7 @@ It's turned on by default only in _production_ environment.
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       assets do
@@ -75,7 +75,7 @@ If enabled, [assets helpers](/guides/helpers/assets) will generate checksum rela
 ## Serve Static Assets
 
 It can dynamically serve them during development.
-It mounts `Lotus::Static` middleware in project Rack stack. This component is conditionally activated, if the environment variable `SERVE_STATIC_ASSETS` equals to `true`.
+It mounts `Hanami::Static` middleware in project Rack stack. This component is conditionally activated, if the environment variable `SERVE_STATIC_ASSETS` equals to `true`.
 
 By default, new projects are generated with this feature enabled in _development_ and _test_ mode, via their corresponding `.env.*` files.
 
@@ -85,7 +85,7 @@ By default, new projects are generated with this feature enabled in _development
 SERVE_STATIC_ASSETS="true"
 ```
 
-Lotus assumes that projects in _production_ mode are deployed using a web server like Nginx that is responsible to serve them without even hitting the Ruby code.
+Hanami assumes that projects in _production_ mode are deployed using a web server like Nginx that is responsible to serve them without even hitting the Ruby code.
 
 <p class="convention">
   Static assets serving is enabled by default in <em>development</em> and <em>test</em> environments, but turned off for <em>production</em>.
@@ -94,9 +94,9 @@ Lotus assumes that projects in _production_ mode are deployed using a web server
 There are cases where this assumption isn't true. For instance, Heroku requires Ruby web apps to serve static assets.
 To enable this feature in production, just make sure that this special environment variable is set to `true` (in `.env` or `.env.production`).
 
-### What Does It Mean To Serve Static Assets With Lotus?
+### What Does It Mean To Serve Static Assets With Hanami?
 
-As mentioned above, when this feature is enabled, a special middleware is added in front of the project Rack stack: `Lotus::Static`.
+As mentioned above, when this feature is enabled, a special middleware is added in front of the project Rack stack: `Hanami::Static`.
 
 Incoming requests can generate the following use cases
 
@@ -114,7 +114,7 @@ It copies the `apps/web/assets/javascripts/application.js` to `public/assets/app
 </p>
 
 <p class="warning">
-  When an application has turned OFF assets compilation (Compile mode), Lotus won't copy the file.
+  When an application has turned OFF assets compilation (Compile mode), Hanami won't copy the file.
 </p>
 
 #### Stale Asset
@@ -187,7 +187,7 @@ If we want add other sources for a given application, we can specify them in the
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       assets do
@@ -204,48 +204,48 @@ end
 This will add `apps/web/vendor/assets` and all its subdirectories.
 
 <p class="warning">
-  Lotus looks recursively to the assets sources. In order to NOT accidentally disclose sensitive files like secrets or source code, please make sure that these sources directories ONLY contain web assets.
+  Hanami looks recursively to the assets sources. In order to NOT accidentally disclose sensitive files like secrets or source code, please make sure that these sources directories ONLY contain web assets.
 </p>
 
 ## Third Party Gems
 
-Lotus allows to use [Rubygems](https://rubygems.org) as a way to distribute web assets and make them available to Lotus applications.
+Hanami allows to use [Rubygems](https://rubygems.org) as a way to distribute web assets and make them available to Hanami applications.
 
-Third party gems can be maintained by developers who want to bring frontend frameworks support to Lotus.
-Let's say we want to build an `lotus-emberjs` gem.
+Third party gems can be maintained by developers who want to bring frontend frameworks support to Hanami.
+Let's say we want to build an `hanami-emberjs` gem.
 
 ```shell
 % tree .
 # ...
 ├── lib
-│   └── lotus
+│   └── hanami
 │       ├── emberjs
 │       │   ├── dist
 │       │   │   ├── ember.js
 │       │   │   └── ember.min.js
 │       │   └── version.rb
 │       └── emberjs.rb
-├── lotus-emberjs.gemspec
+├── hanami-emberjs.gemspec
 # ...
 ```
 
 We put in an **arbitrary** directory **only** the assets that we want to serve.
-Then we add it to `Lotus::Assets.sources`.
+Then we add it to `Hanami::Assets.sources`.
 
 ```ruby
-# lib/lotus/emberjs.rb
-require 'lotus/assets'
+# lib/hanami/emberjs.rb
+require 'hanami/assets'
 
-module Lotus
+module Hanami
   module Emberjs
-    require 'lotus/emberjs/version'
+    require 'hanami/emberjs/version'
   end
 end
 
-Lotus::Assets.sources << __dir__ + '/emberjs/source'
+Hanami::Assets.sources << __dir__ + '/emberjs/source'
 ```
 
-When an application will do `require 'lotus/emberjs'`, that directory will be added to the sources where Lotus will be able to lookup for assets.
+When an application will do `require 'hanami/emberjs'`, that directory will be added to the sources where Hanami will be able to lookup for assets.
 
 ```erb
 <%= javascript 'ember' %>

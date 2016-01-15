@@ -1,17 +1,17 @@
 ---
-title: "Lotus - Guides - Architectures: Application"
+title: "Hanami | Guides - Architectures: Application"
 ---
 
 # Architectures
 
 ## Application
 
-This is an alternative Lotus architecture that should be used only at the later stage of a project, when we have already considered extracting to microservices.
+This is an alternative Hanami architecture that should be used only at the later stage of a project, when we have already considered extracting to microservices.
 
-Lotus applies the [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html) principle.
+Hanami applies the [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html) principle.
 In the early days of our product, we are moving fast and it's more convenient to keep all the components in the same repository and in the same Ruby process.
 
-This is possible with Lotus [Container architecture](/guides/architectures/container) and we **strongly** suggest using it for new projects.
+This is possible with Hanami [Container architecture](/guides/architectures/container) and we **strongly** suggest using it for new projects.
 
 Application architecture is suggested for small web components.
 
@@ -20,10 +20,10 @@ However, we want to offer a different approach, large projects should use differ
 
 ### Anatomy Of An Application
 
-Let's use the application generator to create a new Lotus app.
+Let's use the application generator to create a new Hanami app.
 
 ```shell
-% lotus new admin --arch=app
+% hanami new admin --arch=app
 ```
 
 We use the `--arch` CLI argument to specify that we want to use the Application architecture.
@@ -70,4 +70,4 @@ We have been running our business for three years now. During this time we moved
 We went for the Container architecture, and now we have a few components such the admin pane, that were useful to keep in the same Ruby process, but now we want to move to a separated server.
 Theoretically all we need to do is to move it from `apps/admin` into a different repository and deploy it separately.
 
-However, there are some configuration files that we want to let Lotus generate for us.
+However, there are some configuration files that we want to let Hanami generate for us.

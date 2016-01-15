@@ -1,11 +1,11 @@
 ---
-title: Lotus - Guides - Architectures
+title: Hanami | Guides - Architectures
 ---
 
 # Architectures
 
-Lotus is a **modular** web framework.
-It scales from **single file HTTP endpoints** to **multiple Lotus (or Rack based) applications in the same Ruby process**.
+Hanami is a **modular** web framework.
+It scales from **single file HTTP endpoints** to **multiple Hanami (or Rack based) applications in the same Ruby process**.
 
 Each application is a component to our product.
 It can be the user web facing UI, an admin pane, a HTTP API, metrics etc..
@@ -18,13 +18,13 @@ Once our application grows in complexity we decide to extract each component int
 
 ## Container
 
-To make this possible, Lotus' default architecture is called [**Container**](/guides/architectures/container).
+To make this possible, Hanami's default architecture is called [**Container**](/guides/architectures/container).
 It hosts several applications in the same Ruby process.
 
 Each component (application) has its own Ruby namespace (eg `Web` or `Admin`) that is a strong boundary between them.
 When (and **if**) we want to extract one of them, we can easily do it.
 
-In other words, Lotus is providing gentle guidance to help build component based applications.
+In other words, Hanami is providing gentle guidance to help build component based applications.
 We **strongly** suggest starting your next project with this architecture.
 
 ## Application

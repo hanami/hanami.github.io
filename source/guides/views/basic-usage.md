@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Views Basic Usage
+title: Hanami | Guides - Views Basic Usage
 ---
 
 # Basic Usage
@@ -87,7 +87,7 @@ Rendering context for a template is made of view methods and exposures.
 
 ## Custom Rendering
 
-Lotus perfoms rendering by calling `#render` on a view and it expects a string in return.
+Hanami perfoms rendering by calling `#render` on a view and it expects a string in return.
 The benefit of an object oriented approach is the ability to easily diverge from default behavior.
 
 We can override that method to define a custom rendering policy.

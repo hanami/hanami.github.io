@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Routing Helpers
+title: Hanami | Guides - Routing Helpers
 ---
 
 ## Routing Helpers

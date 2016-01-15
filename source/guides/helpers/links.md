@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Link Helpers
+title: Hanami | Guides - Link Helpers
 ---
 
 ## Link Helpers

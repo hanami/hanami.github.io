@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Action Share Code
+title: Hanami | Guides - Action Share Code
 ---
 
 # Share Code
@@ -57,7 +57,7 @@ We can use `controller.prepare` for the scope.
 require_relative './controllers/authentication'
 
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       controller.prepare do
         include Web::Authentication

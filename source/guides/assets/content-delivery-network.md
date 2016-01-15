@@ -1,12 +1,12 @@
 ---
-title: Lotus - Guides - Assets Content Delivery Network (CDN)
+title: Hanami | Guides - Assets Content Delivery Network (CDN)
 ---
 
 # Assets
 
 ## Content Delivery Network (CDN)
 
-A Lotus application can serve assets from a [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN).
+A Hanami application can serve assets from a [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN).
 This feature is useful in _production_ environment, where we want to speed up static assets serving.
 
 In order to take advantage of this feature, we need to specify CDN settings.
@@ -14,7 +14,7 @@ In order to take advantage of this feature, we need to specify CDN settings.
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     # ...
     configure :production do
       scheme 'https'

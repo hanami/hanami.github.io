@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Entities
+title: Hanami | Guides - Entities
 ---
 
 # Entities
@@ -23,18 +23,18 @@ All the entities live under `lib/` directory of our application.
 ```ruby
 # lib/bookshelf/entities/book.rb
 class Book
-  include Lotus::Entity
+  include Hanami::Entity
   attributes :title
 end
 ```
 
-When a class includes `Lotus::Entity` it receives the following interface:
+When a class includes `Hanami::Entity` it receives the following interface:
 
   * `#id`
   * `#id=`
   * `#initialize(attributes = {})`
 
-`Lotus::Entity` also provides the `.attributes` for defining attribute accessors for the given names.
+`Hanami::Entity` also provides the `.attributes` for defining attribute accessors for the given names.
 
 If we expand the code above in **pure Ruby**, it would be:
 
@@ -48,22 +48,22 @@ class Book
 end
 ```
 
-**Lotus::Model** ships `Lotus::Entity` for developers's convenience.
+**Hanami::Model** ships `Hanami::Entity` for developers's convenience.
 
-**Lotus::Model** depends on a narrow and well-defined interface for an Entity - `#id`, `#id=`, `#initialize(attributes={})`.
-If your object implements that interface then that object can be used as an Entity in the **Lotus::Model** framework.
+**Hanami::Model** depends on a narrow and well-defined interface for an Entity - `#id`, `#id=`, `#initialize(attributes={})`.
+If your object implements that interface then that object can be used as an Entity in the **Hanami::Model** framework.
 
-However, we suggest to implement this interface by including `Lotus::Entity`, in case that future versions of the framework will expand it.
+However, we suggest to implement this interface by including `Hanami::Entity`, in case that future versions of the framework will expand it.
 
 See [Dependency Inversion Principle](http://en.wikipedia.org/wiki/Dependency_inversion_principle) for more on interfaces.
 
 ## Inheritance
 
-When a class extends a `Lotus::Entity` class, it will also *inherit* its mother's attributes.
+When a class extends a `Hanami::Entity` class, it will also *inherit* its mother's attributes.
 
 ```ruby
 class Book
-  include Lotus::Entity
+  include Hanami::Entity
   attributes :title
 end
 

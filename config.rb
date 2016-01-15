@@ -57,7 +57,7 @@ activate :deploy do |deploy|
   deploy.branch = 'master'
 end
 
-set :url_root, 'http://lotusrb.org'
+set :url_root, 'http://hanami.io'
 activate :search_engine_sitemap
 
 # Methods defined in the helpers block are available in templates
@@ -108,7 +108,7 @@ helpers do
   #
 
   GUIDES_ROOT     = 'source/guides'.freeze
-  GUIDES_EDIT_URL = 'https://github.com/lotus/lotus.github.io/edit/build/'.freeze
+  GUIDES_EDIT_URL = 'https://github.com/hanami/hanami.github.io/edit/build/'.freeze
 
   def guides_navigation
     result = ''
@@ -160,14 +160,14 @@ helpers do
             page
           end
 
-    "http://lotusrb.org#{ url }"
+    "http://hanami.io#{ url }"
   end
 
   def encode_text(text)
    ::Rack::Utils.escape(text)
   end
 
-  def lotus_version
+  def hanami_version
     '0.6.0'
   end
 end

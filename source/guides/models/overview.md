@@ -1,28 +1,28 @@
 ---
-title: Lotus - Guides - Models Overview
+title: Hanami | Guides - Models Overview
 ---
 
 # Models
 
-Lotus' model domain is implemented in a way that separates the behavior that we want to express (entities) from that persistence layer (repositories and database).
+Hanami's model domain is implemented in a way that separates the behavior that we want to express (entities) from that persistence layer (repositories and database).
 This design helps to keep the interface of our objects really small and, by consequence, fast and reusable.
 
 ## Soft Dependency
 
-If we look at the `Gemfile` of our generated application, `lotus-model` gem is a separated entry.
+If we look at the `Gemfile` of our generated application, `hanami-model` gem is a separated entry.
 That means our applications don't depend on this framework.
 
 **We are free to bring our own ORM and/or persistency library.**
 
 ## Adapters
 
-`Lotus::Model` is designed to expose high level operations to perform against a database.
+`Hanami::Model` is designed to expose high level operations to perform against a database.
 This allows to swap the storage, without affecting the code of our application.
 
 For this purpose the framework has a concept of _adapter_.
 It's layer of code that targets a specific data store and exposes a common set of operations.
 
-While we'll **NEVER** work with them directly, it's important to know that Lotus ships with three types of adapters:
+While we'll **NEVER** work with them directly, it's important to know that Hanami ships with three types of adapters:
 
   * File System (default)
   * Memory
@@ -38,7 +38,7 @@ It generates some code in `lib/bookshelf.rb` that sets the current adapter (`:sq
 ```ruby
 # lib/bookshelf.rb
 # ...
-Lotus::Model.configure do
+Hanami::Model.configure do
   ##
   # Database adapter
   #
@@ -75,7 +75,7 @@ Our application comes with a default mapper in `lib/bookshelf.rb`, we can use it
 ```ruby
 # ...
 
-Lotus::Model.configure do
+Hanami::Model.configure do
   # ...
   mapping do
     collection :books do
@@ -162,12 +162,12 @@ Then the argument that we pass to `#attribute` is the name of the attribute from
 If the database column name has the same attribute name we're done.
 In our case we need to use `:as` option, to indicate the database column that we want to map.
 
-Lotus collections assume the primary key for a table is the `id` column, but this example uses `_id` instead. We can
+Hanami collections assume the primary key for a table is the `id` column, but this example uses `_id` instead. We can
 change the primary key for a collection by using the `identity` setting which takes a single column name.
 
 ### Custom Coercions
 
-Lotus data mapper supports the most common Ruby data type such as `String`, `Integer`, or `DateTime`.
+Hanami data mapper supports the most common Ruby data type such as `String`, `Integer`, or `DateTime`.
 Sometimes, this simple approach is not enough to solve the database impedance mismatch on types.
 
 Imagine we have a `Book#tags`, a collection of strings that we want to store as a [Postgres array](http://www.postgresql.org/docs/9.1/static/arrays.html).
@@ -177,10 +177,10 @@ The solution to this problem is to define a custom coercer.
 
 ```ruby
 # lib/ext/pg_array.rb
-require 'lotus/model/coercer'
+require 'hanami/model/coercer'
 require 'sequel/extensions/pg_array'
 
-class PGArray < Lotus::Model::Coercer
+class PGArray < Hanami::Model::Coercer
   def self.dump(value)
     ::Sequel.pg_array(value, :varchar)
   end
@@ -196,7 +196,7 @@ end
 require_relative './ext/pg_array'
 # ...
 
-Lotus::Model.configure do
+Hanami::Model.configure do
   # ...
   mapping do
     # ...

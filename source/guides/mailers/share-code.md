@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Mailes Share Code
+title: Hanami | Guides - Mailes Share Code
 ---
 
 # Share Code
@@ -7,7 +7,7 @@ title: Lotus - Guides - Mailes Share Code
 ## Prepare
 
 In our settings (`lib/bookshelf.rb`), there is code block that allows to share the code for **all the mailers** of our application.
-When a mailer includes the `Lotus::Mailer` module, that block code is yielded within the context of that class.
+When a mailer includes the `Hanami::Mailer` module, that block code is yielded within the context of that class.
 This is heavily inspired by Ruby Module and its `included` hook.
 
 Imagine we want to set a default sender for all the mailers.
@@ -31,7 +31,7 @@ Then we include in all the mailers of our application, via `prepare`.
 ```ruby
 # lib/bookshelf.rb
 # ...
-Lotus::Mailer.configure do
+Hanami::Mailer.configure do
   # ...
   prepare do
     include Mailers::DefaultSender

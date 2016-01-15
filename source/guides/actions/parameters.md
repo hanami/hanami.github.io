@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Action Parameters
+title: Hanami | Guides - Action Parameters
 ---
 
 # Parameters
@@ -12,7 +12,7 @@ They are similar to a Ruby Hash, but they offer an expanded set of features.
 Params can come from:
 
   * [Router variables](/guides/routing/basic-usage) (eg. `/books/:id`)
-  * Query string (eg. `/books?title=Lotus`)
+  * Query string (eg. `/books?title=Hanami`)
   * Request body (eg. a `POST` request to `/books`)
 
 ## Access
@@ -49,7 +49,7 @@ params['q']
 ```
 
 <p class="warning">
-  Indifferent Access may be removed in future versions of Lotus in favor of symbol access only.
+  Indifferent Access may be removed in future versions of Hanami in favor of symbol access only.
 </p>
 
 ### Nested Access
@@ -70,7 +70,7 @@ We have a safe solution for our problem: `#get`.
 It accepts a **dot separated** string, where each token represents a level in our nested structure.
 
 ```ruby
-params.get('book.title')           # => "Lotus"
+params.get('book.title')           # => "Hanami"
 params.get('unknown.nested.param') # => nil instead of NoMethodError
 ```
 
@@ -79,7 +79,7 @@ params.get('unknown.nested.param') # => nil instead of NoMethodError
 In order to show how whitelisting works, let's create a new action:
 
 ```shell
-bundle exec lotus generate action web signup#create
+bundle exec hanami generate action web signup#create
 ```
 
 We want to provide self-registration for our users.
@@ -199,7 +199,7 @@ module Web::Controllers::Signup
 end
 ```
 
-Parameter validations are delegated, under the hood, to [Lotus::Validations](https://github.com/lotus/validations).
+Parameter validations are delegated, under the hood, to [Hanami::Validations](https://github.com/hanami/validations).
 Please check the related documentation for a complete list of options and how to share code between validations.
 
 ## Concrete Classes

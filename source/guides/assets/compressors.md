@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Assets Compressors
+title: Hanami | Guides - Assets Compressors
 ---
 
 # Assets
@@ -14,7 +14,7 @@ In order to set one of the following engines, we need to open `apps/web/applicat
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       assets do
         javascript_compressor :builtin
@@ -72,7 +72,7 @@ Then we can use it with our configuration:
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       assets do
         javascript_compressor MyCustomJavascriptCompressor.new

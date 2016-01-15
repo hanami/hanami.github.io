@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Form Helpers
+title: Hanami | Guides - Form Helpers
 ---
 
 ## Form Helpers
@@ -36,7 +36,7 @@ Those frameworks allow a syntax like this:
 
 The code above **isn't a valid ERB template**. To make it work, Rails uses monkey-patches ERB, and Padrino supports only HAML with that syntax.
 
-One of the pillars of Lotus is _"zero monkey-patch of Ruby core and stdlib"_. We want to keep this principle for this feature too.
+One of the pillars of Hanami is _"zero monkey-patch of Ruby core and stdlib"_. We want to keep this principle for this feature too.
 
 ### Template engine independent
 
@@ -142,7 +142,7 @@ The API is really clean and concise, **it doesn't require concatenation** betwee
 
 ### Method override
 
-Browsers don't understand HTTP methods outside of `GET` and `POST`. On the other hand, Lotus embraces REST conventions, that goes beyond that two verbs. When we specify a method via `:method`, it adds a special hidden field `_method`, that's understood by the application.
+Browsers don't understand HTTP methods outside of `GET` and `POST`. On the other hand, Hanami embraces REST conventions, that goes beyond that two verbs. When we specify a method via `:method`, it adds a special hidden field `_method`, that's understood by the application.
 
 ```erb
 <%=
@@ -166,12 +166,12 @@ Browsers don't understand HTTP methods outside of `GET` and `POST`. On the other
 
 ### CSRF Protection
 
-Cross Site Request Forgery (CSRF) is one of the most common attacks on the web. Lotus offers a security mechanism based on a technique called: _Synchronizer Token Pattern_.
+Cross Site Request Forgery (CSRF) is one of the most common attacks on the web. Hanami offers a security mechanism based on a technique called: _Synchronizer Token Pattern_.
 
 When we enable sessions, it uses them to store a random token for each user.
 Forms are rendered with a special hidden field (`_csrf_token`) which contains this token.
 
-On form submission, Lotus matches this input with the value from the session. If they match, the request can continue. If not, it resets the sesssion and raises an exception.
+On form submission, Hanami matches this input with the value from the session. If they match, the request can continue. If not, it resets the sesssion and raises an exception.
 
 Developers can customize attack handling.
 
@@ -203,7 +203,7 @@ Developers can customize attack handling.
 
 ## Automatic values
 
-Form fields are **automatically filled with the right value**. Lotus looks up for explicit values passed in the form constructor and for the params of the current request. It compares the form hierarchy (including nested fields), with these two sources. For each match, it fills the associated value.
+Form fields are **automatically filled with the right value**. Hanami looks up for explicit values passed in the form constructor and for the params of the current request. It compares the form hierarchy (including nested fields), with these two sources. For each match, it fills the associated value.
 
 #### Example
 

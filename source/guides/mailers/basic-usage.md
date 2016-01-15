@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Mailers Basic Usage
+title: Hanami | Guides - Mailers Basic Usage
 ---
 
 # Basic Usage
@@ -15,7 +15,7 @@ They all accept a string, but `.to` can also accept an array of strings in order
 
 ```ruby
 class Mailers::Welcome
-  include Lotus::Mailer
+  include Hanami::Mailer
 
   from    'noreply@bookshelf.org'
   to      'user@example.com'
@@ -38,7 +38,7 @@ If pass a **symbol as argument**, it will be interpreted as a **method** that we
 
 ```ruby
 class Mailers::Welcome
-  include Lotus::Mailer
+  include Hanami::Mailer
 
   from    'noreply@bookshelf.org'
   to      :recipient
@@ -90,7 +90,7 @@ All the public methods defined in a mailer are accessible from the templates:
 ```ruby
 # lib/bookshelf/mailers/welcome.rb
 class Mailers::Welcome
-  include Lotus::Mailer
+  include Hanami::Mailer
 
   # ...
 

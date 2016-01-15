@@ -1,32 +1,57 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= current_page.data.title || "Lotus &dash; A complete web framework for Ruby" %></title>
-    <meta name="description" content="Lotus, a complete web framework for Ruby" />
-    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+    <meta name="description" content="Hanami - The web, with simplicity" />
+    <meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="author" content="Luca Guidi">
+    <link href="http://feeds.feedburner.com/hanamirb" rel="alternate" title="Hanami" type="application/atom+xml" />
 
-    <%= stylesheet_link_tag 'application' %>
+    <title><%= current_page.data.title || "Hanami | The web, with simplicity." %></title>
 
-    <script src="//use.typekit.net/xhp5wmc.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+    <%= stylesheet_link_tag 'toolkit-minimal' %>
+    <%= stylesheet_link_tag 'application-minimal' %>
+    <%= stylesheet_link_tag 'guides' %>
   </head>
-  <body class="subpage blog">
-    <%= partial 'header' %>
 
-    <section class="wrapper animated fadeIn">
-      <div class="container-fluid">
-
-        <div class="row">
-          <div class="col-md-12 main">
-            <%= yield %>
-          </div>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../">
+            <span>Hanami</span>
+          </a>
         </div>
+        <div class="navbar-collapse collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="/guides">Guides</a>
+            </li>
+            <li>
+              <a href="/community">Community</a>
+            </li>
+            <li>
+              <a href="https://github.com/hanami">Source Code</a>
+            </li>
+            <li>
+              <a href="/blog">Blog</a>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
-    </section>
+    </nav>
+
+    <div class="container">
+      <%= yield %>
+    </div>
 
     <%= partial 'footer' %>
   </body>

@@ -1,15 +1,15 @@
 ---
-title: "Lotus - Guides - Command Line: Applications"
+title: "Hanami | Guides - Command Line: Applications"
 ---
 
 # Command Line
 
 ## Applications
 
-We can generate a new project via `lotus new`, followed by the name that we want to use.
+We can generate a new project via `hanami new`, followed by the name that we want to use.
 
 ```shell
-% lotus new bookshelf
+% hanami new bookshelf
 ```
 
 ### Architecture
@@ -26,7 +26,7 @@ It supports:
 The following command will generate an `admin` project that uses the _Application_ architecture.
 
 ```shell
-% lotus new admin --arch=app
+% hanami new admin --arch=app
 ```
 
 ### Database
@@ -34,7 +34,7 @@ The following command will generate an `admin` project that uses the _Applicatio
 The default storage used is a toy file system database.
 This is because we want to provide a quick prototyping tool.
 
-We can use the `--database` argument to let Lotus to generate code for a specific data store.
+We can use the `--database` argument to let Hanami to generate code for a specific data store.
 
 It supports:
 

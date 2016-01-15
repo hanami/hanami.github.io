@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - MIME Types
+title: Hanami | Guides - MIME Types
 ---
 
 # MIME Types
@@ -7,7 +7,7 @@ title: Lotus - Guides - MIME Types
 A view can handle several MIME Types. Before to dive into this subject, please consider to read how actions handle [MIME Types](/guides/actions/mime-types).
 
 It's important to highlight the correlation between the _format_ and template name.
-For a given MIME Type, Rack (and then Lotus) associate a _format_ for it.
+For a given MIME Type, Rack (and then Hanami) associate a _format_ for it.
 XML is mapped from `application/xml` to `:xml`, HTML is `text/html` and becomes `:html` for us.
 
 <p class="convention">
@@ -44,7 +44,7 @@ In case we request an unsupported MIME Type, our application will raise an error
 
 ```shell
 % curl -H "Accept: application/xml" http://localhost:2300/dashboard
-Lotus::View::MissingTemplateError: Can't find template "dashboard/index" for "xml" format.
+Hanami::View::MissingTemplateError: Can't find template "dashboard/index" for "xml" format.
 ```
 
 ## View For Specific Format
