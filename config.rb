@@ -1,7 +1,5 @@
 require 'rack/utils'
 require 'middleman-syntax'
-require 'bootstrap-sass'
-require 'compass/import-once/activate'
 
 ###
 # Compass
@@ -11,7 +9,6 @@ compass_config do |config|
   config.output_style    = :compact
   config.http_path       = '/'
   config.css_dir         = 'source/stylesheets'
-  config.sass_dir        = 'source/sass'
   config.images_dir      = 'source/images'
   config.javascripts_dir = 'source/javascripts'
 end

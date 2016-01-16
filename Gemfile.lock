@@ -8,12 +8,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.7)
-    autoprefixer-rails (5.1.5)
-      execjs
-      json
-    bootstrap-sass (3.3.3)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
     builder (3.2.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -154,7 +148,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass (~> 3.3)
   httparty
   middleman (~> 3.3)
   middleman-blog (~> 3.5)
@@ -165,4 +158,4 @@ DEPENDENCIES
   redcarpet (~> 3.2)
 
 BUNDLED WITH
-   1.10.4
+   1.11.2
