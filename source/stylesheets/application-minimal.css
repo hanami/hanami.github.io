@@ -116,6 +116,18 @@
   }
 }
 
+div.download-develop-deploy .tab-pane {
+  padding: 2em 0;
+}
+
+div.download-develop-deploy .command {
+  color: #685D9F;
+}
+
+div.download-develop-deploy .callout {
+  margin-bottom: 14em;
+}
+
 div.app-block-footer {
   margin-top: 5em;
 }
@@ -149,3 +161,4 @@ p.lead {
 div.article-body {
   font-size: 1.4em;
 }
+

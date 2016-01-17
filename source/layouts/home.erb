@@ -64,7 +64,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text-center m-b-lg">
-            <img class="img-circle" src="/images/logo.png">
+            <img class="img-circle" src="/images/logo.png" width="150px" height="150px">
             <p class="lead m-x-auto">Hanami is a modern web framework for Ruby.</p>
           </div>
         </div>
@@ -128,8 +128,68 @@
             <p class="lead">
               Download, Develop, Deploy in 5 minutes.
             </p>
-            <div class="text-right">
-              <img src="/images/terminal.png" width="780px" height="500px" class="app-translate-50" data-transition="entrance">
+            <div class="container">
+              <div class="row download-develop-deploy">
+                <div>
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#download" aria-controls="download" role="tab" data-toggle="tab">Download</a></li>
+                    <li role="presentation"><a href="#develop" aria-controls="develop" role="tab" data-toggle="tab">Develop</a></li>
+                    <li role="presentation"><a href="#deploy" aria-controls="deploy" role="tab" data-toggle="tab">Deploy</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="download">
+                      <pre class="language-ruby plaintext"><code><span class="command">% gem install hanami</span>
+Successfully installed hanami
+1 gem installed
+<br>
+<span class="command">% hanami new bookshelf</span>
+18 files successfully created
+                      </code></pre>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="develop">
+                      <pre class="language-ruby plaintext"><code><span class="command">% cd bookshelf &amp;&amp; bundle</span>
+Bundle complete! 6 Gemfile dependencies, 28 gems now installed.
+<br>
+<span class="command">% git add . &amp;&amp; gc -m "Initial commit"</span>
+[master (root-commit) ecb3a75] Initial commit
+ 37 files changed, 527 insertions(+)
+                      </code></pre>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="deploy">
+                      <pre class="language-ruby plaintext"><code><span class="command">% heroku apps:create</span>
+Creating cherry-blossom-1234... done, stack is cedar-14
+https://cherry-blossom-1234.herokuapp.com/ | https://git.heroku.com/cherry-blossom-1234.git
+Git remote heroku added
+<br>
+<span class="command">% heroku config:add BOOKSHELF_DATABASE_URL="file:///db/bookshelf"</span>
+Setting config vars and restarting cherry-blossom-1234... done
+BOOKSHELF_DATABASE_URL: file:///db/bookshelf
+<br>
+<span class="command">% git push heroku master</span>
+# ...
+remote: Verifying deploy... done.
+To https://git.heroku.com/cherry-blossom-1234.git
+ * [new branch]      master -&gt; master
+<br>
+<span class="command">% heroku open</span>
+Opening cherry-blossom-1234... done
+                      </code></pre>
+                    </div>
+                  </div>
+
+                  <div class="callout">
+                    <div class="callout-content">
+                      <strong>Build your first application now.</strong> It will take you only a few minutes to learn how to do it.
+                    </div>
+
+                    <div class="callout-secondary">
+                      <a href="/guides/getting-started" class="btn btn-sm btn-primary" target="_blank">Get started</a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
