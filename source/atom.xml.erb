@@ -2,20 +2,20 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
    <title>Hanami</title>
    <subtitle>Hanami web framework blog</subtitle>
-   <link href="http://hanami.io/atom.xml" rel="self"/>
-   <link href="http://hanami.io/blog"/>
+   <link href="http://hanamirb.org/atom.xml" rel="self"/>
+   <link href="http://hanamirb.org/blog"/>
    <updated><%= blog.articles.first.date.to_time.iso8601 %></updated>
-   <id>http://hanami.io/blog</id>
+   <id>http://hanamirb.org/blog</id>
    <author>
      <name>Hanami</name>
-     <email>admin@hanami.io</email>
+     <email>admin@hanamirb.org</email>
    </author>
 
    <% articles(10).each do |article| %>
      <entry>
        <title><%= article_title(article) %></title>
-       <id>http://hanami.io<%= article.url %></id>
-       <link rel="alternate" href="http://hanami.io<%= article.url %>"/>
+       <id>http://hanamirb.ororg<%= article.url %></id>
+       <link rel="alternate" href="http://hanamirb.org<%= article.url %>"/>
        <updated><%= article.date.to_time.iso8601 %></updated>
        <author>
          <name><%= article_author(article) %></name>
