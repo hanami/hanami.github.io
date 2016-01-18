@@ -53,8 +53,8 @@
         <h1 class="block-title m-b-sm text-uppercase brand-name">Hanami</h1>
         <p class="lead m-b-lg p-b-md">The web, with simplicity.</p>
         <div class="app-block-cta">
-          <button class="btn btn-primary m-t">Install v0.6.0</button>
-          <button class="btn btn-default btn-outline m-t">Getting Started</button>
+          <a href="#install" class="btn btn-primary m-t">Install v<%= hanami_version %></a>
+          <a href="/guides/getting-started" target="_blank" class="btn btn-default btn-outline m-t">Getting Started</a>
         </div>
         <img src="/images/home-background.jpg">
       </div>
@@ -125,6 +125,7 @@
       <div class="container">
         <div class="row pos-r">
           <div class="col-sm-7 text-xs-center text-sm-left">
+            <a name="install"></a>
             <p class="lead">
               Download, Develop, Deploy in 5 minutes.
             </p>
@@ -140,7 +141,7 @@
                   <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="download">
                       <pre class="language-ruby plaintext"><code><span class="command">% gem install hanami</span>
-Successfully installed hanami
+Successfully installed hanami-<%= hanami_version %>
 1 gem installed
 <br>
 <span class="command">% hanami new bookshelf</span>
