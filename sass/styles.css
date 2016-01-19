@@ -6,8 +6,8 @@ Error: File to import not found or unreadable: modules/colors.
          Compass::SpriteImporter
          /Users/luca/.gem/ruby/2.2.3/gems/bootstrap-sass-3.3.3/assets/stylesheets
          /Users/luca/.gem/ruby/2.2.3/gems/bootstrap-sass-3.3.3/assets/stylesheets
-        on line 2 of /Users/luca/Code/lotus/website/source/sass/pages/_index.scss
-        from line 13 of /Users/luca/Code/lotus/website/source/sass/styles.scss
+        on line 2 of /Users/luca/Code/hanami/website/source/sass/pages/_index.scss
+        from line 13 of /Users/luca/Code/hanami/website/source/sass/styles.scss
 
 1: // Import Bootstrap Compass integration
 2: @import "bootstrap-compass";
@@ -18,8 +18,8 @@ Error: File to import not found or unreadable: modules/colors.
 7: @import "bootstrap-variables";
 
 Backtrace:
-/Users/luca/Code/lotus/website/source/sass/pages/_index.scss:2
-/Users/luca/Code/lotus/website/source/sass/styles.scss:13
+/Users/luca/Code/hanami/website/source/sass/pages/_index.scss:2
+/Users/luca/Code/hanami/website/source/sass/styles.scss:13
 /Users/luca/.gem/ruby/2.2.3/gems/sass-3.4.12/lib/sass/tree/import_node.rb:66:in `rescue in import'
 /Users/luca/.gem/ruby/2.2.3/gems/sass-3.4.12/lib/sass/tree/import_node.rb:45:in `import'
 /Users/luca/.gem/ruby/2.2.3/gems/sass-3.4.12/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -112,4 +112,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: modules/colors.\A        Load paths:\A          /Users/luca/.gem/ruby/2.2.3/gems/compass-core-1.0.3/stylesheets\A          /Users/luca/.gem/ruby/2.2.3/gems/bootstrap-sass-3.3.3/assets/stylesheets\A          Compass::SpriteImporter\A          /Users/luca/.gem/ruby/2.2.3/gems/bootstrap-sass-3.3.3/assets/stylesheets\A          /Users/luca/.gem/ruby/2.2.3/gems/bootstrap-sass-3.3.3/assets/stylesheets\A         on line 2 of /Users/luca/Code/lotus/website/source/sass/pages/_index.scss\A         from line 13 of /Users/luca/Code/lotus/website/source/sass/styles.scss\A \A 1: // Import Bootstrap Compass integration\A 2: @import \"bootstrap-compass\";\A 3: @import \"compass/css3\";\A 4: @import \"compass/css3/user-interface\";\A 5: \A 6: // Import custom Bootstrap variables\A 7: @import \"bootstrap-variables\";"; }
+  content: "Error: File to import not found or unreadable: modules/colors.\A        Load paths:\A          /Users/luca/.gem/ruby/2.2.3/gems/compass-core-1.0.3/stylesheets\A          /Users/luca/.gem/ruby/2.2.3/gems/bootstrap-sass-3.3.3/assets/stylesheets\A          Compass::SpriteImporter\A          /Users/luca/.gem/ruby/2.2.3/gems/bootstrap-sass-3.3.3/assets/stylesheets\A          /Users/luca/.gem/ruby/2.2.3/gems/bootstrap-sass-3.3.3/assets/stylesheets\A         on line 2 of /Users/luca/Code/hanami/website/source/sass/pages/_index.scss\A         from line 13 of /Users/luca/Code/hanami/website/source/sass/styles.scss\A \A 1: // Import Bootstrap Compass integration\A 2: @import \"bootstrap-compass\";\A 3: @import \"compass/css3\";\A 4: @import \"compass/css3/user-interface\";\A 5: \A 6: // Import custom Bootstrap variables\A 7: @import \"bootstrap-variables\";"; }
