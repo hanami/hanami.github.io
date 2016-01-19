@@ -832,6 +832,15 @@ describe Web::Controllers::Books::Create do
       response = action.call(params)
       response[0].must_equal 200
     end
+
+    it 'sets errors attribute accordingly' do
+      action.call(params)
+
+      refute action.params.valid?
+
+      action.errors.for('book.title').wont_be_empty
+      action.errors.for('book.author').wont_be_empty
+    end
   end
 end
 ```
@@ -923,6 +932,32 @@ describe Web::Views::Books::New do
 
     rendered.must_include('There was a problem with your submission')
     rendered.must_include('title is required')
+    rendered.must_include('author is required')
+  end
+end
+```
+
+We should also update our feature spec to reflect this new behavior:
+
+```ruby
+# spec/web/features/add_book_spec.rb
+require 'features_helper'
+
+describe 'Books' do
+  # Spec written sooner removed from brevity
+
+  it 'displays list of errors when params contains errors' do
+    visit '/books/new'
+
+    within 'form#book-form' do
+      click_button 'Create'
+    end
+
+    current_path.must_equal('/books')
+
+    assert page.has_content?('There was a problem with your submission')
+    assert page.has_content?('title is required')
+    assert page.has_content?('author is required')
   end
 end
 ```
