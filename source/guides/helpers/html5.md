@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - HTML5 Helpers
+title: Hanami | Guides - HTML5 Helpers
 ---
 
 ## HTML5 Helpers
@@ -120,7 +120,7 @@ The result is a very clean Ruby API.
 
 ## Custom tags
 
-Lotus helpers support 100+ most common tags, such as `div`, `video` or `canvas`. 
+Hanami helpers support 100+ most common tags, such as `div`, `video` or `canvas`. 
 However, HTML5 is fast moving target so we wanted to provide an open interface to define **new or custom tags**.
 
 The API is really simple: `#tag` must be used for a self-closing tag, where `#empty_tag` does the opposite.

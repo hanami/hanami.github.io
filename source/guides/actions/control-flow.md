@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Action Control Flow
+title: Hanami | Guides - Action Control Flow
 ---
 
 # Control Flow
@@ -104,7 +104,7 @@ This is an antipattern that causes a lot of problems for code maintenance, testa
 Using exceptions for control flow is expensive for the Ruby VM.
 There is a lightweight alternative that our language supports: **signals** (see `throw` and `catch`).
 
-Lotus takes advantage of this mechanism to provide **faster control flow** in our actions via `#halt`.
+Hanami takes advantage of this mechanism to provide **faster control flow** in our actions via `#halt`.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb

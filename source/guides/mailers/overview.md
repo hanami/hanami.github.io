@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Mailers Overview
+title: Hanami | Guides - Mailers Overview
 ---
 
 # Overview
@@ -11,10 +11,10 @@ If in our application we need to send emails for several features like: _"confir
 
 ## A Simple Mailer
 
-Lotus ships a generator that creates a mailer, two templates and the test code.
+Hanami ships a generator that creates a mailer, two templates and the test code.
 
 ```shell
-% lotus generate mailer welcome
+% hanami generate mailer welcome
     create  spec/bookshelf/mailers/welcome_spec.rb
     create  lib/bookshelf/mailers/welcome.rb
     create  lib/bookshelf/mailers/templates/welcome.html.erb
@@ -26,7 +26,7 @@ Let's see how a mailer is structured:
 ```ruby
 # lib/bookshelf/mailers/welcome.rb
 class Mailers::Welcome
-  include Lotus::Mailer
+  include Hanami::Mailer
 end
 ```
 

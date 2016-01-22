@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Request & Response
+title: Hanami | Guides - Request & Response
 ---
 
 # Request

@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Actions Basic Usage
+title: Hanami | Guides - Actions Basic Usage
 ---
 
 # Basic Usage
@@ -24,7 +24,7 @@ Then we edit the corresponding template:
 <h1>Dashboard</h1>
 ```
 
-Here is how Lotus handles an incoming request:
+Here is how Hanami handles an incoming request:
 
   1. The router creates a new instance of `Web::Controllers::Dashboard::Index` and invokes `#call`.
   2. The application creates a new instance of `Web::Views::Dashboard::Index` and invokes `#render`.
@@ -60,7 +60,7 @@ module Web::Controllers::Dashboard
 end
 ```
 
-Here how Lotus handles an incoming request in this case:
+Here how Hanami handles an incoming request in this case:
 
   1. The router creates a new instance of `Web::Controllers::Dashboard::Index` and invokes `#call`.
   2. The application detects that a body is already set and doesn't instantiate the view.
@@ -76,7 +76,7 @@ With direct body assignment, **we can safely delete the corresponding view and t
 
 ## Initialization
 
-Actions are instantiated for us by Lotus at the runtime: for each incoming request, we'll automatically get a new instance.
+Actions are instantiated for us by Hanami at the runtime: for each incoming request, we'll automatically get a new instance.
 Because actions are objects, **we can take control on their initialization** and eventually [_inject_ our dependencies](http://en.wikipedia.org/wiki/Dependency_injection).
 This is a really useful technique for unit testing our actions.
 

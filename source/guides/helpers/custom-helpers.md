@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Custom Helpers
+title: Hanami | Guides - Custom Helpers
 ---
 
 ## Custom Helpers
@@ -43,7 +43,7 @@ As third step, we include the module in all the views. See [View's Share Code](/
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
 
@@ -56,7 +56,7 @@ module Web
       # ...
 
       view.prepare do
-        include Lotus::Helpers
+        include Hanami::Helpers
         include Web::Helpers::Shuffler
       end
     end
@@ -65,5 +65,5 @@ end
 ```
 
 <p class="notice">
-  Please note that our custom helper will work even if we remove <code>include Lotus::Helpers</code> line, because it's just Ruby.
+  Please note that our custom helper will work even if we remove <code>include Hanami::Helpers</code> line, because it's just Ruby.
 </p>

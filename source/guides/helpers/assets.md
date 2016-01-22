@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Assets Helpers
+title: Hanami - Guides - Assets Helpers
 ---
 
 ## Assets Helpers
@@ -378,7 +378,7 @@ To fix them, we need to adjust security settings in our application.
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
 

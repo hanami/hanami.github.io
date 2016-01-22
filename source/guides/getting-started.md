@@ -1,11 +1,11 @@
 ---
-title: Lotus - Guides - Getting Started
+title: Hanami | Guides - Getting Started
 ---
 
 # Getting Started
 
-In this guide we will set up our first Lotus project and build a simple bookshelf project.
-We'll touch on all the major components of the Lotus framework, all guided by tests.
+In this guide we will set up our first Hanami project and build a simple bookshelf project.
+We'll touch on all the major components of the Hanami framework, all guided by tests.
 
 ## Prerequisites
 
@@ -17,14 +17,14 @@ You should also be familiar with [Bundler](http://bundler.io), [Rake](http://rak
 Lastly, in this guide we'll be using a [PostgreSQL](http://www.postgresql.org) database.
 If you want to follow along, make sure you have a working installation of Ruby 2.2 and PostgreSQL 9.4 on your system.
 
-## Create a new Lotus project
+## Create a new Hanami project
 
-To create a new Lotus project, we need to install the Lotus gem from Rubygems.
-Then we can use the new `lotus` executable to generate a new project:
+To create a new Hanami project, we need to install the Hanami gem from Rubygems.
+Then we can use the new `hanami` executable to generate a new project:
 
 ```
-% gem install lotusrb
-% lotus new bookshelf --database=postgres
+% gem install hanami
+% hanami new bookshelf --database=postgres
 ```
 
 This will create a new directory `bookshelf` in our current location.
@@ -49,7 +49,7 @@ Here's what we need to know:
 * `Gemfile` is a Bundler artifact to manage Rubygems dependencies.
 * `Rakefile` describes our Rake tasks.
 * `apps` contains one or more web applications compatible with Rack.
-  Here we can find the first generated Lotus application called `Web`.
+  Here we can find the first generated Hanami application called `Web`.
   It's the place where we find our controllers, views, routes and templates.
 * `config` contains configuration files.
 * `config.ru` is for Rack servers.
@@ -61,18 +61,18 @@ Go ahead and install our gem dependency with Bundler; then we can launch a devel
 
 ```
 % bundle install
-% bundle exec lotus server
+% bundle exec hanami server
 ```
 
-And... bask in the glory of your first Lotus project at
+And... bask in the glory of your first Hanami project at
 [http://localhost:2300](http://localhost:2300)! We should see a screen similar to this:
 
-<p><img src="/guides/screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
+<p><img src="/guides/screenshot.png" alt="Hanami first screen" class="img-responsive"></p>
 
-## Lotus Architectures
+## Hanami Architectures
 
-Lotus supports a few different architectures to support the needs of the current project.
-The default one that we're going to explore is called _Container_, because **it can host several Lotus (and Rack) applications in the same Ruby process**.
+Hanami supports a few different architectures to support the needs of the current project.
+The default one that we're going to explore is called _Container_, because **it can host several Hanami (and Rack) applications in the same Ruby process**.
 
 These applications live under `apps/`.
 Each of them can be a component of our product, such as the user facing web interface, the admin pane, metrics, HTTP API etc..
@@ -80,14 +80,14 @@ Each of them can be a component of our product, such as the user facing web inte
 All these parts are a _delivery mechanism_ to the business logic that lives under `lib/`.
 This is the place where our models are defined, and interact with each other to compose the **features** that our product provides.
 
-Lotus Container arch is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
+Hanami Container arch is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
 ## Exploring App By Writing Our First Test
 
 The opening screen we see when we point our browser at our app, is a
 default page which is displayed when there are no routes defined.
 
-Lotus encourages [Behavior Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) (BDD) as a way to write web applications.
+Hanami encourages [Behavior Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) (BDD) as a way to write web applications.
 In order to get our first custom page to display, we'll write a high-level feature test:
 
 ```ruby
@@ -103,10 +103,10 @@ describe 'Visit home' do
 end
 ```
 
-Note that, although Lotus is ready for a Behavior Driven Development workflow out of the box, **it is in no way bound to any particular testing framework** -- nor does it come with special integrations or libraries.
+Note that, although Hanami is ready for a Behavior Driven Development workflow out of the box, **it is in no way bound to any particular testing framework** -- nor does it come with special integrations or libraries.
 
 We'll go with [Minitest](https://github.com/seattlerb/minitest) here (which is the default), but we can use [RSpec](http://rspec.info) by creating the project with `--test=rspec` option.
-Lotus will then generate helpers and stub files for it.
+Hanami will then generate helpers and stub files for it.
 
 ### Following A Request
 
@@ -123,7 +123,7 @@ F
 Finished in 0.018611s, 53.7305 runs/s, 53.7305 assertions/s.
 
   1) Failure:
-Homepage#test_0001_is successful [/Users/lotus/bookshelf/spec/web/features/visit_home_spec.rb:6]:
+Homepage#test_0001_is successful [/Users/hanami/bookshelf/spec/web/features/visit_home_spec.rb:6]:
 Expected "<!DOCTYPE html>\n<html>\n  <head>\n    <title>Not Found</title>\n  </head>\n  <body>\n    <h1>Not Found</h1>\n  </body>\n</html>\n" to include "Bookshelf".
 
 1 runs, 1 assertions, 1 failures, 0 errors, 0 skips
@@ -192,19 +192,19 @@ Finished in 0.011854s, 84.3600 runs/s, 168.7200 assertions/s.
 
 Did you wonder about the `Web` constant you saw referenced in the controllers and views?
 Where did it come from?
-Lotus uses a _"Container"_ architecture by default, whereby a single project can contain multiple applications.
+Hanami uses a _"Container"_ architecture by default, whereby a single project can contain multiple applications.
 Such applications might include a JSON API, an admin panel, a marketing website, and so forth.
 
 All these applications live under `apps/`, with the default application named `web`.
-Lotus' core frameworks are duplicated when the container boots, so configurations for different applications don't interfere with others.
+Hanami's core frameworks are duplicated when the container boots, so configurations for different applications don't interfere with others.
 
-Let's recap what we've seen so far: to get our own page on the screen, we followed the execution path of a request in Lotus through the router into a controller action, through a view, to a template file.
+Let's recap what we've seen so far: to get our own page on the screen, we followed the execution path of a request in Hanami through the router into a controller action, through a view, to a template file.
 
 We can find out more about [routing](/guides/routing/overview), [actions](/guides/actions/overview) and [views](/guides/views/overview) in their respective guides.
 
 ## Generating New Actions
 
-Let's use our new knowledge about the major Lotus components to add a new action.
+Let's use our new knowledge about the major Hanami components to add a new action.
 The purpose of our Bookshelf project is to manage books.
 
 We'll store books in our database and let the user manage them with our project.
@@ -229,13 +229,13 @@ end
 
 The test is simple enough, and fails because the URL `/books` is not currently recognised in our application. We'll create a new controller action to fix that.
 
-### Lotus Generators
+### Hanami Generators
 
-Lotus ships with various **generators** to save on typing some of the code involved in adding new functionality.
+Hanami ships with various **generators** to save on typing some of the code involved in adding new functionality.
 In our terminal, enter:
 
 ```
-% lotus generate action web books#index
+% hanami generate action web books#index
 ```
 
 This will generate a new action _index_ in the _books_ controller of the _web_ application.
@@ -247,7 +247,7 @@ get '/books', to: 'books#index'
 
 If you're using ZSH, you may get `zsh: no matches found: books#new`. In that case, you can use:
 ```
-% lotus generate action web books/index
+% hanami generate action web books/index
 ```
 
 To make our test pass, we need to edit our newly generated template file in `apps/web/templates/books/index.html.erb`:
@@ -271,7 +271,7 @@ To make our test pass, we need to edit our newly generated template file in `app
 
 Save your changes and see your tests pass!
 
-The terminology of controllers and actions might be confusing, so let's clear this up: actions form the basis of our Lotus applications; controllers are mere modules that group several actions together.
+The terminology of controllers and actions might be confusing, so let's clear this up: actions form the basis of our Hanami applications; controllers are mere modules that group several actions together.
 So while the "controller" is _conceptually_ present in our project, in practice we only deal with actions.
 
 We've used a generator to create a new endpoint in our application.
@@ -318,15 +318,15 @@ Entities are totally unaware of database.
 This makes them **lightweight** and **easy to test**.
 
 For this reason we need a repository to persist the data that a `Book` depends on.
-Lotus uses the [Data Mapper](http://martinfowler.com/eaaCatalog/dataMapper.html) pattern.
+Hanami uses the [Data Mapper](http://martinfowler.com/eaaCatalog/dataMapper.html) pattern.
 In this way we're able to save any Ruby object in a database.
-That means we can adapt Lotus to use existing Ruby projects and to provide a way to persist them.
+That means we can adapt Hanami to use existing Ruby projects and to provide a way to persist them.
 Read more about entities and repositories in the [models guide](/guides/models/overview).
 
-Lotus ships with a generator for models, so let's use it create a `Book` entity and the corresponding repository:
+Hanami ships with a generator for models, so let's use it create a `Book` entity and the corresponding repository:
 
 ```
-% lotus generate model book
+% hanami generate model book
 create  lib/bookshelf/entities/book.rb
 create  lib/bookshelf/repositories/book_repository.rb
 create  spec/bookshelf/entities/book_spec.rb
@@ -346,7 +346,7 @@ Let's add these attributes.
 ```ruby
 # lib/bookshelf/entities/book.rb
 class Book
-  include Lotus::Entity
+  include Hanami::Entity
   attributes :title, :author
 end
 ```
@@ -371,7 +371,7 @@ end
 We can use repositories to read and write entities to our database.
 In order for that to work, we need to set it up.
 
-Lotus configurations are stored in env variables.
+Hanami configurations are stored in env variables.
 This has proven to be a secure and standardized way to handle credentials in deployment environments.
 
 In order to achieve parity between development and production machines, we use env variables loaded from `.env` files (via [dotenv](https://github.com/bkeepers/dotenv) gem).
@@ -401,10 +401,10 @@ You may want to change `localhost` for `127.0.0.1` if you're using Linux.
 You may decide to use a different adapter, if you do make sure that you update your Gemfile to include the adapter of your choice and run bundle install.
 
 The database configured by default, called `bookshelf_development` running on `localhost`, should work fine for now.
-Lotus can create the database for us:
+Hanami can create the database for us:
 
 ```
-% lotus db create
+% hanami db create
 ```
 
 ### Migrations To Change Our Database Schema
@@ -414,13 +414,13 @@ We can use a **migration** to make the required changes.
 Use the migration generator to create an empty migration:
 
 ```
-% lotus generate migration create_books
+% hanami generate migration create_books
 ```
 
 This gives us a file name like `db/migrations/20150616120629_create_books.rb` that we can edit:
 
 ```ruby
-Lotus::Model.migration do
+Hanami::Model.migration do
   change do
     create_table :books do
       primary_key :id
@@ -431,18 +431,18 @@ Lotus::Model.migration do
 end
 ```
 
-Lotus provides a DSL to describe changes to our database schema. You can read more
+Hanami provides a DSL to describe changes to our database schema. You can read more
 about how migrations work in the [migrations' guide](/guides/migrations/overview).
 
 In this case, we define a new table with columns for each of our entities' attributes.
 Let's apply these changes to our database:
 
 ```
-% lotus db migrate
+% hanami db migrate
 ```
 
-Finally, we need to tell Lotus how to map entity attributes to database columns.
-Go ahead and open up `lib/bookshelf.rb`; in this file you'll find most of the project-wide configuration for `Lotus::Model`, including a section on mapping.
+Finally, we need to tell Hanami how to map entity attributes to database columns.
+Go ahead and open up `lib/bookshelf.rb`; in this file you'll find most of the project-wide configuration for `Hanami::Model`, including a section on mapping.
 Edit the commented-out example:
 
 ```ruby
@@ -463,10 +463,10 @@ end
 ### Playing With The Repository
 
 With our mapping set up, we are ready to play around with our repository.
-We can use Lotus' `console` command to launch IRb with our application pre-loaded, so we can use our objects:
+We can use Hanami's `console` command to launch IRb with our application pre-loaded, so we can use our objects:
 
 ```
-% lotus console
+% hanami console
 >> BookRepository.all
 => []
 >> book = Book.new(title: 'TDD', author: 'Kent Beck')
@@ -477,10 +477,10 @@ We can use Lotus' `console` command to launch IRb with our application pre-loade
 => #<Book:0x007f9af1d13ec0 @title="TDD", @author="Kent Beck" @id=1>
 ```
 
-Lotus repositories have methods to load one or more entities from our database; and to create and update existing records.
+Hanami repositories have methods to load one or more entities from our database; and to create and update existing records.
 The repository is also the place where you would define new methods to implement custom queries.
 
-To recap, we've seen how Lotus uses entities and repositories to model our data.
+To recap, we've seen how Hanami uses entities and repositories to model our data.
 Entities represent our behavior, while repositories use mappings to translate our entities to our data store.
 We can use migrations to apply changes to our database schema.
 
@@ -513,7 +513,7 @@ When we run this test, we will most likely see an error from our database connec
 Its connection string is defined in `.env.test` and here's how you set it up:
 
 ```
-% LOTUS_ENV=test lotus db prepare
+% HANAMI_ENV=test hanami db prepare
 ```
 
 Now we can go change our template and remove the static HTML.
@@ -527,7 +527,7 @@ require_relative '../../../../apps/web/views/books/index'
 
 describe Web::Views::Books::Index do
   let(:exposures) { Hash[books: []] }
-  let(:template)  { Lotus::View::Template.new('apps/web/templates/books/index.html.erb') }
+  let(:template)  { Hanami::View::Template.new('apps/web/templates/books/index.html.erb') }
   let(:view)      { Web::Views::Books::Index.new(template, exposures) }
   let(:rendered)  { view.render }
 
@@ -561,7 +561,7 @@ end
 
 We specify that our index page will show a simple placeholder message when there are no books to display; when there are, it lists every one of them.
 Note how rendering a view with some data is relatively straight-forward.
-Lotus is designed around simple objects with minimal interfaces that are easy to test in isolation, yet still work great together.
+Hanami is designed around simple objects with minimal interfaces that are easy to test in isolation, yet still work great together.
 
 Let's rewrite our template to implement these requirements:
 
@@ -627,7 +627,7 @@ module Web::Controllers::Books
 end
 ```
 
-By using the `expose` method in our action class, we can expose the contents of our `@books` instance variable to the outside world, so that Lotus can pass it to the view.
+By using the `expose` method in our action class, we can expose the contents of our `@books` instance variable to the outside world, so that Hanami can pass it to the view.
 That's enough to make all our tests pass again!
 
 ## Building Forms To Create Records
@@ -671,7 +671,7 @@ We'll speed things up a little, so we can quickly get to the good parts.
 First, create a new action for our "New Book" page:
 
 ```
-% lotus generate action web books#new --url=/books/new
+% hanami generate action web books#new --url=/books/new
 ```
 
 This adds a new route to our app:
@@ -681,7 +681,7 @@ This adds a new route to our app:
 get '/books/new', to: 'books#new'
 ```
 
-The interesting bit will be our new template, because we'll be using Lotus' form builder to construct a HTML form around our `Book` entity.
+The interesting bit will be our new template, because we'll be using Hanami's form builder to construct a HTML form around our `Book` entity.
 
 ### Using Form Helpers
 
@@ -710,7 +710,7 @@ Let's use [form helpers](/guides/helpers/forms) to build this form in `apps/web/
 ```
 
 We've added `<label>` tags for our form fields, and wrapped each field in a
-container `<div>` using Lotus' [HTML builder helper](/guides/helpers/html5).
+container `<div>` using Hanami's [HTML builder helper](/guides/helpers/html5).
 
 ### Submitting Our Form
 
@@ -718,7 +718,7 @@ To submit our form, we need yet another action.
 Let's create a `Books::Create` action:
 
 ```
-% lotus generate action web books#create
+% hanami generate action web books#create
 ```
 
 This adds a new route to our app:
@@ -848,8 +848,8 @@ end
 Now our tests specify two alternative scenario's: our original happy path, and a new scenario in which validations fail.
 To make our tests pass, we need to implement validations.
 
-Although you can add validation rules to the entity, Lotus also allows you to define validation rules as close to the source of the input as possible, i.e. the action.
-Lotus controller actions can use the `params` class method to define acceptable incoming parameters.
+Although you can add validation rules to the entity, Hanami also allows you to define validation rules as close to the source of the input as possible, i.e. the action.
+Hanami controller actions can use the `params` class method to define acceptable incoming parameters.
 
 This approach both whitelists what params are used (others are discarded to prevent mass-assignment vulnerabilities from untrusted user input) _and_ adds rules to define what values are acceptable — in this case we've specified that the nested attributes for a book's title and author should be present.
 
@@ -897,7 +897,7 @@ module Web::Views::Books
 end
 ```
 
-This approach will work nicely because Lotus' form builder is smart enough to inspect the `params` in this action and populate the form fields with values found in the params.
+This approach will work nicely because Hanami's form builder is smart enough to inspect the `params` in this action and populate the form fields with values found in the params.
 If the user fills in only one field before submitting, they are presented with their original input, saving them the frustration of typing it again.
 
 Run your tests again and see they are all passing again!
@@ -913,7 +913,7 @@ First, we expect a list of errors to be included in the page when `params` conta
 require 'spec_helper'
 require_relative '../../../../apps/web/views/books/new'
 
-class NewBookParams < Lotus::Action::Params
+class NewBookParams < Hanami::Action::Params
   param :book do
     param :title, presence: true
     param :author, presence: true
@@ -923,7 +923,7 @@ end
 describe Web::Views::Books::New do
   let(:params)    { NewBookParams.new({}) }
   let(:exposures) { Hash[params: params] }
-  let(:template)  { Lotus::View::Template.new('apps/web/templates/books/new.html.erb') }
+  let(:template)  { Hanami::View::Template.new('apps/web/templates/books/new.html.erb') }
   let(:view)      { Web::Views::Books::New.new(template, exposures) }
   let(:rendered)  { view.render }
 
@@ -994,7 +994,7 @@ get '/books', to: 'books#index'
 get '/', to: 'home#index'
 ```
 
-Lotus provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:
+Hanami provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:
 
 ```ruby
 resources :books
@@ -1005,7 +1005,7 @@ To get a sense of what routes are defined, now we've made this change, you can
 use the special command-line task `routes` to inspect the end result:
 
 ```
-% lotus routes
+% hanami routes
           GET, HEAD  /                Web::Controllers::Home::Index
     books GET, HEAD  /books           Web::Controllers::Books::Index
  new_book GET, HEAD  /books/new       Web::Controllers::Books::New
@@ -1016,7 +1016,7 @@ edit_book GET, HEAD  /books/:id/edit  Web::Controllers::Books::Edit
      book DELETE     /books/:id       Web::Controllers::Books::Destroy
 ```
 
-The output for `lotus routes` shows you the name of the defined helper method (you can suffix this name with `_path` or `_url` and call it on the `routes` helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.
+The output for `hanami routes` shows you the name of the defined helper method (you can suffix this name with `_path` or `_url` and call it on the `routes` helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.
 
 Now we've applied the `resources` helper method, we can take advantage of the named route methods.
 Remember how we built our form using `form_for`?
@@ -1048,11 +1048,29 @@ redirect_to routes.books_path
 
 ## Wrapping Up
 
-**Congratulations for completing your first Lotus project!**
+**Congratulations for completing your first Hanami project!**
 
-Let's review what we've done: we've traced requests through Lotus' major frameworks to understand how they relate to each other; we've seen how we can model our domain using entities and repositories; we've seen solutions for building forms, maintaining our database schema, and validating user input.
+Let's review what we've done: we've traced requests through Hanami's major frameworks to understand how they relate to each other; we've seen how we can model our domain using entities and repositories; we've seen solutions for building forms, maintaining our database schema, and validating user input.
 
 We've come a long way, but there's still plenty more to explore.
-Explore the [other guides](/guides), the [Lotus API documentation](http://www.rubydoc.info/gems/lotusrb), read the [source code](https://github.com/lotus) and follow the [blog](/blog).
+Explore the [other guides](/guides), the [Hanami API documentation](http://www.rubydoc.info/gems/hanami), read the [source code](https://github.com/hanami) and follow the [blog](/blog).
 
 **Above all, enjoy building amazing things!**
+
+<div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,000+ developers.
+    </p>
+    <form action="http://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>

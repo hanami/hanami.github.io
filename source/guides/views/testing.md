@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - View Testing
+title: Hanami | Guides - View Testing
 ---
 
 # View Testing
@@ -16,7 +16,7 @@ require_relative '../../../../apps/web/views/books/show'
 
 RSpec.describe Web::Views::Books::Show do
   let(:exposures) { Hash[book: double('book', price: 1.00), current_user: user] }
-  let(:template)  { Lotus::View::Template.new('apps/web/templates/books/show.html.erb') }
+  let(:template)  { Hanami::View::Template.new('apps/web/templates/books/show.html.erb') }
   let(:view)      { Web::Views::Home::Another.new(template, exposures) }
   let(:rendered)  { view.render }
   let(:user)      { double('user', admin?: false) }

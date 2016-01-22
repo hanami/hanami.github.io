@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Migrations
+title: Hanami | Guides - Migrations
 ---
 
 # Migrations
@@ -15,7 +15,7 @@ Migrations are Ruby files stored by default under `db/migrations`.
 Their name is composed by a UTC timestamp and a snake case name (eg `db/migrations/20150621165604_create_books.rb`).
 
 ```ruby
-Lotus::Model.migration do
+Hanami::Model.migration do
   change do
     create_table :books do
       primary_key :id
@@ -52,12 +52,12 @@ When we "migrate" a database we are going into an _"up"_ direction because we're
 Migrations modifications can be rolled back (_"down"_ direction).
 
 When we use `change` in our migrations, we're implicitly describing _"up"_ modifications.
-Their counterpart can be inferred by `Lotus::Model` when we migrate _"down"_ our database.
+Their counterpart can be inferred by `Hanami::Model` when we migrate _"down"_ our database.
 
 Imagine we have the following code:
 
 ```ruby
-Lotus::Model.migration do
+Hanami::Model.migration do
   change do
     create_table :books do
       # ...
@@ -66,12 +66,12 @@ Lotus::Model.migration do
 end
 ```
 
-When we use `create_table`, Lotus::Model will use `drop_table` in case we want to rollback this migration.
+When we use `create_table`, Hanami::Model will use `drop_table` in case we want to rollback this migration.
 
 In case we want to have concrete code for our _"down"_ policy, we can use `up` and `down` blocks.
 
 ```ruby
-Lotus::Model.migration do
+Hanami::Model.migration do
   up do
     create_table :books do
       # ...
@@ -86,4 +86,4 @@ end
 
 ## References
 
-Lotus::Model uses [Sequel](http://sequel.jeremyevans.net/) under the hood as database migration engine. If there is any aspect that isn't covered by our documentation or tests, please refer to [Sequel documentation](http://sequel.jeremyevans.net/rdoc/files/doc/schema_modification_rdoc.html).
+Hanami::Model uses [Sequel](http://sequel.jeremyevans.net/) under the hood as database migration engine. If there is any aspect that isn't covered by our documentation or tests, please refer to [Sequel documentation](http://sequel.jeremyevans.net/rdoc/files/doc/schema_modification_rdoc.html).

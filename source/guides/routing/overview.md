@@ -1,21 +1,21 @@
 ---
-title: Lotus - Guides - Routing Overview
+title: Hanami | Guides - Routing Overview
 ---
 
 # Overview
 
-Lotus applications use [Lotus::Router](https://github.com/lotus/router) for routing: a Rack compatible, lightweight and fast HTTP router for Ruby.
+Hanami applications use [Hanami::Router](https://github.com/hanami/router) for routing: a Rack compatible, lightweight and fast HTTP router for Ruby.
 
 ## Getting started
 
 With your favorite editor open `apps/web/config/routes.rb` and add the following line.
 
 ```ruby
-get '/hello', to: ->(env) { [200, {}, ['Hello from Lotus!']] }
+get '/hello', to: ->(env) { [200, {}, ['Hello from Hanami!']] }
 ```
 
-Then start the server with `bundle exec lotus server` and visit [http://localhost:2300/hello](http://localhost:2300/hello).
-You should see `Hello from Lotus!` in your browser.
+Then start the server with `bundle exec hanami server` and visit [http://localhost:2300/hello](http://localhost:2300/hello).
+You should see `Hello from Hanami!` in your browser.
 
 Let's explain what we just did.
 We created a **route**, an application can have many routes.
@@ -25,7 +25,7 @@ Then we specify a relative URI (`/hello` for us) and the object that is responsi
 We can use most common HTTP verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `TRACE` and `OPTIONS`.
 
 ```ruby
-endpoint = ->(env) { [200, {}, ['Hello from Lotus!']] }
+endpoint = ->(env) { [200, {}, ['Hello from Hanami!']] }
 
 get     '/hello', to: endpoint
 post    '/hello', to: endpoint
@@ -41,7 +41,7 @@ options '/hello', to: endpoint
 Full Rack integration is great, but the most common endpoint that we'll use in our web applications is an **action**.
 Actions are objects responsible for responding to incoming HTTP requests.
 They have a nested naming like `Web::Controllers::Home::Index`.
-This is a really long name to write, that's why Lotus has a **naming convention** for it: `"home#index"`.
+This is a really long name to write, that's why Hanami has a **naming convention** for it: `"home#index"`.
 
 ```ruby
 # apps/web/config/routes.rb
@@ -51,17 +51,17 @@ get '/', to: "home#index" # => will route to Web::Controllers::Home::Index
 The first token is the name of the controller `"home"` is translated to `Home`.
 The same transformation will be applied to the name after the `#`: `"index"` to `Index`.
 
-Lotus is able to figure out the namespace (`Web::Controllers`) and to compose the full class name.
+Hanami is able to figure out the namespace (`Web::Controllers`) and to compose the full class name.
 
 ## Rack
 
-Lotus is compatible with [Rack SPEC](http://www.rubydoc.info/github/rack/rack/master/file/SPEC), and so the endpoints that we use MUST be compliant as well.
+Hanami is compatible with [Rack SPEC](http://www.rubydoc.info/github/rack/rack/master/file/SPEC), and so the endpoints that we use MUST be compliant as well.
 In the example above we used a `Proc` that was fitting our requirements.
 
 A valid endpoint can be an object, a class, an action, or an **application** that responds to `#call`.
 
 ```ruby
-get '/proc',       to: ->(env) { [200, {}, ['Hello from Lotus!']] }
+get '/proc',       to: ->(env) { [200, {}, ['Hello from Hanami!']] }
 get '/action',     to: "home#index"
 get '/middleware', to: Middleware
 get '/rack-app',   to: RackApp.new

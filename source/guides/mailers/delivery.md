@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Mailers Delivery
+title: Hanami | Guides - Mailers Delivery
 ---
 
 # Delivery
@@ -15,7 +15,7 @@ To render both the templates and deliver them as a multipart message, we simply 
 Mailers::Welcome.deliver
 ```
 
-Lotus mailers are flexible enough to adapt to several scenarios.
+Hanami mailers are flexible enough to adapt to several scenarios.
 
 ## Single Part Delivery
 
@@ -61,7 +61,7 @@ The second optional argument is a set of arbitrary configurations that we want t
 ```ruby
 # lib/bookshelf.rb
 # ...
-Lotus::Mailer.configure do
+Hanami::Mailer.configure do
   # ...
   delivery do
     development :test
@@ -79,9 +79,9 @@ end.load!
 ```
 
 For advanced configurations, please have a look at `mail` [gem](https://github.com/mikel/mail) by Mikel Lindsaar.
-At the low level, **Lotus::Mailer** uses this rock solid library.
+At the low level, **Hanami::Mailer** uses this rock solid library.
 
-Because Lotus uses `mail` gem, which is a _de facto_ standard for Ruby, we can have interoperability with all the most common gateways vendors.
+Because Hanami uses `mail` gem, which is a _de facto_ standard for Ruby, we can have interoperability with all the most common gateways vendors.
 [Sendgrid](https://devcenter.heroku.com/articles/sendgrid#ruby-rails), [Mandrill](https://devcenter.heroku.com/articles/mandrill#sending-with-smtp), [Postmark](https://devcenter.heroku.com/articles/postmark#sending-emails-via-the-postmark-smtp-interface) and [Mailgun](https://devcenter.heroku.com/articles/mailgun#sending-emails-via-smtp) just to name a few, use SMTP and have detailed setup guides.
 
 ### Custom Methods
@@ -95,7 +95,7 @@ Here's an example on how to use [Mandrill API](https://mandrillapp.com/api/docs/
 # ...
 require 'lib/mailers/mandrill_delivery_method'
 
-Lotus::Mailer.configure do
+Hanami::Mailer.configure do
   # ...
   delivery do
     production MandrillDeliveryMethod

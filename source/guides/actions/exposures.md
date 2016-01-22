@@ -1,11 +1,11 @@
 ---
-title: Lotus - Guides - Action Exposures
+title: Hanami - Guides - Action Exposures
 ---
 
 # Exposures
 
 For complex use cases we may want to pass data to views in order to present it to our users.
-Lotus puts emphasis on explicitness: data isn't shared between the controller action and the view unless we tell it to do so.
+Hanami puts emphasis on explicitness: data isn't shared between the controller action and the view unless we tell it to do so.
 
 We use a simple and powerful mechanism to achieve our goal: _**exposures**_.
 Exposures create a _getter_ on the action for the given name(s) and only the whitelisted instance variables are made available to the corresponding view.

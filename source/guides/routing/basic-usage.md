@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Basic Usage
+title: Hanami | Guides - Basic Usage
 ---
 
 # Basic Usage
@@ -62,7 +62,7 @@ get '/books(.:format)', to: 'books#show'
 Imagine we want to to serve static files from a user repository.
 It would be impossible to know in advance which files are stored and to prepare routes accordingly.
 
-To solve this problem, Lotus supports _wildcard matching_.
+To solve this problem, Hanami supports _wildcard matching_.
 
 ```ruby
 get '/files/*', to: 'files#show'
@@ -77,7 +77,7 @@ get '/hello',     to: 'greet#index', as: :greeting
 get '/books/:id', to: 'books#show',  as: :book
 ```
 
-When a Lotus application starts, it generates a Ruby module at the runtime under our application namespace: eg. `Web::Routes`.
+When a Hanami application starts, it generates a Ruby module at the runtime under our application namespace: eg. `Web::Routes`.
 We can use it to generate a relative or absolute URI for our route.
 
 ```ruby
@@ -99,7 +99,7 @@ Absolute URL generation is dependent on `scheme`, `host` and `port` settings in 
 Generating routes from `Web::Routes` is helpful, because that module can be accessed from anywhere.
 However, this syntax is noisy.
 
-Lotus has _routing helpers_ available as `routes` in: **actions**, **views** and **templates**.
+Hanami has _routing helpers_ available as `routes` in: **actions**, **views** and **templates**.
 
 ```ruby
 <%= routes.path(:greeting) %>

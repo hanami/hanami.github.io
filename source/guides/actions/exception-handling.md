@@ -1,11 +1,11 @@
 ---
-title: Lotus - Guides - Action Exception Handling
+title: Hanami | Guides - Action Exception Handling
 ---
 
 # Exception Handling
 
 Actions have an elegant API for exception handling.
-The behavior changes according to the current Lotus environment and the custom settings in our configuration.
+The behavior changes according to the current Hanami environment and the custom settings in our configuration.
 
 ## Default Behavior
 

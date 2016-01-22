@@ -1,5 +1,5 @@
 ---
-title: "Lotus - Guides - Command Line: Assets"
+title: "Hanami | Guides - Command Line: Assets"
 ---
 
 # Command Line
@@ -13,7 +13,7 @@ We can manage assets via the command line.
 This command is useful for **deployment** purposes.
 
 ```shell
-% bundle exec lotus assets precompile
+% bundle exec hanami assets precompile
 ```
 
 The first step it precompiles and copies all the assets from all the applications and third party gems under `public/assets/` directory.
@@ -42,7 +42,7 @@ Let's say we have a project with three applications: `admin`, `metrics` and `web
 ```ruby
 # config/environment.rb
 # ...
-Lotus::Container.configure do
+Hanami::Container.configure do
   mount Metrics::Application, at: '/metrics'
   mount Admin::Application,   at: '/admin'
   mount Web::Application,     at: '/'
@@ -55,7 +55,7 @@ They have the following sources:
   * Metrics: `apps/metrics/assets`
   * Web: `apps/web/assets`, `apps/web/vendor/assets`
 
-Furtermore, they all depend on Ember.js, which is distributed by an imaginary gem named `lotus-ember`.
+Furtermore, they all depend on Ember.js, which is distributed by an imaginary gem named `hanami-ember`.
 
 ```shell
 % tree .
@@ -85,7 +85,7 @@ Furtermore, they all depend on Ember.js, which is distributed by an imaginary ge
 # ...
 ```
 
-When we run `lotus assets precompile` on our server, here's the output.
+When we run `hanami assets precompile` on our server, here's the output.
 
 ```shell
 % tree public

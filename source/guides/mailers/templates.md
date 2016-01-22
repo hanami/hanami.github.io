@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - View Templates
+title: Hanami | Guides - View Templates
 ---
 
 # Templates
@@ -17,7 +17,7 @@ It's the translation of the name into a path: from `Mailers::ForgotPassword` to 
 The remaining part is made of multiple file extensions.
 The first is relative to the **_format_** and the latter is for the **_template engine_**.
 
-**Lotus only accepts `html` and `txt` formats for emails.**
+**Hanami only accepts `html` and `txt` formats for emails.**
 
 <p class="convention">
 For a given mailer named <code>Mailers::ForgotPassword</code>, there must be at least one template <code>forgot_password.[format].[engine]</code> under the mailers templates directory.
@@ -30,7 +30,7 @@ If we want to associate a different template to a mailer, we can use `template`.
 ```ruby
 # lib/bookshelf/mailers/forgot_password.rb
 class Mailers::ForgotPassword
-  include Lotus::Mailer
+  include Hanami::Mailer
   template 'send_password'
 end
 ```
@@ -39,8 +39,8 @@ Our view will look for `lib/bookshelf/mailers/templates/send_password.*` templat
 
 ## Engines
 
-Lotus looks at the last extension of a template file name to decide which engine to use (eg `welcome.html.erb` will use ERb).
-The builtin rendering engine is [ERb](http://en.wikipedia.org/wiki/ERuby), but Lotus supports countless rendering engines out of the box.
+Hanami looks at the last extension of a template file name to decide which engine to use (eg `welcome.html.erb` will use ERb).
+The builtin rendering engine is [ERb](http://en.wikipedia.org/wiki/ERuby), but Hanami supports countless rendering engines out of the box.
 
 This is a list of the supported engines.
 They are listed in order of **higher precedence**, for a given extension.
@@ -175,13 +175,13 @@ In order to use a different template engine we need to bundle the gem and to use
 ## Templates Directory
 
 Templates are located in the default directory `mailers/templates`, located under an application's directory `lib/bookshelf`, where `bookshelf` is the name of our application.
-If we want to customize this location, we can set a different value in Lotus::Mailer configuration.
+If we want to customize this location, we can set a different value in Hanami::Mailer configuration.
 
 ```ruby
 # lib/bookshelf.rb
 # ...
 
-Lotus::Mailer.configure do
+Hanami::Mailer.configure do
   # ...
   root 'path/to/templates'
 end.load!

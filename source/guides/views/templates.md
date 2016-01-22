@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - View Templates
+title: Hanami | Guides - View Templates
 ---
 
 # Templates
@@ -37,8 +37,8 @@ Our view will look for `apps/web/templates/home/index.*` template.
 
 ## Engines
 
-Lotus looks at the last extension of a template file name to decide which engine to use (eg `index.html.erb` will use ERb).
-The builtin rendering engine is [ERb](http://en.wikipedia.org/wiki/ERuby), but Lotus supports countless rendering engines out of the box.
+Hanami looks at the last extension of a template file name to decide which engine to use (eg `index.html.erb` will use ERb).
+The builtin rendering engine is [ERb](http://en.wikipedia.org/wiki/ERuby), but Hanami supports countless rendering engines out of the box.
 
 This is a list of the supported engines.
 They are listed in order of **higher precedence**, for a given extension.
@@ -178,7 +178,7 @@ If we want to customize this location, we can amend our application's configurat
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       templates 'path/to/templates'

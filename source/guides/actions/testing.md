@@ -1,10 +1,10 @@
 ---
-title: Lotus - Guides - Action Testing
+title: Hanami | Guides - Action Testing
 ---
 
 # Testing
 
-Lotus pays a lot of attention to code testability and it offers advanced features to make our lives easier.
+Hanami pays a lot of attention to code testability and it offers advanced features to make our lives easier.
 The framework supports Minitest (default) and RSpec.
 
 ## Unit Tests
@@ -103,7 +103,7 @@ end
 ```
 
 <p class="notice">
-Simulating request params and headers is simple for Lotus actions. We pass them as a <code>Hash</code> and they are transformed into an instance of <code>Lotus::Action::Params</code>.
+Simulating request params and headers is simple for Hanami actions. We pass them as a <code>Hash</code> and they are transformed into an instance of <code>Hanami::Action::Params</code>.
 </p>
 
 ### Exposures
@@ -115,7 +115,7 @@ How do we verify that the record is the one that we are looking for?
 
 Because we want to make `@user` available to the outside world, we're going to use an [_exposure_](/guides/actions/exposures).
 They are used to pass a data payload between an action and the corresponding view.
-When we do `expose :user`, Lotus creates a getter (`#user`), so we can easily assert if the record is the right one.
+When we do `expose :user`, Hanami creates a getter (`#user`), so we can easily assert if the record is the right one.
 
 ```ruby
 # apps/web/controllers/users/show.rb
@@ -220,15 +220,15 @@ Please be careful using doubles in unit tests. Always verify that the mocks are 
 Unit tests are a great tool to assert that low level interfaces work as expected.
 We always advise combining them with integration tests.
 
-In the case of Lotus web applications, we can write features (aka acceptance tests) with Capybara, but what do we use when we are building HTTP APIs?
+In the case of Hanami web applications, we can write features (aka acceptance tests) with Capybara, but what do we use when we are building HTTP APIs?
 The tool that we suggest is `rack-test`.
 
-Imagine we have an API application mounted at `/api/v1` in our `Lotus::Container`.
+Imagine we have an API application mounted at `/api/v1` in our `Hanami::Container`.
 
 ```ruby
 # config/environment.rb
 # ...
-Lotus::Container.configure do
+Hanami::Container.configure do
   mount ApiV1::Application, at: '/api/v1'
   mount Web::Application,   at: '/'
 end
@@ -267,7 +267,7 @@ describe "API V1 users" do
 
   # app is required by Rack::Test
   def app
-    Lotus::Container.new
+    Hanami::Container.new
   end
 
   it "is successful" do

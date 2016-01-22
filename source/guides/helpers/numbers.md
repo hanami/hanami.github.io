@@ -1,10 +1,10 @@
 ---
-title: Lotus - Guides - Number Helpers
+title: Hanami | Guides - Number Helpers
 ---
 
 ## Number Helpers
 
-Lotus offers a helpful way to present numbers via `#format_number`, a **private method** available only in views.
+Hanami offers a helpful way to present numbers via `#format_number`, a **private method** available only in views.
 
 ## Usage
 

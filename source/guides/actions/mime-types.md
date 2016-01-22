@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Action MIME Types
+title: Hanami | Guides - Action MIME Types
 ---
 
 # MIME Types
@@ -43,7 +43,7 @@ This is a setting that allows us to safely handle cases like our example; the de
 # apps/web/application.rb
 
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       default_request_format :json
@@ -61,7 +61,7 @@ The default value is `:html`.
 # apps/web/application.rb
 
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       default_response_format :json
@@ -79,7 +79,7 @@ The standard value is `utf-8`, but we can change it in our settings.
 # apps/web/application.rb
 
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       default_charset 'koi8-r'
@@ -132,7 +132,7 @@ end
 
 ## Register MIME Types
 
-Lotus knows about more than 100 of the most common MIME types.
+Hanami knows about more than 100 of the most common MIME types.
 However, we may want to add custom types in order to use them with `#format=` or `.accept`.
 
 In our application settings we can use `controller.format`, which accepts a Hash where the key is the format symbol (`:custom`) and the value is a string expressed in the MIME type standard (`application/custom`).
@@ -141,7 +141,7 @@ In our application settings we can use `controller.format`, which accepts a Hash
 # apps/web/application.rb
 
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       controller.format custom: 'application/custom'

@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Migrations Alter Tables
+title: Hanami | Guides - Migrations Alter Tables
 ---
 
 # Migrations
@@ -29,7 +29,7 @@ There is a convenient shortcut for this: `#alter_table`. It accepts the **name o
 The following syntaxes are **equivalent**.
 
 ```ruby
-Lotus::Model.migration do
+Hanami::Model.migration do
   change do
     add_column         :users, :email, String,  null: false, unique: true
     set_column_default :users, :visits_counts, default: 0
@@ -40,7 +40,7 @@ end
 The code above can be DRY'd with:
 
 ```ruby
-Lotus::Model.migration do
+Hanami::Model.migration do
   change do
     alter_table :users do
       # `users` table is implicit within this block, so it can be omitted.

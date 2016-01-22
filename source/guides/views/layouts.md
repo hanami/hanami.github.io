@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - View Layouts
+title: Hanami | Guides - View Layouts
 ---
 
 # Layouts
@@ -31,7 +31,7 @@ The context for a layout template is made of the layout and the current view.
 The latter has higher priority.
 
 Imagine to have the following line `<title><%= page_title %></title>`.
-If both the layout and the view implement `#page_title`, Lotus will use the one from the view.
+If both the layout and the view implement `#page_title`, Hanami will use the one from the view.
 
 ## Configure Layout
 
@@ -40,7 +40,7 @@ Default layout is defined in application's configuration.
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       layout :application
     end
@@ -49,7 +49,7 @@ end
 ```
 
 <p class="convention">
-Lotus transforms layout name in application's configuration, by appending the <code>Layout</code> suffix. Eg. <code>:application</code> for <code>Web::Views::ApplicationLayout</code>.
+Hanami transforms layout name in application's configuration, by appending the <code>Layout</code> suffix. Eg. <code>:application</code> for <code>Web::Views::ApplicationLayout</code>.
 </p>
 
 If we want to disable a layout for a view, we can use a DSL for that.

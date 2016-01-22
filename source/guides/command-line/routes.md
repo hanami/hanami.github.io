@@ -1,5 +1,5 @@
 ---
-title: "Lotus - Guides - Command Line: Routes"
+title: "Hanami | Guides - Command Line: Routes"
 ---
 
 # Command Line
@@ -9,7 +9,7 @@ title: "Lotus - Guides - Command Line: Routes"
 In order to print the routes defined by all the applications, use:
 
 ```
-% bundle exec lotus routes
+% bundle exec hanami routes
 
                      GET, HEAD  /               Web::Controllers::Home::Index
                books GET, HEAD  /books          Web::Controllers::Books::Index

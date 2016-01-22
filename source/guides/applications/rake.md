@@ -1,10 +1,10 @@
 ---
-title: Lotus - Guides - Applications Rake Tasks
+title: Hanami | Guides - Applications Rake Tasks
 ---
 
 # Rake Tasks
 
-Lotus ships with default Rake tasks that can be used as _prerequisites_ by developers to build their own tasks.
+Hanami ships with default Rake tasks that can be used as _prerequisites_ by developers to build their own tasks.
 
 ```shell
 % bundle exec rake -T
@@ -60,7 +60,7 @@ Imagine we want to build a Rake task that prints informations about our project:
 # Rakefile
 
 task print_informations: :preload do
-  puts ENV['LOTUS_ENV']              # => "development"
+  puts ENV['HANAMI_ENV']             # => "development"
   puts ENV['BOOKSHELF_DATABASE_URL'] # => "postgres://localhost/bookshelf_development"
   puts defined?(User)                # => nil
 end
@@ -105,4 +105,4 @@ For instance, Heroku expects to find the following Rake tasks in a Ruby applicat
 
 For Heroku, there isn't a way to customize the deploy, so we're supporting these "standard" Rake tasks from Ruby on Rails.
 
-**If you are in control of your deployment, don't rely on these Rake tasks, but please use `lotus` [command line](/guides/command-line/database), instead.**
+**If you are in control of your deployment, don't rely on these Rake tasks, but please use `hanami` [command line](/guides/command-line/database), instead.**

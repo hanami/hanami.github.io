@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Request & Response
+title: Hanami | Guides - Request & Response
 ---
 
 # Rack Integration
@@ -11,7 +11,7 @@ If we need to access raw data from Rack environment we can use `params.env`.
 
 ## Rack Middleware
 
-Lotus mounts a very thin default middleware stack.
+Hanami mounts a very thin default middleware stack.
 Additional components can be mounted globally, at the application level, or locally.
 
 ### Global Middleware
@@ -24,7 +24,7 @@ require './config/environment'
 require 'rack/auth/basic'
 
 use Rack::Auth::Basic
-run Lotus::Container.new
+run Hanami::Container.new
 ```
 
 ### Application Middleware
@@ -36,7 +36,7 @@ If we need a component that's only used by a specific application (under `apps/`
 require 'rack/auth/basic'
 
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       middleware.use Rack::Auth::Basic

@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - View Share Code
+title: Hanami | Guides - View Share Code
 ---
 
 # Share Code
@@ -33,7 +33,7 @@ Then we include in all the views of our application, via `view.prepare`.
 ```ruby
 # apps/web/application.rb
 module Web
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       # ...
       view.prepare do

@@ -1,12 +1,12 @@
 ---
-title: "Lotus - Guides - Architectures: Container"
+title: "Hanami | Guides - Architectures: Container"
 ---
 
 # Architectures
 
 ## Container
 
-This is the default Lotus architecture.
+This is the default Hanami architecture.
 We **strongly** suggest using it for your next product.
 
 It utilises two principles: [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html).
@@ -24,10 +24,10 @@ They are home to the main parts described above.
 We implement a set of functionalities, without worrying about how they can be exposed to the outside world.
 This is the **cornerstone** of our product, and we want to be careful on how we manage dependencies for it.
 
-`Lotus::Model` is the default choice for persisting our Ruby objects.
+`Hanami::Model` is the default choice for persisting our Ruby objects.
 This is a _soft-dependency_, it can be removed from our `Gemfile` and replaced with something else.
 
-Let's have a look at how the `lib/` directory appears for a new generated project called `bookshelf` that uses `Lotus::Model`.
+Let's have a look at how the `lib/` directory appears for a new generated project called `bookshelf` that uses `Hanami::Model`.
 
 ```shell
 % tree lib
@@ -61,7 +61,7 @@ We can add as many directories that we want, such as `lib/bookshelf/interactors`
 
 #### Delivery Mechanisms
 
-Lotus generates a default application named `Web`, which lives under `apps/web`.
+Hanami generates a default application named `Web`, which lives under `apps/web`.
 This application **depends** on the core of our product, as it uses entities, repositories and all the other objects defined there.
 
 It's used as web delivery mechanism, for our features.
@@ -86,7 +86,7 @@ apps/web
 
 Let's have a quick look at this code.
 
-The file `apps/web/application.rb` contains a Lotus application named `Web::Application`, here we can configure all the settings for this **component** of our project.
+The file `apps/web/application.rb` contains a Hanami application named `Web::Application`, here we can configure all the settings for this **component** of our project.
 Directories such as `apps/web/controllers`, `views` and `templates` will contain our [actions](/guides/actions/overview), [views](/guides/views/overview) and [templates](/guides/views/templates).
 
 Web assets such as javascripts and stylesheets will be automatically served by the application.
@@ -99,10 +99,10 @@ At a certain point in our story, we want to manage our users with an admin pane.
 We know that the set of features that we're going to introduce doesn't belong to our main UI (`Web`).
 On the other hand, it's **too early** for us to implement a microservices architecture, only for the purpose of helping our users reset their password.
 
-Lotus has a solution for our problem: we can generate a new app that lives in the same Ruby process, but it's a separated component.
+Hanami has a solution for our problem: we can generate a new app that lives in the same Ruby process, but it's a separated component.
 
 ```shell
-% bundle exec lotus generate app admin
+% bundle exec hanami generate app admin
 ```
 
 This command MUST be run from the root of our project. It will generate a new application (`Admin::Application`) under `apps/admin`.
@@ -133,7 +133,7 @@ Let's quickly introduce them:
   * `Gemfile` and `Gemfile.lock` are [Bundler](http://bundler.io) artifacts
   * `Rakefile` describes Rake task for our project.
   * `config/` contains an important file `config/environment.rb`, which is the **entry point** for our project.
-    By requiring it, we'll preload our dependencies (Ruby gems), Lotus frameworks and our code.
+    By requiring it, we'll preload our dependencies (Ruby gems), Hanami frameworks and our code.
   * `config.ru` is a file that describes how a Rack server must run our applications.
   * `db/` contains database files (for File System adapter or SQLite).
     When our project uses a SQL database it also contains `db/migrations` and `db/schema.sql`.

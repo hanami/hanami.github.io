@@ -1,5 +1,5 @@
 ---
-title: Lotus - Guides - Markup Escape Helpers
+title: Hanami | Guides - Markup Escape Helpers
 ---
 
 ## Markup Escape Helpers
@@ -7,7 +7,7 @@ title: Lotus - Guides - Markup Escape Helpers
 **Views escape automatically the output of their methods.**
 There are complex situations that views can't cover properly and that require an extra attention from us.
 
-Lotus makes available a set of escape helpers, to increase the security of our web applications.
+Hanami makes available a set of escape helpers, to increase the security of our web applications.
 They are **public methods** that are available both in views and templates.
 
 ## Escape HTML Contents
