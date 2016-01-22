@@ -1,4 +1,4 @@
-# Lotus website
+# Hanami website
 
 ## Setup
 
@@ -10,8 +10,8 @@
 ### Steps
 
 ```shell
-% git clone git@github.com:lotus/lotus.github.io.git
-% cd lotus.github.io
+% git clone git@github.com:hanami/hanami.github.io.git
+% cd hanami.github.io
 % bundle
 ```
 
