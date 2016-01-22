@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-   <title>Lotus</title>
-   <subtitle>Lotus framework blog</subtitle>
-   <link href="http://lotusrb.org/atom.xml" rel="self"/>
-   <link href="http://lotusrb.org/blog"/>
+   <title>Hanami</title>
+   <subtitle>Hanami web framework blog</subtitle>
+   <link href="http://hanamirb.org/atom.xml" rel="self"/>
+   <link href="http://hanamirb.org/blog"/>
    <updated>2016-01-19T09:48:00+01:00</updated>
-   <id>http://lotusrb.org/blog</id>
+   <id>http://hanamirb.org/blog</id>
    <author>
-     <name>Lotus</name>
-     <email>admin@lotusrb.org</email>
+     <name>Hanami</name>
+     <email>admin@hanamirb.org</email>
    </author>
 
      <entry>
        <title>Announcing Lotus v0.6.1</title>
-       <id>http://lotusrb.org/blog/2016/01/19/announcing-lotus-061.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2016/01/19/announcing-lotus-061.html"/>
+       <id>http://hanamirb.ororg/blog/2016/01/19/announcing-lotus-061.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/01/19/announcing-lotus-061.html"/>
        <updated>2016-01-19T09:48:00+01:00</updated>
        <author>
          <name>Luca Guidi</name>
@@ -66,24 +66,12 @@
 <h2>Upgrade Instructions</h2>
 
 <p>In order to get these bug fixes, just run <code>bundle update</code> from the root of the project.</p>
-
-<div style="display: inline">
-
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.6.1" data-url="http://lotusrb.org/blog/2016/01/19/announcing-lotus-061.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2016/01/19/announcing-lotus-061.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>
 ]]></content>
      </entry>
      <entry>
        <title>Announcing Lotus v0.6.0</title>
-       <id>http://lotusrb.org/blog/2016/01/12/announcing-lotus-060.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2016/01/12/announcing-lotus-060.html"/>
+       <id>http://hanamirb.ororg/blog/2016/01/12/announcing-lotus-060.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/01/12/announcing-lotus-060.html"/>
        <updated>2016-01-12T13:57:00+01:00</updated>
        <author>
          <name>Luca Guidi</name>
@@ -211,24 +199,12 @@ We want to make <strong>stronger</strong> and <strong>flexible</strong> the way 
 It&rsquo;s <strong>not necessary</strong> to instantiate an entity to write a record, repositories can <strong>directly accept data</strong> and persist it.</p>
 
 <p>We want to <strong>simplify</strong> our day to day life with Lotus.</p>
-
-<div style="display: inline">
-
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.6.0" data-url="http://lotusrb.org/blog/2016/01/12/announcing-lotus-060.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2016/01/12/announcing-lotus-060.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>
 ]]></content>
      </entry>
      <entry>
        <title>Introducing Assets</title>
-       <id>http://lotusrb.org/blog/2015/12/29/introducing-assets.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/12/29/introducing-assets.html"/>
+       <id>http://hanamirb.ororg/blog/2015/12/29/introducing-assets.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2015/12/29/introducing-assets.html"/>
        <updated>2015-12-29T17:12:00+01:00</updated>
        <author>
          <name>Luca Guidi</name>
@@ -410,8 +386,8 @@ If you can&rsquo;t wait, try it with <a href="https://github.com/lotus/lotus">ma
      </entry>
      <entry>
        <title>Announcing Lotus v0.5.0</title>
-       <id>http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html"/>
+       <id>http://hanamirb.ororg/blog/2015/09/30/announcing-lotus-050.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2015/09/30/announcing-lotus-050.html"/>
        <updated>2015-09-30T09:11:00+02:00</updated>
        <author>
          <name>Luca Guidi</name>
@@ -581,24 +557,12 @@ It defaults to <code>:html</code>, but if you are building a JSON API, you may f
 <p>⬇️ If you want to get alerted, please consider to subscribe to our <a href="http://lotusrb.org/mailing-list/">mailing list</a> using the form below. ⬇️</p>
 
 <p><strong>Until then, happy hacking!</strong></p>
-
-<div style="display: inline">
-
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.5.0" data-url="http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2015/09/30/announcing-lotus-050.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>
 ]]></content>
      </entry>
      <entry>
        <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/07/12/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/07/12/weekly-changelog.html"/>
+       <id>http://hanamirb.ororg/blog/2015/07/12/weekly-changelog.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2015/07/12/weekly-changelog.html"/>
        <updated>2015-07-12T14:42:00+02:00</updated>
        <author>
          <name>Trung Lê</name>
@@ -664,8 +628,8 @@ It defaults to <code>:html</code>, but if you are building a JSON API, you may f
      </entry>
      <entry>
        <title>Announcing Lotus v0.4.1</title>
-       <id>http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html"/>
+       <id>http://hanamirb.ororg/blog/2015/07/10/announcing-lotus-041.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2015/07/10/announcing-lotus-041.html"/>
        <updated>2015-07-10T19:16:00+02:00</updated>
        <author>
          <name>Luca Guidi</name>
@@ -720,23 +684,12 @@ It now uses <code>createdb</code> when we do <code>lotus db create</code>.</p>
 It includes <strong>websockets</strong>, <strong>assets</strong>, <strong>mailers</strong>, <strong>associations</strong> and experimental features.
 Please join the discussion and let us to hear your opinion.
 Thank you!</p>
-
-<div style="display: inline">
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.4.1" data-url="http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2015/07/10/announcing-lotus-041.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>
 ]]></content>
      </entry>
      <entry>
        <title>Announcing Rails Girls Summer of Code x Lotus</title>
-       <id>http://lotusrb.org/blog/2015/06/30/announcing-lotus-rgsoc.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/06/30/announcing-lotus-rgsoc.html"/>
+       <id>http://hanamirb.ororg/blog/2015/06/30/announcing-lotus-rgsoc.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2015/06/30/announcing-lotus-rgsoc.html"/>
        <updated>2015-06-30T10:23:00+02:00</updated>
        <author>
          <name>Trung Lê</name>
@@ -773,8 +726,8 @@ The integration with Lotus applications will be add a new code generator for mai
      </entry>
      <entry>
        <title>Weekly Changelog</title>
-       <id>http://lotusrb.org/blog/2015/06/28/weekly-changelog.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/06/28/weekly-changelog.html"/>
+       <id>http://hanamirb.ororg/blog/2015/06/28/weekly-changelog.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2015/06/28/weekly-changelog.html"/>
        <updated>2015-06-28T21:51:00+02:00</updated>
        <author>
          <name>Trung Lê</name>
@@ -836,8 +789,8 @@ The integration with Lotus applications will be add a new code generator for mai
      </entry>
      <entry>
        <title>Announcing Lotus v0.4.0</title>
-       <id>http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html"/>
+       <id>http://hanamirb.ororg/blog/2015/06/23/announcing-lotus-040.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2015/06/23/announcing-lotus-040.html"/>
        <updated>2015-06-23T10:23:00+02:00</updated>
        <author>
          <name>Luca Guidi</name>
@@ -1082,24 +1035,12 @@ We wrote a new extensive <a href="/guides">section</a> in our website to explain
 We&rsquo;ll continue to deliver value and new features starting from tomorrow.</p>
 
 <p><a href="/guides/getting-started">Happy hacking</a>.</p>
-
-<div style="display: inline">
-
-  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-
-  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Announcing Lotus v0.4.0" data-url="http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
-  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
-  <script type="text/javascript">
-    reddit_url = "http://lotusrb.org/blog/2015/06/23/announcing-lotus-040.html";
-  </script>
-  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
-</div>
 ]]></content>
      </entry>
      <entry>
        <title>Introducing Database Migrations</title>
-       <id>http://lotusrb.org/blog/2015/06/17/introducing-database-migrations.html</id>
-       <link rel="alternate" href="http://lotusrb.org/blog/2015/06/17/introducing-database-migrations.html"/>
+       <id>http://hanamirb.ororg/blog/2015/06/17/introducing-database-migrations.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2015/06/17/introducing-database-migrations.html"/>
        <updated>2015-06-17T16:34:00+02:00</updated>
        <author>
          <name>Luca Guidi</name>

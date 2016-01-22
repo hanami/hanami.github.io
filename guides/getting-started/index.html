@@ -1,203 +1,206 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Getting Started</title>
-    <meta name="description" content="Lotus, a complete web framework for Ruby" />
-    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+    <meta name="description" content="Hanami - The web, with simplicity" />
+    <meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="author" content="Luca Guidi">
+    <link href="http://feeds.feedburner.com/hanamirb" rel="alternate" title="Hanami" type="application/atom+xml" />
 
-    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+    <title>Hanami | Guides - Getting Started</title>
 
-    <script src="//use.typekit.net/xhp5wmc.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+    <link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/application-minimal.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/guides.css" rel="stylesheet" type="text/css" />
   </head>
-  <body class="subpage docs">
-    <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 
-<nav class="navbar navbar-fixed-top container-fluid">
-  <div class="wrapper container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="/guides">Guides</a></li>
-        <li><a href="/community">Community</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.6.1</a></li>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+            <span>Hanami</span>
+          </a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="/guides">Guides</a>
+            </li>
+            <li>
+              <a href="/community">Community</a>
+            </li>
+            <li>
+              <a href="https://github.com/hanami" target="_blank">Source Code</a>
+            </li>
+            <li>
+              <a href="/blog">Blog</a>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container docs-content">
+      <ul id="markdown-toc">
+        <li></li>
+        <li><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"><a href="https://github.com/hanami/hanami.github.io/edit/build/source/guides/getting-started.md" target="_blank"></a></span></li>
+
+        <li class="toc-group">
+          <span>Introduction</span>
+          <ul>
+            <li><a href="/guides/getting-started">Getting Started</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Architectures</span>
+          <ul>
+            <li><a href="/guides/architectures/overview">Overview</a></li>
+            <li><a href="/guides/architectures/container">Container</a></li>
+            <li><a href="/guides/architectures/application">Application</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Applications</span>
+          <ul>
+            <li><a href="/guides/applications/initializers">Initializers</a></li>
+            <li><a href="/guides/applications/rake">Rake</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Routing</span>
+          <ul>
+            <li><a href="/guides/routing/overview">Overview</a></li>
+            <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
+            <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Actions</span>
+          <ul>
+            <li><a href="/guides/actions/overview">Overview</a></li>
+            <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
+            <li><a href="/guides/actions/parameters">Parameters</a></li>
+            <li><a href="/guides/actions/request-and-response">Request & Response</a></li>
+            <li><a href="/guides/actions/exposures">Exposures</a></li>
+            <li><a href="/guides/actions/rack-integration">Rack Integration</a></li>
+            <li><a href="/guides/actions/mime-types">MIME Types</a></li>
+            <li><a href="/guides/actions/cookies">Cookies</a></li>
+            <li><a href="/guides/actions/sessions">Sessions</a></li>
+            <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
+            <li><a href="/guides/actions/control-flow">Control Flow</a></li>
+            <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
+            <li><a href="/guides/actions/share-code">Share Code</a></li>
+            <li><a href="/guides/actions/testing">Testing</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Views</span>
+          <ul>
+            <li><a href="/guides/views/overview">Overview</a></li>
+            <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
+            <li><a href="/guides/views/templates">Templates</a></li>
+            <li><a href="/guides/views/mime-types">MIME Types</a></li>
+            <li><a href="/guides/views/layouts">Layouts</a></li>
+            <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
+            <li><a href="/guides/views/share-code">Share Code</a></li>
+            <li><a href="/guides/views/testing">Testing</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Models</span>
+          <ul>
+            <li><a href="/guides/models/overview">Overview</a></li>
+            <li><a href="/guides/models/entities">Entities</a></li>
+            <li><a href="/guides/models/repositories">Repositories</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Migrations</span>
+          <ul>
+            <li><a href="/guides/migrations/overview">Overview</a></li>
+            <li><a href="/guides/migrations/create-table">Create Table</a></li>
+            <li><a href="/guides/migrations/alter-table">Alter Table</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Helpers</span>
+          <ul>
+            <li><a href="/guides/helpers/overview">Overview</a></li>
+            <li><a href="/guides/helpers/html5">HTML5</a></li>
+            <li><a href="/guides/helpers/forms">Forms</a></li>
+            <li><a href="/guides/helpers/routing">Routing</a></li>
+            <li><a href="/guides/helpers/assets">Assets</a></li>
+            <li><a href="/guides/helpers/links">Links</a></li>
+            <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+            <li><a href="/guides/helpers/numbers">Numbers</a></li>
+            <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Mailers</span>
+          <ul>
+            <li><a href="/guides/mailers/overview">Overview</a></li>
+            <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+            <li><a href="/guides/mailers/templates">Templates</a></li>
+            <li><a href="/guides/mailers/delivery">Delivery</a></li>
+            <li><a href="/guides/mailers/share-code">Share Code</a></li>
+            <li><a href="/guides/mailers/testing">Testing</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Assets</span>
+          <ul>
+            <li><a href="/guides/assets/overview">Overview</a></li>
+            <li><a href="/guides/assets/preprocessors">Preprocessors</a></li>
+            <li><a href="/guides/assets/compressors">Compressors</a></li>
+            <li><a href="/guides/assets/content-delivery-network">Content Delivery Network (CDN)</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Command Line</span>
+          <ul>
+            <li><a href="/guides/command-line/applications">Applications</a></li>
+            <li><a href="/guides/command-line/generators">Generators</a></li>
+            <li><a href="/guides/command-line/destroy">Destroy</a></li>
+            <li><a href="/guides/command-line/database">Database</a></li>
+            <li><a href="/guides/command-line/assets">Assets</a></li>
+            <li><a href="/guides/command-line/routes">Routes</a></li>
+            <li><a href="/guides/command-line/version">Version</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Upgrade Notes</span>
+          <ul>
+            <li><a href="/guides/upgrade-notes/v060">v0.6.0</a></li>
+          </ul>
+        </li>
       </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
 
+      <h1>Getting Started</h1>
 
-    <section class="docs wrapper animated fadeIn">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-3 hidden-sm hidden-xs sidebar">
-            <ul class="nav nav-sidebar">
-              <li>
-                <span class="heading">Getting Started</span>
-                <ul class="nav">
-                  <li><a href="/guides/getting-started">Getting Started</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Architectures</span>
-                <ul class="nav">
-                  <li><a href="/guides/architectures/overview">Overview</a></li>
-                  <li><a href="/guides/architectures/container">Container</a></li>
-                  <li><a href="/guides/architectures/application">Application</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Applications</span>
-                <ul class="nav">
-                  <li><a href="/guides/applications/initializers">Initializers</a></li>
-                  <li><a href="/guides/applications/rake">Rake</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Routing</span>
-                <ul class="nav">
-                  <li><a href="/guides/routing/overview">Overview</a></li>
-                  <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
-                  <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Actions</span>
-                <ul class="nav">
-                  <li><a href="/guides/actions/overview">Overview</a></li>
-                  <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
-                  <li><a href="/guides/actions/parameters">Parameters</a></li>
-                  <li><a href="/guides/actions/request-and-response">Request & Response</a></li>
-                  <li><a href="/guides/actions/exposures">Exposures</a></li>
-                  <li><a href="/guides/actions/rack-integration">Rack Integration</a></li>
-                  <li><a href="/guides/actions/mime-types">MIME Types</a></li>
-                  <li><a href="/guides/actions/cookies">Cookies</a></li>
-                  <li><a href="/guides/actions/sessions">Sessions</a></li>
-                  <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
-                  <li><a href="/guides/actions/control-flow">Control Flow</a></li>
-                  <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
-                  <li><a href="/guides/actions/share-code">Share Code</a></li>
-                  <li><a href="/guides/actions/testing">Testing</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Views</span>
-                <ul class="nav">
-                  <li><a href="/guides/views/overview">Overview</a></li>
-                  <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
-                  <li><a href="/guides/views/templates">Templates</a></li>
-                  <li><a href="/guides/views/mime-types">MIME Types</a></li>
-                  <li><a href="/guides/views/layouts">Layouts</a></li>
-                  <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
-                  <li><a href="/guides/views/share-code">Share Code</a></li>
-                  <li><a href="/guides/views/testing">Testing</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Models</span>
-                <ul class="nav">
-                  <li><a href="/guides/models/overview">Overview</a></li>
-                  <li><a href="/guides/models/entities">Entities</a></li>
-                  <li><a href="/guides/models/repositories">Repositories</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Migrations</span>
-                <ul class="nav">
-                  <li><a href="/guides/migrations/overview">Overview</a></li>
-                  <li><a href="/guides/migrations/create-table">Create Table</a></li>
-                  <li><a href="/guides/migrations/alter-table">Alter Table</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Helpers</span>
-                <ul class="nav">
-                  <li><a href="/guides/helpers/overview">Overview</a></li>
-                  <li><a href="/guides/helpers/html5">HTML5</a></li>
-                  <li><a href="/guides/helpers/forms">Forms</a></li>
-                  <li><a href="/guides/helpers/routing">Routing</a></li>
-                  <li><a href="/guides/helpers/assets">Assets</a></li>
-                  <li><a href="/guides/helpers/links">Links</a></li>
-                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
-                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
-                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Mailers</span>
-                <ul class="nav">
-                  <li><a href="/guides/mailers/overview">Overview</a></li>
-                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
-                  <li><a href="/guides/mailers/templates">Templates</a></li>
-                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
-                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
-                  <li><a href="/guides/mailers/testing">Testing</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Assets</span>
-                <ul class="nav">
-                  <li><a href="/guides/assets/overview">Overview</a></li>
-                  <li><a href="/guides/assets/preprocessors">Preprocessors</a></li>
-                  <li><a href="/guides/assets/compressors">Compressors</a></li>
-                  <li><a href="/guides/assets/content-delivery-network">Content Delivery Network (CDN)</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Command Line</span>
-                <ul class="nav">
-                  <li><a href="/guides/command-line/applications">Applications</a></li>
-                  <li><a href="/guides/command-line/generators">Generators</a></li>
-                  <li><a href="/guides/command-line/destroy">Destroy</a></li>
-                  <li><a href="/guides/command-line/database">Database</a></li>
-                  <li><a href="/guides/command-line/assets">Assets</a></li>
-                  <li><a href="/guides/command-line/routes">Routes</a></li>
-                  <li><a href="/guides/command-line/version">Version</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Upgrade Notes</span>
-                <ul class="nav">
-                  <li><a href="/guides/upgrade-notes/v060">v0.6.0</a></li>
-                </ul>
-              </li>
-            </ul>
-
-          </div>
-
-          <div class="col-md-9 main">
-            <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/getting-started.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Getting Started</h1>
-
-<p>In this guide we will set up our first Lotus project and build a simple bookshelf project.
-We&rsquo;ll touch on all the major components of the Lotus framework, all guided by tests.</p>
+<p>In this guide we will set up our first Hanami project and build a simple bookshelf project.
+We&rsquo;ll touch on all the major components of the Hanami framework, all guided by tests.</p>
 
 <h2>Prerequisites</h2>
 
@@ -209,12 +212,12 @@ First, we&rsquo;re going to assume a basic knowledge of developing web applicati
 <p>Lastly, in this guide we&rsquo;ll be using a <a href="http://www.postgresql.org">PostgreSQL</a> database.
 If you want to follow along, make sure you have a working installation of Ruby 2.2 and PostgreSQL 9.4 on your system.</p>
 
-<h2>Create a new Lotus project</h2>
+<h2>Create a new Hanami project</h2>
 
-<p>To create a new Lotus project, we need to install the Lotus gem from Rubygems.
-Then we can use the new <code>lotus</code> executable to generate a new project:</p>
-<pre class="language-ruby plaintext"><code>% gem install lotusrb
-% lotus new bookshelf --database=postgres
+<p>To create a new Hanami project, we need to install the Hanami gem from Rubygems.
+Then we can use the new <code>hanami</code> executable to generate a new project:</p>
+<pre class="language-ruby plaintext"><code>% gem install hanami
+% hanami new bookshelf --database=postgres
 </code></pre>
 
 <p>This will create a new directory <code>bookshelf</code> in our current location.
@@ -238,7 +241,7 @@ Let&rsquo;s see what it contains:</p>
 <li><code>Gemfile</code> is a Bundler artifact to manage Rubygems dependencies.</li>
 <li><code>Rakefile</code> describes our Rake tasks.</li>
 <li><code>apps</code> contains one or more web applications compatible with Rack.
-Here we can find the first generated Lotus application called <code>Web</code>.
+Here we can find the first generated Hanami application called <code>Web</code>.
 It&rsquo;s the place where we find our controllers, views, routes and templates.</li>
 <li><code>config</code> contains configuration files.</li>
 <li><code>config.ru</code> is for Rack servers.</li>
@@ -249,18 +252,18 @@ It&rsquo;s the place where we find our controllers, views, routes and templates.
 
 <p>Go ahead and install our gem dependency with Bundler; then we can launch a development server:</p>
 <pre class="language-ruby plaintext"><code>% bundle install
-% bundle exec lotus server
+% bundle exec hanami server
 </code></pre>
 
-<p>And&hellip; bask in the glory of your first Lotus project at
+<p>And&hellip; bask in the glory of your first Hanami project at
 <a href="http://localhost:2300">http://localhost:2300</a>! We should see a screen similar to this:</p>
 
-<p><img src="/guides/screenshot.png" alt="Lotus first screen" class="img-responsive"></p>
+<p><img src="/guides/screenshot.png" alt="Hanami first screen" class="img-responsive"></p>
 
-<h2>Lotus Architectures</h2>
+<h2>Hanami Architectures</h2>
 
-<p>Lotus supports a few different architectures to support the needs of the current project.
-The default one that we&rsquo;re going to explore is called <em>Container</em>, because <strong>it can host several Lotus (and Rack) applications in the same Ruby process</strong>.</p>
+<p>Hanami supports a few different architectures to support the needs of the current project.
+The default one that we&rsquo;re going to explore is called <em>Container</em>, because <strong>it can host several Hanami (and Rack) applications in the same Ruby process</strong>.</p>
 
 <p>These applications live under <code>apps/</code>.
 Each of them can be a component of our product, such as the user facing web interface, the admin pane, metrics, HTTP API etc..</p>
@@ -268,14 +271,14 @@ Each of them can be a component of our product, such as the user facing web inte
 <p>All these parts are a <em>delivery mechanism</em> to the business logic that lives under <code>lib/</code>.
 This is the place where our models are defined, and interact with each other to compose the <strong>features</strong> that our product provides.</p>
 
-<p>Lotus Container arch is heavily inspired by <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>.</p>
+<p>Hanami Container arch is heavily inspired by <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>.</p>
 
 <h2>Exploring App By Writing Our First Test</h2>
 
 <p>The opening screen we see when we point our browser at our app, is a
 default page which is displayed when there are no routes defined.</p>
 
-<p>Lotus encourages <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">Behavior Driven Development</a> (BDD) as a way to write web applications.
+<p>Hanami encourages <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">Behavior Driven Development</a> (BDD) as a way to write web applications.
 In order to get our first custom page to display, we&rsquo;ll write a high-level feature test:</p>
 <pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/visit_home_spec.rb</span>
 <span class="nb">require</span> <span class="s1">'features_helper'</span>
@@ -289,10 +292,10 @@ In order to get our first custom page to display, we&rsquo;ll write a high-level
 <span class="k">end</span>
 </code></pre>
 
-<p>Note that, although Lotus is ready for a Behavior Driven Development workflow out of the box, <strong>it is in no way bound to any particular testing framework</strong> &ndash; nor does it come with special integrations or libraries.</p>
+<p>Note that, although Hanami is ready for a Behavior Driven Development workflow out of the box, <strong>it is in no way bound to any particular testing framework</strong> &ndash; nor does it come with special integrations or libraries.</p>
 
 <p>We&rsquo;ll go with <a href="https://github.com/seattlerb/minitest">Minitest</a> here (which is the default), but we can use <a href="http://rspec.info">RSpec</a> by creating the project with <code>--test=rspec</code> option.
-Lotus will then generate helpers and stub files for it.</p>
+Hanami will then generate helpers and stub files for it.</p>
 
 <h3>Following A Request</h3>
 
@@ -307,7 +310,7 @@ F
 Finished in 0.018611s, 53.7305 runs/s, 53.7305 assertions/s.
 
   1) Failure:
-Homepage#test_0001_is successful [/Users/lotus/bookshelf/spec/web/features/visit_home_spec.rb:6]:
+Homepage#test_0001_is successful [/Users/hanami/bookshelf/spec/web/features/visit_home_spec.rb:6]:
 Expected "<span class="cp">&lt;!DOCTYPE html&gt;</span>\n<span class="nt">&lt;html&gt;</span>\n  <span class="nt">&lt;head&gt;</span>\n    <span class="nt">&lt;title&gt;</span>Not Found<span class="nt">&lt;/title&gt;</span>\n  <span class="nt">&lt;/head&gt;</span>\n  <span class="nt">&lt;body&gt;</span>\n    <span class="nt">&lt;h1&gt;</span>Not Found<span class="nt">&lt;/h1&gt;</span>\n  <span class="nt">&lt;/body&gt;</span>\n<span class="nt">&lt;/html&gt;</span>\n" to include "Bookshelf".
 
 1 runs, 1 assertions, 1 failures, 0 errors, 0 skips
@@ -366,19 +369,19 @@ Finished <span class="k">in </span>0.011854s, 84.3600 runs/s, 168.7200 assertion
 
 <p>Did you wonder about the <code>Web</code> constant you saw referenced in the controllers and views?
 Where did it come from?
-Lotus uses a <em>&ldquo;Container&rdquo;</em> architecture by default, whereby a single project can contain multiple applications.
+Hanami uses a <em>&ldquo;Container&rdquo;</em> architecture by default, whereby a single project can contain multiple applications.
 Such applications might include a JSON API, an admin panel, a marketing website, and so forth.</p>
 
 <p>All these applications live under <code>apps/</code>, with the default application named <code>web</code>.
-Lotus&rsquo; core frameworks are duplicated when the container boots, so configurations for different applications don&rsquo;t interfere with others.</p>
+Hanami&rsquo;s core frameworks are duplicated when the container boots, so configurations for different applications don&rsquo;t interfere with others.</p>
 
-<p>Let&rsquo;s recap what we&rsquo;ve seen so far: to get our own page on the screen, we followed the execution path of a request in Lotus through the router into a controller action, through a view, to a template file.</p>
+<p>Let&rsquo;s recap what we&rsquo;ve seen so far: to get our own page on the screen, we followed the execution path of a request in Hanami through the router into a controller action, through a view, to a template file.</p>
 
 <p>We can find out more about <a href="/guides/routing/overview">routing</a>, <a href="/guides/actions/overview">actions</a> and <a href="/guides/views/overview">views</a> in their respective guides.</p>
 
 <h2>Generating New Actions</h2>
 
-<p>Let&rsquo;s use our new knowledge about the major Lotus components to add a new action.
+<p>Let&rsquo;s use our new knowledge about the major Hanami components to add a new action.
 The purpose of our Bookshelf project is to manage books.</p>
 
 <p>We&rsquo;ll store books in our database and let the user manage them with our project.
@@ -401,11 +404,11 @@ A first step would be to show a listing of all the books in our system.</p>
 
 <p>The test is simple enough, and fails because the URL <code>/books</code> is not currently recognised in our application. We&rsquo;ll create a new controller action to fix that.</p>
 
-<h3>Lotus Generators</h3>
+<h3>Hanami Generators</h3>
 
-<p>Lotus ships with various <strong>generators</strong> to save on typing some of the code involved in adding new functionality.
+<p>Hanami ships with various <strong>generators</strong> to save on typing some of the code involved in adding new functionality.
 In our terminal, enter:</p>
-<pre class="language-ruby plaintext"><code>% lotus generate action web books#index
+<pre class="language-ruby plaintext"><code>% hanami generate action web books#index
 </code></pre>
 
 <p>This will generate a new action <em>index</em> in the <em>books</em> controller of the <em>web</em> application.
@@ -415,7 +418,7 @@ It gives us an empty action, view and template; it also adds a default route to 
 
 <p>If you&rsquo;re using ZSH, you may get <code>zsh: no matches found: books#new</code>. In that case, you can use:
 <code>
-% lotus generate action web books/index
+% hanami generate action web books/index
 </code></p>
 
 <p>To make our test pass, we need to edit our newly generated template file in <code>apps/web/templates/books/index.html.erb</code>:</p>
@@ -437,7 +440,7 @@ It gives us an empty action, view and template; it also adds a default route to 
 
 <p>Save your changes and see your tests pass!</p>
 
-<p>The terminology of controllers and actions might be confusing, so let&rsquo;s clear this up: actions form the basis of our Lotus applications; controllers are mere modules that group several actions together.
+<p>The terminology of controllers and actions might be confusing, so let&rsquo;s clear this up: actions form the basis of our Hanami applications; controllers are mere modules that group several actions together.
 So while the &ldquo;controller&rdquo; is <em>conceptually</em> present in our project, in practice we only deal with actions.</p>
 
 <p>We&rsquo;ve used a generator to create a new endpoint in our application.
@@ -484,13 +487,13 @@ Enter entities and repositories:</p>
 This makes them <strong>lightweight</strong> and <strong>easy to test</strong>.</p>
 
 <p>For this reason we need a repository to persist the data that a <code>Book</code> depends on.
-Lotus uses the <a href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data Mapper</a> pattern.
+Hanami uses the <a href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data Mapper</a> pattern.
 In this way we&rsquo;re able to save any Ruby object in a database.
-That means we can adapt Lotus to use existing Ruby projects and to provide a way to persist them.
+That means we can adapt Hanami to use existing Ruby projects and to provide a way to persist them.
 Read more about entities and repositories in the <a href="/guides/models/overview">models guide</a>.</p>
 
-<p>Lotus ships with a generator for models, so let&rsquo;s use it create a <code>Book</code> entity and the corresponding repository:</p>
-<pre class="language-ruby plaintext"><code>% lotus generate model book
+<p>Hanami ships with a generator for models, so let&rsquo;s use it create a <code>Book</code> entity and the corresponding repository:</p>
+<pre class="language-ruby plaintext"><code>% hanami generate model book
 create  lib/bookshelf/entities/book.rb
 create  lib/bookshelf/repositories/book_repository.rb
 create  spec/bookshelf/entities/book_spec.rb
@@ -508,7 +511,7 @@ We should focus on the behaviors that we want from it and only then, how to save
 Let&rsquo;s add these attributes.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/book.rb</span>
 <span class="k">class</span> <span class="nc">Book</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
   <span class="n">attributes</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:author</span>
 <span class="k">end</span>
 </code></pre>
@@ -531,7 +534,7 @@ We can verify it all works as expected with a unit test:</p>
 <p>We can use repositories to read and write entities to our database.
 In order for that to work, we need to set it up.</p>
 
-<p>Lotus configurations are stored in env variables.
+<p>Hanami configurations are stored in env variables.
 This has proven to be a secure and standardized way to handle credentials in deployment environments.</p>
 
 <p>In order to achieve parity between development and production machines, we use env variables loaded from <code>.env</code> files (via <a href="https://github.com/bkeepers/dotenv">dotenv</a> gem).
@@ -558,8 +561,8 @@ BOOKSHELF_DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_develo
 <p>You may decide to use a different adapter, if you do make sure that you update your Gemfile to include the adapter of your choice and run bundle install.</p>
 
 <p>The database configured by default, called <code>bookshelf_development</code> running on <code>localhost</code>, should work fine for now.
-Lotus can create the database for us:</p>
-<pre class="language-ruby plaintext"><code>% lotus db create
+Hanami can create the database for us:</p>
+<pre class="language-ruby plaintext"><code>% hanami db create
 </code></pre>
 
 <h3>Migrations To Change Our Database Schema</h3>
@@ -567,11 +570,11 @@ Lotus can create the database for us:</p>
 <p>Next, we need a table in our database to hold our book data.
 We can use a <strong>migration</strong> to make the required changes.
 Use the migration generator to create an empty migration:</p>
-<pre class="language-ruby plaintext"><code>% lotus generate migration create_books
+<pre class="language-ruby plaintext"><code>% hanami generate migration create_books
 </code></pre>
 
 <p>This gives us a file name like <code>db/migrations/20150616120629_create_books.rb</code> that we can edit:</p>
-<pre class="language-ruby ruby"><code><span class="no">Lotus</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+<pre class="language-ruby ruby"><code><span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
   <span class="n">change</span> <span class="k">do</span>
     <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
       <span class="n">primary_key</span> <span class="ss">:id</span>
@@ -582,16 +585,16 @@ Use the migration generator to create an empty migration:</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>Lotus provides a DSL to describe changes to our database schema. You can read more
+<p>Hanami provides a DSL to describe changes to our database schema. You can read more
 about how migrations work in the <a href="/guides/migrations/overview">migrations&rsquo; guide</a>.</p>
 
 <p>In this case, we define a new table with columns for each of our entities&rsquo; attributes.
 Let&rsquo;s apply these changes to our database:</p>
-<pre class="language-ruby plaintext"><code>% lotus db migrate
+<pre class="language-ruby plaintext"><code>% hanami db migrate
 </code></pre>
 
-<p>Finally, we need to tell Lotus how to map entity attributes to database columns.
-Go ahead and open up <code>lib/bookshelf.rb</code>; in this file you&rsquo;ll find most of the project-wide configuration for <code>Lotus::Model</code>, including a section on mapping.
+<p>Finally, we need to tell Hanami how to map entity attributes to database columns.
+Go ahead and open up <code>lib/bookshelf.rb</code>; in this file you&rsquo;ll find most of the project-wide configuration for <code>Hanami::Model</code>, including a section on mapping.
 Edit the commented-out example:</p>
 <pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf.rb</span>
 <span class="c1"># ...</span>
@@ -610,8 +613,8 @@ Edit the commented-out example:</p>
 <h3>Playing With The Repository</h3>
 
 <p>With our mapping set up, we are ready to play around with our repository.
-We can use Lotus&rsquo; <code>console</code> command to launch IRb with our application pre-loaded, so we can use our objects:</p>
-<pre class="language-ruby plaintext"><code>% lotus console
+We can use Hanami&rsquo;s <code>console</code> command to launch IRb with our application pre-loaded, so we can use our objects:</p>
+<pre class="language-ruby plaintext"><code>% hanami console
 &gt;&gt; BookRepository.all
 =&gt; []
 &gt;&gt; book = Book.new(title: 'TDD', author: 'Kent Beck')
@@ -622,10 +625,10 @@ We can use Lotus&rsquo; <code>console</code> command to launch IRb with our appl
 =&gt; #&lt;Book:0x007f9af1d13ec0 @title="TDD", @author="Kent Beck" @id=1&gt;
 </code></pre>
 
-<p>Lotus repositories have methods to load one or more entities from our database; and to create and update existing records.
+<p>Hanami repositories have methods to load one or more entities from our database; and to create and update existing records.
 The repository is also the place where you would define new methods to implement custom queries.</p>
 
-<p>To recap, we&rsquo;ve seen how Lotus uses entities and repositories to model our data.
+<p>To recap, we&rsquo;ve seen how Hanami uses entities and repositories to model our data.
 Entities represent our behavior, while repositories use mappings to translate our entities to our data store.
 We can use migrations to apply changes to our database schema.</p>
 
@@ -654,7 +657,7 @@ Let&rsquo;s adjust the feature test we created earlier:</p>
 <p>We create the required records in our test and then assert the correct number of book classes on the page.
 When we run this test, we will most likely see an error from our database connection &ndash; remember we only migrated our <em>development</em> database, and not yet our <em>test</em> database.
 Its connection string is defined in <code>.env.test</code> and here&rsquo;s how you set it up:</p>
-<pre class="language-ruby plaintext"><code>% LOTUS_ENV=test lotus db prepare
+<pre class="language-ruby plaintext"><code>% HANAMI_ENV=test hanami db prepare
 </code></pre>
 
 <p>Now we can go change our template and remove the static HTML.
@@ -666,7 +669,7 @@ Let&rsquo;s write a test to force this change in our view:</p>
 
 <span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span> <span class="k">do</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">books: </span><span class="p">[]]</span> <span class="p">}</span>
-  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/index.html.erb'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/index.html.erb'</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
 
@@ -700,7 +703,7 @@ Let&rsquo;s write a test to force this change in our view:</p>
 
 <p>We specify that our index page will show a simple placeholder message when there are no books to display; when there are, it lists every one of them.
 Note how rendering a view with some data is relatively straight-forward.
-Lotus is designed around simple objects with minimal interfaces that are easy to test in isolation, yet still work great together.</p>
+Hanami is designed around simple objects with minimal interfaces that are easy to test in isolation, yet still work great together.</p>
 
 <p>Let&rsquo;s rewrite our template to implement these requirements:</p>
 <pre class="language-ruby erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">books</span><span class="p">.</span><span class="nf">any?</span> <span class="cp">%&gt;</span>
@@ -760,7 +763,7 @@ Now we&rsquo;ve specified that the action exposes <code>:books</code>, we can im
 <span class="k">end</span>
 </code></pre>
 
-<p>By using the <code>expose</code> method in our action class, we can expose the contents of our <code>@books</code> instance variable to the outside world, so that Lotus can pass it to the view.
+<p>By using the <code>expose</code> method in our action class, we can expose the contents of our <code>@books</code> instance variable to the outside world, so that Hanami can pass it to the view.
 That&rsquo;s enough to make all our tests pass again!</p>
 
 <h2>Building Forms To Create Records</h2>
@@ -800,7 +803,7 @@ Here&rsquo;s that story expressed in a test:</p>
 
 <p>We&rsquo;ll speed things up a little, so we can quickly get to the good parts.
 First, create a new action for our &ldquo;New Book&rdquo; page:</p>
-<pre class="language-ruby plaintext"><code>% lotus generate action web books#new --url=/books/new
+<pre class="language-ruby plaintext"><code>% hanami generate action web books#new --url=/books/new
 </code></pre>
 
 <p>This adds a new route to our app:</p>
@@ -808,7 +811,7 @@ First, create a new action for our &ldquo;New Book&rdquo; page:</p>
 <span class="n">get</span> <span class="s1">'/books/new'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#new'</span>
 </code></pre>
 
-<p>The interesting bit will be our new template, because we&rsquo;ll be using Lotus&rsquo; form builder to construct a HTML form around our <code>Book</code> entity.</p>
+<p>The interesting bit will be our new template, because we&rsquo;ll be using Hanami&rsquo;s form builder to construct a HTML form around our <code>Book</code> entity.</p>
 
 <h3>Using Form Helpers</h3>
 
@@ -835,13 +838,13 @@ First, create a new action for our &ldquo;New Book&rdquo; page:</p>
 </code></pre>
 
 <p>We&rsquo;ve added <code>&lt;label&gt;</code> tags for our form fields, and wrapped each field in a
-container <code>&lt;div&gt;</code> using Lotus&rsquo; <a href="/guides/helpers/html5">HTML builder helper</a>.</p>
+container <code>&lt;div&gt;</code> using Hanami&rsquo;s <a href="/guides/helpers/html5">HTML builder helper</a>.</p>
 
 <h3>Submitting Our Form</h3>
 
 <p>To submit our form, we need yet another action.
 Let&rsquo;s create a <code>Books::Create</code> action:</p>
-<pre class="language-ruby plaintext"><code>% lotus generate action web books#create
+<pre class="language-ruby plaintext"><code>% hanami generate action web books#create
 </code></pre>
 
 <p>This adds a new route to our app:</p>
@@ -963,8 +966,8 @@ Let&rsquo;s specify this behaviour as unit tests:</p>
 <p>Now our tests specify two alternative scenario&rsquo;s: our original happy path, and a new scenario in which validations fail.
 To make our tests pass, we need to implement validations.</p>
 
-<p>Although you can add validation rules to the entity, Lotus also allows you to define validation rules as close to the source of the input as possible, i.e. the action.
-Lotus controller actions can use the <code>params</code> class method to define acceptable incoming parameters.</p>
+<p>Although you can add validation rules to the entity, Hanami also allows you to define validation rules as close to the source of the input as possible, i.e. the action.
+Hanami controller actions can use the <code>params</code> class method to define acceptable incoming parameters.</p>
 
 <p>This approach both whitelists what params are used (others are discarded to prevent mass-assignment vulnerabilities from untrusted user input) <em>and</em> adds rules to define what values are acceptable — in this case we&rsquo;ve specified that the nested attributes for a book&rsquo;s title and author should be present.</p>
 
@@ -1008,7 +1011,7 @@ In this case <code>apps/web/templates/books/new.html.erb</code> will be used to 
 <span class="k">end</span>
 </code></pre>
 
-<p>This approach will work nicely because Lotus&rsquo; form builder is smart enough to inspect the <code>params</code> in this action and populate the form fields with values found in the params.
+<p>This approach will work nicely because Hanami&rsquo;s form builder is smart enough to inspect the <code>params</code> in this action and populate the form fields with values found in the params.
 If the user fills in only one field before submitting, they are presented with their original input, saving them the frustration of typing it again.</p>
 
 <p>Run your tests again and see they are all passing again!</p>
@@ -1022,7 +1025,7 @@ If the user fills in only one field before submitting, they are presented with t
 <span class="nb">require</span> <span class="s1">'spec_helper'</span>
 <span class="nb">require_relative</span> <span class="s1">'../../../../apps/web/views/books/new'</span>
 
-<span class="k">class</span> <span class="nc">NewBookParams</span> <span class="o">&lt;</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Action</span><span class="o">::</span><span class="no">Params</span>
+<span class="k">class</span> <span class="nc">NewBookParams</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Action</span><span class="o">::</span><span class="no">Params</span>
   <span class="n">param</span> <span class="ss">:book</span> <span class="k">do</span>
     <span class="n">param</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">presence: </span><span class="kp">true</span>
     <span class="n">param</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">presence: </span><span class="kp">true</span>
@@ -1032,7 +1035,7 @@ If the user fills in only one field before submitting, they are presented with t
 <span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">New</span> <span class="k">do</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span>    <span class="p">{</span> <span class="no">NewBookParams</span><span class="p">.</span><span class="nf">new</span><span class="p">({})</span> <span class="p">}</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">params: </span><span class="n">params</span><span class="p">]</span> <span class="p">}</span>
-  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/new.html.erb'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/new.html.erb'</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">New</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
 
@@ -1097,14 +1100,14 @@ Open up the routes file for the &ldquo;web&rdquo; application:</p>
 <span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'home#index'</span>
 </code></pre>
 
-<p>Lotus provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:</p>
+<p>Hanami provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:</p>
 <pre class="language-ruby ruby"><code><span class="n">resources</span> <span class="ss">:books</span>
 <span class="n">get</span> <span class="s1">'/'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'home#index'</span><span class="p">,</span> <span class="ss">as: :home</span>
 </code></pre>
 
 <p>To get a sense of what routes are defined, now we&rsquo;ve made this change, you can
 use the special command-line task <code>routes</code> to inspect the end result:</p>
-<pre class="language-ruby plaintext"><code>% lotus routes
+<pre class="language-ruby plaintext"><code>% hanami routes
           GET, HEAD  /                Web::Controllers::Home::Index
     books GET, HEAD  /books           Web::Controllers::Books::Index
  new_book GET, HEAD  /books/new       Web::Controllers::Books::New
@@ -1115,7 +1118,7 @@ edit_book GET, HEAD  /books/:id/edit  Web::Controllers::Books::Edit
      book DELETE     /books/:id       Web::Controllers::Books::Destroy
 </code></pre>
 
-<p>The output for <code>lotus routes</code> shows you the name of the defined helper method (you can suffix this name with <code>_path</code> or <code>_url</code> and call it on the <code>routes</code> helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.</p>
+<p>The output for <code>hanami routes</code> shows you the name of the defined helper method (you can suffix this name with <code>_path</code> or <code>_url</code> and call it on the <code>routes</code> helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.</p>
 
 <p>Now we&rsquo;ve applied the <code>resources</code> helper method, we can take advantage of the named route methods.
 Remember how we built our form using <code>form_for</code>?</p>
@@ -1141,81 +1144,78 @@ We can use the <code>routes</code> helper method that is available in our views 
 
 <h2>Wrapping Up</h2>
 
-<p><strong>Congratulations for completing your first Lotus project!</strong></p>
+<p><strong>Congratulations for completing your first Hanami project!</strong></p>
 
-<p>Let&rsquo;s review what we&rsquo;ve done: we&rsquo;ve traced requests through Lotus&rsquo; major frameworks to understand how they relate to each other; we&rsquo;ve seen how we can model our domain using entities and repositories; we&rsquo;ve seen solutions for building forms, maintaining our database schema, and validating user input.</p>
+<p>Let&rsquo;s review what we&rsquo;ve done: we&rsquo;ve traced requests through Hanami&rsquo;s major frameworks to understand how they relate to each other; we&rsquo;ve seen how we can model our domain using entities and repositories; we&rsquo;ve seen solutions for building forms, maintaining our database schema, and validating user input.</p>
 
 <p>We&rsquo;ve come a long way, but there&rsquo;s still plenty more to explore.
-Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.info/gems/lotusrb">Lotus API documentation</a>, read the <a href="https://github.com/lotus">source code</a> and follow the <a href="/blog">blog</a>.</p>
+Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.info/gems/hanami">Hanami API documentation</a>, read the <a href="https://github.com/hanami">source code</a> and follow the <a href="/blog">blog</a>.</p>
 
 <p><strong>Above all, enjoy building amazing things!</strong></p>
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="email-signup">
-  <div class="container-fluid wrapper">
-    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+<div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,000+ developers.
+    </p>
+    <form action="http://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
       <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
       <input name="id" value="fb3873a90f" type="hidden">
       <input name="orig-lang" value="1" type="hidden">
-      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
-      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
     </form>
+    <small class="text-muted">
+      By clicking &ldquo;Subscribe&rdquo; I want to subscribe to Hanami mailing list.
+    </small>
   </div>
-</section>
+</div>
 
-<footer class="primary">
-  <div class="container-fluid wrapper">
+    </div>
+
+    <div class="block app-block-footer">
+  <div class="container">
     <div class="row">
-      <a class="logo col-md-3" href="/">logo</a>
-        <div class="col-md-4">
-          <span class="date">January 19, 2016</span>
-          <h4>Announcing Lotus v0.6.1</h4>
-          <p>Minor fixes for CLI, cookie sessions and database exceptions.
-</p>
-          <a href="/blog/2016/01/19/announcing-lotus-061.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">January 12, 2016</span>
-          <h4>Announcing Lotus v0.6.0</h4>
-          <p>Features: Assets, custom initializers, default Rake tasks, and destroy command.
-</p>
-          <a href="/blog/2016/01/12/announcing-lotus-060.html">Read more...</a>
-        </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discuss.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="http://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-lotus" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2016 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
     </div>
   </div>
-
-  <div class="sub-footer wrapper">
-    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
-    <br>
-    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
-    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
-    <ul class="social">
-      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
-      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
-    </ul>
-  </div>
-
-  <div id="sponsors" class="sub-footer wrapper row">
-    <div class="col-xs-6 col-md-4">
-      <a href="http://dnsimple.link/resolving-lotus" target="_blank">
-        <span>Resolving with<br/></span>
-        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
-      </a>
-    </div>
-    <div class="col-xs-6 col-md-8">
-    </div>
-  </div>
-</footer>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
 <script src="/javascripts/application.js" type="text/javascript"></script>
 
 <script>
@@ -1223,7 +1223,7 @@ Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
   ga('send', 'pageview');
 </script>
 

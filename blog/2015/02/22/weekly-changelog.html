@@ -1,77 +1,100 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Weekly Changelog</title>
-    <meta name="description" content="Lotus, a complete web framework for Ruby" />
-    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+    <meta name="description" content="Hanami - The web, with simplicity" />
+    <meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="author" content="Luca Guidi">
+    <link href="http://feeds.feedburner.com/hanamirb" rel="alternate" title="Hanami" type="application/atom+xml" />
 
-    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+    <title>Hanami | Weekly Changelog</title>
 
-    <script src="//use.typekit.net/xhp5wmc.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+    <link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/application-minimal.css" rel="stylesheet" type="text/css" />
 
-    <meta property="og:site_name"   content="Lotus"/>
+    <meta property="og:site_name"   content="Hanami"/>
     <meta property="og:title"       content="Weekly Changelog">
-    <meta property="og:url"         content="http://lotusrb.org/blog/2015/02/22/weekly-changelog.html">
+    <meta property="og:url"         content="http://hanami.io/blog/2015/02/22/weekly-changelog.html">
     <meta property="og:description" content="Changelog from Feb 16th to Feb 22th 2015
 ">
-    <meta property="og:image"       content="http://lotusrb.org/images/cover.jpg">
+    <meta property="og:image"       content="http://hanami.io/images/cover.jpg">
 
     <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:site"        content="@lotus_rb">
-    <meta name="twitter:creator"     content="@lotus_rb">
-    <meta name="twitter:url"         content="http://lotusrb.org/blog/2015/02/22/weekly-changelog.html">
+    <meta name="twitter:site"        content="@hanamirb">
+    <meta name="twitter:creator"     content="@hanamirb">
+    <meta name="twitter:url"         content="http://hanami.io/blog/2015/02/22/weekly-changelog.html">
     <meta name="twitter:title"       content="Weekly Changelog">
     <meta name="twitter:description" content="Changelog from Feb 16th to Feb 22th 2015
 ">
-    <meta name="twitter:image:src"   content="http://lotusrb.org/images/cover.jpg">
+    <meta name="twitter:image:src"   content="http://hanami.io/images/cover.jpg">
   </head>
-  <body class="subpage blog">
-    <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 
-<nav class="navbar navbar-fixed-top container-fluid">
-  <div class="wrapper container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="/guides">Guides</a></li>
-        <li><a href="/community">Community</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.6.1</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+            <span>Hanami</span>
+          </a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/guides">Guides</a>
+            </li>
+            <li>
+              <a href="/community">Community</a>
+            </li>
+            <li>
+              <a href="https://github.com/hanami" target="_blank">Source Code</a>
+            </li>
+            <li class="active">
+              <a href="/blog">Blog</a>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
-
-    <section class="blog wrapper animated fadeIn">
-      <div class="container-fluid">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 main">
+    <div class="container">
+      <div class="block block-inverse text-center">
+        <div class="block-foreground">
+          <h1 class="block-title">Weekly Changelog</h1>
+          <h4 class="text-muted">Posted by <strong>Luca Guidi</strong> on <em>February 22, 2015</em></h4>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-facebook"></span>
+            Share
+          </button>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-twitter"></span>
+            Tweet
+          </button>
+        </div>
+        <div class="block-background">
           
+        </div>
+      </div>
 
-          <h1 class="page-header">
-            Weekly Changelog
-            <div class="meta">Posted by <strong>Luca Guidi</strong> on February 22, 2015</div>
-          </h1>
-
-          <p class="lead">Changelog from Feb 16th to Feb 22th 2015
+      <div class="container container-article">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 col-md-offset-1">
+            <p class="lead">Changelog from Feb 16th to Feb 22th 2015
 </p>
-          <hr>
-
-          <h2>Releases</h2>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-md-9 col-md-offset-1">
+            <div class="article-body">
+              <h2>Releases</h2>
 
 <ul>
 <li><a href="http://lotusrb.org">New website</a></li>
@@ -103,137 +126,100 @@
 
 <p><a href="http://bit.ly/lotusrb-roadmap">Trello board</a></p>
 
-          <hr>
-          <ul class="rrssb-buttons clearfix rrssb-1">
-            <li class="rrssb-facebook" data-initwidth="14.285714285714286" data-size="63" style="width: 14.2857142857143%;">
-            <!-- Replace with your URL. For best results, make sure you page has the proper FB Open Graph tags in header:
-            https://developers.facebook.com/docs/opengraph/howtos/maximizing-distribution-media-content/ -->
-            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F02%2F22%2Fweekly-changelog.html" class="popup">
-              <span class="rrssb-icon">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
-                <path d="M27.825,4.783c0-2.427-2.182-4.608-4.608-4.608H4.783c-2.422,0-4.608,2.182-4.608,4.608v18.434
-                c0,2.427,2.181,4.608,4.608,4.608H14V17.379h-3.379v-4.608H14v-1.795c0-3.089,2.335-5.885,5.192-5.885h3.718v4.608h-3.726
-                c-0.408,0-0.884,0.492-0.884,1.236v1.836h4.609v4.608h-4.609v10.446h4.916c2.422,0,4.608-2.188,4.608-4.608V4.783z"></path>
-                </svg>
-              </span>
-              <span class="rrssb-text">facebook</span>
-            </a>
-            </li>
-            <li class="rrssb-twitter" data-initwidth="14.285714285714286" data-size="50" style="width: 14.2857142857143%;">
-            <!-- Replace href with your Meta and URL information  -->
-            <a href="http://twitter.com/home?status=Weekly+Changelog+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F02%2F22%2Fweekly-changelog.html+%2Fvia+%40lotus_rb+%23lotusrb" class="popup">
-              <span class="rrssb-icon">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
-                <path d="M24.253,8.756C24.689,17.08,18.297,24.182,9.97,24.62c-3.122,0.162-6.219-0.646-8.861-2.32
-                c2.703,0.179,5.376-0.648,7.508-2.321c-2.072-0.247-3.818-1.661-4.489-3.638c0.801,0.128,1.62,0.076,2.399-0.155
-                C4.045,15.72,2.215,13.6,2.115,11.077c0.688,0.275,1.426,0.407,2.168,0.386c-2.135-1.65-2.729-4.621-1.394-6.965
-                C5.575,7.816,9.54,9.84,13.803,10.071c-0.842-2.739,0.694-5.64,3.434-6.482c2.018-0.623,4.212,0.044,5.546,1.683
-                c1.186-0.213,2.318-0.662,3.329-1.317c-0.385,1.256-1.247,2.312-2.399,2.942c1.048-0.106,2.069-0.394,3.019-0.851
-                C26.275,7.229,25.39,8.196,24.253,8.756z"></path>
-                </svg>
-              </span>
-              <span class="rrssb-text">twitter</span>
-            </a>
-            </li>
-            <li class="rrssb-reddit">
-            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F02%2F22%2Fweekly-changelog.html">
-              <span class="rrssb-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve"><g><path d="M11.794 15.316c0-1.029-0.835-1.895-1.866-1.895c-1.03 0-1.893 0.865-1.893 1.895s0.863 1.9 1.9 1.9 C10.958 17.2 11.8 16.3 11.8 15.316z"/><path d="M18.1 13.422c-1.029 0-1.895 0.864-1.895 1.895c0 1 0.9 1.9 1.9 1.865c1.031 0 1.869-0.836 1.869-1.865 C19.969 14.3 19.1 13.4 18.1 13.422z"/><path d="M17.527 19.791c-0.678 0.678-1.826 1.006-3.514 1.006c-0.004 0-0.009 0-0.014 0c-0.004 0-0.01 0-0.015 0 c-1.686 0-2.834-0.328-3.51-1.005c-0.264-0.265-0.693-0.265-0.958 0c-0.264 0.265-0.264 0.7 0 1 c0.943 0.9 2.4 1.4 4.5 1.402c0.005 0 0 0 0 0c0.005 0 0 0 0 0c2.066 0 3.527-0.459 4.47-1.402 c0.265-0.264 0.265-0.693 0.002-0.958C18.221 19.5 17.8 19.5 17.5 19.791z"/><path d="M27.707 13.267c0-1.785-1.453-3.237-3.236-3.237c-0.793 0-1.518 0.287-2.082 0.761c-2.039-1.295-4.646-2.069-7.438-2.219 l1.483-4.691l4.062 0.956c0.071 1.4 1.3 2.6 2.7 2.555c1.488 0 2.695-1.208 2.695-2.695C25.881 3.2 24.7 2 23.2 2 c-1.059 0-1.979 0.616-2.42 1.508l-4.633-1.091c-0.344-0.081-0.693 0.118-0.803 0.455l-1.793 5.7 C10.548 8.6 7.7 9.4 5.6 10.75C5.006 10.3 4.3 10 3.5 10.029c-1.785 0-3.237 1.452-3.237 3.2 c0 1.1 0.6 2.1 1.4 2.69c-0.04 0.272-0.061 0.551-0.061 0.831c0 2.3 1.3 4.4 3.7 5.9 c2.299 1.5 5.3 2.3 8.6 2.325c3.228 0 6.271-0.825 8.571-2.325c2.387-1.56 3.7-3.66 3.7-5.917 c0-0.26-0.016-0.514-0.051-0.768C27.088 15.5 27.7 14.4 27.7 13.267z M23.186 3.355c0.74 0 1.3 0.6 1.3 1.3 c0 0.738-0.6 1.34-1.34 1.34s-1.342-0.602-1.342-1.34C21.844 4 22.4 3.4 23.2 3.355z M1.648 13.3 c0-1.038 0.844-1.882 1.882-1.882c0.31 0 0.6 0.1 0.9 0.209c-1.049 0.868-1.813 1.861-2.26 2.9 C1.832 14.2 1.6 13.8 1.6 13.267z M21.773 21.57c-2.082 1.357-4.863 2.105-7.831 2.105c-2.967 0-5.747-0.748-7.828-2.105 c-1.991-1.301-3.088-3-3.088-4.782c0-1.784 1.097-3.484 3.088-4.784c2.081-1.358 4.861-2.106 7.828-2.106 c2.967 0 5.7 0.7 7.8 2.106c1.99 1.3 3.1 3 3.1 4.784C24.859 18.6 23.8 20.3 21.8 21.57z M25.787 14.6 c-0.432-1.084-1.191-2.095-2.244-2.977c0.273-0.156 0.59-0.245 0.928-0.245c1.035 0 1.9 0.8 1.9 1.9 C26.354 13.8 26.1 14.3 25.8 14.605z"/></g></svg>
-              </span>
-              <span class="rrssb-text">reddit</span>
-            </a>
-            </li>
-            <li class="rrssb-googleplus" data-initwidth="14.285714285714286" data-size="55" style="width: 14.2857142857143%;">
-            <!-- Replace href with your meta and URL information.  -->
-            <a href="https://plus.google.com/share?url=Weekly+Changelog+-+http%3A%2F%2Flotusrb.org%2Fblog%2F2015%2F02%2F22%2Fweekly-changelog.html" class="popup">
-              <span class="rrssb-icon">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
-                <g>
-                <g>
-                <path d="M14.703,15.854l-1.219-0.948c-0.372-0.308-0.88-0.715-0.88-1.459c0-0.748,0.508-1.223,0.95-1.663
-                c1.42-1.119,2.839-2.309,2.839-4.817c0-2.58-1.621-3.937-2.399-4.581h2.097l2.202-1.383h-6.67c-1.83,0-4.467,0.433-6.398,2.027
-                C3.768,4.287,3.059,6.018,3.059,7.576c0,2.634,2.022,5.328,5.604,5.328c0.339,0,0.71-0.033,1.083-0.068
-                c-0.167,0.408-0.336,0.748-0.336,1.324c0,1.04,0.551,1.685,1.011,2.297c-1.524,0.104-4.37,0.273-6.467,1.562
-                c-1.998,1.188-2.605,2.916-2.605,4.137c0,2.512,2.358,4.84,7.289,4.84c5.822,0,8.904-3.223,8.904-6.41
-                c0.008-2.327-1.359-3.489-2.829-4.731H14.703z M10.269,11.951c-2.912,0-4.231-3.765-4.231-6.037c0-0.884,0.168-1.797,0.744-2.511
-                c0.543-0.679,1.489-1.12,2.372-1.12c2.807,0,4.256,3.798,4.256,6.242c0,0.612-0.067,1.694-0.845,2.478
-                c-0.537,0.55-1.438,0.948-2.295,0.951V11.951z M10.302,25.609c-3.621,0-5.957-1.732-5.957-4.142c0-2.408,2.165-3.223,2.911-3.492
-                c1.421-0.479,3.25-0.545,3.555-0.545c0.338,0,0.52,0,0.766,0.034c2.574,1.838,3.706,2.757,3.706,4.479
-                c-0.002,2.073-1.736,3.665-4.982,3.649L10.302,25.609z"></path>
-                <polygon points="23.254,11.89 23.254,8.521 21.569,8.521 21.569,11.89 18.202,11.89 18.202,13.604 21.569,13.604 21.569,17.004
-                23.254,17.004 23.254,13.604 26.653,13.604 26.653,11.89      "></polygon>
-                </g>
-                </g>
-                </svg>
-              </span>
-              <span class="rrssb-text">google+</span>
-            </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+            </div>
 
-  <section class="email-signup">
-  <div class="container-fluid wrapper">
-    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
+           <hr>
+
+           <a href="https://github.com/hanami/hanami" title="Star on GitHub" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-github"></span>
+             Star
+           </a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhanami.io%2Fblog%2F2015%2F02%2F22%2Fweekly-changelog.html" title="Like on Facebook" class="btn btn-default-outline" target="_blank">
+             <span class="icon icon-thumbs-up"></span>
+             Like
+           </a>
+           <a href="https://twitter.com/home?status=Weekly+Changelog+-+http%3A%2F%2Fhanami.io%2Fblog%2F2015%2F02%2F22%2Fweekly-changelog.html+%2Fvia+%40hanamirb+%23hanamirb" title="Share on Twitter" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-twitter"></span>
+             Tweet
+           </a>
+           <a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fhanami.io%2Fblog%2F2015%2F02%2F22%2Fweekly-changelog.html&t=Weekly Changelog" class="btn btn-default-outline" title="Vote on HackerNews">
+             <span class="icon"><strong>HN</strong></span>
+             Vote
+           </a>
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fhanami.io%2Fblog%2F2015%2F02%2F22%2Fweekly-changelog.html" target="_blank" title="Share on Reddit" class="btn btn-default-outline">
+             <span class="icon"><strong>R</strong></span>
+             Share
+            </a>
+
+            <br>
+            <br>
+
+            <div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,000+ developers.
+    </p>
+    <form action="http://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
       <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
       <input name="id" value="fb3873a90f" type="hidden">
       <input name="orig-lang" value="1" type="hidden">
-      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
-      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
     </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
   </div>
-</section>
+</div>
 
-<footer class="primary">
-  <div class="container-fluid wrapper">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block app-block-footer">
+  <div class="container">
     <div class="row">
-      <a class="logo col-md-3" href="/">logo</a>
-        <div class="col-md-4">
-          <span class="date">January 19, 2016</span>
-          <h4>Announcing Lotus v0.6.1</h4>
-          <p>Minor fixes for CLI, cookie sessions and database exceptions.
-</p>
-          <a href="/blog/2016/01/19/announcing-lotus-061.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">January 12, 2016</span>
-          <h4>Announcing Lotus v0.6.0</h4>
-          <p>Features: Assets, custom initializers, default Rake tasks, and destroy command.
-</p>
-          <a href="/blog/2016/01/12/announcing-lotus-060.html">Read more...</a>
-        </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discuss.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="http://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-lotus" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2016 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
     </div>
   </div>
-
-  <div class="sub-footer wrapper">
-    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
-    <br>
-    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
-    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
-    <ul class="social">
-      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
-      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
-    </ul>
-  </div>
-
-  <div id="sponsors" class="sub-footer wrapper row">
-    <div class="col-xs-6 col-md-4">
-      <a href="http://dnsimple.link/resolving-lotus" target="_blank">
-        <span>Resolving with<br/></span>
-        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
-      </a>
-    </div>
-    <div class="col-xs-6 col-md-8">
-    </div>
-  </div>
-</footer>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
 <script src="/javascripts/application.js" type="text/javascript"></script>
 
 <script>
@@ -241,7 +227,7 @@
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
   ga('send', 'pageview');
 </script>
 

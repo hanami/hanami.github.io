@@ -1,200 +1,203 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lotus - Guides - Repositories</title>
-    <meta name="description" content="Lotus, a complete web framework for Ruby" />
-    <meta name="keywords" content="lotus,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://feeds.feedburner.com/lotusrb" rel="alternate" title="Lotus" type="application/atom+xml" />
+    <meta name="description" content="Hanami - The web, with simplicity" />
+    <meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+    <meta name="author" content="Luca Guidi">
+    <link href="http://feeds.feedburner.com/hanamirb" rel="alternate" title="Hanami" type="application/atom+xml" />
 
-    <link href="/stylesheets/application.css" rel="stylesheet" type="text/css" />
+    <title>Hanami | Guides - Repositories</title>
 
-    <script src="//use.typekit.net/xhp5wmc.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+    <link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/application-minimal.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/guides.css" rel="stylesheet" type="text/css" />
   </head>
-  <body class="subpage docs">
-    <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 
-<nav class="navbar navbar-fixed-top container-fluid">
-  <div class="wrapper container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="/guides">Guides</a></li>
-        <li><a href="/community">Community</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="https://rubygems.org/gems/lotusrb" id="nav-link-install" target="_blank" class="btn btn-primary version">Install v0.6.1</a></li>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+            <span>Hanami</span>
+          </a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+              <a href="/guides">Guides</a>
+            </li>
+            <li>
+              <a href="/community">Community</a>
+            </li>
+            <li>
+              <a href="https://github.com/hanami" target="_blank">Source Code</a>
+            </li>
+            <li>
+              <a href="/blog">Blog</a>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container docs-content">
+      <ul id="markdown-toc">
+        <li></li>
+        <li><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"><a href="https://github.com/hanami/hanami.github.io/edit/build/source/guides/models/repositories.md" target="_blank"></a></span></li>
+
+        <li class="toc-group">
+          <span>Introduction</span>
+          <ul>
+            <li><a href="/guides/getting-started">Getting Started</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Architectures</span>
+          <ul>
+            <li><a href="/guides/architectures/overview">Overview</a></li>
+            <li><a href="/guides/architectures/container">Container</a></li>
+            <li><a href="/guides/architectures/application">Application</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Applications</span>
+          <ul>
+            <li><a href="/guides/applications/initializers">Initializers</a></li>
+            <li><a href="/guides/applications/rake">Rake</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Routing</span>
+          <ul>
+            <li><a href="/guides/routing/overview">Overview</a></li>
+            <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
+            <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Actions</span>
+          <ul>
+            <li><a href="/guides/actions/overview">Overview</a></li>
+            <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
+            <li><a href="/guides/actions/parameters">Parameters</a></li>
+            <li><a href="/guides/actions/request-and-response">Request & Response</a></li>
+            <li><a href="/guides/actions/exposures">Exposures</a></li>
+            <li><a href="/guides/actions/rack-integration">Rack Integration</a></li>
+            <li><a href="/guides/actions/mime-types">MIME Types</a></li>
+            <li><a href="/guides/actions/cookies">Cookies</a></li>
+            <li><a href="/guides/actions/sessions">Sessions</a></li>
+            <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
+            <li><a href="/guides/actions/control-flow">Control Flow</a></li>
+            <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
+            <li><a href="/guides/actions/share-code">Share Code</a></li>
+            <li><a href="/guides/actions/testing">Testing</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Views</span>
+          <ul>
+            <li><a href="/guides/views/overview">Overview</a></li>
+            <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
+            <li><a href="/guides/views/templates">Templates</a></li>
+            <li><a href="/guides/views/mime-types">MIME Types</a></li>
+            <li><a href="/guides/views/layouts">Layouts</a></li>
+            <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
+            <li><a href="/guides/views/share-code">Share Code</a></li>
+            <li><a href="/guides/views/testing">Testing</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Models</span>
+          <ul>
+            <li><a href="/guides/models/overview">Overview</a></li>
+            <li><a href="/guides/models/entities">Entities</a></li>
+            <li><a href="/guides/models/repositories">Repositories</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Migrations</span>
+          <ul>
+            <li><a href="/guides/migrations/overview">Overview</a></li>
+            <li><a href="/guides/migrations/create-table">Create Table</a></li>
+            <li><a href="/guides/migrations/alter-table">Alter Table</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Helpers</span>
+          <ul>
+            <li><a href="/guides/helpers/overview">Overview</a></li>
+            <li><a href="/guides/helpers/html5">HTML5</a></li>
+            <li><a href="/guides/helpers/forms">Forms</a></li>
+            <li><a href="/guides/helpers/routing">Routing</a></li>
+            <li><a href="/guides/helpers/assets">Assets</a></li>
+            <li><a href="/guides/helpers/links">Links</a></li>
+            <li><a href="/guides/helpers/escape">Markup Escape</a></li>
+            <li><a href="/guides/helpers/numbers">Numbers</a></li>
+            <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Mailers</span>
+          <ul>
+            <li><a href="/guides/mailers/overview">Overview</a></li>
+            <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
+            <li><a href="/guides/mailers/templates">Templates</a></li>
+            <li><a href="/guides/mailers/delivery">Delivery</a></li>
+            <li><a href="/guides/mailers/share-code">Share Code</a></li>
+            <li><a href="/guides/mailers/testing">Testing</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Assets</span>
+          <ul>
+            <li><a href="/guides/assets/overview">Overview</a></li>
+            <li><a href="/guides/assets/preprocessors">Preprocessors</a></li>
+            <li><a href="/guides/assets/compressors">Compressors</a></li>
+            <li><a href="/guides/assets/content-delivery-network">Content Delivery Network (CDN)</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Command Line</span>
+          <ul>
+            <li><a href="/guides/command-line/applications">Applications</a></li>
+            <li><a href="/guides/command-line/generators">Generators</a></li>
+            <li><a href="/guides/command-line/destroy">Destroy</a></li>
+            <li><a href="/guides/command-line/database">Database</a></li>
+            <li><a href="/guides/command-line/assets">Assets</a></li>
+            <li><a href="/guides/command-line/routes">Routes</a></li>
+            <li><a href="/guides/command-line/version">Version</a></li>
+          </ul>
+        </li>
+
+        <li class="toc-group">
+          <span>Upgrade Notes</span>
+          <ul>
+            <li><a href="/guides/upgrade-notes/v060">v0.6.0</a></li>
+          </ul>
+        </li>
       </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
 
-
-    <section class="docs wrapper animated fadeIn">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-3 hidden-sm hidden-xs sidebar">
-            <ul class="nav nav-sidebar">
-              <li>
-                <span class="heading">Getting Started</span>
-                <ul class="nav">
-                  <li><a href="/guides/getting-started">Getting Started</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Architectures</span>
-                <ul class="nav">
-                  <li><a href="/guides/architectures/overview">Overview</a></li>
-                  <li><a href="/guides/architectures/container">Container</a></li>
-                  <li><a href="/guides/architectures/application">Application</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Applications</span>
-                <ul class="nav">
-                  <li><a href="/guides/applications/initializers">Initializers</a></li>
-                  <li><a href="/guides/applications/rake">Rake</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Routing</span>
-                <ul class="nav">
-                  <li><a href="/guides/routing/overview">Overview</a></li>
-                  <li><a href="/guides/routing/basic-usage">Basic Usage</a></li>
-                  <li><a href="/guides/routing/restful-resources">RESTful Resource(s)</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Actions</span>
-                <ul class="nav">
-                  <li><a href="/guides/actions/overview">Overview</a></li>
-                  <li><a href="/guides/actions/basic-usage">Basic Usage</a></li>
-                  <li><a href="/guides/actions/parameters">Parameters</a></li>
-                  <li><a href="/guides/actions/request-and-response">Request & Response</a></li>
-                  <li><a href="/guides/actions/exposures">Exposures</a></li>
-                  <li><a href="/guides/actions/rack-integration">Rack Integration</a></li>
-                  <li><a href="/guides/actions/mime-types">MIME Types</a></li>
-                  <li><a href="/guides/actions/cookies">Cookies</a></li>
-                  <li><a href="/guides/actions/sessions">Sessions</a></li>
-                  <li><a href="/guides/actions/exception-handling">Exception Handling</a></li>
-                  <li><a href="/guides/actions/control-flow">Control Flow</a></li>
-                  <li><a href="/guides/actions/http-caching">HTTP Caching</a></li>
-                  <li><a href="/guides/actions/share-code">Share Code</a></li>
-                  <li><a href="/guides/actions/testing">Testing</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Views</span>
-                <ul class="nav">
-                  <li><a href="/guides/views/overview">Overview</a></li>
-                  <li><a href="/guides/views/basic-usage">Basic Usage</a></li>
-                  <li><a href="/guides/views/templates">Templates</a></li>
-                  <li><a href="/guides/views/mime-types">MIME Types</a></li>
-                  <li><a href="/guides/views/layouts">Layouts</a></li>
-                  <li><a href="/guides/views/custom-error-pages">Custom Error Pages</a></li>
-                  <li><a href="/guides/views/share-code">Share Code</a></li>
-                  <li><a href="/guides/views/testing">Testing</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Models</span>
-                <ul class="nav">
-                  <li><a href="/guides/models/overview">Overview</a></li>
-                  <li><a href="/guides/models/entities">Entities</a></li>
-                  <li><a href="/guides/models/repositories">Repositories</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Migrations</span>
-                <ul class="nav">
-                  <li><a href="/guides/migrations/overview">Overview</a></li>
-                  <li><a href="/guides/migrations/create-table">Create Table</a></li>
-                  <li><a href="/guides/migrations/alter-table">Alter Table</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Helpers</span>
-                <ul class="nav">
-                  <li><a href="/guides/helpers/overview">Overview</a></li>
-                  <li><a href="/guides/helpers/html5">HTML5</a></li>
-                  <li><a href="/guides/helpers/forms">Forms</a></li>
-                  <li><a href="/guides/helpers/routing">Routing</a></li>
-                  <li><a href="/guides/helpers/assets">Assets</a></li>
-                  <li><a href="/guides/helpers/links">Links</a></li>
-                  <li><a href="/guides/helpers/escape">Markup Escape</a></li>
-                  <li><a href="/guides/helpers/numbers">Numbers</a></li>
-                  <li><a href="/guides/helpers/custom-helpers">Custom Helpers</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Mailers</span>
-                <ul class="nav">
-                  <li><a href="/guides/mailers/overview">Overview</a></li>
-                  <li><a href="/guides/mailers/basic-usage">Basic Usage</a></li>
-                  <li><a href="/guides/mailers/templates">Templates</a></li>
-                  <li><a href="/guides/mailers/delivery">Delivery</a></li>
-                  <li><a href="/guides/mailers/share-code">Share Code</a></li>
-                  <li><a href="/guides/mailers/testing">Testing</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Assets</span>
-                <ul class="nav">
-                  <li><a href="/guides/assets/overview">Overview</a></li>
-                  <li><a href="/guides/assets/preprocessors">Preprocessors</a></li>
-                  <li><a href="/guides/assets/compressors">Compressors</a></li>
-                  <li><a href="/guides/assets/content-delivery-network">Content Delivery Network (CDN)</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Command Line</span>
-                <ul class="nav">
-                  <li><a href="/guides/command-line/applications">Applications</a></li>
-                  <li><a href="/guides/command-line/generators">Generators</a></li>
-                  <li><a href="/guides/command-line/destroy">Destroy</a></li>
-                  <li><a href="/guides/command-line/database">Database</a></li>
-                  <li><a href="/guides/command-line/assets">Assets</a></li>
-                  <li><a href="/guides/command-line/routes">Routes</a></li>
-                  <li><a href="/guides/command-line/version">Version</a></li>
-                </ul>
-              </li>
-
-              <li>
-                <span class="heading">Upgrade Notes</span>
-                <ul class="nav">
-                  <li><a href="/guides/upgrade-notes/v060">v0.6.0</a></li>
-                </ul>
-              </li>
-            </ul>
-
-          </div>
-
-          <div class="col-md-9 main">
-            <div class="doc-section">
-              <a href="https://github.com/lotus/lotus.github.io/edit/build//source/guides/models/repositories.md" id="edit-guides-article" title="Edit this article" target="_blank">edit</a>
-              <h1>Repositories</h1>
+      <h1>Repositories</h1>
 
 <p>An object that mediates between entities and the persistence layer.
 It offers a standardized API to query and execute commands on a database.</p>
@@ -216,7 +219,7 @@ storage changes</p></li>
 
 <h2>Interface</h2>
 
-<p>When a class includes <code>Lotus::Repository</code>, it will receive the following interface:</p>
+<p>When a class includes <code>Hanami::Repository</code>, it will receive the following interface:</p>
 
 <ul>
 <li><code>.persist(entity)</code> – Create or update an entity</li>
@@ -259,7 +262,7 @@ This decision forces developers to define intention revealing API, instead of le
 <pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
 
 <span class="k">class</span> <span class="nc">BookRepository</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">most_recent_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="ss">limit: </span><span class="mi">8</span><span class="p">)</span>
     <span class="n">query</span> <span class="k">do</span>
@@ -287,7 +290,7 @@ This decision forces developers to define intention revealing API, instead of le
 <h3>Fetch</h3>
 <pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
 <span class="k">class</span> <span class="nc">BookRepository</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">raw_all</span>
     <span class="n">fetch</span><span class="p">(</span><span class="s2">"SELECT * FROM books"</span><span class="p">)</span>
@@ -320,7 +323,7 @@ This decision forces developers to define intention revealing API, instead of le
 <h3>Execute</h3>
 <pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
 <span class="k">class</span> <span class="nc">BookRepository</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">reset_download_count</span>
     <span class="n">execute</span><span class="p">(</span><span class="s2">"UPDATE books SET download_count = 0"</span><span class="p">)</span>
@@ -339,7 +342,7 @@ This decision forces developers to define intention revealing API, instead of le
 <p>Here is an extended example of a repository that uses the SQL adapter.</p>
 <pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
 <span class="k">class</span> <span class="nc">BookRepository</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">most_recent_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="ss">limit: </span><span class="mi">8</span><span class="p">)</span>
     <span class="n">query</span> <span class="k">do</span>
@@ -396,7 +399,7 @@ Here is a pagination example:</p>
 </code></pre>
 <pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
 <span class="k">class</span> <span class="nc">BookRepository</span>
-  <span class="kp">include</span> <span class="no">Lotus</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
   <span class="kp">include</span> <span class="no">Bookshelf</span><span class="o">::</span><span class="no">Repositories</span><span class="o">::</span><span class="no">Pagination</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">published</span>
@@ -407,72 +410,51 @@ Here is a pagination example:</p>
 <span class="k">end</span>
 </code></pre>
 
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
 
-    <section class="email-signup">
-  <div class="container-fluid wrapper">
-    <form action="http://lotusrb.us3.list-manage.com/subscribe/post" method="POST" class="">
-      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
-      <input name="id" value="fb3873a90f" type="hidden">
-      <input name="orig-lang" value="1" type="hidden">
-      <input type="email" placeholder="Enter your email to get updates" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="" class="pull-left">
-      <button type="submit" class="btn btn-primary pull-right">Subscribe</button>
-    </form>
-  </div>
-</section>
-
-<footer class="primary">
-  <div class="container-fluid wrapper">
+    <div class="block app-block-footer">
+  <div class="container">
     <div class="row">
-      <a class="logo col-md-3" href="/">logo</a>
-        <div class="col-md-4">
-          <span class="date">January 19, 2016</span>
-          <h4>Announcing Lotus v0.6.1</h4>
-          <p>Minor fixes for CLI, cookie sessions and database exceptions.
-</p>
-          <a href="/blog/2016/01/19/announcing-lotus-061.html">Read more...</a>
-        </div>
-        <div class="col-md-4">
-          <span class="date">January 12, 2016</span>
-          <h4>Announcing Lotus v0.6.0</h4>
-          <p>Features: Assets, custom initializers, default Rake tasks, and destroy command.
-</p>
-          <a href="/blog/2016/01/12/announcing-lotus-060.html">Read more...</a>
-        </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discuss.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="http://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-lotus" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2016 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
     </div>
   </div>
-
-  <div class="sub-footer wrapper">
-    <p class="copyright pull-left">&copy; 2014-<span id="copyright-year">{{year}}</span> <a href="http://lucaguidi.com/">Luca Guidi</a> – Lotus is released under the MIT License.
-    <br>
-    <br> This website and its contents are released under <a href="http://creativecommons.org/licenses/by-nc/4.0/" href="_blank">CC Attribution-NonCommercial 4.0</a>.
-    <br> Maintained with <3 by the <a href="https://github.com/orgs/lotus/people" target="_blank">core team</a> with help from <a href="https://github.com/lotus/lotus/graphs/contributors" target="_blank">contributors</a>. Site Design by <a href="http://www.alantippins.com/">Alan Tippins</a>.</p>
-    <ul class="social">
-      <li><a href="https://twitter.com/lotus_rb" target="_blank" class="icon-twitter"></a></li>
-      <li><a href="https://github.com/lotus" target="_blank" class="icon-github"></a></li>
-    </ul>
-  </div>
-
-  <div id="sponsors" class="sub-footer wrapper row">
-    <div class="col-xs-6 col-md-4">
-      <a href="http://dnsimple.link/resolving-lotus" target="_blank">
-        <span>Resolving with<br/></span>
-        <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
-      </a>
-    </div>
-    <div class="col-xs-6 col-md-8">
-    </div>
-  </div>
-</footer>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
 <script src="/javascripts/application.js" type="text/javascript"></script>
 
 <script>
@@ -480,7 +462,7 @@ Here is a pagination example:</p>
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-47369640-1', 'lotusrb.org');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
   ga('send', 'pageview');
 </script>
 
