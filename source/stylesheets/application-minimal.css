@@ -162,3 +162,13 @@ div.article-body {
   font-size: 1.4em;
 }
 
+#lotus {
+  color: #fff;
+  background-color: #685D9F;
+  line-height: 5em;
+}
+
+#lotus a {
+  color: #fff;
+  text-decoration: underline;
+}

@@ -54,7 +54,7 @@ activate :deploy do |deploy|
   deploy.branch = 'master'
 end
 
-set :url_root, 'http://hanami.io'
+set :url_root, 'http://hanamirb.org'
 activate :search_engine_sitemap
 
 # Methods defined in the helpers block are available in templates
@@ -157,7 +157,7 @@ helpers do
             page
           end
 
-    "http://hanami.io#{ url }"
+    "http://hanamirb.org#{ url }"
   end
 
   def encode_text(text)
@@ -165,7 +165,7 @@ helpers do
   end
 
   def hanami_version
-    '0.6.1'
+    '0.7.0'
   end
 end
 
