@@ -19,6 +19,30 @@ The first is relative to the **_format_** and the latter is for the **_template 
 For a given view named <code>Web::Views::Dashboard::Index</code>, there must be at least one template <code>dashboard/index.[format].[engine]</code> under the templates directory.
 </p>
 
+## Nested Templates
+To render a partial in other template call `render` method with `partial` option:
+
+```
+# Given a partial under:
+#   templates/shared/_sidebar.html.erb
+#
+# In the layout template:
+#   templates/application.html.erb
+#
+<%= render partial: 'shared/sidebar' %>
+```
+
+To render a template in other template call `render` method with `template` option:
+```
+# Given a template under:
+#   templates/articles/index.html.erb
+#
+# In the layout template:
+#   templates/application.html.erb
+#
+<%= render template: 'articles/index' %>
+```
+
 ### Custom Template
 
 If we want to associate a different template to a view, we can use `template`.
