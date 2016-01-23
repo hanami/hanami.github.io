@@ -14,7 +14,7 @@
    <% articles(10).each do |article| %>
      <entry>
        <title><%= article_title(article) %></title>
-       <id>http://hanamirb.ororg<%= article.url %></id>
+       <id>http://hanamirb.org<%= article.url %></id>
        <link rel="alternate" href="http://hanamirb.org<%= article.url %>"/>
        <updated><%= article.date.to_time.iso8601 %></updated>
        <author>
