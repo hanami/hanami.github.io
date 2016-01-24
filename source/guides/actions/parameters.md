@@ -223,7 +223,7 @@ module Web::Controllers::Signup
 end
 ```
 
-```
+```ruby
 # apps/web/controllers/signup/create.rb
 require_relative './my_params'
 
