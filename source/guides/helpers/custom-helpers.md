@@ -48,9 +48,9 @@ module Web
       # ...
 
       load_paths << [
-        'helpers'
+        'helpers',
         'controllers',
-        'views',
+        'views'
       ]
 
       # ...
