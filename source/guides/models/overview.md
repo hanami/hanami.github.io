@@ -211,3 +211,28 @@ end.load!
 <p class="warning">
   A custom coercer **MUST** respond to <code>.dump(value)</code> for serialization and to <code>.load(value)</code> for deserialization.
 </p>
+
+### Use UUID as primary key instead of integer
+
+When using Postgres, you may use [UUID Type](http://www.postgresql.org/docs/8.3/static/datatype-uuid.html) as primary keys instead if integers.
+First of all, you need to enable <code>uuid-ossp<code> extension:
+
+```ruby
+# db/migrations/20160125223305_enable_uuid_extensions.rb
+Hanami::Model.migration do
+  change do
+    run 'CREATE EXTENSION "uuid-ossp"'
+  end
+end
+```
+
+Then, create table with <code>uuid</code> type and set default value:
+
+```ruby
+# db/migrations/20160126223305_create_books.rb
+Hanami::Model.migration do
+  create_table :books do
+    primary_key :id, :uuid, default: Sequel.function(:uuid_generate_v4)
+  end
+end
+```
