@@ -33,6 +33,7 @@ To render a partial in other template call `render` method with `partial` option
 ```
 
 To render a template in other template call `render` method with `template` option:
+
 ```
 # Given a template under:
 #   templates/articles/index.html.erb
