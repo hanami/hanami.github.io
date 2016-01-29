@@ -1,5 +1,6 @@
 require 'rack/utils'
 require 'middleman-syntax'
+require_relative "./extensions/build_cleaner"
 
 ###
 # Compass
@@ -192,4 +193,5 @@ configure :build do
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
+  activate :build_cleaner
 end
