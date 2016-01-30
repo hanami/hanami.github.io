@@ -718,7 +718,7 @@ To submit our form, we need yet another action.
 Let's create a `Books::Create` action:
 
 ```
-% hanami generate action web books#create
+% hanami generate action web books#create --method=post
 ```
 
 This adds a new route to our app:
