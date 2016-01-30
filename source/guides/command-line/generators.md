@@ -45,6 +45,12 @@ If you wish to generate only the action, without the view and template, you can 
 % bundle exec hanami generate action web books#show --skip-view
 ```
 
+If you wish to generate action with specific method, you can do that by using the `--method`.
+
+```shell
+% bundle exec hanami generate action web books#create --method=post
+```
+
 #### Route
 
 The generated route is named after the controller name.
