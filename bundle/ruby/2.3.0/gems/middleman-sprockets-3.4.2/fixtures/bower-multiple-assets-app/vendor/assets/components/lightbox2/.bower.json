@@ -1,0 +1,34 @@
+{
+  "name": "lightbox",
+  "homepage": "http://lokeshdhakar.com/projects/lightbox2/",
+  "authors": [
+    "Lokesh Dhakar <lokesh.dhakar@gmail.com>"
+  ],
+  "description": "The original Lightbox script. Uses jQuery.",
+  "main": "js/lightbox.js",
+  "keywords": [
+    "lightbox",
+    "overlay",
+    "jquery",
+    "gallery",
+    "images"
+  ],
+  "license": "CC BY 2.5",
+  "ignore": [
+    "**/.*",
+    "Gruntfile.js",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "05ffb8e6d5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "05ffb8e6d524762ded286b0c33cebab5347cf34a"
+  },
+  "_source": "https://github.com/dg-vrnetze/revealjs-lightbox2.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/dg-vrnetze/revealjs-lightbox2.git"
+}

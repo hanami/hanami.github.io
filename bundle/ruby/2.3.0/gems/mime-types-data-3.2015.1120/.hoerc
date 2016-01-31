@@ -1,0 +1,16 @@
+---
+exclude: !ruby/regexp '/
+  \.(tmp|swp)$
+  |
+  (?i:TAGS)
+  |
+  \.(git|DS_Store|hoerc)\/
+  |
+  ^Gemfile(?:\.lock)?$
+  |
+  ^support\/
+  |
+  ^types\/
+  |
+  \.gemspec$
+  /x'

@@ -1,0 +1,172 @@
+== 1.3.3 - 25-Sep-2015
+* This gem is now signed.
+* The Rakefile tasks now assume Rubygems 2.x.
+
+== 1.3.2 - 11-Dec-2014
+* Update to the File.tail method that deals prevents potential line ending
+  issues in JRuby.
+* Added known issues with JRuby to the README.
+
+== 1.3.1 - 9-Dec-2014
+* Fixed some potential issues with File.tail. Thanks go to Matt Hoyle for
+  the patch.
+
+== 1.3.0 - 8-Dec-2014
+* Made the File.tail method efficient. It's no longer slurpy, and it also no
+  longer includes line endings in the result.
+* Removed the File.middle method. I don't think it's useful.
+
+== 1.2.7 - 6-Dec-2014
+* File.which now expands ~ for paths. Thanks go to dg-vrnetze for the patch.
+* Use /dev/null for cygwin instead of NUL.
+* Use mv instead of cp in the nl_convert method.
+* Solaris now handled explicitly in nl_convert, and OSX now considered Unix.
+* Modified the binary? method to check 4096 bytes at most.
+* Thanks to Matt Hoyle for many of the changes implemented in this release.
+
+== 1.2.6 - 14-Jul-2014
+* Updated the png? and jpg? methods so they explicitly specify the
+  offset argument so that it works with 1.9.2 and earlier. Thanks go to
+  Anurag Priyam for the spot.
+
+== 1.2.5 - 11-Jul-2014
+* Added a Gemfile, mostly for Travis CI.
+* Added rake as a development dependency.
+* Revert back to hash syntax supported by 1.8.x.
+* Removed rubyforge_project from gemspec.
+* Updated the tests for File.sparse? so that it doesn't rely on
+  an external file.
+
+== 1.2.4 - 25-Feb-2014
+* The File.binary method now always returns false for images. It is meant to
+  detect executables, shared objects, etc. Use File.image? to detect images.
+* Encoding fixes for the File.image? method.
+
+== 1.2.3 - 19-Feb-2014
+* Fixed a bug where File.binary? would return true for unicode text. Thanks go
+  to Ben Hollis for the spot.
+* Updated the win32-file and test-unit dependencies.
+* Replace all instances of File.exists? with File.exist? because the former
+  is deprecated in Ruby 2.1 and later.
+
+== 1.2.2 - 6-Apr-2012
+* Yet another sparse file test fix for OSX, which does not support
+  sparse file generation on HFS+.
+* Fixed a bug in the File.whereis method on Windows when dealing with
+  absolute paths.
+* Some Config vs RbConfig fixes to silence 1.9.3 warnings.
+* Refactored and cleaned up some tests.
+
+== 1.2.1 - 20-May-2011
+* Added an (empty) .gemtest file so that it can be used with test.rubygems.org.
+* Fixed a sparse file test.
+
+== 1.2.0 - 8-Jan-2011
+* Added the File.sparse? method for Unix platforms. This method already
+  exists on Windows courtesy of the win32-file library.
+
+== 1.1.9 - 25-Mar-2010
+* Refactored File.which and File.whereis and added additional tests for each.
+* Removed the block form of File.whereis.
+* Reorganized the Rakefile a bit and put the test tasks under the 'test'
+  namespace, and the gem tasks under the 'gem' namespace.
+* Updated the test-unit development dependency.
+* Updates the README.
+
+== 1.1.8 - 6-Oct-2009
+* Fixed some bad variable names that crept into the File.nl_convert method.
+* Added the File.null_device alias for File.null.
+* Added cygwin and mingw to Windows detection code.
+* One of the nlconvert tests is now skipped on Windows.
+* Two text files that were previously bundled as part of this library for
+  testing purposes have been removed. Those are now dynamically generated
+  within the tests themselves.
+* Gemspec updates.
+* Documentation updates.
+* Added the :gem rake task.
+
+== 1.1.7 - 28-Jul-2009
+* Now compatible with Ruby 1.9.x.
+* Replaced RUBY_PLATFORM with rbconfig check for the sake of other
+  implementations, such as JRuby.
+* Updated the tests to be more friendly to JRuby.
+* Added Test::Unit 2.x as a development dependency.
+* Renamed the test files.
+
+== 1.1.6 - 31-Aug-2007
+* Fixed the File.touch method so that it doesn't whack existing files. Thanks
+  go to Thomas Preymesser for the spot.
+* Added corresponding tests to the tc_touch.rb file.
+
+== 1.1.5 - 19-Jul-2007
+* Added the File.image? method. Inspired by ruby-talk: 260487. 
+
+== 1.1.4 - 21-May-2007
+* Removed the install.rb file. Installation is now handled exclusively by the
+  rake install task.
+* Updated the MANIFEST file, and made it rdoc friendly.
+* Manual installation corrections in the README file.
+
+== 1.1.3 - 29-Apr-2007
+* I changed the way that the constants IS_WINDOWS and WIN32EXTS are defined.
+* The IS_WINDOWS and WIN32EXTS are no long documented publically. They were
+  never meant for public use.
+* The tc_constants.rb file was modified to only run certain tests on Windows.
+
+== 1.1.2 - 28-Apr-2007
+* Fixed a require line that could cause problems on MS Windows.
+* Added a Rakefile which includes tasks for installation and testing.
+* Some cleanup and improvement in the various test files.
+
+== 1.1.1 - 24-Aug-2006
+* Added the File.binary? method, based on code from Ryan Davis.
+
+== 1.1.0 - 23-Aug-2006
+* Added the File.null method which returns the bit bucket on your platform.
+* The suffixes on MS Windows are now based on the PATHEXT environment variable,
+  and defaults to '.com', '.bat' and '.exe' only if it's not defined.
+* The File.which and File.whereis methods were tweaked a bit for Windows so
+  that they ignore the case of suffixes.
+* Modified the platform checking and path separator handling.
+* Added and tweaked some tests.
+
+== 1.0.0 - 2-Jun-2005
+* Modified the File.middle method to accept an optional block.
+* File.whereis is now limited to unique values so that redundant PATH entries
+  do not cause redundant entries in the returned array (or block).
+* File.nl_convert and File.touch now return self.
+* File.nl_convert now raises ArgumentError (instead of StandardError) if
+  an unknown platform is provided.
+* File.wc now raises ArgumentError (instead of RuntimeError) if a bad option
+  is provided.
+* Made documentation rdoc friendly.
+* Test suite updates, corrections and additions.
+* Removed the INSTALL file.  See the README instead.
+* Moved project to RubyForge.
+
+== 0.1.3 - 5-Dec-2003
+* Modified File#which and File#whereis for Win32 to handle extensions better,
+  i.e. you can send "ruby" or "ruby.exe" and get back the same result.
+* Minor test changes to tc_which.rb and tc_whereis.rb.
+
+== 0.1.2 - 14-May-2003
+* Modified nl_convert() to allow the destination filename to be the same as the
+  source file.  In that case, a tempfile is used and copied back over the
+  original file.
+* The target file name for nl_convert() now defaults to the source file name and
+  the default format is now "dos".
+* Added a tc_constants.rb test suite.
+* Test suite additions/fixes.
+* Updates to MANIFEST.
+
+== 0.1.1 - 21-Mar-2003
+* Modified File.tail to return data in the same order that 'tail' does.
+* Modified File.which to return nil if the program is not found.
+* Modified File.whereis now uses '\' instead of '/' on MS Windows.
+* Added File.middle class method.
+* Test suite modification & additions.
+* Thanks go to Shanko for both the spot and patch for tail, which, whereis
+  and middle.
+
+== 0.1.0 - 18-Mar-2003
+* Initial release
