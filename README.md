@@ -32,3 +32,9 @@ Available commands:
 NOTE: There is an issue in which invoking `site` command with specified
 current directory, `./bin/site` won't publish the site correctly. Please
 invoke without `./`
+
+## Production deployment
+
+The deployment is automated with Travis CI. Upon merging PR into `build` branch, deployment script is invoked.
+
+For more details, please consult `.travis.yml` file.

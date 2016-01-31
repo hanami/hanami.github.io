@@ -1,0 +1,16 @@
+language: ruby
+sudo: false
+cache: bundler
+install: true
+branches:
+  only:
+  - build
+before_script:
+- git config --global user.email "trung.le@ruby-journal.co,"
+- git config --global user.name "Trung Lê"
+- git remote rm origin
+- git remote add origin https://user:${GH_TOKEN}@github.com/user/repo.git
+script: "./bin/site publish"
+env:
+  global:
+  - secure: YZlMVMMZ9fLE4enTCfoaeajmbcCbnECe6v3FmkhKx4K/AMp3fkSk+bYOl/rfCf7hXKV4Fk1MUCU6X/gz93P/DpW88R9Dr+7iFsJpVJd5+by7xFcHri1j22eTJ0ODgxyGcDZoSYzlVbecO1sYgTFsmNO1v4Lhyx7ALjBAEKH1aAM=
