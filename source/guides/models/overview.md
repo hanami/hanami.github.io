@@ -215,7 +215,7 @@ end.load!
 ### Use UUID as primary key instead of integer
 
 When using Postgres, you may use [UUID Type](http://www.postgresql.org/docs/8.3/static/datatype-uuid.html) as primary keys instead if integers.
-First of all, you need to enable <code>uuid-ossp<code> extension:
+First of all, you need to enable <code>uuid-ossp</code> extension:
 
 ```ruby
 # db/migrations/20160125223305_enable_uuid_extensions.rb
