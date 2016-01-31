@@ -1,6 +1,6 @@
 require 'rack/utils'
 require 'middleman-syntax'
-require_relative "./extensions/build_cleaner"
+require File.expand_path('../extensions/build_cleaner.rb', __FILE__)
 
 ###
 # Compass

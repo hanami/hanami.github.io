@@ -6,10 +6,12 @@ branches:
   only:
   - build
 before_script:
-- git config --global user.email "trung.le@ruby-journal.co,"
+- bundle install
+- git config --global user.email "trung.le@ruby-journal.com"
 - git config --global user.name "Trung Lê"
 - git remote rm origin
-- git remote add origin https://user:${GH_TOKEN}@github.com/user/repo.git
+- git remote add origin https://joneslee85:${GH_TOKEN}@github.com/hanami/hanami.github.io.git
+- mkdir build
 script: "./bin/site publish"
 env:
   global:
