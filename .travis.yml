@@ -2,7 +2,6 @@ language: ruby
 sudo: false
 bundler_args: --without development --jobs=3 --retry=3
 cache: bundler
-install: true
 branches:
   only:
   - build
@@ -10,7 +9,6 @@ env:
   global:
     - SITE_ENV=deploy
 before_script:
-- bundle install
 - git config --global user.email "trung.le@ruby-journal.com"
 - git config --global user.name "Trung Lê"
 - git remote rm origin
