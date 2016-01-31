@@ -1,7 +1,9 @@
 language: ruby
 sudo: false
-bundler_args: --without development --jobs=3 --retry=3
-cache: bundler
+install: bundle install --without development --jobs=3 --retry=3
+cache:
+  directories:
+  - bundle
 branches:
   only:
   - build
@@ -15,8 +17,7 @@ before_script:
 - git remote add origin https://joneslee85:${GH_TOKEN}@github.com/hanami/hanami.github.io.git
 - mkdir build
 script:
-- bundle exec middleman build
-- bundle exec middleman deploy
+- bundle exec middleman build && bundle exec middleman deploy
 env:
   global:
   - secure: YZlMVMMZ9fLE4enTCfoaeajmbcCbnECe6v3FmkhKx4K/AMp3fkSk+bYOl/rfCf7hXKV4Fk1MUCU6X/gz93P/DpW88R9Dr+7iFsJpVJd5+by7xFcHri1j22eTJ0ODgxyGcDZoSYzlVbecO1sYgTFsmNO1v4Lhyx7ALjBAEKH1aAM=
