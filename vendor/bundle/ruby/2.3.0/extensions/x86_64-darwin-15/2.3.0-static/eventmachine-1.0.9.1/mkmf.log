@@ -1,0 +1,11 @@
+"clang -o conftest -I/Users/tle/.rbenv/versions/2.3.0/include/ruby-2.3.0/x86_64-darwin15 -I/Users/tle/.rbenv/versions/2.3.0/include/ruby-2.3.0/ruby/backward -I/Users/tle/.rbenv/versions/2.3.0/include/ruby-2.3.0 -I. -I/Users/tle/.rbenv/versions/2.3.0/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -O3 -Wno-error=shorten-64-to-32  -pipe conftest.c  -L. -L/Users/tle/.rbenv/versions/2.3.0/lib -L. -L/Users/tle/.rbenv/versions/2.3.0/lib  -fstack-protector -L/usr/local/lib     -lruby-static -framework CoreFoundation  -lpthread -lgmp -ldl -lobjc "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
