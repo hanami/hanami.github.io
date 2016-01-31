@@ -10,6 +10,8 @@ branches:
 env:
   global:
     - SITE_ENV=deploy
+rvm:
+  - 2.3.0
 before_script:
 - git config --global user.email "trung.le@ruby-journal.com"
 - git config --global user.name "Trung Lê"
