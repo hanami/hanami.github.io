@@ -1,3 +1,7 @@
+ENV['SITE_ENV'] ||= 'development'
+
+Bundler.require(:default, ENV['SITE_ENV']) if defined?(Bundler)
+
 require 'rack/utils'
 require 'middleman-syntax'
 require File.expand_path('../extensions/build_cleaner.rb', __FILE__)
@@ -47,7 +51,7 @@ end
 
 # Reload the browser automatically whenever files change
 configure :development do
-  activate :livereload
+  activate :livereload if defined?(::Middleman::LiveReloadExtension)
 end
 
 activate :deploy do |deploy|

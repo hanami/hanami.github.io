@@ -5,6 +5,9 @@ install: true
 branches:
   only:
   - build
+env:
+  global:
+    - SITE_ENV=deploy
 before_script:
 - bundle install
 - git config --global user.email "trung.le@ruby-journal.com"
