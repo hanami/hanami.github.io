@@ -221,7 +221,7 @@ describe 'List books' do
     visit '/books'
 
     within '#books' do
-      assert page.has_css?('.book', count: 2), "Expected to find 2 books"
+      assert page.has_css?('.book', count: 2), 'Expected to find 2 books'
     end
   end
 end
@@ -503,7 +503,7 @@ describe 'List books' do
 
   it 'shows a book element for each book' do
     visit '/books'
-    assert page.has_css?('.book', count: 2), "Expected to find 2 books"
+    assert page.has_css?('.book', count: 2), 'Expected to find 2 books'
   end
 end
 ```
