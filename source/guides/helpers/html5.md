@@ -136,10 +136,22 @@ Hanami html helpers also support other assembled helpers. For example `link_to` 
 
 ```ruby
 html.div do
-  link_to 'hello', routes.root, class: 'btn'
+  link_to 'hello', routes.root_path, class: 'btn'
 end
 # => <div>
 # =>   <a href="/" class="btn">hello</a>
+# => </div>
+
+html.div do
+  link_to 'Users', routes.users_path, class: 'btn'
+  hr
+  link_to 'Books', routes.books_path, class: 'btn'
+end
+
+# => <div>
+# =>   <a href="/users" class="btn">Users</a>
+# =>   </hr>
+# =>   <a href="/posts" class="btn">Books</a>
 # => </div>
 ```
 
