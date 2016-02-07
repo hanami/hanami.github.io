@@ -671,7 +671,7 @@ We'll speed things up a little, so we can quickly get to the good parts.
 First, create a new action for our "New Book" page:
 
 ```
-% hanami generate action web books#new --url=/books/new
+% hanami generate action web books#new
 ```
 
 This adds a new route to our app:
