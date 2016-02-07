@@ -510,3 +510,9 @@ body {
   background-color: #685d9f;
   background-image: linear-gradient(to bottom, #48416f 0, #685d9f 100%);
 }
+#getting-started-lead {
+  padding: 2em;
+  background-color: #f5f7f9;
+  text-align: justify;
+  text-justify: inter-word;
+}

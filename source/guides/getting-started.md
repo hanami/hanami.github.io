@@ -4,8 +4,49 @@ title: Hanami | Guides - Getting Started
 
 # Getting Started
 
-In this guide we will set up our first Hanami project and build a simple bookshelf project.
-We'll touch on all the major components of the Hanami framework, all guided by tests.
+<div id="getting-started-lead">
+  <p>
+    Hello. If you're reading this page, it's very likely that you want to learn more about Hanami.
+    That's great, congrats! If you're looking for new ways to build maintanable, secure, faster and testable web applications, you're in good hands.
+  </p>
+
+  <p>
+    <strong>Hanami is built for people like you.</strong>
+  </p>
+
+  <p>
+    I warn you that either you're a totally beginner or an experienced developer <strong>this learning process can be hard</strong>.
+    After 10 years you develop a way of working, and it can be painful for you to change. However, <strong>without change, there is no challenge</strong>.
+  </p>
+
+  <p>
+    Sometimes a feature doesn't looks right, that doesn't mean it's you.
+    It can be a matter of formed habits, a design fallacy or even a bug.
+  </p>
+
+  <p>
+    Myself and the rest of the Community are pouring our best efforts to make Hanami better every day.
+  </p>
+
+  <p>
+    In this guide we will set up our first Hanami project and build a simple bookshelf web application.
+    We'll touch on all the major components of Hanami framework, all guided by tests.
+  </p>
+
+  <p>
+    <strong>It you feel alone, or frustrated, don't give up, jump in our <a href="http://chat.hanamirb.org">chat</a> and ask for help.</strong>
+    There will be someone more than happy to talk with you.
+  </p>
+
+  <p>
+    Enjoy,<br>
+    Luca Guidi<br>
+    <em>Hanami creator</em>
+  </p>
+</div>
+
+<br>
+<hr>
 
 ## Prerequisites
 
