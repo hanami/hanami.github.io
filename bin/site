@@ -16,6 +16,7 @@ function build_site {
 }
 
 function publish_site {
+  build_site
   _middleman deploy
   git checkout build
 }
