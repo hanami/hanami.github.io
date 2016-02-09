@@ -130,6 +130,31 @@ html.tag(:custom, 'Foo', id: 'next') # => <custom id="next">Foo</custom>
 html.empty_tag(:xr, id: 'next')      # => <xr id="next">
 ```
 
+## Other helpers
+
+Hanami html helpers also support other assembled helpers. For example `link_to` helper:
+
+```ruby
+html.div do
+  link_to 'hello', routes.root_path, class: 'btn'
+end
+# => <div>
+# =>   <a href="/" class="btn">hello</a>
+# => </div>
+
+html.div do
+  link_to 'Users', routes.users_path, class: 'btn'
+  hr
+  link_to 'Books', routes.books_path, class: 'btn'
+end
+
+# => <div>
+# =>   <a href="/users" class="btn">Users</a>
+# =>   </hr>
+# =>   <a href="/posts" class="btn">Books</a>
+# => </div>
+```
+
 ## Auto escape
 
 The tag contents are automatically escaped for **security** reasons:
