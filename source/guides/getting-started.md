@@ -20,7 +20,7 @@ title: Hanami | Guides - Getting Started
   </p>
 
   <p>
-    Sometimes a feature doesn't looks right, that doesn't mean it's you.
+    Sometimes a feature doesn't look right, that doesn't mean it's you.
     It can be a matter of formed habits, a design fallacy or even a bug.
   </p>
 
