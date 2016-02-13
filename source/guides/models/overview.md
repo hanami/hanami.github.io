@@ -221,7 +221,7 @@ First of all, you need to enable <code>uuid-ossp</code> extension:
 # db/migrations/20160125223305_enable_uuid_extensions.rb
 Hanami::Model.migration do
   change do
-    run 'CREATE EXTENSION "uuid-ossp"'
+    run 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
   end
 end
 ```
