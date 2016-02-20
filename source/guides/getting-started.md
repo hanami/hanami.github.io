@@ -34,7 +34,7 @@ title: Hanami | Guides - Getting Started
   </p>
 
   <p>
-    <strong>It you feel alone, or frustrated, don't give up, jump in our <a href="http://chat.hanamirb.org">chat</a> and ask for help.</strong>
+    <strong>If you feel alone, or frustrated, don't give up, jump in our <a href="http://chat.hanamirb.org">chat</a> and ask for help.</strong>
     There will be someone more than happy to talk with you.
   </p>
 
