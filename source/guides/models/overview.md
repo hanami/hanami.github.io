@@ -178,6 +178,7 @@ The solution to this problem is to define a custom coercer.
 ```ruby
 # lib/ext/pg_array.rb
 require 'hanami/model/coercer'
+require 'sequel'
 require 'sequel/extensions/pg_array'
 
 class PGArray < Hanami::Model::Coercer
