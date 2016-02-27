@@ -148,7 +148,7 @@ helpers do
 
   def guides_edit_article(source)
     url = GUIDES_EDIT_URL + source.gsub("#{ Dir.pwd }/", '')
-    %(<span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"><a href="#{ url }" target="_blank"></a></span>)
+    %(<a href="#{ url }" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a>)
   end
 
   #
