@@ -286,7 +286,7 @@ It gives us an empty action, view and template; it also adds a default route to 
 get '/books', to: 'books#index'
 ```
 
-If you're using ZSH, you may get `zsh: no matches found: books#new`. In that case, you can use:
+If you're using ZSH, you may get `zsh: no matches found: books#index`. In that case, you can use:
 ```
 % hanami generate action web books/index
 ```
