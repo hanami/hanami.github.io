@@ -1047,7 +1047,8 @@ use the special command-line task `routes` to inspect the end result:
 
 ```
 % hanami routes
-          GET, HEAD  /                Web::Controllers::Home::Index
+     Name Method     Path             Action
+
     books GET, HEAD  /books           Web::Controllers::Books::Index
  new_book GET, HEAD  /books/new       Web::Controllers::Books::New
     books POST       /books           Web::Controllers::Books::Create
@@ -1055,6 +1056,7 @@ use the special command-line task `routes` to inspect the end result:
 edit_book GET, HEAD  /books/:id/edit  Web::Controllers::Books::Edit
      book PATCH      /books/:id       Web::Controllers::Books::Update
      book DELETE     /books/:id       Web::Controllers::Books::Destroy
+     home GET, HEAD  /                Web::Controllers::Home::Index
 ```
 
 The output for `hanami routes` shows you the name of the defined helper method (you can suffix this name with `_path` or `_url` and call it on the `routes` helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.
