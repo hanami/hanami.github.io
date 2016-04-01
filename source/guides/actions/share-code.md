@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action Share Code
+title: Guides - Action Share Code
 ---
 
 # Share Code

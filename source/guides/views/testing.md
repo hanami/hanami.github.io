@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - View Testing
+title: Guides - View Testing
 ---
 
 # View Testing

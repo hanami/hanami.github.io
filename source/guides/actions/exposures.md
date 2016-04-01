@@ -1,5 +1,5 @@
 ---
-title: Hanami - Guides - Action Exposures
+title: Guides - Action Exposures
 ---
 
 # Exposures

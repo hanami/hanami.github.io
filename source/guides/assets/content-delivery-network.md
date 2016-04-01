@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Assets Content Delivery Network (CDN)
+title: Guides - Assets Content Delivery Network (CDN)
 ---
 
 # Assets

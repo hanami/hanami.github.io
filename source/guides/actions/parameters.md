@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action Parameters
+title: Guides - Action Parameters
 ---
 
 # Parameters

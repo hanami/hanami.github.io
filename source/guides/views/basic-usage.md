@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Views Basic Usage
+title: Guides - Views Basic Usage
 ---
 
 # Basic Usage

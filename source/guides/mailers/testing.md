@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Mailers Testing
+title: Guides - Mailers Testing
 ---
 
 # Testing

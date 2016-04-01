@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action Cookies
+title: Guides - Action Cookies
 ---
 
 # Cookies

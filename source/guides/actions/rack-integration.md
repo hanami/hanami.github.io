@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Request & Response
+title: Guides - Request & Response
 ---
 
 # Rack Integration

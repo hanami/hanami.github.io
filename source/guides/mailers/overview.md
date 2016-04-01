@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Mailers Overview
+title: Guides - Mailers Overview
 ---
 
 # Overview

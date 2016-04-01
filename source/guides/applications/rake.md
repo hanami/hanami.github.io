@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Applications Rake Tasks
+title: Guides - Applications Rake Tasks
 ---
 
 # Rake Tasks

@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Actions Basic Usage
+title: Guides - Actions Basic Usage
 ---
 
 # Basic Usage

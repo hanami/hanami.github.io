@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action Exception Handling
+title: Guides - Action Exception Handling
 ---
 
 # Exception Handling

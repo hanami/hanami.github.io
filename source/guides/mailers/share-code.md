@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Mailes Share Code
+title: Guides - Mailes Share Code
 ---
 
 # Share Code

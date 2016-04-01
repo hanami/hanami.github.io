@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Getting Started
+title: Guides - Getting Started
 ---
 
 # Getting Started

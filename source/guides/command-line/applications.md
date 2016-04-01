@@ -1,5 +1,5 @@
 ---
-title: "Hanami | Guides - Command Line: Applications"
+title: "Guides - Command Line: Applications"
 ---
 
 # Command Line

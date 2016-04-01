@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Number Helpers
+title: Guides - Number Helpers
 ---
 
 ## Number Helpers
