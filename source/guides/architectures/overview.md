@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Architectures
+title: Guides - Architectures
 ---
 
 # Architectures

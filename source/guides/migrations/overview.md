@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Migrations
+title: Guides - Migrations
 ---
 
 # Migrations

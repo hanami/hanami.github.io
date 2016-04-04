@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Custom Error Pages
+title: Guides - Custom Error Pages
 ---
 
 # Custom Error Pages

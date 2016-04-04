@@ -1,5 +1,5 @@
 ---
-title: "Hanami | Guides - Architectures: Application"
+title: "Guides - Architectures: Application"
 ---
 
 # Architectures

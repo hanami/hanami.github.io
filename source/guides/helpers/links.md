@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Link Helpers
+title: Guides - Link Helpers
 ---
 
 ## Link Helpers

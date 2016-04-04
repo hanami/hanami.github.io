@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Helpers Overview
+title: Guides - Helpers Overview
 ---
 
 # Overview

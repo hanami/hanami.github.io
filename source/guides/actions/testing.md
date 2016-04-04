@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action Testing
+title: Guides - Action Testing
 ---
 
 # Testing

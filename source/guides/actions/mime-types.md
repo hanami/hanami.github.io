@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action MIME Types
+title: Guides - Action MIME Types
 ---
 
 # MIME Types

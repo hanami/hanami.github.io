@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides
+title: Guides
 ---
 
 # Introduction

@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Assets Compressors
+title: Guides - Assets Compressors
 ---
 
 # Assets

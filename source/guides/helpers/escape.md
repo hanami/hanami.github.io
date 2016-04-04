@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Markup Escape Helpers
+title: Guides - Markup Escape Helpers
 ---
 
 ## Markup Escape Helpers

@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Mailers Delivery
+title: Guides - Mailers Delivery
 ---
 
 # Delivery

@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - View Templates
+title: Guides - View Templates
 ---
 
 # Templates

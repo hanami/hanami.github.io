@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action Control Flow
+title: Guides - Action Control Flow
 ---
 
 # Control Flow

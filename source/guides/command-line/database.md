@@ -1,5 +1,5 @@
 ---
-title: "Hanami | Guides - Command Line: Database"
+title: "Guides - Command Line: Database"
 ---
 
 # Command Line

@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Form Helpers
+title: Guides - Form Helpers
 ---
 
 ## Form Helpers

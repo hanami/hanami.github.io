@@ -1,5 +1,5 @@
 ---
-title: "Hanami | Guides - Command Line: Assets"
+title: "Guides - Command Line: Assets"
 ---
 
 # Command Line

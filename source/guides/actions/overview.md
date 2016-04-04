@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Actions Overview
+title: Guides - Actions Overview
 ---
 
 # Overview

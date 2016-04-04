@@ -1,5 +1,5 @@
 ---
-title: "Hanami | Guides - Command Line: Generators"
+title: "Guides - Command Line: Generators"
 ---
 
 # Command Line

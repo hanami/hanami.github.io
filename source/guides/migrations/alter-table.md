@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Migrations Alter Tables
+title: Guides - Migrations Alter Tables
 ---
 
 # Migrations

@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Models Overview
+title: Guides - Models Overview
 ---
 
 # Models

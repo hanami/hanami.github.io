@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - RESTful Resource(s)
+title: Guides - RESTful Resource(s)
 ---
 
 # REST

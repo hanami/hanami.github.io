@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Applications Initializers
+title: Guides - Applications Initializers
 ---
 
 # Initializers

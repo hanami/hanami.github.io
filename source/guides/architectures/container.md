@@ -1,5 +1,5 @@
 ---
-title: "Hanami | Guides - Architectures: Container"
+title: "Guides - Architectures: Container"
 ---
 
 # Architectures

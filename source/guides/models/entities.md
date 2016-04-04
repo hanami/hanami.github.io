@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Entities
+title: Guides - Entities
 ---
 
 # Entities
