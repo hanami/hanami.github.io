@@ -207,7 +207,7 @@ module Web::Views::Home
 end
 ```
 
-...which, in turn, is empty and does nothing more than render it's template.
+...which, in turn, is empty and does nothing more than render its template.
 This is the file we need to edit in order to make our test pass. All we need to do is add the bookshelf heading.
 
 ```erb
