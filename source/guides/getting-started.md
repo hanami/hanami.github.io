@@ -422,7 +422,7 @@ For example, review `.env.development`:
 
 ```
 # Define ENV variables for development environment
-BOOKSHELF_DATABASE_URL="postgres://localhost/bookshelf_development"
+DATABASE_URL="postgres://localhost/bookshelf_development"
 WEB_SESSIONS_SECRET="21aec7f7371228dd0d4da6a620a1a6b22889edcf0d4fb1c11b8080cd87146eda"
 ```
 
@@ -430,10 +430,10 @@ We can edit the database URL and add the database user and password if needed:
 
 ```
 # It follows the format below:
-BOOKSHELF_DATABASE_URL="[ADAPTER]://[DATABASE_USER]:[DATABASE_USER_PASSWORD]@[HOST]:[PORT]/[DATABASE_NAME]"
+DATABASE_URL="[ADAPTER]://[DATABASE_USER]:[DATABASE_USER_PASSWORD]@[HOST]:[PORT]/[DATABASE_NAME]"
 
 # Example:
-BOOKSHELF_DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
+DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
 ```
 The placeholders **_user_** and **_password_** should be replaced with the correct credentials.
 
