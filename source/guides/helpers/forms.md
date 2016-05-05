@@ -173,7 +173,7 @@ Cross Site Request Forgery (CSRF) is one of the most common attacks on the web. 
 When we enable sessions, it uses them to store a random token for each user.
 Forms are rendered with a special hidden field (`_csrf_token`) which contains this token.
 
-On form submission, Hanami matches this input with the value from the session. If they match, the request can continue. If not, it resets the sesssion and raises an exception.
+On form submission, Hanami matches this input with the value from the session. If they match, the request can continue. If not, it resets the session and raises an exception.
 
 Developers can customize attack handling.
 
