@@ -7,7 +7,7 @@ title: Guides - Getting Started
 <div id="getting-started-lead">
   <p>
     Hello. If you're reading this page, it's very likely that you want to learn more about Hanami.
-    That's great, congrats! If you're looking for new ways to build maintanable, secure, faster and testable web applications, you're in good hands.
+    That's great, congrats! If you're looking for new ways to build maintainable, secure, faster and testable web applications, you're in good hands.
   </p>
 
   <p>
