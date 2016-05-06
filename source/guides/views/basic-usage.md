@@ -87,7 +87,7 @@ Rendering context for a template is made of view methods and exposures.
 
 ## Custom Rendering
 
-Hanami perfoms rendering by calling `#render` on a view and it expects a string in return.
+Hanami performs rendering by calling `#render` on a view and it expects a string in return.
 The benefit of an object oriented approach is the ability to easily diverge from default behavior.
 
 We can override that method to define a custom rendering policy.
