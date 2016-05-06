@@ -11,7 +11,7 @@ It is rendered by bounding the [context](/guides/mailers/basic-usage) of a maile
 
 ## Naming
 
-For covenience, there is a correlation between the view mailer name and the template file name.
+For convenience, there is a correlation between the view mailer name and the template file name.
 It's the translation of the name into a path: from `Mailers::ForgotPassword` to `forgot_password`.
 
 The remaining part is made of multiple file extensions.
