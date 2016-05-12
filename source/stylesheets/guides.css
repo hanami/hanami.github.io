@@ -367,6 +367,14 @@ body {
   font-weight: 300;
   line-height: 1.5;
 }
+.docs-content .anchor {
+  padding-right: 2px;
+  margin-left: -18px;
+  display: none;
+}
+.docs-content .title:hover .anchor {
+  display: inline-block;
+}
 @media (min-width: 768px) {
   .docs-content > h1 + p {
     font-size: 21px;
