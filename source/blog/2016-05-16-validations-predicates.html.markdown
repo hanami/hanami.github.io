@@ -15,12 +15,12 @@ Even simple cases like _blank values_ management became an issue.
 We tried to fix these problems, but over the time we realized that we hit the limit of that syntax, which led to lack of flexibility for us and for developers themselves.
 
 At the same time [dry-rb](http://dry-rb.org) folks released a new, stronger validations gem: `dry-validation`.
-It chances, for the good, the way we express validation rules.
+It changes, for the good, the way we express validation rules.
 So we took the decision to radically change our syntax and to adopt `dry-validation` as a validations backend for us.
 
 ## How It Will Work?
 
-`Hanami::Validations` will work with input hashes and lets us to define a set of validation rules **for each** key/value pair.
+`Hanami::Validations` will work with input hashes and let define a set of validation rules **for each** key/value pair.
 These rules are wrapped by lambdas (or special DSL) that check the input for a specific key to determine if it's valid or not.
 To do that, we translate business requirements into predicates that are chained together with Ruby _faux boolean logic_ operators (eg. `&` or `|`).
 
@@ -57,16 +57,22 @@ Indeed, a Ruby _boolean expression_ can only return `true` or `false`.
 To better recognise the pattern, let’s get back to the example above.
 This time we will map the natural language rules with programming language rules.
 
-```
+```ruby
         A name must be filled  and be a string and its size fall between 3 and 64.
            👇            👇     👇        👇    👇       👇                👇    👇
 required(:name)      { filled?  &       str?   &      size?              (3 .. 64) }
-
 ```
 
 Now, I hope you’ll never format code like that, but in this case, that formatting serves well our purpose to show how Ruby’s  simplicity helps to define complex rules with no effort.
 
 From a high level perspective, we can tell that input data for `name` is _valid_ only if **all** the requirements are satisfied. That’s because we used `&`.
+
+But there is more. Rule composition with blocks is powerful, but it can become verbose.
+To **reduce verbosity**, Hanami offers convenient macros that are internally expanded (aka interpreted) to an equivalent block expression.
+
+```ruby
+required(:name).filled(:str?, size?: 3..64)
+```
 
 ### The Advantages
 
