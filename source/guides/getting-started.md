@@ -180,7 +180,7 @@ The first thing we need to add is a route:
 get '/', to: 'home#index'
 ```
 
-The root we pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
+We pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
 Now we can create the index action.
 
 ```ruby
@@ -215,7 +215,7 @@ This is the file we need to edit in order to make our test pass. All we need to 
 <h1>Bookshelf</h1>
 ```
 
-Save your changes, run your test again and it now pass. Great!
+Save your changes, run your test again and it now passes. Great!
 
 ```shell
 Run options: --seed 19286
@@ -364,7 +364,7 @@ In this way we're able to save any Ruby object in a database.
 That means we can adapt Hanami to use existing Ruby projects and to provide a way to persist them.
 Read more about entities and repositories in the [models guide](/guides/models/overview).
 
-Hanami ships with a generator for models, so let's use it create a `Book` entity and the corresponding repository:
+Hanami ships with a generator for models, so let's use it to create a `Book` entity and the corresponding repository:
 
 ```
 % hanami generate model book
@@ -439,7 +439,7 @@ The placeholders **_user_** and **_password_** should be replaced with the corre
 
 You may want to change `localhost` for `127.0.0.1` if you're using Linux.
 
-You may decide to use a different adapter, if you do make sure that you update your Gemfile to include the adapter of your choice and run bundle install.
+You may decide to use a different adapter. If you do, make sure that you update your Gemfile to include the adapter of your choice and run bundle install.
 
 The database configured by default, called `bookshelf_development` running on `localhost`, should work fine for now.
 Hanami can create the database for us:
