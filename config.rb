@@ -4,6 +4,7 @@ Bundler.require(:default, ENV['SITE_ENV']) if defined?(Bundler)
 
 require 'rack/utils'
 require 'middleman-syntax'
+require 'lib/github_style_titles'
 require File.expand_path('../extensions/build_cleaner.rb', __FILE__)
 
 ###
@@ -179,7 +180,7 @@ set :js_dir,     'javascripts'
 set :images_dir, 'images'
 
 set :markdown_engine, :redcarpet
-set :markdown, fenced_code_blocks: true, smartypants: true
+set :markdown, fenced_code_blocks: true, smartypants: true, renderer: GithubStyleTitles
 
 # Build-specific configuration
 configure :build do
