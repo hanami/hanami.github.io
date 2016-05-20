@@ -20,7 +20,7 @@ This Rake task:
   1. Executes all `preload` steps
   2. Loads all the project code
 
-Use this as a Rake task prerequisite when you **DO** need to access to project code (eg. entites, actions, views, etc..)
+Use this as a Rake task prerequisite when you **DO** need to access project code (eg. entities, actions, views, etc..)
 
 ### Example
 
