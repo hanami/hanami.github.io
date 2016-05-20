@@ -54,7 +54,7 @@ Use this as a Rake task prerequisite when you **DO NOT** need to access project 
 
 ### Example
 
-Imagine we want to build a Rake task that prints informations about our project:
+Imagine we want to build a Rake task that prints information about our project:
 
 ```ruby
 # Rakefile
