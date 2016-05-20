@@ -54,6 +54,13 @@ The last bit is `Dashboard`, which is our controller.
 
 The whole action name is `Web::Controllers::Dashboard::Index`.
 
+<p class="warning">
+  You should avoid giving your action modules the same name as your application, e.g. avoid naminng a controller `Web` in an app named `Web`. If you have a controller name like `Web::Controllers::Web` then some code across your app will break with errors about constants not being found, for example in views which `include Web::Layout`. This is because Ruby starts constant lookup with the current module, so a constant like `Web::Layout` referenced by code in the `Web::Controllers::Web` or `Web::Controllers::Web::MyAction` module will be converted to `Web::Controllers::Web::Layout`, which can't be found and causes a constant lookup error.
+</p>
+<p class="warning">
+  If you absolutely must name a controller with the same name as your application, you'll need to explicitly set the namespace lookup for things which should be included from immediately under the app, not the controller by prefixing those names with `::`, e.g. change your views to include `::Web::Layout` instead of `include Web::Layout`, and using `include ::Web::Action` in your controllers.
+</p>
+
 ### Action Module
 
 Hanami philosophy emphasizes _composition over inheritance_ and avoids the [framework superclass antipattern](http://michaelfeathers.typepad.com/michael_feathers_blog/2013/01/the-framework-superclass-anti-pattern.html).
