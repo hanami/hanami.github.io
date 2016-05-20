@@ -9,7 +9,7 @@ title: Guides - Action Control Flow
 If we want to execute some logic before and/or after `#call` is executed, we can use a callback.
 Callbacks are useful to declutter code for common tasks like checking if a user is signed in, set a record, handle 404 responses or tidy up the response.
 
-The correspoding DSL methods are `before` and `after`.
+The corresponding DSL methods are `before` and `after`.
 These methods each accept a symbol that is the name of the method that we want to call, or an anonymous proc.
 
 ### Methods
