@@ -74,12 +74,12 @@ end
 ```
 
 <p class="notice">
-  The <code>:preload</code> Rake task preloads projects and applications configurations. Use it when you need a fast way to access them.
+  The <code>:preload</code> Rake task preloads project and applications configurations. Use it when you need a fast way to access them.
 </p>
 
 ## Test
 
-This is the default Rake task, it runs the test suite
+This is the default Rake task, which runs the test suite
 
 The following commands are equivalent:
 
