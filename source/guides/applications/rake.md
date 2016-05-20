@@ -18,7 +18,7 @@ rake test         # Run tests
 This Rake task:
 
   1. Executes all `preload` steps
-  2. Load all the project code
+  2. Loads all the project code
 
 Use this as a Rake task prerequisite when you **DO** need to access to project code (eg. entites, actions, views, etc..)
 
