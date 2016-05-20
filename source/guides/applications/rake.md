@@ -50,7 +50,7 @@ This Rake task is a fast way to preload:
   * The framework
   * Project configurations such as env variables and application configurations (eg. `apps/web/application.rb`)
 
-Use this as a Rake task prerequisite when you **DO NOT** need to access to project code (eg. entites, actions, views, etc..)
+Use this as a Rake task prerequisite when you **DO NOT** need to access project code (eg. entities, actions, views, etc..)
 
 ### Example
 
