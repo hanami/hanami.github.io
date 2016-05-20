@@ -5,7 +5,7 @@ title: Guides - View Testing
 # View Testing
 
 One of the advantages of views as objects is that we can unit test them.
-We can both understand if a specific presentational logic behaves correctly and/or assert if the rendered markup.
+We can both understand if a specific presentational logic behaves correctly and/or assert if the rendered markup is correct.
 
 For the following example we're gonna use RSpec for the concise syntax for test doubles.
 
