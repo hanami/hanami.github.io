@@ -114,13 +114,13 @@ end
 
 ### Configure Controller
 
-Imagine we have a controller named `manoscripts`, where we have actions like `Manoscripts::Index`, but we still want to expose those resources as `/books`.
-Using `:controller` option will save our day.
+Imagine we have a controller named `manuscripts`, where we have actions like `Manuscripts::Index`, but we still want to expose those resources as `/books`.
+Using the `:controller` option will save our day.
 
 ```ruby
-resources :books, controller: 'manoscripts'
+resources :books, controller: 'manuscripts'
 
-# GET /books/1 will route to Manoscripts::Show etc..
+# GET /books/1 will route to Manuscripts::Show, etc.
 ```
 
 ## RESTful Resource
