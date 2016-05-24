@@ -182,3 +182,25 @@ div.supporters {
   color: #fff;
   text-decoration: underline;
 }
+
+table.status {
+  width: 100%;
+}
+
+table.status tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+table.status th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+table.status th {
+  height: 50px;
+  font-size: 20px;
+}
+
+table.status td {
+  font-size: 16px;
+}
