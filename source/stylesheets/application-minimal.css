@@ -133,7 +133,7 @@ div.download-develop-deploy code {
 }
 
 div.app-block-footer {
-  margin-top: 5em;
+  margin-top: 2em;
 }
 
 div.container-blog h1 {
@@ -166,10 +166,16 @@ div.article-body {
   font-size: 1.4em;
 }
 
+div.supporters {
+  font-size: 18px;
+  font-weight: 300;
+}
+
 #lotus {
   color: #fff;
   background-color: #685D9F;
   line-height: 5em;
+  margin-top: 2em;
 }
 
 #lotus a {
