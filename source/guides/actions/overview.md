@@ -55,10 +55,10 @@ The last bit is `Dashboard`, which is our controller.
 The whole action name is `Web::Controllers::Dashboard::Index`.
 
 <p class="warning">
-  You should avoid giving your action modules the same name as your application, e.g. avoid naminng a controller `Web` in an app named `Web`. If you have a controller name like `Web::Controllers::Web` then some code across your app will break with errors about constants not being found, for example in views which `include Web::Layout`. This is because Ruby starts constant lookup with the current module, so a constant like `Web::Layout` referenced by code in the `Web::Controllers::Web` or `Web::Controllers::Web::MyAction` module will be converted to `Web::Controllers::Web::Layout`, which can't be found and causes a constant lookup error.
+  You should avoid giving your action modules the same name as your application, e.g. avoid naminng a controller <code>Web</code> in an app named <code>Web</code>. If you have a controller name like <code>Web::Controllers::Web</code> then some code across your app will break with errors about constants not being found, for example in views which `include Web::Layout`. This is because Ruby starts constant lookup with the current module, so a constant like <code>Web::Layout</code> referenced by code in the <code>Web::Controllers::Web</code> or <code>Web::Controllers::Web::MyAction</code> module will be converted to <code>Web::Controllers::Web::Layout</code>, which can't be found and causes a constant lookup error.
 </p>
 <p class="warning">
-  If you absolutely must name a controller with the same name as your application, you'll need to explicitly set the namespace lookup for things which should be included from immediately under the app, not the controller by prefixing those names with `::`, e.g. change your views to include `::Web::Layout` instead of `include Web::Layout`, and using `include ::Web::Action` in your controllers.
+  If you absolutely must name a controller with the same name as your application, you'll need to explicitly set the namespace lookup for things which should be included from immediately under the app, not the controller by prefixing those names with <code>::</code>, e.g. change your views to include <code>::Web::Layout</code> instead of `include Web::Layout`, and using `include ::Web::Action` in your controllers.
 </p>
 
 ### Action Module
