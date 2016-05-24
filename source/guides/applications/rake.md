@@ -18,9 +18,9 @@ rake test         # Run tests
 This Rake task:
 
   1. Executes all `preload` steps
-  2. Load all the project code
+  2. Loads all the project code
 
-Use this as a Rake task prerequisite when you **DO** need to access to project code (eg. entites, actions, views, etc..)
+Use this as a Rake task prerequisite when you **DO** need to access project code (eg. entities, actions, views, etc..)
 
 ### Example
 
@@ -50,11 +50,11 @@ This Rake task is a fast way to preload:
   * The framework
   * Project configurations such as env variables and application configurations (eg. `apps/web/application.rb`)
 
-Use this as a Rake task prerequisite when you **DO NOT** need to access to project code (eg. entites, actions, views, etc..)
+Use this as a Rake task prerequisite when you **DO NOT** need to access project code (eg. entities, actions, views, etc..)
 
 ### Example
 
-Imagine we want to build a Rake task that prints informations about our project:
+Imagine we want to build a Rake task that prints information about our project:
 
 ```ruby
 # Rakefile
@@ -74,12 +74,12 @@ end
 ```
 
 <p class="notice">
-  The <code>:preload</code> Rake task preloads projects and applications configurations. Use it when you need a fast way to access them.
+  The <code>:preload</code> Rake task preloads project and applications configurations. Use it when you need a fast way to access them.
 </p>
 
 ## Test
 
-This is the default Rake task, it runs the test suite
+This is the default Rake task, which runs the test suite
 
 The following commands are equivalent:
 
