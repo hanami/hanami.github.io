@@ -2,6 +2,7 @@ ENV['SITE_ENV'] ||= 'development'
 
 Bundler.require(:default, ENV['SITE_ENV']) if defined?(Bundler)
 
+require 'ostruct'
 require 'rack/utils'
 require 'middleman-syntax'
 require 'lib/github_style_titles'
@@ -115,6 +116,42 @@ helpers do
 
   def guide_title(item)
     item.title || item.path.split('-').map(&:capitalize).join(' ')
+  end
+
+  def guide_url(category, page)
+    File.join('/guides', category.path, page.path)
+  end
+
+  def guide_pager(current_page, guides)
+    current_url = current_page.url.tr('/', '')
+    flat_guides = guides.categories.flat_map { |category|
+      category.pages.map { |page|
+        OpenStruct.new(
+          category: category,
+          page: page,
+        )
+      }
+    }
+    current_guide_index = flat_guides.index { |guide_page|
+      guide_url(guide_page.category, guide_page.page).tr('/', '') == current_url
+    }
+    if current_guide_index
+      links = []
+      prev_guide = flat_guides[current_guide_index - 1]
+      if 0 < current_guide_index && prev_guide
+        prev_url = guide_url(prev_guide.category, prev_guide.page)
+        prev_title = "#{guide_title(prev_guide.category)} - #{guide_title(prev_guide.page)}"
+        links << %(<div class="pull-left">Prev: <a href="#{prev_url}">#{prev_title}</a></div>)
+      end
+
+      next_guide = flat_guides[current_guide_index + 1]
+      if next_guide
+        next_url = guide_url(next_guide.category, next_guide.page)
+        next_title = "#{guide_title(next_guide.category)} - #{guide_title(next_guide.page)}"
+        links << %(<div class="pull-right">Next: <a href="#{next_url}">#{next_title}</a></div>)
+      end
+      links.join
+    end
   end
 
   def guides_navigation
