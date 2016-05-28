@@ -113,6 +113,10 @@ helpers do
   GUIDES_ROOT     = 'source/guides'.freeze
   GUIDES_EDIT_URL = 'https://github.com/hanami/hanami.github.io/edit/build/'.freeze
 
+  def guide_title(item)
+    item.title || item.path.split('-').map(&:capitalize).join(' ')
+  end
+
   def guides_navigation
     result = ''
 
