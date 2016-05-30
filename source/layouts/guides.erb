@@ -19,7 +19,7 @@
             <ul>
               <% category.pages.each do |page| %>
                 <li>
-                  <%= link_to(guide_title(page), File.join('/guides', category.path, page.path)) %>
+                  <%= link_to(guide_title(page), guide_url(category, page)) %>
                 </li>
               <% end %>
             </ul>
@@ -28,6 +28,10 @@
       </ul>
 
       <%= yield %>
+
+      <hr>
+
+      <%= guide_pager(current_page, data.guides) %>
     </div>
 
     <%= partial 'footer' %>
