@@ -508,13 +508,13 @@ We can use Hanami's `console` command to launch IRb with our application pre-loa
 
 ```
 % hanami console
->> BookRepository.all
+>> BookRepository.new.all
 => []
 >> book = Book.new(title: 'TDD', author: 'Kent Beck')
 => #<Book:0x007f9af1d4b028 @title="TDD", @author="Kent Beck">
->> BookRepository.create(book)
+>> BookRepository.new.create(book)
 => #<Book:0x007f9af1d13ec0 @title="TDD", @author="Kent Beck" @id=1>
->> BookRepository.find(1)
+>> BookRepository.new.find(1)
 => #<Book:0x007f9af1d13ec0 @title="TDD", @author="Kent Beck" @id=1>
 ```
 
@@ -538,8 +538,8 @@ describe 'List books' do
   before do
     BookRepository.clear
 
-    BookRepository.create(Book.new(title: 'PoEAA', author: 'Martin Fowler'))
-    BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
+    BookRepository.new.create(Book.new(title: 'PoEAA', author: 'Martin Fowler'))
+    BookRepository.new.create(Book.new(title: 'TDD', author: 'Kent Beck'))
   end
 
   it 'shows a book element for each book' do
@@ -633,9 +633,9 @@ describe Web::Controllers::Books::Index do
   let(:params) { Hash[] }
 
   before do
-    BookRepository.clear
+    BookRepository.new.clear
 
-    @book = BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
+    @book = BookRepository.new.create(Book.new(title: 'TDD', author: 'Kent Beck'))
   end
 
   it "is successful" do
@@ -662,7 +662,7 @@ module Web::Controllers::Books
     expose :books
 
     def call(params)
-      @books = BookRepository.all
+      @books = BookRepository.new.all
     end
   end
 end
@@ -685,7 +685,7 @@ require 'features_helper'
 
 describe 'Books' do
   after do
-    BookRepository.clear
+    BookRepository.new.clear
   end
 
   it 'can create a new book' do
@@ -784,7 +784,7 @@ describe Web::Controllers::Books::Create do
   let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
   before do
-    BookRepository.clear
+    BookRepository.new.clear
   end
 
   it 'creates a new book' do
@@ -815,7 +815,7 @@ module Web::Controllers::Books
     expose :book
 
     def call(params)
-      @book = BookRepository.create(Book.new(params[:book]))
+      @book = BookRepository.new.create(Book.new(params[:book]))
 
       redirect_to '/books'
     end
@@ -847,7 +847,7 @@ describe Web::Controllers::Books::Create do
   let(:action) { Web::Controllers::Books::Create.new }
 
   after do
-    BookRepository.clear
+    BookRepository.new.clear
   end
 
   describe 'with valid params' do
@@ -913,7 +913,7 @@ module Web::Controllers::Books
 
     def call(params)
       if params.valid?
-        @book = BookRepository.create(Book.new(params[:book]))
+        @book = BookRepository.new.create(Book.new(params[:book]))
 
         redirect_to '/books'
       end
