@@ -144,7 +144,7 @@ The API is really clean and concise, **it doesn't require concatenation** betwee
 
 ### Method override
 
-Browsers don't understand HTTP methods outside of `GET` and `POST`. On the other hand, Hanami embraces REST conventions, that goes beyond that two verbs. When we specify a method via `:method`, it adds a special hidden field `_method`, that's understood by the application.
+Browsers don't understand HTTP methods outside of `GET` and `POST`. On the other hand, Hanami embraces REST conventions, that goes beyond that two verbs. When we specify a method via `:method`, it adds a special hidden field `_method`, that is understood by the application.
 
 ```erb
 <%=
