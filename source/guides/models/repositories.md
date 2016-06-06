@@ -41,7 +41,7 @@ When a class includes `Hanami::Repository`, its objects will receive the followi
   * `#clear` - Delete all the records from the collection
   * `#query` - Fabricates a query object
 
-Note that these methods are instance methods therefor are called after a new repository object has been created with
+Note that these methods are instance methods therefore are called after a new repository object has been created with
 `.new`.
 
 **A collection is a homogenous set of records.**
@@ -99,7 +99,7 @@ This is a **huge improvement**, because:
 
   * If we change the storage, the callers aren't affected.
 
-Now we can get all books from an author ordered by date, and we can also suply an optional limit, with only one method call.
+Now we can get all books from an author ordered by date, and we can also supply an optional limit, with only one method call.
 We can do this by calling `BookRepository.new.most_recent_by_author(author, 20)`.
 
 ## Raw Queries & Commands
