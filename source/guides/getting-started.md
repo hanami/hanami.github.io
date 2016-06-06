@@ -536,7 +536,7 @@ require 'features_helper'
 
 describe 'List books' do
   before do
-    BookRepository.clear
+    BookRepository.new.clear
 
     BookRepository.new.create(Book.new(title: 'PoEAA', author: 'Martin Fowler'))
     BookRepository.new.create(Book.new(title: 'TDD', author: 'Kent Beck'))

@@ -26,20 +26,23 @@ This architecture has several advantages:
 
 ## Interface
 
-When a class includes `Hanami::Repository`, it will receive the following interface:
+When a class includes `Hanami::Repository`, its objects will receive the following interface:
 
-  * `.persist(entity)` – Create or update an entity
-  * `.create(entity)`  – Create a record for the given entity
-  * `.update(entity)`  – Update the record corresponding to the given entity
-  * `.delete(entity)`  – Delete the record corresponding to the given entity
-  * `.fetch(raw)`  – Fetch raw datasets for the given raw query string (eg. SQL)
-  * `.execute(raw)`  – Execute raw command (eg. SQL)
-  * `.all`   - Fetch all the entities from the collection
-  * `.find`  - Fetch an entity from the collection by its ID
-  * `.first` - Fetch the first entity from the collection
-  * `.last`  - Fetch the last entity from the collection
-  * `.clear` - Delete all the records from the collection
-  * `.query` - Fabricates a query object
+  * `#persist(entity)` – Create or update an entity
+  * `#create(entity)`  – Create a record for the given entity
+  * `#update(entity)`  – Update the record corresponding to the given entity
+  * `#delete(entity)`  – Delete the record corresponding to the given entity
+  * `#fetch(raw)`  – Fetch raw datasets for the given raw query string (eg. SQL)
+  * `#execute(raw)`  – Execute raw command (eg. SQL)
+  * `#all`   - Fetch all the entities from the collection
+  * `#find`  - Fetch an entity from the collection by its ID
+  * `#first` - Fetch the first entity from the collection
+  * `#last`  - Fetch the last entity from the collection
+  * `#clear` - Delete all the records from the collection
+  * `#query` - Fabricates a query object
+
+Note that these methods are instance methods therefore are called after a new repository object has been created with
+`.new`.
 
 **A collection is a homogenous set of records.**
 It corresponds to a table for a SQL database or to a MongoDB collection.
@@ -52,7 +55,7 @@ This decision forces developers to define intention revealing API, instead of le
 Look at the following code:
 
 ```ruby
-BookRepository.where(author_id: 23).order(:published_at).limit(8)
+BookRepository.new.where(author_id: 23).order(:published_at).limit(8)
 ```
 
 This is **bad** for a variety of reasons:
@@ -75,7 +78,7 @@ There is a better way:
 class BookRepository
   include Hanami::Repository
 
-  def self.most_recent_by_author(author, limit: 8)
+  def most_recent_by_author(author, limit: 8)
     query do
       where(author_id: author.id).
         order(:published_at)
@@ -96,6 +99,9 @@ This is a **huge improvement**, because:
 
   * If we change the storage, the callers aren't affected.
 
+Now we can get all books from an author ordered by date, and we can also supply an optional limit, with only one method call.
+We can do this by calling `BookRepository.new.most_recent_by_author(author, 20)`.
+
 ## Raw Queries & Commands
 
 A repository can perform queries and commands by accepting raw query language expressions.
@@ -107,17 +113,17 @@ A repository can perform queries and commands by accepting raw query language ex
 class BookRepository
   include Hanami::Repository
 
-  def self.raw_all
+  def raw_all
     fetch("SELECT * FROM books")
   end
 
-  def self.find_all_titles
+  def find_all_titles
     fetch("SELECT title FROM books").map do |book|
       book[:title]
     end
   end
 
-  def self.max_price
+  def max_price
     result = 0
 
     fetch("SELECT price FROM books") do |book|
@@ -129,7 +135,7 @@ class BookRepository
 end
 ```
 
-When `.fetch` is used, the returning value is NOT a collection of entities (eg. `Book`), BUT an array of hashes that represents the **raw result set**.
+When `#fetch` is used, the returning value is NOT a collection of entities (eg. `Book`), BUT an array of hashes that represents the **raw result set**.
 
 <p class="warning">
   Do NOT use user input with <code>.fetch</code>, because it makes your app vulnerable to SQL Injection.
@@ -142,13 +148,13 @@ When `.fetch` is used, the returning value is NOT a collection of entities (eg. 
 class BookRepository
   include Hanami::Repository
 
-  def self.reset_download_count
+  def reset_download_count
     execute("UPDATE books SET download_count = 0")
   end
 end
 ```
 
-To ensure a command/query separation, `.execute` doesn't have a returning value.
+To ensure a command/query separation, `#execute` doesn't have a returning value.
 
 <p class="warning">
   Do NOT use user input with <code>.execute</code>, because it makes your app vulnerable to SQL Injection.
@@ -163,7 +169,7 @@ Here is an extended example of a repository that uses the SQL adapter.
 class BookRepository
   include Hanami::Repository
 
-  def self.most_recent_by_author(author, limit: 8)
+  def most_recent_by_author(author, limit: 8)
     query do
       where(author_id: author.id).
         desc(:id).
@@ -171,29 +177,29 @@ class BookRepository
     end
   end
 
-  def self.most_recent_published_by_author(author, limit = 8)
+  def most_recent_published_by_author(author, limit = 8)
     most_recent_by_author(author, limit).published
   end
 
-  def self.published
+  def published
     query do
       where(published: true)
     end
   end
 
-  def self.drafts
+  def drafts
     exclude published
   end
 
-  def self.rank
+  def rank
     published.desc(:comments_count)
   end
 
-  def self.best_article_ever
+  def best_article_ever
     rank.limit(1)
   end
 
-  def self.comments_average
+  def comments_average
     query.average(:comments_count)
   end
 end
@@ -209,7 +215,7 @@ Here is a pagination example:
 module Bookshelf
   module Repositories
     module Pagination
-      def self.paginate(limit: 10, offset: 0)
+      def paginate(limit: 10, offset: 0)
         query do
           limit(limit).offset(offset)
         end
@@ -225,7 +231,7 @@ class BookRepository
   include Hanami::Repository
   include Bookshelf::Repositories::Pagination
 
-  def self.published
+  def published
     query do
       where(published: true)
     end.paginate
