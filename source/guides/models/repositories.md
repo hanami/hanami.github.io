@@ -26,7 +26,7 @@ This architecture has several advantages:
 
 ## Interface
 
-When a class includes `Hanami::Repository`, it will receive the following instance methods:
+When a class includes `Hanami::Repository`, its objects will receive the following interface:
 
   * `#persist(entity)` – Create or update an entity
   * `#create(entity)`  – Create a record for the given entity
