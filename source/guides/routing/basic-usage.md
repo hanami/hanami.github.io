@@ -59,7 +59,7 @@ get '/books(.:format)', to: 'books#show'
 
 ### Wildcard Matching
 
-Imagine we want to to serve static files from a user repository.
+Imagine we want to serve static files from a user repository.
 It would be impossible to know in advance which files are stored and to prepare routes accordingly.
 
 To solve this problem, Hanami supports _wildcard matching_.
