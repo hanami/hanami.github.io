@@ -98,8 +98,7 @@ require 'lib/mailers/mandrill_delivery_method'
 Hanami::Mailer.configure do
   # ...
   delivery do
-    production MandrillDeliveryMethod
-      api_key: ENV['MANDRILL_API_KEY']
+    production MandrillDeliveryMethod, api_key: ENV['MANDRILL_API_KEY']
   end
 end.load!
 ```
@@ -118,7 +117,7 @@ class MandrillDeliveryMethod
 
   private
 
-  def send(raw_message)
+  def send(message)
     gateway.messages.send message
   end
 
