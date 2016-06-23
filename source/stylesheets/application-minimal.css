@@ -136,6 +136,10 @@ div.app-block-footer {
   margin-top: 2em;
 }
 
+.app-block-footer .col-sm-6 p {
+  color: rgba(116, 119, 123, 0.85);
+}
+
 div.container-blog h1 {
   color: #685D9F;
   font-weight: 300;
