@@ -84,6 +84,8 @@ Hanami::Model.migration do
 end
 ```
 
+**To learn how to use migrations in command line, please have a look at [this article](/guides/command-line/database/#migrate).**
+
 ## References
 
 Hanami::Model uses [Sequel](http://sequel.jeremyevans.net/) under the hood as database migration engine. If there is any aspect that isn't covered by our documentation or tests, please refer to [Sequel documentation](http://sequel.jeremyevans.net/rdoc/files/doc/schema_modification_rdoc.html).
