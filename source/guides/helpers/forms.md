@@ -20,8 +20,6 @@ It provides a powerful Ruby API to describe HTML5 forms, to be used both with vi
 
 ## Technical notes
 
-### Zero monkey-patching
-
 This feature has a similar syntax to other Ruby gems with the same purpose, but it has a different usage if compared with Rails or Padrino.
 
 Those frameworks allow a syntax like this:
@@ -34,13 +32,13 @@ Those frameworks allow a syntax like this:
 <% end %>
 ```
 
-The code above **isn't a valid ERB template**. To make it work, Rails uses monkey-patches ERB, and Padrino supports only HAML with that syntax.
-
-One of the pillars of Hanami is _"zero monkey-patch of Ruby core and stdlib"_. We want to keep this principle for this feature too.
+The code above **isn't a valid ERB template**.
+To make it work, these frameworks use custom ERB handlers and rely on third-party gems for other template engines.
 
 ### Template engine independent
 
-Avoiding monkey-patching has a big advantage: **form helpers are designed to be independent from the template engine**. That means we can use Slim, HAML, or ERB and keep the same Ruby syntax.
+Because we support a lot of template engines, we wanted to keep it simple: use what ERB already offers.
+That means we can use Slim, HAML, or ERB and keep the same Ruby syntax.
 
 ### One output block
 
