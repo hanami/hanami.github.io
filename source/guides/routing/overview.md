@@ -45,7 +45,7 @@ This is a really long name to write, that's why Hanami has a **naming convention
 
 ```ruby
 # apps/web/config/routes.rb
-get '/', to: "home#index" # => will route to Web::Controllers::Home::Index
+root to: "home#index" # => will route to Web::Controllers::Home::Index
 ```
 
 The first token is the name of the controller `"home"` is translated to `Home`.

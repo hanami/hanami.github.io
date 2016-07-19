@@ -177,7 +177,7 @@ The first thing we need to add is a route:
 
 ```ruby
 # apps/web/config/routes.rb
-get '/', to: 'home#index'
+root to: 'home#index'
 ```
 
 The root we pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
@@ -1029,17 +1029,17 @@ Open up the routes file for the "web" application:
 
 ```ruby
 # apps/web/config/routes.rb
-post '/books', to: 'books#create'
+post '/books',    to: 'books#create'
 get '/books/new', to: 'books#new'
-get '/books', to: 'books#index'
-get '/', to: 'home#index'
+get '/books',     to: 'books#index'
+root              to: 'home#index'
 ```
 
 Hanami provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:
 
 ```ruby
 resources :books
-get '/', to: 'home#index', as: :home
+root to: 'home#index'
 ```
 
 To get a sense of what routes are defined, now we've made this change, you can
@@ -1047,7 +1047,7 @@ use the special command-line task `routes` to inspect the end result:
 
 ```
 % hanami routes
-          GET, HEAD  /                Web::Controllers::Home::Index
+     root GET, HEAD  /                Web::Controllers::Home::Index
     books GET, HEAD  /books           Web::Controllers::Books::Index
  new_book GET, HEAD  /books/new       Web::Controllers::Books::New
     books POST       /books           Web::Controllers::Books::Create
