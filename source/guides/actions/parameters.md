@@ -34,32 +34,13 @@ end
 
 If we visit `/dashboard?q=foo`, we should see `Query string: foo`.
 
-### Indifferent Access
+### Symbol Access
 
-Until the version 2.2.0 of MRI (Matz Ruby Interpreter), symbols weren't garbage collected.
-Because params come from untrusted sources (the web), we cannot automatically symbolize their keys.
-This is a security mechanism to avoid an attack called _Symbol DoS_.
-
-Params are stored internally with string keys, but they offer a convenient access for symbols too.
+Params and nested params can be referenced **only** via symbols.
 
 ```ruby
 params[:q]
-# or
-params['q']
-```
-
-<p class="warning">
-  Indifferent Access may be removed in future versions of Hanami in favor of symbol access only.
-</p>
-
-### Nested Access
-
-Params also offer indifferent access for nested values.
-
-```ruby
 params[:book][:title]
-# or
-params['book']['title']
 ```
 
 Now, what happens if the parameter `:book` is missing from the request?
