@@ -93,21 +93,22 @@ end
 ### Supported methods
 
 * color_field
+* datalist
 * date_field
 * datetime_field
 * datetime_local_field
 * email_field
-* hidden_field
-* file_field
 * fields_for
+* file_field
 * form_for
+* hidden_field
 * label
-* text_area
-* text_field
 * password_field
 * radio_button
 * select
 * submit
+* text_area
+* text_field
 
 ## Examples
 
