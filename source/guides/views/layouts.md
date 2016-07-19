@@ -80,7 +80,7 @@ Given the following template for a layout:
   <body>
     <!-- ... -->
     <footer>
-      <%= content :javascripts %>
+      <%= local :javascripts %>
     </footer>
   </body>
 </html>
