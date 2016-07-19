@@ -81,11 +81,11 @@ module Web::Controllers::Signup
     include Web::Action
 
     params do
-      param :email
-      param :password
+      required(:email).filled
+      required(:password).filled
 
-      param :address do
-        param :country
+      required(:address).schema do
+        required(:country).filled
       end
     end
 
@@ -161,12 +161,12 @@ module Web::Controllers::Signup
     MEGABYTE = 1024 ** 2
 
     params do
-      param :name,             presence: true
-      param :email,            presence: true, format: /@/, confirmation: true
-      param :password,         presence: true,              confirmation: true
-      param :terms_of_service, acceptance: true
-      param :avatar,           size: 0..(MEGABYTE * 3)
-      param :age,              type: Integer, size: 18..99
+      required(:name).filled(:str?)
+      required(:email).filled(:str?, format?: /@/).confirmation
+      required(:password).filled(:str?).confirmation
+      required(:terms_of_service).filled(:bool?)
+      required(:age).filled(:int?, included_in?: 18..99)
+      optional(:avatar).filled(size?: 1..(MEGABYTE * 3)
     end
 
     def call(params)
@@ -194,12 +194,14 @@ module Web::Controllers::Signup
   class MyParams < Web::Action::Params
     MEGABYTE = 1024 ** 2
 
-    param :name,             presence: true
-    param :email,            presence: true, format: /@/, confirmation: true
-    param :password,         presence: true,              confirmation: true
-    param :terms_of_service, acceptance: true
-    param :avatar,           size: 0..(MEGABYTE * 3)
-    param :age,              type: Integer, size: 18..99
+    params do
+      required(:name).filled(:str?)
+      required(:email).filled(:str?, format?: /@/).confirmation
+      required(:password).filled(:str?).confirmation
+      required(:terms_of_service).filled(:bool?)
+      required(:age).filled(:int?, included_in?: 18..99)
+      optional(:avatar).filled(size?: 1..(MEGABYTE * 3)
+    end
   end
 end
 ```

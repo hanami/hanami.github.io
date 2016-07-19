@@ -879,8 +879,8 @@ describe Web::Controllers::Books::Create do
 
       refute action.params.valid?
 
-      action.errors.for('book.title').wont_be_empty
-      action.errors.for('book.author').wont_be_empty
+      action.errors[:book][:title].must_equal  ['is missing']
+      action.errors[:book][:author].must_equal ['is missing']
     end
   end
 end
@@ -905,9 +905,9 @@ module Web::Controllers::Books
     expose :book
 
     params do
-      param :book do
-        param :title,  presence: true
-        param :author, presence: true
+      required(:book).schema do
+        required(:title).filled(:str?)
+        required(:author).filled(:str?)
       end
     end
 
@@ -955,9 +955,9 @@ require 'spec_helper'
 require_relative '../../../../apps/web/views/books/new'
 
 class NewBookParams < Hanami::Action::Params
-  param :book do
-    param :title, presence: true
-    param :author, presence: true
+  params :book do
+    required(:title).filled(:str?)
+    required(:author).filled(:str?)
   end
 end
 
@@ -972,8 +972,8 @@ describe Web::Views::Books::New do
     params.valid? # trigger validations
 
     rendered.must_include('There was a problem with your submission')
-    rendered.must_include('title is required')
-    rendered.must_include('author is required')
+    rendered.must_include('title is missing')
+    rendered.must_include('author is missing')
   end
 end
 ```
@@ -997,8 +997,8 @@ describe 'Books' do
     current_path.must_equal('/books')
 
     assert page.has_content?('There was a problem with your submission')
-    assert page.has_content?('title is required')
-    assert page.has_content?('author is required')
+    assert page.has_content?('title is missing')
+    assert page.has_content?('author is missing')
   end
 end
 ```
@@ -1011,8 +1011,8 @@ Open up `apps/web/templates/books/new.html.erb`:
   <div class="errors">
     <h3>There was a problem with your submission</h3>
     <ul>
-      <% params.errors.each do |error| %>
-        <li><%= error.attribute_name %> is required</li>
+      <% params.errors(full: true).each do |error| %>
+        <li><%= error %></li>
       <% end %>
     </ul>
   </div>
