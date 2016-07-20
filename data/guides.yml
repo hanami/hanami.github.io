@@ -18,6 +18,7 @@ categories:
       - path: basic-usage
       - path: restful-resources
         title: RESTful Resource(s)
+      - path: testing
   - path: actions
     pages:
       - path: overview
