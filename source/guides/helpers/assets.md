@@ -38,6 +38,16 @@ A source can be the file name without the extension, or an absolute URL.
 <script src="/assets/application.js" type="text/javascript"></script>
 ```
 
+Alternatively, it accepts **only one** source and a Hash to represent HTML attributes.
+
+```erb
+<%= javascript 'application', async: true %>
+```
+
+```html
+<script src="/assets/application.js" type="text/javascript" async="true"></script>
+```
+
 ### `stylesheet`
 
 It generates a `<link>` tag for the given source(s).
@@ -51,6 +61,16 @@ A source can be the file name without the extension, or an absolute URL.
 <link href="/assets/reset.css" type="text/css" rel="stylesheet">
 <link href="/assets/grid.css" type="text/css" rel="stylesheet">
 <link href="/assets/main.css" type="text/css" rel="stylesheet">
+```
+
+Alternatively, it accepts **only one** source and a Hash to represent HTML attributes.
+
+```erb
+<%= stylesheet 'application', crossorigin: 'anonymous' %>
+```
+
+```html
+<link href="/assets/application.css" type="text/css" rel="stylesheet" crossorigin="anonymous">
 ```
 
 ### `favicon`
