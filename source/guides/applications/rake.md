@@ -60,9 +60,9 @@ Imagine we want to build a Rake task that prints informations about our project:
 # Rakefile
 
 task print_informations: :preload do
-  puts ENV['HANAMI_ENV']             # => "development"
-  puts ENV['BOOKSHELF_DATABASE_URL'] # => "postgres://localhost/bookshelf_development"
-  puts defined?(User)                # => nil
+  puts ENV['HANAMI_ENV']   # => "development"
+  puts ENV['DATABASE_URL'] # => "postgres://localhost/bookshelf_development"
+  puts defined?(User)      # => nil
 end
 ```
 
