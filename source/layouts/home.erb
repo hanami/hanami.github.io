@@ -1,52 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Hanami - The web, with simplicity" />
-    <meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
-    <meta name="author" content="Luca Guidi">
-    <link href="http://feeds.feedburner.com/hanamirb" rel="alternate" title="Hanami" type="application/atom+xml" />
-
-    <title><%= current_page.data.title || "Hanami | The web, with simplicity." %></title>
-
-    <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
-    <%= stylesheet_link_tag 'toolkit-minimal' %>
-    <%= stylesheet_link_tag 'application-minimal' %>
+    <%= partial 'head' %>
   </head>
   <body>
-
-    <nav class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">
-            <span>Hanami</span>
-          </a>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="/guides">Guides</a>
-            </li>
-            <li>
-              <a href="/community">Community</a>
-            </li>
-            <li>
-              <a href="https://github.com/hanami" target="_blank">Source Code</a>
-            </li>
-            <li>
-              <a href="/blog">Blog</a>
-            </li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+    <%= partial 'navbar' %>
 
     <div class="block app-block-intro">
       <div class="container text-center">
@@ -75,7 +33,7 @@
                 <div class="featured-list-icon text-primary">
                   <span class="icon icon-flash"></span>
                 </div>
-                <p class="featured-list-icon-text m-b-0"><strong>Fast response time</strong></p>
+                <p class="featured-list-icon-text m-b-0"><strong>Fast response times</strong></p>
                 <p class="featured-list-icon-text">
                   Hanami is optimized for speed. It returns responses in a matter of milliseconds. Take the full advantage of Content Delivery Networks to make your apps faster.
                 </p>
@@ -85,9 +43,9 @@
                 <div class="featured-list-icon text-primary">
                   <span class="icon icon-feather"></span>
                 </div>
-                <p class="featured-list-icon-text m-b-0"><strong>Full featured, but lightweight</strong></p>
+                <p class="featured-list-icon-text m-b-0"><strong>Full-featured, but lightweight</strong></p>
                 <p class="featured-list-icon-text">
-                  Use the <strong>100+ features</strong> that we offer to build powerful products without compromising memory. Hanami consumes <strong>60% less memory</strong> than other full featured Ruby frameworks.
+                  Use the <strong>100+ features</strong> that we offer to build powerful products without compromising memory. Hanami consumes <strong>60% less memory</strong> than other full-featured Ruby frameworks.
                 </p>
               </li>
 
@@ -102,7 +60,7 @@
                 </div>
                 <p class="featured-list-icon-text m-b-0"><strong>Secure by default</strong></p>
                 <p class="featured-list-icon-text">
-                  Deploy applications that rely on latest browser technologies such as Content Security Policy, X-Frame headers, automatic escape to protect your users against the most common security threats.
+                  Deploy applications that rely on latest browser technologies such as Content Security Policy, X-Frame headers, automatic escaping to protect your users against the most common security threats.
                 </p>
               </li>
 
@@ -112,7 +70,7 @@
                 </div>
                 <p class="featured-list-icon-text m-b-0"><strong>Simple and productive</strong></p>
                 <p class="featured-list-icon-text">
-                  Enjoy Hanami simplicity of design and the minimalism of its components. Write flexible code in a matter of minutes, and make it easy to change for the future.
+                  Enjoy Hanami's simplicity of design and the minimalism of its components. Write flexible code in a matter of minutes, and make it easy to change for the future.
                 </p>
               </li>
             </ul>

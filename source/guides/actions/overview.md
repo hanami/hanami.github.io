@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Actions Overview
+title: Guides - Actions Overview
 ---
 
 # Overview
@@ -53,6 +53,13 @@ This module is generated at runtime for us, when the application starts.
 The last bit is `Dashboard`, which is our controller.
 
 The whole action name is `Web::Controllers::Dashboard::Index`.
+
+<p class="warning">
+  You should avoid giving your action modules the same name as your application, e.g. avoid naming a controller <code>Web</code> in an app named <code>Web</code>. If you have a controller name like <code>Web::Controllers::Web</code> then some code across your app will break with errors about constants not being found, for example in views which <code>include Web::Layout</code>. This is because Ruby starts constant lookup with the current module, so a constant like <code>Web::Layout</code> referenced by code in the <code>Web::Controllers::Web</code> or <code>Web::Controllers::Web::MyAction</code> module will be converted to <code>Web::Controllers::Web::Layout</code>, which can't be found and causes a constant lookup error.
+</p>
+<p class="warning">
+  If you absolutely must name a controller with the same name as your application, you'll need to explicitly set the namespace lookup for things which should be included from immediately under the app, not the controller by prefixing those names with <code>::</code>, e.g. change your views to include <code>::Web::Layout</code> instead of <code>include Web::Layout</code>, and using <code>include ::Web::Action</code> in your controllers.
+</p>
 
 ### Action Module
 

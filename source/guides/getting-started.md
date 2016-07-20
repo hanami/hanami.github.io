@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Getting Started
+title: Guides - Getting Started
 ---
 
 # Getting Started
@@ -7,7 +7,7 @@ title: Hanami | Guides - Getting Started
 <div id="getting-started-lead">
   <p>
     Hello. If you're reading this page, it's very likely that you want to learn more about Hanami.
-    That's great, congrats! If you're looking for new ways to build maintanable, secure, faster and testable web applications, you're in good hands.
+    That's great, congrats! If you're looking for new ways to build maintainable, secure, faster and testable web applications, you're in good hands.
   </p>
 
   <p>
@@ -15,12 +15,12 @@ title: Hanami | Guides - Getting Started
   </p>
 
   <p>
-    I warn you that either you're a totally beginner or an experienced developer <strong>this learning process can be hard</strong>.
+    I warn you that whether you're a total beginner or an experienced developer <strong>this learning process can be hard</strong>.
     After 10 years you develop a way of working, and it can be painful for you to change. However, <strong>without change, there is no challenge</strong>.
   </p>
 
   <p>
-    Sometimes a feature doesn't looks right, that doesn't mean it's you.
+    Sometimes a feature doesn't look right, that doesn't mean it's you.
     It can be a matter of formed habits, a design fallacy or even a bug.
   </p>
 
@@ -34,7 +34,7 @@ title: Hanami | Guides - Getting Started
   </p>
 
   <p>
-    <strong>It you feel alone, or frustrated, don't give up, jump in our <a href="http://chat.hanamirb.org">chat</a> and ask for help.</strong>
+    <strong>If you feel alone, or frustrated, don't give up, jump in our <a href="http://chat.hanamirb.org">chat</a> and ask for help.</strong>
     There will be someone more than happy to talk with you.
   </p>
 
@@ -180,7 +180,7 @@ The first thing we need to add is a route:
 root to: 'home#index'
 ```
 
-The root we pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
+We pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
 Now we can create the index action.
 
 ```ruby
@@ -207,7 +207,7 @@ module Web::Views::Home
 end
 ```
 
-...which, in turn, is empty and does nothing more than render it's template.
+...which, in turn, is empty and does nothing more than render its template.
 This is the file we need to edit in order to make our test pass. All we need to do is add the bookshelf heading.
 
 ```erb
@@ -215,7 +215,7 @@ This is the file we need to edit in order to make our test pass. All we need to 
 <h1>Bookshelf</h1>
 ```
 
-Save your changes, run your test again and it now pass. Great!
+Save your changes, run your test again and it now passes. Great!
 
 ```shell
 Run options: --seed 19286
@@ -286,7 +286,7 @@ It gives us an empty action, view and template; it also adds a default route to 
 get '/books', to: 'books#index'
 ```
 
-If you're using ZSH, you may get `zsh: no matches found: books#new`. In that case, you can use:
+If you're using ZSH, you may get `zsh: no matches found: books#index`. In that case, you can use:
 ```
 % hanami generate action web books/index
 ```
@@ -364,7 +364,7 @@ In this way we're able to save any Ruby object in a database.
 That means we can adapt Hanami to use existing Ruby projects and to provide a way to persist them.
 Read more about entities and repositories in the [models guide](/guides/models/overview).
 
-Hanami ships with a generator for models, so let's use it create a `Book` entity and the corresponding repository:
+Hanami ships with a generator for models, so let's use it to create a `Book` entity and the corresponding repository:
 
 ```
 % hanami generate model book
@@ -439,7 +439,7 @@ The placeholders **_user_** and **_password_** should be replaced with the corre
 
 You may want to change `localhost` for `127.0.0.1` if you're using Linux.
 
-You may decide to use a different adapter, if you do make sure that you update your Gemfile to include the adapter of your choice and run bundle install.
+You may decide to use a different adapter. If you do, make sure that you update your Gemfile to include the adapter of your choice and run bundle install.
 
 The database configured by default, called `bookshelf_development` running on `localhost`, should work fine for now.
 Hanami can create the database for us:
@@ -538,7 +538,7 @@ describe 'List books' do
   before do
     BookRepository.clear
 
-    BookRepository.create(Book.new(title: 'PoEEA', author: 'Martin Fowler'))
+    BookRepository.create(Book.new(title: 'PoEAA', author: 'Martin Fowler'))
     BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
   end
 
@@ -791,7 +791,7 @@ describe Web::Controllers::Books::Create do
     action.call(params)
 
     action.book.id.wont_be_nil
-    action.book.title.must_equal params[:book][:title]
+    action.book.title.must_equal params[:book]['title']
   end
 
   it 'redirects the user to the books listing' do
@@ -1048,6 +1048,8 @@ use the special command-line task `routes` to inspect the end result:
 
 ```
 % hanami routes
+     Name Method     Path             Action
+
      root GET, HEAD  /                Web::Controllers::Home::Index
     books GET, HEAD  /books           Web::Controllers::Books::Index
  new_book GET, HEAD  /books/new       Web::Controllers::Books::New
@@ -1056,6 +1058,7 @@ use the special command-line task `routes` to inspect the end result:
 edit_book GET, HEAD  /books/:id/edit  Web::Controllers::Books::Edit
      book PATCH      /books/:id       Web::Controllers::Books::Update
      book DELETE     /books/:id       Web::Controllers::Books::Destroy
+     home GET, HEAD  /                Web::Controllers::Home::Index
 ```
 
 The output for `hanami routes` shows you the name of the defined helper method (you can suffix this name with `_path` or `_url` and call it on the `routes` helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.

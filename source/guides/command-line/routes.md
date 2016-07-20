@@ -1,5 +1,5 @@
 ---
-title: "Hanami | Guides - Command Line: Routes"
+title: "Guides - Command Line: Routes"
 ---
 
 # Command Line

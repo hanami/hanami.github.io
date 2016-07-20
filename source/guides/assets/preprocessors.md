@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Assets Preprocessors
+title: Guides - Assets Preprocessors
 ---
 
 # Assets

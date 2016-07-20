@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Models Overview
+title: Guides - Models Overview
 ---
 
 # Models
@@ -178,6 +178,7 @@ The solution to this problem is to define a custom coercer.
 ```ruby
 # lib/ext/pg_array.rb
 require 'hanami/model/coercer'
+require 'sequel'
 require 'sequel/extensions/pg_array'
 
 class PGArray < Hanami::Model::Coercer
@@ -214,14 +215,14 @@ end.load!
 
 ### Use UUID as primary key instead of integer
 
-When using Postgres, you may use [UUID Type](http://www.postgresql.org/docs/8.3/static/datatype-uuid.html) as primary keys instead if integers.
+When using Postgres, you may use [UUID Type](http://www.postgresql.org/docs/8.3/static/datatype-uuid.html) as primary keys instead of integers.
 First of all, you need to enable <code>uuid-ossp</code> extension:
 
 ```ruby
 # db/migrations/20160125223305_enable_uuid_extensions.rb
 Hanami::Model.migration do
   change do
-    run 'CREATE EXTENSION "uuid-ossp"'
+    run 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
   end
 end
 ```

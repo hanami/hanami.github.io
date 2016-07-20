@@ -133,7 +133,11 @@ div.download-develop-deploy code {
 }
 
 div.app-block-footer {
-  margin-top: 5em;
+  margin-top: 2em;
+}
+
+.app-block-footer .col-sm-6 p {
+  color: rgba(116, 119, 123, 0.85);
 }
 
 div.container-blog h1 {
@@ -166,13 +170,41 @@ div.article-body {
   font-size: 1.4em;
 }
 
+div.supporters {
+  font-size: 18px;
+  font-weight: 300;
+}
+
 #lotus {
   color: #fff;
   background-color: #685D9F;
   line-height: 5em;
+  margin-top: 2em;
 }
 
 #lotus a {
   color: #fff;
   text-decoration: underline;
+}
+
+table.status {
+  width: 100%;
+}
+
+table.status tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+table.status th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+table.status th {
+  height: 50px;
+  font-size: 20px;
+}
+
+table.status td {
+  font-size: 16px;
 }

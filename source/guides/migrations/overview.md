@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Migrations
+title: Guides - Migrations
 ---
 
 # Migrations
@@ -83,6 +83,8 @@ Hanami::Model.migration do
   end
 end
 ```
+
+**To learn how to use migrations in command line, please have a look at [this article](/guides/command-line/database/#migrate).**
 
 ## References
 

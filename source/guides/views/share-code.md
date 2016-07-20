@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - View Share Code
+title: Guides - View Share Code
 ---
 
 # Share Code

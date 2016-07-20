@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Repositories
+title: Guides - Repositories
 ---
 
 # Repositories

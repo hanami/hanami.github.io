@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Routing Overview
+title: Guides - Routing Overview
 ---
 
 # Overview

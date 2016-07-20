@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Assets Overview
+title: Guides - Assets Overview
 ---
 
 # Assets

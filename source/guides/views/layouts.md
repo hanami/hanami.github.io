@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - View Layouts
+title: Guides - View Layouts
 ---
 
 # Layouts

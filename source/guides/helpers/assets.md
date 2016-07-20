@@ -1,5 +1,5 @@
 ---
-title: Hanami - Guides - Assets Helpers
+title: Guides - Assets Helpers
 ---
 
 ## Assets Helpers

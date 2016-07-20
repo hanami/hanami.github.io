@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Custom Helpers
+title: Guides - Custom Helpers
 ---
 
 ## Custom Helpers

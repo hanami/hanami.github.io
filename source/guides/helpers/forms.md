@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Form Helpers
+title: Guides - Form Helpers
 ---
 
 ## Form Helpers
@@ -20,8 +20,6 @@ It provides a powerful Ruby API to describe HTML5 forms, to be used both with vi
 
 ## Technical notes
 
-### Zero monkey-patching
-
 This feature has a similar syntax to other Ruby gems with the same purpose, but it has a different usage if compared with Rails or Padrino.
 
 Those frameworks allow a syntax like this:
@@ -34,13 +32,13 @@ Those frameworks allow a syntax like this:
 <% end %>
 ```
 
-The code above **isn't a valid ERB template**. To make it work, Rails uses monkey-patches ERB, and Padrino supports only HAML with that syntax.
-
-One of the pillars of Hanami is _"zero monkey-patch of Ruby core and stdlib"_. We want to keep this principle for this feature too.
+The code above **isn't a valid ERB template**.
+To make it work, these frameworks use custom ERB handlers and rely on third-party gems for other template engines.
 
 ### Template engine independent
 
-Avoiding monkey-patching has a big advantage: **form helpers are designed to be independent from the template engine**. That means we can use Slim, HAML, or ERB and keep the same Ruby syntax.
+Because we support a lot of template engines, we wanted to keep it simple: use what ERB already offers.
+That means we can use Slim, HAML, or ERB and keep the same Ruby syntax.
 
 ### One output block
 
@@ -92,23 +90,25 @@ end
 
 ### Supported methods
 
-* color_field
-* datalist
-* date_field
-* datetime_field
-* datetime_local_field
-* email_field
-* fields_for
-* file_field
-* form_for
-* hidden_field
-* label
-* password_field
-* radio_button
-* select
-* submit
-* text_area
-* text_field
+* [check_box](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#check_box-instance_method)
+* [color_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#color_field-instance_method)
+* [datalist](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#datalist-instance_method)
+* [date_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#date_field-instance_method)
+* [datetime_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#datetime_field-instance_method)
+* [datetime_local_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#datetime_local_field-instance_method)
+* [email_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#email_field-instance_method)
+* [fields_for](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#fields_for-instance_method)
+* [file_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#file_field-instance_method)
+* [form_for](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper#form_for-instance_method)
+* [hidden_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#hidden_field-instance_method)
+* [label](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#label-instance_method)
+* [number_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#number_field-instance_method)
+* [password_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#password_field-instance_method)
+* [radio_button](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#radio_button-instance_method)
+* [select](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#select-instance_method)
+* [submit](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#submit-instance_method)
+* [text_area](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#text_area-instance_method)
+* [text_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#text_field-instance_method)
 
 ## Examples
 
@@ -172,7 +172,7 @@ Cross Site Request Forgery (CSRF) is one of the most common attacks on the web. 
 When we enable sessions, it uses them to store a random token for each user.
 Forms are rendered with a special hidden field (`_csrf_token`) which contains this token.
 
-On form submission, Hanami matches this input with the value from the session. If they match, the request can continue. If not, it resets the sesssion and raises an exception.
+On form submission, Hanami matches this input with the value from the session. If they match, the request can continue. If not, it resets the session and raises an exception.
 
 Developers can customize attack handling.
 

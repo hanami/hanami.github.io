@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - HTML5 Helpers
+title: Guides - HTML5 Helpers
 ---
 
 ## HTML5 Helpers

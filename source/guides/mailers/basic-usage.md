@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Mailers Basic Usage
+title: Guides - Mailers Basic Usage
 ---
 
 # Basic Usage

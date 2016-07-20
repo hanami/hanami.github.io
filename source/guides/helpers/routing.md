@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Routing Helpers
+title: Guides - Routing Helpers
 ---
 
 ## Routing Helpers

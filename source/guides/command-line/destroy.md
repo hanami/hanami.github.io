@@ -1,5 +1,5 @@
 ---
-title: "Hanami | Guides - Command Line: Destroy"
+title: "Guides - Command Line: Destroy"
 ---
 
 # Command Line

@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action HTTP Caching
+title: Guides - Action HTTP Caching
 ---
 
 # HTTP Caching

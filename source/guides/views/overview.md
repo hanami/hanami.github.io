@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Views Overview
+title: Guides - Views Overview
 ---
 
 # Overview

@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - MIME Types
+title: Guides - MIME Types
 ---
 
 # MIME Types

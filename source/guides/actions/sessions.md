@@ -1,5 +1,5 @@
 ---
-title: Hanami | Guides - Action Sessions
+title: Guides - Action Sessions
 ---
 
 # Sessions
