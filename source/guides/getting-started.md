@@ -875,9 +875,8 @@ describe Web::Controllers::Books::Create do
     end
 
     it 'sets errors attribute accordingly' do
-      action.call(params)
-
-      refute action.params.valid?
+      response = action.call(params)
+      response[0].must_equal 422
 
       action.errors[:book][:title].must_equal  ['is missing']
       action.errors[:book][:author].must_equal ['is missing']
@@ -916,6 +915,8 @@ module Web::Controllers::Books
         @book = BookRepository.create(Book.new(params[:book]))
 
         redirect_to '/books'
+      else
+        self.status = 422
       end
     end
   end
