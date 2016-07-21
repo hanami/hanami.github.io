@@ -179,7 +179,6 @@ These lovely people are:
   * [Sean Collins](https://github.com/cllns)
   * [Sebastjan Hribar](https://github.com/sebastjan-hribar)
   * [Semyon Pupkov](https://github.com/artofhuman)
-  * [Semyon Pupkov](https://github.com/artofhuman)
   * [Steve Hook](https://github.com/stevehook)
   * [TheSmartnik](https://github.com/TheSmartnik)
   * [Tran Duy Khoa](https://github.com/duykhoa)
