@@ -10,25 +10,25 @@ excerpt: >
   Subresource Integrity, updated Content Security Policy, and new HTTP security headers.
 ---
 
-This is the first minor release after the [project rebranding](/blog/2016/01/22/lotus-is-now-hanami.html) happened a few months ago.
+This is the first minor release after the [project rebranding](/blog/2016/01/22/lotus-is-now-hanami.html) that happened a few months ago.
 
-We waited for so long for this version in order to have the largest feedback cycle since this project was started four years ago.
-We had a lot of new contributions for new features, bug fixes, real world experiences.
-At this point we're really close to 1.0.
+We waited so long to release this version in order to have the largest possible feedback cycle. (Actually, the longest gap in releases since this project was started four years ago!)
+We've had a lot of new contributions: new features, bug fixes, and real world experiences.
+At this point **we're really close to 1.0**.
 
-In the meantime, we started tech alliances with [dry-rb](http://dry-rb.org) and [ROM](http://rom-rb.org).
-We're working close with these two amazing projects (and communities) to make the Ruby ecosystem stronger.
+In the meantime, we've started tech alliances with [dry-rb](http://dry-rb.org) and [ROM](http://rom-rb.org).
+We're working closely with these two amazing projects (and communities) to make the Ruby ecosystem stronger.
 
-As result of this collaboration, we can ship today a new and powerful validation syntax based on [dry-validation](http://dry-rb.org/gems/dry-validation).
+As result of this collaboration, today we can ship a new, powerful validation syntax based on [dry-validation](http://dry-rb.org/gems/dry-validation).
 
 ## Features
 
 ### New Validations Syntax
 
-This new poweful syntax overcomes the limit that we have reached with the old design: no control on the order of execution and lack of extensibility.
-We realized that complex validation rules are hard to describe with DSL options, so we made possible to express these rules with Ruby macros.
+This new powerful syntax overcomes the limitations that we have reached with the old design: no control on the order of execution and lack of extensibility.
+We realized that complex validation rules are hard to describe with DSL options, so we made it possible to express these rules with Ruby macros.
 
-The results are astonishing: beside of the better expressiveness, we guardantee type safety and time execution which is faster than the past.
+The results are astonishing: besides having better expressiveness, we now guarantee type safety and have better performance.
 
 ```ruby
 # apps/web/controllers/books/create.rb
@@ -82,15 +82,15 @@ end
 ### Subresource Integrity
 
 A CDN can dramatically improve page speed, but it can potentially open a security breach.
-If the CDN that we're using is compromised and serves evil javascript files, we're exposing our users to security attacks like Cross Site Scripting (XSS).
+If the CDN that we're using is compromised and serves evil javascript or stylesheet files, we're exposing our users to security attacks like Cross Site Scripting (XSS).
 
-To solve this problem browsers vendor introduced a defense called [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity).
+To solve this problem, browsers vendors introduced a defense called [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity).
 
 When enabled, the browser verifies that the checksum of the downloaded file, matches with the declared one.
 
 #### From A CDN
 
-If we're using jQuery from their CDN we should check on their website what's the checksum of the `.js` file and write:
+If we're using jQuery from their CDN, we should find the checksum of the `.js` file on their website and write:
 
 ```erb
 <%= javascript 'https://code.jquery.com/jquery-3.1.0.min.js', integrity: 'sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=' %>
@@ -108,7 +108,7 @@ The security problem described above doesn't concern only CDNs, but local files 
 Imagine we have a compromised file system and someone was able to replace our javascripts with evil files: we would be vulnerable to the same kind of attack.
 
 As a defense against this security problem, Hanami **enables Subresource Integrity by default in production.**
-When we [precompile the assets](/guides/command-line/assets) at the deploy time, Hanami calculates the checksum of all our assets and it adds a special HTML attribute `integrity` to our asset tags like `<script>`.
+When we [precompile assets](/guides/command-line/assets) at deploy time, Hanami calculates the checksum of all our assets and it adds a special HTML attribute `integrity` to our asset tags like `<script>`.
 
 ```erb
 <%= javascript 'application' %>
@@ -120,14 +120,14 @@ When we [precompile the assets](/guides/command-line/assets) at the deploy time,
 
 ### Security Updates
 
-We updated our default security settings to support [Content Security Policy](https://content-security-policy.com) 1.1 and 2.0 (1.0 is still supported).
+We've updated our default security settings to support [Content Security Policy](https://content-security-policy.com) 1.1 and 2.0 (1.0 is still supported).
 
-Alongside with this improvement, we have now turned on two extra security HTTP headers: `X-Content-Type-Options` and `X-XSS-Protection`.
+Along with this improvement, we have now turned on two extra security HTTP headers: `X-Content-Type-Options` and `X-XSS-Protection`.
 
 ### Misc
 
 New settings for logging: Hanami now supports per environment stream (standard output, file, etc..), level and formatter.
-Because of JSON parseability, for production env there is now a JSON formatter for the logger.
+Because of JSON parseability, for the production environment, there is now a JSON formatter for the logger.
 
 ## Upgrade Notes
 
