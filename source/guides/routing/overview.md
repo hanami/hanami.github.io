@@ -78,7 +78,7 @@ get '/rack-app', to: 'rack_app' # it will map to RackApp.new
 
 If we want to mount an application, we should use `mount`.
 
-#### Mouting To A Path
+#### Mounting To A Path
 
 ```ruby
 mount SinatraApp.new, at: '/sinatra'
@@ -86,10 +86,17 @@ mount SinatraApp.new, at: '/sinatra'
 
 All the HTTP requests starting with `/sinatra` will be routed to `SinatraApp`.
 
-#### Mouting On A Subdomain
+#### Mounting On A Subdomain
 
 ```ruby
 mount Blog.new, host: 'blog'
 ```
 
 All the HTTP requests to `http://blog.example.com` will be routed to `Blog`.
+
+<p class="notice">
+In development, you will NOT be able to access `http://blog.localhost:2300`,
+so you should specify a host when running the server:
+`bundle exec hanami server --host=lvh.me`.
+Then your application can be visited at `http://blog.lvh.me:2300`
+</p>
