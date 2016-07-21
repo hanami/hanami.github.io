@@ -28,7 +28,7 @@ As result of this collaboration, today we can ship a new, powerful validation sy
 This new powerful syntax overcomes the limitations that we have reached with the old design: no control on the order of execution and lack of extensibility.
 We realized that complex validation rules are hard to describe with DSL options, so we made it possible to express these rules with Ruby macros.
 
-The results are astonishing: besides having better expressiveness, we now guarantee type safety and have better performance.
+The results are astonishing: besides being more expressive, we can now guarantee type safety and we've seen performance improvements.
 
 ```ruby
 # apps/web/controllers/books/create.rb
