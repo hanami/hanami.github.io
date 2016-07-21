@@ -48,15 +48,15 @@ Once _CDN mode_ is on, all the [asset helpers](/guides/helpers/assets) will retu
 ## Subresource Integrity
 
 A CDN can dramatically improve page speed, but it can potentially open a security breach.
-If the CDN that we're using is compromised and serves evil javascript files, we're exposing our users to security attacks like Cross Site Scripting (XSS).
+If the CDN that we're using is compromised and serves evil javascript or stylesheet files, we're exposing our users to security attacks like Cross Site Scripting (XSS).
 
-To solve this problem browsers vendor introduced a defense called [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity).
+To solve this problem, browsers vendors introduced a defense called [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity).
 
 When enabled, the browser verifies that the checksum of the downloaded file, matches with the declared one.
 
 ### From A CDN
 
-If we're using jQuery from their CDN we should check on their website what's the checksum of the `.js` file and write:
+If we're using jQuery from their CDN, we should find the checksum of the `.js` file on their website and write:
 
 ```erb
 <%= javascript 'https://code.jquery.com/jquery-3.1.0.min.js', integrity: 'sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=' %>
@@ -74,7 +74,7 @@ The security problem described above doesn't concern only CDNs, but local files 
 Imagine we have a compromised file system and someone was able to replace our javascripts with evil files: we would be vulnerable to the same kind of attack.
 
 As a defense against this security problem, Hanami **enables Subresource Integrity by default in production.**
-When we [precompile the assets](/guides/command-line/assets) at the deploy time, Hanami calculates the checksum of all our assets and it adds a special HTML attribute `integrity` to our asset tags like `<script>`.
+When we [precompile assets](/guides/command-line/assets) at deploy time, Hanami calculates the checksum of all our assets and it adds a special HTML attribute `integrity` to our asset tags like `<script>`.
 
 ```erb
 <%= javascript 'application' %>
