@@ -13,6 +13,7 @@ categories:
       - path: initializers
       - path: rake
       - path: logging
+      - path: code-reloading
   - path: routing
     pages:
       - path: overview
