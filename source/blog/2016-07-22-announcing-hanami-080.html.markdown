@@ -129,7 +129,7 @@ Along with this improvement, we have now turned on two extra security HTTP heade
 - New settings for logging: Hanami now supports per-environment stream (standard output, file, etc..), level and formatter.
 Because of JSON parseability, for the production environment, there is now a JSON formatter for the logger.
 
-- Hanami now only supports Ruby 2.2+
+- Hanami no longer supports Ruby 2.0 and 2.1
 
 - `params` can now be accessed only with `:symbols`, not 'strings'. That is, we have removed indifferent access.
 
