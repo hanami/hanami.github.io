@@ -4,7 +4,7 @@ title: Guides - Routing Testing
 
 # Testing
 
-Hanami applications has builtin facilities for routing unit tests
+Hanami has builtin facilities for routing unit tests.
 
 ## Path Generation
 
@@ -71,4 +71,4 @@ end
 ```
 
 When we use `.recognize`, the router returns a recognized route, which is an object designed only for testing purposes.
-It carries on all the important informations about the route that we have hit.
+It carries on all the important information about the route that we have hit.
