@@ -132,7 +132,7 @@ Subsequent instructions will be entirely skipped.
 When <code>halt</code> is used, the flow is interrupted and the control is passed back to the framework.
 </p>
 
-That means that `halt` can be used to skip `#call` invokation entirely if we use it in a `before` callback.
+That means that `halt` can be used to skip `#call` invocation entirely if we use it in a `before` callback.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
