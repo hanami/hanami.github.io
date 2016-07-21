@@ -956,9 +956,11 @@ require 'spec_helper'
 require_relative '../../../../apps/web/views/books/new'
 
 class NewBookParams < Hanami::Action::Params
-  params :book do
-    required(:title).filled(:str?)
-    required(:author).filled(:str?)
+  params do
+    required(:book).schema do
+      required(:title).filled(:str?)
+      required(:author).filled(:str?)
+    end
   end
 end
 
