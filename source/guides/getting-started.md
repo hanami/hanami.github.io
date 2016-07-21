@@ -998,8 +998,8 @@ describe 'Books' do
     current_path.must_equal('/books')
 
     assert page.has_content?('There was a problem with your submission')
-    assert page.has_content?('title is missing')
-    assert page.has_content?('author is missing')
+    assert page.has_content?('Title is missing')
+    assert page.has_content?('Author is missing')
   end
 end
 ```
@@ -1012,8 +1012,8 @@ Open up `apps/web/templates/books/new.html.erb`:
   <div class="errors">
     <h3>There was a problem with your submission</h3>
     <ul>
-      <% params.errors(full: true).each do |error| %>
-        <li><%= error %></li>
+      <% params.error_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
     </ul>
   </div>
