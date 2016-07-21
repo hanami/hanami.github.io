@@ -115,4 +115,4 @@ With this setting, Hanami will render `integrity` HTML attribute with two values
 <script src="/assets/application-92cab02f6d2d51253880cd98d91f1d0e.js" type="text/javascript" integrity="sha256-WB2pRuy8LdgAZ0aiFxLN8DdfRjKJTc4P4xuEw31iilM= sha512-4gegSER1uqxBvmlb/O9CJypUpRWR49SniwUjOcK2jifCRjFptwGKplFWGlGJ1yms+nSlkjpNCS/Lk9GoKI1Kew==" crossorigin="anonymous"></script>
 ```
 
-**Please note** that checksum calculations are CPU expensive, so the `subresource_integrity` setting would affect the elapsed time of _assets precompiling_ and so of your deploy. We suggest to leave the default `:sha256` setting.
+**Please note** that checksum calculations are CPU intensive, so adding an additional `subresource_integrity` scheme will extend the time it takes to _precompile assests_, and therefore deploy. We suggest leaving the default setting (`:sha256`).
