@@ -878,8 +878,8 @@ describe Web::Controllers::Books::Create do
       response = action.call(params)
       response[0].must_equal 422
 
-      action.errors[:book][:title].must_equal  ['is missing']
-      action.errors[:book][:author].must_equal ['is missing']
+      action.params.errors[:book][:title].must_equal  ['must be filled']
+      action.params.errors[:book][:author].must_equal ['must be filled']
     end
   end
 end
