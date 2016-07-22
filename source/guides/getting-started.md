@@ -791,7 +791,7 @@ describe Web::Controllers::Books::Create do
     action.call(params)
 
     action.book.id.wont_be_nil
-    action.book.title.must_equal params[:book]['title']
+    action.book.title.must_equal params[:book][:title]
   end
 
   it 'redirects the user to the books listing' do
