@@ -871,7 +871,7 @@ describe Web::Controllers::Books::Create do
 
     it 're-renders the books#new view' do
       response = action.call(params)
-      response[0].must_equal 200
+      response[0].must_equal 422
     end
 
     it 'sets errors attribute accordingly' do
@@ -965,7 +965,7 @@ class NewBookParams < Hanami::Action::Params
 end
 
 describe Web::Views::Books::New do
-  let(:params)    { NewBookParams.new({}) }
+  let(:params)    { NewBookParams.new(book: {}) }
   let(:exposures) { Hash[params: params] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/books/new.html.erb') }
   let(:view)      { Web::Views::Books::New.new(template, exposures) }
@@ -975,8 +975,8 @@ describe Web::Views::Books::New do
     params.valid? # trigger validations
 
     rendered.must_include('There was a problem with your submission')
-    rendered.must_include('title is missing')
-    rendered.must_include('author is missing')
+    rendered.must_include('Title is missing')
+    rendered.must_include('Author is missing')
   end
 end
 ```
