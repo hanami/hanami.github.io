@@ -17,7 +17,7 @@ Imagine we have the following routes for our application:
 
 ```ruby
 # web/apps/config/routes.rb
-get '/',    to: 'home#index', as: :home
+root        to: 'home#index'
 get '/foo', to: 'foo#index'
 
 resources :books
@@ -29,7 +29,7 @@ We can do:
 
 ```erb
 <ul>
-  <li><a href="<%= routes.home_path %>">Home</a></li>
+  <li><a href="<%= routes.root_path %>">Home</a></li>
   <li><a href="<%= routes.book_path %>">Books</a></li>
 </ul>
 ```

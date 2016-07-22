@@ -132,7 +132,7 @@ Subsequent instructions will be entirely skipped.
 When <code>halt</code> is used, the flow is interrupted and the control is passed back to the framework.
 </p>
 
-That means that `halt` can be used to skip `#call` invokation entirely if we use it in a `before` callback.
+That means that `halt` can be used to skip `#call` invocation entirely if we use it in a `before` callback.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
@@ -169,6 +169,62 @@ module Web::Controllers::Dashboard
     end
   end
 end
+```
+
+When `#halt` is used, **Hanami** renders a default status page with the HTTP status and the message.
+
+<p><img src="/images/default-template.png" alt="Hanami default template" class="img-responsive"></p>
+
+To customize the UI for the HTTP 404 error, you can use a [custom error page](/guides/views/custom-error-pages).
+
+## HTTP Status
+
+In case you want let the view to handle the error, instead of using `#halt`, you should use `#status=`.
+
+The typical case is a **failed form submission**: we want to return a non-successful HTTP status (`422`) and let the view to render the form again and show the validation errors.
+
+```ruby
+# apps/web/controllers/books/create.rb
+module Web::Controllers::Books
+  class Create
+    include Web::Action
+
+    params do
+      required(:title).filled(:str?)
+    end
+
+    def call(params)
+      if params.valid?
+        # persist
+      else
+        self.status = 422
+      end
+    end
+  end
+end
+```
+
+```ruby
+# apps/web/views/books/create.rb
+module Web::Views::Books
+  class Create
+    include Web::View
+    template 'books/new'
+  end
+end
+```
+
+```erb
+# apps/web/templates/books/new.html.erb
+<%= unless params.valid? %>
+  <ul>
+    <% params.errors(full: true).each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<!-- form goes here -->
 ```
 
 ## Redirect

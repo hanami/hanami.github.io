@@ -6,10 +6,10 @@ title: Guides - Mailers Basic Usage
 
 In the [previous section](/guides/mailers/overview), we generated a mailer, let's use it.
 
-## Informations
+## Information
 
 Firstly, we need to specify sender and recipient(s) and the subject of the email.
-For this purpose a mailer exposes three methods: `.from`, `.to` and `.subject`.
+For this purpose a mailer exposes three mandatory methods: `.from`, `.to`, `.subject` and two optional: `.cc`, `.bcc`.
 
 They all accept a string, but `.to` can also accept an array of strings in order to set multiple recipients.
 

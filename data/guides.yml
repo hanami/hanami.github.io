@@ -12,12 +12,15 @@ categories:
     pages:
       - path: initializers
       - path: rake
+      - path: logging
+      - path: code-reloading
   - path: routing
     pages:
       - path: overview
       - path: basic-usage
       - path: restful-resources
         title: RESTful Resource(s)
+      - path: testing
   - path: actions
     pages:
       - path: overview
@@ -101,3 +104,5 @@ categories:
         title: v0.6.0
       - path: v070
         title: v0.7.0
+      - path: v080
+        title: v0.8.0

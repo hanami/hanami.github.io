@@ -73,6 +73,7 @@ get '/files/*', to: 'files#show'
 We can specify a unique name for each route, in order to generate paths from the router or to test them.
 
 ```ruby
+root              to  'home#index'
 get '/hello',     to: 'greet#index', as: :greeting
 get '/books/:id', to: 'books#show',  as: :book
 ```
@@ -81,6 +82,9 @@ When a Hanami application starts, it generates a Ruby module at the runtime unde
 We can use it to generate a relative or absolute URI for our route.
 
 ```ruby
+Web::Routes.path(:root)     # => "/"
+Web::Routes.url(:root)      # => "http://localhost:2300/"
+
 Web::Routes.path(:greeting) # => "/hello"
 Web::Routes.url(:greeting)  # => "http://localhost:2300/hello"
 ```

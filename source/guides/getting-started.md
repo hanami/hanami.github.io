@@ -108,7 +108,7 @@ Go ahead and install our gem dependency with Bundler; then we can launch a devel
 And... bask in the glory of your first Hanami project at
 [http://localhost:2300](http://localhost:2300)! We should see a screen similar to this:
 
-<p><img src="/guides/screenshot.png" alt="Hanami first screen" class="img-responsive"></p>
+<p><img src="/images/welcome-page.png" alt="Hanami welcome page" class="img-responsive"></p>
 
 ## Hanami Architectures
 
@@ -177,7 +177,7 @@ The first thing we need to add is a route:
 
 ```ruby
 # apps/web/config/routes.rb
-get '/', to: 'home#index'
+root to: 'home#index'
 ```
 
 We pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
@@ -422,7 +422,7 @@ For example, review `.env.development`:
 
 ```
 # Define ENV variables for development environment
-BOOKSHELF_DATABASE_URL="postgres://localhost/bookshelf_development"
+DATABASE_URL="postgres://localhost/bookshelf_development"
 WEB_SESSIONS_SECRET="21aec7f7371228dd0d4da6a620a1a6b22889edcf0d4fb1c11b8080cd87146eda"
 ```
 
@@ -430,10 +430,10 @@ We can edit the database URL and add the database user and password if needed:
 
 ```
 # It follows the format below:
-BOOKSHELF_DATABASE_URL="[ADAPTER]://[DATABASE_USER]:[DATABASE_USER_PASSWORD]@[HOST]:[PORT]/[DATABASE_NAME]"
+DATABASE_URL="[ADAPTER]://[DATABASE_USER]:[DATABASE_USER_PASSWORD]@[HOST]:[PORT]/[DATABASE_NAME]"
 
 # Example:
-BOOKSHELF_DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
+DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
 ```
 The placeholders **_user_** and **_password_** should be replaced with the correct credentials.
 
@@ -791,7 +791,7 @@ describe Web::Controllers::Books::Create do
     action.call(params)
 
     action.book.id.wont_be_nil
-    action.book.title.must_equal params[:book]['title']
+    action.book.title.must_equal params[:book][:title]
   end
 
   it 'redirects the user to the books listing' do
@@ -871,16 +871,15 @@ describe Web::Controllers::Books::Create do
 
     it 're-renders the books#new view' do
       response = action.call(params)
-      response[0].must_equal 200
+      response[0].must_equal 422
     end
 
     it 'sets errors attribute accordingly' do
-      action.call(params)
+      response = action.call(params)
+      response[0].must_equal 422
 
-      refute action.params.valid?
-
-      action.errors.for('book.title').wont_be_empty
-      action.errors.for('book.author').wont_be_empty
+      action.params.errors[:book][:title].must_equal  ['must be filled']
+      action.params.errors[:book][:author].must_equal ['must be filled']
     end
   end
 end
@@ -905,9 +904,9 @@ module Web::Controllers::Books
     expose :book
 
     params do
-      param :book do
-        param :title,  presence: true
-        param :author, presence: true
+      required(:book).schema do
+        required(:title).filled(:str?)
+        required(:author).filled(:str?)
       end
     end
 
@@ -916,6 +915,8 @@ module Web::Controllers::Books
         @book = BookRepository.create(Book.new(params[:book]))
 
         redirect_to '/books'
+      else
+        self.status = 422
       end
     end
   end
@@ -955,14 +956,16 @@ require 'spec_helper'
 require_relative '../../../../apps/web/views/books/new'
 
 class NewBookParams < Hanami::Action::Params
-  param :book do
-    param :title, presence: true
-    param :author, presence: true
+  params do
+    required(:book).schema do
+      required(:title).filled(:str?)
+      required(:author).filled(:str?)
+    end
   end
 end
 
 describe Web::Views::Books::New do
-  let(:params)    { NewBookParams.new({}) }
+  let(:params)    { NewBookParams.new(book: {}) }
   let(:exposures) { Hash[params: params] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/books/new.html.erb') }
   let(:view)      { Web::Views::Books::New.new(template, exposures) }
@@ -972,8 +975,8 @@ describe Web::Views::Books::New do
     params.valid? # trigger validations
 
     rendered.must_include('There was a problem with your submission')
-    rendered.must_include('title is required')
-    rendered.must_include('author is required')
+    rendered.must_include('Title is missing')
+    rendered.must_include('Author is missing')
   end
 end
 ```
@@ -997,8 +1000,8 @@ describe 'Books' do
     current_path.must_equal('/books')
 
     assert page.has_content?('There was a problem with your submission')
-    assert page.has_content?('title is required')
-    assert page.has_content?('author is required')
+    assert page.has_content?('Title is missing')
+    assert page.has_content?('Author is missing')
   end
 end
 ```
@@ -1011,8 +1014,8 @@ Open up `apps/web/templates/books/new.html.erb`:
   <div class="errors">
     <h3>There was a problem with your submission</h3>
     <ul>
-      <% params.errors.each do |error| %>
-        <li><%= error.attribute_name %> is required</li>
+      <% params.error_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
     </ul>
   </div>
@@ -1029,17 +1032,17 @@ Open up the routes file for the "web" application:
 
 ```ruby
 # apps/web/config/routes.rb
-post '/books', to: 'books#create'
+post '/books',    to: 'books#create'
 get '/books/new', to: 'books#new'
-get '/books', to: 'books#index'
-get '/', to: 'home#index'
+get '/books',     to: 'books#index'
+root              to: 'home#index'
 ```
 
 Hanami provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:
 
 ```ruby
 resources :books
-get '/', to: 'home#index', as: :home
+root to: 'home#index'
 ```
 
 To get a sense of what routes are defined, now we've made this change, you can
@@ -1049,6 +1052,7 @@ use the special command-line task `routes` to inspect the end result:
 % hanami routes
      Name Method     Path             Action
 
+     root GET, HEAD  /                Web::Controllers::Home::Index
     books GET, HEAD  /books           Web::Controllers::Books::Index
  new_book GET, HEAD  /books/new       Web::Controllers::Books::New
     books POST       /books           Web::Controllers::Books::Create

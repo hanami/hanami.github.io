@@ -55,7 +55,7 @@ Hanami::Model.configure do
   #    adapter type: :sql, uri: 'postgres://localhost/bookshelf_development'
   #    adapter type: :sql, uri: 'mysql://localhost/bookshelf_development'
   #
-  adapter type: :sql, uri: ENV['BOOKSHELF_DATABASE_URL']
+  adapter type: :sql, uri: ENV['DATABASE_URL']
 
   # ...
 end.load!

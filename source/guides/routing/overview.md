@@ -45,7 +45,7 @@ This is a really long name to write, that's why Hanami has a **naming convention
 
 ```ruby
 # apps/web/config/routes.rb
-get '/', to: "home#index" # => will route to Web::Controllers::Home::Index
+root to: "home#index" # => will route to Web::Controllers::Home::Index
 ```
 
 The first token is the name of the controller `"home"` is translated to `Home`.
@@ -78,8 +78,25 @@ get '/rack-app', to: 'rack_app' # it will map to RackApp.new
 
 If we want to mount an application, we should use `mount`.
 
+#### Mounting To A Path
+
 ```ruby
 mount SinatraApp.new, at: '/sinatra'
 ```
 
 All the HTTP requests starting with `/sinatra` will be routed to `SinatraApp`.
+
+#### Mounting On A Subdomain
+
+```ruby
+mount Blog.new, host: 'blog'
+```
+
+All the HTTP requests to `http://blog.example.com` will be routed to `Blog`.
+
+<p class="notice">
+In development, you will NOT be able to access `http://blog.localhost:2300`,
+so you should specify a host when running the server:
+`bundle exec hanami server --host=lvh.me`.
+Then your application can be visited at `http://blog.lvh.me:2300`
+</p>
