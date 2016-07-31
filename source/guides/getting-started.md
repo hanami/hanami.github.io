@@ -878,8 +878,8 @@ describe Web::Controllers::Books::Create do
       response = action.call(params)
       response[0].must_equal 422
 
-      action.params.errors[:book][:title].must_equal  ['must be filled']
-      action.params.errors[:book][:author].must_equal ['must be filled']
+      action.params.errors[:book][:title].must_equal  ['is missing']
+      action.params.errors[:book][:author].must_equal ['is missing']
     end
   end
 end
@@ -1000,8 +1000,8 @@ describe 'Books' do
     current_path.must_equal('/books')
 
     assert page.has_content?('There was a problem with your submission')
-    assert page.has_content?('Title is missing')
-    assert page.has_content?('Author is missing')
+    assert page.has_content?('Title must be filled')
+    assert page.has_content?('Author must be filled')
   end
 end
 ```
