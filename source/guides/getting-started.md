@@ -923,10 +923,12 @@ module Web::Controllers::Books
 end
 ```
 
-You may have noticed that there isn't an `else` condition to that `if` statement.
-What happens when params aren't valid?
+When the params are valid, the Book is created and the action redirects to a different URL.
+But when the params are not valid, what happens?
 
-The control will pass to the corresponding view, which needs to be informed about which template to render.
+First, the HTTP status code is set to
+[422 (Unprocessable Entity)](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#422).
+Then the control will pass to the corresponding view, which needs to know which template to render.
 In this case `apps/web/templates/books/new.html.erb` will be used to render the form again.
 
 ```ruby
