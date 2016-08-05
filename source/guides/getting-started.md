@@ -885,7 +885,7 @@ describe Web::Controllers::Books::Create do
 end
 ```
 
-Now our tests specify two alternative scenario's: our original happy path, and a new scenario in which validations fail.
+Now our tests specify two alternative scenarios: our original happy path, and a new scenario in which validations fail.
 To make our tests pass, we need to implement validations.
 
 Although you can add validation rules to the entity, Hanami also allows you to define validation rules as close to the source of the input as possible, i.e. the action.
