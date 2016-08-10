@@ -210,7 +210,7 @@ end.load!
 ```
 
 <p class="warning">
-  A custom coercer **MUST** respond to <code>.dump(value)</code> for serialization and to <code>.load(value)</code> for deserialization.
+  A custom coercer <strong>MUST</strong> respond to <code>.dump(value)</code> for serialization and to <code>.load(value)</code> for deserialization.
 </p>
 
 ### Use UUID as primary key instead of integer
