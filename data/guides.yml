@@ -56,6 +56,8 @@ categories:
       - path: overview
       - path: entities
       - path: repositories
+      - path: use-your-own-orm
+        title: Use Your Own ORM
   - path: migrations
     pages:
       - path: overview
