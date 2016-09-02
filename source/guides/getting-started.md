@@ -608,12 +608,14 @@ Let's rewrite our template to implement these requirements:
 
 ```erb
 <% if books.any? %>
-  <% books.each do |book| %>
-    <div class="book">
-      <h2><%= book.title %></h2>
-      <p><%= book.author %></p>
-    </div>
-  <% end %>
+  <div id="books">
+    <% books.each do |book| %>
+      <div class="book">
+        <h2><%= book.title %></h2>
+        <p><%= book.author %></p>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   <p class="placeholder">There are no books yet.</p>
 <% end %>
