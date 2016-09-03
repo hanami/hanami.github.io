@@ -607,6 +607,7 @@ Hanami is designed around simple objects with minimal interfaces that are easy t
 Let's rewrite our template to implement these requirements:
 
 ```erb
+<h2>All books</h2>
 <% if books.any? %>
   <div id="books">
     <% books.each do |book| %>
