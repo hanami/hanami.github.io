@@ -4,11 +4,11 @@ title: Guides - Views Basic Usage
 
 # Basic Usage
 
-In the [previous section](/guides/views/overview), we generated a view, let's use it.
+In the [previous section](/guides/views/overview) we generated a view. Let's use it.
 
 ## Default Rendering
 
-As first thing, we edit the corresponding template:
+First, we edit the corresponding template:
 
 ```erb
 # apps/web/templates/dashboard/index.html.erb
@@ -18,7 +18,7 @@ As first thing, we edit the corresponding template:
 By visiting `/dashboard`, we should see `<h1>Dashboard</h1>` in our browser.
 
 Again we should look at the naming convention.
-Our view is `Web::Views::Dashboard::Index`, while the part of file name of the template is `web/templates/dashboard/index`.
+Our view is `Web::Views::Dashboard::Index`, while the file name of the template is `web/templates/dashboard/index`.
 
 <p class="convention">
   For a given view <code>Web::Views::Dashboard::Index</code>, the corresponding template MUST be available at <code>apps/web/templates/dashboard/index.html.erb</code>.
@@ -26,14 +26,14 @@ Our view is `Web::Views::Dashboard::Index`, while the part of file name of the t
 
 ### Context
 
-While rendering a template, a view has a _context_ where to lookup for variables requested by the template.
+While rendering a template, varible lookups requested by the template go to a view _context_.
 
 ```erb
 # apps/web/templates/dashboard/index.html.erb
 <h1><%= title %></h1>
 ```
 
-If we amend our template by adding a variable interpolation, the view is responsible to lookup for it.
+If we amend our template by adding an interpolated variable, the view is responsible for providing it.
 
 ```ruby
 # apps/web/views/dashboard/index.rb
@@ -88,7 +88,7 @@ Rendering context for a template is made of view methods and exposures.
 ## Custom Rendering
 
 Hanami performs rendering by calling `#render` on a view and it expects a string in return.
-The benefit of an object oriented approach is the ability to easily diverge from default behavior.
+The benefit of an object-oriented approach is the ability to easily diverge from default behavior.
 
 We can override that method to define a custom rendering policy.
 
