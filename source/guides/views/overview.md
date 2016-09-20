@@ -4,9 +4,9 @@ title: Guides - Views Overview
 
 # Overview
 
-A view is an object that's responsible to render a template.
+A view is an object that's responsible for rendering a template.
 
-In a full stack Hanami application, an incoming HTTP request, goes through the [router](/guides/routing/overview), it instantiates and calls an [action](/guides/actions/overview), which sets the status code and the headers for the response.
+In a full stack Hanami application, an incoming HTTP request goes through the [router](/guides/routing/overview), it instantiates and calls an [action](/guides/actions/overview), which sets the status code and the headers for the response.
 The last bit is the body, which is set by the corresponding view's output.
 
 ## A Simple View
@@ -23,7 +23,7 @@ Hanami ships a generator for actions that creates a view and a template.
     create  spec/web/views/dashboard/index_spec.rb
 ```
 
-Look at the file naming, we have an action called `Web::Controllers::Dashboard::Index` (read about [actions naming](/guides/actions/overview)).
+Looking at those file names, we have an action called `Web::Controllers::Dashboard::Index` (read about [actions naming](/guides/actions/overview)).
 Our view has a similar name: `Web::Views::Dashboard::Index`.
 
 Let's examine the view:
