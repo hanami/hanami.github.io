@@ -66,6 +66,37 @@ end
 
 If we want to turn off this feature entirely, we can set `layout nil` into the application's configuration.
 
+## Using Multiple Templates
+
+Sometimes it's useful to have more than one template. For example, if the `application.erb` template contains an HTML structure you don't want for, say, a login page - a separate `login.html.erb` template can be used.
+
+Assuming you have created a `home#login` action, you create the `login.html.erb` template right next to your default `application.html.erb` in `/web/templates/`.
+
+Hanami doesn't know about the existence of a `Web::Views::LoginLayout` yet, so make sure to create a `login_layout.rb` right next to default `application_layout.rb` in `/views`. Inside, you pretty much copy default, changing only the class name:
+
+```ruby
+module Web
+  module Views
+    class LoginLayout
+      include Web::Layout
+    end
+  end
+end
+```
+
+Now, in your `/views/home.rb` you can specify you'd like to use the login template for this action:
+
+```ruby
+module Web::Views::Home
+  class Login
+    include Web::View
+    layout :login
+  end
+end
+```
+
+Now, only `home#login` will use the special template, but you can use `layout :login` in any other View in this app.
+
 ## Optional Content
 
 There are some cases when we want to render a content only for certain resources.
