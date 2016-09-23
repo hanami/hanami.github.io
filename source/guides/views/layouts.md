@@ -66,13 +66,13 @@ end
 
 If we want to turn off this feature entirely, we can set `layout nil` into the application's configuration.
 
-## Using Multiple Templates
+## Using Multiple Template Layouts
 
-Sometimes it's useful to have more than one template. For example, if the `application.erb` template contains an HTML structure you don't want for, say, a login page - a separate `login.html.erb` template can be used.
+Sometimes it's useful to have more than one layout. For example, if the `application.html.erb` template contains an HTML structure you don't want for, say, a login page - a separate `login.html.erb` template can be used. For example, a `<nav>` element with categories has no place next to a login form.
 
-Assuming you have created a `home#login` action, you create the `login.html.erb` template right next to your default `application.html.erb` in `/web/templates/`.
+Assuming you have created something like a `user_sessions#new` action to log a user in, you create the `login.html.erb` template right next to your default `application.html.erb` in `/web/templates/`.
 
-Hanami doesn't know about the existence of a `Web::Views::LoginLayout` yet, so make sure to create a `login_layout.rb` right next to default `application_layout.rb` in `/views`. Inside, you pretty much copy default, changing only the class name:
+We now need to create a new `Web::Views::LoginLayout` object to utilize the new template. Create a `login_layout.rb` right next to default `application_layout.rb` in `/views`:
 
 ```ruby
 module Web
@@ -84,10 +84,10 @@ module Web
 end
 ```
 
-Now, in your `/views/home.rb` you can specify you'd like to use the login template for this action:
+Now, in your `app/web/views/user_sessions.rb` you can specify you'd like to use the login layout for this View:
 
 ```ruby
-module Web::Views::Home
+module Web::Views::UserSessions
   class Login
     include Web::View
     layout :login
@@ -95,7 +95,7 @@ module Web::Views::Home
 end
 ```
 
-Now, only `home#login` will use the special template, but you can use `layout :login` in any other View in this app.
+Now, only `user_sessions#new` will use the special layout, but you can now use `layout :login` in any other View in this app.
 
 ## Optional Content
 
