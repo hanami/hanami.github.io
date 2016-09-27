@@ -68,11 +68,11 @@ If we want to turn off this feature entirely, we can set `layout nil` into the a
 
 ## Using Multiple Template Layouts
 
-Sometimes it's useful to have more than one layout. For example, if the `application.html.erb` template contains an HTML structure you don't want for, say, a login page - a separate `login.html.erb` template can be used. For example, a `<nav>` element with categories has no place next to a login form.
+Sometimes it's useful to have more than one layout. For example, if the `application.html.erb` template contains navigation elements, and you want an entirely different layout - without navigation - for a login page, you can create a `login.html.erb` layout template.
 
-Assuming you have created something like a `user_sessions#new` action to log a user in, you create the `login.html.erb` template right next to your default `application.html.erb` in `/web/templates/`.
+Assuming you have created something like a `user_sessions#new` action to log a user in, you create the `login.html.erb` template right next to your default `application.html.erb` in `apps/web/templates/`.
 
-We now need to create a new `Web::Views::LoginLayout` object to utilize the new template. Create a `login_layout.rb` right next to default `application_layout.rb` in `/views`:
+We now need to create a new `Web::Views::LoginLayout` object to utilize the new template. Create a `login_layout.rb` right next to default `application_layout.rb` in `apps/web/views`:
 
 ```ruby
 module Web
