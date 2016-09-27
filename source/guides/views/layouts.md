@@ -4,7 +4,7 @@ title: Guides - View Layouts
 
 # Layouts
 
-Layouts are special views, that render render the _"fixed"_ part of the HTML markup.
+Layouts are special views, that render the _"fixed"_ part of the HTML markup.
 This is the part that doesn't change from page to page (perhaps navigation, sidebar, header, footer, etc.)
 
 When we generate a new application, there is a default layout called `Web::Views::ApplicationLayout` with a `apps/web/templates/application.html.erb` template.
