@@ -98,42 +98,51 @@
 
                   <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="download">
-                      <pre class="language-ruby plaintext"><code><span class="command">% gem install hanami</span>
-Successfully installed hanami-<%= hanami_version %>
-1 gem installed
-<br>
-<span class="command">% hanami new bookshelf</span>
-18 files successfully created
-                      </code></pre>
+                      <pre class="language-ruby plaintext">
+                        <code>
+                          <span class="command">% gem install hanami</span>
+                          Successfully installed hanami-<%= hanami_version %>
+                          1 gem installed
+                          <br>
+                          <span class="command">% hanami new bookshelf</span>
+                          18 files successfully created
+                        </code>
+                      </pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="develop">
-                      <pre class="language-ruby plaintext"><code><span class="command">% cd bookshelf &amp;&amp; bundle</span>
-Bundle complete! 6 Gemfile dependencies, 28 gems now installed.
-<br>
-<span class="command">% git add . &amp;&amp; git commit -m "Initial commit"</span>
-[master (root-commit) ecb3a75] Initial commit
- 37 files changed, 527 insertions(+)
-                      </code></pre>
+                      <pre class="language-ruby plaintext">
+                        <code>
+                          <span class="command">% cd bookshelf &amp;&amp; bundle</span>
+                          Bundle complete! 6 Gemfile dependencies, 28 gems now installed.
+                          <br>
+                          <span class="command">% git add . &amp;&amp; git commit -m "Initial commit"</span>
+                          [master (root-commit) ecb3a75] Initial commit
+                           37 files changed, 527 insertions(+)
+                        </code>
+                      </pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="deploy">
-                      <pre class="language-ruby plaintext"><code><span class="command">% heroku apps:create</span>
-Creating cherry-blossom-1234... done, stack is cedar-14
-https://cherry-blossom-1234.herokuapp.com/ | https://git.heroku.com/cherry-blossom-1234.git
-Git remote heroku added
-<br>
-<span class="command">% heroku config:add SERVE_STATIC_ASSETS=true</span>
-Setting SERVE_STATIC_ASSETS and restarting ⬢ cherry-blossom-1234... done, v2
-SERVE_STATIC_ASSETS: true
-<br>
-<span class="command">% git push heroku master</span>
-# ...
-remote: Verifying deploy... done.
-To https://git.heroku.com/cherry-blossom-1234.git
- * [new branch]      master -&gt; master
-<br>
-<span class="command">% heroku open</span>
-Opening cherry-blossom-1234... done
-                      </code></pre>
+                      <pre class="language-ruby plaintext">
+                      <code>
+                        <span class="command">% heroku apps:create</span>
+                          Creating cherry-blossom-1234... done, stack is cedar-14
+                          https://cherry-blossom-1234.herokuapp.com/ | https://git.heroku.com/cherry-blossom-1234.git
+                          Git remote heroku added
+                          <br>
+                          <span class="command">% heroku config:add SERVE_STATIC_ASSETS=true</span>
+                          Setting SERVE_STATIC_ASSETS and restarting ⬢ cherry-blossom-1234... done, v2
+                          SERVE_STATIC_ASSETS: true
+                          <br>
+                          <span class="command">% git push heroku master</span>
+                          # ...
+                          remote: Verifying deploy... done.
+                          To https://git.heroku.com/cherry-blossom-1234.git
+                           * [new branch]      master -&gt; master
+                          <br>
+                          <span class="command">% heroku open</span>
+                          Opening cherry-blossom-1234... done
+                      </code>
+                      </pre>
                     </div>
                   </div>
 
