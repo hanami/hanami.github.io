@@ -216,9 +216,9 @@ end
 
 ```erb
 # apps/web/templates/books/new.html.erb
-<%= unless params.valid? %>
+<% unless params.valid? %>
   <ul>
-    <% params.errors(full: true).each do |error| %>
+    <% params.error_messages.each do |error| %>
       <li><%= error %></li>
     <% end %>
   </ul>
