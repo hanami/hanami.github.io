@@ -119,7 +119,6 @@ The `Interactor` now:
 * Cleans up the Action to a series of yes/no gates making our app less likely to blow up with an uncaught exception.
 * Makes testing easier as each `Interactor` can be tested on its own.
 * Compartmentalizes code so that the code can be re-used later instead of being a part of, and dependent on, a framework.
-* Provides a set of tools to monitor (with error()s) or stop (fail!()) busy logic that has no place in the controller/action.
-
+* Provides a set of tools to monitor (with `error()`s) or stop (`fail!()`) busy logic that has no place in the controller/action.
 
 When used properly, the `Interactor` eases the pain of testing, cleans up your controllers, compartmentalizes your code and, in general, keeps with the credo that we should avoid errors earlier - in the params - rather than later, in the business logic. If we do encounter them - we'd rather see which feature failed rather than which controller failed.
