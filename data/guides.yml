@@ -100,6 +100,9 @@ categories:
       - path: assets
       - path: routes
       - path: version
+  - path: utilities
+    pages:
+      - path: interactor
   - path: upgrade-notes
     pages:
       - path: v060
