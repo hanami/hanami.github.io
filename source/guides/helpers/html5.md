@@ -160,12 +160,12 @@ end
 The tag contents are automatically escaped for **security** reasons:
 
 ```ruby
-html.div('hello')         # => <div>hello</hello>
-html.div { 'hello' }      # => <div>hello</hello>
-html.div(html.p('hello')) # => <div><p>hello</p></hello>
+html.div('hello')         # => <div>hello</div>
+html.div { 'hello' }      # => <div>hello</div>
+html.div(html.p('hello')) # => <div><p>hello</p></div>
 html.div do
   p 'hello'
-end # => <div><p>hello</p></hello>
+end # => <div><p>hello</p></div>
 
 
 
