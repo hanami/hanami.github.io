@@ -134,7 +134,7 @@ The API is really clean and concise, **it doesn't require concatenation** betwee
   <input type="hidden" name="_csrf_token" value="1825a0a7ea92bbe3fd60cc8b6a0ea00ce3c52030afbf4037370d937bc5248acb">
   <div>
     <label for="book-title">Title</label>
-    <input type="text" name="book[title]" id="book-title" value="Test Driven Development" class="form-control">
+    <input type="text" name="book[title]" id="book-title" value="" class="form-control">
   </div>
 
   <button type="submit">Create</button>
