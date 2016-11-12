@@ -48,11 +48,11 @@ Because `params[:book]` is `nil`, we can't access `:title`.
 In this case Ruby will raise a `NoMethodError`.
 
 We have a safe solution for our problem: `#get`.
-It accepts a **dot separated** string, where each token represents a level in our nested structure.
+It accepts a list of symbols, where each symbol represents a level in our nested structure.
 
 ```ruby
-params.get('book.title')           # => "Hanami"
-params.get('unknown.nested.param') # => nil instead of NoMethodError
+params.get(:book, :title)             # => "Hanami"
+params.get(:unknown, :nested, :param) # => nil instead of NoMethodError
 ```
 
 ## Whitelisting
