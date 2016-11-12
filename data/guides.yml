@@ -3,17 +3,15 @@ categories:
     title: Introduction
     pages:
       - path: getting-started
-  - path: architectures
+  - path: architecture
     pages:
       - path: overview
-      - path: container
-      - path: application
-  - path: applications
+  - path: projects
     pages:
-      - path: initializers
+      - path: code-reloading
       - path: rake
       - path: logging
-      - path: code-reloading
+      - path: initializers
   - path: routing
     pages:
       - path: overview
