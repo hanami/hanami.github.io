@@ -10,7 +10,7 @@ Hanami has convenient code generators to speed up our development process.
 
 ### Applications
 
-With the Container architecture, we can have multiple Hanami applications running under `apps/`.
+With Hanami architecture, we can have multiple Hanami applications running under `apps/`.
 The default application is called `Web` and lives under `apps/web`.
 
 We can generate new applications for different components that we want to add to our project.
@@ -23,19 +23,13 @@ This generates an application named `Admin` under `apps/admin`.
 
 ### Actions
 
-We can generate an action along with the corresponding view, template, route and test code with one command.
+Generate an action along with the corresponding view, template, route and test code with one command.
 
 ```shell
 % bundle exec hanami generate action web books#show
 ```
 
-The first argument, `web`, is the name of the target application in a Container architecture.
-**It must be omitted if used within an Application architecture:**
-
-
-```shell
-% bundle exec hanami generate action books#show
-```
+The first argument, `web`, is the name of the target application in a Hanami project.
 
 The argument `books#show` is the name of the controller and the action separated by the number sign (`#`).
 
@@ -85,27 +79,32 @@ You can also set the HTTP method by specifying a `--method` argument when callin
 
 ### Models
 
-We can generate a model.
+Generate an entity and a repository with a single command
 
 ```shell
 % bundle exec hanami generate model book
+      create  lib/bookshelf/entities/book.rb
+      create  lib/bookshelf/repositories/book_repository.rb
+      create  spec/bookshelf/entities/book_spec.rb
+      create  spec/bookshelf/repositories/book_repository_spec.rb
 ```
 
 It generates an entity with the corresponding repository and test code.
 
 ### Migrations
 
-We can generate a migration.
+Generate a database migration
 
 ```shell
 % bundle exec hanami generate migration create_books
+      create  db/migrations/20161112113203_create_books.rb
 ```
 
-It generates an empty migration with the UTC timestamp and the name we have specified: `db/migrations/20150621181347_create_books.rb`.
+It generates an empty migration with the UTC timestamp and the name we have specified: `db/migrations/20161112113203_create_books.rb`.
 
 ### Mailers
 
-We can generate a mailer.
+Generate a mailer
 
 ```shell
 % bundle exec hanami generate mailer welcome
@@ -124,4 +123,14 @@ lib
 │   │   │   └── welcome.txt.erb
 │   │   └── welcome.rb # Mailers::Welcome
 # ...
+```
+
+### Secret
+
+Generate a HTTP sessions secret for an application.
+
+```shell
+% bundle exec hanami generate secret web
+Set the following environment variable to provide the secret token:
+WEB_SESSIONS_SECRET="a6aa65a71538a56faffe1b1c9e96c0dc600de5dd14172f03c35cc48c3b27affe"
 ```
