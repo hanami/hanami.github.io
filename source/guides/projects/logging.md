@@ -4,10 +4,10 @@ title: Guides - Logging
 
 # Logging
 
-Within a [Container project](/guides/architectures/container), each application has a Ruby constant that gives us access to its logger.
+Within a project, each application has its own logger
 
 <p class="convention">
-  For a given application named <code>Web</code>, there is a Ruby constant <code>Web::Logger</code> defined at the runtime by Hanami.
+  For a given application named <code>Web</code>, logger is accessible at <code>Web.logger</code>.
 </p>
 
 Using the per-environment application settings we can define the behavior of the logger: the destination `stream`, `format`, and `level`.
@@ -77,5 +77,5 @@ Because of its parseability, JSON is the default format for production environme
 The logger is very similar to Ruby's `Logger`; you can use it like this:
 
 ```ruby
-Web::Logger.debug "Hello"
+Web.logger.debug "Hello"
 ```
