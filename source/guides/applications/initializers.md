@@ -1,19 +1,32 @@
 ---
-title: Guides - Applications Initializers
+title: Guides - Project Initializers
 ---
 
 # Initializers
 
-Each single Hanami application within a project can **optionally** have one or more custom initializers.
+A project can **optionally** have one or more custom initializers.
 
 <p class="notice">
   Initializers are optional
 </p>
 
-They are run **after** the dependencies, the framework and the application code are loaded, but **before** the server or the console are started.
+An initializer is a Ruby file used to setup third-party libraries or some other aspect of the code.
+
+They are run as the **last** thing after the dependencies, the framework and the project code are loaded, but **before** the server or the console are started.
+
+For instance, if we want to setup [Bugsnag](https://bugsnag.com) for our project we can do:
+
+```ruby
+# config/initializers/bugsnag.rb
+require 'bugsnag'
+
+Bugsnag.configure do |config|
+  config.api_key = ENV['BUGSNAG_API_KEY']
+end
+```
 
 <p class="convention">
-  For a given application named <code>Web</code>, they MUST be placed under <code>apps/web/config/initializers</code>.
+  Project initializers must be added under <code>config/initializers</code>.
 </p>
 
 <p class="warning">
