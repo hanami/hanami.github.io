@@ -95,8 +95,8 @@ mount Blog.new, host: 'blog'
 All the HTTP requests to `http://blog.example.com` will be routed to `Blog`.
 
 <p class="notice">
-In development, you will NOT be able to access `http://blog.localhost:2300`,
-so you should specify a host when running the server:
-`bundle exec hanami server --host=lvh.me`.
-Then your application can be visited at `http://blog.lvh.me:2300`
+  In development, you will NOT be able to access <code>http://blog.localhost:2300</code>,
+  so you should specify a host when running the server:
+  <code>bundle exec hanami server --host=lvh.me</code>.
+  Then your application can be visited at <code>http://blog.lvh.me:2300</code>
 </p>
