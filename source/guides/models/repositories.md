@@ -110,3 +110,56 @@ This is a **huge improvement**, because:
   * The caller can be easily tested in isolation. It's just a matter of stubbing this method.
 
   * If we change the storage, the callers aren't affected.
+
+## Legacy Database
+
+By default, a repository performs auto-mapping of corresponding database table and creates an [automatic schema](/guides/models/entities#automatic-schema) for the associated entity.
+
+When working with legacy databases we can resolve the naming mismatch between the table name, the columns, with repositories defaults and entities attributes.
+
+Let's say we have a database table like this:
+
+```sql
+CREATE TABLE t_operator (
+    operator_id integer NOT NULL,
+    s_name text
+);
+```
+
+We can setup our repository with the following code:
+
+```ruby
+# lib/bookshelf/repositories/operator_repository.rb
+class OperatorRepository < Hanami::Repository
+  self.relation = :t_operator
+
+  mapping do
+    attribute :id,   from: :operator_id
+    attribute :name, from: :s_name
+  end
+end
+```
+
+While the entity can stay with the basic setup:
+
+```ruby
+# lib/bookshelf/entities/operator.rb
+class Operator < Hanami::Entity
+end
+```
+
+---
+
+The entity now gets the mapping we defined in the repository:
+
+```ruby
+operator = Operator.new(name: "Jane")
+operator.name # => "Jane"
+```
+
+The repository can use the same mapped attributes:
+
+```ruby
+operator = OperatorRepository.new.create(name: "Jane")
+  # => #<Operator:0x007f8e43cbcea0 @attributes={:id=>1, :name=>"Jane"}>
+```
