@@ -24,25 +24,43 @@ This architecture has several advantages:
 
   * Multiple data sources can easily coexist in an application
 
+<p class="warning">
+  As of the current version, Hanami only supports SQL databases.
+</p>
+
 ## Interface
 
-When a class includes `Hanami::Repository`, it will receive the following interface:
+When a class inherits from `Hanami::Repository`, it will receive the following interface:
 
-  * `.persist(entity)` – Create or update an entity
-  * `.create(entity)`  – Create a record for the given entity
-  * `.update(entity)`  – Update the record corresponding to the given entity
-  * `.delete(entity)`  – Delete the record corresponding to the given entity
-  * `.fetch(raw)`  – Fetch raw datasets for the given raw query string (eg. SQL)
-  * `.execute(raw)`  – Execute raw command (eg. SQL)
-  * `.all`   - Fetch all the entities from the collection
-  * `.find`  - Fetch an entity from the collection by its ID
-  * `.first` - Fetch the first entity from the collection
-  * `.last`  - Fetch the last entity from the collection
-  * `.clear` - Delete all the records from the collection
-  * `.query` - Fabricates a query object
+  * `#create(data)` – Create a record for the given data and return an entity
+  * `#update(id, data)` – Update the record corresponding to the id and return the updated entity
+  * `#delete(id)` – Delete the record corresponding to the given entity
+  * `#all` - Fetch all the entities from the collection
+  * `#find(id)` - Fetch an entity from the collection by its ID
+  * `#first` - Fetch the first entity from the collection
+  * `#last`  - Fetch the last entity from the collection
+  * `#clear` - Delete all the records from the collection
 
 **A collection is a homogenous set of records.**
 It corresponds to a table for a SQL database or to a MongoDB collection.
+
+```ruby
+repository = BookRepository.new
+
+book = repository.create(title: "Hanami")
+  # => #<Book:0x007f95cbd8b7c0 @attributes={:id=>1, :title=>"Hanami", :created_at=>2016-11-13 16:02:37 UTC, :updated_at=>2016-11-13 16:02:37 UTC}>
+
+book = book.find(book.id)
+  # => #<Book:0x007f95cbd5a030 @attributes={:id=>1, :title=>"Hanami", :created_at=>2016-11-13 16:02:37 UTC, :updated_at=>2016-11-13 16:02:37 UTC}>
+
+book = repository.update(book.id, title: "Hanami Book")
+  # => #<Book:0x007f95cb243408 @attributes={:id=>1, :title=>"Hanami Book", :created_at=>2016-11-13 16:02:37 UTC, :updated_at=>2016-11-13 16:03:34 UTC}>
+
+repository.delete(book.id)
+
+repository.find(book.id)
+  # => nil
+```
 
 ## Private Queries
 
@@ -52,7 +70,7 @@ This decision forces developers to define intention revealing API, instead of le
 Look at the following code:
 
 ```ruby
-BookRepository.where(author_id: 23).order(:published_at).limit(8)
+BookRepository.new.where(author_id: 23).order(:published_at).limit(8)
 ```
 
 This is **bad** for a variety of reasons:
@@ -71,15 +89,12 @@ There is a better way:
 
 ```ruby
 # lib/bookshelf/repositories/book_repository.rb
-
-class BookRepository
-  include Hanami::Repository
-
-  def self.most_recent_by_author(author, limit: 8)
-    query do
-      where(author_id: author.id).
-        order(:published_at)
-    end.limit(limit)
+class BookRepository < Hanami::Repository
+  def most_recent_by_author(author, limit: 8)
+    books
+      .where(author_id: author.id)
+      .order(:published_at)
+      .limit(limit)
   end
 end
 ```
@@ -95,140 +110,3 @@ This is a **huge improvement**, because:
   * The caller can be easily tested in isolation. It's just a matter of stubbing this method.
 
   * If we change the storage, the callers aren't affected.
-
-## Raw Queries & Commands
-
-A repository can perform queries and commands by accepting raw query language expressions.
-
-### Fetch
-
-```ruby
-# lib/bookshelf/repositories/book_repository.rb
-class BookRepository
-  include Hanami::Repository
-
-  def self.raw_all
-    fetch("SELECT * FROM books")
-  end
-
-  def self.find_all_titles
-    fetch("SELECT title FROM books").map do |book|
-      book[:title]
-    end
-  end
-
-  def self.max_price
-    result = 0
-
-    fetch("SELECT price FROM books") do |book|
-      result = book[:price] if book[:price] > result
-    end
-
-    result
-  end
-end
-```
-
-When `.fetch` is used, the returning value is NOT a collection of entities (eg. `Book`), BUT an array of hashes that represents the **raw result set**.
-
-<p class="warning">
-  Do NOT use user input with <code>.fetch</code>, because it makes your app vulnerable to SQL Injection.
-</p>
-
-### Execute
-
-```ruby
-# lib/bookshelf/repositories/book_repository.rb
-class BookRepository
-  include Hanami::Repository
-
-  def self.reset_download_count
-    execute("UPDATE books SET download_count = 0")
-  end
-end
-```
-
-To ensure a command/query separation, `.execute` doesn't have a returning value.
-
-<p class="warning">
-  Do NOT use user input with <code>.execute</code>, because it makes your app vulnerable to SQL Injection.
-</p>
-
-## Extended Example
-
-Here is an extended example of a repository that uses the SQL adapter.
-
-```ruby
-# lib/bookshelf/repositories/book_repository.rb
-class BookRepository
-  include Hanami::Repository
-
-  def self.most_recent_by_author(author, limit: 8)
-    query do
-      where(author_id: author.id).
-        desc(:id).
-        limit(limit)
-    end
-  end
-
-  def self.most_recent_published_by_author(author, limit = 8)
-    most_recent_by_author(author, limit).published
-  end
-
-  def self.published
-    query do
-      where(published: true)
-    end
-  end
-
-  def self.drafts
-    exclude published
-  end
-
-  def self.rank
-    published.desc(:comments_count)
-  end
-
-  def self.best_article_ever
-    rank.limit(1)
-  end
-
-  def self.comments_average
-    query.average(:comments_count)
-  end
-end
-```
-
-## Reuse Code
-
-You can also extract the common logic from your repository into a module to reuse it in other repositories.
-Here is a pagination example:
-
-```ruby
-# lib/bookshelf/repositories/pagination.rb
-module Bookshelf
-  module Repositories
-    module Pagination
-      def self.paginate(limit: 10, offset: 0)
-        query do
-          limit(limit).offset(offset)
-        end
-      end
-    end
-  end
-end
-```
-
-```ruby
-# lib/bookshelf/repositories/book_repository.rb
-class BookRepository
-  include Hanami::Repository
-  include Bookshelf::Repositories::Pagination
-
-  def self.published
-    query do
-      where(published: true)
-    end.paginate
-  end
-end
-```

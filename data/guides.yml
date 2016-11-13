@@ -52,8 +52,9 @@ categories:
   - path: models
     pages:
       - path: overview
-      - path: entities
       - path: repositories
+      - path: entities
+      - path: data-types
       - path: use-your-own-orm
         title: Use Your Own ORM
   - path: migrations

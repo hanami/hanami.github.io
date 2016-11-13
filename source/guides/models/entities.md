@@ -4,9 +4,10 @@ title: Guides - Entities
 
 # Entities
 
-An _entity_ is an object that is defined by its identity. See ["Domain Driven Design" by Eric Evans.](http://youtube.com/watch?v=7MaYeudL9yo)
+An entity is model domain object that is defined by its identity.
+See "Domain Driven Design" by Eric Evans.
 
-An entity is the core of an application, where the part of the domain logic is implemented.
+An entity is at the core of an application, where the part of the domain logic is implemented.
 It's a small, cohesive object that expresses coherent and meaningful behaviors.
 
 It deals with one and only one responsibility that is pertinent to the
@@ -16,61 +17,163 @@ or validations.
 This simplicity of design allows developers to focus on behaviors, or
 message passing if you will, which is the quintessence of Object Oriented Programming.
 
-All the entities live under `lib/` directory of our application.
+## Entity Schema
 
-## Interface
+Internally, an entity holds a schema of the attributes, made of their names and types.
+The role of a schema is to whitelist the data used during the initialization, and to enforce data integrity via coercions or exceptions.
+
+We'll see concrete examples in a second.
+
+### Automatic Schema
+
+When using a SQL database, this is derived automatically from the table definition.
+
+Imagine to have the `books` table defined as:
+
+```sql
+CREATE TABLE `books` (
+  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `title` varchar(255),
+  `created_at` timestamp,
+  `updated_at` timestamp
+);
+```
+
+This is the corresponding entity `Book`.
 
 ```ruby
 # lib/bookshelf/entities/book.rb
-class Book
-  include Hanami::Entity
-  attributes :title
+class Book < Hanami::Entity
 end
 ```
 
-When a class includes `Hanami::Entity` it receives the following interface:
+---
 
-  * `#id`
-  * `#id=`
-  * `#initialize(attributes = {})`
-
-`Hanami::Entity` also provides the `.attributes` for defining attribute accessors for the given names.
-
-If we expand the code above in **pure Ruby**, it would be:
+Let's instantiate it with proper values:
 
 ```ruby
-class Book
-  attr_accessor :id, :title
+book = Book.new(title: "Hanami")
 
-  def initialize(attributes = {})
-    @id, @title = attributes.values_at(:id, :title)
+book.title      # => "Hanami"
+book.created_at # => nil
+```
+
+The `created_at` attribute is `nil` because it wasn't present when we have instantiated `book`.
+
+---
+
+It ignores unknown attributes:
+
+```ruby
+book = Book.new(unknown: "value")
+
+book.unknown # => NoMethodError
+book.foo     # => NoMethodError
+```
+
+It raises a `NoMethodError` both for `unknown` and `foo`, because they aren't part of the internal schema.
+
+---
+
+It can coerce values:
+
+```ruby
+book = Book.new(created_at: "Sun, 13 Nov 2016 09:41:09 GMT")
+
+book.created_at # => 2016-11-13 09:41:09 UTC
+book.class      # => Time
+```
+
+An entity tries as much as it cans to coerce values according to the internal schema.
+
+---
+
+It enforces **data integrity** via exceptions:
+
+```ruby
+Book.new(created_at: "foo") # => ArgumentError
+```
+
+If we use this feature, in combination with [database constraints](/guides/migrations/create-table#constraints) and validations, we can guarantee a **strong** level of **data integrity** for our projects.
+
+### Custom Schema
+
+We can take data integrity a step further: we can **optionally** define our own entity internal schema.
+
+<p class="notice">
+  Custom schema is <strong>optional</strong> for SQL databases, while it's mandatory for entities without a database table, or while using with a non-SQL database.
+</p>
+
+```ruby
+# lib/bookshelf/entities/user.rb
+class User < Hanami::Entity
+  EMAIL_FORMAT = /\@/
+
+  attributes do
+    attribute :id,         Types::Int
+    attribute :name,       Types::String
+    attribute :email,      Types::String.constrained(format: EMAIL_FORMAT)
+    attribute :age,        Types::Int.constrained(gt: 18)
+    attribute :codes,      Types::Collection(Types::Coercible::Int)
+    attribute :comments,   Types::Collection(Comment)
+    attribute :created_at, Types::Time
+    attribute :updated_at, Types::Time
   end
 end
 ```
 
-**Hanami::Model** ships `Hanami::Entity` for developers's convenience.
-
-**Hanami::Model** depends on a narrow and well-defined interface for an Entity - `#id`, `#id=`, `#initialize(attributes={})`.
-If your object implements that interface then that object can be used as an Entity in the **Hanami::Model** framework.
-
-However, we suggest to implement this interface by including `Hanami::Entity`, in case that future versions of the framework will expand it.
-
-See [Dependency Inversion Principle](http://en.wikipedia.org/wiki/Dependency_inversion_principle) for more on interfaces.
-
-## Inheritance
-
-When a class extends a `Hanami::Entity` class, it will also *inherit* its mother's attributes.
+Let's instantiate it with proper values:
 
 ```ruby
-class Book
-  include Hanami::Entity
-  attributes :title
-end
+user = User.new(name: "Luca", age: 34, email: "test@hanami.test")
 
-class NonFictionBook < Book
-  attributes :price
-end
+user.name     # => "Luca"
+user.age      # => 34
+user.email    # => "luca@hanami.test"
+user.codes    # => nil
+user.comments # => nil
 ```
 
-That is, `NonFictionBook`'s attributes carry over `:title` attribute from `Book`,
-thus is `:id, :title, :price`.
+---
+
+It can coerce values:
+
+```ruby
+user = User.new(codes: ["123", "456"])
+user.codes # => [123, 456]
+```
+
+Other entities can be passed as concrete instance:
+
+```ruby
+user = User.new(comments: [Comment.new(text: "cool")])
+user.comments
+  # => [#<Comment:0x007f966be20c58 @attributes={:text=>"cool"}>]
+```
+
+Or as data:
+
+```ruby
+user = User.new(comments: [{text: "cool"}])
+user.comments
+  # => [#<Comment:0x007f966b689e40 @attributes={:text=>"cool"}>]
+```
+
+---
+
+It enforces **data integrity** via exceptions:
+
+```ruby
+User.new(email: "foo")     # => TypeError: "foo" (String) has invalid type for :email
+User.new(comments: [:foo]) # => TypeError: :foo must be coercible into Comment
+```
+
+---
+
+<p class="warning">
+  Custom schema <strong>takes precedence</strong> over automatic schema. If we use custom schema, we're need to add manually all the new columns from the corresponding SQL database table.
+</p>
+
+---
+
+Learn more about data types in the [dedicated article](/guides/models/data-types).
