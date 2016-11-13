@@ -19,6 +19,28 @@
   font-size: 13px;
 }
 
+/* mobile select guides */
+.mobile-guides {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-guides {
+    display: block;
+    margin: auto;
+    width: 100%;
+    padding: 18px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(../images/scroll_arrow.svg) no-repeat 97% 14px;
+    background-size: 2.12em;
+  }
+  #markdown-toc {
+    display: none;
+  }
+}
+
 /* intro block */
 .app-block-intro {
   padding-top: 20px;
