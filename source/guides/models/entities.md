@@ -31,11 +31,11 @@ When using a SQL database, this is derived automatically from the table definiti
 Imagine to have the `books` table defined as:
 
 ```sql
-CREATE TABLE `books` (
-  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-  `title` varchar(255),
-  `created_at` timestamp,
-  `updated_at` timestamp
+CREATE TABLE books (
+    id integer NOT NULL,
+    title text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 ```
 
