@@ -111,6 +111,46 @@ This is a **huge improvement**, because:
 
   * If we change the storage, the callers aren't affected.
 
+## Timestamps
+
+To have a track of when a record has been created or updated is important when running a project in production.
+
+When creating a new table, if we add the following columns, a repository will take care of keep the values updated.
+
+```ruby
+Hanami::Model.migration do
+  up do
+    create_table :books do
+      # ...
+      column :created_at, DateTime
+      column :updated_at, DateTime
+    end
+  end
+end
+```
+
+```ruby
+repository = BookRepository.new
+
+book = repository.create(title: "Hanami")
+
+book.created_at # => 2016-11-14 08:20:44 UTC
+book.updated_at # => 2016-11-14 08:20:44 UTC
+
+book = repository.update(book.id, title: "Hanami Book")
+
+book.created_at # => 2016-11-14 08:20:44 UTC
+book.updated_at # => 2016-11-14 08:22:40 UTC
+```
+
+<p class="convention">
+  When a database table has <code>created_at</code> and <code>updated_at</code> timestamps, a repository will automatically update their values.
+</p>
+
+<p class="notice">
+  Timestamps are on UTC timezone.
+</p>
+
 ## Legacy Database
 
 By default, a repository performs auto-mapping of corresponding database table and creates an [automatic schema](/guides/models/entities#automatic-schema) for the associated entity.
