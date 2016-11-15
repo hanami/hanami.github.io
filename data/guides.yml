@@ -57,6 +57,7 @@ categories:
       - path: data-types
       - path: postgresql
         title: PostgreSQL
+      - path: associations
       - path: use-your-own-orm
         title: Use Your Own ORM
   - path: migrations
