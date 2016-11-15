@@ -208,7 +208,7 @@ found.books
   # => [#<Book:0x007f8a040a5970 @attributes={:id=>1, :author_id=>1, :title=>"The Count of Monte Cristo", :created_at=>2016-11-14 20:52:24 UTC, :updated_at=>2016-11-14 20:52:24 UTC}>]
 ```
 
-Learn more about [associations](/guides/associations/overview).
+Learn more about [associations](/guides/models/associations).
 
 ### PostgreSQL Types
 
@@ -249,6 +249,11 @@ Learn more about [PostgreSQL data types](/guides/models/postgresql)
 
 Please have a look at the [upgrade notes for v0.9.0](/guides/upgrade-notes/v090).
 
+## Acknowledgements
+
+A special thanks goes to the ROM team for their support during the hard work of integration between the two frameworks.
+Thank you Piotr Solnica, Nikita Shilnikov, Andy Holland, and Tim Riley for your help.
+
 ## Contributors
 
 We're grateful for each person who contributed to this release.
@@ -262,7 +267,6 @@ These lovely people are:
   * Jakub Pavlík
   * James Hamilton
   * Kyle Chong
-  * Luca Guidi
   * Lucas Allan
   * Marion Duprey
   * Maxim Dzhuliy
