@@ -125,7 +125,7 @@ module Web::Controllers::Users
     expose :user, :foo
 
     def call(params)
-      @user = UserRepository.find(params[:id])
+      @user = UserRepository.new.find(params[:id])
       @foo  = 'bar'
     end
   end
@@ -141,7 +141,7 @@ require_relative '../../../../apps/web/controllers/users/show'
 
 describe Web::Controllers::Users::Show do
   before do
-    @user = UserRepository.create(User.new(name: 'Luca'))
+    @user = UserRepository.new.create(name: 'Luca')
   end
 
   let(:action)  { Web::Controllers::Users::Show.new }
@@ -164,7 +164,7 @@ The internal state of an action can be easily verified with <em>exposures</em>.
 ### Dependency Injection
 
 During unit testing, we may want to use mocks to make tests faster or to avoid hitting external systems like databases, file system or remote services.
-Because we can instantiate actions during tests, there is no need to use testing antipatterns (eg. `any_instance_of`, or `UserRepository.stub(:find)`).
+Because we can instantiate actions during tests, there is no need to use testing antipatterns (eg. `any_instance_of`, or `UserRepository.new.stub(:find)`).
 Instead, we can just specify which collaborators we want to use via _dependency injection_.
 
 Let's rewrite the test above so that it does not hit the database.
@@ -200,7 +200,7 @@ module Web::Controllers::Users
     include Web::Action
     expose :user
 
-    def initialize(repository: UserRepository)
+    def initialize(repository: UserRepository.new)
       @repository = repository
     end
 
@@ -244,7 +244,7 @@ module ApiV1::Controllers::Users
     accept :json
 
     def call(params)
-      user = UserRepository.find(params[:id])
+      user = UserRepository.new.find(params[:id])
       self.body = JSON.generate(user.to_h)
     end
   end
@@ -262,12 +262,12 @@ describe "API V1 users" do
   include Rack::Test::Methods
 
   before do
-    @user = UserRepository.create(User.new(name: 'Luca'))
+    @user = UserRepository.new.create(name: 'Luca')
   end
 
   # app is required by Rack::Test
   def app
-    Hanami::Container.new
+    Hanami.app
   end
 
   it "is successful" do
@@ -280,5 +280,5 @@ end
 ```
 
 <p class="notice">
-Please avoid doubles when writing full integration tests, as we want to verify that the whole stack is behaving as expected.
+Please avoid <em>test doubles</em> when writing full integration tests, as we want to verify that the whole stack is behaving as expected.
 </p>

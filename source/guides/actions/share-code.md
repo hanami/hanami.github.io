@@ -39,7 +39,7 @@ module Web
     end
 
     def current_user
-      @current_user ||= UserRepository.find(session[:user_id])
+      @current_user ||= UserRepository.new.find(session[:user_id])
     end
   end
 end
@@ -120,7 +120,7 @@ module Web::Controllers::Books
     private
 
     def set_book
-      @book = BookRepository.find(params[:id])
+      @book = BookRepository.new.find(params[:id])
       halt 404 if @book.nil?
     end
   end

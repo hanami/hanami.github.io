@@ -9,7 +9,7 @@ These helpers are HTML5 generators that target specific assets features.
 They are following the settings of the application that uses them.
 For instance, if we have a project with two applications `Web` and `Admin` mounted at `/` and `/admin`, respectively, all the asset URLs will respect these prefixes.
 
-They also respect [_Digest mode_](/guides/assets/overview) and [_CDN mode_](/guides/assets/content-delivery-network) for each application.
+They also respect [_Fingerprint mode_](/guides/assets/overview#fingerprint-mode) and [_CDN mode_](/guides/assets/content-delivery-network) for each application.
 
 The following helpers are available for views and templates:
 
@@ -292,7 +292,7 @@ When the argument is a relative name, it returns a relative URL.
 
 #### Absolute URL
 
-When an absolute URL is given, it's **always** returned as it is, even if _Digest_ or _CDN_ mode are on.
+When an absolute URL is given, it's **always** returned as it is, even if _Fingerprint_ or _CDN_ mode are on.
 
 ```erb
 <%= asset_path 'https://code.jquery.com/jquery-2.1.1.min.js' %>
@@ -302,9 +302,9 @@ When an absolute URL is given, it's **always** returned as it is, even if _Diges
 https://code.jquery.com/jquery-2.1.1.min.js
 ```
 
-#### Digest Mode
+#### Fingerprint Mode
 
-When [_Digest Mode_](/guides/assets/overview) is on (usually in _production_ env), the relative URL contains a checksum suffix.
+When [_Fingerprint Mode_](/guides/assets/overview#fingerprint-mode) is on (usually in _production_ env), the relative URL contains a checksum suffix.
 
 ```erb
 <%= asset_path 'application.css' %>
@@ -350,7 +350,7 @@ https://bookshelf.org/assets/application.js
 
 #### Absolute URL
 
-When an absolute URL is given, it's **always** returned as it is, even if _Digest_ or _CDN_ mode are on.
+When an absolute URL is given, it's **always** returned as it is, even if _Fingerprint_ or _CDN_ mode are on.
 
 ```erb
 <%= asset_url 'https://code.jquery.com/jquery-2.1.1.min.js' %>
@@ -360,9 +360,9 @@ When an absolute URL is given, it's **always** returned as it is, even if _Diges
 https://code.jquery.com/jquery-2.1.1.min.js
 ```
 
-#### Digest Mode
+#### Fingerprint Mode
 
-When [_Digest Mode_](/guides/assets/overview) is on (usually in _production_ env), the relative URL contains a checksum suffix.
+When [_Fingerprint Mode_](/guides/assets/overview#fingerprint-mode) is on (usually in _production_ env), the relative URL contains a checksum suffix.
 
 ```erb
 <%= asset_url 'application.css' %>

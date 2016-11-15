@@ -4,14 +4,9 @@ title: "Guides - Architectures: Container"
 
 # Architectures
 
-## Container
+Hanami is based in on two principles: [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html).
 
-This is the default Hanami architecture.
-We **strongly** suggest using it for your next product.
-
-It utilises two principles: [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html).
-
-### Clean Architecture
+## Clean Architecture
 
 The main purpose of this architecture is to enforce a **separation of concerns** between the **core** of our product and the **delivery mechanisms**.
 The first is expressed by the set of **use cases** that our product implements, while the latter are interfaces to make these features available to the outside world.
@@ -19,7 +14,7 @@ The first is expressed by the set of **use cases** that our product implements, 
 When we generate a new project we can find two important directories: `lib/` and `apps/`.
 They are home to the main parts described above.
 
-#### Application Core
+### Application Core
 
 We implement a set of functionalities, without worrying about how they can be exposed to the outside world.
 This is the **cornerstone** of our product, and we want to be careful on how we manage dependencies for it.
@@ -59,7 +54,7 @@ For each entity named `Book` we can have a `BookRepository`.
 
 We can add as many directories that we want, such as `lib/bookshelf/interactors` to implement our use cases.
 
-#### Delivery Mechanisms
+### Delivery Mechanisms
 
 Hanami generates a default application named `Web`, which lives under `apps/web`.
 This application **depends** on the core of our product, as it uses entities, repositories and all the other objects defined there.
@@ -91,7 +86,7 @@ Directories such as `apps/web/controllers`, `views` and `templates` will contain
 
 Web assets such as javascripts and stylesheets will be automatically served by the application.
 
-### Monolith First
+## Monolith First
 
 Our default application `Web` can be used as a UI interface for our customers.
 At a certain point in our story, we want to manage our users with an admin panel.
@@ -108,9 +103,9 @@ Hanami has a solution for our problem: we can generate a new app that lives in t
 This command MUST be run from the root of our project. It will generate a new application (`Admin::Application`) under `apps/admin`.
 
 At the late stages of our product life, we can eventually decide to extract this into a standalone component.
-We just need to move everything under `apps/admin` into another repository and deploy it separately. See [Application architecture](/guides/architectures/application) for more details.
+We just need to move everything under `apps/admin` into another repository and deploy it separately.
 
-### Anatomy Of A Project
+## Anatomy Of A Project
 
 We have examined `lib/` and `apps/` until now, but there are other parts of a new generated project that deserve to be explained.
 

@@ -524,3 +524,20 @@ body {
   text-align: justify;
   text-justify: inter-word;
 }
+.notice, .convention, .warning {
+  padding: 1em;
+  border-radius: 4px;
+  border: 2px solid;
+}
+.notice {
+  border-color: #27ae60;
+  background-color: #2ecc71;
+}
+.convention {
+  border-color: #3498db;
+  background-color: #67cbfe;
+}
+.warning {
+  border-color: #f39c12;
+  background-color: #f1c40f;
+}

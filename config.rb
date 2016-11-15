@@ -212,7 +212,7 @@ helpers do
   end
 
   def hanami_version
-    '0.8.0'
+    '0.9.0'
   end
 end
 

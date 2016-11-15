@@ -3,17 +3,15 @@ categories:
     title: Introduction
     pages:
       - path: getting-started
-  - path: architectures
+  - path: architecture
     pages:
       - path: overview
-      - path: container
-      - path: application
-  - path: applications
+  - path: projects
     pages:
-      - path: initializers
+      - path: code-reloading
       - path: rake
       - path: logging
-      - path: code-reloading
+      - path: initializers
   - path: routing
     pages:
       - path: overview
@@ -54,8 +52,12 @@ categories:
   - path: models
     pages:
       - path: overview
-      - path: entities
       - path: repositories
+      - path: entities
+      - path: data-types
+      - path: postgresql
+        title: PostgreSQL
+      - path: associations
       - path: use-your-own-orm
         title: Use Your Own ORM
   - path: migrations
@@ -108,3 +110,5 @@ categories:
         title: v0.7.0
       - path: v080
         title: v0.8.0
+      - path: v090
+        title: v0.9.0

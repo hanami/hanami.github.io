@@ -24,7 +24,7 @@ require './config/environment'
 require 'rack/auth/basic'
 
 use Rack::Auth::Basic
-run Hanami::Container.new
+run Hanami.app
 ```
 
 ### Application Middleware

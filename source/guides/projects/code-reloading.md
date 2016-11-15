@@ -15,12 +15,14 @@ New generated projects have this entry in their `Gemfile`:
 ```ruby
 group :development do
   # Code reloading
-  # See: http://hanamirb.org/guides/applications/code-reloading
+  # See: http://hanamirb.org/guides/projects/code-reloading
   gem 'shotgun'
 end
 ```
 
-If, for some reason, `shotgun` is not usable in your development environment, you can remove that entry from the `Gemfile` or start the server with the `--no-code-reloading` argument.
+Unfortunately, `shotgun` requires that the current environment supports `fork(2)`.
+JRuby and Windows don't support it.
+If this is your case, `shotgun` is not compatible with your development environment, then you can remove that entry from the `Gemfile` or start the server with the `--no-code-reloading` argument.
 
 ## Other Environments
 

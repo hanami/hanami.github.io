@@ -25,7 +25,7 @@ title: Guides - Getting Started
   </p>
 
   <p>
-    Myself and the rest of the Community are pouring our best efforts to make Hanami better every day.
+    Myself and the rest of the Community are putting best efforts to make Hanami better every day.
   </p>
 
   <p>
@@ -56,7 +56,7 @@ First, we're going to assume a basic knowledge of developing web applications.
 You should also be familiar with [Bundler](http://bundler.io), [Rake](http://rake.rubyforge.org), working with a terminal and building apps using the [Model, View, Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) paradigm.
 
 Lastly, in this guide we'll be using a [PostgreSQL](http://www.postgresql.org) database.
-If you want to follow along, make sure you have a working installation of Ruby 2.2 and PostgreSQL 9.4 on your system.
+If you want to follow along, make sure you have a working installation of Ruby 2.3+ and PostgreSQL 9.4+ on your system.
 
 ## Create a new Hanami project
 
@@ -82,7 +82,10 @@ Let's see what it contains:
 ├── config.ru
 ├── db
 ├── lib
+├── public
 └── spec
+
+6 directories, 3 files
 ```
 
 Here's what we need to know:
@@ -96,6 +99,7 @@ Here's what we need to know:
 * `config.ru` is for Rack servers.
 * `db` contains our database schema and migrations.
 * `lib` contains our business logic and domain model, including entities and repositories.
+* `public` will contain compiled static assets.
 * `spec` contains our tests.
 
 Go ahead and install our gem dependency with Bundler; then we can launch a development server:
@@ -110,10 +114,9 @@ And... bask in the glory of your first Hanami project at
 
 <p><img src="/images/welcome-page.png" alt="Hanami welcome page" class="img-responsive"></p>
 
-## Hanami Architectures
+## Hanami Architecture
 
-Hanami supports a few different architectures to support the needs of the current project.
-The default one that we're going to explore is called _Container_, because **it can host several Hanami (and Rack) applications in the same Ruby process**.
+Hanami architecture **can host several Hanami (and Rack) applications in the same Ruby process**.
 
 These applications live under `apps/`.
 Each of them can be a component of our product, such as the user facing web interface, the admin pane, metrics, HTTP API etc..
@@ -121,7 +124,7 @@ Each of them can be a component of our product, such as the user facing web inte
 All these parts are a _delivery mechanism_ to the business logic that lives under `lib/`.
 This is the place where our models are defined, and interact with each other to compose the **features** that our product provides.
 
-Hanami Container arch is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
+Hanami architecture is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
 ## Exploring App By Writing Our First Test
 
@@ -229,20 +232,6 @@ Finished in 0.011854s, 84.3600 runs/s, 168.7200 assertions/s.
 1 runs, 2 assertions, 0 failures, 0 errors, 0 skips
 ```
 
-### Of Containers And Apps
-
-Did you wonder about the `Web` constant you saw referenced in the controllers and views?
-Where did it come from?
-Hanami uses a _"Container"_ architecture by default, whereby a single project can contain multiple applications.
-Such applications might include a JSON API, an admin panel, a marketing website, and so forth.
-
-All these applications live under `apps/`, with the default application named `web`.
-Hanami's core frameworks are duplicated when the container boots, so configurations for different applications don't interfere with others.
-
-Let's recap what we've seen so far: to get our own page on the screen, we followed the execution path of a request in Hanami through the router into a controller action, through a view, to a template file.
-
-We can find out more about [routing](/guides/routing/overview), [actions](/guides/actions/overview) and [views](/guides/views/overview) in their respective guides.
-
 ## Generating New Actions
 
 Let's use our new knowledge about the major Hanami components to add a new action.
@@ -276,7 +265,7 @@ Hanami ships with various **generators** to save on typing some of the code invo
 In our terminal, enter:
 
 ```
-% hanami generate action web books#index
+% bundle exec hanami generate action web books#index
 ```
 
 This will generate a new action _index_ in the _books_ controller of the _web_ application.
@@ -343,10 +332,48 @@ A **layout** is like any other template, but it is used to wrap your regular tem
 The `yield` line is replaced with the contents of our regular template.
 It's the perfect place to put our repeating headers and footers.
 
-## Modeling Our Data With Entities
+### Migrations To Change Our Database Schema
 
 Hard-coding books in our templates is, admittedly, kind of cheating.
 Let's add some dynamic data to our application.
+
+As first thing, we need a table in our database to hold our book data.
+We can use a **migration** to make the required changes.
+Use the migration generator to create an empty migration:
+
+```
+% bundle exec hanami generate migration create_books
+```
+
+This gives us a file name like `db/migrations/20161115110038_create_books.rb` that we can edit:
+
+```ruby
+Hanami::Model.migration do
+  change do
+    create_table :books do
+      primary_key :id
+
+      column :title,  String, null: false
+      column :author, String, null: false
+
+      column :created_at, DateTime, null: false
+      column :updated_at, DateTime, null: false
+    end
+  end
+end
+```
+
+Hanami provides a DSL to describe changes to our database schema. You can read more
+about how migrations work in the [migrations' guide](/guides/migrations/overview).
+
+In this case, we define a new table with columns for each of our entities' attributes.
+Let's prepare our database:
+
+```
+% bundle exec hanami db prepare
+```
+
+## Modeling Our Data With Entities
 
 We'll store books in our database and display them on our page.
 To do so, we need a way to read and write to our database.
@@ -359,15 +386,12 @@ Entities are totally unaware of database.
 This makes them **lightweight** and **easy to test**.
 
 For this reason we need a repository to persist the data that a `Book` depends on.
-Hanami uses the [Data Mapper](http://martinfowler.com/eaaCatalog/dataMapper.html) pattern.
-In this way we're able to save any Ruby object in a database.
-That means we can adapt Hanami to use existing Ruby projects and to provide a way to persist them.
 Read more about entities and repositories in the [models guide](/guides/models/overview).
 
 Hanami ships with a generator for models, so let's use it to create a `Book` entity and the corresponding repository:
 
 ```
-% hanami generate model book
+% bundle exec hanami generate model book
 create  lib/bookshelf/entities/book.rb
 create  lib/bookshelf/repositories/book_repository.rb
 create  spec/bookshelf/entities/book_spec.rb
@@ -376,9 +400,9 @@ create  spec/bookshelf/repositories/book_repository_spec.rb
 
 The generator gives us an entity, repository and accompanying test files.
 
-### Working with entities
+### Working With Entities
 
-An entity is something really close to a plain Ruby object, it doesn't know anything about our database structure.
+An entity is something really close to a plain Ruby object.
 We should focus on the behaviors that we want from it and only then, how to save it.
 
 For now, we want it to carry title and author information.
@@ -386,9 +410,7 @@ Let's add these attributes.
 
 ```ruby
 # lib/bookshelf/entities/book.rb
-class Book
-  include Hanami::Entity
-  attributes :title, :author
+class Book < Hanami::Entity
 end
 ```
 
@@ -409,113 +431,19 @@ end
 
 ### Using Repositories
 
-We can use repositories to read and write entities to our database.
-In order for that to work, we need to set it up.
-
-Hanami configurations are stored in env variables.
-This has proven to be a secure and standardized way to handle credentials in deployment environments.
-
-In order to achieve parity between development and production machines, we use env variables loaded from `.env` files (via [dotenv](https://github.com/bkeepers/dotenv) gem).
-Our project has three of them: `.env` is for general settings, while `.env.development` and `.env.test` are complete files for these two envs.
-
-For example, review `.env.development`:
-
-```
-# Define ENV variables for development environment
-DATABASE_URL="postgres://localhost/bookshelf_development"
-WEB_SESSIONS_SECRET="21aec7f7371228dd0d4da6a620a1a6b22889edcf0d4fb1c11b8080cd87146eda"
-```
-
-We can edit the database URL and add the database user and password if needed:
-
-```
-# It follows the format below:
-DATABASE_URL="[ADAPTER]://[DATABASE_USER]:[DATABASE_USER_PASSWORD]@[HOST]:[PORT]/[DATABASE_NAME]"
-
-# Example:
-DATABASE_URL="postgres://user:password@localhost:5432/bookshelf_development"
-```
-The placeholders **_user_** and **_password_** should be replaced with the correct credentials.
-
-You may want to change `localhost` for `127.0.0.1` if you're using Linux.
-
-You may decide to use a different adapter. If you do, make sure that you update your Gemfile to include the adapter of your choice and run bundle install.
-
-The database configured by default, called `bookshelf_development` running on `localhost`, should work fine for now.
-Hanami can create the database for us:
-
-```
-% hanami db create
-```
-
-### Migrations To Change Our Database Schema
-
-Next, we need a table in our database to hold our book data.
-We can use a **migration** to make the required changes.
-Use the migration generator to create an empty migration:
-
-```
-% hanami generate migration create_books
-```
-
-This gives us a file name like `db/migrations/20150616120629_create_books.rb` that we can edit:
-
-```ruby
-Hanami::Model.migration do
-  change do
-    create_table :books do
-      primary_key :id
-      column :title,      String,   null: false
-      column :author,     String,   null: false
-    end
-  end
-end
-```
-
-Hanami provides a DSL to describe changes to our database schema. You can read more
-about how migrations work in the [migrations' guide](/guides/migrations/overview).
-
-In this case, we define a new table with columns for each of our entities' attributes.
-Let's apply these changes to our database:
-
-```
-% hanami db migrate
-```
-
-Finally, we need to tell Hanami how to map entity attributes to database columns.
-Go ahead and open up `lib/bookshelf.rb`; in this file you'll find most of the project-wide configuration for `Hanami::Model`, including a section on mapping.
-Edit the commented-out example:
-
-```ruby
-# lib/bookshelf.rb
-# ...
-mapping do
-  collection :books do
-    entity     Book
-    repository BookRepository
-
-    attribute :id,         Integer
-    attribute :title,      String
-    attribute :author,     String
-  end
-end
-```
-
-### Playing With The Repository
-
 With our mapping set up, we are ready to play around with our repository.
 We can use Hanami's `console` command to launch IRb with our application pre-loaded, so we can use our objects:
 
 ```
-% hanami console
->> BookRepository.all
+% bundle exec hanami console
+>> repository = BookRepository.new
+=> => #<BookRepository:0x007f9ab61fbb40 ...>
+>> repository.all
 => []
->> book = Book.new(title: 'TDD', author: 'Kent Beck')
-=> #<Book:0x007f9af1d4b028 @title="TDD", @author="Kent Beck">
->> BookRepository.create(book)
-=> #<Book:0x007f9af1d13ec0 @title="TDD", @author="Kent Beck" @id=1>
->> BookRepository.find(1)
-=> #<Book:0x007f9af1d13ec0 @title="TDD", @author="Kent Beck" @id=1>
+>> book = repository.create(title: 'TDD', author: 'Kent Beck')
+=> #<Book:0x007f9ab61c23b8 @attributes={:id=>1, :title=>"TDD", :author=>"Kent Beck", :created_at=>2016-11-15 11:11:38 UTC, :updated_at=>2016-11-15 11:11:38 UTC}>
+>> repository.find(book.id)
+=> #<Book:0x007f9ab6181610 @attributes={:id=>1, :title=>"TDD", :author=>"Kent Beck", :created_at=>2016-11-15 11:11:38 UTC, :updated_at=>2016-11-15 11:11:38 UTC}>
 ```
 
 Hanami repositories have methods to load one or more entities from our database; and to create and update existing records.
@@ -535,26 +463,29 @@ Let's adjust the feature test we created earlier:
 require 'features_helper'
 
 describe 'List books' do
+  let(:repository) { BookRepository.new }
   before do
-    BookRepository.clear
+    repository.clear
 
-    BookRepository.create(Book.new(title: 'PoEAA', author: 'Martin Fowler'))
-    BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
+    repository.create(title: 'PoEAA', author: 'Martin Fowler')
+    repository.create(title: 'TDD',   author: 'Kent Beck')
   end
 
-  it 'shows a book element for each book' do
+  it 'displays each book on the page' do
     visit '/books'
-    assert page.has_css?('.book', count: 2), 'Expected to find 2 books'
+
+    within '#books' do
+      assert page.has_css?('.book', count: 2), 'Expected to find 2 books'
+    end
   end
 end
 ```
 
 We create the required records in our test and then assert the correct number of book classes on the page.
 When we run this test, we will most likely see an error from our database connection -- remember we only migrated our _development_ database, and not yet our _test_ database.
-Its connection string is defined in `.env.test` and here's how you set it up:
 
 ```
-% HANAMI_ENV=test hanami db prepare
+% HANAMI_ENV=test bundle exec hanami db prepare
 ```
 
 Now we can go change our template and remove the static HTML.
@@ -607,7 +538,9 @@ Hanami is designed around simple objects with minimal interfaces that are easy t
 Let's rewrite our template to implement these requirements:
 
 ```erb
+# apps/web/templates/books/index.html.erb
 <h2>All books</h2>
+
 <% if books.any? %>
   <div id="books">
     <% books.each do |book| %>
@@ -634,11 +567,12 @@ require_relative '../../../../apps/web/controllers/books/index'
 describe Web::Controllers::Books::Index do
   let(:action) { Web::Controllers::Books::Index.new }
   let(:params) { Hash[] }
+  let(:repository) { BookRepository.new }
 
   before do
-    BookRepository.clear
+    repository.clear
 
-    @book = BookRepository.create(Book.new(title: 'TDD', author: 'Kent Beck'))
+    @book = repository.create(title: 'TDD', author: 'Kent Beck')
   end
 
   it "is successful" do
@@ -665,7 +599,7 @@ module Web::Controllers::Books
     expose :books
 
     def call(params)
-      @books = BookRepository.all
+      @books = BookRepository.new.all
     end
   end
 end
@@ -673,6 +607,19 @@ end
 
 By using the `expose` method in our action class, we can expose the contents of our `@books` instance variable to the outside world, so that Hanami can pass it to the view.
 That's enough to make all our tests pass again!
+
+```shell
+% bundle exec rake
+Run options: --seed 59133
+
+# Running:
+
+.........
+
+Finished in 0.042065s, 213.9543 runs/s, 380.3633 assertions/s.
+
+9 runs, 16 assertions, 0 failures, 0 errors, 0 skips
+```
 
 ## Building Forms To Create Records
 
@@ -686,9 +633,9 @@ Here's that story expressed in a test:
 # spec/web/features/add_book_spec.rb
 require 'features_helper'
 
-describe 'Books' do
+describe 'Add a book' do
   after do
-    BookRepository.clear
+    BookRepository.new.clear
   end
 
   it 'can create a new book' do
@@ -715,7 +662,7 @@ We'll speed things up a little, so we can quickly get to the good parts.
 First, create a new action for our "New Book" page:
 
 ```
-% hanami generate action web books#new
+% bundle exec hanami generate action web books#new
 ```
 
 This adds a new route to our app:
@@ -732,6 +679,7 @@ The interesting bit will be our new template, because we'll be using Hanami's fo
 Let's use [form helpers](/guides/helpers/forms) to build this form in `apps/web/templates/books/new.html.erb`:
 
 ```erb
+# apps/web/templates/books/new.html.erb
 <h2>Add book</h2>
 
 <%=
@@ -762,7 +710,7 @@ To submit our form, we need yet another action.
 Let's create a `Books::Create` action:
 
 ```
-% hanami generate action web books#create --method=post
+% bundle exec hanami generate action web books#create --method=post
 ```
 
 This adds a new route to our app:
@@ -787,7 +735,7 @@ describe Web::Controllers::Books::Create do
   let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
   before do
-    BookRepository.clear
+    BookRepository.new.clear
   end
 
   it 'creates a new book' do
@@ -818,7 +766,7 @@ module Web::Controllers::Books
     expose :book
 
     def call(params)
-      @book = BookRepository.create(Book.new(params[:book]))
+      @book = BookRepository.new.create(params[:book])
 
       redirect_to '/books'
     end
@@ -827,6 +775,20 @@ end
 ```
 
 This minimal implementation should suffice to make our tests pass.
+
+```shell
+% bundle exec rake
+Run options: --seed 63592
+
+# Running:
+
+...............
+
+Finished in 0.081961s, 183.0142 runs/s, 305.0236 assertions/s.
+
+15 runs, 25 assertions, 0 failures, 0 errors, 0 skips
+```
+
 Congratulations!
 
 ### Securing Our Form With Validations
@@ -850,7 +812,7 @@ describe Web::Controllers::Books::Create do
   let(:action) { Web::Controllers::Books::Create.new }
 
   after do
-    BookRepository.clear
+    BookRepository.new.clear
   end
 
   describe 'with valid params' do
@@ -915,7 +877,7 @@ module Web::Controllers::Books
 
     def call(params)
       if params.valid?
-        @book = BookRepository.create(Book.new(params[:book]))
+        @book = BookRepository.new.create(params[:book])
 
         redirect_to '/books'
       else
@@ -1030,6 +992,19 @@ Open up `apps/web/templates/books/new.html.erb`:
 As you can see, in this case we simply hard-code the error message "is required", but you could inspect the error and customise your message for the specific validation that failed.
 This will be improved in the near future.
 
+```shell
+% bundle exec rake
+Run options: --seed 59940
+
+# Running:
+
+..................
+
+Finished in 0.078112s, 230.4372 runs/s, 473.6765 assertions/s.
+
+18 runs, 37 assertions, 0 failures, 0 errors, 0 skips
+```
+
 ### Improving Our Use Of The Router
 
 The last improvement we are going to make, is in the use of our router.
@@ -1046,26 +1021,21 @@ root              to: 'home#index'
 Hanami provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:
 
 ```ruby
-resources :books
-root to: 'home#index'
+resources :books, only: [:index, :new, :create]
+root to: "home#index"
 ```
 
 To get a sense of what routes are defined, now we've made this change, you can
 use the special command-line task `routes` to inspect the end result:
 
 ```
-% hanami routes
-     Name Method     Path             Action
+% bundle exec hanami routes
+                Name Method     Path                           Action
 
-     root GET, HEAD  /                Web::Controllers::Home::Index
-    books GET, HEAD  /books           Web::Controllers::Books::Index
- new_book GET, HEAD  /books/new       Web::Controllers::Books::New
-    books POST       /books           Web::Controllers::Books::Create
-     book GET, HEAD  /books/:id       Web::Controllers::Books::Show
-edit_book GET, HEAD  /books/:id/edit  Web::Controllers::Books::Edit
-     book PATCH      /books/:id       Web::Controllers::Books::Update
-     book DELETE     /books/:id       Web::Controllers::Books::Destroy
-     home GET, HEAD  /                Web::Controllers::Home::Index
+               books GET, HEAD  /books                         Web::Controllers::Books::Index
+            new_book GET, HEAD  /books/new                     Web::Controllers::Books::New
+               books POST       /books                         Web::Controllers::Books::Create
+                root GET, HEAD  /                              Web::Controllers::Home::Index
 ```
 
 The output for `hanami routes` shows you the name of the defined helper method (you can suffix this name with `_path` or `_url` and call it on the `routes` helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.

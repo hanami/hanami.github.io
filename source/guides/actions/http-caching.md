@@ -72,7 +72,7 @@ module Web::Controllers::Users
     include Web::Action
 
     def call(params)
-      @user = UserRepository.find(params[:id])
+      @user = UserRepository.new.find(params[:id])
       fresh etag: etag
 
       # ...
@@ -109,7 +109,7 @@ module Web::Controllers::Users
     include Web::Action
 
     def call(params)
-      @user = UserRepository.find(params[:id])
+      @user = UserRepository.new.find(params[:id])
       fresh last_modified: @user.updated_at
 
       # ...
