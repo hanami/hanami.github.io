@@ -35,7 +35,7 @@ module Web
 end
 ```
 
-### Digest Mode
+### Fingerprint Mode
 
 In order to force browsers to cache the right copy of an asset, during the deploy, Hanami creates a copy of each file by [appending its checksum](/guides/command-line/assets) to the file name.
 
@@ -49,13 +49,13 @@ module Web
     configure do
       # ...
       assets do
-        # digest false, disabled by default
+        # fingerprint false, disabled by default
       end
     end
 
     configure :production do
       assets do
-        digest true
+        fingerprint true
       end
     end
   end

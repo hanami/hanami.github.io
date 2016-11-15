@@ -23,7 +23,7 @@ Then it [compress](/guides/assets/compressors) all the javascripts and styleshee
 As last thing, it generates a copy of each asset, by appending its checksum to the file name.
 This trick makes assets cacheable by browsers.
 
-It generates a digest manifest that lists all the assets and their checksum counterpart.
+It generates a fingeprint manifest that lists all the assets and their checksum counterpart.
 
 ```shell
 % cat public/assets.json

@@ -23,7 +23,7 @@ module Web
 
       assets do
         # ...
-        digest true
+        fingerprint true
 
         # CDN settings
         scheme 'https'
