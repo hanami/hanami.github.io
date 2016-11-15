@@ -9,6 +9,15 @@
     <%= partial 'navbar' %>
 
     <div class="container docs-content">
+      <select class="mobile-guides">
+        <% data.guides.categories.each do |category| %>
+          <optgroup label="<%= guide_title(category) %>">
+            <% category.pages.each do |page| %>
+              <option value="<%= guide_url(category, page) %>" <%= "selected" if guide_url(category, page) == current_page.url.chomp("\/") %>><%= guide_title(page) %></option>
+            <% end %>
+          </optgroup>
+        <% end %>
+      </select>
       <ul id="markdown-toc">
         <li></li>
         <li><%= guides_edit_article(current_page.source_file) %></li>

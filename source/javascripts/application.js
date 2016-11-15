@@ -7,4 +7,8 @@ $(function () {
   var $li  = $toc.find('a[href="' + url + '"]', 'a:first').closest('li');
 
   $li.addClass('active');
+
+  $("select.mobile-guides").change(function() {
+    window.location = $(this).find(":selected").val();
+  });
 })
