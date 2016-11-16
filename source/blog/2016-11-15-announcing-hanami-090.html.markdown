@@ -135,8 +135,8 @@ It can coerce values:
 ```ruby
 book = Book.new(created_at: "Sun, 13 Nov 2016 09:41:09 GMT")
 
-book.created_at # => 2016-11-13 09:41:09 UTC
-book.class      # => Time
+book.created_at       # => 2016-11-13 09:41:09 UTC
+book.created_at.class # => Time
 ```
 
 An entity tries as much as it cans to coerce values according to the internal schema.
