@@ -15,9 +15,12 @@ This is a security patch for [JSON body parsers](/guides/actions/parameters#body
 JSON body parsing was implemented using `Hanami::Utils::Json.load`, which internally uses `JSON.load`.
 According to Ruby docs, `JSON.load` should be used only with trusted data, because it evals the given payload.
 
+Thanks to [Lucas Hosseini](https://github.com/beauby) for spotting this problem.
+
 ## The Fix
 
-`Hanami::Utils::Json` now implements `.parse`, which is a safe alternative for JSON parsing.
+We introduced `Hanami::Utils::Json.parse`, which is a safe alternative for JSON parsing.
+JSON body parser now uses this new method, in order to guaratee a higher level of safety.
 
 ## How To Fix Your Project
 
