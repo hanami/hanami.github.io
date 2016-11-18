@@ -225,3 +225,45 @@ module Web::Controllers::Signup
   end
 end
 ```
+
+## Body Parsers
+
+Rack ignores request bodies unless they come from a form submission.
+If we have a JSON endpoint, the payload isn't available in `params`.
+
+```ruby
+module Web::Controllers::Books
+  class Create
+    include Web::Action
+    accept :json
+
+    def call(params)
+      puts params.to_h # => {}
+    end
+  end
+end
+```
+
+```shell
+curl http://localhost:2300/books      \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json"       \
+  -d '{"book":{"title":"Hanami"}}'    \
+  -X POST
+```
+
+In order to make book payload available in `params`, we should enable this feature:
+
+```ruby
+# apps/web/application.rb
+module Web
+  class Application < Hanami::Application
+    configure do
+      # ...
+      body_parsers :json
+    end
+  end
+end
+```
+
+Now `params.get(:book, :title)` returns `"Hanami"`.
