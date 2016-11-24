@@ -23,7 +23,7 @@ module Web
       # ...
 
       # Logger
-      # See: http://hanamirb.org/guides/applications/logging
+      # See: http://hanamirb.org/guides/projects/logging
       #
       # Logger stream. It defaults to STDOUT.
       # logger.stream "log/development.log"
@@ -42,7 +42,7 @@ module Web
       # ...
 
       # Logger
-      # See: http://hanamirb.org/guides/applications/logging
+      # See: http://hanamirb.org/guides/projects/logging
       #
       # Logger level. It defaults to ERROR
       logger.level :error
@@ -55,7 +55,7 @@ module Web
       # ...
 
       # Logger
-      # See: http://hanamirb.org/guides/applications/logging
+      # See: http://hanamirb.org/guides/projects/logging
       #
       # Logger stream. It defaults to STDOUT.
       # logger.stream "log/production.log"

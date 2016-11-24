@@ -40,7 +40,7 @@ Starting from `v0.6.0`, new projects and applications will be generated with tha
 
 Thanks to [Lucas Allan](https://github.com/lucasallan) for this new feature.
 
-[Read the [guides](/guides/applications/initializers)]
+[Read the [guides](/guides/projects/initializers)]
 
 ### Default Rake Tasks
 
@@ -74,7 +74,7 @@ bundle exec rake print_info
 bundle exec rake clear_users
 ```
 
-[Read the [guides](/guides/applications/rake)]
+[Read the [guides](/guides/projects/rake)]
 
 ### Destroy Command
 
