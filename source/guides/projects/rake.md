@@ -51,9 +51,9 @@ The following commands are equivalent:
   The <code>:test</code> (or <code>:spec</code>) Rake task is the default.
 </p>
 
-## Ruby Ecosystem Compatibility
+## Ruby Server Hosting Ecosystem Compatibility
 
-Many Software as a Service (SaaS) of the Ruby ecosystem are modeled after Ruby on Rails.
+Many Software as a Service (SaaS) of the Ruby server hosting ecosystem are modeled after Ruby on Rails.
 For instance, Heroku expects to find the following Rake tasks in a Ruby application:
 
   * `db:migrate`

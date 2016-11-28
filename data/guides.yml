@@ -93,6 +93,8 @@ categories:
       - path: compressors
       - path: content-delivery-network
         title: Content Delivery Network (CDN)
+      - path: use-your-own-assets-management-tool
+        title: Use Your Own Assets Management Tool
   - path: command-line
     pages:
       - path: applications
