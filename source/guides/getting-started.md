@@ -102,10 +102,21 @@ Here's what we need to know:
 * `public` will contain compiled static assets.
 * `spec` contains our tests.
 
-Go ahead and install our gem dependency with Bundler; then we can launch a development server:
+Install our gem dependencies with Bundler:
 
 ```
 % bundle install
+```
+
+Create the application database:
+
+```
+% bundle exec hanami db create
+```
+
+Now we can launch the development server:
+
+```
 % bundle exec hanami server
 ```
 
