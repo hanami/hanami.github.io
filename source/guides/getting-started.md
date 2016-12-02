@@ -68,6 +68,13 @@ Then we can use the new `hanami` executable to generate a new project:
 % hanami new bookshelf
 ```
 
+<p class="notice">
+  By default, the project will be setup to use a SQLite database. For real-world projects, you can specify your engine:
+  <code> 
+  % hanami new bookshelf --database=postgres
+  </code>
+</p>
+
 This will create a new directory `bookshelf` in our current location.
 Let's see what it contains:
 
