@@ -55,8 +55,8 @@ First, we're going to assume a basic knowledge of developing web applications.
 
 You should also be familiar with [Bundler](http://bundler.io), [Rake](http://rake.rubyforge.org), working with a terminal and building apps using the [Model, View, Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) paradigm.
 
-Lastly, in this guide we'll be using a [PostgreSQL](http://www.postgresql.org) database.
-If you want to follow along, make sure you have a working installation of Ruby 2.3+ and PostgreSQL 9.4+ on your system.
+Lastly, in this guide we'll be using a [SQLite](https://sqlite.org/) database.
+If you want to follow along, make sure you have a working installation of Ruby 2.3+ and SQLite 3+ on your system.
 
 ## Create a new Hanami project
 
@@ -65,8 +65,15 @@ Then we can use the new `hanami` executable to generate a new project:
 
 ```
 % gem install hanami
-% hanami new bookshelf --database=postgres
+% hanami new bookshelf
 ```
+
+<p class="notice">
+  By default, the project will be setup to use a SQLite database. For real-world projects, you can specify your engine:
+  <code> 
+  % hanami new bookshelf --database=postgres
+  </code>
+</p>
 
 This will create a new directory `bookshelf` in our current location.
 Let's see what it contains:
