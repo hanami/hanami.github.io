@@ -412,8 +412,7 @@ The generator gives us an entity, repository and accompanying test files.
 An entity is something really close to a plain Ruby object.
 We should focus on the behaviors that we want from it and only then, how to save it.
 
-For now, we want it to carry title and author information.
-Let's add these attributes.
+For now, we need to create simple entity class:
 
 ```ruby
 # lib/bookshelf/entities/book.rb
@@ -421,7 +420,7 @@ class Book < Hanami::Entity
 end
 ```
 
-This has added some simple getters and setters to our class.
+This class will generate getters and setters for each attribute which we pass to initialize params.
 We can verify it all works as expected with a unit test:
 
 ```ruby
@@ -438,7 +437,7 @@ end
 
 ### Using Repositories
 
-With our mapping set up, we are ready to play around with our repository.
+Now we are ready to play around with our repository.
 We can use Hanami's `console` command to launch IRb with our application pre-loaded, so we can use our objects:
 
 ```
