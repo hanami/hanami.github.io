@@ -39,8 +39,7 @@ lib
 
 The idea is to develop our application like a Ruby gem.
 
-Indeed, by opening `lib/bookshelf.rb`, we find the `Bookshelf` module, which is the main namespace of our project.
-It's also the entry point for our application, when we require this file, we require and initialize all the code under `lib/`.
+The `lib/bookshelf.rb` file is the entry point for our application, when we require this file, we require and initialize all the code under `lib/`.
 
 There are two important directories:
 
