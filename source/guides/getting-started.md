@@ -960,8 +960,8 @@ We should also update our feature spec to reflect this new behavior:
 # spec/web/features/add_book_spec.rb
 require 'features_helper'
 
-describe 'Books' do
-  # Spec written sooner removed from brevity
+describe 'Add a book' do
+  # Spec written earlier omitted for brevity
 
   it 'displays list of errors when params contains errors' do
     visit '/books/new'
