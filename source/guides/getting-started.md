@@ -509,7 +509,7 @@ describe Web::Views::Books::Index do
   let(:view)      { Web::Views::Books::Index.new(template, exposures) }
   let(:rendered)  { view.render }
 
-  it "exposes #books" do
+  it 'exposes #books' do
     view.books.must_equal exposures.fetch(:books)
   end
 
@@ -581,7 +581,7 @@ describe Web::Controllers::Books::Index do
     @book = repository.create(title: 'TDD', author: 'Kent Beck')
   end
 
-  it "is successful" do
+  it 'is successful' do
     response = action.call(params)
     response[0].must_equal 200
   end
@@ -1028,7 +1028,7 @@ Hanami provides a convenient helper method to build these REST-style routes, tha
 
 ```ruby
 resources :books, only: [:index, :new, :create]
-root to: "home#index"
+root to: 'home#index'
 ```
 
 To get a sense of what routes are defined, now we've made this change, you can
@@ -1051,7 +1051,7 @@ Remember how we built our form using `form_for`?
 
 ```erb
 <%=
-  form_for :book, "/books" do
+  form_for :book, '/books' do
     # ...
   end
 %>
