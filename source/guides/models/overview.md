@@ -4,7 +4,7 @@ title: Guides - Models Overview
 
 # Models
 
-Hanami's model domain is implemented in a way that separates the behavior that we want to express ([entities](/guides/models/entities)) from that persistence layer ([repositories](/guides/model/repositories) and database).
+Hanami's model domain is implemented in a way that separates the behavior that we want to express ([entities](/guides/models/entities)) from that persistence layer ([repositories](/guides/models/repositories) and database).
 This design helps to keep the interface of our objects really small and, by consequence, fast and reusable.
 
 ## Basic Usage
