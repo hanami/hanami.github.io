@@ -60,6 +60,9 @@ categories:
       - path: associations
       - path: use-your-own-orm
         title: Use Your Own ORM
+  - path: database-configuration
+    pages:
+      - path: overview
   - path: migrations
     pages:
       - path: overview
