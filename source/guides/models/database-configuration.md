@@ -1,8 +1,8 @@
 ---
-title: Guides - Database Configuration Overview
+title: Guides - Database Configuration
 ---
 
-# Overview
+# Database Configuration
 
 Before starting your server, you need to configure the database link in <code>.env*</code> files.
 
