@@ -133,7 +133,7 @@ This is the place where our models are defined, and interact with each other to 
 
 Hanami architecture is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
-## Exploring App By Writing Our First Test
+## Writing Our First Test
 
 The opening screen we see when we point our browser at our app, is a
 default page which is displayed when there are no routes defined.
