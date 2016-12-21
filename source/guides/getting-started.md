@@ -97,7 +97,7 @@ Let's see what it contains:
 
 Here's what we need to know:
 
-* `Gemfile` is a Bundler artifact to manage Rubygems dependencies.
+* `Gemfile` is defines our Rubygems dependencies (using Bundler).
 * `Rakefile` describes our Rake tasks.
 * `apps` contains one or more web applications compatible with Rack.
   Here we can find the first generated Hanami application called `Web`.
