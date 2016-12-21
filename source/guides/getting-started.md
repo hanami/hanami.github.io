@@ -321,7 +321,7 @@ To avoid repeating ourselves in every single template, we can use a layout.
 Open up the file `apps/web/templates/application.html.erb` and edit it to look like this:
 
 ```rhtml
-<!doctype HTML>
+<!DOCTYPE HTML>
 <html>
   <head>
     <title>Bookshelf</title>

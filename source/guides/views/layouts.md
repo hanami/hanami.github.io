@@ -11,7 +11,7 @@ When we generate a new application, there is a default layout called `Web::Views
 It comes with a very basic HTML5 wireframe.
 
 ```erb
-<!doctype HTML>
+<!DOCTYPE HTML>
 <html>
   <head>
     <title>Web</title>
@@ -105,7 +105,7 @@ For example, this could be used to have page-specific javascript.
 Given the following template for a layout:
 
 ```erb
-<!doctype HTML>
+<!DOCTYPE HTML>
 <html>
   <!-- ... -->
   <body>
