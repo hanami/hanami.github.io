@@ -58,7 +58,7 @@ You should also be familiar with [Bundler](http://bundler.io), [Rake](http://rak
 Lastly, in this guide we'll be using a [SQLite](https://sqlite.org/) database.
 If you want to follow along, make sure you have a working installation of Ruby 2.3+ and SQLite 3+ on your system.
 
-## Create a new Hanami project
+## Create a New Hanami Project
 
 To create a new Hanami project, we need to install the Hanami gem from Rubygems.
 Then we can use the new `hanami` executable to generate a new project:
@@ -159,7 +159,7 @@ Note that, although Hanami is ready for a Behavior Driven Development workflow o
 We'll go with [Minitest](https://github.com/seattlerb/minitest) here (which is the default), but we can use [RSpec](http://rspec.info) by creating the project with `--test=rspec` option.
 Hanami will then generate helpers and stub files for it.
 
-### Following A Request
+### Following a Request
 
 Now we have a test, we can see it fail:
 
@@ -726,7 +726,7 @@ This adds a new route to our app:
 post '/books', to: 'books#create'
 ```
 
-### Implementing Create action
+### Implementing Create Action
 
 Our `books#create` action needs to do two things.
 Let's express them as unit tests:
