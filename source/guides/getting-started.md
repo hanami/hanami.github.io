@@ -624,7 +624,7 @@ Run options: --seed 59133
 
 Finished in 0.042065s, 213.9543 runs/s, 380.3633 assertions/s.
 
-9 runs, 16 assertions, 0 failures, 0 errors, 0 skips
+6 runs, 7 assertions, 0 failures, 0 errors, 0 skips
 ```
 
 ## Building Forms To Create Records
@@ -792,7 +792,7 @@ Run options: --seed 63592
 
 Finished in 0.081961s, 183.0142 runs/s, 305.0236 assertions/s.
 
-15 runs, 25 assertions, 0 failures, 0 errors, 0 skips
+12 runs, 14 assertions, 0 failures, 0 errors, 2 skips
 ```
 
 Congratulations!
@@ -1008,7 +1008,7 @@ Run options: --seed 59940
 
 Finished in 0.078112s, 230.4372 runs/s, 473.6765 assertions/s.
 
-18 runs, 37 assertions, 0 failures, 0 errors, 0 skips
+15 runs, 27 assertions, 0 failures, 0 errors, 1 skips
 ```
 
 ### Improving Our Use Of The Router
