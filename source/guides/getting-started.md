@@ -58,7 +58,7 @@ You should also be familiar with [Bundler](http://bundler.io), [Rake](http://rak
 Lastly, in this guide we'll be using a [SQLite](https://sqlite.org/) database.
 If you want to follow along, make sure you have a working installation of Ruby 2.3+ and SQLite 3+ on your system.
 
-## Create a new Hanami project
+## Create a New Hanami Project
 
 To create a new Hanami project, we need to install the Hanami gem from Rubygems.
 Then we can use the new `hanami` executable to generate a new project:
@@ -97,7 +97,7 @@ Let's see what it contains:
 
 Here's what we need to know:
 
-* `Gemfile` is a Bundler artifact to manage Rubygems dependencies.
+* `Gemfile` defines our Rubygems dependencies (using Bundler).
 * `Rakefile` describes our Rake tasks.
 * `apps` contains one or more web applications compatible with Rack.
   Here we can find the first generated Hanami application called `Web`.
@@ -133,7 +133,7 @@ This is the place where our models are defined, and interact with each other to 
 
 Hanami architecture is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
-## Exploring App By Writing Our First Test
+## Writing Our First Test
 
 The opening screen we see when we point our browser at our app, is a
 default page which is displayed when there are no routes defined.
@@ -159,7 +159,7 @@ Note that, although Hanami is ready for a Behavior Driven Development workflow o
 We'll go with [Minitest](https://github.com/seattlerb/minitest) here (which is the default), but we can use [RSpec](http://rspec.info) by creating the project with `--test=rspec` option.
 Hanami will then generate helpers and stub files for it.
 
-### Following A Request
+### Following a Request
 
 Now we have a test, we can see it fail:
 
@@ -321,7 +321,7 @@ To avoid repeating ourselves in every single template, we can use a layout.
 Open up the file `apps/web/templates/application.html.erb` and edit it to look like this:
 
 ```rhtml
-<!doctype HTML>
+<!DOCTYPE HTML>
 <html>
   <head>
     <title>Bookshelf</title>
@@ -624,7 +624,7 @@ Run options: --seed 59133
 
 Finished in 0.042065s, 213.9543 runs/s, 380.3633 assertions/s.
 
-9 runs, 16 assertions, 0 failures, 0 errors, 0 skips
+6 runs, 7 assertions, 0 failures, 0 errors, 0 skips
 ```
 
 ## Building Forms To Create Records
@@ -726,7 +726,7 @@ This adds a new route to our app:
 post '/books', to: 'books#create'
 ```
 
-### Implementing Create action
+### Implementing Create Action
 
 Our `books#create` action needs to do two things.
 Let's express them as unit tests:
@@ -792,7 +792,7 @@ Run options: --seed 63592
 
 Finished in 0.081961s, 183.0142 runs/s, 305.0236 assertions/s.
 
-15 runs, 25 assertions, 0 failures, 0 errors, 0 skips
+12 runs, 14 assertions, 0 failures, 0 errors, 2 skips
 ```
 
 Congratulations!
@@ -1008,7 +1008,7 @@ Run options: --seed 59940
 
 Finished in 0.078112s, 230.4372 runs/s, 473.6765 assertions/s.
 
-18 runs, 37 assertions, 0 failures, 0 errors, 0 skips
+15 runs, 27 assertions, 0 failures, 0 errors, 1 skips
 ```
 
 ### Improving Our Use Of The Router
