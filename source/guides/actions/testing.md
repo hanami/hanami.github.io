@@ -215,6 +215,31 @@ end
 Please be careful using doubles in unit tests. Always verify that the mocks are in a true representation of the corresponding production code.
 </p>
 
+
+### Flash messages
+
+In your action tests, you can check `flash` messages too. For this, you can use `exposures` method for getting all flash data.
+
+The following test example uses this method.
+
+```ruby
+# spec/web/controllers/users/create_spec.rb
+require 'spec_helper'
+require_relative '../../../../apps/web/controllers/users/create'
+
+describe Web::Controllers::Users::Create do
+  let(:action)  { Web::Controllers::Users::Create.new }
+  let(:user_params) { name: 'Luca' }
+
+  it "is successful" do
+    response = action.call(id: user_params)
+    flash = action.exposures[:flash]
+
+    flash[:info].must_equal 'User was successfully created'
+  end
+end
+```
+
 ## Requests Tests
 
 Unit tests are a great tool to assert that low level interfaces work as expected.
