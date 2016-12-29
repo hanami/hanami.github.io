@@ -9,14 +9,14 @@ Hanami has builtin facilities for routing unit tests.
 ## Path Generation
 
 We can assert the generated routes, to do so, we're gonna create a spec file for the purpose.
-`Web::Routes` is the class that holds all the routes for the application named `Web`.
+`Web.routes` is the class that holds all the routes for the application named `Web`.
 
 It exposes a method to generate a path, which takes the [name of a route](/guides/routing/basic-usage#named-routes) as a symbol.
 Here's how to test it.
 
 ```ruby
 # spec/web/routes_spec.rb
-RSpec.describe Web::Routes do
+RSpec.describe Web.routes do
   it 'generates "/"' do
     actual = described_class.path(:root)
     expect(actual).to eq '/'
@@ -35,7 +35,7 @@ We can also do the opposite: starting from a fake Rack env, we can assert that t
 
 ```ruby
 # spec/web/routes_spec.rb
-RSpec.describe Web::Routes do
+RSpec.describe Web.routes do
 
   # ...
 

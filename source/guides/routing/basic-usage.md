@@ -78,29 +78,29 @@ get '/hello',     to: 'greet#index', as: :greeting
 get '/books/:id', to: 'books#show',  as: :book
 ```
 
-When a Hanami application starts, it generates a Ruby module at the runtime under our application namespace: eg. `Web::Routes`.
+When a Hanami application starts, it generates a Ruby module at the runtime under our application namespace: eg. `Web.routes`.
 We can use it to generate a relative or absolute URI for our route.
 
 ```ruby
-Web::Routes.path(:root)     # => "/"
-Web::Routes.url(:root)      # => "http://localhost:2300/"
+Web.routes.path(:root)     # => "/"
+Web.routes.url(:root)      # => "http://localhost:2300/"
 
-Web::Routes.path(:greeting) # => "/hello"
-Web::Routes.url(:greeting)  # => "http://localhost:2300/hello"
+Web.routes.path(:greeting) # => "/hello"
+Web.routes.url(:greeting)  # => "http://localhost:2300/hello"
 ```
 
 When we have one or more variables, they can be specified as a Hash.
 
 ```ruby
-Web::Routes.path(:book, id: 1) # => "/books/1"
-Web::Routes.url(:book, id: 1)  # => "http://localhost:2300/books/1"
+Web.routes.path(:book, id: 1) # => "/books/1"
+Web.routes.url(:book, id: 1)  # => "http://localhost:2300/books/1"
 ```
 
 Absolute URL generation is dependent on `scheme`, `host` and `port` settings in `apps/web/application.rb`.
 
 ### Routing Helpers
 
-Generating routes from `Web::Routes` is helpful, because that module can be accessed from anywhere.
+Generating routes from `Web.routes` is helpful, because that module can be accessed from anywhere.
 However, this syntax is noisy.
 
 Hanami has _routing helpers_ available as `routes` in: **actions**, **views** and **templates**.
