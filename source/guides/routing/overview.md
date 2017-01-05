@@ -76,7 +76,16 @@ get '/rack-app', to: 'rack_app' # it will map to RackApp.new
 
 ### Mounting Applications
 
-If we want to mount an application, we should use `mount`.
+If we want to mount an application, we should use `mount` within the Hanami environment configuration file. The global configuration file is located at `config/environment.rb`. Place `mount` within the Hanami.configure block.
+
+```ruby
+Hanami.configure do
+  mount Web::Application, at: '/'
+  mount OtherApplication.new, at: '/other'
+
+  ...
+end
+```
 
 #### Mounting To A Path
 
