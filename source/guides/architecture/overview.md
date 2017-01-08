@@ -29,12 +29,12 @@ Let's have a look at how the `lib/` directory appears for a new generated projec
 lib
 ├── bookshelf
 │   ├── entities
+│   ├── mailers
+│   │   └── templates
 │   └── repositories
-├── bookshelf.rb
-└── config
-    └── mapping.rb
+└── bookshelf.rb
 
-4 directories, 2 files
+5 directories, 1 file
 ```
 
 The idea is to develop our application like a Ruby gem.
@@ -64,18 +64,20 @@ It's used as web delivery mechanism, for our features.
 % tree apps/web
 apps/web
 ├── application.rb
+├── assets
+│   ├── favicon.ico
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
 ├── config
 │   └── routes.rb
 ├── controllers
-├── public
-│   ├── javascripts
-│   └── stylesheets
 ├── templates
 │   └── application.html.erb
 └── views
     └── application_layout.rb
 
-7 directories, 4 files
+8 directories, 5 files
 ```
 
 Let's have a quick look at this code.
