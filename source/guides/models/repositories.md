@@ -50,7 +50,7 @@ repository = BookRepository.new
 book = repository.create(title: "Hanami")
   # => #<Book:0x007f95cbd8b7c0 @attributes={:id=>1, :title=>"Hanami", :created_at=>2016-11-13 16:02:37 UTC, :updated_at=>2016-11-13 16:02:37 UTC}>
 
-book = book.find(book.id)
+book = repository.find(book.id)
   # => #<Book:0x007f95cbd5a030 @attributes={:id=>1, :title=>"Hanami", :created_at=>2016-11-13 16:02:37 UTC, :updated_at=>2016-11-13 16:02:37 UTC}>
 
 book = repository.update(book.id, title: "Hanami Book")
