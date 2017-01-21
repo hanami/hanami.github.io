@@ -203,3 +203,41 @@ The repository can use the same mapped attributes:
 operator = OperatorRepository.new.create(name: "Jane")
   # => #<Operator:0x007f8e43cbcea0 @attributes={:id=>1, :name=>"Jane"}>
 ```
+
+## Count
+
+Count is a concept not generally available to all the databases. SQL databases have it, but others don't.
+
+You can define a method, if you're using a SQL database:
+
+```ruby
+class BookRepository < Hanami::Repository
+  def count
+    books.count
+  end
+end
+```
+
+Or you can expose specific conditions:
+
+```ruby
+class BookRepository < Hanami::Repository
+  # ...
+
+  def on_sale_count
+    books.where(on_sale: true).count
+  end
+end
+```
+
+If you want to use raw SQL you can do:
+
+```ruby
+class BookRepository < Hanami::Repository
+  # ...
+
+  def old_books_count
+    books.read("SELECT id FROM books WHERE created_at < (NOW() - 1 * interval '1 year')").count
+  end
+end
+```
