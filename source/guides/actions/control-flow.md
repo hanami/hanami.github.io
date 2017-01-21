@@ -250,3 +250,12 @@ module Web::Controllers::Dashboard
   end
 end
 ```
+
+### Back
+
+Sometimes you'll want to `redirect_to` back in your browser's history so the easy way to do it
+is the following way:
+
+```ruby
+redirect_to request.headers["Referer"] || fallback_url
+```
