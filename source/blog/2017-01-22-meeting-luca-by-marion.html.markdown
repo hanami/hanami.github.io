@@ -3,7 +3,7 @@ title: How I came to be in the Hanami Core Team
 date: 2017-01-22 17:00 UTC
 tags: announcements
 author: Marion Schleifer
-image: false
+image: true
 excerpt: >
   I am a Junior Developer and quite new in the Hanami core team. In this blog post, I want to tell you how I came to be there.
 ---
