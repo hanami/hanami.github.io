@@ -20,4 +20,4 @@ In the afternoon, I was at his talk about the lessons learned while building Han
 
 When I was back home, I got in touch with Luca over Twitter asking him if there was anything I could do for Hanami, because I like his attitude towards open source. We scheduled a call to talk in more detail and he asked me if I would like to join the Hanami core team. This was a big honor for me, so naturally, I said yes. Thereafter, I joined the subteam that is responsible for community work for Hanami and I’m having the best time doing it. We now have stickers that we will distribute at future conferences. And we have Hanami t-shirts that can be bought [here.](https://teespring.com/shop/hanamirb#pid=369&cid=6529&sid=front) There is a lot more work to do, and I am looking forward to it.
 
-If you are interested in helping Hanami with open source contribution, you find current issues [here.](https://github.com/hanami/hanami/issues)
+If you are interested in helping Hanami with open source contribution, you find current issues [here.](https://github.com/hanami/hanami/issues) Any help is greatly appreciated.
