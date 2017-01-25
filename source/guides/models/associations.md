@@ -122,7 +122,7 @@ class AuthorRepository < Hanami::Repository
   end
 
   def find_with_books(id)
-    aggregate(:books).where(author_id: id).as(Author).one
+    aggregate(:books).where(authors__id: id).as(Author).one
   end
 end
 ```
