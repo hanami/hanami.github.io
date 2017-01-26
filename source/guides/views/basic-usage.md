@@ -26,7 +26,7 @@ Our view is `Web::Views::Dashboard::Index`, while the file name of the template 
 
 ### Context
 
-While rendering a template, varible lookups requested by the template go to a view _context_.
+While rendering a template, variable lookups requested by the template go to a view _context_.
 
 ```erb
 # apps/web/templates/dashboard/index.html.erb
