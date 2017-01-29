@@ -29,7 +29,7 @@ If we need to create an author, contextually with a few books, we need to explic
 
 The same principle applies to read operations: if we want to eager load an author with the associated books, we need an explicit method to do so.
 
-If we don't explicitely load that books, then the resulting data will be `nil`.
+If we don't explicitly load that books, then the resulting data will be `nil`.
 
 ### No Proxy Loader
 
