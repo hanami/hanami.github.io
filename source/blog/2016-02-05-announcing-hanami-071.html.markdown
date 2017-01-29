@@ -41,7 +41,7 @@ This is a patch release that addresses some bugs reported after [v0.7.0 release]
 ### hanami-assets [v0.2.1](https://github.com/hanami/assets/blob/master/CHANGELOG.md#v021---2016-02-05)
 
   - Fix recursive Sass imports [[Luca Guidi](https://github.com/jodosha)]
-  - Ensure to truncate assets in `public/` before to precompile/copy them [[Luca Guidi](https://github.com/jodosha)]
+  - Ensure to truncate assets in `public/` before precompiling/copying them [[Luca Guidi](https://github.com/jodosha)]
 
 ## Upgrade Instructions
 
