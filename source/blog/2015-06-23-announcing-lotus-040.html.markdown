@@ -9,7 +9,7 @@ excerpt: >
   New Core Team member, Rails Girls Summer of Code and Guides!
 ---
 
-Before to dive into the details of this release, we want to say **thank you** to our beloved Community.
+Before diving into the details of this release, we want to say **thank you** to our beloved Community.
 In a year we went from an initial release with few features and people around Lotus, to a technology that is having an impact on the Ruby ecosystem.
 
 Without you this wouldn't be possible.
@@ -196,7 +196,7 @@ We care **a lot** about the stability of our public APIs, because it involves co
 Each breaking change is thoughtfully evaluated and we wait for minor releases like this to make developers aware of them.
 
 Designing a large software like Lotus is hard and **we make mistakes**.
-Before to hit 1.0, we want to be sure that we have fixed them.
+Before hitting 1.0, we want to be sure that we have fixed them.
 
 #### Environment Configurations
 
