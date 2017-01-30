@@ -52,6 +52,7 @@ categories:
   - path: models
     pages:
       - path: overview
+      - path: database-configuration
       - path: repositories
       - path: entities
       - path: data-types
