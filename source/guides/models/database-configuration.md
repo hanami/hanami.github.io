@@ -14,14 +14,14 @@ Setup database variable for the development environment:
 
 ```
 # .env.development
-DATABASE_URL="postgres://username:password@localhost/bookshelf_development"
+DATABASE_URL="postgresql://username:password@localhost/bookshelf_development"
 ```
 
 Setup database variable for the test environment:
 
 ```
 # .env.test
-DATABASE_URL="postgres://username:password@localhost/bookshelf_test"
+DATABASE_URL="postgresql://username:password@localhost/bookshelf_test"
 ```
 
 # Setup your database
