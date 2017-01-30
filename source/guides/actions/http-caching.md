@@ -14,9 +14,12 @@ The first argument is a cache response directive like `:public` or `"must-revali
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
+require 'hanami/action/cache'
+
 module Web::Controllers::Dashboard
   class Index
     include Web::Action
+    include Hanami::Action::Cache
 
     cache_control :public, max_age: 600
       # => Cache-Control: public, max-age: 600
@@ -37,9 +40,12 @@ Hanami's solution for _expire_ combines support for all the browsers by sending 
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
+require 'hanami/action/cache'
+
 module Web::Controllers::Dashboard
   class Index
     include Web::Action
+    include Hanami::Action::Cache
     expires 60, :public, max_age: 300
       # => Expires: Mon, 18 May 2015 09:19:18 GMT
       #    Cache-Control: public, max-age: 300
@@ -67,9 +73,12 @@ If the header does match, the action will be halted and a `304` will be returned
 
 ```ruby
 # apps/web/controllers/users/show.rb
+require 'hanami/action/cache'
+
 module Web::Controllers::Users
   class Show
     include Web::Action
+    include Hanami::Action::Cache
 
     def call(params)
       @user = UserRepository.new.find(params[:id])
@@ -104,9 +113,12 @@ If the timestamp does match, the action will be halted and a `304` will be retur
 
 ```ruby
 # apps/web/controllers/users/show.rb
+require 'hanami/action/cache'
+
 module Web::Controllers::Users
   class Show
     include Web::Action
+    include Hanami::Action::Cache
 
     def call(params)
       @user = UserRepository.new.find(params[:id])
