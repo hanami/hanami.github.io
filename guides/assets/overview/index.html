@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+
+<title>Hanami | Guides - Assets Overview</title>
+
+<link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+
+    <link href="/stylesheets/guides.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/guides">Guides</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <div class="container docs-content">
+      <select class="mobile-guides">
+          <optgroup label="Introduction">
+              <option value="/guides/getting-started" >Getting Started</option>
+          </optgroup>
+          <optgroup label="Architecture">
+              <option value="/guides/architecture/overview" >Overview</option>
+          </optgroup>
+          <optgroup label="Projects">
+              <option value="/guides/projects/code-reloading" >Code Reloading</option>
+              <option value="/guides/projects/rake" >Rake</option>
+              <option value="/guides/projects/logging" >Logging</option>
+              <option value="/guides/projects/initializers" >Initializers</option>
+          </optgroup>
+          <optgroup label="Routing">
+              <option value="/guides/routing/overview" >Overview</option>
+              <option value="/guides/routing/basic-usage" >Basic Usage</option>
+              <option value="/guides/routing/restful-resources" >RESTful Resource(s)</option>
+              <option value="/guides/routing/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Actions">
+              <option value="/guides/actions/overview" >Overview</option>
+              <option value="/guides/actions/basic-usage" >Basic Usage</option>
+              <option value="/guides/actions/parameters" >Parameters</option>
+              <option value="/guides/actions/request-and-response" >Request & Response</option>
+              <option value="/guides/actions/exposures" >Exposures</option>
+              <option value="/guides/actions/rack-integration" >Rack Integration</option>
+              <option value="/guides/actions/mime-types" >MIME Types</option>
+              <option value="/guides/actions/cookies" >Cookies</option>
+              <option value="/guides/actions/sessions" >Sessions</option>
+              <option value="/guides/actions/exception-handling" >Exception Handling</option>
+              <option value="/guides/actions/control-flow" >Control Flow</option>
+              <option value="/guides/actions/http-caching" >HTTP Caching</option>
+              <option value="/guides/actions/share-code" >Share Code</option>
+              <option value="/guides/actions/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Views">
+              <option value="/guides/views/overview" >Overview</option>
+              <option value="/guides/views/basic-usage" >Basic Usage</option>
+              <option value="/guides/views/templates" >Templates</option>
+              <option value="/guides/views/mime-types" >MIME Types</option>
+              <option value="/guides/views/layouts" >Layouts</option>
+              <option value="/guides/views/custom-error-pages" >Custom Error Pages</option>
+              <option value="/guides/views/share-code" >Share Code</option>
+              <option value="/guides/views/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Models">
+              <option value="/guides/models/overview" >Overview</option>
+              <option value="/guides/models/database-configuration" >Database Configuration</option>
+              <option value="/guides/models/repositories" >Repositories</option>
+              <option value="/guides/models/entities" >Entities</option>
+              <option value="/guides/models/data-types" >Data Types</option>
+              <option value="/guides/models/postgresql" >PostgreSQL</option>
+              <option value="/guides/models/associations" >Associations</option>
+              <option value="/guides/models/use-your-own-orm" >Use Your Own ORM</option>
+          </optgroup>
+          <optgroup label="Migrations">
+              <option value="/guides/migrations/overview" >Overview</option>
+              <option value="/guides/migrations/create-table" >Create Table</option>
+              <option value="/guides/migrations/alter-table" >Alter Table</option>
+          </optgroup>
+          <optgroup label="Helpers">
+              <option value="/guides/helpers/overview" >Overview</option>
+              <option value="/guides/helpers/html5" >HTML5</option>
+              <option value="/guides/helpers/forms" >Forms</option>
+              <option value="/guides/helpers/routing" >Routing</option>
+              <option value="/guides/helpers/assets" >Assets</option>
+              <option value="/guides/helpers/links" >Links</option>
+              <option value="/guides/helpers/escape" >Markup Escape</option>
+              <option value="/guides/helpers/numbers" >Numbers</option>
+              <option value="/guides/helpers/custom-helpers" >Custom Helpers</option>
+          </optgroup>
+          <optgroup label="Mailers">
+              <option value="/guides/mailers/overview" >Overview</option>
+              <option value="/guides/mailers/basic-usage" >Basic Usage</option>
+              <option value="/guides/mailers/templates" >Templates</option>
+              <option value="/guides/mailers/delivery" >Delivery</option>
+              <option value="/guides/mailers/share-code" >Share Code</option>
+              <option value="/guides/mailers/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Assets">
+              <option value="/guides/assets/overview" selected>Overview</option>
+              <option value="/guides/assets/preprocessors" >Preprocessors</option>
+              <option value="/guides/assets/compressors" >Compressors</option>
+              <option value="/guides/assets/content-delivery-network" >Content Delivery Network (CDN)</option>
+              <option value="/guides/assets/use-your-own-assets-management-tool" >Use Your Own Assets Management Tool</option>
+          </optgroup>
+          <optgroup label="Command Line">
+              <option value="/guides/command-line/applications" >Applications</option>
+              <option value="/guides/command-line/generators" >Generators</option>
+              <option value="/guides/command-line/destroy" >Destroy</option>
+              <option value="/guides/command-line/database" >Database</option>
+              <option value="/guides/command-line/assets" >Assets</option>
+              <option value="/guides/command-line/routes" >Routes</option>
+              <option value="/guides/command-line/version" >Version</option>
+          </optgroup>
+          <optgroup label="Upgrade Notes">
+              <option value="/guides/upgrade-notes/v060" >v0.6.0</option>
+              <option value="/guides/upgrade-notes/v070" >v0.7.0</option>
+              <option value="/guides/upgrade-notes/v080" >v0.8.0</option>
+              <option value="/guides/upgrade-notes/v090" >v0.9.0</option>
+          </optgroup>
+      </select>
+      <ul id="markdown-toc">
+        <li></li>
+        <li><a href="https://github.com/hanami/hanami.github.io/edit/build/source/guides/assets/overview.md" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a></li>
+
+          <li class="toc-group">
+            <span>Introduction</span>
+            <ul>
+                <li>
+                  <a href="/guides/getting-started">Getting Started</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Architecture</span>
+            <ul>
+                <li>
+                  <a href="/guides/architecture/overview">Overview</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Projects</span>
+            <ul>
+                <li>
+                  <a href="/guides/projects/code-reloading">Code Reloading</a>
+                </li>
+                <li>
+                  <a href="/guides/projects/rake">Rake</a>
+                </li>
+                <li>
+                  <a href="/guides/projects/logging">Logging</a>
+                </li>
+                <li>
+                  <a href="/guides/projects/initializers">Initializers</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Routing</span>
+            <ul>
+                <li>
+                  <a href="/guides/routing/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/routing/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/routing/restful-resources">RESTful Resource(s)</a>
+                </li>
+                <li>
+                  <a href="/guides/routing/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Actions</span>
+            <ul>
+                <li>
+                  <a href="/guides/actions/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/parameters">Parameters</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/request-and-response">Request & Response</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/exposures">Exposures</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/rack-integration">Rack Integration</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/cookies">Cookies</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/sessions">Sessions</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/exception-handling">Exception Handling</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/control-flow">Control Flow</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/http-caching">HTTP Caching</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/actions/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Views</span>
+            <ul>
+                <li>
+                  <a href="/guides/views/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/views/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/views/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/views/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/views/layouts">Layouts</a>
+                </li>
+                <li>
+                  <a href="/guides/views/custom-error-pages">Custom Error Pages</a>
+                </li>
+                <li>
+                  <a href="/guides/views/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/views/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Models</span>
+            <ul>
+                <li>
+                  <a href="/guides/models/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/models/database-configuration">Database Configuration</a>
+                </li>
+                <li>
+                  <a href="/guides/models/repositories">Repositories</a>
+                </li>
+                <li>
+                  <a href="/guides/models/entities">Entities</a>
+                </li>
+                <li>
+                  <a href="/guides/models/data-types">Data Types</a>
+                </li>
+                <li>
+                  <a href="/guides/models/postgresql">PostgreSQL</a>
+                </li>
+                <li>
+                  <a href="/guides/models/associations">Associations</a>
+                </li>
+                <li>
+                  <a href="/guides/models/use-your-own-orm">Use Your Own ORM</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Migrations</span>
+            <ul>
+                <li>
+                  <a href="/guides/migrations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/migrations/create-table">Create Table</a>
+                </li>
+                <li>
+                  <a href="/guides/migrations/alter-table">Alter Table</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Helpers</span>
+            <ul>
+                <li>
+                  <a href="/guides/helpers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/helpers/html5">HTML5</a>
+                </li>
+                <li>
+                  <a href="/guides/helpers/forms">Forms</a>
+                </li>
+                <li>
+                  <a href="/guides/helpers/routing">Routing</a>
+                </li>
+                <li>
+                  <a href="/guides/helpers/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/helpers/links">Links</a>
+                </li>
+                <li>
+                  <a href="/guides/helpers/escape">Markup Escape</a>
+                </li>
+                <li>
+                  <a href="/guides/helpers/numbers">Numbers</a>
+                </li>
+                <li>
+                  <a href="/guides/helpers/custom-helpers">Custom Helpers</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Mailers</span>
+            <ul>
+                <li>
+                  <a href="/guides/mailers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/mailers/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/mailers/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/mailers/delivery">Delivery</a>
+                </li>
+                <li>
+                  <a href="/guides/mailers/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/mailers/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Assets</span>
+            <ul>
+                <li>
+                  <a href="/guides/assets/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/assets/preprocessors">Preprocessors</a>
+                </li>
+                <li>
+                  <a href="/guides/assets/compressors">Compressors</a>
+                </li>
+                <li>
+                  <a href="/guides/assets/content-delivery-network">Content Delivery Network (CDN)</a>
+                </li>
+                <li>
+                  <a href="/guides/assets/use-your-own-assets-management-tool">Use Your Own Assets Management Tool</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Command Line</span>
+            <ul>
+                <li>
+                  <a href="/guides/command-line/applications">Applications</a>
+                </li>
+                <li>
+                  <a href="/guides/command-line/generators">Generators</a>
+                </li>
+                <li>
+                  <a href="/guides/command-line/destroy">Destroy</a>
+                </li>
+                <li>
+                  <a href="/guides/command-line/database">Database</a>
+                </li>
+                <li>
+                  <a href="/guides/command-line/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/command-line/routes">Routes</a>
+                </li>
+                <li>
+                  <a href="/guides/command-line/version">Version</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Upgrade Notes</span>
+            <ul>
+                <li>
+                  <a href="/guides/upgrade-notes/v060">v0.6.0</a>
+                </li>
+                <li>
+                  <a href="/guides/upgrade-notes/v070">v0.7.0</a>
+                </li>
+                <li>
+                  <a href="/guides/upgrade-notes/v080">v0.8.0</a>
+                </li>
+                <li>
+                  <a href="/guides/upgrade-notes/v090">v0.9.0</a>
+                </li>
+            </ul>
+          </li>
+      </ul>
+
+      
+      <h1 id="assets" class="title"><a name="assets" class="anchor" href="#assets">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Assets</h1>
+    
+<p>Hanami supports powerful features for web assets.</p>
+
+      <h2 id="configuration" class="title"><a name="configuration" class="anchor" href="#configuration">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Configuration</h2>
+    
+<p>Each application can have its own separated assets settings in application configuration.</p>
+
+      <h3 id="compile-mode" class="title"><a name="compile-mode" class="anchor" href="#compile-mode">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Compile Mode</h3>
+    
+<p>Toggle this value, to determine if the application must preprocess or copy assets from sources to public directory.
+It&#39;s turned on by default in <em>development</em> and <em>test</em> environments, but turned off for <em>production</em>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">assets</span> <span class="k">do</span>
+        <span class="c1"># compile true, enabled by default</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">configure</span> <span class="ss">:production</span> <span class="k">do</span>
+      <span class="n">assets</span> <span class="k">do</span>
+        <span class="n">compile</span> <span class="kp">false</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h3 id="fingerprint-mode" class="title"><a name="fingerprint-mode" class="anchor" href="#fingerprint-mode">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Fingerprint Mode</h3>
+    
+<p>In order to force browsers to cache the right copy of an asset, during the deploy, Hanami creates a copy of each file by <a href="/guides/command-line/assets">appending its checksum</a> to the file name.</p>
+
+<p>We can control this feature via application configuration.
+It&#39;s turned on by default only in <em>production</em> environment.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">assets</span> <span class="k">do</span>
+        <span class="c1"># fingerprint false, disabled by default</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">configure</span> <span class="ss">:production</span> <span class="k">do</span>
+      <span class="n">assets</span> <span class="k">do</span>
+        <span class="n">fingerprint</span> <span class="kp">true</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If enabled, <a href="/guides/helpers/assets">assets helpers</a> will generate checksum relative URLs.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/application-d1829dc353b734e3adc24855693b70f9.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+      <h2 id="serve-static-assets" class="title"><a name="serve-static-assets" class="anchor" href="#serve-static-assets">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Serve Static Assets</h2>
+    
+<p>It can dynamically serve them during development.
+It mounts <code>Hanami::Static</code> middleware in project Rack stack. This component is conditionally activated, if the environment variable <code>SERVE_STATIC_ASSETS</code> equals to <code>true</code>.</p>
+
+<p>By default, new projects are generated with this feature enabled in <em>development</em> and <em>test</em> mode, via their corresponding <code>.env.*</code> files.</p>
+<pre class="language-ruby plaintext"><code># .env.development
+# ...
+SERVE_STATIC_ASSETS="true"
+</code></pre>
+
+<p>Hanami assumes that projects in <em>production</em> mode are deployed using a web server like Nginx that is responsible to serve them without even hitting the Ruby code.</p>
+
+<p class="convention">
+  Static assets serving is enabled by default in <em>development</em> and <em>test</em> environments, but turned off for <em>production</em>.
+</p>
+
+<p>There are cases where this assumption isn&#39;t true. For instance, Heroku requires Ruby web apps to serve static assets.
+To enable this feature in production, just make sure that this special environment variable is set to <code>true</code> (in <code>.env</code> or <code>.env.production</code>).</p>
+
+      <h3 id="what-does-it-mean-to-serve-static-assets-with-hanami-" class="title"><a name="what-does-it-mean-to-serve-static-assets-with-hanami-" class="anchor" href="#what-does-it-mean-to-serve-static-assets-with-hanami-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What Does It Mean To Serve Static Assets With Hanami?</h3>
+    
+<p>As mentioned above, when this feature is enabled, a special middleware is added in front of the project Rack stack: <code>Hanami::Static</code>.</p>
+
+<p>Incoming requests can generate the following use cases</p>
+
+      <h4 id="fresh-asset" class="title"><a name="fresh-asset" class="anchor" href="#fresh-asset">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Fresh Asset</h4>
+    <pre class="language-ruby plaintext"><code>GET /assets/application.js
+</code></pre>
+
+<p>It copies the <code>apps/web/assets/javascripts/application.js</code> to <code>public/assets/application.js</code> and then serves it.</p>
+
+<p class="notice">
+  Assets are copied only if the destination path is NOT existing (eg. <code>public/assets/application.js</code>).
+  If it DOES exist, the asset is only served, without copying it.
+</p>
+
+<p class="warning">
+  When an application has turned OFF assets compilation (Compile mode), Hanami won't copy the file.
+</p>
+
+      <h4 id="stale-asset" class="title"><a name="stale-asset" class="anchor" href="#stale-asset">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Stale Asset</h4>
+    
+<p>This could happen in <em>development</em> mode, when we require an asset the first time, it&#39;s get copied over <code>public/</code>, then we edit it, so the destination file is stale.</p>
+<pre class="language-ruby plaintext"><code>GET /assets/application.js
+# edit the original file: apps/web/assets/javascripts/application.js
+# then require it again
+GET /assets/application.js
+</code></pre>
+
+<p>It copies <strong>again</strong> the source into the destination file (<code>public/assets/application.js</code>) and then serves it.</p>
+
+      <h4 id="precompiled-asset" class="title"><a name="precompiled-asset" class="anchor" href="#precompiled-asset">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Precompiled Asset</h4>
+    
+<p>Let&#39;s say we use Sass to write our stylesheets.</p>
+<pre class="language-ruby plaintext"><code>GET /assets/application.css
+</code></pre>
+
+<p>It preprocess the <code>apps/web/assets/stylesheet/application.css.sass</code> to <code>public/assets/application.css</code> and then serves it.</p>
+
+      <h4 id="dynamic-resource" class="title"><a name="dynamic-resource" class="anchor" href="#dynamic-resource">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Dynamic Resource</h4>
+    <pre class="language-ruby plaintext"><code>GET /books/23
+</code></pre>
+
+<p>This isn&#39;t a static file available under <code>public/</code>, so the control passes to the backend that hits the appropriate action.</p>
+
+      <h4 id="missing-resource" class="title"><a name="missing-resource" class="anchor" href="#missing-resource">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Missing Resource</h4>
+    <pre class="language-ruby plaintext"><code>GET /unknown
+</code></pre>
+
+<p>This isn&#39;t a static file or a dynamic resource, the project returns a <code>404 (Not Found)</code>.</p>
+
+      <h2 id="sources" class="title"><a name="sources" class="anchor" href="#sources">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Sources</h2>
+    
+<p>Each application has a separated set of directories where to look up for files.
+Assets are recursively searched under these paths.</p>
+
+<p>New projects have a default directory where to put application assets:</p>
+<pre class="language-ruby plaintext"><code>% tree apps/web/assets
+apps/web/assets
+├── favicon.ico
+├── images
+├── javascripts
+└── stylesheets
+
+3 directories, 1 file
+</code></pre>
+
+<p>We can add as many directories we want under it (eg. <code>apps/web/assets/fonts</code>).</p>
+
+<p class="convention">
+  For a given application named <code>Web</code>, the default assets source is <code>apps/web/assets</code>
+</p>
+
+      <h3 id="adding-sources" class="title"><a name="adding-sources" class="anchor" href="#adding-sources">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Adding Sources</h3>
+    
+<p>If we want add other sources for a given application, we can specify them in the configuration.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/application.rb</span>
+<span class="k">module</span> <span class="nn">Web</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">configure</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">assets</span> <span class="k">do</span>
+        <span class="c1"># apps/web/assets is added by default</span>
+        <span class="n">sources</span> <span class="o">&lt;&lt;</span> <span class="p">[</span>
+          <span class="s1">'vendor/assets'</span>
+        <span class="p">]</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This will add <code>apps/web/vendor/assets</code> and all its subdirectories.</p>
+
+<p class="warning">
+  Hanami looks recursively to the assets sources. In order to NOT accidentally disclose sensitive files like secrets or source code, please make sure that these sources directories ONLY contain web assets.
+</p>
+
+      <h2 id="third-party-gems" class="title"><a name="third-party-gems" class="anchor" href="#third-party-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Third Party Gems</h2>
+    
+<p>Hanami allows to use <a href="https://rubygems.org">Rubygems</a> as a way to distribute web assets and make them available to Hanami applications.</p>
+
+<p>Third party gems can be maintained by developers who want to bring frontend frameworks support to Hanami.
+Let&#39;s say we want to build an <code>hanami-emberjs</code> gem.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>tree .
+<span class="c"># ...</span>
+├── lib
+│   └── hanami
+│       ├── emberjs
+│       │   ├── dist
+│       │   │   ├── ember.js
+│       │   │   └── ember.min.js
+│       │   └── version.rb
+│       └── emberjs.rb
+├── hanami-emberjs.gemspec
+<span class="c"># ...</span>
+</code></pre>
+
+<p>We put in an <strong>arbitrary</strong> directory <strong>only</strong> the assets that we want to serve.
+Then we add it to <code>Hanami::Assets.sources</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/hanami/emberjs.rb</span>
+<span class="nb">require</span> <span class="s1">'hanami/assets'</span>
+
+<span class="k">module</span> <span class="nn">Hanami</span>
+  <span class="k">module</span> <span class="nn">Emberjs</span>
+    <span class="nb">require</span> <span class="s1">'hanami/emberjs/version'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Hanami</span><span class="o">::</span><span class="no">Assets</span><span class="p">.</span><span class="nf">sources</span> <span class="o">&lt;&lt;</span> <span class="n">__dir__</span> <span class="o">+</span> <span class="s1">'/emberjs/source'</span>
+</code></pre>
+
+<p>When an application will do <code>require &#39;hanami/emberjs&#39;</code>, that directory will be added to the sources where Hanami will be able to lookup for assets.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'ember'</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>We can use the <code>javascript</code> <a href="/guides/helpers/assets">helper</a> to include <code>ember.js</code> in our application.</p>
+
+
+      <hr>
+
+      <div class="pull-left">Prev: <a href="/guides/mailers/testing">Mailers - Testing</a></div><div class="pull-right">Next: <a href="/guides/assets/preprocessors">Assets - Preprocessors</a></div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami.html">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status" target="_blank">Gems Status</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2017 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

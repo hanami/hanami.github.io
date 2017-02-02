@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+
+<title>Hanami | Introducing Assets</title>
+
+<link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+
+    <meta property="og:site_name"   content="Hanami"/>
+    <meta property="og:title"       content="Introducing Assets">
+    <meta property="og:url"         content="http://hanamirb.org/blog/2015/12/29/introducing-assets.html">
+    <meta property="og:description" content="Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
+">
+    <meta property="og:image"       content="http://hanamirb.org/blog/2015/12/29/introducing-assets/cover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@hanamirb">
+    <meta name="twitter:creator"     content="@hanamirb">
+    <meta name="twitter:url"         content="http://hanamirb.org/blog/2015/12/29/introducing-assets.html">
+    <meta name="twitter:title"       content="Introducing Assets">
+    <meta name="twitter:description" content="Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
+">
+    <meta name="twitter:image:src"   content="http://hanamirb.org/blog/2015/12/29/introducing-assets/cover.jpg">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/guides">Guides</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <div class="container">
+      <div class="block block-inverse text-center">
+        <div class="block-foreground">
+          <h1 class="block-title">Introducing Assets</h1>
+          <h4 class="text-muted">Posted by <strong>Luca Guidi</strong> on <em>December 29, 2015</em></h4>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-facebook"></span>
+            Share
+          </button>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-twitter"></span>
+            Tweet
+          </button>
+        </div>
+        <div class="block-background">
+          <img src="/blog/2015/12/29/introducing-assets/cover.jpg">
+        </div>
+      </div>
+
+      <div class="container container-article">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 col-md-offset-1">
+            <p class="lead">Introducing assets features: helpers, preprocessors, EcmaScript 6, deployment, checksums, CDN, and third party gems!
+</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-md-9 col-md-offset-1">
+            <div class="article-body">
+              <p>We&#39;re proud to announce that the upcoming release of Lotus (<code>v0.6.0</code>) will ship with a new set of facilities for assets management.</p>
+
+      <h2 id="helpers" class="title"><a name="helpers" class="anchor" href="#helpers">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Helpers</h2>
+    
+<p>A bunch of <strong>new helpers</strong> is available for your views and templates, with the purpose of building rich web pages:</p>
+
+<ul>
+<li><code>javascript</code></li>
+<li><code>stylesheet</code></li>
+<li><code>favicon</code></li>
+<li><code>image</code></li>
+<li><code>video</code></li>
+<li><code>audio</code></li>
+<li><code>asset_path</code></li>
+<li><code>asset_url</code></li>
+</ul>
+
+<p>They have the role of assist you in the process of keeping your templates tidy.
+At the same time, they are able to output structured HTML and manage complex URL logic.</p>
+
+<p>Here&#39;s a basic example:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Assets example<span class="nt">&lt;/title&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">stylesheet</span> <span class="s1">'reset'</span><span class="p">,</span> <span class="s1">'grid'</span><span class="p">,</span> <span class="s1">'main'</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+
+  <span class="nt">&lt;body&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'https://code.jquery.com/jquery-2.1.4.min.js'</span><span class="p">,</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'modals'</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>And the result.</p>
+<pre class="language-ruby html"><code><span class="cp">&lt;!doctype HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Assets example<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/reset.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/grid.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/assets/main.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+
+  <span class="nt">&lt;body&gt;</span>
+  <span class="c">&lt;!-- ... --&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-2.1.4.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/application.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/modals.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+      <h2 id="preprocessors" class="title"><a name="preprocessors" class="anchor" href="#preprocessors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Preprocessors</h2>
+    
+<p>Lotus now supports assets preprocessors.
+You can write stylesheets with <a href="http://sass-lang.com">Sass</a> or javascripts with <a href="http://es6-features.org">ES6</a> syntax and let the framework to lazy compile them during development of precompile all of them at the deploy time.</p>
+
+<p>We use <a href="https://github.com/rtomayko/tilt">Tilt</a> to provide support for the most common libraries, such as <a href="http://lesscss.org">Less</a>, <a href="https://jsx.github.io">JSX</a>, <a href="http://coffeescript.org">CoffeScript</a>, <a href="http://opalrb.org">Opal</a>, <a href="http://handlebarsjs.com">Handlebars</a>, <a href="https://github.com/rails/jbuilder">JBuilder</a>, etc..
+In order to use one or more of them, be sure to include the corresponding gem into your <code>Gemfile</code> and require the library.</p>
+
+<p>Please note that some engines may require <a href="https://nodejs.org/en">Node.js</a>.</p>
+
+      <h3 id="ecmascript-6" class="title"><a name="ecmascript-6" class="anchor" href="#ecmascript-6">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>EcmaScript 6</h3>
+    
+<p>We strongly suggest to use <a href="http://es6-features.org/">EcmaScript 6</a> for your next project.
+It is not yet fully <a href="https://kangax.github.io/compat-table/es6/">supported</a> by browser vendors, but it&#39;s the future of JavaScript.</p>
+
+<p>As of today, you need to transpile ES6 code into something understandable by current browsers, which is ES5.
+For this purpose we support <a href="https://babeljs.io">Babel</a>. <strike>Make sure to require <code>&#39;lotus/assets/es6&#39;</code> to enable it.</strike></p>
+
+      <h2 id="sources" class="title"><a name="sources" class="anchor" href="#sources">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Sources</h2>
+    
+<p>Each application under <code>apps/</code> in a Lotus project, can have its own set of assets sources.
+The default directory is <code>assets</code>, for instance <code>apps/web/assets</code>.</p>
+
+<p>You can add other directories if you need to vendor assets, eg: <code>apps/web/vendor/assets</code>.</p>
+
+      <h2 id="third-party-gems" class="title"><a name="third-party-gems" class="anchor" href="#third-party-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Third Party Gems</h2>
+    
+<p>Developers can maintain gems that distribute assets for Lotus. For instance <code>lotus-ember</code> or <code>lotus-jquery</code>.</p>
+
+<p>As a gem developer, you must add one or more paths, where the assets are stored inside the gem.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/lotus/jquery.rb</span>
+<span class="no">Lotus</span><span class="o">::</span><span class="no">Assets</span><span class="p">.</span><span class="nf">sources</span> <span class="o">&lt;&lt;</span> <span class="s1">'/path/to/jquery'</span>
+</code></pre>
+
+      <h2 id="deployment" class="title"><a name="deployment" class="anchor" href="#deployment">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Deployment</h2>
+    
+<p>This release will ship with a new command: <code>lotus assets precompile</code>; which can be used to at the deploy time.</p>
+
+<p>Assets are loaded from the sources of each application (including third party gems) and preprocessed or copied into the public directory of the project.</p>
+
+<p>Each asset is compressed using <strike><a href="http://yui.github.io/yuicompressor">YUI Compressor</a> (which requires <strong>Java 1.4+</strong>)</strike> one of the supported engines: YUI, UglifyJS2, Google Closure, Sass.
+With this step we shrink the file size, to let browser to download them faster.</p>
+
+<p>As last step, we produce another version of the same file that includes the checksum of the assets in the name (see the example below).
+With this trick, we ensure that browsers will always cache the right version of a given asset.</p>
+
+<p>Example:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/application-d1829dc353b734e3adc24855693b70f9.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+      <h3 id="heroku" class="title"><a name="heroku" class="anchor" href="#heroku">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Heroku</h3>
+    
+<p>Assets precompilation just works with Heroku.
+We introduced private Rake tasks to make sure that Lotus can be easily deployed.</p>
+
+<p>Now in just <strong>5 minutes</strong> you can generate a new project and deploy it!</p>
+
+      <h3 id="no-bundling" class="title"><a name="no-bundling" class="anchor" href="#no-bundling">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>No Bundling</h3>
+    
+<p>We <strong>don&#39;t bundle</strong> together all the assets in one gigantic output file.
+There are a few reasons for this. First of all, <strong>simplicity</strong>.</p>
+
+<p>Bundling together dozens of assets, would require a complex dependency system that <strong>slows down your deploys</strong>.</p>
+
+<p>It also demands you to maintain the dependencies between assets.
+With Lotus design, you just &quot;<em>require</em>&quot; assets by adding them to the markup.
+If your <code>users.js</code> depends on jQuery, you do: <code>&lt;%= javascript &#39;jquery&#39;, &#39;users&#39; %&gt;</code> and that&#39;s it.</p>
+
+<p>There also another reason for not bundling them togheter: <strong>HTTP/2</strong>.
+This new version of the protocol is already supported by most popular browsers and it will be shipped soon with Nginx.</p>
+
+<p>This changes the way client and server communicate over the wire.
+Connections will be more efficient with the usage of socket multiplexing.</p>
+
+<p>When we have one huge asset for all the javascripts of our application, this output file will change often.
+For each modification in development, we need to recompile it in production.</p>
+
+<p>This action invalidates the old version of <code>application-ad414f0188b91004debebbe5df37ca05.js</code>, because it contains stale data.
+So we need to generate a new version, let say <code>application-d1829dc353b734e3adc24855693b70f9.js</code>.</p>
+
+<p>At this point the application uses this new file and the browser gets the entire file from scratch.
+Even for a small change, we&#39;re forcing the client to download kilobytes or even megabytes of unmofified javascript code.</p>
+
+<p>With HTTP/2 it&#39;s more efficient to keep small files and let the browser to download only stale resources.</p>
+
+<p>So why build a slow and complex dependency system that will be soon useless because of HTTP/2?</p>
+
+      <h2 id="content-delivery-networks-cdn-" class="title"><a name="content-delivery-networks-cdn-" class="anchor" href="#content-delivery-networks-cdn-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Content Delivery Networks (CDN)</h2>
+    
+<p>Lotus allows to serve assets via a Content Delivery Network.
+What you need to do, is to specify the CDN URL to the application and then the helpers will return the CDN absolute URL for an asset.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://123.cloudfront.net/assets/application-d1829dc353b734e3adc24855693b70f9.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+      <h2 id="release-date" class="title"><a name="release-date" class="anchor" href="#release-date">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Release Date</h2>
+    
+<p>All these features can be used with Lotus full stack applications starting from <code>v0.6.0</code>, that will be released on <strong>Jan 12th, 2016</strong>.
+If you can&#39;t wait, try it with <a href="https://github.com/lotus/lotus">master branch</a> and let us to know!</p>
+
+<div style="display: inline">
+
+  <iframe src="https://ghbtns.com/github-btn.html?user=lotus&repo=lotus&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
+  <a href="https://news.ycombinator.com/submit" class="hn-button" data-title="Introducing Assets for Lotus (Ruby)" data-url="http://lotusrb.org/blog/2015/12/29/introducing-assets.html" data-count="horizontal" data-style="facebook">Vote on Hacker News</a>
+  <script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+  <script type="text/javascript">
+    reddit_url = "http://lotusrb.org/blog/2015/12/21/announcing-lotus-assets.html";
+  </script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+</div>
+
+            </div>
+
+           <hr>
+
+           <a href="https://github.com/hanami/hanami" title="Star on GitHub" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-github"></span>
+             Star
+           </a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2015%2F12%2F29%2Fintroducing-assets.html" title="Like on Facebook" class="btn btn-default-outline" target="_blank">
+             <span class="icon icon-thumbs-up"></span>
+             Like
+           </a>
+           <a href="https://twitter.com/home?status=Introducing+Assets+-+http%3A%2F%2Fhanamirb.org%2Fblog%2F2015%2F12%2F29%2Fintroducing-assets.html+%2Fvia+%40hanamirb+%23hanamirb" title="Share on Twitter" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-twitter"></span>
+             Tweet
+           </a>
+           <a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2015%2F12%2F29%2Fintroducing-assets.html&t=Introducing Assets" class="btn btn-default-outline" title="Vote on HackerNews">
+             <span class="icon"><strong>HN</strong></span>
+             Vote
+           </a>
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fhanamirb.org%2Fblog%2F2015%2F12%2F29%2Fintroducing-assets.html" target="_blank" title="Share on Reddit" class="btn btn-default-outline">
+             <span class="icon"><strong>R</strong></span>
+             Share
+            </a>
+
+            <br>
+            <br>
+
+            <div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,000+ developers.
+    </p>
+    <form action="http://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami.html">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status" target="_blank">Gems Status</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2017 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

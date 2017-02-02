@@ -1,0 +1,1058 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+   <title>Hanami</title>
+   <subtitle>Hanami web framework blog</subtitle>
+   <link href="http://hanamirb.org/atom.xml" rel="self"/>
+   <link href="http://hanamirb.org/blog"/>
+   <updated>2016-12-19T14:54:00+00:00</updated>
+   <id>http://hanamirb.org/blog</id>
+   <author>
+     <name>Hanami</name>
+     <email>admin@hanamirb.org</email>
+   </author>
+
+     <entry>
+       <title>Announcing Hanami v0.9.2</title>
+       <id>http://hanamirb.org/blog/2016/12/19/announcing-hanami-092.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/12/19/announcing-hanami-092.html"/>
+       <updated>2016-12-19T14:54:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Patch release for small bug fixes: Pending specs, Rake tasks, SSL redirects, project boot, Rack exceptions, flash messages, form helpers, pluralizations.
+
+       </summary>
+       <content type="html"><![CDATA[<p>This is a patch release for small bug fixes:</p>
+
+<ul>
+<li>Mark unit tests/specs as pending for generated actions and views</li>
+<li>Rake task <code>:environment</code> no longer depends on <code>:preload</code>, which was removed by v0.9.0</li>
+<li>Force SSL redirects to the default port or to the configured one</li>
+<li>Boot the project when is booted outside of <code>hanami server</code> (eg. <code>puma</code> or <code>rackup</code>)</li>
+<li>Expose <code>flash</code> by default from actions to views</li>
+<li>Don&#39;t reference exceptions in Rack env&#39;s <code>rack.exception</code>, if the exception is handled</li>
+<li>Allow <code>#form_for</code> to accept entities for <code>:values</code> option</li>
+<li>Respect <code>:precision</code> option in <code>#format_number</code> helper</li>
+<li>Ensure <code>#check_box</code> to check/uncheck fields when a boolean value is given</li>
+<li>Introduced <code>Hanami::Interactor::Result#failure?</code> and deprecate <code>#failing?</code></li>
+<li>Fix pluralization of words that end with <code>en</code>, <code>ens</code></li>
+</ul>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-0.9.2</code></li>
+<li><code>hanami-utils-0.9.2</code></li>
+<li><code>hanami-controller-0.8.1</code></li>
+<li><code>hanami-helpers-0.5.1</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/theCrab">The Crab</a></li>
+<li><a href="https://github.com/katafrakt">Paweł Świątkowski</a></li>
+<li><a href="https://github.com/mgrachev">Grachev Mikhail</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/myabc">Alex Coles</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/ksenia-zalesnaya">Ksenia Zalesnaya</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/thhermansen">Thorbjørn Hermansen</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/Newman101">Juha</a></li>
+</ul>
+
+      <h2 id="how-to-update-your-project" class="title"><a name="how-to-update-your-project" class="anchor" href="#how-to-update-your-project">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How To Update Your Project</h2>
+    
+<p>From the root of your Hanami project: <code>bundle update hanami</code>.</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v0.9.1</title>
+       <id>http://hanamirb.org/blog/2016/11/18/announcing-hanami-091.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/11/18/announcing-hanami-091.html"/>
+       <updated>2016-11-18T15:11:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Security patch for JSON body parsers
+
+       </summary>
+       <content type="html"><![CDATA[<p>This is a security patch for <a href="/guides/actions/parameters#body-parsers">JSON body parsers</a>.</p>
+
+      <h2 id="the-problem" class="title"><a name="the-problem" class="anchor" href="#the-problem">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>The Problem</h2>
+    
+<p>JSON body parsing was implemented using <code>Hanami::Utils::Json.load</code>, which internally uses <code>JSON.load</code>.
+According to Ruby docs, <code>JSON.load</code> should be used only with trusted data, because it evals the given payload.</p>
+
+<p>Thanks to <a href="https://github.com/beauby">Lucas Hosseini</a> for spotting this problem.</p>
+
+      <h2 id="the-fix" class="title"><a name="the-fix" class="anchor" href="#the-fix">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>The Fix</h2>
+    
+<p>We introduced <code>Hanami::Utils::Json.parse</code>, which is a safe alternative for JSON parsing.
+JSON body parser now uses this new method, in order to guaratee a higher level of safety.</p>
+
+      <h2 id="how-to-fix-your-project" class="title"><a name="how-to-fix-your-project" class="anchor" href="#how-to-fix-your-project">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How To Fix Your Project</h2>
+    
+<p>From the root of your Hanami project: <code>bundle update hanami</code>.</p>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-0.9.1</code></li>
+<li><code>hanami-utils-0.9.1</code></li>
+<li><code>hanami-router-0.8.1</code></li>
+<li><code>hanami-validations-0.7.1</code></li>
+</ul>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v0.9.0</title>
+       <id>http://hanamirb.org/blog/2016/11/15/announcing-hanami-090.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/11/15/announcing-hanami-090.html"/>
+       <updated>2016-11-15T09:42:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         New hanami-model engine based on ROM. Database automapping, data integrity for entities, experimental associations, native PostgreSQL types.
+
+       </summary>
+       <content type="html"><![CDATA[<p>We rewrote <code>hanami-model</code> from scratch with an engine based on <a href="http://rom-rb.org">ROM</a>.</p>
+
+<p>The result is impressive: it&#39;s faster and more robust.</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+      <h3 id="database-automapping" class="title"><a name="database-automapping" class="anchor" href="#database-automapping">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Database Automapping</h3>
+    
+<p>But there is more, all the <strong>mapping boilerplate is gone</strong>, now using entities and repositories is much <strong>easier</strong>.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>hanami generate model book
+      create  lib/bookshelf/entities/book.rb
+      create  lib/bookshelf/repositories/book_repository.rb
+      create  spec/bookshelf/entities/book_spec.rb
+      create  spec/bookshelf/repositories/book_repository_spec.rb
+</code></pre>
+
+<p>This is the generated entity:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>While this is the generated repository:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">BookRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Then we generate the migration:</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>hanami generate migration create_books
+      create  db/migrations/20161113154510_create_books.rb
+</code></pre>
+
+<p>Let&#39;s edit the migration with the following code:</p>
+<pre class="language-ruby ruby"><code><span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+      <span class="n">column</span> <span class="ss">:title</span><span class="p">,</span>      <span class="no">String</span>
+      <span class="n">column</span> <span class="ss">:created_at</span><span class="p">,</span> <span class="no">DateTime</span>
+      <span class="n">column</span> <span class="ss">:updated_at</span><span class="p">,</span> <span class="no">DateTime</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now we need to prepare the database to use it:</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>hanami db prepare
+</code></pre>
+
+<p>We&#39;re ready to use our repository:</p>
+<pre class="language-ruby ruby"><code><span class="sx">% bundle </span><span class="nb">exec</span> <span class="n">hanami</span> <span class="n">console</span>
+<span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mo">001</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="n">book</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s2">"Hanami"</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="c1">#&lt;Book:0x007f95ccefb320 @attributes={:id=&gt;1, :title=&gt;"Hanami", :created_at=&gt;2016-11-13 15:49:14 UTC, :updated_at=&gt;2016-11-13 15:49:14 UTC}&gt;</span>
+</code></pre>
+
+<p>Learn more about new <a href="/guides/models/repositories">repositories</a>, <a href="/guides/models/entities">entities</a> usage.</p>
+
+      <h3 id="entities-data-integrity" class="title"><a name="entities-data-integrity" class="anchor" href="#entities-data-integrity">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Entities Data Integrity</h3>
+    
+<p>When using a SQL database, an entity setups an <strong>internal schema</strong>, which is derived <strong>automatically</strong> from the table definition.</p>
+
+<p>Imagine to have the <code>books</code> table defined as:</p>
+<pre class="language-ruby sql"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">books</span> <span class="p">(</span>
+    <span class="n">id</span> <span class="n">integer</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">title</span> <span class="n">text</span><span class="p">,</span>
+    <span class="n">created_at</span> <span class="k">timestamp</span> <span class="k">without</span> <span class="n">time</span> <span class="k">zone</span><span class="p">,</span>
+    <span class="n">updated_at</span> <span class="k">timestamp</span> <span class="k">without</span> <span class="n">time</span> <span class="k">zone</span>
+<span class="p">);</span>
+</code></pre>
+
+<p>This is the corresponding entity <code>Book</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/book.rb</span>
+<span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+<span class="k">end</span>
+</code></pre>
+
+<hr>
+
+<p>Let&#39;s instantiate it with proper values:</p>
+<pre class="language-ruby ruby"><code><span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s2">"Hanami"</span><span class="p">)</span>
+
+<span class="n">book</span><span class="p">.</span><span class="nf">title</span>      <span class="c1"># =&gt; "Hanami"</span>
+<span class="n">book</span><span class="p">.</span><span class="nf">created_at</span> <span class="c1"># =&gt; nil</span>
+</code></pre>
+
+<p>The <code>created_at</code> attribute is <code>nil</code> because it wasn&#39;t present when we have instantiated <code>book</code>.</p>
+
+<hr>
+
+<p>It ignores unknown attributes:</p>
+<pre class="language-ruby ruby"><code><span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">unknown: </span><span class="s2">"value"</span><span class="p">)</span>
+
+<span class="n">book</span><span class="p">.</span><span class="nf">unknown</span> <span class="c1"># =&gt; NoMethodError</span>
+<span class="n">book</span><span class="p">.</span><span class="nf">foo</span>     <span class="c1"># =&gt; NoMethodError</span>
+</code></pre>
+
+<p>It raises a <code>NoMethodError</code> both for <code>unknown</code> and <code>foo</code>, because they aren&#39;t part of the internal schema.</p>
+
+<hr>
+
+<p>It can coerce values:</p>
+<pre class="language-ruby ruby"><code><span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">created_at: </span><span class="s2">"Sun, 13 Nov 2016 09:41:09 GMT"</span><span class="p">)</span>
+
+<span class="n">book</span><span class="p">.</span><span class="nf">created_at</span>       <span class="c1"># =&gt; 2016-11-13 09:41:09 UTC</span>
+<span class="n">book</span><span class="p">.</span><span class="nf">created_at</span><span class="p">.</span><span class="nf">class</span> <span class="c1"># =&gt; Time</span>
+</code></pre>
+
+<p>An entity tries as much as it cans to coerce values according to the internal schema.</p>
+
+<hr>
+
+<p>It enforces <strong>data integrity</strong> via exceptions:</p>
+<pre class="language-ruby ruby"><code><span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">created_at: </span><span class="s2">"foo"</span><span class="p">)</span> <span class="c1"># =&gt; ArgumentError</span>
+</code></pre>
+
+<p>If we use this feature, in combination with <a href="/guides/migrations/create-table#constraints">database constraints</a> and validations, we can ensure a <strong>strong</strong> degree of <strong>data integrity</strong> for our projects.</p>
+
+<p>Learn more about Entities <a href="/guides/models/entities#custom-schema">custom schema</a>.</p>
+
+      <h3 id="associations-experimental-" class="title"><a name="associations-experimental-" class="anchor" href="#associations-experimental-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Associations (experimental)</h3>
+    
+<p>Hanami finally ships with associations.
+We postponed this feature for long time mainly because we didn&#39;t want to replicate ActiveRecord API.
+That is a complex beast that took years to get stable.
+Its proxy loader design (<code>post.comments</code> to load comments) doesn&#39;t fit Hanami vision of explicitness.</p>
+
+<p>To design an API that is both explicit and reduces the boilerplate is a hard challenge.
+But today we can share with you a preview of this experimental feature.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">AuthorRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">has_many</span> <span class="ss">:books</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create_with_books</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:books</span><span class="p">).</span><span class="nf">create</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">find_with_books</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">aggregate</span><span class="p">(</span><span class="ss">:books</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">authors__id: </span><span class="nb">id</span><span class="p">).</span><span class="nf">as</span><span class="p">(</span><span class="no">Author</span><span class="p">).</span><span class="nf">one</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We can create with a single SQL command the parent and the children:</p>
+<pre class="language-ruby ruby"><code><span class="n">repository</span> <span class="o">=</span> <span class="no">AuthorRepository</span><span class="p">.</span><span class="nf">new</span>
+
+<span class="n">author</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">create_with_books</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"Alexander Dumas"</span><span class="p">,</span> <span class="ss">books: </span><span class="p">[{</span><span class="ss">title: </span><span class="s2">"The Count of Monte Cristo"</span> <span class="p">}])</span>
+  <span class="c1"># =&gt; #&lt;Author:0x007f8a08130968 @attributes={:id=&gt;1, :name=&gt;"Alexander Dumas", :created_at=&gt;2016-11-14 20:52:24 UTC, :updated_at=&gt;2016-11-14 20:52:24 UTC, :books=&gt;[#&lt;Book:0x007f8a0812b260 @attributes={:id=&gt;1, :author_id=&gt;1, :title=&gt;"The Count of Monte Cristo", :created_at=&gt;2016-11-14 20:52:24 UTC, :updated_at=&gt;2016-11-14 20:52:24 UTC}&gt;]}&gt;</span>
+</code></pre>
+
+<p>The default find, doesn&#39;t preload the associated records:</p>
+<pre class="language-ruby ruby"><code><span class="n">found</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">author</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+  <span class="c1"># =&gt; #&lt;Author:0x007f8a07971ce0 @attributes={:id=&gt;1, :name=&gt;"Alexander Dumas", :created_at=&gt;2016-11-14 20:52:24 UTC, :updated_at=&gt;2016-11-14 20:52:24 UTC}&gt;</span>
+
+<span class="n">found</span><span class="p">.</span><span class="nf">books</span>
+  <span class="c1"># =&gt; nil</span>
+</code></pre>
+
+<p>It requires an explicit preload operation:</p>
+<pre class="language-ruby ruby"><code><span class="n">found</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">find_with_books</span><span class="p">(</span><span class="n">author</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+  <span class="c1"># =&gt; #&lt;Author:0x007f8a040a6cf8 @attributes={:id=&gt;1, :name=&gt;"Alexander Dumas", :created_at=&gt;2016-11-14 20:52:24 UTC, :updated_at=&gt;2016-11-14 20:52:24 UTC, :books=&gt;[#&lt;Book:0x007f8a040a5970 @attributes={:id=&gt;1, :author_id=&gt;1, :title=&gt;"The Count of Monte Cristo", :created_at=&gt;2016-11-14 20:52:24 UTC, :updated_at=&gt;2016-11-14 20:52:24 UTC}&gt;]}&gt;</span>
+
+<span class="n">found</span><span class="p">.</span><span class="nf">books</span>
+  <span class="c1"># =&gt; [#&lt;Book:0x007f8a040a5970 @attributes={:id=&gt;1, :author_id=&gt;1, :title=&gt;"The Count of Monte Cristo", :created_at=&gt;2016-11-14 20:52:24 UTC, :updated_at=&gt;2016-11-14 20:52:24 UTC}&gt;]</span>
+</code></pre>
+
+<p>Learn more about <a href="/guides/models/associations">associations</a>.</p>
+
+      <h3 id="postgresql-types" class="title"><a name="postgresql-types" class="anchor" href="#postgresql-types">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>PostgreSQL Types</h3>
+    
+<p><code>hanami-model</code> now supports natively most common PostgreSQL data types such as: <code>UUID</code>, <code>Array</code>, <code>JSON(B)</code></p>
+<pre class="language-ruby ruby"><code><span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">up</span> <span class="k">do</span>
+    <span class="n">execute</span> <span class="s1">'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'</span>
+
+    <span class="n">create_table</span> <span class="ss">:project_files</span> <span class="k">do</span>
+      <span class="n">column</span> <span class="ss">:id</span><span class="p">,</span> <span class="s1">'uuid'</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">default: </span><span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="o">::</span><span class="no">Sql</span><span class="p">.</span><span class="nf">function</span><span class="p">(</span><span class="ss">:uuid_generate_v4</span><span class="p">)</span>
+      <span class="n">column</span> <span class="ss">:name</span><span class="p">,</span> <span class="no">String</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">down</span> <span class="k">do</span>
+    <span class="n">drop_table</span> <span class="ss">:project_files</span>
+    <span class="n">execute</span> <span class="s1">'DROP EXTENSION IF EXISTS "uuid-ossp"'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="no">ProjectFileRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"source.rb"</span><span class="p">)</span>
+  <span class="c1"># =&gt; #&lt;ProjectFile:0x007ff29c4b9740 @attributes={:id=&gt;"239f8e0f-d764-4a76-aaa7-7b59b5301c72", :name=&gt;"source.rb"}&gt;</span>
+</code></pre>
+
+<p>Learn more about <a href="/guides/models/postgresql">PostgreSQL data types</a></p>
+
+      <h3 id="misc" class="title"><a name="misc" class="anchor" href="#misc">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Misc</h3>
+    
+<ul>
+<li><p>Hanami is only compatible with Ruby (MRI) 2.3+</p></li>
+<li><p>There are several breaking changes, please check the upgrade notes</p></li>
+</ul>
+
+      <h2 id="upgrade-notes" class="title"><a name="upgrade-notes" class="anchor" href="#upgrade-notes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Upgrade Notes</h2>
+    
+<p>Please have a look at the <a href="/guides/upgrade-notes/v090">upgrade notes for v0.9.0</a>.</p>
+
+      <h2 id="acknowledgements" class="title"><a name="acknowledgements" class="anchor" href="#acknowledgements">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Acknowledgements</h2>
+    
+<p>A special thanks goes to the ROM team for their support during the hard work of integration between the two frameworks.
+Thank you Piotr Solnica, Nikita Shilnikov, Andy Holland, and Tim Riley for your help.</p>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release.
+These lovely people are:</p>
+
+<ul>
+<li>Alfonso Uceda</li>
+<li>Anton Davydov</li>
+<li>Bruz Marzolf</li>
+<li>Grachev Mikhail</li>
+<li>Ivan Lasorsa</li>
+<li>Jakub Pavlík</li>
+<li>James Hamilton</li>
+<li>Kyle Chong</li>
+<li>Lucas Allan</li>
+<li>Marion Duprey</li>
+<li>Maxim Dzhuliy</li>
+<li>Pascal Betz</li>
+<li>Russell Cloak</li>
+<li>Sean Collins</li>
+<li>Tomas Craig</li>
+<li>Trung Lê</li>
+</ul>
+
+<p>Thank you all!</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v0.8.0</title>
+       <id>http://hanamirb.org/blog/2016/07/22/announcing-hanami-080.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/07/22/announcing-hanami-080.html"/>
+       <updated>2016-07-22T13:26:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         New validations syntax with predicates, high level rules and error messages. JSON logger format, faster static assets serving. Subresource Integrity, updated Content Security Policy, and new HTTP security headers.
+
+       </summary>
+       <content type="html"><![CDATA[<p>This is the first minor release after the <a href="/blog/2016/01/22/lotus-is-now-hanami.html">project rebranding</a> that happened a few months ago.</p>
+
+<p>We waited so long to release this version in order to have the largest possible feedback cycle. (Actually, the longest gap in releases since this project was started four years ago!)
+We&#39;ve had a lot of new contributions: new features, bug fixes, and real world experiences.
+At this point <strong>we&#39;re really close to 1.0</strong>.</p>
+
+<p>In the meantime, we&#39;ve started tech alliances with <a href="http://dry-rb.org">dry-rb</a> and <a href="http://rom-rb.org">ROM</a>.
+We&#39;re working closely with these two amazing projects (and communities) to make the Ruby ecosystem stronger.</p>
+
+<p>As result of this collaboration, today we can ship a new, powerful validation syntax based on <a href="http://dry-rb.org/gems/dry-validation">dry-validation</a>.</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+      <h3 id="new-validations-syntax" class="title"><a name="new-validations-syntax" class="anchor" href="#new-validations-syntax">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New Validations Syntax</h3>
+    
+<p>This new powerful syntax overcomes the limitations that we have reached with the old design: no control on the order of execution and lack of extensibility.
+We realized that complex validation rules are hard to describe with DSL options, so we made it possible to express these rules with Ruby macros.</p>
+
+<p>The results are astonishing: besides being more expressive, we can now guarantee type safety and we&#39;ve seen performance improvements.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="n">params</span> <span class="k">do</span>
+      <span class="n">required</span><span class="p">(</span><span class="ss">:book</span><span class="p">).</span><span class="nf">schema</span> <span class="k">do</span>
+        <span class="n">required</span><span class="p">(</span><span class="ss">:title</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+        <span class="n">required</span><span class="p">(</span><span class="ss">:price</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:float?</span><span class="p">,</span> <span class="n">gt?</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">optional</span><span class="p">(</span><span class="ss">:sale</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:bool?</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span>
+        <span class="c1"># persist</span>
+      <span class="k">else</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="mi">422</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/books/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+    <span class="n">template</span> <span class="s1">'books/new'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby erb"><code># apps/web/templates/books/new.html.erb
+<span class="cp">&lt;%</span> <span class="k">unless</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;p&gt;</span>There was a problem<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="cp">&lt;%</span> <span class="n">params</span><span class="p">.</span><span class="nf">error_messages</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span> <span class="cp">%&gt;</span>
+        <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+      <h3 id="subresource-integrity" class="title"><a name="subresource-integrity" class="anchor" href="#subresource-integrity">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Subresource Integrity</h3>
+    
+<p>A CDN can dramatically improve page speed, but it can potentially open a security breach.
+If the CDN that we&#39;re using is compromised and serves evil javascript or stylesheet files, we&#39;re exposing our users to security attacks like Cross Site Scripting (XSS).</p>
+
+<p>To solve this problem, browsers vendors introduced a defense called <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">Subresource Integrity</a>.</p>
+
+<p>When enabled, the browser verifies that the checksum of the downloaded file, matches with the declared one.</p>
+
+      <h4 id="from-a-cdn" class="title"><a name="from-a-cdn" class="anchor" href="#from-a-cdn">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>From A CDN</h4>
+    
+<p>If we&#39;re using jQuery from their CDN, we should find the checksum of the <code>.js</code> file on their website and write:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'https://code.jquery.com/jquery-3.1.0.min.js'</span><span class="p">,</span> <span class="ss">integrity: </span><span class="s1">'sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s='</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>The output will be:</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;script </span><span class="na">integrity=</span><span class="s">"sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="</span> <span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-3.1.0.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+      <h4 id="local-assets" class="title"><a name="local-assets" class="anchor" href="#local-assets">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Local Assets</h4>
+    
+<p>The security problem described above doesn&#39;t concern only CDNs, but local files too.
+Imagine we have a compromised file system and someone was able to replace our javascripts with evil files: we would be vulnerable to the same kind of attack.</p>
+
+<p>As a defense against this security problem, Hanami <strong>enables Subresource Integrity by default in production.</strong>
+When we <a href="/guides/command-line/assets">precompile assets</a> at deploy time, Hanami calculates the checksum of all our assets and it adds a special HTML attribute <code>integrity</code> to our asset tags like <code>&lt;script&gt;</code>.</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span> <span class="n">javascript</span> <span class="s1">'application'</span> <span class="cp">%&gt;</span>
+</code></pre>
+<pre class="language-ruby html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/application-92cab02f6d2d51253880cd98d91f1d0e.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">integrity=</span><span class="s">"sha256-WB2pRuy8LdgAZ0aiFxLN8DdfRjKJTc4P4xuEw31iilM="</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+      <h3 id="security-updates" class="title"><a name="security-updates" class="anchor" href="#security-updates">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Security Updates</h3>
+    
+<p>We&#39;ve updated our default security settings to support <a href="https://content-security-policy.com">Content Security Policy</a> 1.1 and 2.0 (1.0 is still supported).</p>
+
+<p>Along with this improvement, we have now turned on two extra security HTTP headers: <code>X-Content-Type-Options</code> and <code>X-XSS-Protection</code>.</p>
+
+      <h3 id="misc" class="title"><a name="misc" class="anchor" href="#misc">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Misc</h3>
+    
+<ul>
+<li><p>New settings for logging: Hanami now supports per-environment stream (standard output, file, etc..), level and formatter.
+Because of JSON parseability, for the production environment, there is now a JSON formatter for the logger.</p></li>
+<li><p>Hanami no longer supports Ruby 2.0 and 2.1</p></li>
+<li><p><code>params</code> can now be accessed only with <code>:symbols</code>, not &#39;strings&#39;. That is, we have removed indifferent access.</p></li>
+</ul>
+
+      <h2 id="upgrade-notes" class="title"><a name="upgrade-notes" class="anchor" href="#upgrade-notes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Upgrade Notes</h2>
+    
+<p>Please have a look at the <a href="/guides/upgrade-notes/v080">upgrade notes for v0.8.0</a>.</p>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release.
+These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/rickenharp">Alexander Gräfe</a></li>
+<li><a href="https://github.com/KELiON">Alexandr Subbotin</a></li>
+<li><a href="https://github.com/cyphactor">Andrew De Ponte</a></li>
+<li><a href="https://github.com/aderyabin">Andrey Deryabin</a></li>
+<li><a href="https://github.com/accessd">Andrey Morskov</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/ariejan">Ariejan de Vroom</a></li>
+<li><a href="https://github.com/ADone">Artem Nistratov</a></li>
+<li><a href="https://github.com/beatrichartz">Beat</a></li>
+<li><a href="https://github.com/berfarah">Bernardo Farah</a></li>
+<li><a href="https://github.com/bruz">Bruz Marzolf</a></li>
+<li><a href="https://github.com/hoksilato">Cang Ta</a></li>
+<li><a href="https://github.com/daneb">Dane Balia</a></li>
+<li><a href="https://github.com/ericfreese">Eric Freese</a></li>
+<li><a href="https://github.com/Erol">Erol Fornoles</a></li>
+<li><a href="https://github.com/fespinoza">Felipe Espinoza</a></li>
+<li><a href="https://github.com/hieuk09">Hiếu Nguyễn</a></li>
+<li><a href="https://github.com/jbodah">Josh Bodah</a></li>
+<li><a href="https://github.com/duduribeiro">Kadu Ribeiro</a></li>
+<li><a href="https://github.com/karimmtarek">Karim Tarek</a></li>
+<li><a href="https://github.com/vyper">Leonardo Saraiva</a></li>
+<li><a href="https://github.com/jodosha">Luca Guidi</a></li>
+<li><a href="https://github.com/lucasallan">Lucas Amorim</a></li>
+<li><a href="https://github.com/maheshm">Mahesh</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/vanetix">Matt McFarland</a></li>
+<li><a href="https://github.com/accuser">Matthew Gibbons</a></li>
+<li><a href="https://github.com/mdorfin">Maxim Dorofienko</a></li>
+<li><a href="https://github.com/oreoshake">Neil Matatall</a></li>
+<li><a href="https://github.com/nicolaracco">Nicola Racco</a></li>
+<li><a href="https://github.com/flash-gordon">Nikita Shilnikov</a></li>
+<li><a href="https://github.com/killthekitten">Nikolay Shebanov</a></li>
+<li><a href="https://github.com/sakuro">Ozawa Sakuro</a></li>
+<li><a href="https://github.com/pascalbetz">Pascal Betz</a></li>
+<li><a href="https://github.com/habutre">Rogério Ramos</a></li>
+<li><a href="https://github.com/rogeriozambon">Rogério Zambon</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/sebastjan-hribar">Sebastjan Hribar</a></li>
+<li><a href="https://github.com/artofhuman">Semyon Pupkov</a></li>
+<li><a href="https://github.com/stevehook">Steve Hook</a></li>
+<li><a href="https://github.com/TheSmartnik">TheSmartnik</a></li>
+<li><a href="https://github.com/duykhoa">Tran Duy Khoa</a></li>
+<li><a href="https://github.com/joneslee85">Trung Lê</a></li>
+<li><a href="https://github.com/vasspilka">Vasilis Spilka</a></li>
+<li><a href="https://github.com/akhramov">akhramov</a></li>
+<li><a href="https://github.com/deepj">deepj</a></li>
+<li><a href="https://github.com/nessur">nessur</a></li>
+</ul>
+
+<p>Thank you all!</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v0.7.3</title>
+       <id>http://hanamirb.org/blog/2016/05/23/announcing-hanami-073.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/05/23/announcing-hanami-073.html"/>
+       <updated>2016-05-23T07:43:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Faster static assets in development
+
+       </summary>
+       <content type="html"><![CDATA[<p>This release introduces faster static assets in development.</p>
+
+      <h2 id="bug-fixes" class="title"><a name="bug-fixes" class="anchor" href="#bug-fixes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Bug Fixes</h2>
+    
+      <h3 id="hanami-a-href-https-github-com-hanami-hanami-blob-0-7-x-changelog-md-v073-2016-05-23-v0-7-3-a-" class="title"><a name="hanami-a-href-https-github-com-hanami-hanami-blob-0-7-x-changelog-md-v073-2016-05-23-v0-7-3-a-" class="anchor" href="#hanami-a-href-https-github-com-hanami-hanami-blob-0-7-x-changelog-md-v073-2016-05-23-v0-7-3-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami <a href="https://github.com/hanami/hanami/blob/0.7.x/CHANGELOG.md#v073---2016-05-23">v0.7.3</a></h3>
+    
+<ul>
+<li>Use <code>Shotgun::Static</code> to serve static files in development mode and avoid to reload the env <a href="https://github.com/pascalbetz">Pascal Betz</a></li>
+</ul>
+
+      <h2 id="upgrade-instructions" class="title"><a name="upgrade-instructions" class="anchor" href="#upgrade-instructions">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Upgrade Instructions</h2>
+    
+<p>Please edit the <code>Gemfile</code> of your project, change Hanami version into <code>0.7.3</code> and then run <code>bundle update hanami</code>.</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Validations Predicates</title>
+       <id>http://hanamirb.org/blog/2016/05/16/validations-predicates.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/05/16/validations-predicates.html"/>
+       <updated>2016-05-16T07:37:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Hanami will introduce a new syntax for validations based on predicates. It features builtin and custom predicates, type safety, specific coercions for HTTP params, whitelisting, custom error messages with optional i18n support. This release will start a new alliance between Hanami and dry-rb.
+
+       </summary>
+       <content type="html"><![CDATA[<p>For long time <a href="https://github.com/hanami/validations">Hanami::Validations</a> had problems that we struggled to solve and new features were problematic to add.
+Data management is complex task with thousands of cases to cover and because validations deal untrusted input, edge cases are common.
+Even simple cases like <em>blank values</em> management became an issue.</p>
+
+<p>We tried to fix these problems, but over the time we realized that we hit the limit of that syntax, which led to lack of flexibility for us and for developers themselves.</p>
+
+<p>At the same time <a href="http://dry-rb.org">dry-rb</a> folks released a new, stronger validations gem: <code>dry-validation</code>.
+It changes, for the good, the way we express validation rules.
+So we took the decision to radically change our syntax and to adopt <code>dry-validation</code> as a validations backend for us.</p>
+
+      <h2 id="how-it-will-work-" class="title"><a name="how-it-will-work-" class="anchor" href="#how-it-will-work-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How It Will Work?</h2>
+    
+<p><code>Hanami::Validations</code> will work with input hashes and let define a set of validation rules <strong>for each</strong> key/value pair.
+These rules are wrapped by lambdas (or special DSL) that check the input for a specific key to determine if it&#39;s valid or not.
+To do that, we translate business requirements into predicates that are chained together with Ruby <em>faux boolean logic</em> operators (eg. <code>&amp;</code> or <code>|</code>).</p>
+
+<p>Think of a signup form.
+We need to ensure data integrity for the  <code>name</code> field with the following rules.
+It is required, it has to be: filled <strong>and</strong> a string <strong>and</strong> its size must be greater than 3 chars, but lesser than 64.
+Here’s the code, <strong>read it aloud</strong> and notice how it perfectly expresses our needs for <code>name</code>.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Signup</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+
+  <span class="n">validations</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span> <span class="p">{</span> <span class="n">filled?</span> <span class="o">&amp;</span> <span class="n">str?</span> <span class="o">&amp;</span> <span class="n">size?</span><span class="p">(</span><span class="mi">3</span><span class="p">.</span><span class="nf">.</span><span class="mi">64</span><span class="p">)</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">Signup</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">).</span><span class="nf">validate</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">success?</span> <span class="c1"># =&gt; true</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">Signup</span><span class="p">.</span><span class="nf">new</span><span class="p">({}).</span><span class="nf">validate</span>
+
+<span class="n">result</span><span class="p">.</span><span class="nf">success?</span> <span class="c1"># =&gt; false</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">messages</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span> <span class="c1"># =&gt; ["must be filled"]</span>
+</code></pre>
+
+      <h3 id="boolean-logic" class="title"><a name="boolean-logic" class="anchor" href="#boolean-logic">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Boolean Logic</h3>
+    
+<p>When we check data, we expect only two outcomes: an input can be valid or not.
+No grey areas, nor fuzzy results.
+It’s white or black, 1 or 0, <code>true</code> or <code>false</code> and <em>boolean logic</em> is the perfect tool to express these two states.
+Indeed, a Ruby <em>boolean expression</em> can only return <code>true</code> or <code>false</code>.</p>
+
+<p>To better recognise the pattern, let’s get back to the example above.
+This time we will map the natural language rules with programming language rules.</p>
+<pre class="language-ruby ruby"><code>        <span class="no">A</span> <span class="nb">name</span> <span class="n">must</span> <span class="n">be</span> <span class="n">filled</span>  <span class="n">and</span> <span class="n">be</span> <span class="n">a</span> <span class="n">string</span> <span class="n">and</span> <span class="n">its</span> <span class="n">size</span> <span class="n">fall</span> <span class="n">between</span> <span class="mi">3</span> <span class="n">and</span> <span class="mi">64</span><span class="o">.</span>
+           <span class="err">👇</span>            <span class="err">👇</span>     <span class="err">👇</span>        <span class="err">👇</span>    <span class="err">👇</span>       <span class="err">👇</span>                <span class="err">👇</span>    <span class="err">👇</span>
+<span class="n">required</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span>      <span class="p">{</span> <span class="n">filled?</span>  <span class="o">&amp;</span>       <span class="n">str?</span>   <span class="o">&amp;</span>      <span class="n">size?</span>              <span class="p">(</span><span class="mi">3</span> <span class="p">.</span><span class="nf">.</span> <span class="mi">64</span><span class="p">)</span> <span class="p">}</span>
+</code></pre>
+
+<p>Now, I hope you’ll never format code like that, but in this case, that formatting serves well our purpose to show how Ruby’s  simplicity helps to define complex rules with no effort.</p>
+
+<p>From a high level perspective, we can tell that input data for <code>name</code> is <em>valid</em> only if <strong>all</strong> the requirements are satisfied. That’s because we used <code>&amp;</code>.</p>
+
+<p>But there is more. Rule composition with blocks is powerful, but it can become verbose.
+To <strong>reduce verbosity</strong>, Hanami offers convenient macros that are internally expanded (aka interpreted) to an equivalent block expression.</p>
+<pre class="language-ruby ruby"><code><span class="n">required</span><span class="p">(</span><span class="ss">:name</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">,</span> <span class="n">size?</span><span class="p">:</span> <span class="mi">3</span><span class="p">.</span><span class="nf">.</span><span class="mi">64</span><span class="p">)</span>
+</code></pre>
+
+      <h3 id="the-advantages" class="title"><a name="the-advantages" class="anchor" href="#the-advantages">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>The Advantages</h3>
+    
+<p>With this new syntax we give more control to developers: they can decide the order of execution of the validations.
+They can define <a href="https://github.com/hanami/validations#custom-predicates">custom predicates</a> and <a href="https://github.com/hanami/validations#messages">custom error messages</a>, <a href="https://github.com/hanami/validations#internationalization-i18n">opt in for internationalization (i18n)</a> with small effort.
+They can <a href="https://github.com/hanami/validations#macros">dry code via macros</a>, <a href="https://github.com/hanami/validations#composition">reuse validators</a>, <a href="https://github.com/hanami/validations#type-safety">enforce types</a>, <a href="https://github.com/hanami/validations#whitelisting">whitelist params</a>.</p>
+
+<p>To summarize: we fixed old bugs, implemented features that developers asked for, increased internal code robustness and started a new alliance with <strong>dry-rb</strong> &lt;3.</p>
+
+<p><strong>These chances were just merged in <a href="https://github.com/hanami/validations">master</a> and they will be released in a few months with <code>hanami</code> <code>v0.8.0</code>.</strong></p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v0.7.2</title>
+       <id>http://hanamirb.org/blog/2016/02/09/announcing-hanami-072.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/02/09/announcing-hanami-072.html"/>
+       <updated>2016-02-09T11:46:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Fix for static assets middleware
+
+       </summary>
+       <content type="html"><![CDATA[<p>This release fixes only one regression introduced by <a href="/blog/2016/02/05/announcing-hanami-071.html">v0.7.1</a>.</p>
+
+      <h2 id="bug-fixes" class="title"><a name="bug-fixes" class="anchor" href="#bug-fixes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Bug Fixes</h2>
+    
+      <h3 id="hanami-a-href-https-github-com-hanami-hanami-blob-master-changelog-md-v072-2016-02-09-v0-7-2-a-" class="title"><a name="hanami-a-href-https-github-com-hanami-hanami-blob-master-changelog-md-v072-2016-02-09-v0-7-2-a-" class="anchor" href="#hanami-a-href-https-github-com-hanami-hanami-blob-master-changelog-md-v072-2016-02-09-v0-7-2-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami <a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md#v072---2016-02-09">v0.7.2</a></h3>
+    
+<ul>
+<li>Fixed routing issue when static assets server tried to hijiack paths that are matching directories in public directory [<a href="https://github.com/AlfonsoUceda">Alfonso Uceda Pompa</a>]</li>
+</ul>
+
+      <h2 id="upgrade-instructions" class="title"><a name="upgrade-instructions" class="anchor" href="#upgrade-instructions">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Upgrade Instructions</h2>
+    
+<p>In order to get these bug fixes edit <code>Gemfile</code> to make sure it uses the right dependencies and then run <code>bundle update</code> from the root of the project.</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v0.7.1</title>
+       <id>http://hanamirb.org/blog/2016/02/05/announcing-hanami-071.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/02/05/announcing-hanami-071.html"/>
+       <updated>2016-02-05T15:41:00+00:00</updated>
+       <author>
+         <name>Trung Lê</name>
+       </author>
+       <summary>
+         Fixes for static assets serving, Hanami console and minor improvements
+
+       </summary>
+       <content type="html"><![CDATA[<p>This is a patch release that addresses some bugs reported after <a href="/blog/2016/01/22/lotus-is-now-hanami.html">v0.7.0 release</a>.</p>
+
+      <h2 id="bug-fixes" class="title"><a name="bug-fixes" class="anchor" href="#bug-fixes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Bug Fixes</h2>
+    
+      <h3 id="hanami-a-href-https-github-com-hanami-hanami-blob-master-changelog-md-v071-2016-02-05-v0-7-1-a-" class="title"><a name="hanami-a-href-https-github-com-hanami-hanami-blob-master-changelog-md-v071-2016-02-05-v0-7-1-a-" class="anchor" href="#hanami-a-href-https-github-com-hanami-hanami-blob-master-changelog-md-v071-2016-02-05-v0-7-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami <a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md#v071---2016-02-05">v0.7.1</a></h3>
+    
+<ul>
+<li>Fix console engine fallback [<a href="https://github.com/railsme">Anatolii Didukh</a>]</li>
+<li>Fixed routing issue when static assets server tried to hijiack requests belonging to dynamic endpoints [<a href="https://github.com/davydovanton">Anton Davydov</a>]</li>
+</ul>
+
+      <h3 id="hanami-utils-a-href-https-github-com-hanami-utils-blob-master-changelog-md-v071-2016-02-05-v0-7-1-a-" class="title"><a name="hanami-utils-a-href-https-github-com-hanami-utils-blob-master-changelog-md-v071-2016-02-05-v0-7-1-a-" class="anchor" href="#hanami-utils-a-href-https-github-com-hanami-utils-blob-master-changelog-md-v071-2016-02-05-v0-7-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami-utils <a href="https://github.com/hanami/utils/blob/master/CHANGELOG.md#v071---2016-02-05">v0.7.1</a></h3>
+    
+<ul>
+<li>Allow non string objects to be escaped by <code>Hanami::Utils::Escape</code> [<a href="https://github.com/cllns">Sean Collins</a>]</li>
+<li><code>Hanami::Utils::Escape</code>: fixed Ruby warning for <code>String#chars</code> with a block, which is deprecated. Using <code>String#each_char</code> now [<a href="https://github.com/y-yagi">Yuuji Yaginuma</a>]</li>
+</ul>
+
+      <h3 id="hanami-router-a-href-https-github-com-hanami-router-blob-master-changelog-md-v062-2016-02-05-v0-6-2-a-" class="title"><a name="hanami-router-a-href-https-github-com-hanami-router-blob-master-changelog-md-v062-2016-02-05-v0-6-2-a-" class="anchor" href="#hanami-router-a-href-https-github-com-hanami-router-blob-master-changelog-md-v062-2016-02-05-v0-6-2-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami-router <a href="https://github.com/hanami/router/blob/master/CHANGELOG.md#v062---2016-02-05">v0.6.2</a></h3>
+    
+<ul>
+<li>Fix double leading slash for Capybara&#39;s <code>current_path</code> [<a href="https://github.com/davydovanton">Anton Davydov</a>]</li>
+</ul>
+
+      <h3 id="hanami-controller-a-href-https-github-com-hanami-controller-blob-master-changelog-md-v061-2016-02-05-v0-6-1-a-" class="title"><a name="hanami-controller-a-href-https-github-com-hanami-controller-blob-master-changelog-md-v061-2016-02-05-v0-6-1-a-" class="anchor" href="#hanami-controller-a-href-https-github-com-hanami-controller-blob-master-changelog-md-v061-2016-02-05-v0-6-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami-controller <a href="https://github.com/hanami/controller/blob/master/CHANGELOG.md#v061---2016-02-05">v0.6.1</a></h3>
+    
+<ul>
+<li>Optimise memory usage by freezing MIME types constant [<a href="https://github.com/railsme">Anatolii Didukh</a>]</li>
+</ul>
+
+      <h3 id="hanami-view-a-href-https-github-com-hanami-view-blob-master-changelog-md-v061-2016-02-05-v0-6-1-a-" class="title"><a name="hanami-view-a-href-https-github-com-hanami-view-blob-master-changelog-md-v061-2016-02-05-v0-6-1-a-" class="anchor" href="#hanami-view-a-href-https-github-com-hanami-view-blob-master-changelog-md-v061-2016-02-05-v0-6-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami-view <a href="https://github.com/hanami/view/blob/master/CHANGELOG.md#v061---2016-02-05">v0.6.1</a></h3>
+    
+<ul>
+<li>Preload partial templates in order to boost performances for partials rendering (2x faster) [<a href="https://github.com/stevehook">Steve Hook</a>]</li>
+</ul>
+
+      <h3 id="hanami-model-a-href-https-github-com-hanami-model-blob-master-changelog-md-v062-2016-02-05-v0-6-2-a-" class="title"><a name="hanami-model-a-href-https-github-com-hanami-model-blob-master-changelog-md-v062-2016-02-05-v0-6-2-a-" class="anchor" href="#hanami-model-a-href-https-github-com-hanami-model-blob-master-changelog-md-v062-2016-02-05-v0-6-2-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami-model <a href="https://github.com/hanami/model/blob/master/CHANGELOG.md#v062---2016-02-05">v0.6.2</a></h3>
+    
+<ul>
+<li>Mapping SQL Adapter&#39;s errors as <code>Hanami::Model</code> errors [<a href="https://github.com/hlegius">Hélio Costa e Silva</a>] &amp; [<a href="https://github.com/pascalbetz">Pascal Betz</a>]</li>
+</ul>
+
+      <h3 id="hanami-assets-a-href-https-github-com-hanami-assets-blob-master-changelog-md-v021-2016-02-05-v0-2-1-a-" class="title"><a name="hanami-assets-a-href-https-github-com-hanami-assets-blob-master-changelog-md-v021-2016-02-05-v0-2-1-a-" class="anchor" href="#hanami-assets-a-href-https-github-com-hanami-assets-blob-master-changelog-md-v021-2016-02-05-v0-2-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>hanami-assets <a href="https://github.com/hanami/assets/blob/master/CHANGELOG.md#v021---2016-02-05">v0.2.1</a></h3>
+    
+<ul>
+<li>Fix recursive Sass imports [<a href="https://github.com/jodosha">Luca Guidi</a>]</li>
+<li>Ensure to truncate assets in <code>public/</code> before precompiling/copying them [<a href="https://github.com/jodosha">Luca Guidi</a>]</li>
+</ul>
+
+      <h2 id="upgrade-instructions" class="title"><a name="upgrade-instructions" class="anchor" href="#upgrade-instructions">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Upgrade Instructions</h2>
+    
+<p>In order to get these bug fixes edit <code>Gemfile</code> to make sure it uses the right dependencies and then run <code>bundle update</code> from the root of the project.</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Lotus is now Hanami</title>
+       <id>http://hanamirb.org/blog/2016/01/22/lotus-is-now-hanami.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/01/22/lotus-is-now-hanami.html"/>
+       <updated>2016-01-22T14:54:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Lotus is now Hanami
+
+       </summary>
+       <content type="html"><![CDATA[
+      <h2 id="lotus" class="title"><a name="lotus" class="anchor" href="#lotus">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Lotus</h2>
+    
+<p>More than three years ago I started hacking with this tiny web framework.
+Naming is hard, as you know, and the choice felt on something that has a deep meaning for me: <strong>Lotus</strong>.</p>
+
+      <h3 id="the-origins" class="title"><a name="the-origins" class="anchor" href="#the-origins">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>The Origins</h3>
+    
+<p>I was aware of the famous IBM&#39;s office suite, but I thought it was something belonging to the past and would have never expected Lotus (my Lotus) to become known in Ruby ecosystem.
+Now, this name collision has caused minor confusion outside of Ruby Community.
+HackerNews or <a href="https://www.thoughtworks.com/radar/languages-and-frameworks/lotus">ThoughtWork&#39;s Radar</a> are clear examples.
+There always been the need to specify Lotus for Ruby.</p>
+
+      <h3 id="the-problem" class="title"><a name="the-problem" class="anchor" href="#the-problem">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>The Problem</h3>
+    
+<p>It wasn&#39;t a huge problem until a few weeks ago.
+We received <a href="https://github.com/hanami/hanami/issues/445">an issue on GitHub</a> from an IBM employee, who informally made us to notice about the fact that they hold the trademark in software industry for Lotus.
+That was the first warning that I could&#39;ve been sued in the future by them.</p>
+
+      <h3 id="the-decision" class="title"><a name="the-decision" class="anchor" href="#the-decision">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>The Decision</h3>
+    
+<p>In the subsequent two weeks, I&#39;ve talked with our Community, with a lawyer and the decision is to change the name.</p>
+
+<p>I want to clarify that I never received a letter by IBM, it&#39;s only a strategic choice.
+First of all, the word &quot;Lotus&quot; is too much popular and it always been hard for me to track online discussions.</p>
+
+<p>Secondly, sharing the same name will always be source of confusion for developers.
+Better to find a new name: <strong>Hanami</strong>.</p>
+
+      <h2 id="hanami" class="title"><a name="hanami" class="anchor" href="#hanami">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Hanami</h2>
+    
+<p>Hanami is a japanese tradition of watching the cherry trees to blossom during spring.
+During this season, they celebrate this event all together in their beautiful gardens.</p>
+
+<p>This choice remarks a continuity with the past of the project and it also puts a strong emphasis on <strong>the importance that our Community has for us</strong>.</p>
+
+<p><strong>This is also a tribute to Matz and Ruby origins.</strong></p>
+
+      <h3 id="new-website" class="title"><a name="new-website" class="anchor" href="#new-website">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New Website</h3>
+    
+<p>The new website is <a href="http://hanamirb.org">http://hanamirb.org</a>, and you can find us on Twitter as <a href="https://twitter.com/hanamirb">@hanamirb</a> (<a href="https://twitter.com/search?f=tweets&amp;vertical=default&amp;q=hanamirb">#hanamirb</a>).
+We moved the source code at <a href="https://github.com/hanami">https://github.com/hanami</a>.</p>
+
+<p>The main Ruby gem is now <a href="https://rubygems.org/gems/hanami"><code>hanami</code></a>.</p>
+
+      <h3 id="gem-releases" class="title"><a name="gem-releases" class="anchor" href="#gem-releases">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Gem Releases</h3>
+    
+<p>In order to reflect this reorganization, we release today all the gems under the new name.
+We bumped the minor version because this is a breaking change.</p>
+
+<ul>
+<li><code>hanami-0.7.0</code> (equivalent to <code>lotusrb-0.6.1</code>)</li>
+<li><code>hanami-utils-0.7.0</code> (equivalent to <code>lotus-utils-0.6.1</code>)</li>
+<li><code>hanami-validations-0.5.0</code> (equivalent to <code>lotus-validations-0.4.0</code>)</li>
+<li><code>hanami-router-0.6.0</code> (equivalent to <code>lotus-router-0.5.1</code>)</li>
+<li><code>hanami-helpers-0.3.0</code> (equivalent to <code>lotus-helpers-0.2.6</code>)</li>
+<li><code>hanami-model-0.6.0</code> (equivalent to <code>lotus-model-0.5.2</code>)</li>
+<li><code>hanami-view-0.6.0</code> (equivalent to <code>lotus-view-0.5.0</code>)</li>
+<li><code>hanami-controller-0.6.0</code> (equivalent to <code>lotus-controller-0.5.1</code>)</li>
+<li><code>hanami-assets-0.2.0</code> (equivalent to <code>lotus-assets-0.1.0</code>)</li>
+<li><code>hanami-mailer-0.2.0</code> (equivalent to <code>lotus-mailer-0.1.0</code>)</li>
+</ul>
+
+      <h3 id="upgrade-notes" class="title"><a name="upgrade-notes" class="anchor" href="#upgrade-notes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Upgrade Notes</h3>
+    
+<p>Please read the <a href="/guides/upgrade-notes/v070">upgrade notes for v0.7.0</a> in our Guides.</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Lotus v0.6.1</title>
+       <id>http://hanamirb.org/blog/2016/01/19/announcing-lotus-061.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2016/01/19/announcing-lotus-061.html"/>
+       <updated>2016-01-19T08:48:00+00:00</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Minor fixes for CLI, cookie sessions and database exceptions.
+
+       </summary>
+       <content type="html"><![CDATA[<p>This is a patch release that addresses some bugs reported after <a href="/blog/2016/01/12/announcing-lotus-060.html">v0.6.0 release</a>.</p>
+
+      <h2 id="bug-fixes" class="title"><a name="bug-fixes" class="anchor" href="#bug-fixes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Bug Fixes</h2>
+    
+      <h3 id="lotusrb-a-href-https-github-com-lotus-lotus-blob-master-changelog-md-v061-2016-01-19-v0-6-1-a-" class="title"><a name="lotusrb-a-href-https-github-com-lotus-lotus-blob-master-changelog-md-v061-2016-01-19-v0-6-1-a-" class="anchor" href="#lotusrb-a-href-https-github-com-lotus-lotus-blob-master-changelog-md-v061-2016-01-19-v0-6-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>lotusrb <a href="https://github.com/lotus/lotus/blob/master/CHANGELOG.md#v061---2016-01-19">v0.6.1</a></h3>
+    
+<ul>
+<li>Show the current app name in Welcome page (eg. <code>/admin</code> shows instructions on how to generate an action for <code>Admin</code> app) [<a href="https://github.com/davydovanton">Anton Davydov</a>]</li>
+<li>Fix project creation when name contains dashes (eg. <code>&quot;awesome-project&quot; =&gt; &quot;AwesomeProject&quot;</code>) [<a href="https://github.com/davydovanton">Anton Davydov</a>]</li>
+<li>Ensure to add assets related entries to <code>.gitignore</code> when a project is generated with the <code>--database</code> flag [<a href="https://github.com/davydovanton">Anton Davydov</a>]</li>
+<li>Avoid blank lines in generated <code>Gemfile</code> [<a href="https://github.com/deepj">deepj</a>]</li>
+<li>Fix for <code>lotus destroy app</code>: it doesn&#39;t cause a syntax error in <code>config/application.rb</code> anymore [<a href="https://github.com/trexnix">trexnix</a>]</li>
+<li>Ensure console to use the bundled engine [<a href="https://github.com/sergikon">Serg Ikonnikov</a> &amp; <a href="https://github.com/joneslee85">Trung Lê</a>]</li>
+</ul>
+
+      <h3 id="lotus-utils-a-href-https-github-com-lotus-utils-blob-master-changelog-md-v061-2016-01-19-v0-6-1-a-" class="title"><a name="lotus-utils-a-href-https-github-com-lotus-utils-blob-master-changelog-md-v061-2016-01-19-v0-6-1-a-" class="anchor" href="#lotus-utils-a-href-https-github-com-lotus-utils-blob-master-changelog-md-v061-2016-01-19-v0-6-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>lotus-utils <a href="https://github.com/lotus/utils/blob/master/CHANGELOG.md#v061---2016-01-19">v0.6.1</a></h3>
+    
+<ul>
+<li>Ensure <code>Lotus::Utils::String#classify</code> to work properly with dashes (eg. <code>&quot;app-store&quot; =&gt; &quot;App::Store&quot;</code>) [<a href="https://github.com/davydovanton">Anton Davydov</a>]</li>
+</ul>
+
+      <h3 id="lotus-router-a-href-https-github-com-lotus-router-blob-master-changelog-md-v051-2016-01-19-v0-5-1-a-" class="title"><a name="lotus-router-a-href-https-github-com-lotus-router-blob-master-changelog-md-v051-2016-01-19-v0-5-1-a-" class="anchor" href="#lotus-router-a-href-https-github-com-lotus-router-blob-master-changelog-md-v051-2016-01-19-v0-5-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>lotus-router <a href="https://github.com/lotus/router/blob/master/CHANGELOG.md#v051---2016-01-19">v0.5.1</a></h3>
+    
+<ul>
+<li>Print stacked lines for routes inspection [<a href="https://github.com/davydovanton">Anton Davydov</a>]</li>
+</ul>
+
+      <h3 id="lotus-controller-a-href-https-github-com-lotus-controller-blob-master-changelog-md-v051-2016-01-19-v0-5-1-a-" class="title"><a name="lotus-controller-a-href-https-github-com-lotus-controller-blob-master-changelog-md-v051-2016-01-19-v0-5-1-a-" class="anchor" href="#lotus-controller-a-href-https-github-com-lotus-controller-blob-master-changelog-md-v051-2016-01-19-v0-5-1-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>lotus-controller <a href="https://github.com/lotus/controller/blob/master/CHANGELOG.md#v051---2016-01-19">v0.5.1</a></h3>
+    
+<ul>
+<li>Ensure <code>rack.session</code> cookie to not be sent twice when both <code>Lotus::Action::Cookies</code> and <code>Rack::Session::Cookie</code> are used together [<a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a>]</li>
+</ul>
+
+      <h3 id="lotus-model-a-href-https-github-com-lotus-model-blob-master-changelog-md-v052-2016-01-19-v0-5-2-a-" class="title"><a name="lotus-model-a-href-https-github-com-lotus-model-blob-master-changelog-md-v052-2016-01-19-v0-5-2-a-" class="anchor" href="#lotus-model-a-href-https-github-com-lotus-model-blob-master-changelog-md-v052-2016-01-19-v0-5-2-a-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>lotus-model <a href="https://github.com/lotus/model/blob/master/CHANGELOG.md#v052---2016-01-19">v0.5.2</a></h3>
+    
+<ul>
+<li>Improved error message for <code>Lotus::Model::Adapters::NoAdapterError</code> [<a href="https://github.com/cllns">Sean Collins</a>]</li>
+<li>Catch Sequel exceptions and re-raise as <code>Lotus::Model::Error</code> [<a href="https://github.com/Moratorius">Kyle Chong</a> &amp; <a href="https://github.com/joneslee85">Trung Lê</a>]</li>
+</ul>
+
+      <h2 id="upgrade-instructions" class="title"><a name="upgrade-instructions" class="anchor" href="#upgrade-instructions">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Upgrade Instructions</h2>
+    
+<p>In order to get these bug fixes, just run <code>bundle update</code> from the root of the project.</p>
+]]></content>
+     </entry>
+</feed>
