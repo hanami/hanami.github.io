@@ -59,23 +59,28 @@ It defaults to SMTP (`:smtp`) for production environment, while `:test` is autom
 The second optional argument is a set of arbitrary configurations that we want to pass to the configuration:
 
 ```ruby
-# lib/bookshelf.rb
+# config/environment.rb
 # ...
-Hanami::Mailer.configure do
+Hanami.configure do
   # ...
-  delivery do
-    development :test
-    test        :test
-    production  :smtp,
-      address:              "smtp.gmail.com",
-      port:                 587,
-      domain:               "bookshelf.org",
-      user_name:            ENV['SMTP_USERNAME'],
-      password:             ENV['SMTP_PASSWORD'],
-      authentication:       "plain",
-      enable_starttls_auto: true
+
+  mailer do
+    root Hanami.root.join("lib", "kaba", "mailers")
+
+    # See http://hanamirb.org/guides/mailers/delivery
+    delivery :test
   end
-end.load!
+
+  # ...
+
+  environment :production do
+    # ...
+
+    mailer do
+      delivery :smtp, address: ENV['SMTP_HOST'], port: ENV['SMTP_PORT']
+    end
+  end
+end
 ```
 
 For advanced configurations, please have a look at `mail` [gem](https://github.com/mikel/mail) by Mikel Lindsaar.
@@ -91,16 +96,21 @@ If we need to a custom delivery workflow, we can pass a class to the configurati
 Here's an example on how to use [Mandrill API](https://mandrillapp.com/api/docs/) to deliver emails.
 
 ```ruby
-# lib/bookshelf.rb
+# config/environment.rb
 # ...
 require 'lib/mailers/mandrill_delivery_method'
 
-Hanami::Mailer.configure do
+Hanami.configure do
   # ...
-  delivery do
-    production MandrillDeliveryMethod, api_key: ENV['MANDRILL_API_KEY']
+
+  environment :production do
+    # ...
+
+    mailer do
+      production MandrillDeliveryMethod, api_key: ENV['MANDRILL_API_KEY']
+    end
   end
-end.load!
+end
 ```
 
 The object MUST respond to `#initialize(options = {})` and to `#deliver!(mail)`, where `mail` is an instance of [`Mail::Message`](https://github.com/mikel/mail/blob/master/lib/mail/mail.rb).
