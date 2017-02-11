@@ -16,7 +16,7 @@ It's a factory to generate **relative** or **absolute URLs**, starting from [nam
 Imagine we have the following routes for our application:
 
 ```ruby
-# web/apps/config/routes.rb
+# apps/web/config/routes.rb
 root        to: 'home#index'
 get '/foo', to: 'foo#index'
 
