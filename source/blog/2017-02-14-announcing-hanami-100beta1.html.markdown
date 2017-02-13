@@ -12,7 +12,7 @@ This `v1.0.0.beta1` release introduces Hanami [feature freeze](https://en.wikipe
 
 Since now on, **Hanami API's are stable and won't be changed until 2.0**.
 
-The stable release (`v1.0.0`) will happen beteen the end of March and the beginning of April 2017, which coincides with the [Hanami season in Japan](http://www.japan-guide.com/sakura/). 🌸
+The stable release (`v1.0.0`) will happen between the end of March and the beginning of April 2017, which coincides with the [Hanami season in Japan](http://www.japan-guide.com/sakura/). 🌸
 
 In the meantime we'll release other _beta_ and _release candidate_ versions.
 
