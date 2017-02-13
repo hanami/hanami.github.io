@@ -27,7 +27,7 @@ Hanami.configure do
 end
 ```
 
-By default it uses stardard output because it's a [best practice](http://12factor.net/logs) that most hosting SaaS companies [suggest using](https://devcenter.heroku.com/articles/rails4#logging-and-assets).
+By default it uses standard output because it's a [best practice](http://12factor.net/logs) that most hosting SaaS companies [suggest using](https://devcenter.heroku.com/articles/rails4#logging-and-assets).
 
 If you want to use a file, pass `stream: 'path/to/file.log'` as an option.
 
