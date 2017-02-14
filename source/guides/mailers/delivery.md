@@ -65,7 +65,7 @@ Hanami.configure do
   # ...
 
   mailer do
-    root Hanami.root.join("lib", "kaba", "mailers")
+    root Hanami.root.join("lib", "bookshelf", "mailers")
 
     # See http://hanamirb.org/guides/mailers/delivery
     delivery :test

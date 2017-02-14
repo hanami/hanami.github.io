@@ -351,7 +351,7 @@ Enter entities and repositories:
 * an **entity** is a domain object (eg. `Book`) uniquely identified by its identity.
 * a **repository** mediates between entities and the persistence layer.
 
-Entities are totally unaware of database.
+Entities are totally unaware of the database.
 This makes them **lightweight** and **easy to test**.
 
 For this reason we need a repository to persist the data that a `Book` depends on.
@@ -372,8 +372,7 @@ The generator gives us an entity, a repository, a migration, and accompanying te
 
 ### Migrations To Change Our Database Schema
 
-As first thing, we need to shape our database table, by editing the migration:
-
+Let's modify the generated migration to include `title` and `author` fields:
 
 ```ruby
 # db/migrations/20161115110038_create_books.rb
