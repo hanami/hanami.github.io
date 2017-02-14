@@ -4,78 +4,47 @@ title: Guides - Logging
 
 # Logging
 
-Within a project, each application has its own logger
+A project has a global logger available at `Hanami.logger` that can be used like this: `Hanami.logger.debug "Hello"`
 
-<p class="convention">
-  For a given application named <code>Web</code>, logger is accessible at <code>Web.logger</code>.
-</p>
-
-Using the per-environment application settings we can define the behavior of the logger: the destination `stream`, `format`, and `level`.
-For instance, the default destination stream is standard output, but we can use a file instead.
+It can be configured in `config/environment.rb`
 
 ```ruby
-# apps/web/application.rb
-module Web
-  class Application < Hanami::Application
+# config/environment.rb
+# ...
+
+Hanami.configure do
+  # ...
+
+  environment :development do
+    logger level: :info
+  end
+
+  environment :production do
+    logger level: :info, formatter: :json
+
     # ...
-
-    configure :development do
-      # ...
-
-      # Logger
-      # See: http://hanamirb.org/guides/projects/logging
-      #
-      # Logger stream. It defaults to STDOUT.
-      # logger.stream "log/development.log"
-      #
-      # Logger level. It defaults to DEBUG
-      # logger.level :debug
-      #
-      # Logger format. It defaults to DEFAULT
-      # logger.format :default
-    end
-
-    ##
-    # TEST
-    #
-    configure :test do
-      # ...
-
-      # Logger
-      # See: http://hanamirb.org/guides/projects/logging
-      #
-      # Logger level. It defaults to ERROR
-      logger.level :error
-    end
-
-    ##
-    # PRODUCTION
-    #
-    configure :production do
-      # ...
-
-      # Logger
-      # See: http://hanamirb.org/guides/projects/logging
-      #
-      # Logger stream. It defaults to STDOUT.
-      # logger.stream "log/production.log"
-      #
-      # Logger level. It defaults to INFO
-      logger.level :info
-
-      # Logger format.
-      logger.format :json
-    end
   end
 end
 ```
 
-Using standard output is a [best practice](http://12factor.net/logs) that most hosting SaaS companies [suggest using](https://devcenter.heroku.com/articles/rails4#logging-and-assets).
+By default it uses standard output because it's a [best practice](http://12factor.net/logs) that most hosting SaaS companies [suggest using](https://devcenter.heroku.com/articles/rails4#logging-and-assets).
 
-Because of its parseability, JSON is the default format for production environment, where you may want aggregate information about the project usage.
+If you want to use a file, pass `stream: 'path/to/file.log'` as an option.
 
-The logger is very similar to Ruby's `Logger`; you can use it like this:
+## Automatic Logging
+
+All the HTTP requests, SQL queries, and database operations are automatically logged.
+
+When a project is used in development mode, the logging format is human readable:
 
 ```ruby
-Web.logger.debug "Hello"
+[bookshelf] [INFO] [2017-02-11 15:42:48 +0100] HTTP/1.1 GET 200 127.0.0.1 /books/1  451 0.018576
+[bookshelf] [INFO] [2017-02-11 15:42:48 +0100] (0.000381s) SELECT "id", "title", "created_at", "updated_at" FROM "books" WHERE ("book"."id" = '1') ORDER BY "books"."id"
+```
+
+For production environment, the default format is JSON.
+JSON is parseable and more machine oriented. It works great with log aggregators or SaaS logging products.
+
+```json
+{"app":"bookshelf","severity":"INFO","time":"2017-02-10T22:31:51Z","http":"HTTP/1.1","verb":"GET","status":"200","ip":"127.0.0.1","path":"/books/1","query":"","length":"451","elapsed":0.000391478}
 ```

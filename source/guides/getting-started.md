@@ -64,7 +64,7 @@ To create a new Hanami project, we need to install the Hanami gem from Rubygems.
 Then we can use the new `hanami` executable to generate a new project:
 
 ```
-% gem install hanami
+% gem install hanami --pre
 % hanami new bookshelf
 ```
 
@@ -339,22 +339,45 @@ A **layout** is like any other template, but it is used to wrap your regular tem
 The `yield` line is replaced with the contents of our regular template.
 It's the perfect place to put our repeating headers and footers.
 
-### Migrations To Change Our Database Schema
+## Modeling Our Data With Entities
 
 Hard-coding books in our templates is, admittedly, kind of cheating.
 Let's add some dynamic data to our application.
 
-As first thing, we need a table in our database to hold our book data.
-We can use a **migration** to make the required changes.
-Use the migration generator to create an empty migration:
+We'll store books in our database and display them on our page.
+To do so, we need a way to read and write to our database.
+Enter entities and repositories:
+
+* an **entity** is a domain object (eg. `Book`) uniquely identified by its identity.
+* a **repository** mediates between entities and the persistence layer.
+
+Entities are totally unaware of database.
+This makes them **lightweight** and **easy to test**.
+
+For this reason we need a repository to persist the data that a `Book` depends on.
+Read more about entities and repositories in the [models guide](/guides/models/overview).
+
+Hanami ships with a generator for models, so let's use it to create a `Book` entity and the corresponding repository:
 
 ```
-% bundle exec hanami generate migration create_books
+% bundle exec hanami generate model book
+create  lib/bookshelf/entities/book.rb
+create  lib/bookshelf/repositories/book_repository.rb
+create  db/migrations/20161115110038_create_books.rb
+create  spec/bookshelf/entities/book_spec.rb
+create  spec/bookshelf/repositories/book_repository_spec.rb
 ```
 
-This gives us a file name like `db/migrations/20161115110038_create_books.rb` that we can edit:
+The generator gives us an entity, a repository, a migration, and accompanying test files.
+
+### Migrations To Change Our Database Schema
+
+As first thing, we need to shape our database table, by editing the migration:
+
 
 ```ruby
+# db/migrations/20161115110038_create_books.rb
+
 Hanami::Model.migration do
   change do
     create_table :books do
@@ -379,33 +402,6 @@ Let's prepare our database:
 ```
 % bundle exec hanami db prepare
 ```
-
-## Modeling Our Data With Entities
-
-We'll store books in our database and display them on our page.
-To do so, we need a way to read and write to our database.
-Enter entities and repositories:
-
-* an **entity** is a domain object (eg. `Book`) uniquely identified by its identity.
-* a **repository** mediates between entities and the persistence layer.
-
-Entities are totally unaware of database.
-This makes them **lightweight** and **easy to test**.
-
-For this reason we need a repository to persist the data that a `Book` depends on.
-Read more about entities and repositories in the [models guide](/guides/models/overview).
-
-Hanami ships with a generator for models, so let's use it to create a `Book` entity and the corresponding repository:
-
-```
-% bundle exec hanami generate model book
-create  lib/bookshelf/entities/book.rb
-create  lib/bookshelf/repositories/book_repository.rb
-create  spec/bookshelf/entities/book_spec.rb
-create  spec/bookshelf/repositories/book_repository_spec.rb
-```
-
-The generator gives us an entity, repository and accompanying test files.
 
 ### Working With Entities
 
