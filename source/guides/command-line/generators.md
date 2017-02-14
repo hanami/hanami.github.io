@@ -90,7 +90,7 @@ Generate an entity and a repository with a single command
       create  spec/bookshelf/repositories/book_repository_spec.rb
 ```
 
-It generates an entity with the corresponding repository, migration, and testing code.
+It generates an entity with the corresponding repository, migration, and tests.
 
 The migration will already contain the code for the creation of the table, the primary key and the timestamps:
 

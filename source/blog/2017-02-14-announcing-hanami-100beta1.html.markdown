@@ -8,13 +8,13 @@ excerpt: >
   Feature freeze, project logger, automatic logging of requests, SQL queries, and migrations. Minor bug fixes.
 ---
 
-This `v1.0.0.beta1` release introduces Hanami [feature freeze](https://en.wikipedia.org/wiki/Freeze_(software_engineering)) for 1.0, alongside with a couple of features, and a few bug fixes.
+This `v1.0.0.beta1` release marks Hanami's [feature freeze](https://en.wikipedia.org/wiki/Freeze_(software_engineering)) for 1.0, along with a couple new features, and a few bug fixes.
 
-Since now on, **Hanami API's are stable and won't be changed until 2.0**.
+From now on, **Hanami API's are stable and won't be changed until 2.0**.
 
 The stable release (`v1.0.0`) will happen between the end of March and the beginning of April 2017, which coincides with the [Hanami season in Japan](http://www.japan-guide.com/sakura/). 🌸
 
-In the meantime we'll release other _beta_ and _release candidate_ versions.
+Between now and then, we'll release other _beta_ and _release candidate_ versions.
 
 ## Features
 
@@ -22,16 +22,16 @@ Hanami is now compatible with Ruby 2.3+ (including the latest 2.4) and with Rack
 
 ### Project Logger
 
-We introduced the project logger, available at `Hanami.logger`.
-If you need to log an information, use it like this: `Hanami.logger.debug "hello"`.
+We added the project logger, available at `Hanami.logger`.
+If you need to log a piece of information, use it like this: `Hanami.logger.debug "hello"`.
 
-Because of this change, the application loggers were removed (eg. `Web.logger`, `Admin.logger`).
-The logger settings for each single application are not supported anymore (eg. `apps/web/application.rb`).
-In order to configure the logger, please edit `config/environment.rb`.
+Because of this change, the application-specific loggers were removed (eg. `Web.logger`, `Admin.logger`).
+Therefore, logger settings for individual application are not supported anymore (e.g. inside `apps/web/application.rb`).
+To configure the logger, please edit `config/environment.rb`.
 
 ### Automatic Logging
 
-A project that uses Hanami will automatically log each incoming HTTP request, SQL queries and migrations output.
+A project that uses Hanami will automatically log each incoming HTTP request, SQL query and migration.
 
 When a project is used in development mode, the logging format is human readable:
 
@@ -40,8 +40,8 @@ When a project is used in development mode, the logging format is human readable
 [bookshelf] [INFO] [2017-02-11 15:42:48 +0100] (0.000381s) SELECT "id", "title", "created_at", "updated_at" FROM "books" WHERE ("book"."id" = '1') ORDER BY "books"."id"
 ```
 
-For production environment, the default format is JSON.
-JSON is parseable and more machine oriented. It works great with log aggregators or SaaS logging products.
+For the production environment, the default format is **JSON** instead.
+JSON is parseable and more machine-oriented. It works great with log aggregators or SaaS logging products.
 
 ```json
 {"app":"bookshelf","severity":"INFO","time":"2017-02-10T22:31:51Z","http":"HTTP/1.1","verb":"GET","status":"200","ip":"127.0.0.1","path":"/books/1","query":"","length":"451","elapsed":0.000391478}
@@ -99,7 +99,8 @@ Hanami.boot
 ```
 
 This is useful to boot a Hanami project **outside of** the server or the console.
-A typical use case is [Sidekiq](http://sidekiq.org). If you want to run background jobs with this queue, you can start the process with:
+A typical use case is [Sidekiq](http://sidekiq.org).
+If you want to run background jobs with this queue, you can start the process with:
 
 ```shell
 bundle exec sidekiq -r ./config/boot.rb
