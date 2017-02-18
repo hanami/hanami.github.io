@@ -166,7 +166,7 @@ module Web::Controllers::Signup
       required(:password).filled(:str?).confirmation
       required(:terms_of_service).filled(:bool?)
       required(:age).filled(:int?, included_in?: 18..99)
-      optional(:avatar).filled(size?: 1..(MEGABYTE * 3)
+      optional(:avatar).filled(size?: 1..(MEGABYTE * 3))
     end
 
     def call(params)
