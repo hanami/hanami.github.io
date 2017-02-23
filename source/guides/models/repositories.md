@@ -242,42 +242,58 @@ class BookRepository < Hanami::Repository
 end
 ```
 
-## First and last record
-We are used to that `#first` and `#last` methods called for ORM object returns first and the second
-record in a query. But it's a not good practice. It's common because it exists in `Array` and popular
-ORMs provide it too, the problem is that you can't tell what the order is, and you can't possibly
-expect to get consistent results when an order is not enforced in any way.
+## Retrieving the first and last records
+We're all used to calling the `#first` and `#last` methods on `Array`.
+Our repositories provide these methods, but we recommend *not* using them.
 
-That's why if you want to use `#first` or `#last` methods in repository query you need to use
-`#one` and `#one!` methods instead:
+The trouble is that calling `#first` or `#last`
+without specifying an order means nothing ('first' or 'last' based on what?).
+By default, they order results by the primary key (`id`, by default),
+but this is arbitrary.
+Instead, you probably want `created_at` instead.
 
-```ruby
-class BookRepository < Hanami::Repository
-  # ...
-
-  def old_books_count
-    books.one # returns first struct based on default by pk (primary key) sorting
-    books.reverse.one # returns last struct based on default by pk (primary key) sorting
-  end
-end
-```
-
-Also you can use `#one!` instead `#one`:
+So we recommend explicitly specifying an `order`
+(if you don't want to use the primary key),
+specifying a `limit`,
+then calling `#one`:
 
 ```ruby
 class BookRepository < Hanami::Repository
   # ...
 
-  def old_books_count
-    # Produces a single tuple or nil if none found.
-    # Raises an error if there are more than one.
-    books.one
+  def newest_book
+    books.order { created_at }.limit(1).one
+    # Passing a symbol instead works too: books.order(:created_at).one
+  end
 
-    # Produces a single tuple.
-    # Raises an error if there are 0 results or more than one.
-    books.one!
+  def oldest_book
+    books.order { created_at.desc }.limit(1).one
   end
 end
 ```
+
+If you want to use the default ordering of the priamry key, then you can just do:
+
+```ruby
+class BookRepository < Hanami::Repository
+  # ...
+
+  def newest_book
+    books.limit(1).one
+    # Passing a symbol instead works too: books.order(:created_at).one
+  end
+
+  def oldest_book
+    books.reverse.limit(1).one
+  end
+end
+```
+
+Also,
+`#one!` (instead of `#one`) will raise an exception if no records are found
+(`#one` returns `nil` instead).
+
+Please note that both `#one` and `#one!` raise exceptions
+if more than one record is found.
 
 You can read more in [this issue](https://github.com/hanami/model/issues/380).
