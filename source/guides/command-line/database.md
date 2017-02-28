@@ -25,6 +25,12 @@ With `db create` we can create the database for the current environment.
 % bundle exec hanami db create
 ```
 
+To be able to run tests, test database has to be explicitly created
+
+```shell
+% HANAMI_ENV=test bundle exec hanami db create
+```
+
 In order to preserve production data, this command can't be run in the production environment.
 
 ### Drop

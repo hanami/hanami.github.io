@@ -70,7 +70,7 @@ Then we can use the new `hanami` executable to generate a new project:
 
 <p class="notice">
   By default, the project will be setup to use a SQLite database. For real-world projects, you can specify your engine:
-  <code> 
+  <code>
   % hanami new bookshelf --database=postgres
   </code>
 </p>
@@ -158,6 +158,18 @@ Note that, although Hanami is ready for a Behavior Driven Development workflow o
 
 We'll go with [Minitest](https://github.com/seattlerb/minitest) here (which is the default), but we can use [RSpec](http://rspec.info) by creating the project with `--test=rspec` option.
 Hanami will then generate helpers and stub files for it.
+
+<p class="notice">
+  Please check .env.test in case you need to tweak the database URL.
+</p>
+
+We have to migrate our schema in the test database by running:
+
+```shell
+% HANAMI_ENV=test bundle exec db prepare
+```
+
+As you can see, we have set `HANAMI_ENV` environment variable to instruct our command about the environment to use.
 
 ### Following a Request
 
