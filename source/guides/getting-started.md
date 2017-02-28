@@ -159,9 +159,11 @@ Note that, although Hanami is ready for a Behavior Driven Development workflow o
 We'll go with [Minitest](https://github.com/seattlerb/minitest) here (which is the default), but we can use [RSpec](http://rspec.info) by creating the project with `--test=rspec` option.
 Hanami will then generate helpers and stub files for it.
 
-Nonetheless we'll have to setup the test database to be able to run the tests.
-First we have to define our database url in `.env.test`.
-Now our database is configured we have to create it and migrate our schema by running
+<p class="notice">
+  Please check .env.test in case you need to tweak the database URL.
+</p>
+
+We have to migrate our schema in the test database by running:
 
 ```shell
 % HANAMI_ENV=test bundle exec db prepare
