@@ -7,11 +7,11 @@ image: true
 excerpt: >
   Small fixes preparing the stable 1.0.0 version
 ---
-_From now on, **Hanami API's are stable and won't be changed until 2.0**._
+__From now on, **Hanami API's are stable and won't be changed until 2.0**.__
 
-_The stable release (`v1.0.0`) will happen between the end of March and the beginning of April 2017, which coincides with the [Hanami season in Japan](http://www.japan-guide.com/sakura/). 🌸_
+__The stable release (`v1.0.0`) will happen between the end of March and the beginning of April 2017, which coincides with the [Hanami season in Japan](http://www.japan-guide.com/sakura/). 🌸__
 
-This `v1.0.0.beta2` release is a patch one for few bug fixes:
+`v1.0.0.beta2` is a patch release for few bug fixes:
 
 - Fixed migrations MySQL detection of username and password
 - Fixed migrations creation/drop of a MySQL database with a dash in the name
@@ -33,8 +33,8 @@ For the entire list of changes, please have a look at our [CHANGELOG](https://gi
   * `hanami-1.0.0.beta2`
   * `hanami-model-1.0.0.beta2`
   * `hamami-controller-1.0.0.beta2`
-  * `hanami-router-1.0.0.beta1`
-  * `hanami-utils-1.0.0.beta1`
+  * `hanami-router-1.0.0.beta2`
+  * `hanami-utils-1.0.0.beta2`
 
 ## Contributors
 
