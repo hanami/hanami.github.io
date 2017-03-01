@@ -2,7 +2,7 @@
 title: Announcing Hanami v1.0.0.beta1
 date: 2017-02-14 13:33 UTC
 tags: announcements
-author: Oana Sipos
+author: Luca Guidi & Oana Sipos
 image: true
 excerpt: >
   Feature freeze, project logger, automatic logging of requests, SQL queries, and migrations. Minor bug fixes.
