@@ -7,6 +7,7 @@ image: true
 excerpt: >
   Small fixes preparing the stable 1.0.0 version
 ---
+
 __From now on, **Hanami API's are stable and won't be changed until 2.0**.__
 
 __The stable release (`v1.0.0`) will happen between the end of March and the beginning of April 2017, which coincides with the [Hanami season in Japan](http://www.japan-guide.com/sakura/). 🌸__
@@ -19,6 +20,7 @@ __The stable release (`v1.0.0`) will happen between the end of March and the beg
 - Add `Action#unsafe_send_file` to send files outside of the public directory of a project
 - Ensure HTTP Cache to not crash when HTTP\_IF\_MODIFIED\_SINCE and HTTP\_IF\_NONE\_MATCH have blank values
 - Ensure to return 404 when `Action#send_file` cannot find a file with a globbed route
+- Flash messages survive after a redirect
 - Don't mutate Rack env when sending files
 - Deep symbolize params from parsed body
 - `Hanami::Router#recognize` must return a non-routeable object when the endpoint cannot be resolved
