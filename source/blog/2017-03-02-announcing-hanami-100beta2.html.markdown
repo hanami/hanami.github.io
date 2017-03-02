@@ -17,7 +17,7 @@ excerpt: >
 - Ensure `db console` to work when Postgres connection URL is defined with `"postgresql://"` scheme
 - Allow to define Postgres connection URL as `"postgresql:///mydb?host=localhost&port=6433&user=postgres&password=testpasswd"`
 - Add `Action#unsafe_send_file` to send files outside of the public directory of a project
-- Ensure HTTP Cache to not crash when `HTTP\_IF\_MODIFIED\_SINCE` and `HTTP\_IF\_NONE\_MATCH` have blank values
+- Ensure HTTP Cache to not crash when `HTTP_IF_MODIFIED_SINCE` and `HTTP_IF_NONE_MATCH` have blank values
 - Ensure to return 404 when `Action#send_file` cannot find a file with a globbed route
 - Flash messages survive after a redirect
 - Don't mutate Rack env when sending files
