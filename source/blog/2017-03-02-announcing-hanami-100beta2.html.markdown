@@ -37,8 +37,8 @@ excerpt: >
 
 We're grateful for each person who contributed to this release. These lovely people are:
 
-* [Anton Davydov](https://github.com/davydovanton)
 * [Alfonso Uceda](https://github.com/AlfonsoUceda)
+* [Anton Davydov](https://github.com/davydovanton)
 * [Craig M. Wellington](https://github.com/tercenya)
 * [Marcello Rocha](https://github.com/mereghost)
 * [Marion Duprey](https://github.com/TiteiKo)
