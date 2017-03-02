@@ -1,6 +1,6 @@
 ---
 title: Announcing Hanami v1.0.0.beta2
-date: 2017-03-02 13:33 UTC
+date: 2017-03-02 13:02 UTC
 tags: announcements
 author: Luca Guidi & Oana Sipos
 image: true
