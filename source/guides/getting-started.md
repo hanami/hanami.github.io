@@ -166,7 +166,7 @@ Hanami will then generate helpers and stub files for it.
 We have to migrate our schema in the test database by running:
 
 ```shell
-% HANAMI_ENV=test bundle exec db prepare
+% HANAMI_ENV=test bundle exec hanami db prepare
 ```
 
 As you can see, we have set `HANAMI_ENV` environment variable to instruct our command about the environment to use.
