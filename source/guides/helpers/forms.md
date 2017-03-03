@@ -42,7 +42,7 @@ That means we can use Slim, HAML, or ERB and keep the same Ruby syntax.
 
 ### One output block
 
-The technical compromise for the principles described above is to use the form builder in an unique output block.
+The technical compromise for the principles described above is to use the form builder in a unique output block.
 
 ```erb
 <%=

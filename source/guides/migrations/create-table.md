@@ -47,7 +47,7 @@ It supports the following options:
   * `:index` (create an index for the column)
   * `:null` (allow NULL values or not)
   * `:primary_key` (make the column primary key for the table)
-  * `:unique` (add an uniqueness constraint for the column)
+  * `:unique` (add a uniqueness constraint for the column)
 
 
 
