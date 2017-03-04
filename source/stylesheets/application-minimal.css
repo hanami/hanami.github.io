@@ -5,8 +5,17 @@
  * copyright @colossal 2015
  */
 
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
 .block {
  overflow: hidden;
+}
+
+/* code */
+pre {
+  background-color: #fdfdfd;
 }
 
 
@@ -14,6 +23,7 @@
 .app-navbar {
   font-size: 13px;
   letter-spacing: .15em;
+  font-weight: 700;
 }
 .app-navbar .navbar-brand {
   font-size: 13px;
@@ -127,6 +137,10 @@
 
 /* brand */
 
+.brand-name {
+    font-weight: 200;
+}
+
 @media (max-width: 400px) {
   .brand-name {
     font-size: 46px !important;
@@ -163,7 +177,6 @@ div.app-block-footer {
 }
 
 div.container-blog h1 {
-  color: #685D9F;
   font-weight: 300;
 }
 
