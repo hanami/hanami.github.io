@@ -20,10 +20,10 @@ When we declare an association, that repository **does NOT** get any extra metho
 This because Hanami wants to prevent to bloat repositories with several methods that are often unused.
 
 <p class="notice">
-  When we define an association, the repository doesn't get any extra public method.
+  When we define an association, the repository doesn't get any extra public methods.
 </p>
 
-If we need to create an author, contextually with a few books, we need to explicitely define a method to perform that operation.
+If we need to create an author, contextually with a few books, we need to explicitly define a method to perform that operation.
 
 ### Explicit Loading
 
@@ -155,7 +155,7 @@ author.books
   # => nil
 ```
 
-Because we haven't [explicitely loaded](#explicit-loading) the associated records, `author.books` is `nil`.
+Because we haven't [explicitly loaded](#explicit-loading) the associated records, `author.books` is `nil`.
 We can use the method that we have defined on before (`#find_with_books`):
 
 ```ruby
