@@ -73,7 +73,7 @@ get '/files/*', to: 'files#show'
 We can specify a unique name for each route, in order to generate paths from the router or to test them.
 
 ```ruby
-root              to  'home#index'
+root              to: 'home#index'
 get '/hello',     to: 'greet#index', as: :greeting
 get '/books/:id', to: 'books#show',  as: :book
 ```
