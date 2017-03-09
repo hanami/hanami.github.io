@@ -16,7 +16,6 @@ title: Guides - Getting Started
 
   <p>
     I warn you that whether you're a total beginner or an experienced developer <strong>this learning process can be hard</strong>.
-    After 10 years you develop a way of working, and it can be painful for you to change. However, <strong>without change, there is no challenge</strong>.
   </p>
 
   <p>
