@@ -16,6 +16,7 @@ title: Guides - Getting Started
 
   <p>
     I warn you that whether you're a total beginner or an experienced developer <strong>this learning process can be hard</strong>.
+    Over time, we build expectations about how things should be, and it can be painful to change. <strong>But without change, there is no challenge</strong> and without challenge, there is no growth.
   </p>
 
   <p>
