@@ -66,6 +66,9 @@ categories:
       - path: overview
       - path: create-table
       - path: alter-table
+  - path: validations
+    pages:
+      - path: overview
   - path: helpers
     pages:
       - path: overview
