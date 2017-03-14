@@ -1,5 +1,6 @@
 ---
 title: Blog
+pageable: true
 ---
 <div class="container container-blog">
   <div class="block block-inverse text-center">
@@ -11,7 +12,7 @@ title: Blog
     </div>
   </div>
 
-  <% articles.each do |article| %>
+  <% page_articles.each do |article| %>
     <div class="row">
       <div class="col-xs-12 col-md-10 col-md-offset-1">
         <h2><%= link_to article_title(article), article %></h2>
@@ -23,4 +24,28 @@ title: Blog
       </div>
     </div>
   <% end %>
+
+  <% if paginate %>
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <ul class="pager">
+        <% prev_title = "&larr; Previous" %>
+        <% next_title = "Next &rarr;" %>
+
+        <li class="<%= prev_page.nil? && 'disabled' %>">
+          <% if prev_page %>
+            <a href="<%= prev_page.url %>"><%= prev_title %></a>
+          <% else %>
+            <span><%= prev_title %></span>
+          <% end %>
+        </li>
+        <li class="<%= next_page.nil? && 'disabled' %>">
+          <% if next_page %>
+            <a href="<%= next_page.url %>"><%= next_title %></a>
+          <% else %>
+            <span><%= next_title %></span>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  <% end%>
 </div>
