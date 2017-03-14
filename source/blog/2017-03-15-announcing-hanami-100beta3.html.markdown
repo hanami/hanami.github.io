@@ -48,7 +48,6 @@ We're grateful for each person who contributed to this release. These lovely peo
 * [Luca Guidi](https://github.com/jodosha)
 * [Alfonso Uceda](https://github.com/AlfonsoUceda)
 * [Anton Davydov](https://github.com/davydovanton)
-* [Craig M. Wellington](https://github.com/tercenya)
 * [Marcello Rocha](https://github.com/mereghost)
 * [Marion Duprey](https://github.com/TiteiKo)
 * [Marion Schleifer](https://github.com/marionschleifer)
