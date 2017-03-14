@@ -32,10 +32,6 @@ with_layout :guides do
   page '/guides/*'
 end
 
-with_layout :blog do
-  page '/blog/*'
-end
-
 ###
 # Helpers
 ###
@@ -46,6 +42,9 @@ activate :syntax, css_class: 'language-ruby'
 activate :blog do |blog|
   blog.prefix    = 'blog'
   blog.permalink = '{year}/{month}/{day}/{title}.html'
+  blog.layout    = :blog
+  blog.paginate  = true
+  blog.per_page  = 5
 end
 
 # Automatic image dimensions on image_tag helper
