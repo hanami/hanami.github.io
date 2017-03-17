@@ -1,31 +1,29 @@
 ---
 title: Announcing Hanami v1.0.0.beta3
-date: 2017-03-15 13:02 UTC
+date: 2017-03-17 13:37 UTC
 tags: announcements
-author: Luca Guidi & Marion Schleifer
+author: Marion Schleifer
 image: true
 excerpt: >
-  Small fixes and enhancements leading up to the stable 1.0.0 version
+  Small fixes and enhancements leading up to the stable v1.0.0 version
 ---
 
 ## Minor Changes
 
 `v1.0.0.beta3` is a patch release for few bug fixes and small changes:
 
-- Removing mailer config causes showstopper exception
-- Ensure project to work without mailer configuration
-- Don't mount `Hanami::CommonLogger` if `Hanami.logger` is nil
+- Action's `flash` is now public API
+- Added form helpers: `time_field`, `month_field`, `week_field`, `range_field`, `search_field`, `url_field`, `tel_field`, and `image_button`
+- Added HTML5 helpers for `<dialog>`, `<hgroup>`, `<rtc>`, `<slot>`, and `<var>` HTML5 tags
 - Use `$stdout` instead of `STDOUT` as default stream for `Hanami::Logger`
-- API docs cleanup
+- Disconnect from stale connections when rebooting an application in production
+- Don't mount `Hanami::CommonLogger` middleware if logging is disabled for the project.
+- Remove `Hanami::Utils::Attributes` as no longer used
 - Remove deprecated `Hanami::Utils::Json.load` and `.dump`
 - Remove deprecated `Hanami::Interactor::Result#failing?`
-- Remove `Hanami::Utils::Attributes` as no longer used
-- Use `$stdout` instead of `STDOUT` as default stream for `Hanami::Logger`
-- Removed `Utils::Attributes`
-- Removed `Hanami::Interactor::Result#failing?`
-- Removed `Utils::Json.load` and `.dump`
-- Introduced `Hanami::Model.disconnect` to disconnect all the active database connections
-- Fix example with confirmation in params
+- Remove deprecated `Hanami::View::Rendering::LayoutScope#content`
+- Safely boot the application if mailers aren't configured
+- Ensure code reloading don't misconfigure mailer settings
 
 ## Released Gems
 
@@ -40,21 +38,20 @@ excerpt: >
   * `hanami-mailer-1.0.0.beta2`
   * `hanami-assets-1.0.0.beta2`
 
-
 ## Contributors
 
 We're grateful for each person who contributed to this release. These lovely people are:
 
-* [Luca Guidi](https://github.com/jodosha)
 * [Alfonso Uceda](https://github.com/AlfonsoUceda)
 * [Anton Davydov](https://github.com/davydovanton)
+* [Dmitriy Ivliev](https://github.com/moofkit)
 * [Marcello Rocha](https://github.com/mereghost)
 * [Marion Duprey](https://github.com/TiteiKo)
 * [Marion Schleifer](https://github.com/marionschleifer)
 * [Oana Sipos](https://github.com/oana-sipos)
 * [Sean Collins](https://github.com/cllns)
-* [Tobias Sandelius](https://github.com/sandelius)
 * [Semyon Pupkov](https://github.com/artofhuman)
+* [Tobias Sandelius](https://github.com/sandelius)
 
 ## How To Update Your Project
 
