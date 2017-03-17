@@ -17,11 +17,12 @@ excerpt: >
 - Added HTML5 helpers for `<dialog>`, `<hgroup>`, `<rtc>`, `<slot>`, and `<var>` HTML5 tags
 - Use `$stdout` instead of `STDOUT` as default stream for `Hanami::Logger`
 - Disconnect from stale connections when rebooting an application in production
-- Don't mount `Hanami::CommonLogger` middleware if logging is disabled for the project.
+- Don't mount `Hanami::CommonLogger` middleware if logging is disabled for the project
 - Remove `Hanami::Utils::Attributes` as no longer used
-- Remove deprecated `Hanami::Utils::Json.load` and `.dump`
-- Remove deprecated `Hanami::Interactor::Result#failing?`
-- Remove deprecated `Hanami::View::Rendering::LayoutScope#content`
+- Remove deprecated `Hanami::Utils::Json.load` and `.dump`, use `.parse` and `.generate` instead
+- Remove deprecated `Hanami::Interactor::Result#failing?`, use `#failure?` instead
+- Remove deprecated `Hanami::View::Rendering::LayoutScope#content`, use `#local` instead
+- Remove deprecated `Hanami::Application#default_format`, use `#default_request_format` instead
 - Safely boot the application if mailers aren't configured
 - Ensure code reloading don't misconfigure mailer settings
 
