@@ -448,6 +448,12 @@ describe Book do
 end
 ```
 
+When we run this test, we will most likely see an error from our database connection -- remember we only migrated our _development_ database, and not yet our _test_ database.
+
+```
+% HANAMI_ENV=test bundle exec hanami db prepare
+```
+
 ### Using Repositories
 
 Now we are ready to play around with our repository.
@@ -501,11 +507,6 @@ end
 ```
 
 We create the required records in our test and then assert the correct number of book classes on the page.
-When we run this test, we will most likely see an error from our database connection -- remember we only migrated our _development_ database, and not yet our _test_ database.
-
-```
-% HANAMI_ENV=test bundle exec hanami db prepare
-```
 
 Now we can go change our template and remove the static HTML.
 Our view needs to loop over all available records and render them.
