@@ -4,13 +4,13 @@ title: Guides - PostgreSQL
 
 # PostgreSQL
 
-Hanami supports natively PostgreSQL data types.
+Hanami natively supports PostgreSQL data types.
 
 Please check your PostgreSQL version for the available features.
 
 ## UUID
 
-Here's how to use UUID for a column
+Here's how to use UUID for a column:
 
 ```ruby
 # db/migrations/20161113184557_create_projects.rb
