@@ -16,9 +16,9 @@ We want to add users to our `bookshelf` application.
 Note: this is just to explain `Hanami::Interactor` and
 we will not be building a full authentication system.
 We are _only_ concerning ourselves with signing up,
-not logging in.
+not logging in or any other features.
 
-This is a perfect example,
+This is a good example of functionality to extract into an Interactor,
 because user sign-up is not trivial.
 
 
