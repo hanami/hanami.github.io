@@ -4,8 +4,9 @@ title: Guides - Entities
 
 # Entities
 
-An entity is model domain object that is defined by its identity.
-See "Domain Driven Design" by Eric Evans.
+An entity is domain object that is defined by its identity.
+
+See ["Domain Driven Design" by Eric Evans](https://en.wikipedia.org/wiki/Domain-driven_design#Building_blocks).
 
 An entity is at the core of an application, where the part of the domain logic is implemented.
 It's a small, cohesive object that expresses coherent and meaningful behaviors.
@@ -171,7 +172,7 @@ User.new(comments: [:foo]) # => TypeError: :foo must be coercible into Comment
 ---
 
 <p class="warning">
-  Custom schema <strong>takes precedence</strong> over automatic schema. If we use custom schema, we're need to add manually all the new columns from the corresponding SQL database table.
+  Custom schema <strong>takes precedence</strong> over automatic schema. If we use custom schema, we need to manually add all the new columns from the corresponding SQL database table.
 </p>
 
 ---

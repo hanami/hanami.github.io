@@ -13,14 +13,14 @@ delegated to the current adapter.
 This architecture has several advantages:
 
   * Applications depend on a standard API, instead of low level details
-    (Dependency Inversion principle)
+    ([Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) principle)
 
   * Applications depend on a stable API, that doesn't change if the
     storage changes
 
   * Developers can postpone storage decisions
 
-  * Confines persistence logic at a low level
+  * Confines persistence logic to a low level
 
   * Multiple data sources can easily coexist in an application
 
@@ -151,7 +151,7 @@ book.updated_at # => 2016-11-14 08:22:40 UTC
   Timestamps are on UTC timezone.
 </p>
 
-## Legacy Database
+## Legacy Databases
 
 By default, a repository performs auto-mapping of corresponding database table and creates an [automatic schema](/guides/models/entities#automatic-schema) for the associated entity.
 

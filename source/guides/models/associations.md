@@ -17,7 +17,7 @@ Because the association is made of data linked together in a database, we define
 ### Explicit Interface
 
 When we declare an association, that repository **does NOT** get any extra method to its public interface.
-This because Hanami wants to prevent to bloat repositories with several methods that are often unused.
+This because Hanami wants to prevent to bloat in repositories by adding methods that are often never used.
 
 <p class="notice">
   When we define an association, the repository doesn't get any extra public methods.
