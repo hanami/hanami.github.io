@@ -244,3 +244,8 @@ table.status td {
 .gitter-chat-embed {
   z-index: 1000;
 }
+
+.hanami-release-date {
+  font-weight: 200;
+  color: #777;
+}
