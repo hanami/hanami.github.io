@@ -31,6 +31,44 @@ By default it uses standard output because it's a [best practice](http://12facto
 
 If you want to use a file, pass `stream: 'path/to/file.log'` as an option.
 
+## Arbitrary Arguments
+
+You can speficy [arbitrary arguments](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html#class-Logger-label-How+to+create+a+logger), that are compatible with Ruby's `Logger`.
+
+Here's how to setup daily log rotation:
+
+```ruby
+# config/environment.rb
+# ...
+
+Hanami.configure do
+  # ...
+
+  environment :production do
+    logger 'daily', level: :info, formatter: :json, stream: 'log/production.log'
+
+    # ...
+  end
+end
+```
+
+Alternatively, you can decide to put a limit to the number of files (let's say `10`) and the size of each file (eg `1,024,000` bytes, aka `1` megabyte):
+
+```ruby
+# config/environment.rb
+# ...
+
+Hanami.configure do
+  # ...
+
+  environment :production do
+    logger 10, 1_024_000, level: :info, formatter: :json, stream: 'log/production.log'
+
+    # ...
+  end
+end
+```
+
 ## Automatic Logging
 
 All HTTP requests, SQL queries, and database operations are automatically logged.
