@@ -31,20 +31,18 @@ The following command will generate an `admin` project that uses the _Applicatio
 
 ### Database
 
-The default storage used is a toy file system database.
-This is because we want to provide a quick prototyping tool.
+The default database engine is SQLite.
 
-We can use the `--database` argument to let Hanami to generate code for a specific data store.
+We can use the `--database` argument to let Hanami to generate code for a specific database.
 
 It supports:
 
-  * `filesystem` (default)
-  * `memory`
   * `postgres`
   * `postgresql`
-  * `sqlite`
+  * `sqlite` (default)
   * `sqlite3`
   * `mysql`
+  * `mysql2`
 
 ### Testing Framework
 
