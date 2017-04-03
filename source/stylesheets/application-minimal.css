@@ -262,3 +262,10 @@ table.status td {
   font-weight: 200;
   color: #777;
 }
+
+.team-avatar {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+}
