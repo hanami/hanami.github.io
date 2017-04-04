@@ -118,7 +118,7 @@ Alongside with [Alfonso Uceda](https://twitter.com/joshka20) (already a member),
 
 If you're new to Hanami, we prepared a [guide](/guides/getting-started) to build and deploy your very first project.
 
-## How To Update Your Project
+## How To Upgrade
 
 Edit your `Gemfile`:
 
