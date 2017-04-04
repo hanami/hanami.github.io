@@ -210,9 +210,10 @@ div.supporters {
 }
 
 #lotus a.anchor {
-  right: 20px;
-  position: relative;
   text-decoration: none;
+  position: relative;
+  left: -20px;
+  width: 30px;
   opacity: 0;
 }
 
@@ -221,9 +222,10 @@ div.supporters {
 }
 
 .title a.anchor {
-  opacity: 0;
   position: absolute;
+  width: 30px;
   left: -10px;
+  opacity: 0;
 }
 
 .title:hover a.anchor {
