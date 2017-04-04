@@ -64,7 +64,7 @@ To create a new Hanami project, we need to install the Hanami gem from Rubygems.
 Then we can use the new `hanami` executable to generate a new project:
 
 ```
-% gem install hanami --pre
+% gem install hanami
 % hanami new bookshelf
 ```
 

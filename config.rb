@@ -211,11 +211,11 @@ helpers do
   end
 
   def hanami_version
-    '1.0.0.rc1'
+    '1.0.0'
   end
 
   def hanami_release_date
-    Date.parse("2017-03-31").strftime("%B %-d, %Y")
+    Date.parse("2017-04-06").strftime("%B %-d, %Y")
   end
 end
 
