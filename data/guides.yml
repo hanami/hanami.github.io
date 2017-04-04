@@ -118,5 +118,5 @@ categories:
         title: v0.8.0
       - path: v090
         title: v0.9.0
-      - path: v100beta1
-        title: v1.0.0.beta1
+      - path: v100
+        title: v1.0.0
