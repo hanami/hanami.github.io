@@ -109,7 +109,7 @@ Successfully installed hanami-<%= hanami_version %>
                       </code></pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="develop">
-                      <pre class="language-ruby plaintext"><code><span class="command">% cd bookshelf &amp;&amp; bundle</span>
+                      <pre class="language-ruby plaintext"><code><span class="command">% cd bookshelf &amp;&amp; echo "ruby '2.3.0'" &gt;&gt; Gemfile &amp;&amp; bundle</span>
 Bundle complete! 8 Gemfile dependencies, 49 gems now installed.
 <br>
 <span class="command">% git add . &amp;&amp; git commit -m "Initial commit"</span>
@@ -132,6 +132,10 @@ SERVE_STATIC_ASSETS: true
 remote: Verifying deploy... done.
 To https://git.heroku.com/cherry-blossom-1234.git
  * [new branch]      master -&gt; master
+<br>
+<span class="command">% heroku run bundle exec hanami db migrate</span>
+Running bundle exec hanami db migrate on ⬢ cherry-blossom-1234... up, run.7361 (Free)
+# ...
 <br>
 <span class="command">% heroku open</span>
 Opening cherry-blossom-1234... done
