@@ -1090,7 +1090,7 @@ Explore the [other guides](/guides), the [Hanami API documentation](http://www.r
 <div class="block block-bordered-lg text-center">
   <div class="container-fluid">
     <p class="lead m-b-md">
-    Join a community of over 2,000+ developers.
+    Join a community of over 2,200+ developers.
     </p>
     <form action="http://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
       <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
