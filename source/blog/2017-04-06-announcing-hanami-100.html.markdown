@@ -23,7 +23,7 @@ It's political. Hanami is a consequence of my vision: I, **we** want to include 
 
 This goes beyond Hanami. Alongside with other projects like [ROM](http://rom-rb.org/), [dry-rb](http://dry-rb.org/), and [Trailblazer](http://trailblazer.to/) we're influencing how modern web applications are written with Ruby.
 
-**After 1392 days, 6195 commits, made by 295 people, we're proud to announce Hanami 1.0.0! 🌸**
+**After 1392 days, 6205 commits, made by 295 people, we're proud to announce Hanami 1.0.0! 🌸**
 
 A huge thank you goes to [all of the people who contributed](http://contributors.hanamirb.org/) in all these years. 💚💙💛❤️
 
