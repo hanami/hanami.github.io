@@ -10,16 +10,16 @@ excerpt: >
 
 ## One-Point-OOOh! 😱
 
-Hanami is a full stack, lightweight, yet powerful web framework for Ruby.
+Hanami is a full-stack, lightweight, yet powerful web framework for Ruby.
 
 Back in the summer of 2012, as a frustrated web developer, I started an experiment to _rethink_ Ruby on Rails and to build a modern web framework for Ruby.
 The goal was to keep all what I consider the good parts of Rails and to add extra components to ease long term maintenance and testability.
 
 The experiment was promising, and I eventually started to open source Hanami at the beginning of 2014.
 
-Since then it was an amazing journey. I learned a lot about Ruby, Open Source, and people.
-The community aspect if this experience is key to me. Software is made by people for people.
-It's political. Hanami is a consequence of my vision: I, **we** want to include people, keep them motivated to work on Open Source, and have fun together.
+Since then, it's been amazing journey. I learned a lot about Ruby, Open Source, and people.
+The community aspect of this experience is key to me. Software is made by people for people.
+It's political. Hanami is a consequence of my vision: I, **we**, want to include people, keep them motivated to work on Open Source, and have fun together.
 
 This goes beyond Hanami. Alongside with other projects like [ROM](http://rom-rb.org/), [dry-rb](http://dry-rb.org/), and [Trailblazer](http://trailblazer.to/) we're influencing how modern web applications are written with Ruby.
 
@@ -29,10 +29,10 @@ A huge thank you goes to [all of the people who contributed](http://contributors
 
 ## Core Team
 
-Open Source doesn't mean just _"open code"_, but above all means an open decision process.
-This day marks a change in the governance: a diverse team to take together the decisions for the future of the project.
+Open Source doesn't mean just _"open code"_. Above all, it means an open decision process.
+Today marks a change in the governance of Hanami: we'll now have a diverse team to make decisions about the future of the project, together.
 
-Today I'm excited to include in the [core team](/team), new marvellous people I met during these years.
+I'm excited to announce an expansion of the [core team](/team), by adding marvellous new people I've met during these years:
 
 <div class="container-fluid">
   <div class="row my-4">
@@ -99,7 +99,7 @@ Today I'm excited to include in the [core team](/team), new marvellous people I 
   </div>
 </div>
 <br>
-Alongside with [Alfonso Uceda](https://twitter.com/joshka20) (already a member), we'll work on the future of Hanami.
+Along with [Alfonso Uceda](https://twitter.com/joshka20) (already a member), we'll work on the future of Hanami.
 
 ## Released Gems
 
