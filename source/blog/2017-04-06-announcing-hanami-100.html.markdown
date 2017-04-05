@@ -17,7 +17,7 @@ The goal was to keep all what I consider the good parts of Rails and to add extr
 
 The experiment was promising, and I eventually started to open source Hanami at the beginning of 2014.
 
-Since then, it's been amazing journey. I learned a lot about Ruby, Open Source, and people.
+Since then, it's been amazing journey. I have learned a lot about Ruby, Open Source, and people.
 The community aspect of this experience is key to me. Software is made by people for people.
 It's political. Hanami is a consequence of my vision: I, **we**, want to include people, keep them motivated to work on Open Source, and have fun together.
 
