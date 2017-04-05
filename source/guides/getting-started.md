@@ -333,10 +333,11 @@ To avoid repeating ourselves in every single template, we can use a layout.
 Open up the file `apps/web/templates/application.html.erb` and edit it to look like this:
 
 ```rhtml
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Bookshelf</title>
+    <%= favicon %>
   </head>
   <body>
     <h1>Bookshelf</h1>
@@ -450,7 +451,7 @@ We can use Hanami's `console` command to launch IRb with our application pre-loa
 ```
 % bundle exec hanami console
 >> repository = BookRepository.new
-=> => #<BookRepository:0x007f9ab61fbb40 ...>
+=> => #<BookRepository relations=[:books]>
 >> repository.all
 => []
 >> book = repository.create(title: 'TDD', author: 'Kent Beck')
@@ -723,7 +724,7 @@ To submit our form, we need yet another action.
 Let's create a `Books::Create` action:
 
 ```
-% bundle exec hanami generate action web books#create --method=post
+% bundle exec hanami generate action web books#create
 ```
 
 This adds a new route to our app:
@@ -746,16 +747,18 @@ require_relative '../../../../apps/web/controllers/books/create'
 describe Web::Controllers::Books::Create do
   let(:action) { Web::Controllers::Books::Create.new }
   let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
+  let(:repository) { BookRepository.new }
 
   before do
-    BookRepository.new.clear
+    repository.clear
   end
 
   it 'creates a new book' do
     action.call(params)
+    book = repository.last
 
-    action.book.id.wont_be_nil
-    action.book.title.must_equal params[:book][:title]
+    book.id.wont_be_nil
+    book.title.must_equal params.dig(:book, :title)
   end
 
   it 'redirects the user to the books listing' do
@@ -776,10 +779,8 @@ module Web::Controllers::Books
   class Create
     include Web::Action
 
-    expose :book
-
     def call(params)
-      @book = BookRepository.new.create(params[:book])
+      BookRepository.new.create(params[:book])
 
       redirect_to '/books'
     end
@@ -823,17 +824,21 @@ require_relative '../../../../apps/web/controllers/books/create'
 
 describe Web::Controllers::Books::Create do
   let(:action) { Web::Controllers::Books::Create.new }
+  let(:repository) { BookRepository.new }
 
-  after do
-    BookRepository.new.clear
+  before do
+    repository.clear
   end
 
   describe 'with valid params' do
-    let(:params) { Hash[book: { title: '1984', author: 'George Orwell' }] }
+    let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
-    it 'creates a new book' do
+    it 'is creates a book' do
       action.call(params)
-      action.book.id.wont_be_nil
+      book = repository.last
+
+      book.id.wont_be_nil
+      book.title.must_equal params.dig(:book, :title)
     end
 
     it 'redirects the user to the books listing' do
@@ -847,17 +852,17 @@ describe Web::Controllers::Books::Create do
   describe 'with invalid params' do
     let(:params) { Hash[book: {}] }
 
-    it 're-renders the books#new view' do
+    it 'returns HTTP client error' do
       response = action.call(params)
       response[0].must_equal 422
     end
 
-    it 'sets errors attribute accordingly' do
-      response = action.call(params)
-      response[0].must_equal 422
+    it 'dumps errors in params' do
+      action.call(params)
+      errors = action.params.errors
 
-      action.params.errors[:book][:title].must_equal  ['is missing']
-      action.params.errors[:book][:author].must_equal ['is missing']
+      errors.dig(:book, :title).must_equal  ['is missing']
+      errors.dig(:book, :author).must_equal ['is missing']
     end
   end
 end
