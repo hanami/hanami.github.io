@@ -765,7 +765,7 @@ describe Web::Controllers::Books::Create do
     response = action.call(params)
 
     response[0].must_equal 302
-    response[1]['Location'].must_equal '/books'
+    response[1]['Location'].must_include '/books'
   end
 end
 ```
@@ -938,30 +938,20 @@ First, we expect a list of errors to be included in the page when `params` conta
 ```ruby
 # spec/web/views/books/new_spec.rb
 require 'spec_helper'
+require 'ostruct'
 require_relative '../../../../apps/web/views/books/new'
 
-class NewBookParams < Hanami::Action::Params
-  params do
-    required(:book).schema do
-      required(:title).filled(:str?)
-      required(:author).filled(:str?)
-    end
-  end
-end
-
 describe Web::Views::Books::New do
-  let(:params)    { NewBookParams.new(book: {}) }
+  let(:params)    { OpenStruct.new(valid?: false, error_messages: ['Title must be filled', 'Author must be filled']) }
   let(:exposures) { Hash[params: params] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/books/new.html.erb') }
   let(:view)      { Web::Views::Books::New.new(template, exposures) }
   let(:rendered)  { view.render }
 
   it 'displays list of errors when params contains errors' do
-    params.valid? # trigger validations
-
     rendered.must_include('There was a problem with your submission')
-    rendered.must_include('Title is missing')
-    rendered.must_include('Author is missing')
+    rendered.must_include('Title must be filled')
+    rendered.must_include('Author must be filled')
   end
 end
 ```
@@ -1039,8 +1029,8 @@ root              to: 'home#index'
 Hanami provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:
 
 ```ruby
-resources :books, only: [:index, :new, :create]
 root to: 'home#index'
+resources :books, only: [:index, :new, :create]
 ```
 
 To get a sense of what routes are defined, now we've made this change, you can
@@ -1050,10 +1040,10 @@ use the special command-line task `routes` to inspect the end result:
 % bundle exec hanami routes
                 Name Method     Path                           Action
 
+                root GET, HEAD  /                              Web::Controllers::Home::Index
                books GET, HEAD  /books                         Web::Controllers::Books::Index
             new_book GET, HEAD  /books/new                     Web::Controllers::Books::New
                books POST       /books                         Web::Controllers::Books::Create
-                root GET, HEAD  /                              Web::Controllers::Home::Index
 ```
 
 The output for `hanami routes` shows you the name of the defined helper method (you can suffix this name with `_path` or `_url` and call it on the `routes` helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.
@@ -1083,7 +1073,7 @@ We can use the `routes` helper method that is available in our views and actions
 We can make a similar change in `apps/web/controllers/books/create.rb`:
 
 ```ruby
-redirect_to routes.books_path
+redirect_to routes.books_url
 ```
 
 ## Wrapping Up
