@@ -269,3 +269,13 @@ table.status td {
   height: 100%;
   vertical-align: top;
 }
+
+#navigation {
+  font-family: Roboto;
+  font-weight: 400;
+}
+
+#brand-name, #motto {
+  font-family: Roboto;
+  font-weight: 200;
+}
