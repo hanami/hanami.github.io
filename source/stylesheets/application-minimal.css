@@ -256,3 +256,17 @@ table.status td {
   height: 100%;
   vertical-align: top;
 }
+
+.core-map {
+  margin: 50px 0 10px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+#map {
+  height: 400px;
+}
