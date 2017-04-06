@@ -170,7 +170,12 @@ title: Team
 
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
-        center: { lat: 35, lng: -30 }
+        zoomControl: false,
+        scrollwheel: false,
+        mapTypeControl: false,
+        draggable: false,
+        streetViewControl: false,
+        center: { lat: 20, lng: 0 }
       });
 
       function addMarker(feature) {

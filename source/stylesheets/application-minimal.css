@@ -259,14 +259,11 @@ table.status td {
 
 .core-map {
   margin: 50px 0 10px;
-  width: 100vw;
+  width: 100%;
+  max-width: 1024px;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
 }
 
 #map {
-  height: 400px;
+  height: 512px;
 }
