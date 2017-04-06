@@ -128,42 +128,42 @@ title: Team
       var features = [
         {
           position: new google.maps.LatLng(41.908639, 12.496707),
-          icon: "https://avatars0.githubusercontent.com/u/5089?v=3&s=40",
+          icon_url: "https://avatars0.githubusercontent.com/u/5089?v=3&s=60",
           name: 'Luca Guidi'
         },
         {
           position: new google.maps.LatLng(59.934280, 30.335099),
-          icon: "https://avatars2.githubusercontent.com/u/1147484?v=3&s=40",
+          icon_url: "https://avatars2.githubusercontent.com/u/1147484?v=3&s=60",
           name: 'Anton Davydov'
         },
         {
           position: new google.maps.LatLng(48.856614, 2.352222),
-          icon: "https://avatars2.githubusercontent.com/u/248372?v=3&s=40",
+          icon_url: "https://avatars2.githubusercontent.com/u/248372?v=3&s=60",
           name: 'Marion Duprey'
         },
         {
           position: new google.maps.LatLng(46.771210, 23.623635),
-          icon: "https://avatars0.githubusercontent.com/u/3356996?v=3&s=40",
+          icon_url: "https://avatars0.githubusercontent.com/u/3356996?v=3&s=60",
           name: 'Oana Sipos'
         },
         {
           position: new google.maps.LatLng(40.416775, -3.703790),
-          icon: "https://avatars2.githubusercontent.com/u/925961?v=3&s=40",
+          icon_url: "https://avatars2.githubusercontent.com/u/925961?v=3&s=60",
           name: 'Alfonso Uceda'
         },
         {
           position: new google.maps.LatLng(40.014986, -105.270546),
-          icon: "https://avatars2.githubusercontent.com/u/632942?v=3&s=40",
+          icon_url: "https://avatars2.githubusercontent.com/u/632942?v=3&s=60",
           name: 'Sean Collins'
         },
         {
           position: new google.maps.LatLng(-23.543179, -46.629185),
-          icon: "https://avatars2.githubusercontent.com/u/10281?v=3&s=40",
+          icon_url: "https://avatars2.githubusercontent.com/u/10281?v=3&s=60",
           name: 'Marcello Rocha'
         },
         {
           position: new google.maps.LatLng(47.376887, 8.541694),
-          icon: "https://avatars2.githubusercontent.com/u/5722022?v=3&s=40",
+          icon_url: "https://avatars2.githubusercontent.com/u/5722022?v=3&s=60",
           name: 'Marion Schleifer'
         }
       ];
@@ -180,10 +180,16 @@ title: Team
           radius: 100
         });
 
+        var icon = {
+          url: feature.icon_url,
+          scaledSize: new google.maps.Size(30, 30),
+          anchor: new google.maps.Point(15, 15)
+        };
+
         var marker = new google.maps.Marker({
           position: feature.position,
           shape: shape,
-          icon: feature.icon,
+          icon: icon,
           title: feature.name,
           map: map
         });
