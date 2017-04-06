@@ -112,3 +112,107 @@ title: Team
     </div>
   </div>
 </div>
+
+
+<div class="core-map">
+  <div id="map"></div>
+  <script>
+    function initMap() {
+      var myoverlay = new google.maps.OverlayView();
+      myoverlay.draw = function () {
+        //this assigns an id to the markerlayer Pane, so it can be referenced by CSS
+        this.getPanes().markerLayer.id='markerLayer';
+      };
+      myoverlay.setMap(map);
+
+      var features = [
+        {
+          position: new google.maps.LatLng(41.90, 12.49),
+          icon_url: "https://avatars0.githubusercontent.com/u/5089?v=3&s=60",
+          name: 'Luca Guidi'
+        },
+        {
+          position: new google.maps.LatLng(59.93, 30.33),
+          icon_url: "https://avatars2.githubusercontent.com/u/1147484?v=3&s=60",
+          name: 'Anton Davydov'
+        },
+        {
+          position: new google.maps.LatLng(48.85, 2.35),
+          icon_url: "https://avatars2.githubusercontent.com/u/248372?v=3&s=60",
+          name: 'Marion Duprey'
+        },
+        {
+          position: new google.maps.LatLng(46.77, 23.62),
+          icon_url: "https://avatars0.githubusercontent.com/u/3356996?v=3&s=60",
+          name: 'Oana Sipos'
+        },
+        {
+          position: new google.maps.LatLng(40.41, -3.70),
+          icon_url: "https://avatars2.githubusercontent.com/u/925961?v=3&s=60",
+          name: 'Alfonso Uceda'
+        },
+        {
+          position: new google.maps.LatLng(40.01, -105.27),
+          icon_url: "https://avatars2.githubusercontent.com/u/632942?v=3&s=60",
+          name: 'Sean Collins'
+        },
+        {
+          position: new google.maps.LatLng(-23.54, -46.62),
+          icon_url: "https://avatars2.githubusercontent.com/u/10281?v=3&s=60",
+          name: 'Marcello Rocha'
+        },
+        {
+          position: new google.maps.LatLng(47.37, 8.54),
+          icon_url: "https://avatars2.githubusercontent.com/u/5722022?v=3&s=60",
+          name: 'Marion Schleifer'
+        }
+      ];
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 2,
+        zoomControl: false,
+        scrollwheel: false,
+        mapTypeControl: false,
+        draggable: false,
+        streetViewControl: false,
+        center: { lat: 20, lng: 0 }
+      });
+
+      function addMarker(feature) {
+        var infowindow = new google.maps.InfoWindow({content: feature.name});
+
+        var shape = new google.maps.Circle({
+          radius: 100
+        });
+
+        var icon = {
+          url: feature.icon_url,
+          scaledSize: new google.maps.Size(30, 30),
+          anchor: new google.maps.Point(15, 15)
+        };
+
+        var marker = new google.maps.Marker({
+          position: feature.position,
+          shape: shape,
+          icon: icon,
+          title: feature.name,
+          map: map
+        });
+
+        marker.addListener("mouseover", function() {
+          infowindow.open(map, marker);
+        });
+
+        marker.addListener("mouseout", function() {
+          infowindow.close();
+        });
+      }
+
+      for (var i = 0, feature; feature = features[i]; i++) {
+        addMarker(feature)
+      }
+    }
+  </script>
+  <script async defer src="//maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCD6aZnKrUWStG469WrliKLMbBwTil8Skc&callback=window.initMap"></script>
+</div>
+
