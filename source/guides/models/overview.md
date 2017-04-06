@@ -17,9 +17,12 @@ As first step, we generate the model:
 % bundle exec hanami generate model book
       create  lib/bookshelf/entities/book.rb
       create  lib/bookshelf/repositories/book_repository.rb
+      create  db/migrations/20170406230335_create_books.rb
       create  spec/bookshelf/entities/book_spec.rb
       create  spec/bookshelf/repositories/book_repository_spec.rb
 ```
+
+The generator gives us an entity, a repository, a migration, and accompanying test files.
 
 This is the generated entity:
 
@@ -33,13 +36,6 @@ While this is the generated repository:
 ```ruby
 class BookRepository < Hanami::Repository
 end
-```
-
-Then we generate the migration:
-
-```shell
-% bundle exec hanami generate migration create_books
-      create  db/migrations/20161113154510_create_books.rb
 ```
 
 Let's edit the migration with the following code:
