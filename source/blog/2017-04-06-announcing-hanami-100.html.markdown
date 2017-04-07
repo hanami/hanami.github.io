@@ -91,7 +91,7 @@ I'm excited to announce an expansion of the [core team](/team), by adding marvel
             <img class="team-avatar" src="https://avatars2.githubusercontent.com/u/5722022?v=3&s=460">
           </div>
 
-          <h3><a href="https://twitter.com/marionschleifer">Marion Schleifer</a></h3>
+          <h3><a href="https://twitter.com/rubydwarf">Marion Schleifer</a></h3>
           <p>Zurich, Switzerland</p>
         </li>
       </ul>
