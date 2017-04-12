@@ -64,7 +64,7 @@ To create a new Hanami project, we need to install the Hanami gem from Rubygems.
 Then we can use the new `hanami` executable to generate a new project:
 
 ```
-% gem install hanami --pre
+% gem install hanami
 % hanami new bookshelf
 ```
 
@@ -333,10 +333,11 @@ To avoid repeating ourselves in every single template, we can use a layout.
 Open up the file `apps/web/templates/application.html.erb` and edit it to look like this:
 
 ```rhtml
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Bookshelf</title>
+    <%= favicon %>
   </head>
   <body>
     <h1>Bookshelf</h1>
@@ -435,7 +436,7 @@ We can verify it all works as expected with a unit test:
 require 'spec_helper'
 
 describe Book do
-  it 'can be initialised with attributes' do
+  it 'can be initialized with attributes' do
     book = Book.new(title: 'Refactoring')
     book.title.must_equal 'Refactoring'
   end
@@ -450,7 +451,7 @@ We can use Hanami's `console` command to launch IRb with our application pre-loa
 ```
 % bundle exec hanami console
 >> repository = BookRepository.new
-=> => #<BookRepository:0x007f9ab61fbb40 ...>
+=> => #<BookRepository relations=[:books]>
 >> repository.all
 => []
 >> book = repository.create(title: 'TDD', author: 'Kent Beck')
@@ -723,7 +724,7 @@ To submit our form, we need yet another action.
 Let's create a `Books::Create` action:
 
 ```
-% bundle exec hanami generate action web books#create --method=post
+% bundle exec hanami generate action web books#create
 ```
 
 This adds a new route to our app:
@@ -746,23 +747,25 @@ require_relative '../../../../apps/web/controllers/books/create'
 describe Web::Controllers::Books::Create do
   let(:action) { Web::Controllers::Books::Create.new }
   let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
+  let(:repository) { BookRepository.new }
 
   before do
-    BookRepository.new.clear
+    repository.clear
   end
 
   it 'creates a new book' do
     action.call(params)
+    book = repository.last
 
-    action.book.id.wont_be_nil
-    action.book.title.must_equal params[:book][:title]
+    book.id.wont_be_nil
+    book.title.must_equal params.dig(:book, :title)
   end
 
   it 'redirects the user to the books listing' do
     response = action.call(params)
 
     response[0].must_equal 302
-    response[1]['Location'].must_equal '/books'
+    response[1]['Location'].must_include '/books'
   end
 end
 ```
@@ -776,10 +779,8 @@ module Web::Controllers::Books
   class Create
     include Web::Action
 
-    expose :book
-
     def call(params)
-      @book = BookRepository.new.create(params[:book])
+      BookRepository.new.create(params[:book])
 
       redirect_to '/books'
     end
@@ -823,17 +824,21 @@ require_relative '../../../../apps/web/controllers/books/create'
 
 describe Web::Controllers::Books::Create do
   let(:action) { Web::Controllers::Books::Create.new }
+  let(:repository) { BookRepository.new }
 
-  after do
-    BookRepository.new.clear
+  before do
+    repository.clear
   end
 
   describe 'with valid params' do
-    let(:params) { Hash[book: { title: '1984', author: 'George Orwell' }] }
+    let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
-    it 'creates a new book' do
+    it 'is creates a book' do
       action.call(params)
-      action.book.id.wont_be_nil
+      book = repository.last
+
+      book.id.wont_be_nil
+      book.title.must_equal params.dig(:book, :title)
     end
 
     it 'redirects the user to the books listing' do
@@ -847,17 +852,17 @@ describe Web::Controllers::Books::Create do
   describe 'with invalid params' do
     let(:params) { Hash[book: {}] }
 
-    it 're-renders the books#new view' do
+    it 'returns HTTP client error' do
       response = action.call(params)
       response[0].must_equal 422
     end
 
-    it 'sets errors attribute accordingly' do
-      response = action.call(params)
-      response[0].must_equal 422
+    it 'dumps errors in params' do
+      action.call(params)
+      errors = action.params.errors
 
-      action.params.errors[:book][:title].must_equal  ['is missing']
-      action.params.errors[:book][:author].must_equal ['is missing']
+      errors.dig(:book, :title).must_equal  ['is missing']
+      errors.dig(:book, :author).must_equal ['is missing']
     end
   end
 end
@@ -933,30 +938,20 @@ First, we expect a list of errors to be included in the page when `params` conta
 ```ruby
 # spec/web/views/books/new_spec.rb
 require 'spec_helper'
+require 'ostruct'
 require_relative '../../../../apps/web/views/books/new'
 
-class NewBookParams < Hanami::Action::Params
-  params do
-    required(:book).schema do
-      required(:title).filled(:str?)
-      required(:author).filled(:str?)
-    end
-  end
-end
-
 describe Web::Views::Books::New do
-  let(:params)    { NewBookParams.new(book: {}) }
+  let(:params)    { OpenStruct.new(valid?: false, error_messages: ['Title must be filled', 'Author must be filled']) }
   let(:exposures) { Hash[params: params] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/books/new.html.erb') }
   let(:view)      { Web::Views::Books::New.new(template, exposures) }
   let(:rendered)  { view.render }
 
   it 'displays list of errors when params contains errors' do
-    params.valid? # trigger validations
-
     rendered.must_include('There was a problem with your submission')
-    rendered.must_include('Title is missing')
-    rendered.must_include('Author is missing')
+    rendered.must_include('Title must be filled')
+    rendered.must_include('Author must be filled')
   end
 end
 ```
@@ -1034,8 +1029,8 @@ root              to: 'home#index'
 Hanami provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:
 
 ```ruby
-resources :books, only: [:index, :new, :create]
 root to: 'home#index'
+resources :books, only: [:index, :new, :create]
 ```
 
 To get a sense of what routes are defined, now we've made this change, you can
@@ -1045,10 +1040,10 @@ use the special command-line task `routes` to inspect the end result:
 % bundle exec hanami routes
                 Name Method     Path                           Action
 
+                root GET, HEAD  /                              Web::Controllers::Home::Index
                books GET, HEAD  /books                         Web::Controllers::Books::Index
             new_book GET, HEAD  /books/new                     Web::Controllers::Books::New
                books POST       /books                         Web::Controllers::Books::Create
-                root GET, HEAD  /                              Web::Controllers::Home::Index
 ```
 
 The output for `hanami routes` shows you the name of the defined helper method (you can suffix this name with `_path` or `_url` and call it on the `routes` helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.
@@ -1078,7 +1073,7 @@ We can use the `routes` helper method that is available in our views and actions
 We can make a similar change in `apps/web/controllers/books/create.rb`:
 
 ```ruby
-redirect_to routes.books_path
+redirect_to routes.books_url
 ```
 
 ## Wrapping Up
@@ -1095,7 +1090,7 @@ Explore the [other guides](/guides), the [Hanami API documentation](http://www.r
 <div class="block block-bordered-lg text-center">
   <div class="container-fluid">
     <p class="lead m-b-md">
-    Join a community of over 2,000+ developers.
+    Join a community of over 2,200+ developers.
     </p>
     <form action="http://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
       <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">

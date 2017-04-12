@@ -4,7 +4,7 @@ title: "Guides - Architectures: Container"
 
 # Architectures
 
-Hanami is based in on two principles: [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html).
+Hanami is based on two principles: [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html).
 
 ## Clean Architecture
 
@@ -46,8 +46,8 @@ There are two important directories:
   * `lib/bookshelf/entities`
   * `lib/bookshelf/repositories`
 
-They contain [entities](/guides/models/entities) that are Ruby objects at the core of our model domain and they aren't aware of any persistence mechanism.
-For this purpose we have a separated concept [repositories](/guides/models/repositories), which are a mediator between our entities and the underlying database.
+They contain [entities](/guides/models/entities) that are Ruby objects at the core of our model domain, and they aren't aware of any persistence mechanism.
+For this purpose we have a separate concept, [repositories](/guides/models/repositories), which are a mediator between our entities and the underlying database.
 
 For each entity named `Book` we can have a `BookRepository`.
 
@@ -103,12 +103,12 @@ Hanami has a solution for our problem: we can generate a new app that lives in t
 
 This command MUST be run from the root of our project. It will generate a new application (`Admin::Application`) under `apps/admin`.
 
-At the late stages of our product life, we can eventually decide to extract this into a standalone component.
-We just need to move everything under `apps/admin` into another repository and deploy it separately.
+In the late stages of our product life-cycle, we could decide to extract this into a standalone component.
+We would just need to move everything under `apps/admin` into another repository and deploy it separately.
 
 ## Anatomy Of A Project
 
-We have examined `lib/` and `apps/` until now, but there are other parts of a new generated project that deserve to be explained.
+We have already examined `lib/` and `apps/`, but there are other parts of a newly generated project that deserve to be explained.
 
 ```shell
 % tree -L 1
