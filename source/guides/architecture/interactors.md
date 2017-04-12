@@ -309,7 +309,7 @@ describe SignUpUser do
   # ...
 
   it "creates a User with password_digest" do
-    result.user.password_digest.length.must_equal 60
+    interactor.user.password_digest.length.must_equal 60
   end
 end
 ```
