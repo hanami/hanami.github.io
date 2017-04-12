@@ -51,18 +51,18 @@ from the [Getting Started]((/guides/getting-started)
 and we want to add a feature.
 
 Clone the `bookshelf` application so we're starting from the same place.
-```bash
-git clone git@github.com:hanami/bookshelf.git hanami-bookshelf
-cd hanami-bookshelf
-bundle install
-HANAMI_ENV=development hanami db prepare
-HANAMI_ENV=test hanami db prepare
-bundle exec rake # All the tests should pass
+```shell
+% git clone git@github.com:hanami/bookshelf.git hanami-bookshelf
+% cd hanami-bookshelf
+% bundle install
+% HANAMI_ENV=development hanami db prepare
+% HANAMI_ENV=test hanami db prepare
+% bundle exec rake # All the tests should pass
 ```
 
 # Adding User model
-```bash
-hanami generate model User
+```shell
+% hanami generate model User
 ```
 
 You'll see an entity (`User`) and a repository (`UserRepository`) created,
@@ -96,16 +96,16 @@ We'll add a couple columns:
 
 Let's create that table:
 
-```bash
-bundle exec hanami db prepare
+```shell
+% bundle exec hanami db prepare
 ```
 
 # Interactor
 Let's create a place for our Interactor to go:
 
-```bash
-mkdir lib/bookshelf/interactors
-mkdir spec/bookshelf/interactors
+```shell
+% mkdir lib/bookshelf/interactors
+% mkdir spec/bookshelf/interactors
 ```
 
 We put them in `lib/bookshelf` because they're decoupled from the web:
@@ -156,8 +156,8 @@ since we didn't say that it failed.
 
 Let's run this test:
 
-```bash
-bundle exec rake
+```shell
+% bundle exec rake
 ```
 
 All the tests should pass!
