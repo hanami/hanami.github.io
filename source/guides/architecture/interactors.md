@@ -89,7 +89,7 @@ Hanami::Model.migration do
 end
 ```
 
-We'll add three columns:
+We'll add a couple columns:
 - `email`, we require this field, and make sure it's unique
 - `password_digest`, this will be the user's hashed password
 
