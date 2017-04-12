@@ -384,6 +384,84 @@ and it also makes sure `.success?` will return false
 
 Now our tests will pass!
 
+# Validations
+
+Validations should be placed as close to user input as possible.
+The reason for this is that different use-cases can have different validations
+(for example, admin validation might be less strict than normal user's validations).
+In a web application, this means putting them in your controller actions.
+
+However,
+there are times when you might want to put the validations at a lower-level.
+This lets you share them across the use-cases and
+ensures consistent behavior from different applications.
+
+Here's how you do that.
+
+`Hanami::Interactor` has built-in support for simple validations.
+If the validations (via a private `valid?` method) fail,
+then `call` is never run and the result is `failure`, rather than `success.
+
+Let's say we want to prohibit any password that begins with the string `password`:
+so `password`, `passwordabc`, `password123` would all be prohibited.
+In a real app,
+you may want to do robust password strength checking,
+but this an adequate example for our purposes.
+
+
+```ruby
+require 'spec_helper'
+
+describe SignUpUser do
+  # ...
+
+  it "fails for having password as 'password'" do
+    result = SignUpUser.new(email: "test@example.com", password: "password").call
+    result.failure?.must_equal [ ]
+  end
+
+  it "fails for having password as 'password123'" do
+    result = SignUpUser.new(email: "test@example.com", password: "password123").call
+    result.failure?.must_equal true
+    result.errors.must_equal [ ]
+  end
+end
+```
+
+These two tests will fail,
+because `valid?` is inherited from `Hanami::Interactor`,
+which returns `true` by default.
+
+Let's override that method in our interactor:
+```ruby
+require 'hanami/interactor'
+
+class SignUpUser
+  include Hanami::Interactor
+
+  # ...
+
+  private
+
+  def valid?
+    @params[:password][0..7] != "password"
+  end
+end
+```
+
+Now our tests should all pass.
+
+There are two things to note here:
+
+1. Our `call` method is bypassed, so it never even attempts to run that code.
+
+2. We don't have any error messages. If you try to run `error!` here, you'll end
+   up with duplicate messages, because this `valid?` method is run multiple
+   times. It's not supposed to change state at all (which `error!` does).
+
+# Controlling Flow
+[To be completed]
+
 # Controller Actions
 [To be completed]
 
