@@ -118,6 +118,8 @@ and write a new spec `spec/bookshelf/interactors/sign_up_user_spec.rb`:
 require 'spec_helper'
 
 describe SignUpUser do
+  let(:interactor) { SignUpUser.new(email: "test@example.com") }
+
   it "succeeds" do
     interactor.call.success?.must_equal true
   end
