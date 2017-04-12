@@ -111,8 +111,21 @@ mkdir spec/bookshelf/interactors
 We put them in `lib/bookshelf` because they're decoupled from the web:
 later you may want to allow users to sign up via an API or an admin portal.
 
+Let's call our interactor `SignUpUser`,
+and write a new spec `spec/bookshelf/interactors/sign_up_user_spec.rb`:
 
-Let's add some boilerplate to a new `lib/bookshelf/interactors/sign_up_user.rb` file:
+```ruby
+require 'spec_helper'
+
+describe SignUpUser do
+  it "succeeds" do
+    interactor.call.success?.must_equal true
+  end
+end
+```
+
+Running your test suite will cause an error because there is no `SignUpUser` class.
+Let's create that class in a `lib/bookshelf/interactors/sign_up_user.rb` file:
 
 ```ruby
 require 'hanami/interactor'
@@ -130,35 +143,27 @@ class SignUpUser
 end
 ```
 
-These are the only two public methods this class has:
+These are the only two public methods this class should ever have:
 `initialize`, to set-up the data, and
 `call` to actually perform the operation(s).
 
+These methods are free to call private methods that you'll write.
 
-Likewise, we need to fill out a new spec: `spec/bookshelf/interactors/sign_up_user_spec.rb`
+By default, the operation is considered a success,
+since we didn't say that it failed.
 
-```ruby
-require 'spec_helper'
-
-describe SignUpUser do
-  it "succeeds" do
-    interactor.call.success?.must_equal true
-  end
-end
-```
-
-And let's run this test:
+Let's run this test:
 
 ```bash
 bundle exec rake
 ```
 
-All tests should pass!
+All the tests should pass!
 
 Now, let's make our `SignUpUser` actually do something!
 
-# Creating a User
 
+# Creating a User
 
 Edit `spec/bookshelf/interactors/sign_up_user_spec.rb`:
 ```ruby
