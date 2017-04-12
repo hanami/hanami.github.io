@@ -187,6 +187,8 @@ If you run the tests with `bundle exec rake`, you'll see this error:
 NoMethodError: undefined method `user' for #<Hanami::Interactor::Result:0x007f94498c1718>
 ```
 
+Let's fill out our interactor,
+then explain what we did:
 
 ```ruby
 require 'hanami/interactor'
