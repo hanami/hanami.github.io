@@ -24,7 +24,7 @@ end
 ```
 
 <p class="warning">
-  Both <code>.from</code> and <code>.to</code> informations MUST be specified when we deliver an email.
+  Both <code>.from</code> and <code>.to</code> MUST be specified when we deliver an email.
 </p>
 
 <p class="notice">
@@ -33,7 +33,7 @@ end
 
 You may have noticed that have a hardcoded value can be useful to set the sender, but it doesn't work well for the rest of the details.
 
-If pass a **symbol as argument**, it will be interpreted as a **method** that we want to use for that information.
+If you pass a **symbol as an argument**, it will be interpreted as a **method** that we want to use for that information.
 
 
 ```ruby
@@ -68,7 +68,7 @@ end
 
 ### Locals
 
-In the previous section, we have referenced an `user` variable, where it comes from?
+In the previous section, we have referenced an `user` variable, where does it come from?
 Similarly to a [view](/guides/views/basic-usage), a mailer can have a set of _locals_ that can be passed as an argument in order to make them available during the rendering.
 
 ```ruby
