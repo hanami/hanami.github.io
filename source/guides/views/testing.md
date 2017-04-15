@@ -53,8 +53,9 @@ This is tested by looking at the output of the template.
   Asserting presentational logic directly via view's methods, or indirectly via rendered markup are two EQUIVALENT ways.
 </p>
 
-Notice that exposures include unused `params` key. While not strictly required it is recommended to provide
-at list this exposure since it is expected by some standard view helpers (e.g. form helpers).
+Notice that `exposures` includes an unused `params` key.
+While this is not strictly required,
+we recommend providing it since it's expected by some standard view helpers (e.g. form helpers).
 
 Let's have a look at the corresponding production code.
 
