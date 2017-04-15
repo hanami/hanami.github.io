@@ -15,7 +15,7 @@ require 'spec_helper'
 require_relative '../../../../apps/web/views/books/show'
 
 RSpec.describe Web::Views::Books::Show do
-  let(:exposures) { Hash[book: double('book', price: 1.00), current_user: user] }
+  let(:exposures) { Hash[book: double('book', price: 1.00), current_user: user, params: {}] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/books/show.html.erb') }
   let(:view)      { Web::Views::Home::Another.new(template, exposures) }
   let(:rendered)  { view.render }
@@ -52,6 +52,9 @@ This is tested by looking at the output of the template.
 <p class="notice">
   Asserting presentational logic directly via view's methods, or indirectly via rendered markup are two EQUIVALENT ways.
 </p>
+
+Notice that exposures include unused `params` key. While not strictly required it is recommended to provide
+at list this exposure since it is expected by some standard view helpers (e.g. form helpers).
 
 Let's have a look at the corresponding production code.
 
