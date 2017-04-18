@@ -43,6 +43,7 @@ The same principle applies if we want only to send textual emails, just remove H
 ## Configuration
 
 In order to specify the gateway to use for our email messages, we can use `delivery` configuration.
+If you use mailer separately please reed [the gem documentation](https://github.com/hanami/mailer#mailers).
 
 ### Built-in Methods
 
