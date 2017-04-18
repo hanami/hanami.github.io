@@ -47,7 +47,7 @@ Hanami::Model.migration do
     execute 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
 
     create_table :project_files do
-      column :id, 'uuid', null: false, default: Hanami::Model::Sql.function(:uuid_generate_v4)
+      primary_key :id, 'uuid', null: false, default: Hanami::Model::Sql.function(:uuid_generate_v4)
       column :name, String
     end
   end
