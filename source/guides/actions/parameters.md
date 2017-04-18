@@ -55,6 +55,13 @@ params.get(:book, :title)             # => "Hanami"
 params.get(:unknown, :nested, :param) # => nil instead of NoMethodError
 ```
 
+Additionally Ruby 2.3.0 introduced a new method called [dig](http://ruby-doc.org/core-2.3.0/Hash.html#method-i-dig) on both `Hash` and `Array`
+
+```ruby
+params.dig(:book, :title)           # => "Hanami"
+params.dig(:unknown, :nested, :param) # => nil instead of NoMethodError
+```
+
 ## Whitelisting
 
 In order to show how whitelisting works, let's create a new action:
