@@ -222,6 +222,29 @@ div.supporters {
   text-decoration: underline;
 }
 
+#lotus a.anchor {
+  text-decoration: none;
+  position: relative;
+  left: -20px;
+  width: 30px;
+  opacity: 0;
+}
+
+#lotus:hover a.anchor {
+  opacity: 1;
+}
+
+.title a.anchor {
+  position: absolute;
+  width: 30px;
+  left: -10px;
+  opacity: 0;
+}
+
+.title:hover a.anchor {
+  opacity: 1;
+}
+
 table.status {
   width: 100%;
 }
