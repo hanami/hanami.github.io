@@ -16,7 +16,7 @@ title: Guides - Getting Started
 
   <p>
     I warn you that whether you're a total beginner or an experienced developer <strong>this learning process can be hard</strong>.
-    After 10 years you develop a way of working, and it can be painful for you to change. However, <strong>without change, there is no challenge</strong>.
+    Over time, we build expectations about how things should be, and it can be painful to change. <strong>But without change, there is no challenge</strong> and without challenge, there is no growth.
   </p>
 
   <p>
