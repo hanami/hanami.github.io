@@ -44,6 +44,21 @@ module Web
 end
 ```
 
+Also, you need to require your shared view file in `apps/<app_name>/application.rb` file.
+
+```ruby
+# ...
+require_relative './accept_json'
+
+module AppName
+  class Application < Hanami::Application
+    configure do
+      # ...
+    end
+  end
+end
+```
+
 <p class="warning">
 Code included via <code>prepare</code> is available for ALL the views of an application.
 </p>
