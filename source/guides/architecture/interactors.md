@@ -451,16 +451,64 @@ end
 
 Now our tests should all pass.
 
-There are two things to note here:
+This is fine, but we'd like to know what went wrong:
+our `errors` array on the result is empty.
 
-1. Our `call` method is bypassed, so it never even attempts to run that code.
+We can leverage `error!`
+(like we used for duplicate email addresses)
+to fix this.
 
-2. We don't have any error messages. If you try to run `error!` here, you'll end
-   up with duplicate messages, because this `valid?` method is run multiple
-   times. It's not supposed to change state at all (which `error!` does).
+```ruby
+require 'spec_helper'
 
-# Controlling Flow
-[To be completed]
+describe SignUpUser do
+  # ...
+
+  it "fails for having password as 'password'" do
+    result = SignUpUser.new(email: "test@example.com", password: "password").call
+    result.failure?.must_equal true
+    result.errors.must_equal [
+      "Please choose a password that does not contain a word on our banned list."
+    ]
+  end
+
+  it "fails for having password as 'password123'" do
+    result = SignUpUser.new(email: "test@example.com", password: "password123").call
+    result.failure?.must_equal true
+    result.errors.must_equal [
+      "Please choose a password that does not contain a word on our banned list."
+    ]
+  end
+end
+```
+
+These two tests will fail, because our `errors` array is still empty.
+
+```ruby
+require 'hanami/interactor'
+
+class SignUpUser
+  include Hanami::Interactor
+
+  # ...
+
+  private
+
+  def valid?
+    @params[:password][0..7] != "password" ||
+    error!("Please choose a password that does not contain a word on our banned list.")
+  end
+end
+```
+
+Note that we inverted the equality check here,
+in order to leverage boolean logic.
+
+That is, our method now says:
+it is valid if it does *not* begin with password, else it's an error.
+This works with the API, because `error!` returns false.
+
+And now our tests should pass!
 
 # Controller Actions
 [To be completed]
