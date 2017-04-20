@@ -513,5 +513,78 @@ And now our tests should pass!
 # Controller Actions
 [To be completed]
 
+But, you're probably most interested in using your interactor in a Hanami web application.
+
+To do that, let's first generate an action:
+
+```shell
+% bundle exec hanami generate action web user_registrations#create --skip-view
+      create  spec/web/controllers/user_registrations/create_spec.rb
+      create  apps/web/controllers/user_registrations/create.rb
+      insert  apps/web/config/routes.rb
+```
+
+First, let's edit the generated spec,
+`spec/web/views/user_registrations/create_spec.rb`:
+
+```ruby
+require 'spec_helper'
+require_relative '../../../../apps/web/controllers/user_registrations/create'
+
+describe Web::Controllers::UserRegistrations::Create do
+  let(:action) { Web::Controllers::UserRegistrations::Create.new }
+  let(:params) { Hash[] }
+
+  before { UserRepository.new.clear }
+
+  it 'is successful' do
+    response = action.call(params)
+    response[0].must_equal 200
+    response[2].must_equal ["Created!"]
+  end
+
+  it 'fails when user with same email already exists' do
+    UserRepository.new.create(params)
+    response = action.call(params)
+    response[0].must_equal 400
+    response[2].must_equal [
+      "Errors: The email test@example.com is already signed up"
+    ]
+  end
+end
+```
+
+This fails because we didn't implement the action, so let's do that:
+
+```
+module Web::Controllers::UserRegistrations
+  class Create
+    include Web::Action
+
+    def call(params)
+      result = SignUpUser.new(params).call
+
+      if result.success?
+        self.status = 200
+        self.body = "Created!"
+      else
+        self.status = 400
+        self.body = "Errors: #{result.errors.join(', ')}"
+      end
+    end
+  end
+end
+```
+
+This is a simple way to use interactors in your controller actions.
+
+But, the testing can be improved.
+
+Right now, we fell into the trap of testing an implementation detail.
+The action spec should not test what happens *inside* the interactor.
+
+Instead, we should just test that the interactor is called,
+and that both successes and failures are handled.
+
 # Summary/Rationale/Conclusion
 [To be completed]
