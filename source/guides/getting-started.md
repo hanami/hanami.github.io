@@ -463,6 +463,22 @@ We can use Hanami's `console` command to launch IRb with our application pre-loa
 Hanami repositories have methods to load one or more entities from our database; and to create and update existing records.
 The repository is also the place where you would define new methods to implement custom queries.
 
+We can verify it all works as expected with a unit test as well:
+
+```ruby
+# spec/bookshelf/repositories/book_repository_spec.rb
+require 'spec_helper'
+
+describe BookRepository do
+  it 'can be initialised with attributes' do
+    repository = BookRepository.new
+    book = repository.create(title: 'TDD', author: 'Kent Beck')
+
+    repository.find(book.id).must_equal book
+  end
+end
+```
+
 To recap, we've seen how Hanami uses entities and repositories to model our data.
 Entities represent our behavior, while repositories use mappings to translate our entities to our data store.
 We can use migrations to apply changes to our database schema.
