@@ -78,6 +78,50 @@ There are cases when we want to print the raw contents.
 
 The helper is called `#raw`.
 
+### Specific Local
+
+If we want to escape a specific _local_:
+
+```ruby
+# apps/web/controllers/snippets/show.rb
+
+module Web::Controllers::Snippets
+  class Show
+    include Web::Action
+
+    expose :snippet
+
+    def call(params)
+      @snippet = "<h1>Hello World</h1>"
+    end
+  end
+end
+```
+
+```ruby
+# apps/web/views/snippets/show.rb
+
+module Web::Views::Snippets
+  class Show
+    include Web::View
+
+    def snippet
+      raw locals[:snippet]
+    end
+  end
+end
+```
+
+```erb
+# apps/web/views/snippets/show.html.erb
+
+<%= snippet %>
+```
+
+### Entire Output
+
+We can also return unescaped output for the entire view:
+
 ```ruby
 # apps/web/views/books/json_show.rb
 require 'json'
