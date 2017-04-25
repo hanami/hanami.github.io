@@ -1073,7 +1073,7 @@ We can use the `routes` helper method that is available in our views and actions
 We can make a similar change in `apps/web/controllers/books/create.rb`:
 
 ```ruby
-redirect_to routes.books_url
+redirect_to routes.books_path
 ```
 
 ## Wrapping Up
