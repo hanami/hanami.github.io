@@ -1,4 +1,0 @@
-HostBasedAuthentication yes
-PasswordAuthentication yes
-PubKeyAuthentication yes
-ChallengeResponseAuthentication yes

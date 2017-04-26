@@ -1,5 +1,0 @@
-sprockets.append_path File.join(root, 'vendor/assets/components')
-sprockets.import_asset('blub/images/drawing-bower.svg')
-sprockets.import_asset('font-awesome/fonts/fontawesome-webfont-bower.svg')
-sprockets.import_asset('font-awesome/fonts/fontawesome-webfont-bower.svg.gz')
-sprockets.import_asset('font-awesome/fonts/fontawesome-webfont-bower.ttf.gz')
