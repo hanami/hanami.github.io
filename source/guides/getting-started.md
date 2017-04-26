@@ -376,12 +376,18 @@ Hanami ships with a generator for models, so let's use it to create a `Book` ent
 % bundle exec hanami generate model book
 create  lib/bookshelf/entities/book.rb
 create  lib/bookshelf/repositories/book_repository.rb
-create  db/migrations/20161115110038_create_books.rb
 create  spec/bookshelf/entities/book_spec.rb
 create  spec/bookshelf/repositories/book_repository_spec.rb
 ```
 
-The generator gives us an entity, a repository, a migration, and accompanying test files.
+The generator gives us an entity, a repository and accompanying test files.
+
+Then we generate the migration:
+
+```shell
+% bundle exec hanami generate migration create_books
+      create  db/migrations/20161113154510_create_books.rb
+```
 
 ### Migrations To Change Our Database Schema
 
@@ -443,6 +449,12 @@ describe Book do
 end
 ```
 
+When we run this test, we will most likely see an error from our database connection -- remember we only migrated our _development_ database, and not yet our _test_ database.
+
+```
+% HANAMI_ENV=test bundle exec hanami db prepare
+```
+
 ### Using Repositories
 
 Now we are ready to play around with our repository.
@@ -496,11 +508,6 @@ end
 ```
 
 We create the required records in our test and then assert the correct number of book classes on the page.
-When we run this test, we will most likely see an error from our database connection -- remember we only migrated our _development_ database, and not yet our _test_ database.
-
-```
-% HANAMI_ENV=test bundle exec hanami db prepare
-```
 
 Now we can go change our template and remove the static HTML.
 Our view needs to loop over all available records and render them.
