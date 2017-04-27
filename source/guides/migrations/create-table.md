@@ -145,6 +145,6 @@ create_table :users do
   column :role, String
 
   check { age > 18 }
-  check %(role IN("contributor", "manager", "owner"))
+  check %(role IN('contributor', 'manager', 'owner'))
 end
 ```
