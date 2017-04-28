@@ -409,10 +409,11 @@ Hanami provides a DSL to describe changes to our database schema. You can read m
 about how migrations work in the [migrations' guide](/guides/migrations/overview).
 
 In this case, we define a new table with columns for each of our entities' attributes.
-Let's prepare our database:
+Let's prepare our database for the development and test environments:
 
 ```
 % bundle exec hanami db prepare
+% HANAMI_ENV=test bundle exec hanami db prepare
 ```
 
 ### Working With Entities
@@ -496,11 +497,7 @@ end
 ```
 
 We create the required records in our test and then assert the correct number of book classes on the page.
-When we run this test, we will most likely see an error from our database connection -- remember we only migrated our _development_ database, and not yet our _test_ database.
-
-```
-% HANAMI_ENV=test bundle exec hanami db prepare
-```
+When we run this test it should pass. If it does not pass, a likely reason is that the test database was not migrated.
 
 Now we can go change our template and remove the static HTML.
 Our view needs to loop over all available records and render them.
