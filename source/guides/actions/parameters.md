@@ -267,3 +267,34 @@ end
 ```
 
 Now `params.get(:book, :title)` returns `"Hanami"`.
+
+In case there is no suitable body parser for your format in Hanami, it is possible to declare a new one:
+
+```ruby
+# lib/foo_parser.rb
+class FooParser
+  def mime_types
+    ['application/foo']
+  end
+  
+  def parse(body)
+    # manually parse body
+  end
+end
+```
+
+and subsequently register it:
+
+```ruby
+# apps/bookshelf/application.rb
+# ...
+module Api
+  class Application < Hanami::Application
+    configure do
+      # ...
+      body_parsers FooParser.new
+      # ...
+    end
+  end
+end
+```
