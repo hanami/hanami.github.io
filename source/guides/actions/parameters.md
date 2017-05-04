@@ -288,7 +288,7 @@ and subsequently register it:
 ```ruby
 # apps/bookshelf/application.rb
 # ...
-module Api
+module Bookshelf
   class Application < Hanami::Application
     configure do
       # ...
