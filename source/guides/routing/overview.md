@@ -18,7 +18,7 @@ Then start the server with `bundle exec hanami server` and visit [http://localho
 You should see `Hello from Hanami!` in your browser.
 
 Let's explain what we just did.
-We created a **route**, an application can have many routes.
+We created a **route**; an application can have many routes.
 Each route starts with an [HTTP verb](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) declaration, `get` in our case.
 Then we specify a relative URI (`/hello` for us) and the object that is responsible to respond to incoming requests.
 
@@ -51,7 +51,7 @@ root to: "home#index" # => will route to Web::Controllers::Home::Index
 The first token is the name of the controller `"home"` is translated to `Home`.
 The same transformation will be applied to the name after the `#`: `"index"` to `Index`.
 
-Hanami is able to figure out the namespace (`Web::Controllers`) and to compose the full class name.
+Hanami is able to figure out the namespace (`Web::Controllers`) and compose the full class name.
 
 ## Rack
 
