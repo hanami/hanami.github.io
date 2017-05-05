@@ -12,7 +12,7 @@ A project can **optionally** have one or more custom initializers.
 
 An initializer is a Ruby file used to setup third-party libraries or some other aspect of the code.
 
-They are run as the **last** thing after the dependencies, the framework and the project code are loaded, but **before** the server or the console are started.
+They are run as the **last** thing after the dependencies, the framework and the project code are loaded, but **before** the server or the console is started.
 
 For instance, if we want to setup [Bugsnag](https://bugsnag.com) for our project we can do:
 
