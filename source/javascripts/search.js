@@ -11,6 +11,7 @@ $(document).ready(function() {
   //
   $('#search').autocomplete({
     preserveInput: true,
+    groupBy: 'category',
 
     lookup: function(query, done) {
       var suggestions = []
@@ -22,7 +23,7 @@ $(document).ready(function() {
         var doc = window.lunrData.docs[val.ref]
 
         suggestions.push({
-          value: doc.title, data: doc.url, ref: val.ref, section: {  }
+          value: doc.title, data: { url: doc.url, category: 'Guides' }, ref: val.ref
         })
       })
 
@@ -40,6 +41,7 @@ $(document).ready(function() {
 
       var title = suggestion.value
         .replace(new RegExp(pattern, 'gi'), '<span class="highlighted">$1<\/span>')
+        .replace('Guides - ', '')
 
       var doc = window.lunrData.docs[suggestion.ref]
       var excerpt = excerptSearch(currentValue, doc.content, {
@@ -51,7 +53,7 @@ $(document).ready(function() {
     },
 
     onSelect: function (suggestion) {
-      window.location.replace(suggestion.data)
+      window.location.replace(suggestion.data.url)
     }
   })
   $('#search').attr('readonly', true).autocomplete('disable')
