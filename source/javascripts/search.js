@@ -54,7 +54,7 @@ $(document).ready(function() {
       window.location.replace(suggestion.data)
     }
   })
-  $('search').autocomplete('disable')
+  $('#search').attr('readonly', true).autocomplete('disable')
 
 
   // Setup lunr.js
@@ -69,7 +69,7 @@ $(document).ready(function() {
     success: function(data) {
       window.lunrData = data;
       window.lunrIndex = lunr.Index.load(lunrData.index);
-      $('search').autocomplete('enable')
+      $('#search').attr('readonly', false).autocomplete('enable')
     }
   });
 })
