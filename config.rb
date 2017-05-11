@@ -13,8 +13,7 @@ activate :search do |search|
   search.fields = {
     title:   { boost: 100, store: true, required: true },
     content: { boost: 50, store: true },
-    url:     { index: false, store: true },
-    # author:  {boost: 30}
+    url:     { index: false, store: true }
   }
 end
 

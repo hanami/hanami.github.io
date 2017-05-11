@@ -1,6 +1,12 @@
 // lunr.js full-text search
 $(document).ready(function() {
 
+  // Helper methods
+  //
+  var escapeRegExChars = function (value) {
+    return value.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
+  }
+
   // Initialize autocomplete
   //
   $('#search').autocomplete({
@@ -16,7 +22,7 @@ $(document).ready(function() {
         var doc = window.lunrData.docs[val.ref]
 
         suggestions.push({
-          value: doc.title, data: doc.url
+          value: doc.title, data: doc.url, ref: val.ref, section: {  }
         })
       })
 
@@ -24,8 +30,24 @@ $(document).ready(function() {
       done({ suggestions: suggestions })
     },
 
-    formatResult: function() {
-      return 'yo'
+    formatResult: function(suggestion, currentValue) {
+      // Do not replace anything if the current value is empty
+      if (!currentValue) {
+        return suggestion.value;
+      }
+
+      var pattern = '(' + escapeRegExChars(currentValue) + ')';
+
+      var title = suggestion.value
+        .replace(new RegExp(pattern, 'gi'), '<span class="highlighted">$1<\/span>')
+
+      var doc = window.lunrData.docs[suggestion.ref]
+      var excerpt = excerptSearch(currentValue, doc.content, {
+        padding: 40,
+        highlightClass: 'highlighted'
+      })
+
+      return "<strong>" + title + "</strong><br/><div class='text-muted'>" + excerpt + "</div>"
     },
 
     onSelect: function (suggestion) {
