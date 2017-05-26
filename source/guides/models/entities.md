@@ -126,7 +126,7 @@ end
 Let's instantiate it with proper values:
 
 ```ruby
-user = User.new(name: "Luca", age: 34, email: "test@hanami.test")
+user = User.new(name: "Luca", age: 34, email: "luca@hanami.test")
 
 user.name     # => "Luca"
 user.age      # => 34
