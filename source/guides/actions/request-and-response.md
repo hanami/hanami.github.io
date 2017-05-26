@@ -29,7 +29,7 @@ end
 
 <p class="warning">
   Instantiating a <code>request</code> for each incoming HTTP request can lead to minor performance degradation.
-  As an alternative, please consider getting the same information from private action methods like <code>accepts?</code> or from the raw Rack environment <code>params.env</code>.
+  As an alternative, please consider getting the same information from private action methods like <code>accept?</code> or from the raw Rack environment <code>params.env</code>.
 </p>
 
 # Response
