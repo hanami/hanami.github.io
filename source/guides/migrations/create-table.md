@@ -17,7 +17,7 @@ Force operation can be performed via `#create_table!`. It drops the existing tab
 To define a column we use `#column`, followed by the **name**, the **type** and **options**.
 The name must be a unique identifier within the table.
 
-The type can be a Ruby type (e.g. `String`), a symbol that represents a Ruby type (e.g. `:string`)  , or a string that represents the raw database type (e.g. `"varchar(255)"`).
+The type can be a Ruby type (e.g. `String`), a symbol that represents a Ruby type (e.g. `:string`), or a string that represents the raw database type (e.g. `"varchar(255)"`). The only one exception in case of symbol is :Bignum. Using the symbol :Bignum as a type will use the appropriate 64-bit integer type for the database you are using.
 
 ##### Type Definition
 
@@ -27,7 +27,7 @@ The following Ruby types are supported:
   * `Numeric` (`numeric`)
   * `Fixnum` (`integer`)
   * `Integer` (`integer`)
-  * `Bignum` (`bigint`)
+  * `:Bignum` (`bigint`) # Note: use this type as a symbol, since Ruby 2.4.0 removed Bignum class
   * `Float` (`double precision`)
   * `BigDecimal` (`numeric`)
   * `Date` (`date`)
