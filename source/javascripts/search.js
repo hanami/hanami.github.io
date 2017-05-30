@@ -44,7 +44,10 @@ $(document).ready(function() {
         .replace('Guides - ', '')
 
       var doc = window.lunrData.docs[suggestion.ref]
-      var excerpt = excerptSearch(currentValue, doc.content, {
+      var content = doc.content
+
+      content = content.replace(/<[^>]*>/g, '')
+      var excerpt = excerptSearch(currentValue, content, {
         padding: 40,
         highlightClass: 'highlighted'
       })
