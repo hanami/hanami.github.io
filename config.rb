@@ -8,6 +8,15 @@ require 'middleman-syntax'
 require 'lib/github_style_titles'
 require File.expand_path('../extensions/build_cleaner.rb', __FILE__)
 
+activate :search do |search|
+  search.resources = ['guides/']
+  search.fields = {
+    title:   { boost: 100, store: true, required: true },
+    content: { boost: 50, store: true },
+    url:     { index: false, store: true }
+  }
+end
+
 ###
 # Compass
 ###
