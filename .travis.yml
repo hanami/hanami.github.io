@@ -22,4 +22,4 @@ script:
 - bundle exec middleman build && bundle exec middleman deploy
 env:
   global:
-  - secure: Fb7u9EEJNX4KWtnH8HHxB2UNOyYU4b8mHYIoCC9EKlFZ/hN62cShNM0n0IN7CHJ0tVGSF7hxXE/g2QGxC0gzKG4wzFkMkG/d/S0n5QR6m2PYs8q+Arfd1uX9HF2OtRxJfAxh4iHQJVxUfmlNfMtUObtiG73kCKB/uCL3P5WPDtc=
+  - secure: c4G+9Fx0Sqf9TiWWACu6GQ93wHqGFm8p0bB7hCyKHVdqCD0NPxllyln7cr2BAQiB3qTzhGejr9Ghe2BgMOnDfmsCryGcIrfolarCim54HNsponJRtZNru0KKGNsfplbpAToZhfGJ+zNq2suJKx4AUmqIgp0ecpju1LkHOeE3fwk=
