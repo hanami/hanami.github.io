@@ -13,13 +13,13 @@ env:
 rvm:
   - 2.3.0
 before_script:
-- git config --global user.email "trung.le@ruby-journal.com"
-- git config --global user.name "Trung Lê"
+- git config --global user.email "antondavyodv.o@gmail.com"
+- git config --global user.name "Anton Davydov"
 - git remote rm origin
-- git remote add origin https://joneslee85:${GH_TOKEN}@github.com/hanami/hanami.github.io.git
+- git remote add origin https://davydovanton:${GH_TOKEN}@github.com/hanami/hanami.github.io.git
 - mkdir build
 script:
 - bundle exec middleman build && bundle exec middleman deploy
 env:
   global:
-  - secure: YZlMVMMZ9fLE4enTCfoaeajmbcCbnECe6v3FmkhKx4K/AMp3fkSk+bYOl/rfCf7hXKV4Fk1MUCU6X/gz93P/DpW88R9Dr+7iFsJpVJd5+by7xFcHri1j22eTJ0ODgxyGcDZoSYzlVbecO1sYgTFsmNO1v4Lhyx7ALjBAEKH1aAM=
+  - secure: Fb7u9EEJNX4KWtnH8HHxB2UNOyYU4b8mHYIoCC9EKlFZ/hN62cShNM0n0IN7CHJ0tVGSF7hxXE/g2QGxC0gzKG4wzFkMkG/d/S0n5QR6m2PYs8q+Arfd1uX9HF2OtRxJfAxh4iHQJVxUfmlNfMtUObtiG73kCKB/uCL3P5WPDtc=
