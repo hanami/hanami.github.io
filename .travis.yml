@@ -20,6 +20,3 @@ before_script:
 - mkdir build
 script:
 - bundle exec middleman build && bundle exec middleman deploy
-env:
-  global:
-  - secure: c4G+9Fx0Sqf9TiWWACu6GQ93wHqGFm8p0bB7hCyKHVdqCD0NPxllyln7cr2BAQiB3qTzhGejr9Ghe2BgMOnDfmsCryGcIrfolarCim54HNsponJRtZNru0KKGNsfplbpAToZhfGJ+zNq2suJKx4AUmqIgp0ecpju1LkHOeE3fwk=
