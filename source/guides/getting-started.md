@@ -830,7 +830,7 @@ describe Web::Controllers::Books::Create do
   describe 'with valid params' do
     let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
-    it 'is creates a book' do
+    it 'creates a book' do
       action.call(params)
       book = repository.last
 
