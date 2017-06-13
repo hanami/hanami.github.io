@@ -830,7 +830,7 @@ describe Web::Controllers::Books::Create do
   describe 'with valid params' do
     let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
-    it 'is creates a book' do
+    it 'creates a book' do
       action.call(params)
       book = repository.last
 
@@ -994,8 +994,7 @@ Open up `apps/web/templates/books/new.html.erb`:
 <% end %>
 ```
 
-As you can see, in this case we simply hard-code the error message "is required", but you could inspect the error and customise your message for the specific validation that failed.
-This will be improved in the near future.
+Run your tests again and see they are all passing again!
 
 ```shell
 % bundle exec rake
