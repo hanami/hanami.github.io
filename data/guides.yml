@@ -54,6 +54,8 @@ categories:
       - path: overview
       - path: database-configuration
       - path: repositories
+      - path: query-examples
+        title: Query Examples
       - path: entities
       - path: data-types
       - path: postgresql
