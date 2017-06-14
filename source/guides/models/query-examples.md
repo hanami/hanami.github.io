@@ -16,3 +16,14 @@ repo.users.order { created_at.asc }
 repo.users.order { name.asc }
 repo.users.order { last_name.asc }
 ```
+
+## SQL Functions
+
+You can use any SQL functions like `LIKE`, `ILIKE`, etc. For this call this functions in `where` block:
+
+```ruby
+repo = UserRepository.new
+
+repo.users.where { name.ilike('%anton%') }
+repo.users.where { name.like('%anton%') }
+```
