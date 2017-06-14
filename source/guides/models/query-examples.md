@@ -26,4 +26,13 @@ repo = UserRepository.new
 
 repo.users.where { name.ilike('%anton%') }
 repo.users.where { name.like('%anton%') }
+
+# you can call IN functions too
+repo.users.where { id.in(1) }
+repo.users.where { id.in(1..100) }
+repo.users.where { id > 1 || id < 100 }
+
+# you can call NOT functions too
+repo.users.where { id.not(1) }
+repo.users.where { id.not(1..100) }
 ```
