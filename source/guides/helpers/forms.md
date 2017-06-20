@@ -98,6 +98,7 @@ end
 * [datetime\_local_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#datetime_local_field-instance_method)
 * [email_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#email_field-instance_method)
 * [fields_for](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#fields_for-instance_method)
+* [fields\_for_collection](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder:fields_for_collection)
 * [file_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#file_field-instance_method)
 * [form_for](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper#form_for-instance_method)
 * [hidden_field](http://www.rubydoc.info/gems/hanami-helpers/Hanami/Helpers/FormHelper/FormBuilder#hidden_field-instance_method)
@@ -197,6 +198,32 @@ Developers can customize attack handling.
   <input type="hidden" name="_csrf_token" value="4800d585b3a802682ae92cb72eed1cdd2894da106fb4e9e25f8a262b862c52ce">
   <input type="text" name="delivery[customer_name]" id="delivery-customer-name" value="">
   <input type="text" name="delivery[address][city]" id="delivery-address-city" value="">
+
+  <button type="submit">Create</button>
+</form>
+```
+
+### Nested collections
+```erb
+<%=
+  form_for :delivery, routes.deliveries_path do
+    text_field :customer_name
+
+    fields_for_collection :addresses do
+      text_field :street
+    end
+
+  submit 'Create'
+end
+%>
+```
+
+```html
+<form action="/deliveries" method="POST" accept-charset="utf-8" id="delivery-form">
+  <input type="hidden" name="_csrf_token" value="920cd5bfaecc6e58368950e790f2f7b4e5561eeeab230aa1b7de1b1f40ea7d5d">
+  <input type="text" name="delivery[customer_name]" id="delivery-customer-name" value="">
+  <input type="text" name="delivery[addresses][][street]" id="delivery-address-0-street" value="">
+  <input type="text" name="delivery[addresses][][street]" id="delivery-address-1-street" value="">
 
   <button type="submit">Create</button>
 </form>
