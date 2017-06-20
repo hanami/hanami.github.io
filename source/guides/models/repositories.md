@@ -95,6 +95,7 @@ class BookRepository < Hanami::Repository
       .where(author_id: author.id)
       .order(:published_at)
       .limit(limit)
+      .to_a
   end
 end
 ```
