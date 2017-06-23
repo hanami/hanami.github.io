@@ -1035,12 +1035,12 @@ use the special command-line task `routes` to inspect the end result:
 
 ```
 % bundle exec hanami routes
-                Name Method     Path                           Action
+     Name Method     Path                           Action
 
-                root GET, HEAD  /                              Web::Controllers::Home::Index
-               books GET, HEAD  /books                         Web::Controllers::Books::Index
-            new_book GET, HEAD  /books/new                     Web::Controllers::Books::New
-               books POST       /books                         Web::Controllers::Books::Create
+     root GET, HEAD  /                              Web::Controllers::Home::Index
+    books GET, HEAD  /books                         Web::Controllers::Books::Index
+ new_book GET, HEAD  /books/new                     Web::Controllers::Books::New
+    books POST       /books                         Web::Controllers::Books::Create
 ```
 
 The output for `hanami routes` shows you the name of the defined helper method (you can suffix this name with `_path` or `_url` and call it on the `routes` helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.
