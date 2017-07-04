@@ -35,7 +35,7 @@ We use a `create_table` block to define the schema of that table.
 
 The first line is `primary_key :id`, which is a shortcut to create an autoincrement integer column.
 
-There is a foreign key definition with cascade deletion.
+There is a `foreign key` definition with cascade deletion.
 The first argument is the name of the local column (`books.author_id`), while the second is the referenced table.
 
 Then we have three lines for columns.
