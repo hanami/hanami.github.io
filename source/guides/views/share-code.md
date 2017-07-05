@@ -28,10 +28,12 @@ module Web::Views
 end
 ```
 
-Then we include in all the views of our application, via `view.prepare`.
+Then we can load the file and include the module in **all** the views of our application, using view.prepare.
 
 ```ruby
 # apps/web/application.rb
+require_relative './accept_json'
+
 module Web
   class Application < Hanami::Application
     configure do
@@ -44,22 +46,6 @@ module Web
 end
 ```
 
-Also, you need to require your shared view file in `apps/<app_name>/application.rb` file.
-
-```ruby
-# ...
-require_relative './accept_json'
-
-module AppName
-  class Application < Hanami::Application
-    configure do
-      # ...
-    end
-  end
-end
-```
-
 <p class="warning">
 Code included via <code>prepare</code> is available for ALL the views of an application.
 </p>
-
