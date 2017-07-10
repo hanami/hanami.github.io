@@ -36,23 +36,6 @@ trace   '/hello', to: endpoint
 options '/hello', to: endpoint
 ```
 
-## Actions
-
-Full Rack integration is great, but the most common endpoint that we'll use in our web applications is an **action**.
-Actions are objects responsible for responding to incoming HTTP requests.
-They have a nested naming like `Web::Controllers::Home::Index`.
-This is a really long name to write, that's why Hanami has a **naming convention** for it: `"home#index"`.
-
-```ruby
-# apps/web/config/routes.rb
-root to: "home#index" # => will route to Web::Controllers::Home::Index
-```
-
-The first token is the name of the controller `"home"` is translated to `Home`.
-The same transformation will be applied to the name after the `#`: `"index"` to `Index`.
-
-Hanami is able to figure out the namespace (`Web::Controllers`) and compose the full class name.
-
 ## Rack
 
 Hanami is compatible with [Rack SPEC](http://www.rubydoc.info/github/rack/rack/master/file/SPEC), and so the endpoints that we use MUST be compliant as well.
@@ -73,6 +56,23 @@ When we use a string, it tries to instantiate a class from it:
 ```ruby
 get '/rack-app', to: 'rack_app' # it will map to RackApp.new
 ```
+
+## Actions
+
+Full Rack integration is great, but the most common endpoint that we'll use in our web applications is an **action**.
+Actions are objects responsible for responding to incoming HTTP requests.
+They have a nested naming like `Web::Controllers::Home::Index`.
+This is a really long name to write, that's why Hanami has a **naming convention** for it: `"home#index"`.
+
+```ruby
+# apps/web/config/routes.rb
+root to: "home#index" # => will route to Web::Controllers::Home::Index
+```
+
+The first token is the name of the controller `"home"` is translated to `Home`.
+The same transformation will be applied to the name after the `#`: `"index"` to `Index`.
+
+Hanami is able to figure out the namespace (`Web::Controllers`) and compose the full class name.
 
 ### Mounting Applications
 
