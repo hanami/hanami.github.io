@@ -31,12 +31,20 @@ Then we include in all the mailers of our application, via `prepare`.
 ```ruby
 # lib/bookshelf.rb
 # ...
-Hanami::Mailer.configure do
+
+Hanami.configure do
   # ...
-  prepare do
-    include Mailers::DefaultSender
+  mailer do
+    root 'lib/bookshelf/mailers'
+
+    # See http://hanamirb.org/guides/mailers/delivery
+    delivery :test
+    
+    prepare do
+      include Mailers::DefaultSender
+    end
   end
-end.load!
+end
 ```
 
 <p class="warning">
