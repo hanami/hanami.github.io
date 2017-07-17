@@ -79,7 +79,7 @@ helpers do
   #
 
   def articles(limit = 5)
-    blog.articles[0...limit]
+    blog.articles.first(limit)
   end
 
   def article_title(article)
