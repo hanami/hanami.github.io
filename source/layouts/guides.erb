@@ -44,7 +44,7 @@
 
       <hr>
 
-      <%= guide_pager(current_page, data.guides) %>
+      <%= guide_pager(current_page, data.guides, current_page.data.version) %>
     </div>
 
     <%= partial 'footer' %>

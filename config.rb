@@ -132,7 +132,7 @@ helpers do
     File.join(path, category.path, page.path)
   end
 
-  def guide_pager(current_page, guides)
+  def guide_pager(current_page, guides, version = nil)
     current_url = current_page.url.tr('/', '')
     flat_guides = guides.categories.flat_map { |category|
       category.pages.map { |page|
@@ -149,14 +149,14 @@ helpers do
       links = []
       prev_guide = flat_guides[current_guide_index - 1]
       if 0 < current_guide_index && prev_guide
-        prev_url = guide_url(prev_guide.category, prev_guide.page)
+        prev_url = guide_url(prev_guide.category, prev_guide.page, version)
         prev_title = "#{guide_title(prev_guide.category)} - #{guide_title(prev_guide.page)}"
         links << %(<div class="pull-left">Prev: <a href="#{prev_url}">#{prev_title}</a></div>)
       end
 
       next_guide = flat_guides[current_guide_index + 1]
       if next_guide
-        next_url = guide_url(next_guide.category, next_guide.page)
+        next_url = guide_url(next_guide.category, next_guide.page, version)
         next_title = "#{guide_title(next_guide.category)} - #{guide_title(next_guide.page)}"
         links << %(<div class="pull-right">Next: <a href="#{next_url}">#{next_title}</a></div>)
       end
