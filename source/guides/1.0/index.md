@@ -45,4 +45,4 @@ the entire framework, or parts of it) is runtime threadsafe.
 The guides explain high level Hanami components and how to configure, use and test them in a full stack application.
 The imaginary product that we'll mention is called _"Bookshelf"_: a online community to share readings and buy books.
 
-We have a [getting started guide](/guides/getting-started), to build our first application with Hanami.
+We have a [getting started guide](/guides/1.0/getting-started), to build our first application with Hanami.

@@ -74,7 +74,7 @@ The default HTTP method is `GET`, except for actions named:
 - `update`, which will use `PATCH`
 - `destroy`, which will use `DELETE`
 
-This should help you route using [RESTful resources](/guides/routing/restful-resources).
+This should help you route using [RESTful resources](/guides/1.0/routing/restful-resources).
 
 You can also set the HTTP method by specifying a `--method` argument when calling `hanami generate action`.
 

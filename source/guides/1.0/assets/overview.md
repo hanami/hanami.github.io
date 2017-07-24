@@ -38,7 +38,7 @@ end
 
 ### Fingerprint Mode
 
-In order to force browsers to cache the right copy of an asset, during the deploy, Hanami creates a copy of each file by [appending its checksum](/guides/command-line/assets) to the file name.
+In order to force browsers to cache the right copy of an asset, during the deploy, Hanami creates a copy of each file by [appending its checksum](/guides/1.0/command-line/assets) to the file name.
 
 We can control this feature via application configuration.
 It's turned on by default only in _production_ environment.
@@ -63,7 +63,7 @@ module Web
 end
 ```
 
-If enabled, [assets helpers](/guides/helpers/assets) will generate checksum relative URLs.
+If enabled, [assets helpers](/guides/1.0/helpers/assets) will generate checksum relative URLs.
 
 ```erb
 <%= javascript 'application' %>
@@ -252,4 +252,4 @@ When an application will do `require 'hanami/emberjs'`, that directory will be a
 <%= javascript 'ember' %>
 ```
 
-We can use the `javascript` [helper](/guides/helpers/assets) to include `ember.js` in our application.
+We can use the `javascript` [helper](/guides/1.0/helpers/assets) to include `ember.js` in our application.

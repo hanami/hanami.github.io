@@ -61,13 +61,13 @@ public/
     └── reset.css
 ```
 
-Preprocessors will compile/copy assets only if the [_Compile mode_](/guides/assets/overview) is on.
+Preprocessors will compile/copy assets only if the [_Compile mode_](/guides/1.0/assets/overview) is on.
 
 <p class="convention">
   Preprocessors are enabled by default in <em>development</em> and <em>test</em> environments.
 </p>
 
-For performance reasons, this feature is turned off in _production_ env, where we should [precompile](/guides/command-line/assets) our assets.
+For performance reasons, this feature is turned off in _production_ env, where we should [precompile](/guides/1.0/command-line/assets) our assets.
 
 ### Preprocessors Engines
 

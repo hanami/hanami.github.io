@@ -5,7 +5,7 @@ version: 1.0
 
 # Overview
 
-An action is an endpoint that handles incoming HTTP requests for a specific [route](/guides/routing/overview).
+An action is an endpoint that handles incoming HTTP requests for a specific [route](/guides/1.0/routing/overview).
 In a Hanami application, an **action is an object**, while a **controller is a Ruby module** that groups them.
 
 This design provides self contained actions that don't share their context accidentally with other actions.  It also prevents gigantic controllers.
@@ -82,7 +82,7 @@ That means our action will behave according to the configuration of the `Web` ap
 
 When we include `Web::Action`, we made our object compliant with [Hanami::Controller](https://github.com/hanami/controller)'s actions.
 We need to implement `#call`, which is a method that accepts only one argument: `params`.
-That is the object that carries the payload that comes from incoming HTTP requests from the [router](/guides/routing/basic-usage).
+That is the object that carries the payload that comes from incoming HTTP requests from the [router](/guides/1.0/routing/basic-usage).
 
 This interface reminds us of Rack.
 Indeed, our action is compatible with the Rack protocol.

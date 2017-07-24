@@ -19,7 +19,7 @@ This command is useful for **deployment** purposes.
 
 The first step it precompiles and copies all the assets from all the applications and third party gems under `public/assets/` directory.
 
-Then it [compress](/guides/assets/compressors) all the javascripts and stylesheets, in order to save browsers bandwidth.
+Then it [compress](/guides/1.0/assets/compressors) all the javascripts and stylesheets, in order to save browsers bandwidth.
 
 As last thing, it generates a copy of each asset, by appending its checksum to the file name.
 This trick makes assets cacheable by browsers.

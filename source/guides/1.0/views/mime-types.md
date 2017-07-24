@@ -5,7 +5,7 @@ version: 1.0
 
 # MIME Types
 
-A view can handle several MIME Types. Before diving into this subject, please consider to read how actions handle [MIME Types](/guides/actions/mime-types).
+A view can handle several MIME Types. Before diving into this subject, please consider to read how actions handle [MIME Types](/guides/1.0/actions/mime-types).
 
 It's important to highlight the correlation between the _format_ and template name.
 For a given MIME Type, Rack (and then Hanami) associate a _format_ for it.
@@ -51,7 +51,7 @@ Hanami::View::MissingTemplateError: Can't find template "dashboard/index" for "x
 ## View For Specific Format
 
 This scenario works well if the presentational logic of a view can be applied for all the format templates that it handles.
-What if we want to have a [custom rendering](/guides/views/basic-usage) or different presentational logic?
+What if we want to have a [custom rendering](/guides/1.0/views/basic-usage) or different presentational logic?
 
 We can inherit from our view and declare that our subclass only handles a specific format.
 

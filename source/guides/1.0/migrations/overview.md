@@ -6,9 +6,9 @@ version: 1.0
 # Migrations
 
 Migrations are a feature that allows to manage database schema via Ruby.
-They come with some [command line facilities](/guides/command-line/database) that allow to perform database operations or to [generate](/guides/command-line/generators) migrations.
+They come with some [command line facilities](/guides/1.0/command-line/database) that allow to perform database operations or to [generate](/guides/1.0/command-line/generators) migrations.
 
-Migrations are only available if our application uses the [SQL adapter](/guides/models/overview).
+Migrations are only available if our application uses the [SQL adapter](/guides/1.0/models/overview).
 
 ## Anatomy Of A Migration
 
@@ -85,7 +85,7 @@ Hanami::Model.migration do
 end
 ```
 
-**To learn how to use migrations in command line, please have a look at [this article](/guides/command-line/database/#migrate).**
+**To learn how to use migrations in command line, please have a look at [this article](/guides/1.0/command-line/database/#migrate).**
 
 ## References
 

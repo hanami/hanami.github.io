@@ -15,5 +15,5 @@ Here's how to do it:
   3. Edit `config/environment.rb`, then remove `require_relative '../lib/bookshelf'` and `model` block in `Hanami.configure`
   4. Edit `Rakefile` and remove `require 'hanami/rake_tasks'`.
 
-Please notice that if `hanami-model` is removed from the project features like [database commands](/guides/command-line/database) and [migrations](/guides/migrations/overview) aren't available.
+Please notice that if `hanami-model` is removed from the project features like [database commands](/guides/1.0/command-line/database) and [migrations](/guides/1.0/migrations/overview) aren't available.
 

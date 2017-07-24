@@ -5,7 +5,7 @@ version: 1.0
 
 # Models
 
-Hanami's model domain is implemented in a way that separates the behavior that we want to express ([entities](/guides/models/entities)) from the persistence layer ([repositories](/guides/models/repositories) and database).
+Hanami's model domain is implemented in a way that separates the behavior that we want to express ([entities](/guides/1.0/models/entities)) from the persistence layer ([repositories](/guides/1.0/models/repositories) and database).
 This design helps keep the interface of our objects small and therefore keeps them fast and reusable.
 
 ## Basic Usage
@@ -70,4 +70,4 @@ irb(main):001:0> book = BookRepository.new.create(title: "Hanami")
 
 ---
 
-Learn more about [repositories](/guides/models/repositories), [entities](/guides/models/entities), [migrations](/guides/migrations/overview), and [database CLI commands](/guides/command-line/database).
+Learn more about [repositories](/guides/1.0/models/repositories), [entities](/guides/1.0/models/entities), [migrations](/guides/1.0/migrations/overview), and [database CLI commands](/guides/1.0/command-line/database).

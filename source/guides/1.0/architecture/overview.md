@@ -47,8 +47,8 @@ There are two important directories:
   * `lib/bookshelf/entities`
   * `lib/bookshelf/repositories`
 
-They contain [entities](/guides/models/entities) that are Ruby objects at the core of our model domain, and they aren't aware of any persistence mechanism.
-For this purpose we have a separate concept, [repositories](/guides/models/repositories), which are a mediator between our entities and the underlying database.
+They contain [entities](/guides/1.0/models/entities) that are Ruby objects at the core of our model domain, and they aren't aware of any persistence mechanism.
+For this purpose we have a separate concept, [repositories](/guides/1.0/models/repositories), which are a mediator between our entities and the underlying database.
 
 For each entity named `Book` we can have a `BookRepository`.
 
@@ -84,7 +84,7 @@ apps/web
 Let's have a quick look at this code.
 
 The file `apps/web/application.rb` contains a Hanami application named `Web::Application`, here we can configure all the settings for this **component** of our project.
-Directories such as `apps/web/controllers`, `views` and `templates` will contain our [actions](/guides/actions/overview), [views](/guides/views/overview) and [templates](/guides/views/templates).
+Directories such as `apps/web/controllers`, `views` and `templates` will contain our [actions](/guides/1.0/actions/overview), [views](/guides/1.0/views/overview) and [templates](/guides/1.0/views/templates).
 
 Web assets such as javascripts and stylesheets will be automatically served by the application.
 

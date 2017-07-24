@@ -15,7 +15,7 @@ We can manage our database via the command line.
   * MySQL
   * SQLite3
 
-The [adapter](/guides/models/overview) is set in `lib/bookshelf.rb`.
+The [adapter](/guides/1.0/models/overview) is set in `lib/bookshelf.rb`.
 It uses an environment variable, defined in the `.env.*` files at the root of the project.
 
 ### Create
@@ -46,7 +46,7 @@ In order to preserve production data, this command can't be run in the productio
 
 ### Migrate
 
-With `db migrate` we can run [migrations](/guides/migrations/overview) found in `db/migrations`.
+With `db migrate` we can run [migrations](/guides/1.0/migrations/overview) found in `db/migrations`.
 
 Given the following migrations:
 

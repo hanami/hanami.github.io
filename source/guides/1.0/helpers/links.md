@@ -68,4 +68,4 @@ Output:
 ## Security
 
 There are two aspects to consider when we use links in our markup: **whitelisted URLs** and **escaped attributes**.
-Please visit the [Markup Escape](/guides/helpers/escape) section for a detailed explanation.
+Please visit the [Markup Escape](/guides/1.0/helpers/escape) section for a detailed explanation.

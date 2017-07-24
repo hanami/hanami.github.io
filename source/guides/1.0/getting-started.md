@@ -203,7 +203,7 @@ The first thing we need to add is a route:
 root to: 'home#index'
 ```
 
-We pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/routing/overview) for more information).
+We pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/1.0/routing/overview) for more information).
 Now we can create the index action.
 
 ```ruby
@@ -369,7 +369,7 @@ Entities are totally unaware of the database.
 This makes them **lightweight** and **easy to test**.
 
 For this reason we need a repository to persist the data that a `Book` depends on.
-Read more about entities and repositories in the [models guide](/guides/models/overview).
+Read more about entities and repositories in the [models guide](/guides/1.0/models/overview).
 
 Hanami ships with a generator for models, so let's use it to create a `Book` entity and the corresponding repository:
 
@@ -407,7 +407,7 @@ end
 ```
 
 Hanami provides a DSL to describe changes to our database schema. You can read more
-about how migrations work in the [migrations' guide](/guides/migrations/overview).
+about how migrations work in the [migrations' guide](/guides/1.0/migrations/overview).
 
 In this case, we define a new table with columns for each of our entities' attributes.
 Let's prepare our database for the development and test environments:
@@ -568,7 +568,7 @@ Let's rewrite our template to implement these requirements:
 ```
 
 If we run our feature test now, we'll see it fails — because our controller
-action does not actually [_expose_](/guides/actions/exposures) the books to our view. We can write a test for
+action does not actually [_expose_](/guides/1.0/actions/exposures) the books to our view. We can write a test for
 that change:
 
 ```ruby
@@ -688,7 +688,7 @@ The interesting bit will be our new template, because we'll be using Hanami's fo
 
 ### Using Form Helpers
 
-Let's use [form helpers](/guides/helpers/forms) to build this form in `apps/web/templates/books/new.html.erb`:
+Let's use [form helpers](/guides/1.0/helpers/forms) to build this form in `apps/web/templates/books/new.html.erb`:
 
 ```erb
 # apps/web/templates/books/new.html.erb
@@ -714,7 +714,7 @@ Let's use [form helpers](/guides/helpers/forms) to build this form in `apps/web/
 ```
 
 We've added `<label>` tags for our form fields, and wrapped each field in a
-container `<div>` using Hanami's [HTML builder helper](/guides/helpers/html5).
+container `<div>` using Hanami's [HTML builder helper](/guides/1.0/helpers/html5).
 
 ### Submitting Our Form
 

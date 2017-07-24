@@ -7,7 +7,7 @@ version: 1.0
 
 A view is an object that's responsible for rendering a template.
 
-In a full stack Hanami application, an incoming HTTP request goes through the [router](/guides/routing/overview), it instantiates and calls an [action](/guides/actions/overview), which sets the status code and the headers for the response.
+In a full stack Hanami application, an incoming HTTP request goes through the [router](/guides/1.0/routing/overview), it instantiates and calls an [action](/guides/1.0/actions/overview), which sets the status code and the headers for the response.
 The last bit is the body, which is set by the corresponding view's output.
 
 ## A Simple View
@@ -24,7 +24,7 @@ Hanami ships a generator for actions that creates a view and a template.
     create  spec/web/views/dashboard/index_spec.rb
 ```
 
-Looking at those file names, we have an action called `Web::Controllers::Dashboard::Index` (read about [actions naming](/guides/actions/overview)).
+Looking at those file names, we have an action called `Web::Controllers::Dashboard::Index` (read about [actions naming](/guides/1.0/actions/overview)).
 Our view has a similar name: `Web::Views::Dashboard::Index`.
 
 Let's examine the view:
@@ -40,7 +40,7 @@ end
 
 ### Naming
 
-That file begins with a module declaration which is similar to the [action naming structure](/guides/actions/overview).
+That file begins with a module declaration which is similar to the [action naming structure](/guides/1.0/actions/overview).
 The only difference is that we use `Views` module instead of `Controllers`.
 **All the views are nested under it.**
 This module is generated at the runtime for us, when the application starts.

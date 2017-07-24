@@ -96,7 +96,7 @@ It enforces **data integrity** via exceptions:
 Book.new(created_at: "foo") # => ArgumentError
 ```
 
-If we use this feature, in combination with [database constraints](/guides/migrations/create-table#constraints) and validations, we can guarantee a **strong** level of **data integrity** for our projects.
+If we use this feature, in combination with [database constraints](/guides/1.0/migrations/create-table#constraints) and validations, we can guarantee a **strong** level of **data integrity** for our projects.
 
 ### Custom Schema
 
@@ -178,4 +178,4 @@ User.new(comments: [:foo]) # => TypeError: :foo must be coercible into Comment
 
 ---
 
-Learn more about data types in the [dedicated article](/guides/models/data-types).
+Learn more about data types in the [dedicated article](/guides/1.0/models/data-types).

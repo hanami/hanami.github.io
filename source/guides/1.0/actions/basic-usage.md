@@ -7,7 +7,7 @@ version: 1.0
 
 ## Requests Handling
 
-In the [previous section](/guides/actions/overview), we generated an action.  Now let's use it.
+In the [previous section](/guides/1.0/actions/overview), we generated an action.  Now let's use it.
 
 First, we check our routes:
 
