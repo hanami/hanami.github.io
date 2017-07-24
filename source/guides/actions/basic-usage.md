@@ -126,6 +126,11 @@ def initialize(options = {})
   # ...
 end
 
+# options
+def initialize(**options)
+  # ...
+end
+
 # splat arguments
 def initialize(*args)
   # ...
