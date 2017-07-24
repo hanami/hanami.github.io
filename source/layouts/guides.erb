@@ -28,7 +28,11 @@
             <ul>
               <% category.pages.each do |page| %>
                 <li>
-                  <%= link_to(guide_title(page), guide_url(category, page)) %>
+                  <% if guide_title(category) == 'Upgrade Notes' %>
+                    <%= link_to(guide_title(page), guide_url(category, page)) %>
+                  <% else %>
+                    <%= link_to(guide_title(page, current_page.data.version), guide_url(category, page, current_page.data.version)) %>
+                  <% end %>
                 </li>
               <% end %>
             </ul>

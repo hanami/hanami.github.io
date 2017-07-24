@@ -122,12 +122,14 @@ helpers do
   GUIDES_ROOT     = 'source/guides'.freeze
   GUIDES_EDIT_URL = 'https://github.com/hanami/hanami.github.io/edit/build/'.freeze
 
-  def guide_title(item)
-    item.title || item.path.split('-').map(&:capitalize).join(' ')
+  def guide_title(item, version = nil)
+    title = item.title || item.path.split('-').map(&:capitalize).join(' ')
+    version ? "#{title} (#{version})" : title
   end
 
-  def guide_url(category, page)
-    File.join('/guides', category.path, page.path)
+  def guide_url(category, page, version = nil)
+    path = version ? "/guides/#{version}" : '/guides'
+    File.join(path, category.path, page.path)
   end
 
   def guide_pager(current_page, guides)
