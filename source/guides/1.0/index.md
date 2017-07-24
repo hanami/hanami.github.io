@@ -3,7 +3,7 @@ title: Guides
 version: 1.0
 ---
 
-# Introduction 1.0
+# Introduction
 
 ## What is Hanami?
 
