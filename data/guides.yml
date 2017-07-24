@@ -120,3 +120,10 @@ categories:
         title: v0.9.0
       - path: v100
         title: v1.0.0
+  - path: /
+    title: Old Guides
+    pages:
+      - path: /
+        title: 'Head'
+      - path: '1.0'
+        title: v1.0
