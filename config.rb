@@ -17,6 +17,8 @@ activate :search do |search|
   }
 end
 
+activate :breadcrumbs
+
 ###
 # Compass
 ###
