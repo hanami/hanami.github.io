@@ -240,6 +240,10 @@ div.supporters {
   opacity: 0;
 }
 
+.container-article .title a.anchor {
+  left: -10px;
+}
+
 .title:hover a.anchor {
   opacity: 1;
 }
