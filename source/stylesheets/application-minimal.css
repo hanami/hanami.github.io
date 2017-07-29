@@ -237,7 +237,6 @@ div.supporters {
 .title a.anchor {
   position: absolute;
   width: 30px;
-  left: -10px;
   opacity: 0;
 }
 
