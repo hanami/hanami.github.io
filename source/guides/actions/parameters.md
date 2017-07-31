@@ -226,6 +226,38 @@ module Web::Controllers::Signup
 end
 ```
 
+### Inline predicates
+
+In case there is a predicate that is needed only for the current params, you can define inline predicates:
+
+```ruby
+module Web::Controllers::Books
+  class Create
+    include Web::Action
+
+    params Class.new(Hanami::Action::Params) {
+      predicate(:cool?, message: "is not cool") do |current|
+        current.match(/cool/)
+      end
+
+      validations do
+        required(:book).schema do
+          required(:title) { filled? & str? & cool? }
+        end
+      end
+    }
+
+    def call(params)
+      if params.valid?
+        self.body = 'OK'
+      else
+        self.body = params.error_messages.join("\n")
+      end
+    end
+  end
+end
+```
+
 ## Body Parsers
 
 Rack ignores request bodies unless they come from a form submission.
