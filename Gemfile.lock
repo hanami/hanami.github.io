@@ -70,6 +70,8 @@ GEM
       addressable (~> 2.3.5)
       middleman-core (~> 3.2)
       tzinfo (>= 0.3.0)
+    middleman-breadcrumbs (0.3.3)
+      middleman (>= 3.3.5)
     middleman-core (3.4.1)
       activesupport (~> 4.1)
       bundler (~> 1.1)
@@ -168,6 +170,7 @@ DEPENDENCIES
   httparty
   middleman (~> 3.3)
   middleman-blog (~> 3.5)
+  middleman-breadcrumbs
   middleman-deploy (~> 1.0)
   middleman-livereload (~> 3.1)
   middleman-search

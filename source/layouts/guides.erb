@@ -9,6 +9,8 @@
     <%= partial 'navbar' %>
 
     <div class="container docs-content">
+      <%= breadcrumbs(current_page) %>
+
       <select class="mobile-guides">
         <% data.guides.categories.each do |category| %>
           <optgroup label="<%= guide_title(category) %>">

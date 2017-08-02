@@ -17,6 +17,8 @@ activate :search do |search|
   }
 end
 
+activate :breadcrumbs
+
 ###
 # Compass
 ###
@@ -123,8 +125,7 @@ helpers do
   GUIDES_EDIT_URL = 'https://github.com/hanami/hanami.github.io/edit/build/'.freeze
 
   def guide_title(item, version = nil)
-    title = item.title || item.path.split('-').map(&:capitalize).join(' ')
-    version ? "#{title} (#{version})" : title
+    item.title || item.path.split('-').map(&:capitalize).join(' ')
   end
 
   def guide_url(category, page, version = nil)
@@ -201,6 +202,31 @@ helpers do
   def guides_edit_article(source)
     url = GUIDES_EDIT_URL + source.gsub("#{ Dir.pwd }/", '')
     %(<a href="#{ url }" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a>)
+  end
+
+  ROOT_GUIDE_PAGE_REGEXP = %r(\A/guides/([\d\.]+/)?\z)
+
+  def breadcrumbs(page, **payload)
+    metadata = page.metadata
+    version = metadata[:page]['version']
+    version_text = (version) ? "/ #{link_to(version, "/guides/#{version}")} " : nil
+    page_title = metadata[:page]['title'].split(' - ').last
+
+    category = data.guides.categories.select do |c|
+      c['pages'].map { |p| p['path'] }.include?(page.url.split('/').last)
+    end.first
+
+    if page.url[ROOT_GUIDE_PAGE_REGEXP]
+      full_page_title = ''
+    else
+      full_page_title = "/ #{category_title(category)} / #{page_title}"
+    end
+
+    "#{link_to('Guides', '/guides')} #{version_text} #{full_page_title}"
+  end
+
+  def category_title(category)
+    category['title'] || category['path'].split('-').map(&:capitalize).join(' ')
   end
 
   #
