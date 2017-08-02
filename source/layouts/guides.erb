@@ -40,6 +40,14 @@
         <% end %>
       </ul>
 
+      <% if current_page.data.version.nil? && !current_page.path.match('upgrade-notes')  %>
+        <p class="warning">
+          You're looking at the guides for the upcoming version of Hanami.
+          <br>
+          Here are the guides for the latest stable version: <a href="/guides/1.0">1.0</a>
+        </p>
+      <% end %>
+
       <%= yield %>
 
       <hr>
