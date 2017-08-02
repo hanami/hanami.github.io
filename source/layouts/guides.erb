@@ -9,7 +9,9 @@
     <%= partial 'navbar' %>
 
     <div class="container docs-content">
-      <%= breadcrumbs(current_page) %>
+      <div class="breadcrumbs">
+        <%= breadcrumbs(current_page) %>
+      </div>
 
       <select class="mobile-guides">
         <% data.guides.categories.each do |category| %>
