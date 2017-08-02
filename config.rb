@@ -17,6 +17,8 @@ activate :search do |search|
   }
 end
 
+activate :breadcrumbs
+
 ###
 # Compass
 ###
@@ -122,15 +124,16 @@ helpers do
   GUIDES_ROOT     = 'source/guides'.freeze
   GUIDES_EDIT_URL = 'https://github.com/hanami/hanami.github.io/edit/build/'.freeze
 
-  def guide_title(item)
+  def guide_title(item, version = nil)
     item.title || item.path.split('-').map(&:capitalize).join(' ')
   end
 
-  def guide_url(category, page)
-    File.join('/guides', category.path, page.path)
+  def guide_url(category, page, version = nil)
+    path = version ? "/guides/#{version}" : '/guides'
+    File.join(path, category.path, page.path)
   end
 
-  def guide_pager(current_page, guides)
+  def guide_pager(current_page, guides, version = nil)
     current_url = current_page.url.tr('/', '')
     flat_guides = guides.categories.flat_map { |category|
       category.pages.map { |page|
@@ -147,14 +150,14 @@ helpers do
       links = []
       prev_guide = flat_guides[current_guide_index - 1]
       if 0 < current_guide_index && prev_guide
-        prev_url = guide_url(prev_guide.category, prev_guide.page)
+        prev_url = guide_url(prev_guide.category, prev_guide.page, version)
         prev_title = "#{guide_title(prev_guide.category)} - #{guide_title(prev_guide.page)}"
         links << %(<div class="pull-left">Prev: <a href="#{prev_url}">#{prev_title}</a></div>)
       end
 
       next_guide = flat_guides[current_guide_index + 1]
       if next_guide
-        next_url = guide_url(next_guide.category, next_guide.page)
+        next_url = guide_url(next_guide.category, next_guide.page, version)
         next_title = "#{guide_title(next_guide.category)} - #{guide_title(next_guide.page)}"
         links << %(<div class="pull-right">Next: <a href="#{next_url}">#{next_title}</a></div>)
       end
@@ -199,6 +202,31 @@ helpers do
   def guides_edit_article(source)
     url = GUIDES_EDIT_URL + source.gsub("#{ Dir.pwd }/", '')
     %(<a href="#{ url }" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a>)
+  end
+
+  ROOT_GUIDE_PAGE_REGEXP = %r(\A/guides/([\d\.]+/)?\z)
+
+  def breadcrumbs(page, **payload)
+    metadata = page.metadata
+    version = metadata[:page]['version']
+    version_text = (version) ? "/ #{link_to(version, "/guides/#{version}")} " : nil
+    page_title = metadata[:page]['title'].split(' - ').last
+
+    category = data.guides.categories.select do |c|
+      c['pages'].map { |p| p['path'] }.include?(page.url.split('/').last)
+    end.first
+
+    if page.url[ROOT_GUIDE_PAGE_REGEXP]
+      full_page_title = ''
+    else
+      full_page_title = "/ #{category_title(category)} / #{page_title}"
+    end
+
+    "#{link_to('Guides', '/guides')} #{version_text} #{full_page_title}"
+  end
+
+  def category_title(category)
+    category['title'] || category['path'].split('-').map(&:capitalize).join(' ')
   end
 
   #
