@@ -1,5 +1,6 @@
 ---
 title: Guides - Migrations Alter Tables
+version: head
 ---
 
 # Migrations

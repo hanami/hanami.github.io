@@ -1,5 +1,6 @@
 ---
 title: Guides - Rake Tasks
+version: head
 ---
 
 # Rake Tasks

@@ -1,5 +1,6 @@
 ---
 title: Guides - Link Helpers
+version: head
 ---
 
 ## Link Helpers

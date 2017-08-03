@@ -1,5 +1,6 @@
 ---
 title: Guides - Migrations
+version: head
 ---
 
 # Migrations

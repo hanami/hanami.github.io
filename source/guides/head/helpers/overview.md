@@ -1,5 +1,6 @@
 ---
 title: Guides - Helpers Overview
+version: head
 ---
 
 # Overview

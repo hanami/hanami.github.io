@@ -1,5 +1,6 @@
 ---
 title: "Guides - Command Line: Destroy"
+version: head
 ---
 
 # Command Line

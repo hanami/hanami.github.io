@@ -256,6 +256,11 @@ helpers do
   end
 end
 
+###
+# Redirects
+###
+redirect "guides", to: "/guides/#{hanami_version}"
+
 set :css_dir,    'stylesheets'
 set :js_dir,     'javascripts'
 set :images_dir, 'images'

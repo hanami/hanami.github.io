@@ -1,5 +1,6 @@
 ---
 title: Guides - Use Your Own Assets Management
+version: head
 ---
 
 # Use Your Own Assets Management

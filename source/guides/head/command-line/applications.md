@@ -1,5 +1,6 @@
 ---
 title: "Guides - Command Line: Applications"
+version: head
 ---
 
 # Command Line

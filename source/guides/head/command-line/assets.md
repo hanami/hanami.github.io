@@ -1,5 +1,6 @@
 ---
 title: "Guides - Command Line: Assets"
+version: head
 ---
 
 # Command Line

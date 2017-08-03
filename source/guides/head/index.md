@@ -1,5 +1,6 @@
 ---
 title: Guides
+version: head
 ---
 
 # Introduction

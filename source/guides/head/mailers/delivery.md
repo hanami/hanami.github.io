@@ -1,5 +1,6 @@
 ---
 title: Guides - Mailers Delivery
+version: head
 ---
 
 # Delivery

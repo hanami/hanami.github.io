@@ -17,7 +17,7 @@
         <% data.guides.categories.each do |category| %>
           <optgroup label="<%= guide_title(category) %>">
             <% category.pages.each do |page| %>
-              <option value="<%= guide_url(category, page) %>" <%= "selected" if guide_url(category, page) == current_page.url.chomp("\/") %>><%= guide_title(page) %></option>
+              <option value="<%= guide_url(category, page, current_page.data.version) %>" <%= "selected" if guide_url(category, page) == current_page.url.chomp("\/") %>><%= guide_title(page) %></option>
             <% end %>
           </optgroup>
         <% end %>
@@ -32,11 +32,7 @@
             <ul>
               <% category.pages.each do |page| %>
                 <li>
-                  <% if ['Upgrade Notes', 'Old Guides'].include?(guide_title(category)) %>
-                    <%= link_to(guide_title(page), guide_url(category, page)) %>
-                  <% else %>
-                    <%= link_to(guide_title(page, current_page.data.version), guide_url(category, page, current_page.data.version)) %>
-                  <% end %>
+                  <%= link_to(guide_title(page, current_page.data.version), guide_url(category, page, current_page.data.version)) %>
                 </li>
               <% end %>
             </ul>

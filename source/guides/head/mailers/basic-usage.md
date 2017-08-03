@@ -1,5 +1,6 @@
 ---
 title: Guides - Mailers Basic Usage
+version: head
 ---
 
 # Basic Usage

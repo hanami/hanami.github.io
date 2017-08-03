@@ -1,5 +1,6 @@
 ---
 title: Guides - Number Helpers
+version: head
 ---
 
 ## Number Helpers

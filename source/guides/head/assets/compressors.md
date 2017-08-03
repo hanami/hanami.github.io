@@ -1,5 +1,6 @@
 ---
 title: Guides - Assets Compressors
+version: head
 ---
 
 # Assets

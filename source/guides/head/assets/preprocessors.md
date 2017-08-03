@@ -1,5 +1,6 @@
 ---
 title: Guides - Assets Preprocessors
+version: head
 ---
 
 # Assets

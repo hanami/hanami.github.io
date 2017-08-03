@@ -1,5 +1,6 @@
 ---
 title: Guides - Action HTTP Caching
+version: head
 ---
 
 # HTTP Caching

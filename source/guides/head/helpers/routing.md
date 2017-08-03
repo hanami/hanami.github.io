@@ -1,5 +1,6 @@
 ---
 title: Guides - Routing Helpers
+version: head
 ---
 
 ## Routing Helpers

@@ -1,5 +1,6 @@
 ---
 title: Guides - View Testing
+version: head
 ---
 
 # View Testing

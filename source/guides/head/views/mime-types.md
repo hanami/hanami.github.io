@@ -1,10 +1,11 @@
 ---
 title: Guides - MIME Types
+version: head
 ---
 
 # MIME Types
 
-A view can handle several MIME Types. Before diving into this subject, please consider to read how actions handle [MIME Types](/guides/head/head/actions/mime-types).
+A view can handle several MIME Types. Before diving into this subject, please consider to read how actions handle [MIME Types](/guides/head/actions/mime-types).
 
 It's important to highlight the correlation between the _format_ and template name.
 For a given MIME Type, Rack (and then Hanami) associate a _format_ for it.

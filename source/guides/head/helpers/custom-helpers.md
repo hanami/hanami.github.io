@@ -1,5 +1,6 @@
 ---
 title: Guides - Custom Helpers
+version: head
 ---
 
 ## Custom Helpers

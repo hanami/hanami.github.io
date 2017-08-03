@@ -1,5 +1,6 @@
 ---
 title: Guides - RESTful Resource(s)
+version: head
 ---
 
 # REST

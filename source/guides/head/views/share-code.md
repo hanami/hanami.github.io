@@ -1,5 +1,6 @@
 ---
 title: Guides - View Share Code
+version: head
 ---
 
 # Share Code

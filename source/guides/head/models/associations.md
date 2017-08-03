@@ -1,5 +1,6 @@
 ---
 title: Guides - Associations
+version: head
 ---
 
 # Associations

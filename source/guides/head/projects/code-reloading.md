@@ -1,5 +1,6 @@
 ---
 title: Guides - Code Reloading
+version: head
 ---
 
 # Code Reloading

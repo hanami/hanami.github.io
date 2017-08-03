@@ -1,5 +1,6 @@
 ---
 title: Guides - Action Cookies
+version: head
 ---
 
 # Cookies

@@ -1,5 +1,6 @@
 ---
 title: Guides - Project Initializers
+version: head
 ---
 
 # Initializers

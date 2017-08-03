@@ -1,5 +1,6 @@
 ---
 title: Guides - Action Exposures
+version: head
 ---
 
 # Exposures

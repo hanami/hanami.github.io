@@ -1,5 +1,6 @@
 ---
 title: Guides - PostgreSQL
+version: head
 ---
 
 # PostgreSQL

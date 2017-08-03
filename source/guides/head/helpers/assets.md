@@ -1,5 +1,6 @@
 ---
 title: Guides - Assets Helpers
+version: head
 ---
 
 ## Assets Helpers

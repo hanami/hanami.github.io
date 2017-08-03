@@ -1,5 +1,6 @@
 ---
 title: Guides - Views Basic Usage
+version: head
 ---
 
 # Basic Usage

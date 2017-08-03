@@ -1,5 +1,6 @@
 ---
 title: "Guides - Architectures: Container"
+version: head
 ---
 
 # Architectures
@@ -47,7 +48,7 @@ There are two important directories:
   * `lib/bookshelf/repositories`
 
 They contain [entities](/guides/head/models/entities) that are Ruby objects at the core of our model domain, and they aren't aware of any persistence mechanism.
-For this purpose we have a separate concept, [repositories](/guides/head/head/models/repositories), which are a mediator between our entities and the underlying database.
+For this purpose we have a separate concept, [repositories](/guides/head/models/repositories), which are a mediator between our entities and the underlying database.
 
 For each entity named `Book` we can have a `BookRepository`.
 

@@ -1,5 +1,6 @@
 ---
 title: "Guides - Command Line: Generators"
+version: head
 ---
 
 # Command Line

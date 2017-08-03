@@ -1,5 +1,6 @@
 ---
 title: Guides - Assets Overview
+version: head
 ---
 
 # Assets

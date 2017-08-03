@@ -1,5 +1,6 @@
 ---
 title: Guides - View Templates
+version: head
 ---
 
 # Templates

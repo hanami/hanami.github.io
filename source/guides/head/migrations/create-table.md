@@ -1,5 +1,6 @@
 ---
 title: Guides - Migrations Create Tables
+version: head
 ---
 
 # Migrations

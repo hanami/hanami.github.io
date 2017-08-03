@@ -1,5 +1,6 @@
 ---
 title: Guides - Database Configuration
+version: head
 ---
 
 # Database Configuration

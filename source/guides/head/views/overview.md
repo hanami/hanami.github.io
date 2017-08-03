@@ -1,5 +1,6 @@
 ---
 title: Guides - Views Overview
+version: head
 ---
 
 # Overview

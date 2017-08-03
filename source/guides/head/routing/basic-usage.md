@@ -1,5 +1,6 @@
 ---
 title: Guides - Basic Usage
+version: head
 ---
 
 # Basic Usage

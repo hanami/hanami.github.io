@@ -1,5 +1,6 @@
 ---
 title: Guides - Logging
+version: head
 ---
 
 # Logging

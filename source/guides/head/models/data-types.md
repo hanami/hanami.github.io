@@ -1,5 +1,6 @@
 ---
 title: Guides - Data Types
+version: head
 ---
 
 # Data Types

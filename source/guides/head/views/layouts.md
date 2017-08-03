@@ -1,5 +1,6 @@
 ---
 title: Guides - View Layouts
+version: head
 ---
 
 # Layouts

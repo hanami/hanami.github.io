@@ -1,5 +1,6 @@
 ---
 title: Guides - Actions Basic Usage
+version: head
 ---
 
 # Basic Usage
