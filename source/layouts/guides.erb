@@ -40,7 +40,7 @@
         <% end %>
       </ul>
 
-      <% if current_page.data.version.nil? && !current_page.path.match('upgrade-notes')  %>
+      <% if current_page.data.version == 'head' && !current_page.path.match('upgrade-notes')  %>
         <p class="warning">
           You're looking at the guides for the upcoming version of Hanami.
           <br>

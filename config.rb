@@ -129,7 +129,8 @@ helpers do
   end
 
   def guide_url(category, page, version = nil)
-    path = version ? "/guides/#{version}" : '/guides'
+    path = version == 'head' ? '/guides/head' : "/guides/#{version}"
+    path = '/guides' if %w[head 1.0].include?(page.path)
     File.join(path, category.path, page.path)
   end
 
