@@ -134,6 +134,10 @@ helpers do
     File.join(path, category.path, page.path)
   end
 
+  def legacy_redirect_url(current_page)
+    current_page.url.sub('/guides', '/guides/1.0')
+  end
+
   def guide_pager(current_page, guides, version = nil)
     current_url = current_page.url.tr('/', '')
     flat_guides = guides.categories.flat_map { |category|
@@ -257,10 +261,7 @@ helpers do
   end
 end
 
-###
-# Redirects
-###
-redirect "guides", to: "/guides/#{hanami_version}"
+# proxy 
 
 set :css_dir,    'stylesheets'
 set :js_dir,     'javascripts'
