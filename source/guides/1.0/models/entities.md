@@ -86,7 +86,7 @@ book.created_at       # => 2016-11-13 09:41:09 UTC
 book.created_at.class # => Time
 ```
 
-An entity tries as much as it cans to coerce values according to the internal schema.
+An entity tries as much as it can to coerce values according to the internal schema.
 
 ---
 
