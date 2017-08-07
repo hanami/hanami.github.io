@@ -205,7 +205,7 @@ helpers do
     %(<a href="#{ url }" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a>)
   end
 
-  ROOT_GUIDE_PAGE_REGEXP = %r(\A/guides/([\d\.]+/)?\z)
+  ROOT_GUIDE_PAGE_REGEXP = %r(\A/guides/([\d\.|head]+/)?\z)
 
   def breadcrumbs(page, **payload)
     metadata = page.metadata
