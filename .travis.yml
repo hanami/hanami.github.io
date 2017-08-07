@@ -18,6 +18,5 @@ before_script:
 - git remote rm origin
 - git remote add origin https://davydovanton:${GH_TOKEN}@github.com/hanami/hanami.github.io.git
 - mkdir build
-- cp -R source/guides/1.0/ source/guides/
 script:
-- bundle exec middleman build && bundle exec middleman deploy
+- bin/site build && bundle exec middleman deploy
