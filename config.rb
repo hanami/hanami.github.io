@@ -210,7 +210,7 @@ helpers do
   def breadcrumbs(page, **payload)
     metadata = page.metadata
     version = metadata[:page]['version']
-    version_text = (version) ? "/ #{link_to(version, "/guides/#{version}")} " : nil
+    version_text = version == 'head' ? nil : "/ #{link_to(version, "/guides/#{version}")} "
     page_title = metadata[:page]['title'].split(' - ').last
 
     category = data.guides.categories.select do |c|
