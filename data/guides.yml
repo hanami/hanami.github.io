@@ -121,9 +121,9 @@ categories:
       - path: v100
         title: v1.0.0
   - path: /
-    title: Old Guides
+    title: Guide Versions
     pages:
-      - path: /
+      - path: 'head'
         title: 'Head'
       - path: '1.0'
         title: v1.0

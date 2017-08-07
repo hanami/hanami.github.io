@@ -129,7 +129,8 @@ helpers do
   end
 
   def guide_url(category, page, version = nil)
-    path = version ? "/guides/#{version}" : '/guides'
+    path = version == 'head' ? '/guides/head' : "/guides/#{version}"
+    path = '/guides' if %w[head 1.0].include?(page.path)
     File.join(path, category.path, page.path)
   end
 
@@ -204,12 +205,12 @@ helpers do
     %(<a href="#{ url }" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a>)
   end
 
-  ROOT_GUIDE_PAGE_REGEXP = %r(\A/guides/([\d\.]+/)?\z)
+  ROOT_GUIDE_PAGE_REGEXP = %r(\A/guides/([\d\.|head]+/)?\z)
 
   def breadcrumbs(page, **payload)
     metadata = page.metadata
     version = metadata[:page]['version']
-    version_text = (version) ? "/ #{link_to(version, "/guides/#{version}")} " : nil
+    version_text = version == 'head' ? nil : "/ #{link_to(version, "/guides/#{version}")} "
     page_title = metadata[:page]['title'].split(' - ').last
 
     category = data.guides.categories.select do |c|

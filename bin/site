@@ -12,6 +12,7 @@ function start_server {
 }
 
 function build_site {
+  cp -R source/guides/1.0/ source/guides/
   _middleman build
 }
 
