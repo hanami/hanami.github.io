@@ -129,13 +129,13 @@ When a developer adds `hanami-webpack` to their `Gemfile`, then the command is a
 ```shell
 $ bundle exec hanami generate
 Commands:
-  hanami generate action APP ACTION                    # Generate an action for app
-  hanami generate app APP                              # Generate an app
-  hanami generate mailer MAILER                        # Generate a mailer
-  hanami generate migration MIGRATION                  # Generate a migration
-  hanami generate model MODEL                          # Generate a model
-  hanami generate secret [APP]                         # Generate session secret
-  hanami generate webpack                              # Generate Webpack configuration
+  hanami generate action APP ACTION                # Generate an action for app
+  hanami generate app APP                          # Generate an app
+  hanami generate mailer MAILER                    # Generate a mailer
+  hanami generate migration MIGRATION              # Generate a migration
+  hanami generate model MODEL                      # Generate a model
+  hanami generate secret [APP]                     # Generate session secret
+  hanami generate webpack                          # Generate Webpack configuration
 ```
 
 ### Extra behaviors for entity manual schema
@@ -212,7 +212,7 @@ You add more and more code to the project, but growing it organically, by using 
 
 There are cases of real world products using a **dozen of Hanami apps in the same project** (eg `web` for the frontend, `admin` for the administration, etc..)
 They deploy the project on several servers, by booting only a subset of these apps.
-So the servers A, B, and C are for customers (`web` application), D is for administration (`admin` application`), while E, and F are for API (`api` application)
+So the servers A, B, and C are for customers (`web` application), D is for administration (`admin` application), while E, and F are for API (`api` application)
 
 To serve this purpose we introduced _selective booting_ feature.
 
