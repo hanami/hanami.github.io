@@ -5,45 +5,67 @@ title: Architecture - Interactors
 # Overview
 Hanami provides an **optional** tool for organizing your code.
 
-These are *Interactors*, also referred to as *service objects* or *operations*
+These are *Interactors*,
+also referred to *service objects*, *use-cases* or *operations*
 
-We provide `Hanami::Interactor`,
-but you can use Plain Old Ruby Objects or a different library.
+In this guide, we'll explain how they work by adding a small feature to an existing application.
 
-# A new feature: User Sign-Up
-We want to add users to our `bookshelf` application.
+The existing application we'll work from is the `bookshelf` application
+from the [Getting Started Guide]((/guides/getting-started).
 
-Note: this is just to explain `Hanami::Interactor` and
-we will not be building a full authentication system.
-We are _only_ concerning ourselves with signing up,
-not logging in or any other features.
+# A new feature: email notifications
+Whenever a book is added to our `bookshelf` application,
+we want to send an email out notifying the admininstrators of the site.
 
-This is a good example of functionality to extract into an Interactor,
-because user sign-up is not trivial.
+This is just an example to show when you should use an interactor, and,
+specifically, how `Hanami::Interactor` can be used.
 
+You could extend this example to add administrator approval of new books,
+or allowing editing via a link.
 
-# Background
-Passwords should **never** be stored in plain-text.
+In practice,
+you can use `Interactors` to implement any business logic.
+It's particularly useful for when you want to do several things at once,
+in order to manage the complexity of the codebase.
 
-We should first _hash_ the password.
-This is a function that always returns the same random output for the
-same input.
-It is _one-way_,
-which means it's extremely hard to reverse it,
-that is, to get the password from the hashed output.
-(This output is called a digest.)
+# Callbacks? We Don't Need No Stinkin' Callbacks!
+A common method of implementing email notification would be to add a callback.
+That is: whenever a new record is created in the database,
+an email is sent out.
 
-We don't store plain-text passwords because if our database is compromised,
-we don't want to reveal our users' passwords
-(since many people re-use passwords).
+By design, Hanami doesn't provide any such mechanism.
+This is because it's persistence callbacks are an **anti-pattern**.
+They violate the Single-Responsibility principle,
+by conflating persistence with email notifications.
 
-Instead, attackers would only get the hashed results.
+During testing (and at some other point, most likely),
+you'll want to skip that callback.
+This quickly becomes confusing when you want to skip several callbacks.
+They make code hard to understand, and brittle.
 
-Note: this approach is still vulnerable to
-[Rainbow tables](https://en.wikipedia.org/wiki/Rainbow_table).
+Instead, we recommend being **explicit over implicit**.
 
-In order to combat this, we'll use a hashing scheme that employs a
-[`salt`](https://en.wikipedia.org/wiki/Salt_(cryptography)).
+An interactor is an object that represents a specific *use-case*.
+
+They let each class have a single responsibility.
+Interactors' single responsibility is to call other behavior.
+
+We provide `Hanami::Interactor` as a module,
+so you can start with a Plain Old Ruby Object (no superclass),
+and then `include Hanami::Interactor` when you need some of its features.
+
+TODO: Add note about alternative libraries?
+
+# Concept
+The central idea behind Interactors is that you extract an isolated piece of functionality into a new class.
+
+There's a minimal interface,
+with just two methods called on Interactors: `#new` and `#call`.
+
+This lets you easily test just that specific behavior,
+rather than having it be expressed implicitly elsewhere.
+
+This helps manage complexity: making it visible and able to be named.
 
 # Preparing
 Let's say we have our `bookshelf` application,
@@ -60,42 +82,6 @@ Clone the `bookshelf` application so we're starting from the same place.
 % bundle exec rake # All the tests should pass
 ```
 
-# Adding User model
-```shell
-% hanami generate model User
-```
-
-You'll see an entity (`User`) and a repository (`UserRepository`) created,
-as well as their tests files.
-
-You'll also see a migration was generated,
-something like:
-`db/migrations/20170326152126_create_users.rb`
-
-Edit this file:
-
-```ruby
-Hanami::Model.migration do
-  change do
-    create_table :users do
-      primary_key :id
-      string :email, null: false, unique: true
-      string :password_digest
-
-      column :created_at, DateTime, null: false
-      column :updated_at, DateTime, null: false
-    end
-  end
-end
-```
-
-We'll add a couple columns:
-- `email`, we require this field, and make sure it's unique
-- `password_digest`, this will be the user's hashed password
-
-
-Let's create that table:
-
 ```shell
 % bundle exec hanami db prepare
 ```
@@ -107,18 +93,17 @@ Let's create a place for our Interactor to go:
 % mkdir lib/bookshelf/interactors
 % mkdir spec/bookshelf/interactors
 ```
-
 We put them in `lib/bookshelf` because they're decoupled from the web:
-later you may want to allow users to sign up via an API or an admin portal.
+later you may want to add books via an admin portal, or an API.
 
-Let's call our interactor `SignUpUser`,
-and write a new spec `spec/bookshelf/interactors/sign_up_user_spec.rb`:
+Let's call our interactor `AddBook`,
+and write a new spec `spec/bookshelf/interactors/add_book_spec.rb`:
 
 ```ruby
 require 'spec_helper'
 
-describe SignUpUser do
-  let(:interactor) { SignUpUser.new(email: "test@example.com") }
+describe Addbook do
+  let(:interactor) { AddBook.new }
 
   it "succeeds" do
     interactor.call.success?.must_equal true
@@ -126,8 +111,8 @@ describe SignUpUser do
 end
 ```
 
-Running your test suite will cause an error because there is no `SignUpUser` class.
-Let's create that class in a `lib/bookshelf/interactors/sign_up_user.rb` file:
+Running your test suite will cause a NameError because there is no `AddBook` class.
+Let's create that class in a `lib/bookshelf/interactors/add_book.rb` file:
 
 ```ruby
 require 'hanami/interactor'
@@ -162,68 +147,72 @@ Let's run this test:
 
 All the tests should pass!
 
-Now, let's make our `SignUpUser` actually do something!
+Now, let's make our `AddBook` actually do something!
 
 
-# Creating a User
+# Creating a Book
 
-Edit `spec/bookshelf/interactors/sign_up_user_spec.rb`:
+Edit `spec/bookshelf/interactors/add_book_spec.rb`:
 ```ruby
 require 'spec_helper'
 
-describe SignUpUser do
-  let(:interactor) { SignUpUser.new(email: "test@example.com") }
+describe AddBook do
+  let(:interactor) { AddBook.new }
 
-  it "succeeds" do
-    interactor.call.success?.must_equal true
-  end
+  describe "good input" do
+    let(:result) { interactor.call(attributes) }
 
-  it "creates a User with correct email" do
-    interactor.call.user.email.must_equal "test@example.com"
+    it "succeeds" do
+      result.success?.must_equal true
+    end
+
+    it "creates a Book with correct title and author" do
+      result.book.title.must_equal "The Fire Next Time"
+      result.book.author.must_equal "James Baldwin"
+    end
   end
 end
 ```
 
 If you run the tests with `bundle exec rake`, you'll see this error:
 ```ruby
-NoMethodError: undefined method `user' for #<Hanami::Interactor::Result:0x007f94498c1718>
+NoMethodError: undefined method `book' for #<Hanami::Interactor::Result:0x007f94498c1718>
 ```
 
-Let's fill out our interactor,
+Let's fill out our Interactor,
 then explain what we did:
 
 ```ruby
 require 'hanami/interactor'
 
-class SignUpUser
+class AddBook
   include Hanami::Interactor
 
-  expose :user
+  expose :book
 
-  def initialize(params)
-    @params = params
+  def initialize
+
   end
 
-  def call
-    @user = User.new(@params)
+  def call(params)
+    @book = Book.new(params)
   end
 end
 ```
 
 There are a few things to talk about here:
 
-The `expose :user` line exposes the `@user` instance variable as a method on the result that will be returned.
+The `expose :book` line exposes the `@book` instance variable as a method on the result that will be returned.
 
-The initializer takes all the params passed in and assigns them to an instance variable,
-so they can be used in `call`.
-
-The `call` method assigns a new User entity to the `@user` variable, which will be exposed to the result.
+The `call` method assigns a new Book entity to the `@book` variable, which will be exposed to the result.
 
 The tests should pass now.
 
-# Persisting the user
-We have a `User` built from the params passed in,
-but doesn't exist in the database yet.
+# Persisting the book
+We have a new `book` built from the title and author passed in,
+but it doesn't exist in the database yet.
+
+We need to use a `BookRepository` to persist it.
 
 ```ruby
 require 'spec_helper'
@@ -235,113 +224,70 @@ describe SignUpUser do
     interactor.call.success?.must_equal true
   end
 
-  it "creates a User with email" do
-    interactor.call.user.email.must_equal "test@example.com"
+  it "creates a Book with correct title and author" do
+    result.book.title.must_equal "The Fire Next Time"
+    result.book.author.must_equal "James Baldwin"
   end
 
-  it "persists the User" do
-    interactor.call.user.id.wont_be_nil
+  it "persists the Book" do
+    result.book.id.wont_be_nil
   end
 end
 ```
 
 If you run the tests,
-you'll the new test fails with `Expected nil to not be nil.`
+you'll see the new expectation fails with `Expected nil to not be nil.`
 
-This is because our unpersisted `User` does not have an `id` yet.
-To add an `id`, we'll need to create a _persisted_ `User` instead.
+This is because the book we built is unpersisted;
+it only gets an `id` once it exists in the database.
 
-Edit the `call` method in our `lib/bookshelf/interactors/sign_up_user.rb` Interactor:
+To make this test pass, we'll need to create a _persisted_ `Book` instead.
+
+Edit the `call` method in our `lib/bookshelf/interactors/ad_book.rb` Interactor:
 
 ```ruby
   def call
-    @user = UserRepository.new.create(@params)
+    @book = BookRepository.new.create({title: title, author: author})
   end
 ```
 
-Instead of calling `User.new`,
-we create a new `UserRepository` and call `create` on it with our params.
+Instead of calling `Book.new`,
+we create a new `BookRepository` and send `create` to it, with our attributes.
 
-This still returns a `User`, but it also persists this record to the database.
+This still returns a `Book`, but it also persists this record to the database.
 
-If you run the tests now you'll see... a few errors.
-`Hanami::Model::UniqueConstraintViolationError: SQLite3::ConstraintException: UNIQUE constraint failed: users.email`
+If you run the tests now you'll see all the tests pass.
 
-This is because our test file calls `interactor.call` three times,
-so the interactor tries to create three `User`s with the same email address.
-We told our database `email` should be unique though.
 
-Luckily, this is simple fix.
-We just need to clean up the database before we run each test.
+# Email notification
+Let's add the email notification!
 
-Edit `spec/bookshelf/interactors/sign_up_user_spec.rb`:
-```ruby
-require 'spec_helper'
+You can use a different library,
+but we'll use `Hanami::Mailer`.
+(You can do anything here,
+like send an SMS, send a chat message, or call a webhook.)
 
-describe SignUpUser do
-  let(:interactor) { SignUpUser.new(email: "test@example.com") }
-
-  before { UserRepository.new.clear }
-
-  # ...
-end
+```shell
+% bundle exec hanami generate mailer book_added_notification
+      create  lib/bookshelf/mailers/book_added_notification.rb
+      create  spec/bookshelf/mailers/book_added_notification_spec.rb
+      create  lib/bookshelf/mailers/templates/book_added_notification.txt.erb
+      create  lib/bookshelf/mailers/templates/book_added_notification.html.erb
 ```
 
-And now all our tests should pass!
+We won't get into the details of [how the mailer works](/guides/mailers/overview),
+but it's pretty simple: there's a `Hanami::Mailer` class, an associated spec,
+and two templates (one for plaintext, and one for html).
 
+Since we're keeping things simple,
+let's delete the `html` email template.
+Plaintext will be fine.
 
-# Password Hashing
-We're going to hash our passwords with `bcrypt`.
-
-This is a secure industry standard,
-and luckily there's [a Ruby wrapper](https://github.com/codahale/bcrypt-ruby) for it!
-
-This is not a security guide,
-but... _please_ do not implement your own hashing scheme,
-nor use MD5 or any SHA-based hashing function for password hashing.
-
-BCrypt includes a salt (so you don't have to worry about that)
-and includes key-stretching, which makes them harder to crack.
-
-Let's ensure the `User` has a password_digest:
-```ruby
-describe SignUpUser do
-  # ...
-
-  it "creates a User with password_digest" do
-    interactor.user.password_digest.length.must_equal 60
-  end
-end
+```shell
+% rm lib/bookshelf/mailers/templates/book_added_notification.html.erb
 ```
 
-BCrypt outputs a digest that's 60 characters long, so we check for that.
-
-Our test will fail because `password_digest` isn't assigned.
-
-## BCrypt
-First, we need to add `bcrypt` to our Gemfile:
-```ruby
-gem 'bcrypt'
-```
-
-Then run `bundle install` to install it.
-
-
-In order to make our test pass,
-we need to add the `password_digest` to our Interactor.
-
-```ruby
-  # ...
-
-  def call
-    @user = UserRepository.new.create(
-      email: @params[:email],
-      password_digest: BCrypt::Password.create(@params[:password])
-    )
-  end
-```
-
-This will store a cryptographically secure digest of the user's password.
+TODO: finish this! test for mailer, and calling it from interactor
 
 # Error handling
 What if a user legitimately tries to create an account for an email that already has an account?
@@ -588,3 +534,33 @@ and that both successes and failures are handled.
 
 # Summary/Rationale/Conclusion
 [To be completed]
+
+# Naming Interactors
+[To be completed]
+
+# DB Constraint? Uniqueness.
+If you run the tests now you'll see... a few errors.
+`Hanami::Model::UniqueConstraintViolationError: SQLite3::ConstraintException: UNIQUE constraint failed: users.email`
+This is because our test file calls `interactor.call` three times,
+so the interactor tries to create three `User`s with the same email address.
+We told our database `email` should be unique though.
+
+Luckily, this is simple fix.
+We just need to clean up the database before we run each test.
+
+Edit `spec/bookshelf/interactors/sign_up_user_spec.rb`:
+```ruby
+require 'spec_helper'
+
+describe SignUpUser do
+  let(:interactor) { SignUpUser.new(email: "test@example.com") }
+
+  before { UserRepository.new.clear }
+
+  # ...
+end
+```
+
+And now all our tests should pass!
+
+
