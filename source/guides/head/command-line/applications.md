@@ -36,3 +36,13 @@ We can use the `--test` argument to specify a different framework, from the list
 
   * `minitest` (default)
   * `rspec`
+
+### Template Engine
+
+The default template engine is ERB.
+
+We can use the `--template` argument to specify a different template engine, from the list below:
+
+  * `erb` (default)
+  * `haml`
+  * `slim`
