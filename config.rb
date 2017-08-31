@@ -166,6 +166,14 @@ helpers do
     end
   end
 
+  def guides_data(version = nil)
+    case version
+    when 1.0 then data.guides_1_0
+    else
+      data.guides
+    end
+  end
+
   def guides_navigation
     result = ''
 
@@ -213,7 +221,7 @@ helpers do
     version_text = version == 'head' ? nil : "/ #{link_to(version, "/guides/#{version}")} "
     page_title = metadata[:page]['title'].split(' - ').last
 
-    category = data.guides.categories.select do |c|
+    category = guides_data(version).categories.select do |c|
       c['pages'].map { |p| p['path'] }.include?(page.url.split('/').last)
     end.first
 
