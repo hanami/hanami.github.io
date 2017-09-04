@@ -70,6 +70,30 @@ Hanami.configure do
 end
 ```
 
+## Custom Loggers
+
+You can specify a custom logger in cases where you desire different logging behaviour. For example,
+the [Timber logger](https://github.com/timberio/timber-ruby):
+
+```ruby
+# config/environment.rb
+# ...
+
+Hanami.configure do
+  # ...
+
+  environment :production do
+    logger Timber::Logger.new(STDOUT)
+
+    # ...
+  end
+end
+```
+
+Use this logger as normal via `Hanami.logger`. It's important to note that any logger chosen
+must conform to the default `::Logger` interface.
+
+
 ## Automatic Logging
 
 All HTTP requests, SQL queries, and database operations are automatically logged.
