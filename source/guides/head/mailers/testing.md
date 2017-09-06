@@ -17,9 +17,7 @@ Please make sure to **clear** them in testing setup.
 require 'spec_helper'
 
 describe Mailers::Welcome do
-  before do
-    Hanami::Mailer.deliveries.clear
-  end
+  before { Hanami::Mailer.deliveries.clear }
 
   let(:user) { ... }
 
@@ -27,8 +25,8 @@ describe Mailers::Welcome do
     Mailers::Welcome.deliver(user: user)
     mail = Hanami::Mailer.deliveries.last
 
-    mail.to.must_equal             [user.email]
-    mail.body.encoded.must_include "Hello, #{ user.name }"
+    expect(mail.to).to           eq([user.email])
+    expect(mail.body.encoded).to eq("Hello, #{ user.name }")
   end
 end
 ```
