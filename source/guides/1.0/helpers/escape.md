@@ -33,7 +33,7 @@ We have an extra helper for this specific task: `#escape_html_attribute` (aliase
 **This should be used only when the value of an attribute comes from a user input.**
 
 ```erb
-<img="/path/to/avatar.png" title="<%= ha(user.name) %>'s Avatar">
+<img src="/path/to/avatar.png" title="<%= ha(user.name) %>'s Avatar">
 ```
 
 ## Whitelisted URLs
