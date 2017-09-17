@@ -17,7 +17,7 @@
         <% data.guides.categories.each do |category| %>
           <optgroup label="<%= guide_title(category) %>">
             <% category.pages.each do |page| %>
-              <option value="<%= guide_url(category, page, current_page.data.version) %>" <%= "selected" if guide_url(category, page) == current_page.url.chomp("\/") %>><%= guide_title(page) %></option>
+              <option value="<%= guide_url(category, page, current_page.data.version) %>" <%= "selected" if guide_url(category, page,current_page.data.version) == current_page.url.chomp("/") %>><%= guide_title(page) %></option>
             <% end %>
           </optgroup>
         <% end %>
