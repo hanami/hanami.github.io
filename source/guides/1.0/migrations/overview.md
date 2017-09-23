@@ -6,7 +6,7 @@ version: 1.0
 # Migrations
 
 Migrations are a feature that allows to manage database schema via Ruby.
-They come with some [command line facilities](/guides/1.0/command-line/database) that allow to perform database operations or to [generate](/guides/1.0/command-line/generators) migrations.
+They come with some [command line facilities](/guides/1.0/command-line/database) that allow to perform database operations or to [generate](/guides/1.0/command-line/generators/#migrations) migrations.
 
 Migrations are only available if our application uses the [SQL adapter](/guides/1.0/models/overview).
 
