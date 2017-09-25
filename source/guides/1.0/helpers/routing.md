@@ -62,3 +62,7 @@ end
 ```
 
 In the case above, we have passed a Hash as set of params that are required to generate the URL.
+
+<p class="convention">
+  Absolute URL generation is dependent on <code>scheme</code>, <code>host</code> and <code>port</code> settings in <code>apps/web/application.rb</code>.
+</p>
