@@ -1,7 +1,0 @@
-{
-  "name": "my title",
-    "dependencies": {
-    "jquery": "~1.11",
-    "lightbox2": "https://github.com/dg-vrnetze/revealjs-lightbox2.git"
-    }
-}
