@@ -258,5 +258,5 @@ Sometimes you'll want to `redirect_to` back in your browser's history so the eas
 is the following way:
 
 ```ruby
-redirect_to request.headers["Referer"] || fallback_url
+redirect_to request.get_header("Referer") || fallback_url
 ```
