@@ -63,6 +63,25 @@ repository.find(book.id)
   # => nil
 ```
 
+## Saving more than one record
+
+For saving bunch of records you need to define a `#create_many` command:
+
+```ruby
+class BookRepository
+  def create_many(list)
+    command(:create, books, result: :many).call(list)
+  end
+end
+```
+
+Now you can use `#create_many` as a bulk creation method:
+
+```ruby
+BookRepository.new.create_many([{ title: "Hanami" }, { title: "Ruby"}])
+# => [#<Book:0x007f95cbd8b7c0 @attributes={...}>, #<Book:0x007ff4e20e6f80 @attributes={...}>]
+```
+
 ## Private Queries
 
 **All the queries are private**.
