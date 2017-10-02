@@ -50,7 +50,10 @@ It supports the following options:
   * `:primary_key` (make the column primary key for the table)
   * `:unique` (add a uniqueness constraint for the column)
 
-
+<p class="convention">
+  Note that Hanami natively supports <strong>PostgreSQL data types</strong>.
+  Learn more about them in the <a href="/guides/1.0/models/postgresql/">dedicated article</a>.
+</p>
 
 #### Primary Key
 
