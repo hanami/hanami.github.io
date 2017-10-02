@@ -33,7 +33,7 @@ Then we can load the file and include the module in **all** the views of our app
 
 ```ruby
 # apps/web/application.rb
-require_relative './accept_json'
+require_relative './views/accept_json'
 
 module Web
   class Application < Hanami::Application
