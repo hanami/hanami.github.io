@@ -3,9 +3,7 @@ title: Guides - Migrations Alter Tables
 version: head
 ---
 
-# Migrations
-
-## Alter Tables
+# Alter Tables
 
 The following methods are available for table alterations:
 
@@ -45,14 +43,14 @@ Hanami::Model.migration do
   change do
     alter_table :users do
       # `users` table is implicit within this block, so it can be omitted.
-      add_column :email, String,  null: false, unique: true    
+      add_column :email, String,  null: false, unique: true
       set_column_default :visits_counts, default: 0
     end
   end
 end
 ```
 
-### Rename Table
+## Rename Table
 
 Tables can be renamed via `#rename_table`. It accepts the **old name** and the **new name** as arguments.
 
@@ -60,7 +58,7 @@ Tables can be renamed via `#rename_table`. It accepts the **old name** and the *
 rename_table :users, :people
 ```
 
-### Drop Table
+## Drop Table
 
 Tables can be dropped via `#drop_table`. It accepts the **name** as argument.
 
