@@ -117,3 +117,38 @@ With this setting, Hanami will render `integrity` HTML attribute with two values
 ```
 
 **Please note** that checksum calculations are CPU intensive, so adding an additional `subresource_integrity` scheme will extend the time it takes to _precompile assests_, and therefore deploy. We suggest leaving the default setting (`:sha256`).
+
+## Content Security Policy (CSP)
+
+Hanami uses HTTP headers that indicate to our web browser, among other things, which sources are allowed for our external resources. If some of our assets fail to load with a security-related error message in the browser's console, the CSP settings are likely to be too restrictive. They can be found in the Security section of `app/web/application.rb`, with the following default values:
+
+```ruby
+security.content_security_policy %{
+  form-action 'self';
+  frame-ancestors 'self';
+  base-uri 'self';
+  default-src 'none';
+  script-src 'self';
+  connect-src 'self';
+  img-src 'self' https: data:;
+  style-src 'self' 'unsafe-inline' https:;
+  font-src 'self';
+  object-src 'none';
+  plugin-types application/pdf;
+  child-src 'self';
+  frame-src 'self';
+  media-src 'self'
+}
+```
+
+We can take note of the fact that, for instance, `script-src` is restricted to `'self'`. If we want to use jQuery served from its CDN, we need to update the setting's line like so:
+
+```ruby
+security.content_security_policy %{
+  ...
+  script-src 'self' https://code.jquery.com;
+  ...
+}
+```
+
+The same principle applies to the other types of assets.
