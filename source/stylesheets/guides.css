@@ -539,6 +539,10 @@ body {
 }
 .convention a {
   color: #fff;
+  font-weight: 700;
+}
+.convention p:last-child {
+  margin-bottom: 0;
 }
 .warning {
   border-color: #f39c12;

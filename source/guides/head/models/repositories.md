@@ -112,6 +112,19 @@ This is a **huge improvement**, because:
 
   * If we change the storage, the callers aren't affected.
 
+<div class="convention">
+  <p>
+    Hanami queries are based on gems from <strong>ROM</strong> project, namely
+    <code>rom-repository</code> and <code>rom-sql</code>.
+    The gem <code>rom-sql</code> is itself based on <strong>Sequel</strong> project.
+  </p>
+  <p>
+    Learn more on how to craft queries with
+    <a href="http://rom-rb.org/current/learn/sql/queries/">ROM</a>
+    and <a href="http://sequel.jeremyevans.net/documentation.html">Sequel</a>.
+  </p>
+</div>
+
 ## Timestamps
 
 To have a track of when a record has been created or updated is important when running a project in production.
