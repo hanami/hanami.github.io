@@ -16,7 +16,7 @@ X-Frame-Options is a HTTP header supported by modern browsers. It determines if 
 Web applications can send this header to prevent Clickjacking attacks:
 
 ```ruby
-# Denies all untrusted domains
+# Denies all untrusted domains (default)
 security.x_frame_options 'DENY'
 ```
 
@@ -30,13 +30,20 @@ security.x_frame_options 'http://example.com'
 X-Content-Type-Options prevents browsers from interpreting files as something else than declared by the content type in the HTTP headers.
 
 ```ruby
-# Will prevent the browser from MIME-sniffing a response away from the declared content-type.
+# Will prevent the browser from MIME-sniffing a response away from the declared content-type (default)
 security.x_content_type_options 'nosniff'
 ```
 
 # X-XSS-Protection
 
 X-XSS-Protection is a HTTP header to determine the behavior of the browser in case an XSS attack is detected.
+
+
+```ruby
+# Filter enabled. Rather than sanitize the page, when a XSS attack is detected,
+# the browser will prevent rendering of the page (default)
+security.x_xss_protection '1; mode=block'
+```
 
 ```ruby
 # Filter disabled
@@ -48,14 +55,6 @@ security.x_xss_protection '0'
 # the browser will sanitize the page
 security.x_xss_protection '1'
 ```
-
-
-```ruby
-# Filter enabled. Rather than sanitize the page, when a XSS attack is detected,
-# the browser will prevent rendering of the page
-security.x_xss_protection '1; mode=block'
-```
-
 
 ```ruby
 # The browser will sanitize the page and report the violation.
@@ -74,7 +73,7 @@ other resources to load (eg object, frame, media, etc).
 
 Inline JavaScript is NOT allowed. To enable it, please use: <code>script-src 'unsafe-inline'</code>.
 
-Example:
+Default value is:
 
 ```ruby
 security.content_security_policy %{
