@@ -537,6 +537,9 @@ body {
   border-color: #3498db;
   background-color: #67cbfe;
 }
+.convention a {
+  color: #fff;
+}
 .warning {
   border-color: #f39c12;
   background-color: #f1c40f;
