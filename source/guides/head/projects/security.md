@@ -1,6 +1,6 @@
 ---
 title: Guides - Project Security
-version: 1.0
+version: head
 ---
 
 # Security
