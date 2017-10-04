@@ -5,6 +5,7 @@ cache: bundler
 branches:
   only:
   - build
+  - refactor-travis-yml
 env:
   global:
     - SITE_ENV=deploy
