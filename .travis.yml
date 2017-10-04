@@ -8,8 +8,6 @@ branches:
 env:
   global:
     - SITE_ENV=deploy
-rvm:
-  - 2.3.0
 before_script:
 - git config --global user.email "antondavyodv.o@gmail.com"
 - git config --global user.name "Anton Davydov"
