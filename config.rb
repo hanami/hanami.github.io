@@ -20,18 +20,6 @@ end
 activate :breadcrumbs
 
 ###
-# Compass
-###
-
-compass_config do |config|
-  config.output_style    = :compact
-  config.http_path       = '/'
-  config.css_dir         = 'source/stylesheets'
-  config.images_dir      = 'source/images'
-  config.javascripts_dir = 'source/javascripts'
-end
-
-###
 # Page options, layouts, aliases and proxies
 ###
 
