@@ -19,22 +19,6 @@ end
 
 activate :breadcrumbs
 
-###
-# Compass
-###
-
-# activate :compass do |config|
-#   config.output_style    = :compact
-#   config.http_path       = '/'
-#   config.css_dir         = 'source/stylesheets'
-#   config.images_dir      = 'source/images'
-#   config.javascripts_dir = 'source/javascripts'
-# end
-
-###
-# Page options, layouts, aliases and proxies
-###
-
 page '/',         layout: 'home'
 page '/atom.xml', layout: false
 page '/ml/*',     layout: false

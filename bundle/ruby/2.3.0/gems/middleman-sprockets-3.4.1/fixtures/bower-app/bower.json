@@ -1,7 +1,0 @@
-{
-  "name": "bower_app",
-  "version": "0.0.0",
-  "dependencies": {
-    "jquery": ">= 0.0.0"
-  }
-}
