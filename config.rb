@@ -61,7 +61,7 @@ helpers do
   # BLOG
   #
 
-  def articles(limit = 5)
+  def blog_articles(limit = 5)
     blog.articles.first(limit)
   end
 
