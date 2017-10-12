@@ -3,9 +3,7 @@ title: Guides - Migrations Create Tables
 version: 1.0
 ---
 
-# Migrations
-
-## Create Tables
+# Create Tables
 
 A table is defined via `#create_table`. This method accepts two arguments: the **name** and a **block** that expresses the design.
 
@@ -13,14 +11,14 @@ Safe operation can be performed via `#create_table?`. It only creates the table 
 Force operation can be performed via `#create_table!`. It drops the existing table and creates a new one from scratch.
 **These operations shouldn't be used in migrations**.
 
-#### Column Definition
+## Column Definition
 
 To define a column we use `#column`, followed by the **name**, the **type** and **options**.
 The name must be a unique identifier within the table.
 
 The type can be a Ruby type (e.g. `String`), a symbol that represents a Ruby type (e.g. `:string`), or a string that represents the raw database type (e.g. `"varchar(255)"`). The only one exception in case of symbol is :Bignum. Using the symbol :Bignum as a type will use the appropriate 64-bit integer type for the database you are using.
 
-##### Type Definition
+## Type Definition
 
 The following Ruby types are supported:
 
@@ -40,7 +38,7 @@ The following Ruby types are supported:
 
 Their translation from Ruby types to database types may vary from database to database.
 
-##### Options
+### Options
 
 It supports the following options:
 
@@ -55,7 +53,7 @@ It supports the following options:
   Learn more about them in the <a href="/guides/1.0/models/postgresql/">dedicated article</a>.
 </p>
 
-#### Primary Key
+## Primary Key
 
 We can define **primary keys** with the following syntaxes:
 
@@ -65,7 +63,7 @@ column :id, Integer, null: false, primary_key: true
 primary_key :id
 ```
 
-#### Foreign Keys
+## Foreign Keys
 
 **Foreign keys** are defined via `#foreign_key`, where we specify the **name** of the column, the **referenced table**, and a set of **options**.
 The following example creates an `author_id` column (integer) for `books` and adds a foreign key.
@@ -77,7 +75,7 @@ create_table :books do
 end
 ```
 
-##### Options
+### Options
 
 It accepts the following options:
 
@@ -89,7 +87,7 @@ It accepts the following options:
   * `:on_update` (action to take if the referenced record is updated: `:restrict`, `:cascade`, `:set_null`, or `:set_default`)
 
 
-#### Indexes
+## Indexes
 
 Indexes are defined via `#index`. It accepts the **name(s)** of the column(s), and a set of **options**.
 
@@ -105,7 +103,7 @@ create_table :stores do
 end
 ```
 
-##### Options
+### Options
 
 It accepts the following options:
 
@@ -115,7 +113,7 @@ It accepts the following options:
   * `:where` (partial index, supported by some databases)
 
 
-#### Constraints
+## Constraints
 
 We can define constraints on columns via `#constraint`. It accepts a **name** and a **block**.
 
@@ -138,7 +136,7 @@ create_table :users do
 end
 ```
 
-#### Checks
+## Checks
 
 Checks are similar to constraints, but they accept an **anonymous block** or a **SQL raw string**.
 
