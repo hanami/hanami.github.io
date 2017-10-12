@@ -12,6 +12,7 @@ categories:
       - path: rake
       - path: logging
       - path: initializers
+      - path: security
   - path: routing
     pages:
       - path: overview
