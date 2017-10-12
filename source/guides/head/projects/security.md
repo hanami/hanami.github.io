@@ -22,7 +22,7 @@ security.x_frame_options 'DENY'
 
 ```ruby
 # Allows iframes on example.com
-security.x_frame_options 'http://example.com'
+security.x_frame_options 'ALLOW-FROM https://example.com/'
 ```
 
 # X-Content-Type-Options
