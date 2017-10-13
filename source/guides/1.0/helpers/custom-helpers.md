@@ -11,7 +11,7 @@ Because they are just Ruby modules, **we can create our own helpers**.
 
 ### Example
 
-Imagine we need (for some reason) a helper that shuffles the characters of a string and we want it to be available in our views.
+Imagine we need (for some reason) a helper that shuffles the characters of a string and we want it to be available in **all** our views.
 
 As first thing, let's define the module.
 
