@@ -31,7 +31,7 @@ We can do:
 ```erb
 <ul>
   <li><a href="<%= routes.root_path %>">Home</a></li>
-  <li><a href="<%= routes.book_path %>">Books</a></li>
+  <li><a href="<%= routes.books_path %>">Books</a></li>
 </ul>
 ```
 
