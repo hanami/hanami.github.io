@@ -112,6 +112,7 @@ categories:
       - path: assets
       - path: routes
       - path: version
+      - path: plugins
   - path: upgrade-notes
     pages:
       - path: v060
