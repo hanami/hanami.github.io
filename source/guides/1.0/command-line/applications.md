@@ -3,9 +3,7 @@ title: "Guides - Command Line: Applications"
 version: 1.0
 ---
 
-# Command Line
-
-## Applications
+# Applications
 
 We can generate a new project via `hanami new`, followed by the name that we want to use.
 
@@ -13,7 +11,7 @@ We can generate a new project via `hanami new`, followed by the name that we wan
 % hanami new bookshelf
 ```
 
-### Database
+## Database
 
 The default database engine is SQLite.
 
@@ -28,7 +26,7 @@ It supports:
   * `mysql`
   * `mysql2`
 
-### Testing Framework
+## Testing Framework
 
 The default testing framework is Minitest.
 
