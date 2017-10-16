@@ -14,7 +14,7 @@
       </div>
 
       <select class="mobile-guides">
-        <% data.guides.categories.each do |category| %>
+        <% guides_data(current_page.data.version).categories.each do |category| %>
           <optgroup label="<%= guide_title(category) %>">
             <% category.pages.each do |page| %>
               <option value="<%= guide_url(category, page, current_page.data.version) %>" <%= "selected" if guide_url(category, page,current_page.data.version) == current_page.url.chomp("/") %>><%= guide_title(page) %></option>
@@ -26,7 +26,7 @@
         <li></li>
         <li><%= guides_edit_article(current_page.source_file) %></li>
 
-        <% data.guides.categories.each do |category| %>
+        <% guides_data(current_page.data.version).categories.each do |category| %>
           <li class="toc-group">
             <span><%= guide_title(category) %></span>
             <ul>
@@ -52,7 +52,7 @@
 
       <hr>
 
-      <%= guide_pager(current_page, data.guides, current_page.data.version) %>
+      <%= guide_pager(current_page, guides_data(current_page.data.version), current_page.data.version) %>
     </div>
 
     <%= partial 'footer' %>
