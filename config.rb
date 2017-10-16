@@ -2,6 +2,7 @@ ENV['SITE_ENV'] ||= 'development'
 
 Bundler.require(:default, ENV['SITE_ENV']) if defined?(Bundler)
 
+require 'yaml'
 require 'ostruct'
 require 'rack/utils'
 require 'middleman-syntax'
@@ -112,6 +113,16 @@ helpers do
   GUIDES_ROOT     = 'source/guides'.freeze
   GUIDES_EDIT_URL = 'https://github.com/hanami/hanami.github.io/edit/build/'.freeze
 
+  def guides
+    @guides ||= {}
+
+    version = current_page.data.version == 'head' ? 'head' : "#{version}" #guides_path(current_page, current_page.data.version)
+    return @guides[version] unless @guides[version].nil?
+
+    yaml = YAML.load_file("#{GUIDES_ROOT}/#{version}/guides.yml")
+    @guides[version] = JSON.parse(yaml.to_json, object_class: OpenStruct)
+  end
+
   def guide_title(item, version = nil)
     item.title || item.path.split('-').map(&:capitalize).join(' ')
   end
@@ -195,13 +206,13 @@ helpers do
 
   ROOT_GUIDE_PAGE_REGEXP = %r(\A/guides/([\d\.|head]+/)?\z)
 
-  def breadcrumbs(page, **payload)
+  def breadcrumbs(page, guides)
     metadata = page.metadata
     version = metadata[:page]['version']
     version_text = version == 'head' ? nil : "/ #{link_to(version, "/guides/#{version}")} "
     page_title = metadata[:page]['title'].split(' - ').last
 
-    category = data.guides.categories.select do |c|
+    category = guides.categories.select do |c|
       c['pages'].map { |p| p['path'] }.include?(page.url.split('/').last)
     end.first
 
