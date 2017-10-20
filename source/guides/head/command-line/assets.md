@@ -3,13 +3,11 @@ title: "Guides - Command Line: Assets"
 version: head
 ---
 
-# Command Line
-
-## Assets
+# Assets
 
 We can manage assets via the command line.
 
-### Precompile
+## Precompile
 
 This command is useful for **deployment** purposes.
 
@@ -36,7 +34,7 @@ It generates a fingeprint manifest that lists all the assets and their checksum 
 
 This is used by assets helpers to resolve an asset name into a relative path.
 
-### Example
+## Example
 
 Let's say we have a project with three applications: `admin`, `metrics` and `web`.
 

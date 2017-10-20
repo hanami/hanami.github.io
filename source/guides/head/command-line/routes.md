@@ -3,9 +3,7 @@ title: "Guides - Command Line: Routes"
 version: head
 ---
 
-# Command Line
-
-## Routes
+# Routes
 
 In order to print the routes defined by all the applications, use:
 

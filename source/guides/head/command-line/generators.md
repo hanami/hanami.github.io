@@ -3,13 +3,11 @@ title: "Guides - Command Line: Generators"
 version: head
 ---
 
-# Command Line
-
-## Generators
+# Generators
 
 Hanami has convenient code generators to speed up our development process.
 
-### Applications
+## Applications
 
 With Hanami architecture, we can have multiple Hanami applications running under `apps/`.
 The default application is called `Web` and lives under `apps/web`.
@@ -22,7 +20,7 @@ We can generate new applications for different components that we want to add to
 
 This generates an application named `Admin` under `apps/admin`.
 
-### Actions
+## Actions
 
 Generate an action along with the corresponding view, template, route and test code with one command.
 
@@ -46,7 +44,7 @@ If you wish to generate action with specific method, you can do that by using th
 % bundle exec hanami generate action web books#create --method=post
 ```
 
-#### Route
+### Route
 
 The generated route is named after the controller name.
 
@@ -78,7 +76,7 @@ This should help you route using [RESTful resources](/guides/head/routing/restfu
 
 You can also set the HTTP method by specifying a `--method` argument when calling `hanami generate action`.
 
-### Models
+## Models
 
 Generate an entity and a repository with a single command
 
@@ -109,7 +107,7 @@ Hanami::Model.migration do
 end
 ```
 
-### Migrations
+## Migrations
 
 Generate a database migration
 
@@ -120,7 +118,7 @@ Generate a database migration
 
 It generates an empty migration with the UTC timestamp and the name we have specified: `db/migrations/20161112113203_create_books.rb`.
 
-### Mailers
+## Mailers
 
 Generate a mailer
 
@@ -143,7 +141,7 @@ lib
 # ...
 ```
 
-### Secret
+## Secret
 
 Generate a HTTP sessions secret for an application.
 

@@ -3,14 +3,12 @@ title: "Guides - Command Line: Destroy"
 version: head
 ---
 
-# Command Line
-
-## Destroy
+# Destroy
 
 Hanami has convenient [code generators](/guides/head/command-line/generators) to speed up our development process.
 If we commit a mistake, we can destroy what we just generated via `hanami destroy` command.
 
-### Applications
+## Applications
 
 With the Container architecture, we can have multiple Hanami applications running under `apps/`.
 We can [generate new applications](/guides/head/command-line/generators) for different components that we want to add to our project.
@@ -23,7 +21,7 @@ To destroy one of them:
 
 This removes an application named `Admin` under `apps/admin`.
 
-### Actions
+## Actions
 
 We can destroy an action along with the corresponding view, template, route and test code with one command.
 
@@ -40,7 +38,7 @@ The first argument, `web`, is the name of the target application in a Container 
 
 The argument `books#show` is the name of the controller and the action separated by the number sign (`#`).
 
-### Models
+## Models
 
 We can destroy a model.
 
@@ -50,7 +48,7 @@ We can destroy a model.
 
 It removes an entity with the corresponding repository and test code.
 
-### Migrations
+## Migrations
 
 We can destroy a migration.
 
@@ -60,7 +58,7 @@ We can destroy a migration.
 
 It deletes the migration with the corresponding name (eg. `db/migrations/20150621181347_create_books.rb`).
 
-### Mailers
+## Mailers
 
 We can destroy a mailer.
 
