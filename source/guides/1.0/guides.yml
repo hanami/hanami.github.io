@@ -57,6 +57,8 @@ categories:
       - path: repositories
       - path: entities
       - path: data-types
+      - path: sql-queries
+        title: SQL Queries
       - path: postgresql
         title: PostgreSQL
       - path: associations
