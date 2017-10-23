@@ -274,3 +274,30 @@ class BookRepository < Hanami::Repository
   end
 end
 ```
+
+## Retrieving the first and last records
+
+A repository provides default `#first` and `#last` methods, but they don't have any sorting policy.
+
+If you need to specify a custom sorting policy you can use `#order`:
+
+```ruby
+class BookRepository < Hanami::Repository
+  # ...
+
+  def newest_book
+    books.order { created_at }.limit(1).one
+    # Passing a symbol instead works too: books.order(:created_at).one
+  end
+
+  def oldest_book
+    books.order { created_at.desc }.limit(1).one
+  end
+end
+```
+
+When `#one` is used if no record is find, it returns `nil`.
+
+Please remember to always use `limit(1)`, otherwise `#one` will raise an exception.
+
+You can read more in [this issue](https://github.com/hanami/model/issues/380).
