@@ -61,7 +61,7 @@ module Web::Controllers::Dashboard
 end
 ```
 
-Here how Hanami handles an incoming request in this case:
+Here is how Hanami handles an incoming request in this case:
 
   1. The router creates a new instance of `Web::Controllers::Dashboard::Index` and invokes `#call`.
   2. The application detects that a body is already set and doesn't instantiate the view.
