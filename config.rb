@@ -116,8 +116,11 @@ helpers do
   def guides
     @guides ||= {}
 
-    version = current_page.data.version == 'head' ? 'head' : "#{version}" #guides_path(current_page, current_page.data.version)
-    return @guides[version] unless @guides[version].nil?
+    version = current_page.data.version
+    raise "missing version for #{current_page.inspect}" if version.nil?
+
+    version = version.to_s
+    return @guides[version] if @guides.key?(version)
 
     yaml = YAML.load_file("#{GUIDES_ROOT}/#{version}/guides.yml")
     @guides[version] = JSON.parse(yaml.to_json, object_class: OpenStruct)
