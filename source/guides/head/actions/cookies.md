@@ -50,6 +50,7 @@ module Web::Controllers::Dashboard
       cookies[:b]         # read
       cookies[:a] = 'foo' # assign
       cookies[:c] = nil   # remove
+      cookies[:d] = { value: 'foo', path: '/bar' } # assign with options
     end
   end
 end
