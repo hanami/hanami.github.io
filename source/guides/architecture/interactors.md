@@ -43,19 +43,20 @@ This lets you separate concerns.
 Your business logic objects, Interactors, won't know about the web at all.
 
 # Callbacks? We Don't Need No Stinkin' Callbacks!
-An easy, common method of implementing email notification would be to add a callback.
+An easy way of implementing email notification would be to add a callback.
 
 That is: after a new `Book` record is created in the database, an email is sent out.
 
 By design, Hanami doesn't provide any such mechanism.
 This is because we consider persistence callbacks an **anti-pattern**.
-They violate the Single-Responsibility principle,
-by conflating persistence with email notifications.
+They violate the Single Responsibility principle.
+In this case, they improperly mix persistence with email notifications.
 
 During testing (and at some other point, most likely),
 you'll want to skip that callback.
-This quickly becomes confusing, since multiple callbacks on the same event will
-be triggered in a specific order. Also, you may want to skip several callbacks at some point.
+This quickly becomes confusing,
+since multiple callbacks on the same event will be triggered in a specific order.
+Also, you may want to skip several callbacks at some point.
 They make code hard to understand, and brittle.
 
 Instead, we recommend being **explicit over implicit**.
@@ -63,32 +64,32 @@ Instead, we recommend being **explicit over implicit**.
 An Interactor is an object that represents a specific *use-case*.
 
 They let each class have a single responsibility.
-The Interactors' single responsibility is to do whatever is needed to achieve a
-specific outcome.
+An Interactor's single responsibility is to combine object and method calls in order achieve a specific outcome.
 
 We provide `Hanami::Interactor` as a module,
-so you can start with a Plain Old Ruby Object (no superclass),
+so you can start with a Plain Old Ruby Object (that is, a class with no superclass),
 and then `include Hanami::Interactor` when you need some of its features.
 
 TODO: Add note about alternative libraries?
 - [collectiveidea's `interactor`](https://github.com/collectiveidea/interactor)
-0 [dry-rb's `dry-transaction`](http://dry-rb.org/gems/dry-transaction/))
+- [dry-rb's `dry-transaction`](http://dry-rb.org/gems/dry-transaction/))
 
 # Concept
 The central idea behind Interactors is that you extract an isolated piece of functionality into a new class.
 
-There's a minimal interface,
-with just two methods called on Interactors: `#new` and `#call`.
+You should only write two public methods: `initialize` and `call`.
 
-This lets you easily test just that specific behavior,
-rather than having it be expressed implicitly elsewhere.
+This means objects are easy to reason about,
+since there's only one possible method to call after the object is created.
 
-This helps manage complexity: making it visible and able to be named.
+By encapsulating behavior into a single object, it's easier to test.
+It's also makes your codebase easier to understand,
+rather than leaving your complexity hidden, only expressed implicitly.
 
 # Preparing
 Let's say we have our `bookshelf` application,
 from the [Getting Started]((/guides/getting-started)
-and we want to add a feature.
+and we want to add the 'email notification for added book' feature.
 
 Clone the `bookshelf` application so we're starting from the same place.
 ```shell
@@ -99,15 +100,14 @@ Clone the `bookshelf` application so we're starting from the same place.
 % bundle exec rake # All the tests should pass
 ```
 
-# Interactor
-Let's create a place for our Interactor to go:
-
+# Creating our Interactor
+Let's create a folder for our Interactors, and a folder for their specs:
 ```shell
 % mkdir lib/bookshelf/interactors
 % mkdir spec/bookshelf/interactors
 ```
-We put them in `lib/bookshelf` because they're decoupled from the web application:
-later you may want to add books via an admin portal, an API, or even a command-line utility.
+We put them in `lib/bookshelf` because they're decoupled from the web application.
+Later, you may want to add books via an admin portal, an API, or even a command-line utility.
 
 Let's call our interactor `AddBook`,
 and write a new spec `spec/bookshelf/interactors/add_book_spec.rb`:
@@ -115,14 +115,17 @@ and write a new spec `spec/bookshelf/interactors/add_book_spec.rb`:
 ```ruby
 require 'spec_helper'
 
-describe Addbook do
+describe AddBook do
   let(:interactor) { AddBook.new }
 
   it "succeeds" do
-    interactor.call.success?.must_equal true
+    expect(interactor.call).to be_a_success
   end
 end
 ```
+(Note: Hanami has no specific RSpec integrations,
+this expectation works because `Hanami::Interactor` defines a `success?` class,
+which [RSpec lets us delegate to with `be_a_success`](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/predicate-matchers)
 
 Running your test suite will cause a NameError because there is no `AddBook` class.
 Let's create that class in a `lib/bookshelf/interactors/add_book.rb` file:
@@ -138,19 +141,19 @@ class AddBook
   end
 
   def call(book_attributes)
-    # perform the required behavior
+    # get it done
   end
 end
 ```
 
 These are the only two public methods this class should ever have:
 `initialize`, to set-up the data, and
-`call` to actually perform the operation(s).
+`call` to actually fulfill the use-case.
 
-These methods are free to call private methods that you'll write.
+These methods, especially `call`, should call private methods that you'll write.
 
-By default, the operation is considered a success,
-since we didn't say that it failed.
+By default, the result is considered a success,
+since we didn't say that it explicitly say it failed.
 
 Let's run this test:
 
@@ -160,7 +163,7 @@ Let's run this test:
 
 All the tests should pass!
 
-Now, let's make our `AddBook` actually do something!
+Now, let's make our `AddBook` Interactor actually do something!
 
 
 # Creating a Book
@@ -177,12 +180,12 @@ describe AddBook do
     let(:result) { interactor.call(attributes) }
 
     it "succeeds" do
-      result.success?.must_equal true
+      expect(result).to be_a_success
     end
 
     it "creates a Book with correct title and author" do
-      result.book.title.must_equal "The Fire Next Time"
-      result.book.author.must_equal "James Baldwin"
+      expect(result.book.title).to eq("The Fire Next Time")
+      expect(result.book.author).to eq("James Baldwin")
     end
   end
 end
@@ -205,7 +208,7 @@ class AddBook
   expose :book
 
   def initialize
-
+    # set up the object
   end
 
   def call(book_attributes)
@@ -214,7 +217,7 @@ class AddBook
 end
 ```
 
-There are a few things to talk about here:
+There are two important things to note here:
 
 The `expose :book` line exposes the `@book` instance variable as a method on the result that will be returned.
 
@@ -224,11 +227,11 @@ The tests should pass now.
 
 We've initialized a new Book entity, but it's not persisted to the database.
 
-# Persisting the book
-We have a new `book` built from the title and author passed in,
+# Persisting the Book
+We have a new `Book` built from the title and author passed in,
 but it doesn't exist in the database yet.
 
-We need to use a `BookRepository` to persist it.
+We need to use our `BookRepository` to persist it.
 
 ```ruby
 require 'spec_helper'
@@ -241,16 +244,16 @@ describe AddBook do
     let(:result) { interactor.call(attributes) }
 
     it "succeeds" do
-      result.success?.must_equal true
+      expect(result).to be_a_success
     end
 
     it "creates a Book with correct title and author" do
-      result.book.title.must_equal "The Fire Next Time"
-      result.book.author.must_equal "James Baldwin"
+      expect(result.book.title).to eq("The Fire Next Time")
+      expect(result.book.author).to eq("James Baldwin")
     end
 
     it "persists the Book" do
-      result.book.id.wont_be_nil
+      expect(result.book.id).to_not be_nil
     end
   end
 end
@@ -259,16 +262,17 @@ end
 If you run the tests,
 you'll see the new expectation fails with `Expected nil to not be nil.`
 
-This is because the book we built is unpersisted;
-it only gets an `id` once it exists in the database.
+This is because the book we built doesn't have an `id`,
+since it only gets one if and when it is persisted.
 
 To make this test pass, we'll need to create a _persisted_ `Book` instead.
+(Another, equally valid, option would be to persist the Book we already have.)
 
 Edit the `call` method in our `lib/bookshelf/interactors/add_book.rb` Interactor:
 
 ```ruby
   def call
-    @book = BookRepository.new.create({title: title, author: author})
+    @book = BookRepository.new.create(book_attributes)
   end
 ```
 
@@ -281,10 +285,15 @@ If you run the tests now you'll see all the tests pass.
 
 # Dependency Injection
 Let's refactor our implementation though,
-to leverage Dependency Injection.
+to leverage [Dependency Injection](https://martinfowler.com/articles/injection.html)
 
-This will make our test suite more robust.
-[TODO: add more benefits]
+The test above works, but it relies on the behavior of the Repository (that the `id` method is defined, only after persistence).
+That is an implementation detail of how the Repository works.
+For example, if you wanted to create a UUID *before* it's persisted,
+and signify the persistence was successful in some other way,
+you'd have to fix this spec.
+
+Instead, we can leverage Dependency Injection to make our test suite more robust.
 
 Here's how we leverage Dependency Injection in our Interactor:
 ```ruby
@@ -304,8 +313,6 @@ class AddBook
   end
 end
 ```
-
-We don't _need_ to edit our spec, but we should.
 
 Right now, our spec tests the behavior of the repository,
 by checking to make sure `id` is populated
