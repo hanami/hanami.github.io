@@ -1,5 +1,6 @@
 ---
 title: Guides - SQL Queries
+version: 1.0
 ---
 
 ## Sort

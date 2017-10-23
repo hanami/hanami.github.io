@@ -1,6 +1,6 @@
 ---
 title: Guides - Custom Predicates
-version: 1.0
+version: head
 ---
 
 # Custom Predicates
