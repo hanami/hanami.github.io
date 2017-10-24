@@ -126,7 +126,7 @@ helpers do
     @guides[version] = JSON.parse(yaml.to_json, object_class: OpenStruct)
   end
 
-  def latest_stable_version_path
+  def latest_stable_version_guides_path
     latest_stable_version = Dir.glob("#{GUIDES_ROOT}/*").each_with_object([]) do |version, result|
       next unless ::File.directory?(version)
       result << ::File.basename(version)
@@ -260,11 +260,11 @@ helpers do
   end
 
   def hanami_version
-    '1.0.0'
+    '1.1.0'
   end
 
   def hanami_release_date
-    Date.parse("2017-04-06").strftime("%B %-d, %Y")
+    Date.parse("2017-10-25").strftime("%B %-d, %Y")
   end
 end
 
