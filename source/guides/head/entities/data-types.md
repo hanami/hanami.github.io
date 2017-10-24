@@ -1,11 +1,11 @@
 ---
-title: Guides - Data Types
+title: "Guides - Entities: Data Types"
 version: head
 ---
 
 # Data Types
 
-Data types are available for custom [entities schema](/guides/head/models/entities#custom-schema), which are *completely optional*.
+Data types are available for custom [entities schema](/guides/head/entities/custom-schema), which are *completely optional*.
 
 We have 5 data types:
 
