@@ -13,7 +13,7 @@ We can manage our database via the command line.
   * MySQL
   * SQLite3
 
-The [adapter](/guides/head/models/overview) is set in `lib/bookshelf.rb`.
+The [adapter](/guides/head/models/overview) is set in `config/environment.rb`.
 It uses an environment variable, defined in the `.env.*` files at the root of the project.
 
 ## Create
@@ -51,24 +51,67 @@ Given the following migrations:
 ```shell
 % tree db/migrations
 db/migrations
-├── 20150613165259_create_books.rb
-└── 20150613165900_create_authors.rb
+├── 20171024081558_create_authors.rb
+├── 20171024081617_create_books.rb
+├── 20171024083639_create_users.rb
+├── 20171024083725_create_avatars.rb
+├── 20171024085712_create_stories.rb
+└── 20171024085858_create_comments.rb
+
+0 directories, 6 files
 ```
 
-We run `db migrate`, then the database _version_ becomes `20150613165900`, which is the maximum timestamp from the migrations above.
+We run `db migrate`, then the database _version_ becomes `20171024085858`, which is the maximum timestamp from the migrations above.
 
 ```shell
-% bundle exec hanami db migrate # Migrates to max migration (20150613165900)
+% bundle exec hanami db migrate # Migrates to max migration (20171024085858)
 ```
 
 This command accepts an optional argument to specify the target version.
-For instance, if we want to **rollback** the changes from `20150613165900_create_authors.rb`, we can migrate _**"down"**_.
+For instance, if we want to **get back to** the changes from `20171024083639_create_users.rb`, we can migrate _**"down"**_.
 
 ```shell
-% bundle exec hanami db migrate 20150613165259 # Migrates (down) to 20150613165259
+% bundle exec hanami db migrate 20171024083639 # Migrates (down) to 20171024083639
 ```
 
 **This command is available in ALL the environments and ALL the SQL databases.**
+
+## Rollback
+
+Rollback the database to a number of _steps_ _**"down"**_.
+
+We have the following migrations:
+
+```shell
+% tree db/migrations
+db/migrations
+├── 20171024081558_create_authors.rb
+├── 20171024081617_create_books.rb
+├── 20171024083639_create_users.rb
+├── 20171024083725_create_avatars.rb
+├── 20171024085712_create_stories.rb
+└── 20171024085858_create_comments.rb
+
+0 directories, 6 files
+```
+
+When we migrate the database:
+
+```shell
+% bundle exec hanami db migrate # Migrates to max migration (20171024085858)
+```
+
+We can rollback the last migration
+
+```shell
+% bundle exec hanami db rollback # Migrates (down) to 20171024085712
+```
+
+We can rollback the 3 migrations
+
+```shell
+% bundle exec hanami db rollback 3 # Migrates (down) to 20171024081617
+```
 
 ## Prepare
 
@@ -112,8 +155,14 @@ Prints current database version. Given the following migrations:
 ```shell
 % tree db/migrations
 db/migrations
-├── 20150613165259_create_books.rb
-└── 20150613165900_create_authors.rb
+├── 20171024081558_create_authors.rb
+├── 20171024081617_create_books.rb
+├── 20171024083639_create_users.rb
+├── 20171024083725_create_avatars.rb
+├── 20171024085712_create_stories.rb
+└── 20171024085858_create_comments.rb
+
+0 directories, 6 files
 ```
 
 When we migrate the database:
@@ -126,5 +175,5 @@ We can then ask for the current version:
 
 ```shell
 % bundle exec hanami db version
-20150613165900
+20171024085858
 ```
