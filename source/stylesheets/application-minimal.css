@@ -305,3 +305,11 @@ table.status td {
   font-family: Roboto;
   font-weight: 200;
 }
+
+.block-background {
+  background-color: #000;
+}
+
+.block-background img {
+  filter: brightness(50%);
+}
