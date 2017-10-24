@@ -3,6 +3,18 @@ title: "Guides - Repositories: SQL Queries"
 version: 1.1
 ---
 
+## Select
+
+You can select a subset of columns to be fetched from the database:
+
+```ruby
+class UserRepository < Hanami::Repository
+  def all_with_name
+    users.select(:id, :name)
+  end
+end
+```
+
 ## Sort
 
 You can sort records using `#order`:
