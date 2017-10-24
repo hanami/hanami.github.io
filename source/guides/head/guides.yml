@@ -138,6 +138,8 @@ categories:
         title: v0.9.0
       - path: v100
         title: v1.0.0
+      - path: v110
+        title: v1.1.0
   - path: /
     title: Guide Versions
     pages:
