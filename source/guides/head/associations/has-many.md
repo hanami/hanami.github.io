@@ -1,62 +1,34 @@
 ---
-title: Guides - Associations
+title: "Guides - Associations: Has Many"
 version: head
 ---
 
-# Associations
-
-An association is a logical relationship between two entities.
-
-<p class="warning">
-  As of the current version, Hanami supports associations as an experimental feature only for the SQL adapter.
-</p>
-
-## Design
-
-Because the association is made of data linked together in a database, we define associations in repositories.
-
-### Explicit Interface
-
-When we declare an association, that repository **does NOT** get any extra method to its public interface.
-This because Hanami wants to prevent to bloat in repositories by adding methods that are often never used.
-
-<p class="notice">
-  When we define an association, the repository doesn't get any extra public methods.
-</p>
-
-If we need to create an author, contextually with a few books, we need to explicitly define a method to perform that operation.
-
-### Explicit Loading
-
-The same principle applies to read operations: if we want to eager load an author with the associated books, we need an explicit method to do so.
-
-If we don't explicitly load that books, then the resulting data will be `nil`.
-
-### No Proxy Loader
-
-Please remember that operations on associations are made via explicit repository methods.
-Hanami **does NOT** support by design, the following use cases:
-
-  * `author.books` (to try to load books from the database)
-  * `author.books.where(on_sale: true)` (to try to load _on sale_ books from the database)
-  * `author.books << book` (to try to associate a book to the author)
-  * `author.books.clear` (to try to unassociate the books from the author)
-
-Please remember that `author.books` is just an array, its mutation **won't be reflected in the database**.
-
-## Types Of Associations
-
-### Has Many
+# Has Many
 
 Also known as _one-to-many_, is an association between a single entity (`Author`) and a collection of many other linked entities (`Book`).
 
+## Setup
+
 ```shell
-% bundle exec hanami generate migration create_authors
-      create  db/migrations/20161115083440_create_authors.rb
+% bundle exec hanami generate model author
+      create  lib/bookshelf/entities/author.rb
+      create  lib/bookshelf/repositories/author_repository.rb
+      create  db/migrations/20171024081558_create_authors.rb
+      create  spec/bookshelf/entities/author_spec.rb
+      create  spec/bookshelf/repositories/author_repository_spec.rb
+
+% bundle exec hanami generate model book
+      create  lib/bookshelf/entities/book.rb
+      create  lib/bookshelf/repositories/book_repository.rb
+      create  db/migrations/20171024081617_create_books.rb
+      create  spec/bookshelf/entities/book_spec.rb
+      create  spec/bookshelf/repositories/book_repository_spec.rb
 ```
 
+Edit the migrations:
+
 ```ruby
-# db/migrations/20161115083440_create_authors.rb
+# db/migrations/20171024081558_create_authors.rb
 Hanami::Model.migration do
   change do
     create_table :authors do
@@ -70,17 +42,13 @@ Hanami::Model.migration do
 end
 ```
 
-```shell
-% bundle exec hanami generate migration create_books
-      create  db/migrations/20161115083644_create_books.rb
-```
-
 ```ruby
-# db/migrations/20161115083644_create_books.rb
+# db/migrations/20171024081617_create_books.rb
 Hanami::Model.migration do
   change do
     create_table :books do
       primary_key :id
+
       foreign_key :author_id, :authors, on_delete: :cascade, null: false
 
       column :title,      String,   null: false
@@ -91,23 +59,15 @@ Hanami::Model.migration do
 end
 ```
 
+Now we can prepare the database:
+
 ```shell
 % bundle exec hanami db prepare
 ```
 
-```shell
-% bundle exec hanami generate model author
-      create  lib/bookshelf/entities/author.rb
-      create  lib/bookshelf/repositories/author_repository.rb
-      create  spec/bookshelf/entities/author_spec.rb
-      create  spec/bookshelf/repositories/author_repository_spec.rb
+## Usage
 
-% bundle exec hanami generate model book
-      create  lib/bookshelf/entities/book.rb
-      create  lib/bookshelf/repositories/book_repository.rb
-      create  spec/bookshelf/entities/book_spec.rb
-      create  spec/bookshelf/repositories/book_repository_spec.rb
-```
+### Basic usage
 
 Let's edit `AuthorRepository` with the following code:
 
@@ -128,7 +88,7 @@ class AuthorRepository < Hanami::Repository
 end
 ```
 
-We have defined [explicit methods](#explicit-interface) only for the operations that we need for our model domain.
+We have defined [explicit methods](/guides/head/associations/overview#explicit-interface) only for the operations that we need for our model domain.
 In this way, we avoid to bloat `AuthorRepository` with dozen of unneeded methods.
 
 Let's create an author with a collection of books with a **single database operation**:
@@ -156,7 +116,7 @@ author.books
   # => nil
 ```
 
-Because we haven't [explicitly loaded](#explicit-loading) the associated records, `author.books` is `nil`.
+Because we haven't [explicitly loaded](/guides/head/associations/overview#explicit-loading) the associated records, `author.books` is `nil`.
 We can use the method that we have defined on before (`#find_with_books`):
 
 ```ruby
@@ -169,7 +129,7 @@ author.books
 
 This time `author.books` has the collection of associated books.
 
----
+### Add and remove
 
 What if we need to add or remove books from an author?
 We need to define new methods to do so.
@@ -181,6 +141,10 @@ class AuthorRepository < Hanami::Repository
 
   def add_book(author, data)
     assoc(:books, author).add(data)
+  end
+
+  def remove_book(author, id)
+    assoc(:books, author).remove(id)
   end
 end
 ```
@@ -194,5 +158,51 @@ book = repository.add_book(author, title: "The Three Musketeers")
 And remove it:
 
 ```ruby
-BookRepository.new.delete(book.id)
+repository.remove_book(author, book.id)
+```
+
+### Querying
+
+An association can be [queried](/guides/head/models/sql-queries):
+
+```ruby
+# lib/bookshelf/repositories/author_repository.rb
+class AuthorRepository < Hanami::Repository
+  # ...
+
+  def books_count(author)
+    assoc(:books, author).count
+  end
+
+  def on_sales_books_count(author)
+    assoc(:books, author).where(on_sale: true).count
+  end
+
+  def find_book(author, id)
+    book_for(author, id).one
+  end
+
+  def book_exists?(author, id)
+    book_for(author, id).exists?
+  end
+
+  private
+
+  def book_for(author, id)
+    assoc(:books, author).where(id: id)
+  end
+end
+```
+
+You can also run operations on top of these scopes:
+
+```ruby
+# lib/bookshelf/repositories/author_repository.rb
+class AuthorRepository < Hanami::Repository
+  # ...
+
+  def delete_on_sales_books(author)
+    assoc(:books, author).where(on_sale: true).delete
+  end
+end
 ```
