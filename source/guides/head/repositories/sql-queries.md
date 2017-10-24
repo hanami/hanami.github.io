@@ -1,5 +1,5 @@
 ---
-title: Guides - SQL Queries
+title: "Guides - Repositories: SQL Queries"
 version: head
 ---
 

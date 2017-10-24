@@ -54,15 +54,17 @@ categories:
     pages:
       - path: overview
       - path: database-configuration
-      - path: repositories
       - path: entities
       - path: data-types
+      - path: use-your-own-orm
+        title: Use Your Own ORM
+  - path: repositories
+    pages:
+      - path: overview
       - path: sql-queries
         title: SQL Queries
       - path: postgresql
         title: PostgreSQL
-      - path: use-your-own-orm
-        title: Use Your Own ORM
   - path: associations
     pages:
       - path: overview
