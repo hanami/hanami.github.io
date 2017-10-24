@@ -129,7 +129,7 @@ categories:
   - path: /
     title: Guide Versions
     pages:
-      - path: 'head'
-        title: 'Head'
+      - path: '../1.1'
+        title: 'v1.1'
       - path: '1.0'
         title: v1.0

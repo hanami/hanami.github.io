@@ -126,6 +126,15 @@ helpers do
     @guides[version] = JSON.parse(yaml.to_json, object_class: OpenStruct)
   end
 
+  def latest_stable_version_path
+    latest_stable_version = Dir.glob("#{GUIDES_ROOT}/*").each_with_object([]) do |version, result|
+      next unless ::File.directory?(version)
+      result << ::File.basename(version)
+    end.compact.sort.last
+
+    "/guides/#{latest_stable_version}"
+  end
+
   def guide_title(item, version = nil)
     item.title || item.path.split('-').map(&:capitalize).join(' ')
   end
