@@ -117,7 +117,7 @@ helpers do
     @guides ||= {}
 
     version = current_page.data.version
-    raise "missing version for #{current_page.inspect}" if version.nil?
+    raise "missing version for #{current_page.path}" if version.nil?
 
     version = version.to_s
     return @guides[version] if @guides.key?(version)

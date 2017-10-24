@@ -61,9 +61,15 @@ categories:
         title: SQL Queries
       - path: postgresql
         title: PostgreSQL
-      - path: associations
       - path: use-your-own-orm
         title: Use Your Own ORM
+  - path: associations
+    pages:
+      - path: overview
+      - path: has-many
+      - path: belongs-to
+      - path: has-one
+      - path: has-many-through
   - path: migrations
     pages:
       - path: overview
