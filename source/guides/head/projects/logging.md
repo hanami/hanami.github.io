@@ -32,6 +32,57 @@ By default it uses standard output because it's a [best practice](http://12facto
 
 If you want to use a file, pass `stream: 'path/to/file.log'` as an option.
 
+## Filter sensitive informations
+
+Hanami automatically logs the body of non-GET HTTP requests.
+
+When a user submits a form, all the fields and their values will appear in the log:
+
+```shell
+[bookshelf] [INFO] [2017-08-11 18:17:54 +0200] HTTP/1.1 POST 302 ::1 /signup 5 {"signup"=>{"username"=>"jodosha", "password"=>"secret", "password_confirmation"=>"secret", "bio"=>"lorem"}} 0.00593
+```
+
+To avoid sensitive informations to be logged, you can filter them:
+
+```ruby
+# config/environment.rb
+# ...
+
+Hanami.configure do
+  # ...
+  environment :development do
+    logger level: :debug, filter: %w[password password_confirmation]
+  end
+end
+```
+
+Now the output will be:
+
+```shell
+[bookshelf] [INFO] [2017-08-11 18:17:54 +0200] HTTP/1.1 POST 302 ::1 /signup 5 {"signup"=>{"username"=>"jodosha", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "bio"=>"lorem"}} 0.00593
+```
+
+It also supports fine grained patterns to disambiguate params with the same name.
+For instance, we have a billing form with street number and credit card number, and we want only to filter the credit card:
+
+```ruby
+# config/environment.rb
+# ...
+
+Hanami.configure do
+  # ...
+  environment :development do
+    logger level: :debug, filter: %w[credit_card.number]
+  end
+end
+```
+
+```shell
+[bookshelf] [INFO] [2017-08-11 18:43:04 +0200] HTTP/1.1 PATCH 200 ::1 /billing 2 {"billing"=>{"name"=>"Luca", "address"=>{"street"=>"Centocelle", "number"=>"23", "city"=>"Rome"}, "credit_card"=>{"number"=>"[FILTERED]"}}} 0.009782
+```
+
+Note that `billing => address => number` wasn't filtered while `billing => credit_card => number` was filtered instead.
+
 ## Arbitrary Arguments
 
 You can speficy [arbitrary arguments](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html#class-Logger-label-How+to+create+a+logger), that are compatible with Ruby's `Logger`.
