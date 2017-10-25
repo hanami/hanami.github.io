@@ -1,6 +1,6 @@
 ---
 title: Announcing Hanami v1.1.0
-date: 2017-10-24 13:09 UTC
+date: 2017-10-25 09:38 UTC
 tags: announcements
 author: Luca Guidi
 image: true
