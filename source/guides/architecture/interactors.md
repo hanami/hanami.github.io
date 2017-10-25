@@ -16,7 +16,7 @@ In this guide, we'll explain how Hanami's Interactors work by adding a small fea
 The existing application we'll work from is the `bookshelf` application
 from the [Getting Started Guide]((/guides/getting-started).
 
-# A new feature: email notifications
+# A New Feature: Email Notifications
 The story for our new feature is:
 > As an administrator, I want to receive an email notification when a book is added
 
@@ -100,7 +100,7 @@ Clone the `bookshelf` application so we're starting from the same place.
 % bundle exec rake # All the tests should pass
 ```
 
-# Creating our Interactor
+# Creating Our Interactor
 Let's create a folder for our Interactors, and a folder for their specs:
 ```shell
 % mkdir lib/bookshelf/interactors
