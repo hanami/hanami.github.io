@@ -89,16 +89,6 @@ Let's say we have our `bookshelf` application,
 from the [Getting Started]((/guides/getting-started)
 and we want to add the 'email notification for added book' feature.
 
-Clone the `bookshelf` application so we're starting from the same place.
-
-```shell
-% git clone git@github.com:hanami/bookshelf.git hanami-bookshelf
-% cd hanami-bookshelf
-% bundle install
-% HANAMI_ENV=test bundle exec hanami db prepare
-% bundle exec rake # All the tests should pass
-```
-
 # Creating Our Interactor
 Let's create a folder for our Interactors, and a folder for their specs:
 
