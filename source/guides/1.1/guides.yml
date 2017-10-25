@@ -6,6 +6,7 @@ categories:
   - path: architecture
     pages:
       - path: overview
+      - path: interactors
   - path: projects
     pages:
       - path: code-reloading

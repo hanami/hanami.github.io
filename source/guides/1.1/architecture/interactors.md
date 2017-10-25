@@ -1,5 +1,6 @@
 ---
 title: Architecture - Interactors
+version: 1.1
 ---
 
 # Overview
@@ -14,7 +15,7 @@ but you're free to build a Hanami app without them at all.
 In this guide, we'll explain how Hanami's Interactors work by adding a small feature to an existing application.
 
 The existing application we'll work from is the `bookshelf` application
-from the [Getting Started Guide]((/guides/getting-started).
+from the [Getting Started Guide](/guides/getting-started).
 
 # A New Feature: Email Notifications
 The story for our new feature is:
@@ -71,6 +72,7 @@ so you can start with a Plain Old Ruby Object,
 and include `include Hanami::Interactor` when you need some of its features.
 
 # Concept
+
 The central idea behind Interactors is that you extract an isolated piece of functionality into a new class.
 
 You should only write two public methods: `initialize` and `call`.
@@ -88,6 +90,7 @@ from the [Getting Started]((/guides/getting-started)
 and we want to add the 'email notification for added book' feature.
 
 Clone the `bookshelf` application so we're starting from the same place.
+
 ```shell
 % git clone git@github.com:hanami/bookshelf.git hanami-bookshelf
 % cd hanami-bookshelf
@@ -98,6 +101,7 @@ Clone the `bookshelf` application so we're starting from the same place.
 
 # Creating Our Interactor
 Let's create a folder for our Interactors, and a folder for their specs:
+
 ```shell
 % mkdir lib/bookshelf/interactors
 % mkdir spec/bookshelf/interactors
@@ -119,6 +123,7 @@ describe AddBook do
   end
 end
 ```
+
 (Note: Hanami has no specific RSpec integrations,
 this expectation works because `Hanami::Interactor` defines a `success?` class,
 which [RSpec lets us delegate to with `be_a_success`](https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers/predicate-matchers)
@@ -165,6 +170,7 @@ Now, let's make our `AddBook` Interactor actually do something!
 # Creating a Book
 
 Edit `spec/bookshelf/interactors/add_book_spec.rb`:
+
 ```ruby
 require 'spec_helper'
 
@@ -298,6 +304,7 @@ We can change our spec and our Interactor to make it more robust:
 it'll be less likely to break because of changes outside of its file.
 
 Here's how we can use Dependency Injection in our Interactor:
+
 ```ruby
 require 'hanami/interactor'
 
@@ -361,6 +368,7 @@ describe AddBook do
   end
 end
 ```
+
 Now our test doesn't violate the boundaries of the concern.
 
 What we did here is **inject** our Interactor's dependency on the repository.
@@ -386,13 +394,12 @@ We won't get into the details of [how the mailer works](/guides/mailers/overview
 but it's pretty simple: there's a `Hanami::Mailer` class, an associated spec,
 and two templates (one for plaintext, and one for html).
 
-Let's keep things simple by using only the plaintext template,
-
-```shell
-% rm lib/bookshelf/mailers/templates/book_added_notification.html.erb
-```
+We'll keep our templates empty,
+so the emails will be blank,
+with a subject line saying 'Book added!'.
 
 Edit the mailer spec `spec/bookshelf/mailers/book_added_notification_spec.rb`:
+
 ```ruby
 RSpec.describe Mailers::BookAddedNotification, type: :mailer do
   subject { Mailers::BookAddedNotification }
