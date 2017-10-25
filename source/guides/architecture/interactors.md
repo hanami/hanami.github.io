@@ -287,15 +287,21 @@ If you run the tests now you'll see all the tests pass.
 Let's refactor our implementation though,
 to leverage [Dependency Injection](https://martinfowler.com/articles/injection.html)
 
-The test above works, but it relies on the behavior of the Repository (that the `id` method is defined, only after persistence).
+We recommend you use Dependency Injection, but you don't have to.
+This is an entirely optional feature of Hanami's Interactor.
+
+The spec so far works,
+but it relies on the behavior of the Repository
+(that the `id` method is defined after persistence succeeds).
 That is an implementation detail of how the Repository works.
 For example, if you wanted to create a UUID *before* it's persisted,
-and signify the persistence was successful in some other way,
-you'd have to fix this spec.
+and signify the persistence was successful in some other way than populating an `id` column,
+you'd have to modify this spec.
 
-Instead, we can leverage Dependency Injection to make our test suite more robust.
+We can change our spec and our Interactor to make it more robust:
+it'll be less likely to break because of changes outside of its file.
 
-Here's how we leverage Dependency Injection in our Interactor:
+Here's how we can use Dependency Injection in our Interactor:
 ```ruby
 require 'hanami/interactor'
 
@@ -308,31 +314,56 @@ class AddBook
     @repository = repository
   end
 
-  def call(title:, author:)
-    @book = @repository.create({title: title, author: author})
+  def call(book_attributes)
+    @book = @repository.create(book_attributes)
   end
 end
 ```
 
+It's basically the same thing, with a little bit more code,
+to create the `@repository` instance variable.
+
 Right now, our spec tests the behavior of the repository,
 by checking to make sure `id` is populated
-(`result.book.id.wont_be_nil`).
+(`expect(result.book.id).to_not be_nil`).
 
 This is an implementation detail.
 
 Instead, we can change our spec to merely make sure the repository receives the `create` message,
 and trust that the repository will persist it (since that is its responsibility).
 
-Let's change our `it "persists the Book"` assertion to:
+Let's change remove our `it "persists the Book"` expectation and
+create a `describe "persistence"` block:
 
 ```ruby
-    it "sends :create to the repository" do
-      mock = Minitest::Mock.new
+require 'spec_helper'
 
-      mock.expect(:create, Book.new, [attributes])
+describe AddBook do
+  let(:interactor) { AddBook.new }
+  let(:attributes) { Hash[author: "James Baldwin", title: "The Fire Next Time"] }
 
-      AddBook.new(repository: mock).call(attributes)
+  describe "good input" do
+    let(:result) { interactor.call(attributes) }
+
+    it "succeeds" do
+      expect(result).to be_a_success
     end
+
+    it "creates a Book with correct title and author" do
+      expect(result.book.title).to eq("The Fire Next Time")
+      expect(result.book.author).to eq("James Baldwin")
+    end
+  end
+
+  describe "persistence" do
+    let(:repository) { instance_double("BookRepository") }
+
+    it "persists the Book" do
+      expect(repository).to receive(:create)
+      AddBook.new(repository: repository).call(attributes)
+    end
+  end
+end
 ```
 Now our test doesn't violate the boundaries of the concern.
 
@@ -345,8 +376,7 @@ Let's add the email notification!
 
 You can use a different library,
 but we'll use `Hanami::Mailer`.
-(You can do anything here,
-like send an SMS, send a chat message, or call a webhook.)
+(You could do anything here, like send an SMS, send a chat message, or call a webhook.)
 
 ```shell
 % bundle exec hanami generate mailer book_added_notification
@@ -361,46 +391,40 @@ but it's pretty simple: there's a `Hanami::Mailer` class, an associated spec,
 and two templates (one for plaintext, and one for html).
 
 Let's keep things simple by using only the plaintext template,
-Since we're keeping things simple,
-let's delete the `html` email template.
-Plaintext will be fine.
 
 ```shell
 % rm lib/bookshelf/mailers/templates/book_added_notification.html.erb
 ```
 
-TODO: finish this! test for mailer, and calling it from interactor
-
 Edit the mailer spec `spec/bookshelf/mailers/book_added_notification_spec.rb`:
 ```ruby
-require_relative '../../spec_helper'
-
-describe Mailers::BookAddedNotification do
+RSpec.describe Mailers::BookAddedNotification, type: :mailer do
   subject { Mailers::BookAddedNotification }
 
   before { Hanami::Mailer.deliveries.clear }
 
   it 'has correct `from` email address' do
-    subject.from.must_equal "no-reply@example.com"
+    expect(subject.from).to eq("no-reply@example.com")
   end
 
   it 'has correct `to` email address' do
-    subject.to.must_equal "admin@example.com"
+    expect(subject.to).to eq("admin@example.com")
   end
 
   it 'has correct `subject`' do
-    subject.subject.must_equal "Book added!"
+    expect(subject.subject).to eq("Book added!")
   end
 
   it 'delivers mail' do
-    subject.deliver
-    Hanami::Mailer.deliveries.length.must_equal 1
+    expect {
+      subject.deliver
+    }.to change { Hanami::Mailer.deliveries.length }.by(1)
   end
 end
 ```
 
 
-Edit the mailer `lib/bookshelf/mailers/book_added_notification.rb`:
+And edit the mailer `lib/bookshelf/mailers/book_added_notification.rb`:
 
 ```ruby
 class Mailers::BookAddedNotification
@@ -415,21 +439,22 @@ end
 Now all our tests should pass!
 
 
-But, the Mailer isn't called from anywhere.
+But, this Mailer isn't called from anywhere.
 We need to call this Mailer from our `AddBook` Interactor.
 
 Let's edit our `AddBook` spec, to ensure our mailer is called:
 
 ```ruby
-    ...
-    it "sends :deliver to the mailer" do
-      mock = Minitest::Mock.new
+  ...
+  describe "sending email" do
+    let(:mailer) { instance_double("Mailers::BookAddedNotification") }
 
-      mock.expect(:deliver, Mailers::BookAddedNotification.new)
-
-      AddBook.new(mailer: mock).call(attributes)
+    it "send :deliver to the mailer" do
+      expect(mailer).to receive(:deliver)
+      AddBook.new(mailer: mailer).call(attributes)
     end
-    ...
+  end
+  ...
 ```
 
 Running your test suite will show an error: `ArgumentError: unknown keyword: mailer`.
@@ -438,6 +463,7 @@ This makes sense, since our Interactor only a singular keyword argument: `reposi
 Let's integrate our mailer now,
 by adding a new `mailer` keyword argument on the initializer.
 
+We'll also call `deliver` on our new `@mailer` instance variable.
 
 ```ruby
 require 'hanami/interactor'
@@ -461,6 +487,42 @@ end
 
 Now our Interactor will deliver an email, notifying that a book has been added.
 
+# Interactor parts
+## Interface
+The interface is rather simple, as shown above.
+There's also one more method you can (optionally) implement.
+It's a private method named `valid?`.
+
+By default `valid?` returns true.
+If you define `valid?` and it ever returns `false`,
+then `call` will never be executed.
+
+Instead, the result will be returned immediately.
+This also causes the result to be a failure (instead of a success.)
+
+You can read about it in the
+[API documentation](http://www.rubydoc.info/gems/hanami-utils/Hanami/Interactor/Interface)
+
+## Result
+The result of `Hanami::Interactor#call` is a `Hanami::Interactor::Result` object.
+
+It will have accessor methods defined for whatever instance variables you
+`expose`.
+
+It also has the ability to keep track of errors.
+
+In your interactor, you can call `error` with a message,
+to add an error.
+This automatically makes the resulting object a failure.
+
+(There's also an `error!` method,
+which does the same *and* also interrupts the flow,
+stopping the Interactor from executing more code).
+
+You can access the errors on the resulting object, by calling `.errors`.
+
+You can read more about the Result object in the
+[API documentation](http://www.rubydoc.info/gems/hanami-utils/Hanami/Interactor/Result).
 
 # Error handling
 What if there's an error adding the book?
