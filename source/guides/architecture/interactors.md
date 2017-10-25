@@ -67,12 +67,8 @@ They let each class have a single responsibility.
 An Interactor's single responsibility is to combine object and method calls in order achieve a specific outcome.
 
 We provide `Hanami::Interactor` as a module,
-so you can start with a Plain Old Ruby Object (that is, a class with no superclass),
-and then `include Hanami::Interactor` when you need some of its features.
-
-TODO: Add note about alternative libraries?
-- [collectiveidea's `interactor`](https://github.com/collectiveidea/interactor)
-- [dry-rb's `dry-transaction`](http://dry-rb.org/gems/dry-transaction/))
+so you can start with a Plain Old Ruby Object,
+and include `include Hanami::Interactor` when you need some of its features.
 
 # Concept
 The central idea behind Interactors is that you extract an isolated piece of functionality into a new class.
