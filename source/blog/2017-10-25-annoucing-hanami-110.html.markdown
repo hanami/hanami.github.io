@@ -310,17 +310,17 @@ For the entire list of changes, please have a look at our [CHANGELOG](https://gi
 
 ## Released Gems
 
-  * `hanami-1.1.0`
-  * `hanami-model-1.1.0`
-  * `hanami-assets-1.1.0`
-  * `hanami-cli-0.1.0`
-  * `hanami-mailer-1.1.0`
-  * `hanami-helpers-1.1.0`
-  * `hanami-view-1.1.0`
-  * `hamami-controller-1.1.0`
-  * `hanami-router-1.1.0`
-  * `hanami-validations-1.1.0`
-  * `hanami-utils-1.1.0`
+  * `hanami-1.1.0` - [[CHANGELOG](https://github.com/hanami/hanami/blob/master/CHANGELOG.md)]
+  * `hanami-model-1.1.0` - [[CHANGELOG](https://github.com/hanami/model/blob/master/CHANGELOG.md)]
+  * `hanami-assets-1.1.0` - [[CHANGELOG](https://github.com/hanami/assets/blob/master/CHANGELOG.md)]
+  * `hanami-cli-0.1.0` - [[CHANGELOG](https://github.com/hanami/cli/blob/master/CHANGELOG.md)]
+  * `hanami-mailer-1.1.0` - [[CHANGELOG](https://github.com/hanami/mailer/blob/master/CHANGELOG.md)]
+  * `hanami-helpers-1.1.0` - [[CHANGELOG](https://github.com/hanami/helpers/blob/master/CHANGELOG.md)]
+  * `hanami-view-1.1.0` - [[CHANGELOG](https://github.com/hanami/view/blob/master/CHANGELOG.md)]
+  * `hamami-controller-1.1.0` - [[CHANGELOG](https://github.com/hanami/controller/blob/master/CHANGELOG.md)]
+  * `hanami-router-1.1.0` - [[CHANGELOG](https://github.com/hanami/router/blob/master/CHANGELOG.md)]
+  * `hanami-validations-1.1.0` - [[CHANGELOG](https://github.com/hanami/validations/blob/master/CHANGELOG.md)]
+  * `hanami-utils-1.1.0` - [[CHANGELOG](https://github.com/hanami/utils/blob/master/CHANGELOG.md)]
 
 ## Contributors
 
