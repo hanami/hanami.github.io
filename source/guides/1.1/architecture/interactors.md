@@ -471,8 +471,8 @@ class AddBook
     @mailer = mailer
   end
 
-  def call(title:, author:)
-    @book = @repository.create({title: title, author: author})
+  def call(book_attributes)
+    @book = @repository.create(book_attributes)
     @mailer.deliver
   end
 end
