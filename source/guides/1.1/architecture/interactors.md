@@ -365,7 +365,7 @@ What we did here is **inject** our Interactor's dependency on the repository.
 Note: in our non-test code, we don't need to change anything.
 The default value for the `repository:` keyword argument provides a new repository object if one is not passed in.
 
-# Email notification
+# Email Notification
 Let's add the email notification!
 
 You can use a different library,
@@ -480,6 +480,131 @@ end
 
 Now our Interactor will deliver an email, notifying that a book has been added.
 
+# Integrating With Our Controller
+Finally, we need to call this Interactor from our action.
+
+Edit the action file, `apps/web/controllers/books/create.rb`:
+
+```
+  def call(params)
+    if params.valid?
+      @book = AddBook.new.call(params[:book])
+
+      redirect_to routes.books_path
+    else
+      self.status = 422
+    end
+  end
+```
+
+Our specs will still pass, but there's a small problem.
+
+We're testing the book creation code **twice**.
+
+This is generally bad practice, and we can fix it,
+by illustrating another benefit of Interactors.
+
+We're going to use Dependency Injection again.
+This time, in our action.
+
+We'll add a `initialize` method,
+with a keyword argument for `interactor`.
+
+But first, let's the spec `spec/web/controllers/books/create_spec.rb`.
+
+We're going to remove references to `BookRepository`,
+and leverage a double for our `AddBook` interactor:
+
+```
+require 'spec_helper'
+
+RSpec.describe Web::Controllers::Books::Create do
+  let(:interactor) { instance_double('AddBook', call: nil) }
+  let(:action) { Web::Controllers::Books::Create.new(interactor: interactor) }
+
+  describe 'with valid params' do
+    let(:params) { Hash[book: { title: '1984', author: 'George Orwell' }] }
+
+    it 'calls interactor' do
+      expect(interactor).to receive(:call)
+      response = action.call(params)
+    end
+
+    it 'redirects the user to the books listing' do
+      response = action.call(params)
+
+      expect(response[0]).to eq(302)
+      expect(response[1]['Location']).to eq('/books')
+    end
+  end
+
+  describe 'with invalid params' do
+    let(:params) { Hash[book: {}] }
+
+    it 'calls interactor' do
+      expect(interactor).to receive(:call)
+      response = action.call(params)
+    end
+
+    it 're-renders the books#new view' do
+      response = action.call(params)
+      expect(response[0]).to eq(422)
+    end
+
+    it 'sets errors attribute accordingly' do
+      response = action.call(params)
+
+      expect(action.params.errors[:book][:title]).to eq(['is missing'])
+      expect(action.params.errors[:book][:author]).to eq(['is missing'])
+    end
+  end
+end
+```
+
+The test will cause an error,
+because we haven't overridden our initialize.
+Let's do that now,
+and leverage our new instance variable in the `call` method:
+
+```
+  ...
+  def initialize(interactor: AddBook.new)
+    @interactor = interactor
+  end
+
+  def call(params)
+    if params.valid?
+      @book = @interactor.call(params[:book])
+
+      redirect_to routes.books_path
+    else
+      self.status = 422
+    end
+  end
+  ...
+```
+
+Now our specs pass, and they're much more robust!
+
+Our action now has less responsibility;
+it delegates it's real behavior to our Interactor.
+
+The action takes input (from parameters),
+and calls our interactor to actually do its work.
+It's single responsibility is to deal with the web.
+Our Interactor now deals with our actual business logic.
+
+This is a great relief for our action and its spec.
+
+Our action is largely liberated from our business logic.
+
+When we modify our interactor,
+we do **not** have to modify our action, or its spec.
+
+(Note that in a real app, you'll likely want to do more than our logic above,
+like make sure the result is a success.
+Else, if it's a failure, you'll want to pass along errors from the interactor.)
+
 # Interactor parts
 ## Interface
 The interface is rather simple, as shown above.
@@ -499,8 +624,7 @@ You can read about it in the
 ## Result
 The result of `Hanami::Interactor#call` is a `Hanami::Interactor::Result` object.
 
-It will have accessor methods defined for whatever instance variables you
-`expose`.
+It will have accessor methods defined for whatever instance variables you `expose`.
 
 It also has the ability to keep track of errors.
 
