@@ -4,7 +4,7 @@ title: Guides - Validations Overview
 
 # Overview
 
-Validations in Hanami happen through `dry-validation` gem provided by [dry.rb](http://dry-rb.org). `dry-validation` focuses on clarity, explicitness and precision of validation logic. It provides several built-in and ready to use predicates to validate the input data for your actions.
+Validations in Hanami happen through `dry-validation` gem provided by [dry.rb](http://dry-rb.org). `dry-validation` focuses on clarity, explicitness and precision of validation logic. It provides several built-in and ready to use predicates to validate the input data for your xactions.
 
 ## Basic example
 
@@ -19,7 +19,7 @@ module Web::Controllers::Signup
       required(:password).filled(:str?).confirmation
       required(:terms_of_service).filled(:bool?)
       required(:age).filled(:int?, included_in?: 18..99)
-      optional(:avatar).filled(size?: 1..(MEGABYTE * 3)
+      optional(:avatar).filled(size?: 1..(MEGABYTE * 3))
     end
   end
 end
@@ -73,13 +73,13 @@ Shorthand for common Ruby types:
 
 - `min_size?`
   - checks that an array’s size (or a string’s length) is greater than or equal to the given value
-  
+
 - `size?(int)`
   - checks that an array’s size (or a string’s length) is equal to the given value
 
 - `size?(range)`
   - checks that an array’s size (or a string’s length) is within a range of values
-  
+
 - `format?`
   - checks that a string matches a given regular expression
 
