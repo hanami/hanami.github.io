@@ -86,7 +86,7 @@ rather than leaving your complexity hidden, only expressed implicitly.
 
 # Preparing
 Let's say we have our `bookshelf` application,
-from the [Getting Started]((/guides/getting-started)
+from the [Getting Started](/guides/getting-started)
 and we want to add the 'email notification for added book' feature.
 
 # Creating Our Interactor
