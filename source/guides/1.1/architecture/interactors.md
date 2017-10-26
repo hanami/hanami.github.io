@@ -24,7 +24,7 @@ The story for our new feature is:
 Since the application doesn't have authentication, anyone can add a new book.
 We'll provide an admin email address via an environment variable.
 
-This is just an example to show when you should use an Interactor, and,
+This is just an example to show when you should use an interactor, and,
 specifically, how `Hanami::Interactor` can be used.
 
 This example could provide a basis for other features like
@@ -32,7 +32,8 @@ adding administrator approval of new books before they're posted,
 or allowing users to provide an email address, then edit the book via a special link.
 
 In practice,
-you can use `Interactors` to implement *any business logic*.
+you can use interactors to implement *any business logic*,
+abstracted away from the web.
 It's particularly useful for when you want to do several things at once,
 in order to manage the complexity of the codebase.
 
@@ -41,7 +42,7 @@ This follows the [Single Responsibility Principle](https://en.wikipedia.org/wiki
 
 In a web application, they will generally be called from the controller action.
 This lets you separate concerns.
-Your business logic objects, Interactors, won't know about the web at all.
+Your business logic objects, interactors, won't know about the web at all.
 
 # Callbacks? We Don't Need No Stinkin' Callbacks!
 An easy way of implementing email notification would be to add a callback.
@@ -62,10 +63,10 @@ They make code hard to understand, and brittle.
 
 Instead, we recommend being **explicit over implicit**.
 
-An Interactor is an object that represents a specific *use-case*.
+An interactor is an object that represents a specific *use-case*.
 
 They let each class have a single responsibility.
-An Interactor's single responsibility is to combine object and method calls in order achieve a specific outcome.
+An interactor's single responsibility is to combine object and method calls in order achieve a specific outcome.
 
 We provide `Hanami::Interactor` as a module,
 so you can start with a Plain Old Ruby Object,
@@ -73,7 +74,7 @@ and include `include Hanami::Interactor` when you need some of its features.
 
 # Concept
 
-The central idea behind Interactors is that you extract an isolated piece of functionality into a new class.
+The central idea behind interactors is that you extract an isolated piece of functionality into a new class.
 
 You should only write two public methods: `initialize` and `call`.
 
@@ -90,7 +91,7 @@ from the [Getting Started](/guides/getting-started)
 and we want to add the 'email notification for added book' feature.
 
 # Creating Our Interactor
-Let's create a folder for our Interactors, and a folder for their specs:
+Let's create a folder for our interactors, and a folder for their specs:
 
 ```shell
 % mkdir lib/bookshelf/interactors
@@ -154,7 +155,7 @@ Let's run this test:
 
 All the tests should pass!
 
-Now, let's make our `AddBook` Interactor actually do something!
+Now, let's make our `AddBook` interactor actually do something!
 
 
 # Creating a Book
@@ -188,7 +189,7 @@ If you run the tests with `bundle exec rake`, you'll see this error:
 NoMethodError: undefined method `book' for #<Hanami::Interactor::Result:0x007f94498c1718>
 ```
 
-Let's fill out our Interactor,
+Let's fill out our interactor,
 then explain what we did:
 
 ```ruby
@@ -260,7 +261,7 @@ since it only gets one if and when it is persisted.
 To make this test pass, we'll need to create a _persisted_ `Book` instead.
 (Another, equally valid, option would be to persist the Book we already have.)
 
-Edit the `call` method in our `lib/bookshelf/interactors/add_book.rb` Interactor:
+Edit the `call` method in our `lib/bookshelf/interactors/add_book.rb` interactor:
 
 ```ruby
   def call
@@ -280,7 +281,7 @@ Let's refactor our implementation though,
 to leverage [Dependency Injection](https://martinfowler.com/articles/injection.html)
 
 We recommend you use Dependency Injection, but you don't have to.
-This is an entirely optional feature of Hanami's Interactor.
+This is an entirely optional feature of `Hanami::Interactor`.
 
 The spec so far works,
 but it relies on the behavior of the Repository
@@ -290,10 +291,10 @@ For example, if you wanted to create a UUID *before* it's persisted,
 and signify the persistence was successful in some other way than populating an `id` column,
 you'd have to modify this spec.
 
-We can change our spec and our Interactor to make it more robust:
+We can change our spec and our interactor to make it more robust:
 it'll be less likely to break because of changes outside of its file.
 
-Here's how we can use Dependency Injection in our Interactor:
+Here's how we can use Dependency Injection in our interactor:
 
 ```ruby
 require 'hanami/interactor'
@@ -361,7 +362,7 @@ end
 
 Now our test doesn't violate the boundaries of the concern.
 
-What we did here is **inject** our Interactor's dependency on the repository.
+What we did here is **inject** our interactor's dependency on the repository.
 Note: in our non-test code, we don't need to change anything.
 The default value for the `repository:` keyword argument provides a new repository object if one is not passed in.
 
@@ -433,7 +434,7 @@ Now all our tests should pass!
 
 
 But, this Mailer isn't called from anywhere.
-We need to call this Mailer from our `AddBook` Interactor.
+We need to call this Mailer from our `AddBook` interactor.
 
 Let's edit our `AddBook` spec, to ensure our mailer is called:
 
@@ -451,7 +452,7 @@ Let's edit our `AddBook` spec, to ensure our mailer is called:
 ```
 
 Running your test suite will show an error: `ArgumentError: unknown keyword: mailer`.
-This makes sense, since our Interactor only a singular keyword argument: `repository`.
+This makes sense, since our interactor has only a singular keyword argument: `repository`.
 
 Let's integrate our mailer now,
 by adding a new `mailer` keyword argument on the initializer.
@@ -478,10 +479,10 @@ class AddBook
 end
 ```
 
-Now our Interactor will deliver an email, notifying that a book has been added.
+Now our interactor will deliver an email, notifying that a book has been added.
 
 # Integrating With Our Controller
-Finally, we need to call this Interactor from our action.
+Finally, we need to call this interactor from our action.
 
 Edit the action file, `apps/web/controllers/books/create.rb`:
 
@@ -502,7 +503,7 @@ Our specs will still pass, but there's a small problem.
 We're testing the book creation code **twice**.
 
 This is generally bad practice, and we can fix it,
-by illustrating another benefit of Interactors.
+by illustrating another benefit of interactors.
 
 We're going to use Dependency Injection again.
 This time, in our action.
@@ -587,12 +588,12 @@ and leverage our new instance variable in the `call` method:
 Now our specs pass, and they're much more robust!
 
 Our action now has less responsibility;
-it delegates it's real behavior to our Interactor.
+it delegates its real behavior to our interactor.
 
 The action takes input (from parameters),
 and calls our interactor to actually do its work.
 It's single responsibility is to deal with the web.
-Our Interactor now deals with our actual business logic.
+Our interactor now deals with our actual business logic.
 
 This is a great relief for our action and its spec.
 
@@ -634,7 +635,7 @@ This automatically makes the resulting object a failure.
 
 (There's also an `error!` method,
 which does the same *and* also interrupts the flow,
-stopping the Interactor from executing more code).
+stopping the interactor from executing more code).
 
 You can access the errors on the resulting object, by calling `.errors`.
 
