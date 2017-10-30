@@ -110,17 +110,17 @@ GET /assets/application.js
 It copies the `apps/web/assets/javascripts/application.js` to `public/assets/application.js` and then serves it.
 
 <p class="notice">
-  Assets are copied only if the destination path is NOT existing (eg. <code>public/assets/application.js</code>).
-  If it DOES exist, the asset is only served, without copying it.
+  Assets are copied only if the destination path does <em>NOT</em> exist (eg. <code>public/assets/application.js</code>).
+  If it <em>DOES</em> exist, the asset is only served, without copying it.
 </p>
 
 <p class="warning">
-  When an application has turned OFF assets compilation (Compile mode), Hanami won't copy the file.
+  When an application has turned <em>OFF</em> asset compilation (Compile mode), Hanami won't copy the file.
 </p>
 
 #### Stale Asset
 
-This could happen in _development_ mode, when we require an asset the first time, it's get copied over `public/`, then we edit it, so the destination file is stale.
+This could happen in _development_ mode. When we require an asset the first time it gets copied to the `public/` directory. Then when we edit the source file, the destination file becomes stale.
 
 ```
 GET /assets/application.js
@@ -129,7 +129,7 @@ GET /assets/application.js
 GET /assets/application.js
 ```
 
-It copies **again** the source into the destination file (`public/assets/application.js`) and then serves it.
+It copies the source into the destination file **again** (`public/assets/application.js`) and then serves it.
 
 #### Precompiled Asset
 
@@ -159,10 +159,10 @@ This isn't a static file or a dynamic resource, the project returns a `404 (Not 
 
 ## Sources
 
-Each application has a separated set of directories where to look up for files.
+Each application has a separated set of directories where its assets can be found.
 Assets are recursively searched under these paths.
 
-New projects have a default directory where to put application assets:
+New projects have a default directory where application assets can be put:
 
 ```
 % tree apps/web/assets
@@ -205,14 +205,14 @@ end
 This will add `apps/web/vendor/assets` and all its subdirectories.
 
 <p class="warning">
-  Hanami looks recursively to the assets sources. In order to NOT accidentally disclose sensitive files like secrets or source code, please make sure that these sources directories ONLY contain web assets.
+  Hanami looks recursively through the asset sources. In order to <em>NOT</em> accidentally disclose sensitive files like secrets or source code, please make sure that these sources directories <em>ONLY</em> contain web assets.
 </p>
 
 ## Third Party Gems
 
-Hanami allows to use [Rubygems](https://rubygems.org) as a way to distribute web assets and make them available to Hanami applications.
+Hanami allows developers to use [Rubygems](https://rubygems.org) as a way to distribute web assets and make them available to Hanami applications.
 
-Third party gems can be maintained by developers who want to bring frontend frameworks support to Hanami.
+Third party gems can be maintained by developers who want to bring frontend framework support to Hanami.
 Let's say we want to build an `hanami-emberjs` gem.
 
 ```shell
@@ -230,7 +230,7 @@ Let's say we want to build an `hanami-emberjs` gem.
 # ...
 ```
 
-We put in an **arbitrary** directory **only** the assets that we want to serve.
+We put **only** the assets that we want to serve in an **arbitrary** directory.
 Then we add it to `Hanami::Assets.sources`.
 
 ```ruby
@@ -246,7 +246,7 @@ end
 Hanami::Assets.sources << __dir__ + '/emberjs/source'
 ```
 
-When an application will do `require 'hanami/emberjs'`, that directory will be added to the sources where Hanami will be able to lookup for assets.
+When an application requires `'hanami/emberjs'`, that directory will be added to the sources where Hanami can search for assets.
 
 ```erb
 <%= javascript 'ember' %>
