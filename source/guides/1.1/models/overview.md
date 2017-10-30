@@ -70,4 +70,4 @@ irb(main):001:0> book = BookRepository.new.create(title: "Hanami")
 
 ---
 
-Learn more about [repositories](/guides/1.1/models/repositories), [entities](/guides/1.1/models/entities), [migrations](/guides/1.1/migrations/overview), and [database CLI commands](/guides/1.1/command-line/database).
+Learn more about [repositories](/guides/1.1/repositories/overview), [entities](/guides/1.1/entities/overview), [migrations](/guides/1.1/migrations/overview), and [database CLI commands](/guides/1.1/command-line/database).
