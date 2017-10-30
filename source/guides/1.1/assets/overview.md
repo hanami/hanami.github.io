@@ -178,7 +178,7 @@ apps/web/assets
 We can add as many directories we want under it (eg. `apps/web/assets/fonts`).
 
 <p class="convention">
-  For a given application named <code>Web</code>, the default assets source is <code>apps/web/assets</code>
+  For a given application named <code>Web</code>, the default asset directory is <code>apps/web/assets</code>
 </p>
 
 ### Adding Sources
