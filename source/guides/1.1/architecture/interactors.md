@@ -65,7 +65,7 @@ Instead, we recommend being **explicit over implicit**.
 An Interactor is an object that represents a specific *use-case*.
 
 They let each class have a single responsibility.
-An Interactor's single responsibility is to combine object and method calls in order achieve a specific outcome.
+An Interactor's single responsibility is to combine object and method calls in order to achieve a specific outcome.
 
 We provide `Hanami::Interactor` as a module,
 so you can start with a Plain Old Ruby Object,
@@ -81,12 +81,12 @@ This means objects are easy to reason about,
 since there's only one possible method to call after the object is created.
 
 By encapsulating behavior into a single object, it's easier to test.
-It's also makes your codebase easier to understand,
+It also makes your codebase easier to understand,
 rather than leaving your complexity hidden, only expressed implicitly.
 
 # Preparing
 Let's say we have our `bookshelf` application,
-from the [Getting Started]((/guides/getting-started)
+from the [Getting Started](/guides/getting-started)
 and we want to add the 'email notification for added book' feature.
 
 # Creating Our Interactor
