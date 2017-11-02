@@ -49,7 +49,7 @@ The following commands are equivalent:
 ```
 
 <p class="convention">
-  The <code>:test</code> (or <code>:spec</code>) Rake task is the default.
+  The <code>:test</code> (or <code>:spec</code> in case you generated the application with <code>--test=rspec</code> switch) Rake task is the default.
 </p>
 
 ## Ruby Server Hosting Ecosystem Compatibility
