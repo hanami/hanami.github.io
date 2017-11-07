@@ -1,0 +1,316 @@
+
+/*
+ * Minimal Application level overrides
+ * (things that dont make sense in a toolkit :)
+ * copyright @colossal 2015
+ */
+
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+.block {
+ overflow: hidden;
+}
+
+/* code */
+pre {
+  background-color: #fdfdfd;
+}
+
+
+/* navbar */
+.app-navbar {
+  font-size: 13px;
+  letter-spacing: .15em;
+  font-weight: 700;
+}
+.app-navbar .navbar-brand {
+  font-size: 13px;
+}
+
+/* mobile select guides */
+.mobile-guides {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-guides {
+    display: block;
+    margin: auto;
+    width: 100%;
+    padding: 18px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(../images/scroll_arrow.svg) no-repeat 97% 14px;
+    background-size: 2.12em;
+  }
+  #markdown-toc {
+    display: none;
+  }
+}
+
+/* intro block */
+.app-block-intro {
+  padding-top: 20px;
+}
+.app-block-intro img {
+  width: 80%;
+  margin-bottom: -25%;
+}
+.app-block-cta {
+  margin-top: -6em;
+}
+
+@media (min-width: 1200px) {
+  .app-block-intro img {
+    width: 90%;
+  }
+}
+
+/* block img */
+.app-block-game img,
+.app-block-stats img {
+  width: 100%;
+}
+@media (max-width: 480px) {
+  .app-block-game-img {
+    transform: scale(1.5) !important;
+  }
+}
+
+/* stats hr */
+.app-block-stats hr {
+  width: calc(80% + 60px);
+}
+
+/* design block */
+.app-block-design > .container > .row {
+  z-index: 2;
+}
+
+.app-block-design-img {
+  margin-top: -60px;
+  margin-left: -450px;
+  float: left;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .app-block-design-img {
+    margin-top: -220px;
+    margin-left: 0;
+  }
+}
+
+/* footer block */
+.app-block-footer {
+  background-color: rgb(27, 28, 29);
+  color: #444;
+  color: rgba(116, 119, 123, .5);
+}
+
+
+/* transforms */
+.app-translate-15 {
+  -webkit-transform: translateY(15px);
+      -ms-transform: translateY(15px);
+          transform: translateY(15px);
+}
+.app-translate-50 {
+  -webkit-transform: translateY(50px);
+      -ms-transform: translateY(50px);
+          transform: translateY(50px);
+}
+.app-translate-5 {
+  -webkit-transform: translateY(5%);
+      -ms-transform: translateY(5%);
+          transform: translateY(5%);
+}
+.app-translate-10 {
+  -webkit-transform: translateY(10%);
+      -ms-transform: translateY(10%);
+          transform: translateY(10%);
+}
+
+
+/* brand */
+
+.brand-name {
+    font-weight: 200;
+}
+
+@media (max-width: 400px) {
+  .brand-name {
+    font-size: 46px !important;
+  }
+}
+@media (max-width: 350px) {
+  .brand-name {
+    font-size: 42px !important;
+  }
+}
+
+div.download-develop-deploy .tab-pane {
+  padding: 2em 0;
+}
+
+div.download-develop-deploy .command {
+  color: #685D9F;
+}
+
+div.download-develop-deploy .callout {
+  margin-bottom: 14em;
+}
+
+div.download-develop-deploy code {
+  color: #999;
+}
+
+div.app-block-footer {
+  margin-top: 2em;
+}
+
+.app-block-footer .col-sm-6 p {
+  color: rgba(116, 119, 123, 0.85);
+}
+
+div.container-blog h1 {
+  font-weight: 300;
+}
+
+div.container-blog h2 {
+  font-weight: 400;
+}
+
+p.summary {
+  font-size: 1.4em;
+}
+
+div.container-article h2 {
+  font-weight: 600;
+}
+
+div.container-article h3 {
+  font-weight: 400;
+}
+
+p.lead {
+  margin-top: 2em;
+  font-size: 1.5em;
+}
+
+div.article-body {
+  font-size: 1.4em;
+}
+
+div.supporters {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+#lotus {
+  color: #fff;
+  background-color: #685D9F;
+  line-height: 5em;
+  margin-top: 2em;
+}
+
+#lotus a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+#lotus a.anchor {
+  text-decoration: none;
+  position: relative;
+  left: -20px;
+  width: 30px;
+  opacity: 0;
+}
+
+#lotus:hover a.anchor {
+  opacity: 1;
+}
+
+.title a.anchor {
+  position: absolute;
+  width: 30px;
+  opacity: 0;
+}
+
+.container-article .title a.anchor {
+  left: -10px;
+}
+
+.title:hover a.anchor {
+  opacity: 1;
+}
+
+table.status {
+  width: 100%;
+}
+
+table.status tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+table.status th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+table.status th {
+  height: 50px;
+  font-size: 20px;
+}
+
+table.status td {
+  font-size: 16px;
+}
+
+.gitter-open-chat-button {
+  background-color: #534a7f;
+  border-color: #443d68;
+}
+
+.gitter-open-chat-button:focus, .gitter-open-chat-button:hover {
+  background-color: #48416f;
+  text-decoration: none;
+}
+
+.gitter-chat-embed {
+  z-index: 1000;
+}
+
+.hanami-release-date {
+  font-weight: 200;
+  color: #777;
+}
+
+.team-avatar {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+}
+
+#navigation {
+  font-family: Roboto;
+  font-weight: 400;
+}
+
+#brand-name, #motto {
+  font-family: Roboto;
+  font-weight: 200;
+}
+
+.block-background {
+  background-color: #000;
+}
+
+.block-background img {
+  filter: brightness(50%);
+}

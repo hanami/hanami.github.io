@@ -1,0 +1,808 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <meta content="exported via StampReady" name="sr_export">
+    <meta content="exported via StampReady" name="sr_export">
+    <meta content="exported via StampReady" name="sr_export">
+    <meta content="exported via StampReady" name="sr_export">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <style>
+        .ReadMsgBody {
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .ExternalClass {
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height: 100%;
+        }
+
+        html {
+            width: 100%;
+        }
+
+        body {
+            -webkit-text-size-adjust: none;
+            -ms-text-size-adjust: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-spacing: 0;
+            table-layout: fixed;
+            margin: 0 auto;
+        }
+
+        table table table {
+            table-layout: auto;
+        }
+
+        img {
+            display: block !important;
+            overflow: hidden !important;
+        }
+
+        table td {
+            border-collapse: collapse;
+        }
+
+        .yshortcuts a {
+            border-bottom: none !important;
+        }
+
+        a {
+            color: #dc3610;
+            text-decoration: none;
+        }
+
+        .textbutton a {
+            font-family: 'open sans', arial, sans-serif !importat;
+            color: #ffffff !important;
+        }
+
+        .footer-link a {
+            color: #979797 !important;
+        }
+        /*Responsive*/
+
+        @media only screen and (max-width: 590px) {
+            body {
+                width: auto !important;
+            }
+            table[class="MAS-600"] {
+                width: 450px !important;
+            }
+            table[class="MAS-inner"] {
+                width: 90% !important;
+            }
+            table[class="MAS2-2"] {
+                width: 47% !important;
+                text-align: left !importatrtant;
+            }
+            table[class="MAS3-3"] {
+                width: 100% !important;
+                text-align: center !important;
+            }
+            table[class="MAS1-3"] {
+                width: 29% !important;
+            }
+            table[class="MAS3-1"] {
+                width: 64% !important;
+                text-align: left !important;
+            }
+            td[class="header-td"] {
+                height: 50px !important;
+                max-height: 50px !important;
+                line-height: 0px !important;
+            }
+            td[class="td-hide"] {
+                height: 0px !important;
+                max-height: 0px !important;
+                line-height: 0px !important;
+            }
+            /* Image */
+            img[class="img1"] {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        @media only screen and (max-width: 479px) {
+            body {
+                width: auto !important;
+            }
+            table[class="MAS-600"] {
+                width: 290px !important;
+            }
+            table[class="MAS-inner"] {
+                width: 82% !important;
+            }
+            table[class="MAS2-2"] {
+                width: 100% !important;
+                text-align: center !important;
+            }
+            table[class="MAS3-3"] {
+                width: 100% !important;
+                text-align: center !important;
+            }
+            table[class="MAS1-3"] {
+                width: 100% !important;
+            }
+            table[class="MAS3-1"] {
+                width: 100% !important;
+                text-align: center !important;
+            }
+            td[class="header-td"] {
+                height: 50px !important;
+                max-height: 20px !important;
+                line-height: 0px !important;
+            }
+            td[class="td-hide"] {
+                height: 0px !important;
+                max-height: 0px !important;
+                line-height: 0px !important;
+            }
+            /* image */
+            img[class="img1"] {
+                width: 100% !important;
+            }
+        }
+    </style>
+    <style>
+        body {
+            -webkit-transform: translate3d(0, 0, 0);
+        }
+
+        #save {
+            position: absolute;
+            bottom: 70px;
+            width: 206px;
+            left: 22px;
+            height: 55px;
+            background-color: #68c0b0;
+            line-height: 56px;
+            color: #FFF;
+            border-radius: 3px;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            background-image: url(img/icons/save_arrow.png);
+            background-repeat: no-repeat;
+            background-position: 118px 19px;
+            -webkit-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            padding-left: 13px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .ani {
+            -webkit-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            box-shadow: inset 200px 0px 0px rgba(0, 0, 0, 0.25);
+        }
+
+        .de {
+            background-color: #b1b1b1!important;
+            background-position: 118px -65px!important;
+            -webkit-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4 ease;
+        }
+
+        #save.de:hover {
+            background-color: #b1b1b1!important;
+        }
+
+        #save:hover {
+            background-color: #5ca99a!important;
+        }
+
+        #menu_btn {
+            width: 16px;
+            height: 12px;
+            position: absolute;
+            left: 210px;
+            top: 37px;
+            cursor: pointer;
+        }
+
+        #menu_btn div {
+            background-color: #959799;
+            height: 2px;
+            width: 16px;
+            position: absolute;
+            left: 0px;
+        }
+
+        #menu_btn .stroke_1 {
+            top: 0px;
+        }
+
+        #menu_btn .stroke_2 {
+            top: 4px;
+        }
+
+        #menu_btn .stroke_3 {
+            top: 8px;
+        }
+
+        #menu {
+            position: absolute;
+            top: 84px;
+            left: 0px;
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.05);
+            z-index: 99;
+        }
+
+        #menu li {
+            color: #828282
+        }
+
+        #menu li:last-child {
+            padding-bottom: 20px;
+        }
+
+        #menu a {
+            color: #828282;
+            display: block;
+            padding: 10px 20px 10px 20px;
+        }
+
+        #menu a:hover {
+            color: #FFF;
+        }
+
+        #frame {
+            opacity: 1!important;
+        }
+        /*** Tooltip Actions ***/
+
+        #cmdLink {
+            background-image: url(img/icons/link.png?random=5549dfce3c62a);
+        }
+
+        #cmdLeftAlign {
+            background-image: url(img/icons/leftAlign.png?random=5549dfce3c663);
+        }
+
+        #cmdCenterAlign {
+            background-image: url(img/icons/centerAlign.png?random=5549dfce3c69b);
+        }
+
+        #cmdRightAlign {
+            background-image: url(img/icons/rightAlign.png?random=5549dfce3c6d3);
+        }
+
+        #cmdBold {
+            background-image: url(img/icons/bold.png?random=5549dfce3c70b);
+        }
+
+        #cmdItalic {
+            background-image: url(img/icons/italic.png?random=5549dfce3c744);
+            background-position: 10px center
+        }
+
+        .wrap {
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        img#uploadPreview {
+            border: 0;
+            overflow: hidden;
+        }
+
+        img#uploadPreview {
+            max-width: 600px;
+            max-height: 500px;
+        }
+
+        .ui-resizable-e {
+            width: 30px;
+            right: -30px;
+            z-index: 9999;
+        }
+
+        #coderWrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: #FFF;
+            z-index: 99999;
+            -webkit-transform: scale(0.8);
+            -ms-transform: scale(0.8);
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        #preview {
+            width: 100%;
+            height: 100%;
+        }
+
+        #preview_right {
+            min-width: 320px;
+            position: relative;
+        }
+
+        #coderNav {
+            height: 50px;
+            background-color: #2c2c2c;
+            box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            z-index: 999999;
+        }
+
+        #previewDeviceFormat {
+            width: 400px;
+            margin: auto;
+            color: #808285;
+            font-size: 13px;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .CodeMirror {
+            -webkit-font-smoothing: ;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+        }
+
+        #saveFromCodeEditor {
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            background-color: #68c0b0;
+            height: 50px;
+            padding: 0 35px;
+            line-height: 50px;
+            color: #FFF;
+            font-size: 13px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .moduleCode {
+            height: 0px;
+            overflow-y: hidden;
+            position: relative;
+            z-index: 999999999;
+            box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.08), 0px -1px 0px rgba(0, 0, 0, 0.08);
+        }
+        /* code button */
+
+        .moduleCodeButton {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 0px;
+            z-index: 9999999;
+            margin-top: -20px;
+        }
+
+        .codeButton {
+            width: 0%;
+            height: 100%;
+            background-color: #cecece;
+            background-image: url(img/icons/openCodeEditor.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+        }
+
+        .codeButton:hover {
+            background-color: #68c0b0;
+        }
+
+        .codeButton:active {
+            background-color: #5aafa0;
+        }
+        /* drag button */
+
+        .moduleDragButton {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 40px;
+            z-index: 9999999;
+            margin-top: -60px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .dragButton {
+            width: 0%;
+            height: 100%;
+            background-color: #cecece;
+            background-image: url(img/icons/dragButton.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+            cursor: -webkit-grab
+        }
+
+        .dragButton:hover {
+            background-color: #ed7831;
+        }
+
+        .dragButton:active {
+            cursor: -webkit-grabbing;
+            background-color: #d76824;
+        }
+        /* close button */
+
+        .moduleDeleteButton {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 0px;
+            z-index: 9999999;
+            margin-top: -20px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .deleteButton {
+            width: 0%;
+            height: 100%;
+            background-color: #cecece;
+            background-image: url(img/icons/deleteButton.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+        }
+
+        .deleteButton:hover {
+            background-color: #e75d5d;
+        }
+
+        .deleteButton:active {
+            background-color: #d14f4f;
+        }
+        /* duplicate button */
+
+        .moduleDuplicateButton {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 0px;
+            z-index: 9999999;
+            margin-top: 20px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .duplicateButton {
+            width: 0%;
+            height: 100%;
+            background-color: #cecece;
+            background-image: url(img/icons/duplicateButton.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+        }
+
+        .duplicateButton:hover {
+            background-color: #58a2d6;
+        }
+
+        .duplicateButton:active {
+            background-color: #4687b4;
+        }
+
+        .cm-tab {
+            width: 12px!important;
+            height: 12px!important
+        }
+
+        .ui-resizable-s {
+            height: 12px;
+            bottom: 0px;
+            z-index: 99999999;
+        }
+
+        .preventSelection {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media only screen and (max-width: 1420px) {
+            /* code button */
+            .moduleCodeButton {
+                right: 0px;
+            }
+            .codeButton {
+                right: 0px;
+            }
+            /* drag button */
+            .moduleDragButton {
+                right: 0px;
+            }
+            .dragButton {
+                right: 0px;
+            }
+            /* close button */
+            .moduleDeleteButton {
+                left: 0px;
+            }
+            .deleteButton {
+                left: 0px;
+            }
+            /* duplicate button */
+            .moduleDuplicateButton {
+                right: 0px;
+            }
+            .duplicateButton {
+                right: 0px;
+            }
+        }
+
+        @media (min-width: 1421px) {
+            /* code button */
+            .moduleCodeButton {
+                right: -40px;
+            }
+            .codeButton {
+                left: 0px;
+            }
+            /* drag button */
+            .moduleDragButton {
+                right: -40px;
+            }
+            .dragButton {
+                left: 0px;
+            }
+            /* close button */
+            .moduleDeleteButton {
+                left: -40px;
+            }
+            .deleteButton {
+                right: 0px;
+            }
+            /* duplicate button */
+            .moduleDuplicateButton {
+                right: -40px;
+            }
+            .duplicateButton {
+                left: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <table data-thumb="http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2016/03/11/kHLRq1Y8ywC2hgTm5lpvNBVJbz9tF0xd.png" data-module="module1_82250" mc:repeatable="layout" mc:hideable="" mc:variant="1Content" data-bgcolor="Header" data-bg="Header"
+        align="center" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#3b3b3b" style="position: relative; opacity: 1; z-index: 0; background-image: url('http://hanamirb.org/ml/0011/images/header.jpg'); background-color: rgb(255, 255, 255); background-size: cover; background-position: 50% 100%;"
+        background="http://hanamirb.org/ml/0011/images/header.jpg">
+        <tr>
+            <td align="center" style="/* background-color: rgba(0, 0, 0, 0.23); */     background-size: cover;">
+                <table align="center" class="MAS-600" width="90%" border="0" cellspacing="0" cellpadding="0">
+                    <!-- logo -->
+                    <tr>
+                        <td>
+                            <table align="left" class="MAS3-3" width="43" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td height="30">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10">
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--Space-->
+                            <table width="1" height="20" border="0" cellpadding="0" cellspacing="0" align="left">
+                                <tr>
+                                    <td height="20" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+                                        <p style="padding-left: 24px;">
+                                            &nbsp; </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--End Space-->
+                            <table class="MAS3-3" align="left" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td height="35" class="td-hide">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table align="right" class="MAS-600" width="180" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>
+                                        <!-- left -->
+                                        <table align="right" class="MAS3-3" width="180" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td>
+                                                    <!-- content -->
+                                                    <table class="MAS3-3" width="80" border="0" align="right" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td height="30">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="MAS3-3" width="90" border="0" align="right" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td height="30">
+                                                            </td>
+                                                        </tr>
+                                                        <tr align="center">
+                                                            <td>
+                                                                <table class="MAS-inner" width="90" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="10">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- end left -->
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- end logo -->
+                </table>
+                <table align="center" class="MAS-600" width="600" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td height="100">
+                        </td>
+                    </tr>
+                    <tr align="center">
+                        <td mc:edit="content-title-6" data-link-style="text-decoration:none; color:#3cb2d0;" data-link-color="Header Link2" data-color="Header Title2" data-size="Header Title2" height="20" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 57px;font-weight: 100;color: #333;line-height: 58px;"
+                            align="left" header="">
+                            <multiline label="content">
+                                Hanami v1.0.0:
+                                production ready, new core team,
+                                automatic logging, logger rotation,
+                                enhanced model generator, faster boot, and bug fixes.
+                            </multiline>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="10">
+                        </td>
+                    </tr>
+                    <tr align="left">
+                        <td mc:edit="content-title-7" data-link-style="text-decoration:none; color:#3cb2d0;" data-link-color="Header 1Link" data-color="Header 1Title" data-size="Header1" style="font-family: 'Open Sans', Arial, sans-serif; font-size: 15px; color: rgb(107, 107, 107); font-weight: 100; line-height: 25.5px;">
+                            <singleline>
+                            Back in the summer of 2012, as a frustrated web developer, I started an experiment to <em>rethink</em> Ruby on Rails and to build a modern web framework for Ruby. The goal was to keep all what I consider the good parts of Rails and to add extra components to ease long term maintenance and testability.
+                            <br>
+                            <br>
+                            Since then it's been an amazing journey. I have learned a lot about Ruby, Open Source, and people. The community aspect of this experience is key to me. Software is made by people for people. It's political. Hanami is a consequence of my vision: I, <strong>we</strong>, want to include people, keep them motivated to work on Open Source, and have fun together.
+                            <br>
+                            <br>
+                            This goes beyond Hanami. Alongside with other projects like <strong>ROM</strong>, <strong>dry-rb</strong>, and <strong>Trailblazer</strong> we're influencing how modern web applications are written with Ruby.
+                            <br>
+                            <br>
+                            <strong>After 1392 days, 6205 commits, made by 295 people, we're proud to announce Hanami 1.0.0! 🌸</strong>
+                            </singleline>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <table align="left" class="MAS-600" width="290" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>
+                                        <!-- left -->
+                                        <table align="left" class="MAS3-3" width="180" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td>
+                                                    <!-- content -->
+                                                    <table class="MAS3-3" width="180" border="0" align="left" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td height="50">
+                                                            </td>
+                                                        </tr>
+                                                        <tr align="center">
+                                                            <td>
+                                                                <table width="120" border="0" align="left" cellpadding="0" cellspacing="0">
+                                                                    <tr>
+                                                                        <td mc:edit="content-title-136" data-link-style="text-decoration:none; color:#FFFFFF;" data-link-color="Text Link" align="center" height="30" style="border-radius: 21px;padding-left: 5px;padding-right: 5px;font-family: 'Open Sans', Arial, sans-serif;color: #FFFFFF; font-size:14px;background-color: #dc3610;">
+                                                                            <a href="http://hanamirb.org/blog/2017/04/06/announcing-hanami-100.html?utm_campaign=ml0011&utm_source=hanami&utm_medium=link" style="color: #ffffff">Read the story</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="100">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- end left -->
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <table data-thumb="http://www.stampready.net/dashboard/editor/user_uploads/image_uploads/2016/03/11/9n3pzJkDMdvyTGxrt7CQN5VFfKgs6h1l.png" data-module="module9_2100" mc:repeatable="layout" mc:hideable="" mc:variant="Content9" width="100%" align="center"
+        border="0" cellpadding="0" cellspacing="0" style="position: relative; opacity: 1; z-index: 0;">
+        <tr>
+            <td align="center">
+                <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td data-bgcolor="Main 1" align="center" valign="top" bgcolor="#333" style="background-color: rgb(255, 255, 255); background-size: cover; background-position: 50% 50%;">
+                            <table class="MAS-600" width="600" align="center" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td height="80">
+                                    </td>
+                                </tr>
+                                <!-- title -->
+                                <tr>
+                                    <td mc:edit="content-title-46" data-link-style="text-decoration:none; color:#dc3610;" data-link-color="Content Link2" data-color="Mains Text2" data-size="Main Text2" align="center" style="font-family: 'Open Sans', Arial, sans-serif; color: rgb(127, 127, 127); font-size: 21px; font-weight: 100; line-height: 35.7px;font-style: italic;">
+                                        <multiline>
+                                            Hanami - The web, with simplicity</multiline>
+                                    </td>
+                                </tr>
+                                <!-- end title -->
+                                <tr>
+                                    <td height="80">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

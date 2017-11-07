@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Guides - Getting Started</title>
+
+<script type="text/javascript" src="/javascripts/lunr.min.js"></script>
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+
+    <link href="/stylesheets/guides.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <form action="" class="navbar-form form-inline pull-left visible-lg-block" id="search-form">
+        <input type="search" class="form-control" id="search" placeholder="Search guides...">
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/guides/1.1">Guides</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <div class="container docs-content">
+      <div class="breadcrumbs">
+        <a href="/guides">Guides</a> / <a href="/guides/1.0">1.0</a>  / Introduction / Getting Started
+      </div>
+
+      <select class="mobile-guides">
+          <optgroup label="Introduction">
+              <option value="/guides/1.0/getting-started" >Getting Started</option>
+          </optgroup>
+          <optgroup label="Architecture">
+              <option value="/guides/1.0/architecture/overview" >Overview</option>
+          </optgroup>
+          <optgroup label="Projects">
+              <option value="/guides/1.0/projects/code-reloading" >Code Reloading</option>
+              <option value="/guides/1.0/projects/rake" >Rake</option>
+              <option value="/guides/1.0/projects/logging" >Logging</option>
+              <option value="/guides/1.0/projects/initializers" >Initializers</option>
+              <option value="/guides/1.0/projects/security" >Security</option>
+          </optgroup>
+          <optgroup label="Routing">
+              <option value="/guides/1.0/routing/overview" >Overview</option>
+              <option value="/guides/1.0/routing/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/routing/restful-resources" >RESTful Resource(s)</option>
+              <option value="/guides/1.0/routing/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Actions">
+              <option value="/guides/1.0/actions/overview" >Overview</option>
+              <option value="/guides/1.0/actions/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/actions/parameters" >Parameters</option>
+              <option value="/guides/1.0/actions/request-and-response" >Request & Response</option>
+              <option value="/guides/1.0/actions/exposures" >Exposures</option>
+              <option value="/guides/1.0/actions/rack-integration" >Rack Integration</option>
+              <option value="/guides/1.0/actions/mime-types" >MIME Types</option>
+              <option value="/guides/1.0/actions/cookies" >Cookies</option>
+              <option value="/guides/1.0/actions/sessions" >Sessions</option>
+              <option value="/guides/1.0/actions/exception-handling" >Exception Handling</option>
+              <option value="/guides/1.0/actions/control-flow" >Control Flow</option>
+              <option value="/guides/1.0/actions/http-caching" >HTTP Caching</option>
+              <option value="/guides/1.0/actions/share-code" >Share Code</option>
+              <option value="/guides/1.0/actions/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Views">
+              <option value="/guides/1.0/views/overview" >Overview</option>
+              <option value="/guides/1.0/views/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/views/templates" >Templates</option>
+              <option value="/guides/1.0/views/mime-types" >MIME Types</option>
+              <option value="/guides/1.0/views/layouts" >Layouts</option>
+              <option value="/guides/1.0/views/custom-error-pages" >Custom Error Pages</option>
+              <option value="/guides/1.0/views/share-code" >Share Code</option>
+              <option value="/guides/1.0/views/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Models">
+              <option value="/guides/1.0/models/overview" >Overview</option>
+              <option value="/guides/1.0/models/database-configuration" >Database Configuration</option>
+              <option value="/guides/1.0/models/repositories" >Repositories</option>
+              <option value="/guides/1.0/models/entities" >Entities</option>
+              <option value="/guides/1.0/models/data-types" >Data Types</option>
+              <option value="/guides/1.0/models/sql-queries" >SQL Queries</option>
+              <option value="/guides/1.0/models/postgresql" >PostgreSQL</option>
+              <option value="/guides/1.0/models/associations" >Associations</option>
+              <option value="/guides/1.0/models/use-your-own-orm" >Use Your Own ORM</option>
+          </optgroup>
+          <optgroup label="Migrations">
+              <option value="/guides/1.0/migrations/overview" >Overview</option>
+              <option value="/guides/1.0/migrations/create-table" >Create Table</option>
+              <option value="/guides/1.0/migrations/alter-table" >Alter Table</option>
+          </optgroup>
+          <optgroup label="Validations">
+              <option value="/guides/1.0/validations/overview" >Overview</option>
+              <option value="/guides/1.0/validations/boolean-logic" >Boolean Logic</option>
+              <option value="/guides/1.0/validations/custom-predicates" >Custom Predicates</option>
+              <option value="/guides/1.0/validations/advanced-usage" >Advanced Usage</option>
+          </optgroup>
+          <optgroup label="Helpers">
+              <option value="/guides/1.0/helpers/overview" >Overview</option>
+              <option value="/guides/1.0/helpers/html5" >HTML5</option>
+              <option value="/guides/1.0/helpers/forms" >Forms</option>
+              <option value="/guides/1.0/helpers/routing" >Routing</option>
+              <option value="/guides/1.0/helpers/assets" >Assets</option>
+              <option value="/guides/1.0/helpers/links" >Links</option>
+              <option value="/guides/1.0/helpers/escape" >Markup Escape</option>
+              <option value="/guides/1.0/helpers/numbers" >Numbers</option>
+              <option value="/guides/1.0/helpers/custom-helpers" >Custom Helpers</option>
+          </optgroup>
+          <optgroup label="Mailers">
+              <option value="/guides/1.0/mailers/overview" >Overview</option>
+              <option value="/guides/1.0/mailers/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/mailers/templates" >Templates</option>
+              <option value="/guides/1.0/mailers/delivery" >Delivery</option>
+              <option value="/guides/1.0/mailers/share-code" >Share Code</option>
+              <option value="/guides/1.0/mailers/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Assets">
+              <option value="/guides/1.0/assets/overview" >Overview</option>
+              <option value="/guides/1.0/assets/preprocessors" >Preprocessors</option>
+              <option value="/guides/1.0/assets/compressors" >Compressors</option>
+              <option value="/guides/1.0/assets/content-delivery-network" >Content Delivery Network (CDN)</option>
+              <option value="/guides/1.0/assets/use-your-own-assets-management-tool" >Use Your Own Assets Management Tool</option>
+          </optgroup>
+          <optgroup label="Command Line">
+              <option value="/guides/1.0/command-line/applications" >Applications</option>
+              <option value="/guides/1.0/command-line/generators" >Generators</option>
+              <option value="/guides/1.0/command-line/destroy" >Destroy</option>
+              <option value="/guides/1.0/command-line/database" >Database</option>
+              <option value="/guides/1.0/command-line/assets" >Assets</option>
+              <option value="/guides/1.0/command-line/routes" >Routes</option>
+              <option value="/guides/1.0/command-line/version" >Version</option>
+          </optgroup>
+          <optgroup label="Upgrade Notes">
+              <option value="/guides/1.0/upgrade-notes/v060" >v0.6.0</option>
+              <option value="/guides/1.0/upgrade-notes/v070" >v0.7.0</option>
+              <option value="/guides/1.0/upgrade-notes/v080" >v0.8.0</option>
+              <option value="/guides/1.0/upgrade-notes/v090" >v0.9.0</option>
+              <option value="/guides/1.0/upgrade-notes/v100" >v1.0.0</option>
+          </optgroup>
+          <optgroup label="Guide Versions">
+              <option value="/guides/1.0/../1.1" >v1.1</option>
+              <option value="/guides/1.0" >v1.0</option>
+          </optgroup>
+      </select>
+      <ul id="markdown-toc">
+        <li></li>
+        <li><a href="https://github.com/hanami/hanami.github.io/edit/build/source/guides/getting-started.md" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a></li>
+
+          <li class="toc-group">
+            <span>Introduction</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/getting-started">Getting Started</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Architecture</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/architecture/overview">Overview</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Projects</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/projects/code-reloading">Code Reloading</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/rake">Rake</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/logging">Logging</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/initializers">Initializers</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/security">Security</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Routing</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/routing/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/restful-resources">RESTful Resource(s)</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Actions</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/actions/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/parameters">Parameters</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/request-and-response">Request & Response</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/exposures">Exposures</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/rack-integration">Rack Integration</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/cookies">Cookies</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/sessions">Sessions</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/exception-handling">Exception Handling</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/control-flow">Control Flow</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/http-caching">HTTP Caching</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Views</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/views/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/layouts">Layouts</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/custom-error-pages">Custom Error Pages</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Models</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/models/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/database-configuration">Database Configuration</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/repositories">Repositories</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/entities">Entities</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/data-types">Data Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/sql-queries">SQL Queries</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/postgresql">PostgreSQL</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/associations">Associations</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/use-your-own-orm">Use Your Own ORM</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Migrations</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/migrations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/migrations/create-table">Create Table</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/migrations/alter-table">Alter Table</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Validations</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/validations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/boolean-logic">Boolean Logic</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/custom-predicates">Custom Predicates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/advanced-usage">Advanced Usage</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Helpers</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/helpers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/html5">HTML5</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/forms">Forms</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/routing">Routing</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/links">Links</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/escape">Markup Escape</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/numbers">Numbers</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/custom-helpers">Custom Helpers</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Mailers</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/mailers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/delivery">Delivery</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Assets</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/assets/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/preprocessors">Preprocessors</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/compressors">Compressors</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/content-delivery-network">Content Delivery Network (CDN)</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/use-your-own-assets-management-tool">Use Your Own Assets Management Tool</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Command Line</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/command-line/applications">Applications</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/generators">Generators</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/destroy">Destroy</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/database">Database</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/routes">Routes</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/version">Version</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Upgrade Notes</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v060">v0.6.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v070">v0.7.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v080">v0.8.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v090">v0.9.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v100">v1.0.0</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Guide Versions</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/../1.1">v1.1</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0">v1.0</a>
+                </li>
+            </ul>
+          </li>
+      </ul>
+
+
+      
+      <h1 id="getting-started" class="title"><a name="getting-started" class="anchor" href="#getting-started">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Getting Started</h1>
+    
+<div id="getting-started-lead">
+  <p>
+    Hello. If you're reading this page, it's very likely that you want to learn more about Hanami.
+    That's great, congrats! If you're looking for new ways to build maintainable, secure, faster and testable web applications, you're in good hands.
+  </p>
+
+  <p>
+    <strong>Hanami is built for people like you.</strong>
+  </p>
+
+  <p>
+    I warn you that whether you're a total beginner or an experienced developer <strong>this learning process can be hard</strong>.
+    Over time, we build expectations about how things should be, and it can be painful to change. <strong>But without change, there is no challenge</strong> and without challenge, there is no growth.
+  </p>
+
+  <p>
+    Sometimes a feature doesn't look right, that doesn't mean it's you.
+    It can be a matter of formed habits, a design fallacy or even a bug.
+  </p>
+
+  <p>
+    Myself and the rest of the Community are putting best efforts to make Hanami better every day.
+  </p>
+
+  <p>
+    In this guide we will set up our first Hanami project and build a simple bookshelf web application.
+    We'll touch on all the major components of Hanami framework, all guided by tests.
+  </p>
+
+  <p>
+    <strong>If you feel alone, or frustrated, don't give up, jump in our <a href="http://chat.hanamirb.org">chat</a> and ask for help.</strong>
+    There will be someone more than happy to talk with you.
+  </p>
+
+  <p>
+    Enjoy,<br>
+    Luca Guidi<br>
+    <em>Hanami creator</em>
+  </p>
+</div>
+
+<p><br>
+<hr></p>
+
+      <h2 id="prerequisites" class="title"><a name="prerequisites" class="anchor" href="#prerequisites">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Prerequisites</h2>
+    
+<p>Before we get started, let&#39;s get some prerequisites out of the way.
+First, we&#39;re going to assume a basic knowledge of developing web applications.</p>
+
+<p>You should also be familiar with <a href="http://bundler.io">Bundler</a>, <a href="http://rake.rubyforge.org">Rake</a>, working with a terminal and building apps using the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model, View, Controller</a> paradigm.</p>
+
+<p>Lastly, in this guide we&#39;ll be using a <a href="https://sqlite.org/">SQLite</a> database.
+If you want to follow along, make sure you have a working installation of Ruby 2.3+ and SQLite 3+ on your system.</p>
+
+      <h2 id="create-a-new-hanami-project" class="title"><a name="create-a-new-hanami-project" class="anchor" href="#create-a-new-hanami-project">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Create a New Hanami Project</h2>
+    
+<p>To create a new Hanami project, we need to install the Hanami gem from Rubygems.
+Then we can use the new <code>hanami</code> executable to generate a new project:</p>
+<pre class="language-ruby plaintext"><code>% gem install hanami
+% hanami new bookshelf
+</code></pre>
+
+<p class="notice">
+  By default, the project will be setup to use a SQLite database. For real-world projects, you can specify your engine:
+  <code>
+  % hanami new bookshelf --database=postgres
+  </code>
+</p>
+
+<p>This will create a new directory <code>bookshelf</code> in our current location.
+Let&#39;s see what it contains:</p>
+<pre class="language-ruby plaintext"><code>% cd bookshelf
+% tree -L 1
+.
+├── Gemfile
+├── Rakefile
+├── apps
+├── config
+├── config.ru
+├── db
+├── lib
+├── public
+└── spec
+
+6 directories, 3 files
+</code></pre>
+
+<p>Here&#39;s what we need to know:</p>
+
+<ul>
+<li><code>Gemfile</code> defines our Rubygems dependencies (using Bundler).</li>
+<li><code>Rakefile</code> describes our Rake tasks.</li>
+<li><code>apps</code> contains one or more web applications compatible with Rack.
+Here we can find the first generated Hanami application called <code>Web</code>.
+It&#39;s the place where we find our controllers, views, routes and templates.</li>
+<li><code>config</code> contains configuration files.</li>
+<li><code>config.ru</code> is for Rack servers.</li>
+<li><code>db</code> contains our database schema and migrations.</li>
+<li><code>lib</code> contains our business logic and domain model, including entities and repositories.</li>
+<li><code>public</code> will contain compiled static assets.</li>
+<li><code>spec</code> contains our tests.</li>
+</ul>
+
+<p>Go ahead and install our gem dependency with Bundler; then we can launch a development server:</p>
+<pre class="language-ruby plaintext"><code>% bundle install
+% bundle exec hanami server
+</code></pre>
+
+<p>And... bask in the glory of your first Hanami project at
+<a href="http://localhost:2300">http://localhost:2300</a>! We should see a screen similar to this:</p>
+
+<p><img src="/images/welcome-page.png" alt="Hanami welcome page" class="img-responsive"></p>
+
+      <h2 id="hanami-architecture" class="title"><a name="hanami-architecture" class="anchor" href="#hanami-architecture">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Hanami Architecture</h2>
+    
+<p>Hanami architecture <strong>can host several Hanami (and Rack) applications in the same Ruby process</strong>.</p>
+
+<p>These applications live under <code>apps/</code>.
+Each of them can be a component of our product, such as the user facing web interface, the admin pane, metrics, HTTP API etc..</p>
+
+<p>All these parts are a <em>delivery mechanism</em> to the business logic that lives under <code>lib/</code>.
+This is the place where our models are defined, and interact with each other to compose the <strong>features</strong> that our product provides.</p>
+
+<p>Hanami architecture is heavily inspired by <a href="https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecture</a>.</p>
+
+      <h2 id="writing-our-first-test" class="title"><a name="writing-our-first-test" class="anchor" href="#writing-our-first-test">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Writing Our First Test</h2>
+    
+<p>The opening screen we see when we point our browser at our app, is a
+default page which is displayed when there are no routes defined.</p>
+
+<p>Hanami encourages <a href="https://en.wikipedia.org/wiki/Behavior-driven_development">Behavior Driven Development</a> (BDD) as a way to write web applications.
+In order to get our first custom page to display, we&#39;ll write a high-level feature test:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/visit_home_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
+
+<span class="n">describe</span> <span class="s1">'Visit home'</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'is successful'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/'</span>
+
+    <span class="n">page</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'Bookshelf'</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Note that, although Hanami is ready for a Behavior Driven Development workflow out of the box, <strong>it is in no way bound to any particular testing framework</strong> -- nor does it come with special integrations or libraries.</p>
+
+<p>We&#39;ll go with <a href="https://github.com/seattlerb/minitest">Minitest</a> here (which is the default), but we can use <a href="http://rspec.info">RSpec</a> by creating the project with <code>--test=rspec</code> option.
+Hanami will then generate helpers and stub files for it.</p>
+
+<p class="notice">
+  Please check .env.test in case you need to tweak the database URL.
+</p>
+
+<p>We have to migrate our schema in the test database by running:</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span><span class="nv">HANAMI_ENV</span><span class="o">=</span><span class="nb">test </span>bundle <span class="nb">exec </span>hanami db prepare
+</code></pre>
+
+<p>As you can see, we have set <code>HANAMI_ENV</code> environment variable to instruct our command about the environment to use.</p>
+
+      <h3 id="following-a-request" class="title"><a name="following-a-request" class="anchor" href="#following-a-request">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Following a Request</h3>
+    
+<p>Now we have a test, we can see it fail:</p>
+<pre class="language-ruby html"><code>% bundle exec rake test
+Run options: --seed 44759
+
+# Running:
+
+F
+
+Finished in 0.018611s, 53.7305 runs/s, 53.7305 assertions/s.
+
+  1) Failure:
+Homepage#test_0001_is successful [/Users/hanami/bookshelf/spec/web/features/visit_home_spec.rb:6]:
+Expected "<span class="cp">&lt;!DOCTYPE html&gt;</span>\n<span class="nt">&lt;html&gt;</span>\n  <span class="nt">&lt;head&gt;</span>\n    <span class="nt">&lt;title&gt;</span>Not Found<span class="nt">&lt;/title&gt;</span>\n  <span class="nt">&lt;/head&gt;</span>\n  <span class="nt">&lt;body&gt;</span>\n    <span class="nt">&lt;h1&gt;</span>Not Found<span class="nt">&lt;/h1&gt;</span>\n  <span class="nt">&lt;/body&gt;</span>\n<span class="nt">&lt;/html&gt;</span>\n" to include "Bookshelf".
+
+1 runs, 1 assertions, 1 failures, 0 errors, 0 skips
+</code></pre>
+
+<p>Now let&#39;s make it pass.
+Lets add the code required to make this test pass, step-by-step.</p>
+
+<p>The first thing we need to add is a route:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">root</span> <span class="ss">to: </span><span class="s1">'home#index'</span>
+</code></pre>
+
+<p>We pointed our application&#39;s root URL to the <code>index</code> action of the <code>home</code> controller (see the <a href="/guides/1.0/routing/overview">routing guide</a> for more information).
+Now we can create the index action.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/home/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Home</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This is an empty action that doesn&#39;t implement any business logic.
+Each action has a corresponding view, which is a Ruby object and needs to be added in order to complete the request.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/home/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Home</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>...which, in turn, is empty and does nothing more than render its template.
+This is the file we need to edit in order to make our test pass. All we need to do is add the bookshelf heading.</p>
+<pre class="language-ruby erb"><code># apps/web/templates/home/index.html.erb
+<span class="nt">&lt;h1&gt;</span>Bookshelf<span class="nt">&lt;/h1&gt;</span>
+</code></pre>
+
+<p>Save your changes, run your test again and it now passes. Great!</p>
+<pre class="language-ruby shell"><code>Run options: --seed 19286
+
+<span class="c"># Running:</span>
+
+.
+
+Finished <span class="k">in </span>0.011854s, 84.3600 runs/s, 168.7200 assertions/s.
+
+1 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+</code></pre>
+
+      <h2 id="generating-new-actions" class="title"><a name="generating-new-actions" class="anchor" href="#generating-new-actions">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Generating New Actions</h2>
+    
+<p>Let&#39;s use our new knowledge about the major Hanami components to add a new action.
+The purpose of our Bookshelf project is to manage books.</p>
+
+<p>We&#39;ll store books in our database and let the user manage them with our project.
+A first step would be to show a listing of all the books in our system.</p>
+
+<p>Let&#39;s write a new feature test describing what we want to achieve:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/list_books_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
+
+<span class="n">describe</span> <span class="s1">'List books'</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'displays each book on the page'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/books'</span>
+
+    <span class="n">within</span> <span class="s1">'#books'</span> <span class="k">do</span>
+      <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_css?</span><span class="p">(</span><span class="s1">'.book'</span><span class="p">,</span> <span class="ss">count: </span><span class="mi">2</span><span class="p">),</span> <span class="s1">'Expected to find 2 books'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The test is simple enough, and fails because the URL <code>/books</code> is not currently recognised in our application. We&#39;ll create a new controller action to fix that.</p>
+
+      <h3 id="hanami-generators" class="title"><a name="hanami-generators" class="anchor" href="#hanami-generators">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Hanami Generators</h3>
+    
+<p>Hanami ships with various <strong>generators</strong> to save on typing some of the code involved in adding new functionality.
+In our terminal, enter:</p>
+<pre class="language-ruby plaintext"><code>% bundle exec hanami generate action web books#index
+</code></pre>
+
+<p>This will generate a new action <em>index</em> in the <em>books</em> controller of the <em>web</em> application.
+It gives us an empty action, view and template; it also adds a default route to <code>apps/web/config/routes.rb</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#index'</span>
+</code></pre>
+
+<p>If you&#39;re using ZSH, you may get <code>zsh: no matches found: books#index</code>. In that case, you can use:
+<code>
+% hanami generate action web books/index
+</code></p>
+
+<p>To make our test pass, we need to edit our newly generated template file in <code>apps/web/templates/books/index.html.erb</code>:</p>
+<pre class="language-ruby html"><code><span class="nt">&lt;h1&gt;</span>Bookshelf<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>All books<span class="nt">&lt;/h2&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"books"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"book"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Patterns of Enterprise Application Architecture<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>by <span class="nt">&lt;strong&gt;</span>Martin Fowler<span class="nt">&lt;/strong&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"book"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Test Driven Development<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>by <span class="nt">&lt;strong&gt;</span>Kent Beck<span class="nt">&lt;/strong&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+
+<p>Save your changes and see your tests pass! The output will also contain a skipped test. This is due to an autogenerated test in <code>spec/web/views/books/index_spec.rb</code>.</p>
+
+<p>The terminology of controllers and actions might be confusing, so let&#39;s clear this up: actions form the basis of our Hanami applications; controllers are mere modules that group several actions together.
+So while the &quot;controller&quot; is <em>conceptually</em> present in our project, in practice we only deal with actions.</p>
+
+<p>We&#39;ve used a generator to create a new endpoint in our application.
+But one thing you may have noticed is that our new template contains the same <code>&lt;h1&gt;</code> as our <code>home/index.html.erb</code> template.
+Let&#39;s fix that.</p>
+
+      <h3 id="layouts" class="title"><a name="layouts" class="anchor" href="#layouts">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Layouts</h3>
+    
+<p>To avoid repeating ourselves in every single template, we can use a layout.
+Open up the file <code>apps/web/templates/application.html.erb</code> and edit it to look like this:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Bookshelf<span class="nt">&lt;/title&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">favicon</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Bookshelf<span class="nt">&lt;/h1&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="k">yield</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
+<p>Now you can remove the duplicate lines from the other templates. Let&#39;s run the tests again to check that everything worked fine:</p>
+<pre class="language-ruby plaintext"><code>bundle exec rake test
+</code></pre>
+
+<p>A <strong>layout</strong> is like any other template, but it is used to wrap your regular templates.
+The <code>yield</code> line is replaced with the contents of our regular template.
+It&#39;s the perfect place to put our repeating headers and footers.</p>
+
+      <h2 id="modeling-our-data-with-entities" class="title"><a name="modeling-our-data-with-entities" class="anchor" href="#modeling-our-data-with-entities">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Modeling Our Data With Entities</h2>
+    
+<p>Hard-coding books in our templates is, admittedly, kind of cheating.
+Let&#39;s add some dynamic data to our application.</p>
+
+<p>We&#39;ll store books in our database and display them on our page.
+To do so, we need a way to read and write to our database.
+Enter entities and repositories:</p>
+
+<ul>
+<li>an <strong>entity</strong> is a domain object (eg. <code>Book</code>) uniquely identified by its identity.</li>
+<li>a <strong>repository</strong> mediates between entities and the persistence layer.</li>
+</ul>
+
+<p>Entities are totally unaware of the database.
+This makes them <strong>lightweight</strong> and <strong>easy to test</strong>.</p>
+
+<p>For this reason we need a repository to persist the data that a <code>Book</code> depends on.
+Read more about entities and repositories in the <a href="/guides/1.0/models/overview">models guide</a>.</p>
+
+<p>Hanami ships with a generator for models, so let&#39;s use it to create a <code>Book</code> entity and the corresponding repository:</p>
+<pre class="language-ruby plaintext"><code>% bundle exec hanami generate model book
+create  lib/bookshelf/entities/book.rb
+create  lib/bookshelf/repositories/book_repository.rb
+create  db/migrations/20161115110038_create_books.rb
+create  spec/bookshelf/entities/book_spec.rb
+create  spec/bookshelf/repositories/book_repository_spec.rb
+</code></pre>
+
+<p>The generator gives us an entity, a repository, a migration, and accompanying test files.</p>
+
+      <h3 id="migrations-to-change-our-database-schema" class="title"><a name="migrations-to-change-our-database-schema" class="anchor" href="#migrations-to-change-our-database-schema">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Migrations To Change Our Database Schema</h3>
+    
+<p>Let&#39;s modify the generated migration (the path to the migration will differ for you, because it contains a timestamp) to include <code>title</code> and <code>author</code> fields:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># db/migrations/20161115110038_create_books.rb</span>
+
+<span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+
+      <span class="n">column</span> <span class="ss">:title</span><span class="p">,</span>  <span class="no">String</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:author</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+
+      <span class="n">column</span> <span class="ss">:created_at</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:updated_at</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Hanami provides a DSL to describe changes to our database schema. You can read more
+about how migrations work in the <a href="/guides/1.0/migrations/overview">migrations&#39; guide</a>.</p>
+
+<p>In this case, we define a new table with columns for each of our entities&#39; attributes.
+Let&#39;s prepare our database for the development and test environments:</p>
+<pre class="language-ruby plaintext"><code>% bundle exec hanami db prepare
+% HANAMI_ENV=test bundle exec hanami db prepare
+</code></pre>
+
+      <h3 id="working-with-entities" class="title"><a name="working-with-entities" class="anchor" href="#working-with-entities">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Working With Entities</h3>
+    
+<p>An entity is something really close to a plain Ruby object.
+We should focus on the behaviors that we want from it and only then, how to save it.</p>
+
+<p>For now, we keep the generated entity class:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/book.rb</span>
+<span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This class will generate getters and setters for each attribute which we pass to initialize params.
+We can verify it all works as expected with a unit test:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/bookshelf/entities/book_spec.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'../../spec_helper'</span>
+
+<span class="n">describe</span> <span class="no">Book</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'can be initialized with attributes'</span> <span class="k">do</span>
+    <span class="n">book</span> <span class="o">=</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'Refactoring'</span><span class="p">)</span>
+    <span class="n">book</span><span class="p">.</span><span class="nf">title</span><span class="p">.</span><span class="nf">must_equal</span> <span class="s1">'Refactoring'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h3 id="using-repositories" class="title"><a name="using-repositories" class="anchor" href="#using-repositories">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Using Repositories</h3>
+    
+<p>Now we are ready to play around with our repository.
+We can use Hanami&#39;s <code>console</code> command to launch IRb with our application pre-loaded, so we can use our objects:</p>
+<pre class="language-ruby plaintext"><code>% bundle exec hanami console
+&gt;&gt; repository = BookRepository.new
+=&gt; =&gt; #&lt;BookRepository relations=[:books]&gt;
+&gt;&gt; repository.all
+=&gt; []
+&gt;&gt; book = repository.create(title: 'TDD', author: 'Kent Beck')
+=&gt; #&lt;Book:0x007f9ab61c23b8 @attributes={:id=&gt;1, :title=&gt;"TDD", :author=&gt;"Kent Beck", :created_at=&gt;2016-11-15 11:11:38 UTC, :updated_at=&gt;2016-11-15 11:11:38 UTC}&gt;
+&gt;&gt; repository.find(book.id)
+=&gt; #&lt;Book:0x007f9ab6181610 @attributes={:id=&gt;1, :title=&gt;"TDD", :author=&gt;"Kent Beck", :created_at=&gt;2016-11-15 11:11:38 UTC, :updated_at=&gt;2016-11-15 11:11:38 UTC}&gt;
+</code></pre>
+
+<p>Hanami repositories have methods to load one or more entities from our database; and to create and update existing records.
+The repository is also the place where you would define new methods to implement custom queries.</p>
+
+<p>To recap, we&#39;ve seen how Hanami uses entities and repositories to model our data.
+Entities represent our behavior, while repositories use mappings to translate our entities to our data store.
+We can use migrations to apply changes to our database schema.</p>
+
+      <h3 id="displaying-dynamic-data" class="title"><a name="displaying-dynamic-data" class="anchor" href="#displaying-dynamic-data">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Displaying Dynamic Data</h3>
+    
+<p>With our new experience modelling data, we can get to work displaying dynamic data on our book listing page.
+Let&#39;s adjust the feature test we created earlier:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/list_books_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
+
+<span class="n">describe</span> <span class="s1">'List books'</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:repository</span><span class="p">)</span> <span class="p">{</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">repository</span><span class="p">.</span><span class="nf">clear</span>
+
+    <span class="n">repository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'PoEAA'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Martin Fowler'</span><span class="p">)</span>
+    <span class="n">repository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'TDD'</span><span class="p">,</span>   <span class="ss">author: </span><span class="s1">'Kent Beck'</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'displays each book on the page'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/books'</span>
+
+    <span class="n">within</span> <span class="s1">'#books'</span> <span class="k">do</span>
+      <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_css?</span><span class="p">(</span><span class="s1">'.book'</span><span class="p">,</span> <span class="ss">count: </span><span class="mi">2</span><span class="p">),</span> <span class="s1">'Expected to find 2 books'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We create the required records in our test and then assert the correct number of book classes on the page.
+When we run this test it should pass. If it does not pass, a likely reason is that the test database was not migrated.</p>
+
+<p>Now we can go change our template and remove the static HTML.
+Our view needs to loop over all available records and render them.
+Let&#39;s write a test to force this change in our view:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/views/books/index_spec.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../spec_helper'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">books: </span><span class="p">[]]</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/index.html.erb'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
+
+  <span class="n">it</span> <span class="s1">'exposes #books'</span> <span class="k">do</span>
+    <span class="n">view</span><span class="p">.</span><span class="nf">books</span><span class="p">.</span><span class="nf">must_equal</span> <span class="n">exposures</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:books</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'when there are no books'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s1">'shows a placeholder message'</span> <span class="k">do</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'&lt;p class="placeholder"&gt;There are no books yet.&lt;/p&gt;'</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'when there are books'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:book1</span><span class="p">)</span>     <span class="p">{</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'Refactoring'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Martin Fowler'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:book2</span><span class="p">)</span>     <span class="p">{</span> <span class="no">Book</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'Domain Driven Design'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Eric Evans'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">books: </span><span class="p">[</span><span class="n">book1</span><span class="p">,</span> <span class="n">book2</span><span class="p">]]</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'lists them all'</span> <span class="k">do</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">scan</span><span class="p">(</span><span class="sr">/class="book"/</span><span class="p">).</span><span class="nf">count</span><span class="p">.</span><span class="nf">must_equal</span> <span class="mi">2</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'Refactoring'</span><span class="p">)</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'Domain Driven Design'</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'hides the placeholder message'</span> <span class="k">do</span>
+      <span class="n">rendered</span><span class="p">.</span><span class="nf">wont_include</span><span class="p">(</span><span class="s1">'&lt;p class="placeholder"&gt;There are no books yet.&lt;/p&gt;'</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We specify that our index page will show a simple placeholder message when there are no books to display; when there are, it lists every one of them.
+Note how rendering a view with some data is relatively straight-forward.
+Hanami is designed around simple objects with minimal interfaces that are easy to test in isolation, yet still work great together.</p>
+
+<p>Let&#39;s rewrite our template to implement these requirements:</p>
+<pre class="language-ruby erb"><code># apps/web/templates/books/index.html.erb
+<span class="nt">&lt;h2&gt;</span>All books<span class="nt">&lt;/h2&gt;</span>
+
+<span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">books</span><span class="p">.</span><span class="nf">any?</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"books"</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;%</span> <span class="n">books</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">book</span><span class="o">|</span> <span class="cp">%&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"book"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h2&gt;</span><span class="cp">&lt;%=</span> <span class="n">book</span><span class="p">.</span><span class="nf">title</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h2&gt;</span>
+        <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">book</span><span class="p">.</span><span class="nf">author</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"placeholder"</span><span class="nt">&gt;</span>There are no books yet.<span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>If we run our feature test now, we&#39;ll see it fails — because our controller
+action does not actually <a href="/guides/1.0/actions/exposures"><em>expose</em></a> the books to our view. We can write a test for
+that change:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/controllers/books/index_spec.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../spec_helper'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Index</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[]</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:repository</span><span class="p">)</span> <span class="p">{</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">repository</span><span class="p">.</span><span class="nf">clear</span>
+
+    <span class="vi">@book</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'TDD'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Kent Beck'</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'is successful'</span> <span class="k">do</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">200</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'exposes all books'</span> <span class="k">do</span>
+    <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">action</span><span class="p">.</span><span class="nf">exposures</span><span class="p">[</span><span class="ss">:books</span><span class="p">].</span><span class="nf">must_equal</span> <span class="p">[</span><span class="vi">@book</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Writing tests for controller actions is basically two-fold: you either assert on the response object, which is a Rack-compatible array of status, headers and content; or on the action itself, which will contain exposures after we&#39;ve called it.
+Now we&#39;ve specified that the action exposes <code>:books</code>, we can implement our action:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/index.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Index</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="n">expose</span> <span class="ss">:books</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@books</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">all</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>By using the <code>expose</code> method in our action class, we can expose the contents of our <code>@books</code> instance variable to the outside world, so that Hanami can pass it to the view.
+That&#39;s enough to make all our tests pass again!</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>rake
+Run options: --seed 59133
+
+<span class="c"># Running:</span>
+
+.........
+
+Finished <span class="k">in </span>0.042065s, 213.9543 runs/s, 380.3633 assertions/s.
+
+9 runs, 16 assertions, 0 failures, 0 errors, 0 skips
+</code></pre>
+
+      <h2 id="building-forms-to-create-records" class="title"><a name="building-forms-to-create-records" class="anchor" href="#building-forms-to-create-records">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Building Forms To Create Records</h2>
+    
+<p>One of the last remaining steps is to make it possible to add new books to the system.
+The plan is simple: we build a page with a form to enter details.</p>
+
+<p>When the user submits the form, we build a new entity, save it, and redirect the user back to the book listing.
+Here&#39;s that story expressed in a test:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/add_book_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
+
+<span class="n">describe</span> <span class="s1">'Add a book'</span> <span class="k">do</span>
+  <span class="n">after</span> <span class="k">do</span>
+    <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">clear</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'can create a new book'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/books/new'</span>
+
+    <span class="n">within</span> <span class="s1">'form#book-form'</span> <span class="k">do</span>
+      <span class="n">fill_in</span> <span class="s1">'Title'</span><span class="p">,</span>  <span class="ss">with: </span><span class="s1">'New book'</span>
+      <span class="n">fill_in</span> <span class="s1">'Author'</span><span class="p">,</span> <span class="ss">with: </span><span class="s1">'Some author'</span>
+
+      <span class="n">click_button</span> <span class="s1">'Create'</span>
+    <span class="k">end</span>
+
+    <span class="n">current_path</span><span class="p">.</span><span class="nf">must_equal</span><span class="p">(</span><span class="s1">'/books'</span><span class="p">)</span>
+    <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_content?</span><span class="p">(</span><span class="s1">'New book'</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h3 id="laying-the-foundations-for-a-form" class="title"><a name="laying-the-foundations-for-a-form" class="anchor" href="#laying-the-foundations-for-a-form">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Laying The Foundations For A Form</h3>
+    
+<p>By now, we should be familiar with the working of actions, views and templates.</p>
+
+<p>We&#39;ll speed things up a little, so we can quickly get to the good parts.
+First, create a new action for our &quot;New Book&quot; page:</p>
+<pre class="language-ruby plaintext"><code>% bundle exec hanami generate action web books#new
+</code></pre>
+
+<p>This adds a new route to our app:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">get</span> <span class="s1">'/books/new'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#new'</span>
+</code></pre>
+
+<p>The interesting bit will be our new template, because we&#39;ll be using Hanami&#39;s form builder to construct a HTML form around our <code>Book</code> entity.</p>
+
+      <h3 id="using-form-helpers" class="title"><a name="using-form-helpers" class="anchor" href="#using-form-helpers">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Using Form Helpers</h3>
+    
+<p>Let&#39;s use <a href="/guides/1.0/helpers/forms">form helpers</a> to build this form in <code>apps/web/templates/books/new.html.erb</code>:</p>
+<pre class="language-ruby erb"><code># apps/web/templates/books/new.html.erb
+<span class="nt">&lt;h2&gt;</span>Add book<span class="nt">&lt;/h2&gt;</span>
+
+<span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="s1">'/books'</span> <span class="k">do</span>
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'input'</span> <span class="k">do</span>
+      <span class="n">label</span>      <span class="ss">:title</span>
+      <span class="n">text_field</span> <span class="ss">:title</span>
+    <span class="k">end</span>
+
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'input'</span> <span class="k">do</span>
+      <span class="n">label</span>      <span class="ss">:author</span>
+      <span class="n">text_field</span> <span class="ss">:author</span>
+    <span class="k">end</span>
+
+    <span class="n">div</span> <span class="ss">class: </span><span class="s1">'controls'</span> <span class="k">do</span>
+      <span class="n">submit</span> <span class="s1">'Create Book'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>We&#39;ve added <code>&lt;label&gt;</code> tags for our form fields, and wrapped each field in a
+container <code>&lt;div&gt;</code> using Hanami&#39;s <a href="/guides/1.0/helpers/html5">HTML builder helper</a>.</p>
+
+      <h3 id="submitting-our-form" class="title"><a name="submitting-our-form" class="anchor" href="#submitting-our-form">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Submitting Our Form</h3>
+    
+<p>To submit our form, we need yet another action.
+Let&#39;s create a <code>Books::Create</code> action:</p>
+<pre class="language-ruby plaintext"><code>% bundle exec hanami generate action web books#create
+</code></pre>
+
+<p>This adds a new route to our app:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">post</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#create'</span>
+</code></pre>
+
+      <h3 id="implementing-create-action" class="title"><a name="implementing-create-action" class="anchor" href="#implementing-create-action">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Implementing Create Action</h3>
+    
+<p>Our <code>books#create</code> action needs to do two things.
+Let&#39;s express them as unit tests:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/controllers/books/create_spec.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../spec_helper'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'Confident Ruby'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Avdi Grimm'</span> <span class="p">}]</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:repository</span><span class="p">)</span> <span class="p">{</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">repository</span><span class="p">.</span><span class="nf">clear</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'creates a new book'</span> <span class="k">do</span>
+    <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">book</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">last</span>
+
+    <span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">.</span><span class="nf">wont_be_nil</span>
+    <span class="n">book</span><span class="p">.</span><span class="nf">title</span><span class="p">.</span><span class="nf">must_equal</span> <span class="n">params</span><span class="p">.</span><span class="nf">dig</span><span class="p">(</span><span class="ss">:book</span><span class="p">,</span> <span class="ss">:title</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'redirects the user to the books listing'</span> <span class="k">do</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">302</span>
+    <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Location'</span><span class="p">].</span><span class="nf">must_equal</span> <span class="s1">'/books'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Let&#39;s make these tests pass!
+We&#39;ve already seen how we can write entities to our database, and we can use <code>redirect_to</code> to implement our redirection:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">])</span>
+
+      <span class="n">redirect_to</span> <span class="s1">'/books'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This minimal implementation should suffice to make our tests pass.</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>rake
+Run options: --seed 63592
+
+<span class="c"># Running:</span>
+
+...S.S.........
+
+Finished <span class="k">in </span>0.081961s, 183.0142 runs/s, 305.0236 assertions/s.
+
+15 runs, 23 assertions, 0 failures, 0 errors, 2 skips
+
+You have skipped tests. Run with --verbose <span class="k">for </span>details.
+</code></pre>
+
+<p>Congratulations!</p>
+
+      <h3 id="securing-our-form-with-validations" class="title"><a name="securing-our-form-with-validations" class="anchor" href="#securing-our-form-with-validations">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Securing Our Form With Validations</h3>
+    
+<p>Hold your horses! We need some extra measures to build a truly robust form.
+Imagine what would happen if the user were to submit the form without entering any values?</p>
+
+<p>We could fill our database with bad data or see an exception for data integrity violations.
+We clearly need a way of keeping invalid data out of our system!</p>
+
+<p>To express our validations in a test, we need to wonder: what <em>would</em> happen if our validations failed?
+One option would be to re-render the <code>books#new</code> form, so we can give our users another shot at completing it correctly.
+Let&#39;s specify this behaviour as unit tests:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/controllers/books/create_spec.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../spec_helper'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:action</span><span class="p">)</span> <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">Create</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:repository</span><span class="p">)</span> <span class="p">{</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
+
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">repository</span><span class="p">.</span><span class="nf">clear</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'with valid params'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{</span> <span class="ss">title: </span><span class="s1">'Confident Ruby'</span><span class="p">,</span> <span class="ss">author: </span><span class="s1">'Avdi Grimm'</span> <span class="p">}]</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'creates a book'</span> <span class="k">do</span>
+      <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">book</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">last</span>
+
+      <span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">.</span><span class="nf">wont_be_nil</span>
+      <span class="n">book</span><span class="p">.</span><span class="nf">title</span><span class="p">.</span><span class="nf">must_equal</span> <span class="n">params</span><span class="p">.</span><span class="nf">dig</span><span class="p">(</span><span class="ss">:book</span><span class="p">,</span> <span class="ss">:title</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'redirects the user to the books listing'</span> <span class="k">do</span>
+      <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+      <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">302</span>
+      <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Location'</span><span class="p">].</span><span class="nf">must_equal</span> <span class="s1">'/books'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'with invalid params'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">book: </span><span class="p">{}]</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'returns HTTP client error'</span> <span class="k">do</span>
+      <span class="n">response</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">must_equal</span> <span class="mi">422</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'dumps errors in params'</span> <span class="k">do</span>
+      <span class="n">action</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="n">errors</span> <span class="o">=</span> <span class="n">action</span><span class="p">.</span><span class="nf">params</span><span class="p">.</span><span class="nf">errors</span>
+
+      <span class="n">errors</span><span class="p">.</span><span class="nf">dig</span><span class="p">(</span><span class="ss">:book</span><span class="p">,</span> <span class="ss">:title</span><span class="p">).</span><span class="nf">must_equal</span>  <span class="p">[</span><span class="s1">'is missing'</span><span class="p">]</span>
+      <span class="n">errors</span><span class="p">.</span><span class="nf">dig</span><span class="p">(</span><span class="ss">:book</span><span class="p">,</span> <span class="ss">:author</span><span class="p">).</span><span class="nf">must_equal</span> <span class="p">[</span><span class="s1">'is missing'</span><span class="p">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now our tests specify two alternative scenarios: our original happy path, and a new scenario in which validations fail.
+To make our tests pass, we need to implement validations.</p>
+
+<p>Although you can add validation rules to the entity, Hanami also allows you to define validation rules as close to the source of the input as possible, i.e. the action.
+Hanami controller actions can use the <code>params</code> class method to define acceptable incoming parameters.</p>
+
+<p>This approach both whitelists what params are used (others are discarded to prevent mass-assignment vulnerabilities from untrusted user input) <em>and</em> adds rules to define what values are acceptable — in this case we&#39;ve specified that the nested attributes for a book&#39;s title and author should be present.</p>
+
+<p>With our validations in place, we can limit our entity creation and redirection to cases where the incoming params are valid:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/controllers/books/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Controllers::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="n">expose</span> <span class="ss">:book</span>
+
+    <span class="n">params</span> <span class="k">do</span>
+      <span class="n">required</span><span class="p">(</span><span class="ss">:book</span><span class="p">).</span><span class="nf">schema</span> <span class="k">do</span>
+        <span class="n">required</span><span class="p">(</span><span class="ss">:title</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+        <span class="n">required</span><span class="p">(</span><span class="ss">:author</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span>
+        <span class="vi">@book</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:book</span><span class="p">])</span>
+
+        <span class="n">redirect_to</span> <span class="s1">'/books'</span>
+      <span class="k">else</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nf">status</span> <span class="o">=</span> <span class="mi">422</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>When the params are valid, the Book is created and the action redirects to a different URL.
+But when the params are not valid, what happens?</p>
+
+<p>First, the HTTP status code is set to
+<a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#422">422 (Unprocessable Entity)</a>.
+Then the control will pass to the corresponding view, which needs to know which template to render.
+In this case <code>apps/web/templates/books/new.html.erb</code> will be used to render the form again.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/views/books/create.rb</span>
+<span class="k">module</span> <span class="nn">Web::Views::Books</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">View</span>
+    <span class="n">template</span> <span class="s1">'books/new'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This approach will work nicely because Hanami&#39;s form builder is smart enough to inspect the <code>params</code> in this action and populate the form fields with values found in the params.
+If the user fills in only one field before submitting, they are presented with their original input, saving them the frustration of typing it again.</p>
+
+<p>Run your tests again and see they are all passing again!</p>
+
+      <h3 id="displaying-validation-errors" class="title"><a name="displaying-validation-errors" class="anchor" href="#displaying-validation-errors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Displaying Validation Errors</h3>
+    
+<p>Rather than just shoving the user a form under their nose when something has gone wrong, we should give them a hint of what&#39;s expected of them. Let&#39;s adapt our form to show a notice about invalid fields.</p>
+
+<p>First, we expect a list of errors to be included in the page when <code>params</code> contains errors:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/views/books/new_spec.rb</span>
+<span class="nb">require_relative</span> <span class="s1">'../../../spec_helper'</span>
+
+<span class="n">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">New</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:params</span><span class="p">)</span>    <span class="p">{</span> <span class="no">OpenStruct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">valid?</span><span class="p">:</span> <span class="kp">false</span><span class="p">,</span> <span class="ss">error_messages: </span><span class="p">[</span><span class="s1">'Title must be filled'</span><span class="p">,</span> <span class="s1">'Author must be filled'</span><span class="p">])</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:exposures</span><span class="p">)</span> <span class="p">{</span> <span class="no">Hash</span><span class="p">[</span><span class="ss">params: </span><span class="n">params</span><span class="p">]</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:template</span><span class="p">)</span>  <span class="p">{</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">View</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'apps/web/templates/books/new.html.erb'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:view</span><span class="p">)</span>      <span class="p">{</span> <span class="no">Web</span><span class="o">::</span><span class="no">Views</span><span class="o">::</span><span class="no">Books</span><span class="o">::</span><span class="no">New</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">exposures</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:rendered</span><span class="p">)</span>  <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="nf">render</span> <span class="p">}</span>
+
+  <span class="n">it</span> <span class="s1">'displays list of errors when params contains errors'</span> <span class="k">do</span>
+    <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'There was a problem with your submission'</span><span class="p">)</span>
+    <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'Title must be filled'</span><span class="p">)</span>
+    <span class="n">rendered</span><span class="p">.</span><span class="nf">must_include</span><span class="p">(</span><span class="s1">'Author must be filled'</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We should also update our feature spec to reflect this new behavior:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># spec/web/features/add_book_spec.rb</span>
+<span class="nb">require</span> <span class="s1">'features_helper'</span>
+
+<span class="n">describe</span> <span class="s1">'Add a book'</span> <span class="k">do</span>
+  <span class="c1"># Spec written earlier omitted for brevity</span>
+
+  <span class="n">it</span> <span class="s1">'displays list of errors when params contains errors'</span> <span class="k">do</span>
+    <span class="n">visit</span> <span class="s1">'/books/new'</span>
+
+    <span class="n">within</span> <span class="s1">'form#book-form'</span> <span class="k">do</span>
+      <span class="n">click_button</span> <span class="s1">'Create'</span>
+    <span class="k">end</span>
+
+    <span class="n">current_path</span><span class="p">.</span><span class="nf">must_equal</span><span class="p">(</span><span class="s1">'/books'</span><span class="p">)</span>
+
+    <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_content?</span><span class="p">(</span><span class="s1">'There was a problem with your submission'</span><span class="p">)</span>
+    <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_content?</span><span class="p">(</span><span class="s1">'Title must be filled'</span><span class="p">)</span>
+    <span class="n">assert</span> <span class="n">page</span><span class="p">.</span><span class="nf">has_content?</span><span class="p">(</span><span class="s1">'Author must be filled'</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>In our template we can loop over <code>params.errors</code> (if there are any) and display a friendly message.
+Open up <code>apps/web/templates/books/new.html.erb</code> and add the following at the top of the file:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%</span> <span class="k">unless</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"errors"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>There was a problem with your submission<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="cp">&lt;%</span> <span class="n">params</span><span class="p">.</span><span class="nf">error_messages</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">message</span><span class="o">|</span> <span class="cp">%&gt;</span>
+        <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">message</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+
+<p>Run your tests again and see they are all passing again!</p>
+<pre class="language-ruby shell"><code><span class="gp">% </span>bundle <span class="nb">exec </span>rake
+Run options: --seed 59940
+
+<span class="c"># Running:</span>
+
+......S..........
+
+Finished <span class="k">in </span>0.188950s, 89.9707 runs/s, 179.9413 assertions/s.
+
+17 runs, 34 assertions, 0 failures, 0 errors, 1 skips
+
+You have skipped tests. Run with --verbose <span class="k">for </span>details.
+</code></pre>
+
+      <h3 id="improving-our-use-of-the-router" class="title"><a name="improving-our-use-of-the-router" class="anchor" href="#improving-our-use-of-the-router">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Improving Our Use Of The Router</h3>
+    
+<p>The last improvement we are going to make, is in the use of our router.
+Open up the routes file for the &quot;web&quot; application:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># apps/web/config/routes.rb</span>
+<span class="n">post</span> <span class="s1">'/books'</span><span class="p">,</span>    <span class="ss">to: </span><span class="s1">'books#create'</span>
+<span class="n">get</span> <span class="s1">'/books/new'</span><span class="p">,</span> <span class="ss">to: </span><span class="s1">'books#new'</span>
+<span class="n">get</span> <span class="s1">'/books'</span><span class="p">,</span>     <span class="ss">to: </span><span class="s1">'books#index'</span>
+<span class="n">root</span>              <span class="ss">to: </span><span class="s1">'home#index'</span>
+</code></pre>
+
+<p>Hanami provides a convenient helper method to build these REST-style routes, that we can use to simplify our router a bit:</p>
+<pre class="language-ruby ruby"><code><span class="n">root</span> <span class="ss">to: </span><span class="s1">'home#index'</span>
+<span class="n">resources</span> <span class="ss">:books</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="p">]</span>
+</code></pre>
+
+<p>To get a sense of what routes are defined, now we&#39;ve made this change, you can
+run <code>bundle exec hanami routes</code> on your command-line to inspect the end result:</p>
+<pre class="language-ruby plaintext"><code>% bundle exec hanami routes
+     Name Method     Path                           Action
+
+     root GET, HEAD  /                              Web::Controllers::Home::Index
+    books GET, HEAD  /books                         Web::Controllers::Books::Index
+ new_book GET, HEAD  /books/new                     Web::Controllers::Books::New
+    books POST       /books                         Web::Controllers::Books::Create
+</code></pre>
+
+<p>The output shows you the name of the defined helper method (you can suffix this name with <code>_path</code> or <code>_url</code> and call it on the <code>routes</code> helper), the allowed HTTP method, the path and finally the controller action that will be used to handle the request.</p>
+
+<p>Now we&#39;ve applied the <code>resources</code> helper method, we can take advantage of the named route methods.
+Remember how we built our form using <code>form_for</code> in <code>apps/web/templates/books/new.html.erb</code>?</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="s1">'/books'</span> <span class="k">do</span>
+    <span class="c1"># ...</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>We don&#39;t need to include a hard-coded path in our template, when our router is already perfectly aware of which route to point the form to.
+We can use the <code>routes</code> helper method that is available in our views and actions to access route-specific helper methods:</p>
+<pre class="language-ruby erb"><code><span class="cp">&lt;%=</span>
+  <span class="n">form_for</span> <span class="ss">:book</span><span class="p">,</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span> <span class="k">do</span>
+    <span class="c1"># ...</span>
+  <span class="k">end</span>
+<span class="cp">%&gt;</span>
+</code></pre>
+
+<p>We can make a similar change in <code>apps/web/controllers/books/create.rb</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">redirect_to</span> <span class="n">routes</span><span class="p">.</span><span class="nf">books_path</span>
+</code></pre>
+
+      <h2 id="wrapping-up" class="title"><a name="wrapping-up" class="anchor" href="#wrapping-up">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Wrapping Up</h2>
+    
+<p><strong>Congratulations for completing your first Hanami project!</strong></p>
+
+<p>Let&#39;s review what we&#39;ve done: we&#39;ve traced requests through Hanami&#39;s major frameworks to understand how they relate to each other; we&#39;ve seen how we can model our domain using entities and repositories; we&#39;ve seen solutions for building forms, maintaining our database schema, and validating user input.</p>
+
+<p>We&#39;ve come a long way, but there&#39;s still plenty more to explore.
+Explore the <a href="/guides">other guides</a>, the <a href="http://www.rubydoc.info/gems/hanami">Hanami API documentation</a>, read the <a href="https://github.com/hanami">source code</a> and follow the <a href="/blog">blog</a>.</p>
+
+<p><strong>Above all, enjoy building amazing things!</strong></p>
+
+<div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,300+ developers.
+    </p>
+    <form action="http://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>
+
+
+      <hr>
+
+      <div class="pull-right">Next: <a href="/guides/1.0/architecture/overview">Architecture - Overview</a></div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami.html">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2017 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.autocomplete.min.js" type="text/javascript"></script>
+<script src="/javascripts/excerpt-search.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/search.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

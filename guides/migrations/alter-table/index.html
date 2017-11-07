@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Guides - Migrations Alter Tables</title>
+
+<script type="text/javascript" src="/javascripts/lunr.min.js"></script>
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+
+    <link href="/stylesheets/guides.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <form action="" class="navbar-form form-inline pull-left visible-lg-block" id="search-form">
+        <input type="search" class="form-control" id="search" placeholder="Search guides...">
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/guides/1.1">Guides</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <div class="container docs-content">
+      <div class="breadcrumbs">
+        <a href="/guides">Guides</a> / <a href="/guides/1.0">1.0</a>  / Migrations / Migrations Alter Tables
+      </div>
+
+      <select class="mobile-guides">
+          <optgroup label="Introduction">
+              <option value="/guides/1.0/getting-started" >Getting Started</option>
+          </optgroup>
+          <optgroup label="Architecture">
+              <option value="/guides/1.0/architecture/overview" >Overview</option>
+          </optgroup>
+          <optgroup label="Projects">
+              <option value="/guides/1.0/projects/code-reloading" >Code Reloading</option>
+              <option value="/guides/1.0/projects/rake" >Rake</option>
+              <option value="/guides/1.0/projects/logging" >Logging</option>
+              <option value="/guides/1.0/projects/initializers" >Initializers</option>
+              <option value="/guides/1.0/projects/security" >Security</option>
+          </optgroup>
+          <optgroup label="Routing">
+              <option value="/guides/1.0/routing/overview" >Overview</option>
+              <option value="/guides/1.0/routing/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/routing/restful-resources" >RESTful Resource(s)</option>
+              <option value="/guides/1.0/routing/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Actions">
+              <option value="/guides/1.0/actions/overview" >Overview</option>
+              <option value="/guides/1.0/actions/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/actions/parameters" >Parameters</option>
+              <option value="/guides/1.0/actions/request-and-response" >Request & Response</option>
+              <option value="/guides/1.0/actions/exposures" >Exposures</option>
+              <option value="/guides/1.0/actions/rack-integration" >Rack Integration</option>
+              <option value="/guides/1.0/actions/mime-types" >MIME Types</option>
+              <option value="/guides/1.0/actions/cookies" >Cookies</option>
+              <option value="/guides/1.0/actions/sessions" >Sessions</option>
+              <option value="/guides/1.0/actions/exception-handling" >Exception Handling</option>
+              <option value="/guides/1.0/actions/control-flow" >Control Flow</option>
+              <option value="/guides/1.0/actions/http-caching" >HTTP Caching</option>
+              <option value="/guides/1.0/actions/share-code" >Share Code</option>
+              <option value="/guides/1.0/actions/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Views">
+              <option value="/guides/1.0/views/overview" >Overview</option>
+              <option value="/guides/1.0/views/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/views/templates" >Templates</option>
+              <option value="/guides/1.0/views/mime-types" >MIME Types</option>
+              <option value="/guides/1.0/views/layouts" >Layouts</option>
+              <option value="/guides/1.0/views/custom-error-pages" >Custom Error Pages</option>
+              <option value="/guides/1.0/views/share-code" >Share Code</option>
+              <option value="/guides/1.0/views/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Models">
+              <option value="/guides/1.0/models/overview" >Overview</option>
+              <option value="/guides/1.0/models/database-configuration" >Database Configuration</option>
+              <option value="/guides/1.0/models/repositories" >Repositories</option>
+              <option value="/guides/1.0/models/entities" >Entities</option>
+              <option value="/guides/1.0/models/data-types" >Data Types</option>
+              <option value="/guides/1.0/models/sql-queries" >SQL Queries</option>
+              <option value="/guides/1.0/models/postgresql" >PostgreSQL</option>
+              <option value="/guides/1.0/models/associations" >Associations</option>
+              <option value="/guides/1.0/models/use-your-own-orm" >Use Your Own ORM</option>
+          </optgroup>
+          <optgroup label="Migrations">
+              <option value="/guides/1.0/migrations/overview" >Overview</option>
+              <option value="/guides/1.0/migrations/create-table" >Create Table</option>
+              <option value="/guides/1.0/migrations/alter-table" >Alter Table</option>
+          </optgroup>
+          <optgroup label="Validations">
+              <option value="/guides/1.0/validations/overview" >Overview</option>
+              <option value="/guides/1.0/validations/boolean-logic" >Boolean Logic</option>
+              <option value="/guides/1.0/validations/custom-predicates" >Custom Predicates</option>
+              <option value="/guides/1.0/validations/advanced-usage" >Advanced Usage</option>
+          </optgroup>
+          <optgroup label="Helpers">
+              <option value="/guides/1.0/helpers/overview" >Overview</option>
+              <option value="/guides/1.0/helpers/html5" >HTML5</option>
+              <option value="/guides/1.0/helpers/forms" >Forms</option>
+              <option value="/guides/1.0/helpers/routing" >Routing</option>
+              <option value="/guides/1.0/helpers/assets" >Assets</option>
+              <option value="/guides/1.0/helpers/links" >Links</option>
+              <option value="/guides/1.0/helpers/escape" >Markup Escape</option>
+              <option value="/guides/1.0/helpers/numbers" >Numbers</option>
+              <option value="/guides/1.0/helpers/custom-helpers" >Custom Helpers</option>
+          </optgroup>
+          <optgroup label="Mailers">
+              <option value="/guides/1.0/mailers/overview" >Overview</option>
+              <option value="/guides/1.0/mailers/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/mailers/templates" >Templates</option>
+              <option value="/guides/1.0/mailers/delivery" >Delivery</option>
+              <option value="/guides/1.0/mailers/share-code" >Share Code</option>
+              <option value="/guides/1.0/mailers/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Assets">
+              <option value="/guides/1.0/assets/overview" >Overview</option>
+              <option value="/guides/1.0/assets/preprocessors" >Preprocessors</option>
+              <option value="/guides/1.0/assets/compressors" >Compressors</option>
+              <option value="/guides/1.0/assets/content-delivery-network" >Content Delivery Network (CDN)</option>
+              <option value="/guides/1.0/assets/use-your-own-assets-management-tool" >Use Your Own Assets Management Tool</option>
+          </optgroup>
+          <optgroup label="Command Line">
+              <option value="/guides/1.0/command-line/applications" >Applications</option>
+              <option value="/guides/1.0/command-line/generators" >Generators</option>
+              <option value="/guides/1.0/command-line/destroy" >Destroy</option>
+              <option value="/guides/1.0/command-line/database" >Database</option>
+              <option value="/guides/1.0/command-line/assets" >Assets</option>
+              <option value="/guides/1.0/command-line/routes" >Routes</option>
+              <option value="/guides/1.0/command-line/version" >Version</option>
+          </optgroup>
+          <optgroup label="Upgrade Notes">
+              <option value="/guides/1.0/upgrade-notes/v060" >v0.6.0</option>
+              <option value="/guides/1.0/upgrade-notes/v070" >v0.7.0</option>
+              <option value="/guides/1.0/upgrade-notes/v080" >v0.8.0</option>
+              <option value="/guides/1.0/upgrade-notes/v090" >v0.9.0</option>
+              <option value="/guides/1.0/upgrade-notes/v100" >v1.0.0</option>
+          </optgroup>
+          <optgroup label="Guide Versions">
+              <option value="/guides/1.0/../1.1" >v1.1</option>
+              <option value="/guides/1.0" >v1.0</option>
+          </optgroup>
+      </select>
+      <ul id="markdown-toc">
+        <li></li>
+        <li><a href="https://github.com/hanami/hanami.github.io/edit/build/source/guides/migrations/alter-table.md" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a></li>
+
+          <li class="toc-group">
+            <span>Introduction</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/getting-started">Getting Started</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Architecture</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/architecture/overview">Overview</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Projects</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/projects/code-reloading">Code Reloading</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/rake">Rake</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/logging">Logging</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/initializers">Initializers</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/security">Security</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Routing</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/routing/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/restful-resources">RESTful Resource(s)</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Actions</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/actions/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/parameters">Parameters</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/request-and-response">Request & Response</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/exposures">Exposures</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/rack-integration">Rack Integration</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/cookies">Cookies</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/sessions">Sessions</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/exception-handling">Exception Handling</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/control-flow">Control Flow</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/http-caching">HTTP Caching</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Views</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/views/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/layouts">Layouts</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/custom-error-pages">Custom Error Pages</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Models</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/models/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/database-configuration">Database Configuration</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/repositories">Repositories</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/entities">Entities</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/data-types">Data Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/sql-queries">SQL Queries</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/postgresql">PostgreSQL</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/associations">Associations</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/use-your-own-orm">Use Your Own ORM</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Migrations</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/migrations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/migrations/create-table">Create Table</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/migrations/alter-table">Alter Table</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Validations</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/validations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/boolean-logic">Boolean Logic</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/custom-predicates">Custom Predicates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/advanced-usage">Advanced Usage</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Helpers</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/helpers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/html5">HTML5</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/forms">Forms</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/routing">Routing</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/links">Links</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/escape">Markup Escape</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/numbers">Numbers</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/custom-helpers">Custom Helpers</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Mailers</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/mailers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/delivery">Delivery</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Assets</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/assets/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/preprocessors">Preprocessors</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/compressors">Compressors</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/content-delivery-network">Content Delivery Network (CDN)</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/use-your-own-assets-management-tool">Use Your Own Assets Management Tool</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Command Line</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/command-line/applications">Applications</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/generators">Generators</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/destroy">Destroy</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/database">Database</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/routes">Routes</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/version">Version</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Upgrade Notes</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v060">v0.6.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v070">v0.7.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v080">v0.8.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v090">v0.9.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v100">v1.0.0</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Guide Versions</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/../1.1">v1.1</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0">v1.0</a>
+                </li>
+            </ul>
+          </li>
+      </ul>
+
+
+      
+      <h1 id="alter-tables" class="title"><a name="alter-tables" class="anchor" href="#alter-tables">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Alter Tables</h1>
+    
+<p>The following methods are available for table alterations:</p>
+
+<ul>
+<li><code>#add_column</code> (see <code>#column</code> for usage)</li>
+<li><code>#drop_column</code></li>
+<li><code>#rename_column</code> (the first argument is the <strong>old name</strong>, while the second is the <strong>new name</strong>)</li>
+<li><code>#add_index</code> (see <code>#index</code> for usage)</li>
+<li><code>#drop_index</code></li>
+<li><code>#add_primary_key</code> (see <code>#primary_key</code> for usage)</li>
+<li><code>#add_foreign_key</code> (see <code>#foreign_key</code> for usage)</li>
+<li><code>#add_constraint</code> (see <code>#constraint</code> for usage)</li>
+<li><code>#drop_constraint</code> (accepts the <strong>name</strong> of the constraint as argument)</li>
+<li><code>#add_unique_constraint</code></li>
+<li><code>#set_column_default</code> (accepts the <strong>name</strong> of the column and the <strong>default value</strong> as comma separated args)</li>
+<li><code>#set_column_type</code> (accepts the <strong>name</strong> of the column and the <strong>new type</strong> as comma separated args)</li>
+<li><code>#set_column_allow_null</code> (accepts the <strong>name</strong> of the column)</li>
+<li><code>#set_column_not_null</code> (accepts the <strong>name</strong> of the column)</li>
+</ul>
+
+<p>Those methods accept the <strong>name of the target table as first argument</strong>, then the other args.
+There is a convenient shortcut for this: <code>#alter_table</code>. It accepts the <strong>name of the table</strong> and a <strong>block</strong> that describes the alterations.</p>
+
+<p>The following syntaxes are <strong>equivalent</strong>.</p>
+<pre class="language-ruby ruby"><code><span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">add_column</span>         <span class="ss">:users</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span>
+    <span class="n">set_column_default</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:visits_counts</span><span class="p">,</span> <span class="ss">default: </span><span class="mi">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The code above can be DRY&#39;d with:</p>
+<pre class="language-ruby ruby"><code><span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">alter_table</span> <span class="ss">:users</span> <span class="k">do</span>
+      <span class="c1"># `users` table is implicit within this block, so it can be omitted.</span>
+      <span class="n">add_column</span> <span class="ss">:email</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span>  <span class="ss">null: </span><span class="kp">false</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span>
+      <span class="n">set_column_default</span> <span class="ss">:visits_counts</span><span class="p">,</span> <span class="ss">default: </span><span class="mi">0</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h2 id="rename-table" class="title"><a name="rename-table" class="anchor" href="#rename-table">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Rename Table</h2>
+    
+<p>Tables can be renamed via <code>#rename_table</code>. It accepts the <strong>old name</strong> and the <strong>new name</strong> as arguments.</p>
+<pre class="language-ruby ruby"><code><span class="n">rename_table</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:people</span>
+</code></pre>
+
+      <h2 id="drop-table" class="title"><a name="drop-table" class="anchor" href="#drop-table">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Drop Table</h2>
+    
+<p>Tables can be dropped via <code>#drop_table</code>. It accepts the <strong>name</strong> as argument.</p>
+<pre class="language-ruby ruby"><code><span class="n">drop_table</span> <span class="ss">:users</span>
+</code></pre>
+
+<p>Safe operation can be performed via <code>#drop_table?</code>. It drops the table only if it exists.</p>
+
+
+      <hr>
+
+      <div class="pull-left">Prev: <a href="/guides/1.0/migrations/create-table">Migrations - Create Table</a></div><div class="pull-right">Next: <a href="/guides/1.0/validations/overview">Validations - Overview</a></div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami.html">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2017 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.autocomplete.min.js" type="text/javascript"></script>
+<script src="/javascripts/excerpt-search.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/search.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

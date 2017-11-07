@@ -1,0 +1,1725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+   <title>Hanami</title>
+   <subtitle>Hanami web framework blog</subtitle>
+   <link href="http://hanamirb.org/atom.xml" rel="self"/>
+   <link href="http://hanamirb.org/blog"/>
+   <updated>2017-10-25T09:38:00Z</updated>
+   <id>http://hanamirb.org/blog</id>
+   <author>
+     <name>Hanami</name>
+     <email>admin@hanamirb.org</email>
+   </author>
+
+     <entry>
+       <title>Announcing Hanami v1.1.0</title>
+       <id>http://hanamirb.org/blog/2017/10/25/annoucing-hanami-110.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/10/25/annoucing-hanami-110.html"/>
+       <updated>2017-10-25T09:38:00Z</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         New associations (<code>belongs_to</code>, <code>has_one</code>, <code>has_many :through</code>), rewritten CLI with registrable commands for third-party gems, new extra behaviors for entity manual schema, selectively boot apps, logger filtering, bug fixes.
+
+       </summary>
+       <content type="html"><![CDATA[<p>Hello wonderful community!</p>
+
+<p>This autumn 🍂 has brought to you a new Hanami version🌸 and its cool 😎 new features.</p>
+
+<p>Today we&#39;re happy to announce <code>v1.1.0</code> release 🙌 .</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+<p>So what&#39;s new and exiciting in the Hanami world?</p>
+
+      <h2 id="new-associations" class="title"><a name="new-associations" class="anchor" href="#new-associations">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New associations</h2>
+    
+<p>We added new useful associations. 🎉
+Let&#39;s quickly see them in action.</p>
+
+      <h3 id="belongs-to" class="title"><a name="belongs-to" class="anchor" href="#belongs-to">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Belongs To</h3>
+    <pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">BookRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">belongs_to</span> <span class="ss">:author</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">find_with_author</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">aggregate</span><span class="p">(</span><span class="ss">:author</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">id: </span><span class="nb">id</span><span class="p">).</span><span class="nf">map_to</span><span class="p">(</span><span class="no">Book</span><span class="p">).</span><span class="nf">one</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><a href="/guides/1.1/associations/belongs-to">Belongs To guide</a></p>
+
+      <h3 id="has-one" class="title"><a name="has-one" class="anchor" href="#has-one">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Has One</h3>
+    <pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">UserRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">has_one</span> <span class="ss">:avatar</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">find_with_avatar</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">aggregate</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">id: </span><span class="nb">id</span><span class="p">).</span><span class="nf">map_to</span><span class="p">(</span><span class="no">User</span><span class="p">).</span><span class="nf">one</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create_with_avatar</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">).</span><span class="nf">create</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">remove_avatar</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">,</span> <span class="n">user</span><span class="p">).</span><span class="nf">delete</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">add_avatar</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">,</span> <span class="n">user</span><span class="p">).</span><span class="nf">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">update_avatar</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">,</span> <span class="n">user</span><span class="p">).</span><span class="nf">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">replace_avatar</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">,</span> <span class="n">user</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><a href="/guides/1.1/associations/has-one">Has One guide</a></p>
+
+      <h3 id="has-many-through" class="title"><a name="has-many-through" class="anchor" href="#has-many-through">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Has Many Through</h3>
+    <pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">AuthorRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">has_many</span> <span class="ss">:books</span>
+    <span class="n">has_many</span> <span class="ss">:reviews</span><span class="p">,</span> <span class="ss">through: :books</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">find_with_reviews</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">aggregate</span><span class="p">(</span><span class="ss">:reviews</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">authors__id: </span><span class="nb">id</span><span class="p">).</span><span class="nf">map_to</span><span class="p">(</span><span class="no">Author</span><span class="p">).</span><span class="nf">one</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">top_reviews_for</span><span class="p">(</span><span class="n">author</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:reviews</span><span class="p">,</span> <span class="n">author</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="s2">"usefulness_count &gt; 10"</span><span class="p">).</span><span class="nf">to_a</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><a href="/guides/1.1/associations/has-many-through">Has Many Through guide</a></p>
+
+      <h2 id="rewritten-cli" class="title"><a name="rewritten-cli" class="anchor" href="#rewritten-cli">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Rewritten CLI</h2>
+    
+<p>We have rewritten from scratch our CLI, by replacing <code>thor</code> with a new gem <code>hanami-cli</code>.</p>
+
+<p>Despite the name, <a href="https://github.com/hanami/cli"><code>hanami-cli</code></a> is <strong>not</strong> about Hanami commands (eg. <code>hanami server</code>), but instead it&#39;s a <strong>general purpose Command Line Interface (CLI) framework for Ruby</strong>.
+We worked with <a href="http://dry-rb.org">dry-rb</a> team to ship this new gem, which is be used by Hanami, and it will be used soon by dry-rb, <a href="http://rom-rb.org/">ROM</a> and <a href="http://trailblazer.to/">Trailblazer</a> to build their CLI too.</p>
+
+<p>Thanks to <code>hanami-cli</code> we built a new CLI architecture that allows third-party developers to integrate with Hanami CLI.
+Let&#39;s say we want to build a fictional gem <code>hanami-webpack</code>.</p>
+<pre class="language-ruby ruby"><code><span class="nb">require</span> <span class="s2">"hanami/cli/commands"</span>
+
+<span class="k">module</span> <span class="nn">Hanami</span>
+  <span class="k">module</span> <span class="nn">Webpack</span>
+    <span class="k">module</span> <span class="nn">CLI</span>
+      <span class="k">module</span> <span class="nn">Commands</span>
+        <span class="k">class</span> <span class="nc">Configuration</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">CLI</span><span class="o">::</span><span class="no">Commands</span><span class="o">::</span><span class="no">Command</span>
+          <span class="n">desc</span> <span class="s2">"Generate Webpack config"</span>
+
+          <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+            <span class="c1"># generate configuration</span>
+          <span class="k">end</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Hanami</span><span class="o">::</span><span class="no">CLI</span><span class="p">.</span><span class="nf">register</span> <span class="s2">"generate webpack"</span><span class="p">,</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Webpack</span><span class="o">::</span><span class="no">CLI</span><span class="o">::</span><span class="no">Commands</span><span class="o">::</span><span class="no">Configuration</span>
+</code></pre>
+
+<p>When a developer adds <code>hanami-webpack</code> to their <code>Gemfile</code>, then the command is available.</p>
+<pre class="language-ruby shell"><code><span class="gp">$ </span>bundle <span class="nb">exec </span>hanami generate
+Commands:
+  hanami generate action APP ACTION                <span class="c"># Generate an action for app</span>
+  hanami generate app APP                          <span class="c"># Generate an app</span>
+  hanami generate mailer MAILER                    <span class="c"># Generate a mailer</span>
+  hanami generate migration MIGRATION              <span class="c"># Generate a migration</span>
+  hanami generate model MODEL                      <span class="c"># Generate a model</span>
+  hanami generate secret <span class="o">[</span>APP]                     <span class="c"># Generate session secret</span>
+  hanami generate webpack                          <span class="c"># Generate Webpack config</span>
+</code></pre>
+
+      <h2 id="entity-custom-schema-modes" class="title"><a name="entity-custom-schema-modes" class="anchor" href="#entity-custom-schema-modes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Entity Custom Schema modes</h2>
+    
+<p>Entities by default infer their schema (set of attributes) from the corresponding database table.
+For instance, if <code>people</code> table has <code>id</code>, <code>name</code>, <code>created_at</code>, and <code>updated_at</code> columns, then <code>Person</code> will have the same attributes.</p>
+
+<p>It may happen that you&#39;re not happy with this inferring, and you want to customize the schema.
+We call it this feature <a href="/guides/1.1/entities/custom-schema">&quot;custom schema&quot;</a>.</p>
+
+<p>It was introduced with Hanami 1.0 and this is how it works:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Person</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="k">do</span>
+    <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>   <span class="no">Types</span><span class="o">::</span><span class="no">Int</span>
+    <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="no">Types</span><span class="o">::</span><span class="no">String</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span>
+<span class="o">=&gt;</span> <span class="c1">#&lt;Person:0x007ff859e34118 @attributes={}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff85acbcfc8 @attributes={:id=&gt;1}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="s2">"1"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff85a04d558 @attributes={:id=&gt;"1"}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff85ab20200 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">,</span> <span class="ss">foo: </span><span class="s2">"bar"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff859e44ea0 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">foo: </span><span class="s2">"bar"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff859e4d1e0 @attributes={}&gt;</span>
+</code></pre>
+
+<p>With Hanami 1.1, you can expand the behavior of your <em>manual schema</em>.
+Do you want a stricter policy for entity initialization? You got it!</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Person</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="ss">:strict</span> <span class="k">do</span>
+    <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>   <span class="no">Types</span><span class="o">::</span><span class="no">Strict</span><span class="o">::</span><span class="no">Int</span>
+    <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="no">Types</span><span class="o">::</span><span class="no">Strict</span><span class="o">::</span><span class="no">String</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span>
+<span class="c1"># =&gt; ArgumentError: :id is missing in Hash input</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># =&gt; ArgumentError: :name is missing in Hash input</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007f8476816c88 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">,</span> <span class="ss">foo: </span><span class="s2">"bar"</span><span class="p">)</span>
+<span class="c1"># =&gt; ArgumentError: unexpected keys [:foo] in Hash input</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">foo: </span><span class="s2">"bar"</span><span class="p">)</span>
+<span class="c1"># =&gt; ArgumentError: unexpected keys [:foo] in Hash input</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="s2">"1"</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">)</span>
+<span class="c1"># =&gt; TypeError: "1" (String) has invalid type for :id violates constraints (type?(Integer, "1") failed)</span>
+</code></pre>
+
+<p><a href="/guides/1.1/entities/custom-schema">Entities Custom Schema guide</a></p>
+
+      <h3 id="selectively-boot-apps" class="title"><a name="selectively-boot-apps" class="anchor" href="#selectively-boot-apps">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Selectively boot apps</h3>
+    
+<p>With Hanami you can build your project by following the <a href="/guides/1.1/architecture/overview/#monolith-first">Monolith-First</a> principle.
+You add more and more code to the project, but growing it organically, by using several Hanami apps.</p>
+
+<p>There are cases of real world products using a <strong>dozen of Hanami apps in the same project</strong> (eg <code>web</code> for the frontend, <code>admin</code> for the administration, etc..)
+They deploy the project on several servers, by booting only a subset of these apps.
+So the servers A, B, and C are for customers (<code>web</code> application), D is for administration (<code>admin</code> application), while E, and F are for API (<code>api</code> application)</p>
+
+<p>To serve this purpose we introduced <em>selective booting</em> feature.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># config/environment.rb</span>
+<span class="c1"># ...</span>
+<span class="no">Hanami</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="k">if</span> <span class="no">Hanami</span><span class="p">.</span><span class="nf">app?</span><span class="p">(</span><span class="ss">:api</span><span class="p">)</span>
+    <span class="nb">require_relative</span> <span class="s1">'../apps/api/application'</span>
+    <span class="n">mount</span> <span class="no">Api</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/api'</span>
+  <span class="k">end</span>
+
+  <span class="k">if</span> <span class="no">Hanami</span><span class="p">.</span><span class="nf">app?</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
+    <span class="nb">require_relative</span> <span class="s1">'../apps/admin/application'</span>
+    <span class="n">mount</span> <span class="no">Api</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/admin'</span>
+  <span class="k">end</span>
+
+  <span class="k">if</span> <span class="no">Hanami</span><span class="p">.</span><span class="nf">app?</span><span class="p">(</span><span class="ss">:web</span><span class="p">)</span>
+    <span class="nb">require_relative</span> <span class="s1">'../apps/web/application'</span>
+    <span class="n">mount</span> <span class="no">Api</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Then from the CLI, you use the <code>HANAMI_APPS</code> env var.</p>
+<pre class="language-ruby shell"><code><span class="gp">$ </span><span class="nv">HANAMI_APPS</span><span class="o">=</span>web,api bundle <span class="nb">exec </span>hanami server
+</code></pre>
+
+<p>With the command above we start only <code>web</code> and <code>api</code> applications.</p>
+
+      <h3 id="logger-filtering" class="title"><a name="logger-filtering" class="anchor" href="#logger-filtering">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Logger filtering</h3>
+    
+<p>With this release, we automatically log the payload from non-GET HTTP requests.
+When a user submits a form, all the fields and their values will appear in the log:</p>
+<pre class="language-ruby shell"><code><span class="o">[</span>bookshelf] <span class="o">[</span>INFO] <span class="o">[</span>2017-08-11 18:17:54 +0200] HTTP/1.1 POST 302 ::1 /signup 5 <span class="o">{</span><span class="s2">"signup"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"username"</span><span class="o">=</span>&gt;<span class="s2">"jodosha"</span>, <span class="s2">"password"</span><span class="o">=</span>&gt;<span class="s2">"secret"</span>, <span class="s2">"password_confirmation"</span><span class="o">=</span>&gt;<span class="s2">"secret"</span>, <span class="s2">"bio"</span><span class="o">=</span>&gt;<span class="s2">"lorem"</span><span class="o">}}</span> 0.00593
+</code></pre>
+
+<p>To avoid sensitive informations to be logged, you can filter them:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># config/environment.rb</span>
+<span class="c1"># ...</span>
+
+<span class="no">Hanami</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">environment</span> <span class="ss">:development</span> <span class="k">do</span>
+    <span class="n">logger</span> <span class="ss">level: :debug</span><span class="p">,</span> <span class="ss">filter: </span><span class="sx">%w[password password_confirmation]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now the output will be:</p>
+<pre class="language-ruby shell"><code><span class="o">[</span>bookshelf] <span class="o">[</span>INFO] <span class="o">[</span>2017-08-11 18:17:54 +0200] HTTP/1.1 POST 302 ::1 /signup 5 <span class="o">{</span><span class="s2">"signup"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"username"</span><span class="o">=</span>&gt;<span class="s2">"jodosha"</span>, <span class="s2">"password"</span><span class="o">=</span>&gt;<span class="s2">"[FILTERED]"</span>, <span class="s2">"password_confirmation"</span><span class="o">=</span>&gt;<span class="s2">"[FILTERED]"</span>, <span class="s2">"bio"</span><span class="o">=</span>&gt;<span class="s2">"lorem"</span><span class="o">}}</span> 0.00593
+</code></pre>
+
+<p>It also supports fine grained patterns to disambiguate params with the same name.
+For instance, we have a billing form with street number and credit card number, and we want only to filter the credit card:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># config/environment.rb</span>
+<span class="c1"># ...</span>
+
+<span class="no">Hanami</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">environment</span> <span class="ss">:development</span> <span class="k">do</span>
+    <span class="n">logger</span> <span class="ss">level: :debug</span><span class="p">,</span> <span class="ss">filter: </span><span class="sx">%w[credit_card.number]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby shell"><code><span class="o">[</span>bookshelf] <span class="o">[</span>INFO] <span class="o">[</span>2017-08-11 18:43:04 +0200] HTTP/1.1 PATCH 200 ::1 /billing 2 <span class="o">{</span><span class="s2">"billing"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"name"</span><span class="o">=</span>&gt;<span class="s2">"Luca"</span>, <span class="s2">"address"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"street"</span><span class="o">=</span>&gt;<span class="s2">"Centocelle"</span>, <span class="s2">"number"</span><span class="o">=</span>&gt;<span class="s2">"23"</span>, <span class="s2">"city"</span><span class="o">=</span>&gt;<span class="s2">"Rome"</span><span class="o">}</span>, <span class="s2">"credit_card"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"number"</span><span class="o">=</span>&gt;<span class="s2">"[FILTERED]"</span><span class="o">}}}</span> 0.009782
+</code></pre>
+
+<p>Note that <code>billing =&gt; address =&gt; number</code> wasn&#39;t filtered while <code>billing =&gt; credit_card =&gt; number</code> was filtered instead.</p>
+
+<p><a href="/guides/1.1/projects/logging#filter-sensitive-informations">Logger filtering guide</a></p>
+
+      <h3 id="minor-changes" class="title"><a name="minor-changes" class="anchor" href="#minor-changes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Minor Changes</h3>
+    
+<p>For the entire list of changes, please have a look at our <a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md">CHANGELOG</a> and <a href="https://github.com/hanami/hanami/blob/master/FEATURES.md">features list</a>.</p>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.1.0</code> - [<a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-model-1.1.0</code> - [<a href="https://github.com/hanami/model/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-assets-1.1.0</code> - [<a href="https://github.com/hanami/assets/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-cli-0.1.0</code> - [<a href="https://github.com/hanami/cli/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-mailer-1.1.0</code> - [<a href="https://github.com/hanami/mailer/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-helpers-1.1.0</code> - [<a href="https://github.com/hanami/helpers/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-view-1.1.0</code> - [<a href="https://github.com/hanami/view/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hamami-controller-1.1.0</code> - [<a href="https://github.com/hanami/controller/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-router-1.1.0</code> - [<a href="https://github.com/hanami/router/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-validations-1.1.0</code> - [<a href="https://github.com/hanami/validations/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+<li><code>hanami-utils-1.1.0</code> - [<a href="https://github.com/hanami/utils/blob/master/CHANGELOG.md">CHANGELOG</a>]</li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/bbonislawski">Bartosz Bonisławski</a></li>
+<li><a href="https://github.com/binarylogic">Ben Johnson</a></li>
+<li><a href="https://github.com/bkuhlmann">Brooke Kuhlmann</a></li>
+<li><a href="https://github.com/cveneziani">Cecile Veneziani</a></li>
+<li><a href="https://github.com/damireh">Daniel Amireh</a></li>
+<li><a href="https://github.com/ddymko">David Dymko</a></li>
+<li><a href="https://github.com/moofkit">Dmitriy Ivliev</a></li>
+<li><a href="https://github.com/dmitriy-strukov">Dmitriy Strukov</a></li>
+<li><a href="https://github.com/nerdinand">Ferdinand Niedermann</a></li>
+<li><a href="https://github.com/gizotti">Gabriel Gizotti</a></li>
+<li><a href="https://github.com/gernot">Gernot Poetsch</a></li>
+<li><a href="https://github.com/hlegius">Hélio Costa e Silva</a></li>
+<li><a href="https://github.com/ilyario">Ilya Ponomarev</a></li>
+<li><a href="https://github.com/janko-m">Janko Marohnić</a></li>
+<li><a href="https://github.com/jaymiejones86">Jaymie Jones</a></li>
+<li><a href="https://github.com/jphager2">John Hager</a></li>
+<li><a href="https://github.com/kaikuchn">Kai Kuchenbecker</a></li>
+<li><a href="https://github.com/Nikamura">Karolis Mažukna</a></li>
+<li><a href="https://github.com/katelovescode">Kate Donaldson</a></li>
+<li><a href="https://github.com/likeath">Kirill</a></li>
+<li><a href="https://github.com/koic">Koichi ITO</a></li>
+<li><a href="https://github.com/jodosha">Luca Guidi</a></li>
+<li><a href="https://github.com/beauby">Lucas Hosseini</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/masatooba">Masato Oba</a></li>
+<li><a href="https://github.com/olistik">Maurizio De Magnis</a></li>
+<li><a href="https://github.com/maac4422">Miguel Angel Arenas Correa</a></li>
+<li><a href="https://github.com/nplusp">Nick Pridorozhko</a></li>
+<li><a href="https://github.com/nfilzi">Nicolas Filzi</a></li>
+<li><a href="https://github.com/flash-gordon">Nikita Shilnikov</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/paulcsmith">Paul Smith</a></li>
+<li><a href="https://github.com/katafrakt">Paweł Świątkowski</a></li>
+<li><a href="https://github.com/philnash">Phil Nash</a></li>
+<li><a href="https://github.com/solnic">Piotr Solnica</a></li>
+<li><a href="https://github.com/radanskoric">Radan Skorić</a></li>
+<li><a href="https://github.com/rogeriozambon">Rogério Zambon</a></li>
+<li><a href="https://github.com/Shkrt">Ruslan Gafurov</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/artofhuman">Semyon Pupkov</a></li>
+<li><a href="https://github.com/Strech">Sergey Fedorov</a></li>
+<li><a href="https://github.com/linchus">Sergey Sein</a></li>
+<li><a href="https://github.com/m45t3r">Thiago Kenji Okada</a></li>
+<li><a href="https://github.com/timriley">Tim Riley</a></li>
+<li><a href="https://github.com/tudorpavel">Tudor Pavel</a></li>
+<li><a href="https://github.com/funk-yourself">Vladislav Yashin</a></li>
+<li><a href="https://github.com/johnnoone">Xavier Barbosa</a></li>
+<li><a href="https://github.com/yjukaku">Yousuf J</a></li>
+<li><a href="https://github.com/unhappychoice">Yuji Ueki</a></li>
+<li><a href="https://github.com/y-yagi">Yuji Yaginuma</a></li>
+<li><a href="https://github.com/akhramov">akhramov</a></li>
+<li><a href="https://github.com/autopp">autopp</a></li>
+<li><a href="https://github.com/chenge">chenge</a></li>
+<li><a href="https://github.com/derekpovah">derekpovah</a></li>
+<li><a href="https://github.com/graywolf">graywolf</a></li>
+<li><a href="https://github.com/jarosluv">jarosluv</a></li>
+<li><a href="https://github.com/malin-as">malin-as</a></li>
+<li><a href="https://github.com/mbajur">mbajur</a></li>
+<li><a href="https://github.com/milovidov">milovidov</a></li>
+<li><a href="https://github.com/morrme">morrme</a></li>
+<li><a href="https://github.com/ryu39">ryu39</a></li>
+<li><a href="https://github.com/sovetnik">sovetnik</a></li>
+<li><a href="https://github.com/yjukaku">yjukaku</a></li>
+</ul>
+
+      <h2 id="how-to-install" class="title"><a name="how-to-install" class="anchor" href="#how-to-install">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to install</h2>
+    
+<p>If you&#39;re new to Hanami, you can install via:</p>
+<pre class="language-ruby shell"><code>gem install hanami
+hanami new bookshelf
+</code></pre>
+
+<p>You may want to follow our great <a href="/guides/1.1/getting-started"><em>getting started guide</em></a>.</p>
+
+      <h2 id="how-to-upgrade" class="title"><a name="how-to-upgrade" class="anchor" href="#how-to-upgrade">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to upgrade</h2>
+    
+<p>Update <code>hanami</code> and <code>hanami-model</code> in your <code>Gemfile</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">gem</span> <span class="s2">"hanami"</span><span class="p">,</span>       <span class="s2">"~&gt; 1.1"</span>
+<span class="n">gem</span> <span class="s2">"hanami-model"</span><span class="p">,</span> <span class="s2">"~&gt; 1.1"</span>
+</code></pre>
+
+<p>Then run <code>bundle update hanami hanami-model</code>.</p>
+
+<p>For a detailed explanation, check the <a href="/guides/1.1/upgrade-notes/v110">upgrade guide</a>.</p>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s next?</h2>
+    
+<p>We&#39;ll start tomorrow the next release cycle for <strong>Hanami 1.2</strong>, the <strong>first beta</strong> will be released on <strong>February 2018</strong>.</p>
+
+<p>Happy coding! 🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v1.1.0.rc1</title>
+       <id>http://hanamirb.org/blog/2017/10/16/announcing-hanami-110-rc1.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/10/16/announcing-hanami-110-rc1.html"/>
+       <updated>2017-10-16T12:30:00Z</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Association aliases, entities as types in custom schema, <code>--relation</code> option for model generator, RSpec metadata, bug fixes.
+
+       </summary>
+       <content type="html"><![CDATA[<p>Hello wonderful community!</p>
+
+<p>Today we&#39;re happy to announce <code>v1.1.0.rc1</code> release 🙌 , with the stable release (<code>v1.1.0</code>) scheduled <strong>later this month</strong>.</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+<p>Here&#39;s the <strong>last</strong> minor additions. This version is the <strong>feature freeze</strong> for <code>v1.1.0</code>.</p>
+
+      <h3 id="association-aliases" class="title"><a name="association-aliases" class="anchor" href="#association-aliases">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Association aliases</h3>
+    
+<p>We added support for association aliases via <code>:as</code> option.
+In this way an association can be referenced by the alias, not the conventional name.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">UserRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">has_many</span> <span class="ss">:stories</span>
+    <span class="n">has_many</span> <span class="ss">:comments</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">CommentRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">belongs_to</span> <span class="ss">:story</span>
+    <span class="n">belongs_to</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">as: :author</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">StoryRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">belongs_to</span> <span class="ss">:user</span>
+    <span class="n">has_many</span> <span class="ss">:comments</span>
+    <span class="n">has_many</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">through: :comments</span><span class="p">,</span> <span class="ss">as: :authors</span>
+  <span class="k">end</span>
+
+
+  <span class="k">def</span> <span class="nf">feed</span>
+    <span class="n">aggregate</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">comments: :author</span><span class="p">).</span><span class="nf">reverse</span><span class="p">(</span><span class="ss">:created_at</span><span class="p">).</span><span class="nf">map_to</span><span class="p">(</span><span class="no">Story</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>In the example above, <code>StoryRepository</code> can reference the author of a comment as <code>author</code>, instead of <code>user</code>.</p>
+
+      <h3 id="entities-as-types-in-custom-schema" class="title"><a name="entities-as-types-in-custom-schema" class="anchor" href="#entities-as-types-in-custom-schema">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Entities as types in custom schema</h3>
+    
+<p>Entities by default have a set of attributes (schema) which is the representation of a relation.
+For instance <code>User</code> will have all the columns of <code>users</code> database table.</p>
+
+<p>You can bypass this feature to build customize the attributes via <a href="http://hanamirb.org/guides/1.0/models/entities/#custom-schema"><em>custom schema</em></a>.</p>
+
+<p>Now you can use entities to be an attribute in a <em>custom schema</em> via <code>Types::Entity()</code>.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Account</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="k">do</span>
+    <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>    <span class="no">Types</span><span class="o">::</span><span class="no">Int</span>
+    <span class="n">attribute</span> <span class="ss">:owner</span><span class="p">,</span> <span class="no">Types</span><span class="o">::</span><span class="no">Entity</span><span class="p">(</span><span class="no">User</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h3 id="new-option-for-model-generator" class="title"><a name="new-option-for-model-generator" class="anchor" href="#new-option-for-model-generator">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New option for model generator</h3>
+    
+<p>We added a new option for the model generator: <code>--relation</code>.</p>
+<pre class="language-ruby plaintext"><code>% bundle exec hanami generate model user --relation=accounts
+      create  lib/bookshelf/entities/user.rb
+      create  lib/bookshelf/repositories/user_repository.rb
+      create  db/migrations/20171016124904_create_accounts.rb
+      create  spec/bookshelf/entities/user_spec.rb
+      create  spec/bookshelf/repositories/user_repository_spec.rb
+</code></pre>
+
+<p>It will generate a customized version of the database migration, and repository.</p>
+<pre class="language-ruby ruby"><code><span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">change</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:accounts</span> <span class="k">do</span>
+      <span class="n">primary_key</span> <span class="ss">:id</span>
+
+      <span class="n">column</span> <span class="ss">:created_at</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+      <span class="n">column</span> <span class="ss">:updated_at</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">UserRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="nb">self</span><span class="p">.</span><span class="nf">relation</span> <span class="o">=</span> <span class="ss">:accounts</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h2 id="rspec-metadata" class="title"><a name="rspec-metadata" class="anchor" href="#rspec-metadata">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>RSpec metadata</h2>
+    
+<p>If you&#39;re using RSpec, the code generator will create specs with the <code>:type</code> metadata:</p>
+<pre class="language-ruby ruby"><code><span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="no">Web</span><span class="o">::</span><span class="no">Controllers</span><span class="o">::</span><span class="no">Home</span><span class="o">::</span><span class="no">Index</span><span class="p">,</span> <span class="ss">type: :action</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Available types are:</p>
+
+<ul>
+<li><code>:action</code></li>
+<li><code>:view</code></li>
+<li><code>:mailer</code></li>
+<li><code>:entity</code></li>
+<li><code>:repository</code></li>
+</ul>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.1.0.rc1</code></li>
+<li><code>hanami-model-1.1.0.rc1</code></li>
+<li><code>hanami-assets-1.1.0.rc1</code></li>
+<li><code>hanami-cli-0.1.0.rc1</code></li>
+<li><code>hanami-mailer-1.1.0.rc1</code></li>
+<li><code>hanami-helpers-1.1.0.rc1</code></li>
+<li><code>hanami-view-1.1.0.rc1</code></li>
+<li><code>hamami-controller-1.1.0.rc1</code></li>
+<li><code>hanami-router-1.1.0.rc1</code></li>
+<li><code>hanami-validations-1.1.0.rc1</code></li>
+<li><code>hanami-utils-1.1.0.rc1</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/jodosha">Luca Guidi</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/Strech">Sergey Fedorov</a></li>
+<li><a href="https://github.com/unhappychoice">Yuji Ueki</a></li>
+<li><a href="https://github.com/likeath">Kirill</a></li>
+</ul>
+
+      <h2 id="how-to-try-it" class="title"><a name="how-to-try-it" class="anchor" href="#how-to-try-it">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to try it</h2>
+    
+<p>If you want to try with a new project:</p>
+<pre class="language-ruby shell"><code>gem install hanami --pre
+hanami new bookshelf
+</code></pre>
+
+<p>If you want to upgrade your existing project, edit the <code>Gemfile</code>:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># ...</span>
+<span class="n">gem</span> <span class="s2">"hanami"</span><span class="p">,</span>       <span class="s2">"1.1.0.rc1"</span>
+<span class="n">gem</span> <span class="s2">"hanami-model"</span><span class="p">,</span> <span class="s2">"1.1.0.rc1"</span>
+</code></pre>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s next?</h2>
+    
+<p>We&#39;ll release the stable release <strong>later this month</strong>, in the meantime, please try this <em>release candidate</em> and report issues.
+Happy coding! 🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v1.1.0.beta3</title>
+       <id>http://hanamirb.org/blog/2017/10/04/announcing-hanami-110-beta3.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/10/04/announcing-hanami-110-beta3.html"/>
+       <updated>2017-10-04T12:12:00Z</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Fixes <code>hanami new</code> bug introduced by <code>v1.1.0.beta2</code>
+
+       </summary>
+       <content type="html"><![CDATA[<p>Hello wonderful community!</p>
+
+<p>On yesterday I released <a href="/blog/2017/10/03/announcing-hanami-110-beta2.html"><code>v1.1.0.beta2</code></a>, but it was <a href="https://github.com/hanami/hanami/issues/838">broken</a> 😭.</p>
+
+<p>My sincere apologize, folks. 🙏</p>
+
+<p>I quickly fixed the problem and released a new version: <code>v1.1.0.beta3</code>.</p>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.1.0.beta3</code></li>
+<li><code>hanami-model-1.1.0.beta3</code></li>
+<li><code>hanami-assets-1.1.0.beta3</code></li>
+<li><code>hanami-cli-0.1.0.beta3</code></li>
+<li><code>hanami-mailer-1.1.0.beta3</code></li>
+<li><code>hanami-helpers-1.1.0.beta3</code></li>
+<li><code>hanami-view-1.1.0.beta3</code></li>
+<li><code>hamami-controller-1.1.0.beta3</code></li>
+<li><code>hanami-router-1.1.0.beta3</code></li>
+<li><code>hanami-validations-1.1.0.beta3</code></li>
+<li><code>hanami-utils-1.1.0.beta3</code></li>
+</ul>
+
+      <h2 id="how-to-try-it" class="title"><a name="how-to-try-it" class="anchor" href="#how-to-try-it">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to try it</h2>
+    
+<p>If you want to try with a new project:</p>
+<pre class="language-ruby shell"><code>gem install hanami --pre
+hanami new bookshelf
+</code></pre>
+
+<p>If you want to upgrade your existing project, edit the <code>Gemfile</code>:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># ...</span>
+<span class="n">gem</span> <span class="s2">"hanami"</span><span class="p">,</span>       <span class="s2">"1.1.0.beta3"</span>
+<span class="n">gem</span> <span class="s2">"hanami-model"</span><span class="p">,</span> <span class="s2">"1.1.0.beta3"</span>
+</code></pre>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s next?</h2>
+    
+<p>We&#39;ll release the stable release <strong>later this month</strong>, in the meantime, please try this beta and report issues.
+Happy coding! 🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v1.1.0.beta2</title>
+       <id>http://hanamirb.org/blog/2017/10/03/announcing-hanami-110-beta2.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/10/03/announcing-hanami-110-beta2.html"/>
+       <updated>2017-10-03T17:53:00Z</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Initial support for Hanami plugins, new database CLI command <code>hanami db rollback</code>, add error messages to params, bug fixes.
+
+       </summary>
+       <content type="html"><![CDATA[<p>Hello wonderful community!</p>
+
+<p>Today we&#39;re happy to announce <code>v1.1.0.beta2</code> release 🙌 , with the stable release (<code>v1.1.0</code>) scheduled <strong>later this month</strong>.</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+<p>So what&#39;s new and exiciting in the Hanami world?</p>
+
+      <h3 id="hanami-plugins" class="title"><a name="hanami-plugins" class="anchor" href="#hanami-plugins">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Hanami plugins</h3>
+    
+<p>We&#39;re starting to support Hanami plugins.
+Hanami plugins are gems that can integrate with Hanami projects.</p>
+
+<p>The first thing plugins are be able to do is to provide custom CLI commands.
+A developer that needs to use a plugin, can add it to the <code>:plugins</code> group to the <code>Gemfile</code>.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># Gemfile</span>
+<span class="c1"># ...</span>
+
+<span class="n">group</span> <span class="ss">:plugins</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s2">"hanami-reloader"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Here&#39;s a first working example of how to implement it: <a href="https://github.com/jodosha/hanami-reloader"><code>hanami-reloader</code></a>.
+It&#39;s an experimental reloader gem for Hanami, based on <a href="http://guardgem.org/"><code>guard</code></a>.</p>
+
+      <h3 id="database-cli" class="title"><a name="database-cli" class="anchor" href="#database-cli">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Database CLI</h3>
+    
+<p>We added <code>hanami db rollback</code> to rollback database migrations.</p>
+
+<p>By default it rolls back the latest migration, but you can specify a number of <em>steps</em> to rollback:</p>
+<pre class="language-ruby shell"><code>bundle <span class="nb">exec </span>hanami db rollback   <span class="c"># rolls back the last migration</span>
+bundle <span class="nb">exec </span>hanami db rollback 5 <span class="c"># rolls back the last five migrations</span>
+</code></pre>
+
+      <h3 id="params-extra-error-messages" class="title"><a name="params-extra-error-messages" class="anchor" href="#params-extra-error-messages">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Params extra error messages</h3>
+    
+<p>It&#39;s now possible to add error messages to Action&#39;s params via <code>params.errors.add</code>:</p>
+<pre class="language-ruby ruby"><code><span class="k">module</span> <span class="nn">Web::Controllers::User</span>
+  <span class="k">class</span> <span class="nc">Create</span>
+    <span class="kp">include</span> <span class="no">Web</span><span class="o">::</span><span class="no">Action</span>
+
+    <span class="n">params</span> <span class="k">do</span>
+      <span class="n">required</span><span class="p">(</span><span class="ss">:user</span><span class="p">).</span><span class="nf">schema</span> <span class="k">do</span>
+        <span class="n">required</span><span class="p">(</span><span class="ss">:name</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+        <span class="n">required</span><span class="p">(</span><span class="ss">:email</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="k">return</span> <span class="k">unless</span> <span class="n">params</span><span class="p">.</span><span class="nf">valid?</span>
+      <span class="no">UserRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:user</span><span class="p">])</span>
+    <span class="k">rescue</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="o">::</span><span class="no">UniqueConstraintViolationError</span>
+      <span class="n">params</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="ss">:email</span><span class="p">,</span> <span class="s2">"is not unique"</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.1.0.beta2</code></li>
+<li><code>hanami-model-1.1.0.beta2</code></li>
+<li><code>hanami-assets-1.1.0.beta2</code></li>
+<li><code>hanami-cli-0.1.0.beta2</code></li>
+<li><code>hanami-mailer-1.1.0.beta2</code></li>
+<li><code>hanami-helpers-1.1.0.beta2</code></li>
+<li><code>hanami-view-1.1.0.beta2</code></li>
+<li><code>hamami-controller-1.1.0.beta2</code></li>
+<li><code>hanami-router-1.1.0.beta2</code></li>
+<li><code>hanami-validations-1.1.0.beta2</code></li>
+<li><code>hanami-utils-1.1.0.beta2</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/gizotti">Gabriel Gizotti</a></li>
+<li><a href="https://github.com/jodosha">Luca Guidi</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+</ul>
+
+      <h2 id="how-to-try-it" class="title"><a name="how-to-try-it" class="anchor" href="#how-to-try-it">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to try it</h2>
+    
+<p>If you want to try with a new project:</p>
+<pre class="language-ruby shell"><code>gem install hanami --pre
+hanami new bookshelf
+</code></pre>
+
+<p>If you want to upgrade your existing project, edit the <code>Gemfile</code>:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># ...</span>
+<span class="n">gem</span> <span class="s2">"hanami"</span><span class="p">,</span>       <span class="s2">"1.1.0.beta2"</span>
+<span class="n">gem</span> <span class="s2">"hanami-model"</span><span class="p">,</span> <span class="s2">"1.1.0.beta2"</span>
+</code></pre>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s next?</h2>
+    
+<p>We&#39;ll release the stable release <strong>later this month</strong>, in the meantime, please try this beta and report issues.
+Happy coding! 🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Documentation Challenge</title>
+       <id>http://hanamirb.org/blog/2017/10/02/documentation-challenge.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/10/02/documentation-challenge.html"/>
+       <updated>2017-10-02T07:41:00Z</updated>
+       <author>
+         <name>Marion Schleifer</name>
+       </author>
+       <summary>
+         Help us improving our documentation and earn yourself Hanami stickers and other gadgets 🌸
+
+       </summary>
+       <content type="html"><![CDATA[<p>🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸</p>
+
+<p>Hello wonderful community!</p>
+
+<p>We would like to improve our documentation in October and we need your help. 🙌</p>
+
+<p>Make a contribution to the <a href="http://hanamirb.org/guides/">Hanami guides</a> in the following repository: <a href="https://github.com/hanami/hanami.github.io">https://github.com/hanami/hanami.github.io</a>.</p>
+
+<p>Every contribution will be awarded with new (and improved) Hanami stickers. Very eager contributors will receive larger gadgets, such as t-shirts.</p>
+
+<p>Do you need some inspiration? Maybe have a look at <a href="https://github.com/hanami/hanami.github.io/issues">these ideas</a>, or write about repositories, and validations.</p>
+
+<p>We appreciate every contribution ❤️.</p>
+
+<p>🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v1.1.0.beta1</title>
+       <id>http://hanamirb.org/blog/2017/08/11/announcing-hanami-110beta1.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/08/11/announcing-hanami-110beta1.html"/>
+       <updated>2017-08-11T19:41:00Z</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         New associations (<code>belongs_to</code>, <code>has_one</code>, <code>has_many :through</code>), rewritten CLI with registrable commands for third-party gems, new extra behaviors for entity manual schema, selectively boot apps, logger filtering, bug fixes.
+
+       </summary>
+       <content type="html"><![CDATA[<p>Hello wonderful community!</p>
+
+<p>This hot summer ☀ has some fresh news brought to you by Hanami 🌸 and its cool 😎 new features. 🍉</p>
+
+<p>Today we&#39;re happy to announce <code>v1.1.0.beta1</code> release 🙌 , with the stable release (<code>v1.1.0</code>) scheduled for <strong>October 2017</strong>.</p>
+
+<p>Between now and then, we&#39;ll release other <em>beta</em> and <em>release candidate</em> versions.</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+<p>So what&#39;s new and exiciting in the Hanami world?</p>
+
+      <h3 id="new-repository-associations" class="title"><a name="new-repository-associations" class="anchor" href="#new-repository-associations">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New repository associations</h3>
+    
+<p>We added new useful associations. 🎉
+Let&#39;s quickly see them in action.</p>
+
+      <h4 id="many-to-one-code-belongs_to-code-" class="title"><a name="many-to-one-code-belongs_to-code-" class="anchor" href="#many-to-one-code-belongs_to-code-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Many-to-One (<code>belongs_to</code>)</h4>
+    <pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">BookRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">belongs_to</span> <span class="ss">:author</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">find_with_author</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">aggregate</span><span class="p">(</span><span class="ss">:author</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">id: </span><span class="nb">id</span><span class="p">).</span><span class="nf">map_to</span><span class="p">(</span><span class="no">Book</span><span class="p">).</span><span class="nf">one</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h4 id="one-to-one-code-has_one-code-" class="title"><a name="one-to-one-code-has_one-code-" class="anchor" href="#one-to-one-code-has_one-code-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>One-to-one (<code>has_one</code>)</h4>
+    <pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">UserRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">has_one</span> <span class="ss">:avatar</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">find_with_avatar</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">aggregate</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">id: </span><span class="nb">id</span><span class="p">).</span><span class="nf">map_to</span><span class="p">(</span><span class="no">User</span><span class="p">).</span><span class="nf">one</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create_with_avatar</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">).</span><span class="nf">create</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">remove_avatar</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">,</span> <span class="n">user</span><span class="p">).</span><span class="nf">delete</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">add_avatar</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">,</span> <span class="n">user</span><span class="p">).</span><span class="nf">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">update_avatar</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">,</span> <span class="n">user</span><span class="p">).</span><span class="nf">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">replace_avatar</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:avatar</span><span class="p">,</span> <span class="n">user</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h4 id="many-to-many-code-has_many-through-code-" class="title"><a name="many-to-many-code-has_many-through-code-" class="anchor" href="#many-to-many-code-has_many-through-code-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Many-to-many (<code>has_many :through</code>)</h4>
+    <pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">AuthorRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="n">associations</span> <span class="k">do</span>
+    <span class="n">has_many</span> <span class="ss">:books</span>
+    <span class="n">has_many</span> <span class="ss">:reviews</span><span class="p">,</span> <span class="ss">through: :books</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">find_with_reviews</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">aggregate</span><span class="p">(</span><span class="ss">:reviews</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">authors__id: </span><span class="nb">id</span><span class="p">).</span><span class="nf">map_to</span><span class="p">(</span><span class="no">Author</span><span class="p">).</span><span class="nf">one</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">top_reviews_for</span><span class="p">(</span><span class="n">author</span><span class="p">)</span>
+    <span class="n">assoc</span><span class="p">(</span><span class="ss">:reviews</span><span class="p">,</span> <span class="n">author</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="s2">"usefulness_count &gt; 10"</span><span class="p">).</span><span class="nf">to_a</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h3 id="rewritten-cli" class="title"><a name="rewritten-cli" class="anchor" href="#rewritten-cli">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Rewritten CLI</h3>
+    
+<p>We have rewritten from scratch our CLI, by replacing <code>thor</code> with a new gem <code>hanami-cli</code>.</p>
+
+<p>Despite the name, <a href="https://github.com/hanami/cli"><code>hanami-cli</code></a> is <strong>not</strong> about Hanami commands (eg. <code>hanami server</code>), but instead it&#39;s a <strong>general purpose Command Line Interface (CLI) framework for Ruby</strong>.
+We worked with <a href="http://dry-rb.org">dry-rb</a> team to ship this new gem, which is be used by Hanami, and it will be used soon by dry-rb, <a href="http://rom-rb.org/">ROM</a> and <a href="http://trailblazer.to/">Trailblazer</a> to build their CLI too.</p>
+
+<p>Thanks to <code>hanami-cli</code> we built a new CLI architecture that allows third-party developers to integrate with Hanami CLI.
+Let&#39;s say we want to build a fictional gem <code>hanami-webpack</code>.</p>
+<pre class="language-ruby ruby"><code><span class="nb">require</span> <span class="s2">"hanami/cli/commands"</span>
+
+<span class="k">module</span> <span class="nn">Hanami</span>
+  <span class="k">module</span> <span class="nn">Webpack</span>
+    <span class="k">module</span> <span class="nn">CLI</span>
+      <span class="k">module</span> <span class="nn">Commands</span>
+        <span class="k">class</span> <span class="nc">Configuration</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">CLI</span><span class="o">::</span><span class="no">Commands</span><span class="o">::</span><span class="no">Command</span>
+          <span class="n">desc</span> <span class="s2">"Generate Webpack configuration"</span>
+
+          <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+            <span class="c1"># generate configuration</span>
+          <span class="k">end</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Hanami</span><span class="o">::</span><span class="no">CLI</span><span class="p">.</span><span class="nf">register</span> <span class="s2">"generate webpack"</span><span class="p">,</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Webpack</span><span class="o">::</span><span class="no">CLI</span><span class="o">::</span><span class="no">Commands</span><span class="o">::</span><span class="no">Configuration</span>
+</code></pre>
+
+<p>When a developer adds <code>hanami-webpack</code> to their <code>Gemfile</code>, then the command is available.</p>
+<pre class="language-ruby shell"><code><span class="gp">$ </span>bundle <span class="nb">exec </span>hanami generate
+Commands:
+  hanami generate action APP ACTION                <span class="c"># Generate an action for app</span>
+  hanami generate app APP                          <span class="c"># Generate an app</span>
+  hanami generate mailer MAILER                    <span class="c"># Generate a mailer</span>
+  hanami generate migration MIGRATION              <span class="c"># Generate a migration</span>
+  hanami generate model MODEL                      <span class="c"># Generate a model</span>
+  hanami generate secret <span class="o">[</span>APP]                     <span class="c"># Generate session secret</span>
+  hanami generate webpack                          <span class="c"># Generate Webpack configuration</span>
+</code></pre>
+
+      <h3 id="extra-behaviors-for-entity-manual-schema" class="title"><a name="extra-behaviors-for-entity-manual-schema" class="anchor" href="#extra-behaviors-for-entity-manual-schema">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Extra behaviors for entity manual schema</h3>
+    
+<p>Entities by default infer their schema (set of attributes) from the corresponding database table.
+For instance, if <code>people</code> table has <code>id</code>, <code>name</code>, <code>created_at</code>, and <code>updated_at</code> columns, then <code>Person</code> will have the same attributes.</p>
+
+<p>It may happen that you&#39;re not happy with this inferring, and you want to customize the schema.
+We call it this feature <a href="/guides/1.0/models/entities/#manual-schema">&quot;manual schema&quot;</a>.</p>
+
+<p>It was introduced with Hanami 1.0 and this is how it works:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Person</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="k">do</span>
+    <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>   <span class="no">Types</span><span class="o">::</span><span class="no">Int</span>
+    <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="no">Types</span><span class="o">::</span><span class="no">String</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span>
+<span class="o">=&gt;</span> <span class="c1">#&lt;Person:0x007ff859e34118 @attributes={}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff85acbcfc8 @attributes={:id=&gt;1}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="s2">"1"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff85a04d558 @attributes={:id=&gt;"1"}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff85ab20200 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">,</span> <span class="ss">foo: </span><span class="s2">"bar"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff859e44ea0 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">foo: </span><span class="s2">"bar"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007ff859e4d1e0 @attributes={}&gt;</span>
+</code></pre>
+
+<p>With Hanami 1.1, you can expand the behavior of your <em>manual schema</em>.
+Do you want a stricter policy for entity initialization? You got it!</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">Person</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+  <span class="n">attributes</span> <span class="ss">:strict</span> <span class="k">do</span>
+    <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>   <span class="no">Types</span><span class="o">::</span><span class="no">Strict</span><span class="o">::</span><span class="no">Int</span>
+    <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="no">Types</span><span class="o">::</span><span class="no">Strict</span><span class="o">::</span><span class="no">String</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span>
+<span class="c1"># =&gt; ArgumentError: :id is missing in Hash input</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># =&gt; ArgumentError: :name is missing in Hash input</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">)</span>
+<span class="c1"># =&gt; #&lt;Person:0x007f8476816c88 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">,</span> <span class="ss">foo: </span><span class="s2">"bar"</span><span class="p">)</span>
+<span class="c1"># =&gt; ArgumentError: unexpected keys [:foo] in Hash input</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">foo: </span><span class="s2">"bar"</span><span class="p">)</span>
+<span class="c1"># =&gt; ArgumentError: unexpected keys [:foo] in Hash input</span>
+
+<span class="no">Person</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">id: </span><span class="s2">"1"</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"Luca"</span><span class="p">)</span>
+<span class="c1"># =&gt; TypeError: "1" (String) has invalid type for :id violates constraints (type?(Integer, "1") failed)</span>
+</code></pre>
+
+      <h3 id="selectively-boot-apps" class="title"><a name="selectively-boot-apps" class="anchor" href="#selectively-boot-apps">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Selectively boot apps</h3>
+    
+<p>With Hanami you can build your project by following the <a href="/guides/1.0/architecture/overview/#monolith-first">Monolith-First</a> principle.
+You add more and more code to the project, but growing it organically, by using several Hanami apps.</p>
+
+<p>There are cases of real world products using a <strong>dozen of Hanami apps in the same project</strong> (eg <code>web</code> for the frontend, <code>admin</code> for the administration, etc..)
+They deploy the project on several servers, by booting only a subset of these apps.
+So the servers A, B, and C are for customers (<code>web</code> application), D is for administration (<code>admin</code> application), while E, and F are for API (<code>api</code> application)</p>
+
+<p>To serve this purpose we introduced <em>selective booting</em> feature.</p>
+<pre class="language-ruby ruby"><code><span class="c1"># config/environment.rb</span>
+<span class="c1"># ...</span>
+<span class="no">Hanami</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="k">if</span> <span class="no">Hanami</span><span class="p">.</span><span class="nf">app?</span><span class="p">(</span><span class="ss">:api</span><span class="p">)</span>
+    <span class="nb">require_relative</span> <span class="s1">'../apps/api/application'</span>
+    <span class="n">mount</span> <span class="no">Api</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/api'</span>
+  <span class="k">end</span>
+
+  <span class="k">if</span> <span class="no">Hanami</span><span class="p">.</span><span class="nf">app?</span><span class="p">(</span><span class="ss">:admin</span><span class="p">)</span>
+    <span class="nb">require_relative</span> <span class="s1">'../apps/admin/application'</span>
+    <span class="n">mount</span> <span class="no">Api</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/admin'</span>
+  <span class="k">end</span>
+
+  <span class="k">if</span> <span class="no">Hanami</span><span class="p">.</span><span class="nf">app?</span><span class="p">(</span><span class="ss">:web</span><span class="p">)</span>
+    <span class="nb">require_relative</span> <span class="s1">'../apps/web/application'</span>
+    <span class="n">mount</span> <span class="no">Api</span><span class="o">::</span><span class="no">Application</span><span class="p">,</span> <span class="ss">at: </span><span class="s1">'/'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Then from the CLI, you use the <code>HANAMI_APPS</code> env var.</p>
+<pre class="language-ruby shell"><code><span class="gp">$ </span><span class="nv">HANAMI_APPS</span><span class="o">=</span>web,api bundle <span class="nb">exec </span>hanami server
+</code></pre>
+
+<p>With the command above we start only <code>web</code> and <code>api</code> applications.</p>
+
+      <h3 id="logger-filtering" class="title"><a name="logger-filtering" class="anchor" href="#logger-filtering">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Logger filtering</h3>
+    
+<p>With this release, we automatically log the payload from non-GET HTTP requests.
+When a user submits a form, all the fields and their values will appear in the log:</p>
+<pre class="language-ruby shell"><code><span class="o">[</span>bookshelf] <span class="o">[</span>INFO] <span class="o">[</span>2017-08-11 18:17:54 +0200] HTTP/1.1 POST 302 ::1 /signup 5 <span class="o">{</span><span class="s2">"signup"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"username"</span><span class="o">=</span>&gt;<span class="s2">"jodosha"</span>, <span class="s2">"password"</span><span class="o">=</span>&gt;<span class="s2">"secret"</span>, <span class="s2">"password_confirmation"</span><span class="o">=</span>&gt;<span class="s2">"secret"</span>, <span class="s2">"bio"</span><span class="o">=</span>&gt;<span class="s2">"lorem"</span><span class="o">}}</span> 0.00593
+</code></pre>
+
+<p>To avoid sensitive informations to be logged, you can filter them:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># config/environment.rb</span>
+<span class="c1"># ...</span>
+
+<span class="no">Hanami</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">environment</span> <span class="ss">:development</span> <span class="k">do</span>
+    <span class="n">logger</span> <span class="ss">level: :debug</span><span class="p">,</span> <span class="ss">filter: </span><span class="sx">%w[password password_confirmation]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now the output will be:</p>
+<pre class="language-ruby shell"><code><span class="o">[</span>bookshelf] <span class="o">[</span>INFO] <span class="o">[</span>2017-08-11 18:17:54 +0200] HTTP/1.1 POST 302 ::1 /signup 5 <span class="o">{</span><span class="s2">"signup"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"username"</span><span class="o">=</span>&gt;<span class="s2">"jodosha"</span>, <span class="s2">"password"</span><span class="o">=</span>&gt;<span class="s2">"[FILTERED]"</span>, <span class="s2">"password_confirmation"</span><span class="o">=</span>&gt;<span class="s2">"[FILTERED]"</span>, <span class="s2">"bio"</span><span class="o">=</span>&gt;<span class="s2">"lorem"</span><span class="o">}}</span> 0.00593
+</code></pre>
+
+<p>It also supports fine grained patterns to disambiguate params with the same name.
+For instance, we have a billing form with street number and credit card number, and we want only to filter the credit card:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># config/environment.rb</span>
+<span class="c1"># ...</span>
+
+<span class="no">Hanami</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="n">environment</span> <span class="ss">:development</span> <span class="k">do</span>
+    <span class="n">logger</span> <span class="ss">level: :debug</span><span class="p">,</span> <span class="ss">filter: </span><span class="sx">%w[credit_card.number]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby shell"><code><span class="o">[</span>bookshelf] <span class="o">[</span>INFO] <span class="o">[</span>2017-08-11 18:43:04 +0200] HTTP/1.1 PATCH 200 ::1 /billing 2 <span class="o">{</span><span class="s2">"billing"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"name"</span><span class="o">=</span>&gt;<span class="s2">"Luca"</span>, <span class="s2">"address"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"street"</span><span class="o">=</span>&gt;<span class="s2">"Centocelle"</span>, <span class="s2">"number"</span><span class="o">=</span>&gt;<span class="s2">"23"</span>, <span class="s2">"city"</span><span class="o">=</span>&gt;<span class="s2">"Rome"</span><span class="o">}</span>, <span class="s2">"credit_card"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"number"</span><span class="o">=</span>&gt;<span class="s2">"[FILTERED]"</span><span class="o">}}}</span> 0.009782
+</code></pre>
+
+<p>Note that <code>billing =&gt; address =&gt; number</code> wasn&#39;t filtered while <code>billing =&gt; credit_card =&gt; number</code> was filtered instead.</p>
+
+      <h3 id="minor-changes" class="title"><a name="minor-changes" class="anchor" href="#minor-changes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Minor Changes</h3>
+    
+<p>For the entire list of changes, please have a look at our <a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md">CHANGELOG</a> and <a href="https://github.com/hanami/hanami/blob/master/FEATURES.md">features list</a>.</p>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.1.0.beta1</code></li>
+<li><code>hanami-model-1.1.0.beta1</code></li>
+<li><code>hanami-assets-1.1.0.beta1</code></li>
+<li><code>hanami-cli-0.1.0.beta1</code></li>
+<li><code>hanami-mailer-1.1.0.beta1</code></li>
+<li><code>hanami-helpers-1.1.0.beta1</code></li>
+<li><code>hanami-view-1.1.0.beta1</code></li>
+<li><code>hamami-controller-1.1.0.beta1</code></li>
+<li><code>hanami-router-1.1.0.beta1</code></li>
+<li><code>hanami-validations-1.1.0.beta1</code></li>
+<li><code>hanami-utils-1.1.0.beta1</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/bbonislawski">Bartosz Bonisławski</a></li>
+<li><a href="https://github.com/binarylogic">Ben Johnson</a></li>
+<li><a href="https://github.com/cveneziani">Cecile Veneziani</a></li>
+<li><a href="https://github.com/damireh">Daniel Amireh</a></li>
+<li><a href="https://github.com/ddymko">David Dymko</a></li>
+<li><a href="https://github.com/moofkit">Dmitriy Ivliev</a></li>
+<li><a href="https://github.com/nerdinand">Ferdinand Niedermann</a></li>
+<li><a href="https://github.com/gizotti">Gabriel Gizotti</a></li>
+<li><a href="https://github.com/gernot">Gernot Poetsch</a></li>
+<li><a href="https://github.com/hlegius">Hélio Costa e Silva</a></li>
+<li><a href="https://github.com/jaymiejones86">Jaymie Jones</a></li>
+<li><a href="https://github.com/jphager2">John Hager</a></li>
+<li><a href="https://github.com/kaikuchn">Kai Kuchenbecker</a></li>
+<li><a href="https://github.com/Nikamura">Karolis Mažukna</a></li>
+<li><a href="https://github.com/koic">Koichi ITO</a></li>
+<li><a href="https://github.com/jodosha">Luca Guidi</a></li>
+<li><a href="https://github.com/beauby">Lucas Hosseini</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/olistik">Maurizio De Magnis</a></li>
+<li><a href="https://github.com/nplusp">Nick Pridorozhko</a></li>
+<li><a href="https://github.com/flash-gordon">Nikita Shilnikov</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/katafrakt">Paweł Świątkowski</a></li>
+<li><a href="https://github.com/radanskoric">Radan Skorić</a></li>
+<li><a href="https://github.com/rogeriozambon">Rogério Zambon</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/artofhuman">Semyon Pupkov</a></li>
+<li><a href="https://github.com/linchus">Sergey Sein</a></li>
+<li><a href="https://github.com/timriley">Tim Riley</a></li>
+<li><a href="https://github.com/tudorpavel">Tudor Pavel</a></li>
+<li><a href="https://github.com/akhramov">akhramov</a></li>
+<li><a href="https://github.com/autopp">autopp</a></li>
+<li><a href="https://github.com/chenge">chenge</a></li>
+<li><a href="https://github.com/derekpovah">derekpovah</a></li>
+<li><a href="https://github.com/jarosluv">jarosluv</a></li>
+<li><a href="https://github.com/mbajur">mbajur</a></li>
+<li><a href="https://github.com/milovidov">milovidov</a></li>
+<li><a href="https://github.com/morrme">morrme</a></li>
+<li><a href="https://github.com/ryu39">ryu39</a></li>
+<li><a href="https://github.com/sovetnik">sovetnik</a></li>
+<li><a href="https://github.com/yjukaku">yjukaku</a></li>
+</ul>
+
+      <h2 id="how-to-try-it" class="title"><a name="how-to-try-it" class="anchor" href="#how-to-try-it">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to try it</h2>
+    <pre class="language-ruby shell"><code>gem install hanami --pre
+hanami new bookshelf
+</code></pre>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s next?</h2>
+    
+<p>We&#39;ll release the stable release on <strong>October 2017</strong>, in the meantime, please try this beta and report issues.
+Happy coding! 🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v1.0.0</title>
+       <id>http://hanamirb.org/blog/2017/04/06/announcing-hanami-100.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/04/06/announcing-hanami-100.html"/>
+       <updated>2017-04-06T07:46:00Z</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Hanami v1.0.0 🎉
+
+       </summary>
+       <content type="html"><![CDATA[
+      <h2 id="one-point-oooh-" class="title"><a name="one-point-oooh-" class="anchor" href="#one-point-oooh-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>One-Point-OOOh! 😱</h2>
+    
+<p>Hanami is a full-stack, lightweight, yet powerful web framework for Ruby.</p>
+
+<p>Back in the summer of 2012, as a frustrated web developer, I started an experiment to <em>rethink</em> Ruby on Rails and to build a modern web framework for Ruby.
+The goal was to keep all what I consider the good parts of Rails and to add extra components to ease long term maintenance and testability.</p>
+
+<p>The experiment was promising, and I eventually started to open source Hanami at the beginning of 2014.</p>
+
+<p>Since then, it&#39;s been amazing journey. I have learned a lot about Ruby, Open Source, and people.
+The community aspect of this experience is key to me. Software is made by people for people.
+It&#39;s political. Hanami is a consequence of my vision: I, <strong>we</strong>, want to include people, keep them motivated to work on Open Source, and have fun together.</p>
+
+<p>This goes beyond Hanami. Alongside with other projects like <a href="http://rom-rb.org/">ROM</a>, <a href="http://dry-rb.org/">dry-rb</a>, and <a href="http://trailblazer.to/">Trailblazer</a> we&#39;re influencing how modern web applications are written with Ruby.</p>
+
+<p><strong>After 1392 days, 6205 commits, made by 295 people, we&#39;re proud to announce Hanami 1.0.0! 🌸</strong></p>
+
+<p>A huge thank you goes to <a href="http://contributors.hanamirb.org/">all of the people who contributed</a> in all these years. 💚💙💛❤️</p>
+
+      <h2 id="core-team" class="title"><a name="core-team" class="anchor" href="#core-team">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Core Team</h2>
+    
+<p>Open Source doesn&#39;t mean just <em>&quot;open code&quot;</em>. Above all, it means an open decision process.
+Today marks a change in the governance of Hanami: we&#39;ll now have a diverse team to make decisions about the future of the project, together.</p>
+
+<p>I&#39;m excited to announce an expansion of the <a href="/team">core team</a>, by adding marvellous new people I&#39;ve met during these years:</p>
+
+<div class="container-fluid">
+  <div class="row my-4">
+    <div class="col-sm-6">
+      <ul class="featured-list featured-list-bordered">
+        <li>
+          <div class="featured-list-icon">
+            <img class="team-avatar" src="https://avatars2.githubusercontent.com/u/1147484?v=3&s=460">
+          </div>
+
+          <h3><a href="https://twitter.com/anton_davydov">Anton Davydov</a></h3>
+          <p>Saint Petersburg, Russia</p>
+        </li>
+
+        <li>
+          <div class="featured-list-icon">
+            <img class="team-avatar" src="https://avatars2.githubusercontent.com/u/248372?v=3&s=460">
+          </div>
+
+          <h3><a href="https://twitter.com/TiteiKo">Marion Duprey</a></h3>
+          <p>Paris, France</p>
+        </li>
+
+        <li>
+          <div class="featured-list-icon">
+            <img class="team-avatar" src="https://avatars0.githubusercontent.com/u/3356996?v=3&s=460">
+          </div>
+
+          <h3><a href="https://twitter.com/oanasipos">Oana Sipos</a></h3>
+          <p>Cluj-Napoca, Romania</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-6">
+      <ul class="featured-list featured-list-bordered">
+        <li>
+          <div class="featured-list-icon">
+            <img class="team-avatar" src="https://avatars2.githubusercontent.com/u/632942?v=3&s=460">
+          </div>
+
+          <h3><a href="https://twitter.com/seancllns">Sean Collins</a></h3>
+          <p>Boulder, United States</p>
+        </li>
+
+        <li>
+          <div class="featured-list-icon">
+            <img class="team-avatar" src="https://avatars2.githubusercontent.com/u/10281?v=3&s=460">
+          </div>
+
+          <h3><a href="https://twitter.com/mereghost">Marcello Rocha</a></h3>
+          <p>Sao Paulo, Brazil</p>
+        </li>
+
+        <li>
+          <div class="featured-list-icon">
+            <img class="team-avatar" src="https://avatars2.githubusercontent.com/u/5722022?v=3&s=460">
+          </div>
+
+          <h3><a href="https://twitter.com/rubydwarf">Marion Schleifer</a></h3>
+          <p>Zurich, Switzerland</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<p><br>
+Along with <a href="https://twitter.com/joshka20">Alfonso Uceda</a> (already a member), we&#39;ll work on the future of Hanami.</p>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.0.0</code></li>
+<li><code>hanami-model-1.0.0</code></li>
+<li><code>hanami-utils-1.0.0</code></li>
+<li><code>hanami-validations-1.0.0</code></li>
+<li><code>hanami-router-1.0.0</code></li>
+<li><code>hanami-controller-1.0.0</code></li>
+<li><code>hanami-view-1.0.0</code></li>
+<li><code>hanami-helpers-1.0.0</code></li>
+<li><code>hanami-mailer-1.0.0</code></li>
+<li><code>hanami-assets-1.0.0</code></li>
+</ul>
+
+      <h2 id="how-to-get-started" class="title"><a name="how-to-get-started" class="anchor" href="#how-to-get-started">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How To Get Started</h2>
+    
+<p>If you&#39;re new to Hanami, we prepared a <a href="/guides/getting-started">guide</a> to build and deploy your very first project.</p>
+
+      <h2 id="how-to-upgrade" class="title"><a name="how-to-upgrade" class="anchor" href="#how-to-upgrade">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How To Upgrade</h2>
+    
+<p>Edit your <code>Gemfile</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">gem</span> <span class="s1">'hanami'</span><span class="p">,</span>       <span class="s1">'~&gt; 1.0'</span>
+<span class="n">gem</span> <span class="s1">'hanami-model'</span><span class="p">,</span> <span class="s1">'~&gt; 1.0'</span>
+</code></pre>
+
+<p>Then run <code>bundle update hanami hanami-model</code>.</p>
+
+<p>If you&#39;re upgrading from <code>v0.9.x</code>, please check the <a href="/guides/upgrade-notes/v100">upgrade guide</a> for <code>v1.0.0</code>.</p>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s Next?</h2>
+    
+<p>We&#39;re already shaping the future of the project and what goes in the next version (<code>v1.1.0</code>).
+If you care about Hanami and want to share your ideas, please join <a href="https://discourse.hanamirb.org/t/hanami-2-0-ideas/306">our conversation</a>.</p>
+
+<p><strong>But for today, thank you all for this amazing journey.</strong></p>
+
+<p>🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v1.0.0.rc1</title>
+       <id>http://hanamirb.org/blog/2017/03/31/announcing-hanami-100rc1.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/03/31/announcing-hanami-100rc1.html"/>
+       <updated>2017-03-31T08:21:00Z</updated>
+       <author>
+         <name>Luca Guidi</name>
+       </author>
+       <summary>
+         Small fixes and enhancements leading up to the stable v1.0.0 version
+
+       </summary>
+       <content type="html"><![CDATA[
+      <h2 id="minor-changes" class="title"><a name="minor-changes" class="anchor" href="#minor-changes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Minor Changes</h2>
+    
+<p><code>v1.0.0.rc1</code> is a patch release for few bug fixes and small changes:</p>
+
+<ul>
+<li>Let <code>Hanami::Mailer.deliver</code> to bubble up <code>ArgumentError</code> exceptions</li>
+<li>Allow <code>logger</code> setting in <code>config/environment.rb</code> to accept arbitrary arguments to make <code>Hanami::Logger</code> to be compatible with Ruby&#39;s <code>Logger</code>. (eg. <code>logger &#39;daily&#39;, level: :info</code>)</li>
+<li>Ensure code reloading don&#39;t misconfigure mailer settings (regression from <code>v1.0.0.beta3</code>)</li>
+<li>Ensure database disconnection to happen in the same thread of <code>Hanami.boot</code></li>
+<li>Ensure <code>mailer</code> block in <code>config/environment.rb</code> to be evaluated multiple times, according to the current Hanami environment</li>
+<li>Ensure a Hanami project to require only once the code under <code>lib/</code></li>
+</ul>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.0.0.rc1</code></li>
+<li><code>hanami-model-1.0.0.rc1</code></li>
+<li><code>hanami-utils-1.0.0.rc1</code></li>
+<li><code>hanami-validations-1.0.0.rc1</code></li>
+<li><code>hanami-router-1.0.0.rc1</code></li>
+<li><code>hanami-controller-1.0.0.rc1</code></li>
+<li><code>hanami-view-1.0.0.rc1</code></li>
+<li><code>hanami-helpers-1.0.0.rc1</code></li>
+<li><code>hanami-mailer-1.0.0.rc1</code></li>
+<li><code>hanami-assets-1.0.0.rc1</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+</ul>
+
+      <h2 id="how-to-update-your-project" class="title"><a name="how-to-update-your-project" class="anchor" href="#how-to-update-your-project">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How To Update Your Project</h2>
+    
+<p>Edit your <code>Gemfile</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">gem</span> <span class="s1">'hanami'</span><span class="p">,</span> <span class="s1">'1.0.0.rc1'</span>
+<span class="n">gem</span> <span class="s1">'hanami-model'</span><span class="p">,</span> <span class="s1">'1.0.0.rc1'</span>
+</code></pre>
+
+<p>Then run <code>bundle update hanami hanami-model</code>.</p>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s Next?</h2>
+    
+<p>The final stable release (<code>v1.0.0</code>) will happen at the beginning of April 2017, which coincides with the <a href="http://www.japan-guide.com/sakura/">Hanami season in Japan</a>. 🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v1.0.0.beta3</title>
+       <id>http://hanamirb.org/blog/2017/03/17/announcing-hanami-100beta3.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/03/17/announcing-hanami-100beta3.html"/>
+       <updated>2017-03-17T13:37:00Z</updated>
+       <author>
+         <name>Marion Schleifer</name>
+       </author>
+       <summary>
+         Small fixes and enhancements leading up to the stable v1.0.0 version
+
+       </summary>
+       <content type="html"><![CDATA[
+      <h2 id="minor-changes" class="title"><a name="minor-changes" class="anchor" href="#minor-changes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Minor Changes</h2>
+    
+<p><code>v1.0.0.beta3</code> is a patch release for few bug fixes and small changes:</p>
+
+<ul>
+<li>Action&#39;s <code>flash</code> is now public API</li>
+<li>Added form helpers: <code>time_field</code>, <code>month_field</code>, <code>week_field</code>, <code>range_field</code>, <code>search_field</code>, <code>url_field</code>, <code>tel_field</code>, and <code>image_button</code></li>
+<li>Added HTML5 helpers for <code>&lt;dialog&gt;</code>, <code>&lt;hgroup&gt;</code>, <code>&lt;rtc&gt;</code>, <code>&lt;slot&gt;</code>, and <code>&lt;var&gt;</code> HTML5 tags</li>
+<li>Use <code>$stdout</code> instead of <code>STDOUT</code> as default stream for <code>Hanami::Logger</code></li>
+<li>Disconnect from stale connections when rebooting an application in production</li>
+<li>Don&#39;t mount <code>Hanami::CommonLogger</code> middleware if logging is disabled for the project</li>
+<li>Remove <code>Hanami::Utils::Attributes</code> as no longer used</li>
+<li>Remove deprecated <code>Hanami::Utils::Json.load</code> and <code>.dump</code>, use <code>.parse</code> and <code>.generate</code> instead</li>
+<li>Remove deprecated <code>Hanami::Interactor::Result#failing?</code>, use <code>#failure?</code> instead</li>
+<li>Remove deprecated <code>Hanami::View::Rendering::LayoutScope#content</code>, use <code>#local</code> instead</li>
+<li>Remove deprecated <code>Hanami::Application#default_format</code>, use <code>#default_request_format</code> instead</li>
+<li>Safely boot the application if mailers aren&#39;t configured</li>
+<li>Ensure code reloading don&#39;t misconfigure mailer settings</li>
+</ul>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.0.0-beta3</code></li>
+<li><code>hanami-model-1.0.0.beta3</code></li>
+<li><code>hanami-utils-1.0.0.beta3</code></li>
+<li><code>hanami-validations-1.0.0.beta2</code></li>
+<li><code>hanami-router-1.0.0.beta3</code></li>
+<li><code>hanami-controller-1.0.0.beta3</code></li>
+<li><code>hanami-view-1.0.0.beta2</code></li>
+<li><code>hanami-helpers-1.0.0.beta2</code></li>
+<li><code>hanami-mailer-1.0.0.beta2</code></li>
+<li><code>hanami-assets-1.0.0.beta2</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/moofkit">Dmitriy Ivliev</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/artofhuman">Semyon Pupkov</a></li>
+<li><a href="https://github.com/sandelius">Tobias Sandelius</a></li>
+</ul>
+
+      <h2 id="how-to-update-your-project" class="title"><a name="how-to-update-your-project" class="anchor" href="#how-to-update-your-project">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How To Update Your Project</h2>
+    
+<p>Edit your <code>Gemfile</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">gem</span> <span class="s1">'hanami'</span><span class="p">,</span> <span class="s1">'1.0.0.beta3'</span>
+<span class="n">gem</span> <span class="s1">'hanami-model'</span><span class="p">,</span> <span class="s1">'1.0.0.beta3'</span>
+</code></pre>
+
+<p>Then run <code>bundle update hanami hanami-model</code>.</p>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s Next?</h2>
+    
+<p>The final stable release (<code>v1.0.0</code>) will happen between the end of March and the beginning of April 2017, which coincides with the <a href="http://www.japan-guide.com/sakura/">Hanami season in Japan</a>. 🌸</p>
+]]></content>
+     </entry>
+     <entry>
+       <title>Announcing Hanami v1.0.0.beta2</title>
+       <id>http://hanamirb.org/blog/2017/03/02/announcing-hanami-100beta2.html</id>
+       <link rel="alternate" href="http://hanamirb.org/blog/2017/03/02/announcing-hanami-100beta2.html"/>
+       <updated>2017-03-02T13:02:00Z</updated>
+       <author>
+         <name>Luca Guidi & Oana Sipos</name>
+       </author>
+       <summary>
+         Small fixes preparing the stable 1.0.0 version
+
+       </summary>
+       <content type="html"><![CDATA[
+      <h2 id="minor-changes" class="title"><a name="minor-changes" class="anchor" href="#minor-changes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Minor Changes</h2>
+    
+<p><code>v1.0.0.beta2</code> is a patch release for few bug fixes:</p>
+
+<ul>
+<li>Fixed migrations MySQL detection of username and password</li>
+<li>Fixed migrations creation/drop of a MySQL database with a dash in the name</li>
+<li>Ensure <code>db console</code> to work when Postgres connection URL is defined with <code>&quot;postgresql://&quot;</code> scheme</li>
+<li>Allow to define Postgres connection URL as <code>&quot;postgresql:///mydb?host=localhost&amp;port=6433&amp;user=postgres&amp;password=testpasswd&quot;</code></li>
+<li>Add <code>Action#unsafe_send_file</code> to send files outside of the public directory of a project</li>
+<li>Ensure HTTP Cache to not crash when <code>HTTP_IF_MODIFIED_SINCE</code> and <code>HTTP_IF_NONE_MATCH</code> have blank values</li>
+<li>Ensure to return 404 when <code>Action#send_file</code> cannot find a file with a globbed route</li>
+<li>Flash messages survive after a redirect</li>
+<li>Don&#39;t mutate Rack env when sending files</li>
+<li>Deep symbolize params from parsed body</li>
+<li><code>Hanami::Router#recognize</code> must return a non-routeable object when the endpoint cannot be resolved</li>
+<li>Made <code>Utils::Blank</code> private API</li>
+</ul>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.0.0.beta2</code></li>
+<li><code>hanami-model-1.0.0.beta2</code></li>
+<li><code>hamami-controller-1.0.0.beta2</code></li>
+<li><code>hanami-router-1.0.0.beta2</code></li>
+<li><code>hanami-utils-1.0.0.beta2</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/tercenya">Craig M. Wellington</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/artofhuman">Semyon Pupkov</a></li>
+<li><a href="https://github.com/valikos">Valentyn Ostakh</a></li>
+</ul>
+
+      <h2 id="how-to-update-your-project" class="title"><a name="how-to-update-your-project" class="anchor" href="#how-to-update-your-project">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How To Update Your Project</h2>
+    
+<p>Edit your <code>Gemfile</code>:</p>
+<pre class="language-ruby ruby"><code><span class="n">gem</span> <span class="s1">'hanami'</span><span class="p">,</span> <span class="s1">'1.0.0.beta2'</span>
+<span class="n">gem</span> <span class="s1">'hanami-model'</span><span class="p">,</span> <span class="s1">'1.0.0.beta2'</span>
+</code></pre>
+
+<p>Then run <code>bundle update hanami hanami-model</code>.</p>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s Next?</h2>
+    
+<p><a href="/blog/2017/02/14/announcing-hanami-100beta1.html">Since <code>v1.0.0.beta1</code></a>, <strong>Hanami API&#39;s are stable and won&#39;t be changed until 2.0</strong>.</p>
+
+<p>We&#39;ll keep to release small <em>beta</em>/<em>rc</em> versions to integrate fixes for reported bugs.</p>
+
+<p>The final stable release (<code>v1.0.0</code>) will happen between the end of March and the beginning of April 2017, which coincides with the <a href="http://www.japan-guide.com/sakura/">Hanami season in Japan</a>. 🌸</p>
+]]></content>
+     </entry>
+</feed>

@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Guides - Advanced Usage</title>
+
+<script type="text/javascript" src="/javascripts/lunr.min.js"></script>
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+
+    <link href="/stylesheets/guides.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <form action="" class="navbar-form form-inline pull-left visible-lg-block" id="search-form">
+        <input type="search" class="form-control" id="search" placeholder="Search guides...">
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/guides/1.1">Guides</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <div class="container docs-content">
+      <div class="breadcrumbs">
+        <a href="/guides">Guides</a> / <a href="/guides/1.0">1.0</a>  / Validations / Advanced Usage
+      </div>
+
+      <select class="mobile-guides">
+          <optgroup label="Introduction">
+              <option value="/guides/1.0/getting-started" >Getting Started</option>
+          </optgroup>
+          <optgroup label="Architecture">
+              <option value="/guides/1.0/architecture/overview" >Overview</option>
+          </optgroup>
+          <optgroup label="Projects">
+              <option value="/guides/1.0/projects/code-reloading" >Code Reloading</option>
+              <option value="/guides/1.0/projects/rake" >Rake</option>
+              <option value="/guides/1.0/projects/logging" >Logging</option>
+              <option value="/guides/1.0/projects/initializers" >Initializers</option>
+              <option value="/guides/1.0/projects/security" >Security</option>
+          </optgroup>
+          <optgroup label="Routing">
+              <option value="/guides/1.0/routing/overview" >Overview</option>
+              <option value="/guides/1.0/routing/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/routing/restful-resources" >RESTful Resource(s)</option>
+              <option value="/guides/1.0/routing/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Actions">
+              <option value="/guides/1.0/actions/overview" >Overview</option>
+              <option value="/guides/1.0/actions/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/actions/parameters" >Parameters</option>
+              <option value="/guides/1.0/actions/request-and-response" >Request & Response</option>
+              <option value="/guides/1.0/actions/exposures" >Exposures</option>
+              <option value="/guides/1.0/actions/rack-integration" >Rack Integration</option>
+              <option value="/guides/1.0/actions/mime-types" >MIME Types</option>
+              <option value="/guides/1.0/actions/cookies" >Cookies</option>
+              <option value="/guides/1.0/actions/sessions" >Sessions</option>
+              <option value="/guides/1.0/actions/exception-handling" >Exception Handling</option>
+              <option value="/guides/1.0/actions/control-flow" >Control Flow</option>
+              <option value="/guides/1.0/actions/http-caching" >HTTP Caching</option>
+              <option value="/guides/1.0/actions/share-code" >Share Code</option>
+              <option value="/guides/1.0/actions/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Views">
+              <option value="/guides/1.0/views/overview" >Overview</option>
+              <option value="/guides/1.0/views/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/views/templates" >Templates</option>
+              <option value="/guides/1.0/views/mime-types" >MIME Types</option>
+              <option value="/guides/1.0/views/layouts" >Layouts</option>
+              <option value="/guides/1.0/views/custom-error-pages" >Custom Error Pages</option>
+              <option value="/guides/1.0/views/share-code" >Share Code</option>
+              <option value="/guides/1.0/views/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Models">
+              <option value="/guides/1.0/models/overview" >Overview</option>
+              <option value="/guides/1.0/models/database-configuration" >Database Configuration</option>
+              <option value="/guides/1.0/models/repositories" >Repositories</option>
+              <option value="/guides/1.0/models/entities" >Entities</option>
+              <option value="/guides/1.0/models/data-types" >Data Types</option>
+              <option value="/guides/1.0/models/sql-queries" >SQL Queries</option>
+              <option value="/guides/1.0/models/postgresql" >PostgreSQL</option>
+              <option value="/guides/1.0/models/associations" >Associations</option>
+              <option value="/guides/1.0/models/use-your-own-orm" >Use Your Own ORM</option>
+          </optgroup>
+          <optgroup label="Migrations">
+              <option value="/guides/1.0/migrations/overview" >Overview</option>
+              <option value="/guides/1.0/migrations/create-table" >Create Table</option>
+              <option value="/guides/1.0/migrations/alter-table" >Alter Table</option>
+          </optgroup>
+          <optgroup label="Validations">
+              <option value="/guides/1.0/validations/overview" >Overview</option>
+              <option value="/guides/1.0/validations/boolean-logic" >Boolean Logic</option>
+              <option value="/guides/1.0/validations/custom-predicates" >Custom Predicates</option>
+              <option value="/guides/1.0/validations/advanced-usage" >Advanced Usage</option>
+          </optgroup>
+          <optgroup label="Helpers">
+              <option value="/guides/1.0/helpers/overview" >Overview</option>
+              <option value="/guides/1.0/helpers/html5" >HTML5</option>
+              <option value="/guides/1.0/helpers/forms" >Forms</option>
+              <option value="/guides/1.0/helpers/routing" >Routing</option>
+              <option value="/guides/1.0/helpers/assets" >Assets</option>
+              <option value="/guides/1.0/helpers/links" >Links</option>
+              <option value="/guides/1.0/helpers/escape" >Markup Escape</option>
+              <option value="/guides/1.0/helpers/numbers" >Numbers</option>
+              <option value="/guides/1.0/helpers/custom-helpers" >Custom Helpers</option>
+          </optgroup>
+          <optgroup label="Mailers">
+              <option value="/guides/1.0/mailers/overview" >Overview</option>
+              <option value="/guides/1.0/mailers/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/mailers/templates" >Templates</option>
+              <option value="/guides/1.0/mailers/delivery" >Delivery</option>
+              <option value="/guides/1.0/mailers/share-code" >Share Code</option>
+              <option value="/guides/1.0/mailers/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Assets">
+              <option value="/guides/1.0/assets/overview" >Overview</option>
+              <option value="/guides/1.0/assets/preprocessors" >Preprocessors</option>
+              <option value="/guides/1.0/assets/compressors" >Compressors</option>
+              <option value="/guides/1.0/assets/content-delivery-network" >Content Delivery Network (CDN)</option>
+              <option value="/guides/1.0/assets/use-your-own-assets-management-tool" >Use Your Own Assets Management Tool</option>
+          </optgroup>
+          <optgroup label="Command Line">
+              <option value="/guides/1.0/command-line/applications" >Applications</option>
+              <option value="/guides/1.0/command-line/generators" >Generators</option>
+              <option value="/guides/1.0/command-line/destroy" >Destroy</option>
+              <option value="/guides/1.0/command-line/database" >Database</option>
+              <option value="/guides/1.0/command-line/assets" >Assets</option>
+              <option value="/guides/1.0/command-line/routes" >Routes</option>
+              <option value="/guides/1.0/command-line/version" >Version</option>
+          </optgroup>
+          <optgroup label="Upgrade Notes">
+              <option value="/guides/1.0/upgrade-notes/v060" >v0.6.0</option>
+              <option value="/guides/1.0/upgrade-notes/v070" >v0.7.0</option>
+              <option value="/guides/1.0/upgrade-notes/v080" >v0.8.0</option>
+              <option value="/guides/1.0/upgrade-notes/v090" >v0.9.0</option>
+              <option value="/guides/1.0/upgrade-notes/v100" >v1.0.0</option>
+          </optgroup>
+          <optgroup label="Guide Versions">
+              <option value="/guides/1.0/../1.1" >v1.1</option>
+              <option value="/guides/1.0" >v1.0</option>
+          </optgroup>
+      </select>
+      <ul id="markdown-toc">
+        <li></li>
+        <li><a href="https://github.com/hanami/hanami.github.io/edit/build/source/guides/validations/advanced-usage.md" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a></li>
+
+          <li class="toc-group">
+            <span>Introduction</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/getting-started">Getting Started</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Architecture</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/architecture/overview">Overview</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Projects</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/projects/code-reloading">Code Reloading</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/rake">Rake</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/logging">Logging</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/initializers">Initializers</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/security">Security</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Routing</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/routing/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/restful-resources">RESTful Resource(s)</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Actions</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/actions/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/parameters">Parameters</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/request-and-response">Request & Response</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/exposures">Exposures</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/rack-integration">Rack Integration</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/cookies">Cookies</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/sessions">Sessions</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/exception-handling">Exception Handling</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/control-flow">Control Flow</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/http-caching">HTTP Caching</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Views</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/views/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/layouts">Layouts</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/custom-error-pages">Custom Error Pages</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Models</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/models/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/database-configuration">Database Configuration</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/repositories">Repositories</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/entities">Entities</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/data-types">Data Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/sql-queries">SQL Queries</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/postgresql">PostgreSQL</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/associations">Associations</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/use-your-own-orm">Use Your Own ORM</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Migrations</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/migrations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/migrations/create-table">Create Table</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/migrations/alter-table">Alter Table</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Validations</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/validations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/boolean-logic">Boolean Logic</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/custom-predicates">Custom Predicates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/advanced-usage">Advanced Usage</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Helpers</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/helpers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/html5">HTML5</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/forms">Forms</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/routing">Routing</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/links">Links</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/escape">Markup Escape</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/numbers">Numbers</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/custom-helpers">Custom Helpers</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Mailers</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/mailers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/delivery">Delivery</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Assets</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/assets/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/preprocessors">Preprocessors</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/compressors">Compressors</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/content-delivery-network">Content Delivery Network (CDN)</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/use-your-own-assets-management-tool">Use Your Own Assets Management Tool</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Command Line</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/command-line/applications">Applications</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/generators">Generators</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/destroy">Destroy</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/database">Database</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/routes">Routes</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/version">Version</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Upgrade Notes</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v060">v0.6.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v070">v0.7.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v080">v0.8.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v090">v0.9.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v100">v1.0.0</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Guide Versions</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/../1.1">v1.1</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0">v1.0</a>
+                </li>
+            </ul>
+          </li>
+      </ul>
+
+
+      
+      <h1 id="advanced-usage" class="title"><a name="advanced-usage" class="anchor" href="#advanced-usage">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Advanced Usage</h1>
+    
+      <h3 id="required-and-optional-keys" class="title"><a name="required-and-optional-keys" class="anchor" href="#required-and-optional-keys">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Required and Optional keys</h3>
+    
+<p>HTML forms can have required or optional fields. We can express this concept with two methods in our validations: <code>required</code> (which we already met in previous examples), and <code>optional</code>.</p>
+<pre class="language-ruby ruby"><code><span class="nb">require</span> <span class="s1">'hanami/validations'</span>
+
+<span class="k">class</span> <span class="nc">Signup</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+
+  <span class="n">validations</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span>    <span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">}</span>
+    <span class="n">optional</span><span class="p">(</span><span class="ss">:referral</span><span class="p">)</span> <span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h3 id="type-safety" class="title"><a name="type-safety" class="anchor" href="#type-safety">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Type Safety</h3>
+    
+<p>At this point, we need to explicitly tell something really important about built-in predicates. Each of them have expectations about the methods that an input is able to respond to.</p>
+
+<p>Why this is so important? Because if we try to invoke a method on the input we’ll get a <code>NoMethodError</code> if the input doesn’t respond to it. Which isn’t nice, right?</p>
+
+<p>Before to use a predicate, we want to ensure that the input is an instance of the expected type. Let’s introduce another new predicate for our need: <code>#type?</code>.</p>
+<pre class="language-ruby ruby"><code><span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">)</span> <span class="p">{</span> <span class="n">type?</span><span class="p">(</span><span class="no">Integer</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">gteq?</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span> <span class="p">}</span>
+</code></pre>
+
+<p>It takes the input and tries to coerce it. If it fails, the execution stops. If it succeed, the subsequent predicates can trust <code>#type?</code> and be sure that the input is an integer.</p>
+
+<p><strong>We suggest to use <code>#type?</code> at the beginning of the validations block. This <em>type safety</em> policy is crucial to prevent runtime errors.</strong></p>
+
+<p><code>Hanami::Validations</code> supports the most common Ruby types:</p>
+
+<ul>
+<li><code>Array</code> (aliased as <code>array?</code>)</li>
+<li><code>BigDecimal</code> (aliased as <code>decimal?</code>)</li>
+<li><code>Boolean</code> (aliased as <code>bool?</code>)</li>
+<li><code>Date</code> (aliased as <code>date?</code>)</li>
+<li><code>DateTime</code> (aliased as <code>date_time?</code>)</li>
+<li><code>Float</code> (aliased as <code>float?</code>)</li>
+<li><code>Hash</code> (aliased as <code>hash?</code>)</li>
+<li><code>Integer</code> (aliased as <code>int?</code>)</li>
+<li><code>String</code> (aliased as <code>str?</code>)</li>
+<li><code>Time</code> (aliased as <code>time?</code>)</li>
+</ul>
+
+<p>For each supported type, there a convenient predicate that acts as an alias. For instance, the two lines of code below are <strong>equivalent</strong>.</p>
+<pre class="language-ruby ruby"><code><span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">)</span> <span class="p">{</span> <span class="n">type?</span><span class="p">(</span><span class="no">Integer</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">)</span> <span class="p">{</span> <span class="n">int?</span> <span class="p">}</span>
+</code></pre>
+
+      <h3 id="macros" class="title"><a name="macros" class="anchor" href="#macros">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Macros</h3>
+    
+<p>Rule composition with blocks is powerful, but it can become verbose.
+To reduce verbosity, <code>Hanami::Validations</code> offers convenient <em>macros</em> that are internally <em>expanded</em> (aka interpreted) to an equivalent <em>block expression</em></p>
+
+      <h4 id="filled" class="title"><a name="filled" class="anchor" href="#filled">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Filled</h4>
+    
+<p>To use when we expect a value to be filled:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># expands to</span>
+<span class="c1"># required(:age) { filled? }</span>
+
+<span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">).</span><span class="nf">filled</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="c1"># expands to</span>
+<span class="c1"># required(:age) { filled? &amp; type?(Integer) }</span>
+
+<span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:int?</span><span class="p">)</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="c1"># expands to</span>
+<span class="c1"># required(:age) { filled? &amp; type?(Integer) &amp; gt?(18) }</span>
+
+<span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:int?</span><span class="p">,</span> <span class="n">gt?</span><span class="p">:</span> <span class="mi">18</span><span class="p">)</span>
+</code></pre>
+
+<p>In the examples above <code>age</code> is <strong>always required</strong> as value.</p>
+
+      <h4 id="maybe" class="title"><a name="maybe" class="anchor" href="#maybe">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Maybe</h4>
+    
+<p>To use when a value can be nil:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># expands to</span>
+<span class="c1"># required(:age) { none? | int? }</span>
+
+<span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">).</span><span class="nf">maybe</span><span class="p">(</span><span class="ss">:int?</span><span class="p">)</span>
+</code></pre>
+
+<p>In the example above <code>age</code> can be <code>nil</code>, but if we send the value, it <strong>must</strong> be an integer.</p>
+
+      <h4 id="each" class="title"><a name="each" class="anchor" href="#each">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Each</h4>
+    
+<p>To use when we want to apply the same validation rules to all the elements of an array:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># expands to</span>
+<span class="c1"># required(:tags) { array? { each { str? } } }</span>
+
+<span class="n">required</span><span class="p">(</span><span class="ss">:tags</span><span class="p">).</span><span class="nf">each</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+</code></pre>
+
+<p>In the example above <code>tags</code> <strong>must</strong> be an array of strings.</p>
+
+      <h4 id="confirmation" class="title"><a name="confirmation" class="anchor" href="#confirmation">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Confirmation</h4>
+    
+<p>This is designed to check if pairs of web form fields have the same value. One wildly popular example is <em>password confirmation</em>.</p>
+<pre class="language-ruby ruby"><code><span class="n">required</span><span class="p">(</span><span class="ss">:password</span><span class="p">).</span><span class="nf">filled</span><span class="p">.</span><span class="nf">confirmation</span>
+</code></pre>
+
+<p>It is valid if the input has <code>password</code> and <code>password_confirmation</code> keys with the same exact value.</p>
+
+<p>⚠ <strong>CONVENTION:</strong> For a given key <code>password</code>, the <em>confirmation</em> predicate expects another key <code>password_confirmation</code>. Easy to tell, it’s the concatenation of the original key with the <code>_confirmation</code> suffix. Their values must be equal. ⚠</p>
+
+      <h3 id="forms" class="title"><a name="forms" class="anchor" href="#forms">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Forms</h3>
+    
+<p>An important precondition to check before to implement a validator is about the expected input.
+When we use validators for already preprocessed data it&#39;s safe to use basic validations from <code>Hanami::Validations</code> mixin.</p>
+
+<p>If the data is coming directly from user input via a HTTP form, it&#39;s advisable to use <code>Hanami::Validations::Form</code> instead.
+<strong>The two mixins have the same API, but the latter is able to do low level input preprocessing specific for forms</strong>. For instance, blank inputs are casted to <code>nil</code> in order to avoid blank strings in the database.</p>
+
+      <h3 id="rules" class="title"><a name="rules" class="anchor" href="#rules">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Rules</h3>
+    
+<p>Predicates and macros are tools to code validations that concern a single key like <code>first_name</code> or <code>email</code>.
+If the outcome of a validation depends on two or more attributes we can use <em>rules</em>.</p>
+
+<p>Here&#39;s a practical example: a job board.
+We want to validate the form of the job creation with some mandatory fields: <code>type</code> (full time, part-time, contract), <code>title</code> (eg. Developer), <code>description</code>, <code>company</code> (just the name) and a <code>website</code> (which is optional).
+An user must specify the location: on-site or remote. If it&#39;s on site, they must specify the <code>location</code>, otherwise they have to tick the checkbox for <code>remote</code>.</p>
+
+<p>Here&#39;s the code:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">CreateJob</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span><span class="o">::</span><span class="no">Form</span>
+
+  <span class="n">validations</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:type</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:int?</span><span class="p">,</span> <span class="n">included_in?</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+    <span class="n">optional</span><span class="p">(</span><span class="ss">:location</span><span class="p">).</span><span class="nf">maybe</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+    <span class="n">optional</span><span class="p">(</span><span class="ss">:remote</span><span class="p">).</span><span class="nf">maybe</span><span class="p">(</span><span class="ss">:bool?</span><span class="p">)</span>
+
+    <span class="n">required</span><span class="p">(</span><span class="ss">:title</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:description</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:company</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">)</span>
+
+    <span class="n">optional</span><span class="p">(</span><span class="ss">:website</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">,</span> <span class="nb">format</span><span class="sc">?:</span> <span class="no">URI</span><span class="p">.</span><span class="nf">regexp</span><span class="p">(</span><span class="sx">%w(http https)</span><span class="p">))</span>
+
+    <span class="n">rule</span><span class="p">(</span><span class="ss">location_presence: </span><span class="p">[</span><span class="ss">:location</span><span class="p">,</span> <span class="ss">:remote</span><span class="p">])</span> <span class="k">do</span> <span class="o">|</span><span class="n">location</span><span class="p">,</span> <span class="n">remote</span><span class="o">|</span>
+      <span class="p">(</span><span class="n">remote</span><span class="p">.</span><span class="nf">none?</span> <span class="o">|</span> <span class="n">remote</span><span class="p">.</span><span class="nf">false?</span><span class="p">).</span><span class="nf">then</span><span class="p">(</span><span class="n">location</span><span class="p">.</span><span class="nf">filled?</span><span class="p">)</span> <span class="o">&amp;</span>
+        <span class="n">remote</span><span class="p">.</span><span class="nf">true?</span><span class="p">.</span><span class="nf">then</span><span class="p">(</span><span class="n">location</span><span class="p">.</span><span class="nf">none?</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>We specify a rule with <code>rule</code> method, which takes an arbitrary name and an array of preconditions.
+Only if <code>:location</code> and <code>:remote</code> are valid according to their validations described above, the <code>rule</code> block is evaluated.</p>
+
+<p>The block yields the same exact keys that we put in the precondintions.
+So for <code>[:location, :remote]</code> it will yield the corresponding values, bound to the <code>location</code> and <code>remote</code> variables.</p>
+
+<p>We can use these variables to define the rule. We covered a few cases:</p>
+
+<ul>
+<li>If <code>remote</code> is missing or false, then <code>location</code> must be filled</li>
+<li>If <code>remote</code> is true, then <code>location</code> must be omitted</li>
+</ul>
+
+      <h3 id="nested-input-data" class="title"><a name="nested-input-data" class="anchor" href="#nested-input-data">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Nested Input Data</h3>
+    
+<p>While we’re building complex web forms, we may find comfortable to organise data in a hierarchy of cohesive input fields. For instance, all the fields related to a customer, may have the <code>customer</code> prefix. To reflect this arrangement on the server side, we can group keys.</p>
+<pre class="language-ruby ruby"><code><span class="n">validations</span> <span class="k">do</span>
+  <span class="n">required</span><span class="p">(</span><span class="ss">:customer</span><span class="p">).</span><span class="nf">schema</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span>  <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+    <span class="c1"># other validations …</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Groups can be <strong>deeply nested</strong>, without any limitation.</p>
+<pre class="language-ruby ruby"><code><span class="n">validations</span> <span class="k">do</span>
+  <span class="n">required</span><span class="p">(</span><span class="ss">:customer</span><span class="p">).</span><span class="nf">schema</span> <span class="k">do</span>
+    <span class="c1"># other validations …</span>
+
+    <span class="n">required</span><span class="p">(</span><span class="ss">:address</span><span class="p">).</span><span class="nf">schema</span> <span class="k">do</span>
+      <span class="n">required</span><span class="p">(</span><span class="ss">:street</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+      <span class="c1"># other address validations …</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h3 id="composition" class="title"><a name="composition" class="anchor" href="#composition">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Composition</h3>
+    
+<p>Until now, we have seen only small snippets to show specific features. That really close view prevents us to see the big picture of complex real world projects.</p>
+
+<p>As the code base grows, it’s a good practice to DRY validation rules.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">AddressValidator</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+
+  <span class="n">validations</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:street</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This validator can be reused by other validators.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">CustomerValidator</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+
+  <span class="n">validations</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:address</span><span class="p">).</span><span class="nf">schema</span><span class="p">(</span><span class="no">AddressValidator</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Again, there is no limit to the nesting levels.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">OrderValidator</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+
+  <span class="n">validations</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:number</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:customer</span><span class="p">).</span><span class="nf">schema</span><span class="p">(</span><span class="no">CustomerValidator</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>In the end, <code>OrderValidator</code> is able to validate a complex data structure like this:</p>
+<pre class="language-ruby ruby"><code><span class="p">{</span>
+  <span class="ss">number: </span><span class="s2">"123"</span><span class="p">,</span>
+  <span class="ss">customer: </span><span class="p">{</span>
+    <span class="ss">email: </span><span class="s2">"user@example.com"</span><span class="p">,</span>
+    <span class="ss">address: </span><span class="p">{</span>
+      <span class="ss">city: </span><span class="s2">"Rome"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+      <h3 id="whitelisting" class="title"><a name="whitelisting" class="anchor" href="#whitelisting">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Whitelisting</h3>
+    
+<p>Another fundamental role that validators plays in the architecture of our projects is input whitelisting.
+For security reasons, we want to allow known keys to come in and reject everything else.</p>
+
+<p>This process happens when we invoke <code>#validate</code>.
+Allowed keys are the ones defined with <code>.required</code>.</p>
+
+<p><strong>Please note that whitelisting is only available for <code>Hanami::Validations::Form</code> mixin.</strong></p>
+
+      <h3 id="result" class="title"><a name="result" class="anchor" href="#result">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Result</h3>
+    
+<p>When we trigger the validation process with <code>#validate</code>, we get a result object in return. It’s able to tell if it’s successful, which rules the input data has violated and an output data bag.</p>
+<pre class="language-ruby ruby"><code><span class="n">result</span> <span class="o">=</span> <span class="no">OrderValidator</span><span class="p">.</span><span class="nf">new</span><span class="p">({}).</span><span class="nf">validate</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">success?</span> <span class="c1"># =&gt; false</span>
+</code></pre>
+
+      <h4 id="messages" class="title"><a name="messages" class="anchor" href="#messages">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Messages</h4>
+    
+<p><code>result.messages</code> returns a nested set of validation error messages.</p>
+
+<p>Each error carries on informations about a single rule violation.</p>
+<pre class="language-ruby ruby"><code><span class="n">result</span><span class="p">.</span><span class="nf">messages</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:number</span><span class="p">)</span>   <span class="c1"># =&gt; ["is missing"]</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">messages</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:customer</span><span class="p">)</span> <span class="c1"># =&gt; ["is missing"]</span>
+</code></pre>
+
+      <h4 id="output" class="title"><a name="output" class="anchor" href="#output">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Output</h4>
+    
+<p><code>result.output</code> is a <code>Hash</code> which is the result of whitelisting and coercions. It’s useful to pass it do other components that may want to persist that data.</p>
+<pre class="language-ruby ruby"><code><span class="p">{</span>
+  <span class="s2">"number"</span>  <span class="o">=&gt;</span> <span class="s2">"123"</span><span class="p">,</span>
+  <span class="s2">"unknown"</span> <span class="o">=&gt;</span> <span class="s2">"foo"</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>If we receive the input above, <code>output</code> will look like this.</p>
+<pre class="language-ruby ruby"><code><span class="n">result</span><span class="p">.</span><span class="nf">output</span>
+  <span class="c1"># =&gt; { :number =&gt; 123 }</span>
+</code></pre>
+
+<p>We can observe that:</p>
+
+<ul>
+<li>Keys are <em>symbolized</em></li>
+<li>Only whitelisted keys are included</li>
+<li>Data is coerced</li>
+</ul>
+
+      <h3 id="error-messages" class="title"><a name="error-messages" class="anchor" href="#error-messages">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Error Messages</h3>
+    
+<p>To pick the right error message is crucial for user experience.
+As usual <code>Hanami::Validations</code> comes to the rescue for most common cases and it leaves space to customization of behaviors.</p>
+
+<p>We have seen that builtin predicates have default messages, while <a href="#inline-custom-predicates">inline predicates</a> allow to specify a custom message via the <code>:message</code> option.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">SignupValidator</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+
+  <span class="n">predicate</span> <span class="ss">:email?</span><span class="p">,</span> <span class="ss">message: </span><span class="s1">'must be an email'</span> <span class="k">do</span> <span class="o">|</span><span class="n">current</span><span class="o">|</span>
+    <span class="c1"># ...</span>
+  <span class="k">end</span>
+
+  <span class="n">validations</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:email</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">,</span> <span class="ss">:email?</span><span class="p">)</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:int?</span><span class="p">,</span> <span class="n">gt?</span><span class="p">:</span> <span class="mi">18</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="no">SignupValidator</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">email: </span><span class="s1">'foo'</span><span class="p">,</span> <span class="ss">age: </span><span class="mi">1</span><span class="p">).</span><span class="nf">validate</span>
+
+<span class="n">result</span><span class="p">.</span><span class="nf">success?</span>               <span class="c1"># =&gt; false</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">messages</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="c1"># =&gt; ['must be an email']</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">messages</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:age</span><span class="p">)</span>   <span class="c1"># =&gt; ['must be greater than 18']</span>
+</code></pre>
+
+      <h4 id="configurable-error-messages" class="title"><a name="configurable-error-messages" class="anchor" href="#configurable-error-messages">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Configurable Error Messages</h4>
+    
+<p>Inline error messages are ideal for quick and dirty development, but we suggest to use an external YAML file to configure these messages:</p>
+<pre class="language-ruby yaml"><code><span class="c1"># config/messages.yml</span>
+<span class="s">en</span><span class="pi">:</span>
+  <span class="s">errors</span><span class="pi">:</span>
+    <span class="s">email?</span><span class="pi">:</span> <span class="s2">"</span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">email"</span>
+</code></pre>
+
+<p>To be used like this:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">SignupValidator</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+  <span class="n">messages_path</span> <span class="s1">'config/messages.yml'</span>
+
+  <span class="n">predicate</span> <span class="ss">:email?</span> <span class="k">do</span> <span class="o">|</span><span class="n">current</span><span class="o">|</span>
+    <span class="c1"># ...</span>
+  <span class="k">end</span>
+
+  <span class="n">validations</span> <span class="k">do</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:email</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:str?</span><span class="p">,</span> <span class="ss">:email?</span><span class="p">)</span>
+    <span class="n">required</span><span class="p">(</span><span class="ss">:age</span><span class="p">).</span><span class="nf">filled</span><span class="p">(</span><span class="ss">:int?</span><span class="p">,</span> <span class="n">gt?</span><span class="p">:</span> <span class="mi">18</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+</code></pre>
+
+      <h4 id="custom-error-messages" class="title"><a name="custom-error-messages" class="anchor" href="#custom-error-messages">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Custom Error Messages</h4>
+    
+<p>In the example above, the failure message for age is fine: <code>&quot;must be greater than 18&quot;</code>, but how to tweak it? What if we need to change into something diffent? Again, we can use the YAML configuration file for our purpose.</p>
+<pre class="language-ruby yaml"><code><span class="c1"># config/messages.yml</span>
+<span class="s">en</span><span class="pi">:</span>
+  <span class="s">errors</span><span class="pi">:</span>
+    <span class="s">email?</span><span class="pi">:</span> <span class="s2">"</span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">email"</span>
+
+    <span class="s">rules</span><span class="pi">:</span>
+      <span class="s">signup</span><span class="pi">:</span>
+        <span class="s">age</span><span class="pi">:</span>
+          <span class="s">gt?</span><span class="pi">:</span> <span class="s2">"</span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">adult"</span>
+
+</code></pre>
+
+<p>Now our validator is able to look at the right error message.</p>
+<pre class="language-ruby ruby"><code><span class="n">result</span> <span class="o">=</span> <span class="no">SignupValidator</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">email: </span><span class="s1">'foo'</span><span class="p">,</span> <span class="ss">age: </span><span class="mi">1</span><span class="p">).</span><span class="nf">validate</span>
+
+<span class="n">result</span><span class="p">.</span><span class="nf">success?</span>             <span class="c1"># =&gt; false</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">messages</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:age</span><span class="p">)</span> <span class="c1"># =&gt; ['must be an adult']</span>
+</code></pre>
+
+      <h5 id="custom-namespace" class="title"><a name="custom-namespace" class="anchor" href="#custom-namespace">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Custom namespace</h5>
+    
+<p>⚠ <strong>CONVENTION:</strong> For a given validator named <code>SignupValidator</code>, the framework will look for <code>signup</code> translation key. ⚠</p>
+
+<p>If for some reason that doesn&#39;t work for us, we can customize the namespace:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">SignupValidator</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+
+  <span class="n">messages_path</span> <span class="s1">'config/messages.yml'</span>
+  <span class="n">namespace</span>     <span class="ss">:my_signup</span>
+
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The new namespace should be used in the YAML file too.</p>
+<pre class="language-ruby yaml"><code><span class="c1"># config/messages.yml</span>
+<span class="s">en</span><span class="pi">:</span>
+  <span class="c1"># ...</span>
+    <span class="s">rules</span><span class="pi">:</span>
+      <span class="s">my_signup</span><span class="pi">:</span>
+        <span class="s">age</span><span class="pi">:</span>
+          <span class="s">gt?</span><span class="pi">:</span> <span class="s2">"</span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">adult"</span>
+
+</code></pre>
+
+      <h4 id="internationalization-i18n-" class="title"><a name="internationalization-i18n-" class="anchor" href="#internationalization-i18n-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Internationalization (I18n)</h4>
+    
+<p>If your project already depends on <code>i18n</code> gem, <code>Hanami::Validations</code> is able to look at the translations defined for that gem and to use them.</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">SignupValidator</span>
+  <span class="kp">include</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Validations</span>
+
+  <span class="n">messages</span> <span class="ss">:i18n</span>
+
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby yaml"><code><span class="c1"># config/locales/en.yml</span>
+<span class="s">en</span><span class="pi">:</span>
+  <span class="s">errors</span><span class="pi">:</span>
+    <span class="s">signup</span><span class="pi">:</span>
+      <span class="c1"># ...</span>
+</code></pre>
+
+
+      <hr>
+
+      <div class="pull-left">Prev: <a href="/guides/1.0/validations/custom-predicates">Validations - Custom Predicates</a></div><div class="pull-right">Next: <a href="/guides/1.0/helpers/overview">Helpers - Overview</a></div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami.html">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2017 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.autocomplete.min.js" type="text/javascript"></script>
+<script src="/javascripts/excerpt-search.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/search.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

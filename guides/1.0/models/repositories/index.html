@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Guides - Repositories</title>
+
+<script type="text/javascript" src="/javascripts/lunr.min.js"></script>
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+
+    <link href="/stylesheets/guides.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <form action="" class="navbar-form form-inline pull-left visible-lg-block" id="search-form">
+        <input type="search" class="form-control" id="search" placeholder="Search guides...">
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/guides/1.1">Guides</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+
+    <div class="container docs-content">
+      <div class="breadcrumbs">
+        <a href="/guides">Guides</a> / <a href="/guides/1.0">1.0</a>  / Models / Repositories
+      </div>
+
+      <select class="mobile-guides">
+          <optgroup label="Introduction">
+              <option value="/guides/1.0/getting-started" >Getting Started</option>
+          </optgroup>
+          <optgroup label="Architecture">
+              <option value="/guides/1.0/architecture/overview" >Overview</option>
+          </optgroup>
+          <optgroup label="Projects">
+              <option value="/guides/1.0/projects/code-reloading" >Code Reloading</option>
+              <option value="/guides/1.0/projects/rake" >Rake</option>
+              <option value="/guides/1.0/projects/logging" >Logging</option>
+              <option value="/guides/1.0/projects/initializers" >Initializers</option>
+              <option value="/guides/1.0/projects/security" >Security</option>
+          </optgroup>
+          <optgroup label="Routing">
+              <option value="/guides/1.0/routing/overview" >Overview</option>
+              <option value="/guides/1.0/routing/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/routing/restful-resources" >RESTful Resource(s)</option>
+              <option value="/guides/1.0/routing/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Actions">
+              <option value="/guides/1.0/actions/overview" >Overview</option>
+              <option value="/guides/1.0/actions/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/actions/parameters" >Parameters</option>
+              <option value="/guides/1.0/actions/request-and-response" >Request & Response</option>
+              <option value="/guides/1.0/actions/exposures" >Exposures</option>
+              <option value="/guides/1.0/actions/rack-integration" >Rack Integration</option>
+              <option value="/guides/1.0/actions/mime-types" >MIME Types</option>
+              <option value="/guides/1.0/actions/cookies" >Cookies</option>
+              <option value="/guides/1.0/actions/sessions" >Sessions</option>
+              <option value="/guides/1.0/actions/exception-handling" >Exception Handling</option>
+              <option value="/guides/1.0/actions/control-flow" >Control Flow</option>
+              <option value="/guides/1.0/actions/http-caching" >HTTP Caching</option>
+              <option value="/guides/1.0/actions/share-code" >Share Code</option>
+              <option value="/guides/1.0/actions/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Views">
+              <option value="/guides/1.0/views/overview" >Overview</option>
+              <option value="/guides/1.0/views/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/views/templates" >Templates</option>
+              <option value="/guides/1.0/views/mime-types" >MIME Types</option>
+              <option value="/guides/1.0/views/layouts" >Layouts</option>
+              <option value="/guides/1.0/views/custom-error-pages" >Custom Error Pages</option>
+              <option value="/guides/1.0/views/share-code" >Share Code</option>
+              <option value="/guides/1.0/views/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Models">
+              <option value="/guides/1.0/models/overview" >Overview</option>
+              <option value="/guides/1.0/models/database-configuration" >Database Configuration</option>
+              <option value="/guides/1.0/models/repositories" selected>Repositories</option>
+              <option value="/guides/1.0/models/entities" >Entities</option>
+              <option value="/guides/1.0/models/data-types" >Data Types</option>
+              <option value="/guides/1.0/models/sql-queries" >SQL Queries</option>
+              <option value="/guides/1.0/models/postgresql" >PostgreSQL</option>
+              <option value="/guides/1.0/models/associations" >Associations</option>
+              <option value="/guides/1.0/models/use-your-own-orm" >Use Your Own ORM</option>
+          </optgroup>
+          <optgroup label="Migrations">
+              <option value="/guides/1.0/migrations/overview" >Overview</option>
+              <option value="/guides/1.0/migrations/create-table" >Create Table</option>
+              <option value="/guides/1.0/migrations/alter-table" >Alter Table</option>
+          </optgroup>
+          <optgroup label="Validations">
+              <option value="/guides/1.0/validations/overview" >Overview</option>
+              <option value="/guides/1.0/validations/boolean-logic" >Boolean Logic</option>
+              <option value="/guides/1.0/validations/custom-predicates" >Custom Predicates</option>
+              <option value="/guides/1.0/validations/advanced-usage" >Advanced Usage</option>
+          </optgroup>
+          <optgroup label="Helpers">
+              <option value="/guides/1.0/helpers/overview" >Overview</option>
+              <option value="/guides/1.0/helpers/html5" >HTML5</option>
+              <option value="/guides/1.0/helpers/forms" >Forms</option>
+              <option value="/guides/1.0/helpers/routing" >Routing</option>
+              <option value="/guides/1.0/helpers/assets" >Assets</option>
+              <option value="/guides/1.0/helpers/links" >Links</option>
+              <option value="/guides/1.0/helpers/escape" >Markup Escape</option>
+              <option value="/guides/1.0/helpers/numbers" >Numbers</option>
+              <option value="/guides/1.0/helpers/custom-helpers" >Custom Helpers</option>
+          </optgroup>
+          <optgroup label="Mailers">
+              <option value="/guides/1.0/mailers/overview" >Overview</option>
+              <option value="/guides/1.0/mailers/basic-usage" >Basic Usage</option>
+              <option value="/guides/1.0/mailers/templates" >Templates</option>
+              <option value="/guides/1.0/mailers/delivery" >Delivery</option>
+              <option value="/guides/1.0/mailers/share-code" >Share Code</option>
+              <option value="/guides/1.0/mailers/testing" >Testing</option>
+          </optgroup>
+          <optgroup label="Assets">
+              <option value="/guides/1.0/assets/overview" >Overview</option>
+              <option value="/guides/1.0/assets/preprocessors" >Preprocessors</option>
+              <option value="/guides/1.0/assets/compressors" >Compressors</option>
+              <option value="/guides/1.0/assets/content-delivery-network" >Content Delivery Network (CDN)</option>
+              <option value="/guides/1.0/assets/use-your-own-assets-management-tool" >Use Your Own Assets Management Tool</option>
+          </optgroup>
+          <optgroup label="Command Line">
+              <option value="/guides/1.0/command-line/applications" >Applications</option>
+              <option value="/guides/1.0/command-line/generators" >Generators</option>
+              <option value="/guides/1.0/command-line/destroy" >Destroy</option>
+              <option value="/guides/1.0/command-line/database" >Database</option>
+              <option value="/guides/1.0/command-line/assets" >Assets</option>
+              <option value="/guides/1.0/command-line/routes" >Routes</option>
+              <option value="/guides/1.0/command-line/version" >Version</option>
+          </optgroup>
+          <optgroup label="Upgrade Notes">
+              <option value="/guides/1.0/upgrade-notes/v060" >v0.6.0</option>
+              <option value="/guides/1.0/upgrade-notes/v070" >v0.7.0</option>
+              <option value="/guides/1.0/upgrade-notes/v080" >v0.8.0</option>
+              <option value="/guides/1.0/upgrade-notes/v090" >v0.9.0</option>
+              <option value="/guides/1.0/upgrade-notes/v100" >v1.0.0</option>
+          </optgroup>
+          <optgroup label="Guide Versions">
+              <option value="/guides/1.0/../1.1" >v1.1</option>
+              <option value="/guides/1.0" >v1.0</option>
+          </optgroup>
+      </select>
+      <ul id="markdown-toc">
+        <li></li>
+        <li><a href="https://github.com/hanami/hanami.github.io/edit/build/source/guides/1.0/models/repositories.md" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a></li>
+
+          <li class="toc-group">
+            <span>Introduction</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/getting-started">Getting Started</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Architecture</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/architecture/overview">Overview</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Projects</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/projects/code-reloading">Code Reloading</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/rake">Rake</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/logging">Logging</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/initializers">Initializers</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/projects/security">Security</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Routing</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/routing/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/restful-resources">RESTful Resource(s)</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/routing/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Actions</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/actions/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/parameters">Parameters</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/request-and-response">Request & Response</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/exposures">Exposures</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/rack-integration">Rack Integration</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/cookies">Cookies</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/sessions">Sessions</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/exception-handling">Exception Handling</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/control-flow">Control Flow</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/http-caching">HTTP Caching</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/actions/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Views</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/views/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/mime-types">MIME Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/layouts">Layouts</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/custom-error-pages">Custom Error Pages</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/views/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Models</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/models/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/database-configuration">Database Configuration</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/repositories">Repositories</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/entities">Entities</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/data-types">Data Types</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/sql-queries">SQL Queries</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/postgresql">PostgreSQL</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/associations">Associations</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/models/use-your-own-orm">Use Your Own ORM</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Migrations</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/migrations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/migrations/create-table">Create Table</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/migrations/alter-table">Alter Table</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Validations</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/validations/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/boolean-logic">Boolean Logic</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/custom-predicates">Custom Predicates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/validations/advanced-usage">Advanced Usage</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Helpers</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/helpers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/html5">HTML5</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/forms">Forms</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/routing">Routing</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/links">Links</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/escape">Markup Escape</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/numbers">Numbers</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/helpers/custom-helpers">Custom Helpers</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Mailers</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/mailers/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/basic-usage">Basic Usage</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/templates">Templates</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/delivery">Delivery</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/share-code">Share Code</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/mailers/testing">Testing</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Assets</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/assets/overview">Overview</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/preprocessors">Preprocessors</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/compressors">Compressors</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/content-delivery-network">Content Delivery Network (CDN)</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/assets/use-your-own-assets-management-tool">Use Your Own Assets Management Tool</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Command Line</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/command-line/applications">Applications</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/generators">Generators</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/destroy">Destroy</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/database">Database</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/assets">Assets</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/routes">Routes</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/command-line/version">Version</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Upgrade Notes</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v060">v0.6.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v070">v0.7.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v080">v0.8.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v090">v0.9.0</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0/upgrade-notes/v100">v1.0.0</a>
+                </li>
+            </ul>
+          </li>
+          <li class="toc-group">
+            <span>Guide Versions</span>
+            <ul>
+                <li>
+                  <a href="/guides/1.0/../1.1">v1.1</a>
+                </li>
+                <li>
+                  <a href="/guides/1.0">v1.0</a>
+                </li>
+            </ul>
+          </li>
+      </ul>
+
+
+      
+      <h1 id="repositories" class="title"><a name="repositories" class="anchor" href="#repositories">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Repositories</h1>
+    
+<p>An object that mediates between entities and the persistence layer.
+It offers a standardized API to query and execute commands on a database.</p>
+
+<p>A repository is <strong>storage independent</strong>, all the queries and commands are
+delegated to the current adapter.</p>
+
+<p>This architecture has several advantages:</p>
+
+<ul>
+<li><p>Applications depend on a standard API, instead of low level details
+(<a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency Inversion</a> principle)</p></li>
+<li><p>Applications depend on a stable API, that doesn&#39;t change if the
+storage changes</p></li>
+<li><p>Developers can postpone storage decisions</p></li>
+<li><p>Confines persistence logic to a low level</p></li>
+<li><p>Multiple data sources can easily coexist in an application</p></li>
+</ul>
+
+<p class="warning">
+  As of the current version, Hanami only supports SQL databases.
+</p>
+
+      <h2 id="interface" class="title"><a name="interface" class="anchor" href="#interface">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Interface</h2>
+    
+<p>When a class inherits from <code>Hanami::Repository</code>, it will receive the following interface:</p>
+
+<ul>
+<li><code>#create(data)</code> – Create a record for the given data and return an entity</li>
+<li><code>#update(id, data)</code> – Update the record corresponding to the id and return the updated entity</li>
+<li><code>#delete(id)</code> – Delete the record corresponding to the given entity</li>
+<li><code>#all</code> - Fetch all the entities from the collection</li>
+<li><code>#find(id)</code> - Fetch an entity from the collection by its ID</li>
+<li><code>#first</code> - Fetch the first entity from the collection</li>
+<li><code>#last</code>  - Fetch the last entity from the collection</li>
+<li><code>#clear</code> - Delete all the records from the collection</li>
+</ul>
+
+<p><strong>A collection is a homogenous set of records.</strong>
+It corresponds to a table for a SQL database or to a MongoDB collection.</p>
+<pre class="language-ruby ruby"><code><span class="n">repository</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span>
+
+<span class="n">book</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s2">"Hanami"</span><span class="p">)</span>
+  <span class="c1"># =&gt; #&lt;Book:0x007f95cbd8b7c0 @attributes={:id=&gt;1, :title=&gt;"Hanami", :created_at=&gt;2016-11-13 16:02:37 UTC, :updated_at=&gt;2016-11-13 16:02:37 UTC}&gt;</span>
+
+<span class="n">book</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+  <span class="c1"># =&gt; #&lt;Book:0x007f95cbd5a030 @attributes={:id=&gt;1, :title=&gt;"Hanami", :created_at=&gt;2016-11-13 16:02:37 UTC, :updated_at=&gt;2016-11-13 16:02:37 UTC}&gt;</span>
+
+<span class="n">book</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="ss">title: </span><span class="s2">"Hanami Book"</span><span class="p">)</span>
+  <span class="c1"># =&gt; #&lt;Book:0x007f95cb243408 @attributes={:id=&gt;1, :title=&gt;"Hanami Book", :created_at=&gt;2016-11-13 16:02:37 UTC, :updated_at=&gt;2016-11-13 16:03:34 UTC}&gt;</span>
+
+<span class="n">repository</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+
+<span class="n">repository</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+  <span class="c1"># =&gt; nil</span>
+</code></pre>
+
+      <h2 id="saving-more-than-one-record" class="title"><a name="saving-more-than-one-record" class="anchor" href="#saving-more-than-one-record">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Saving more than one record</h2>
+    
+<p>For saving bunch of records you need to define a <code>#create_many</code> command:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">BookRepository</span>
+  <span class="k">def</span> <span class="nf">create_many</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+    <span class="n">command</span><span class="p">(</span><span class="ss">:create</span><span class="p">,</span> <span class="n">books</span><span class="p">,</span> <span class="ss">result: :many</span><span class="p">).</span><span class="nf">call</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Now you can use <code>#create_many</code> as a bulk creation method:</p>
+<pre class="language-ruby ruby"><code><span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">create_many</span><span class="p">([{</span> <span class="ss">title: </span><span class="s2">"Hanami"</span> <span class="p">},</span> <span class="p">{</span> <span class="ss">title: </span><span class="s2">"Ruby"</span><span class="p">}])</span>
+<span class="c1"># =&gt; [#&lt;Book:0x007f95cbd8b7c0 @attributes={...}&gt;, #&lt;Book:0x007ff4e20e6f80 @attributes={...}&gt;]</span>
+</code></pre>
+
+      <h2 id="private-queries" class="title"><a name="private-queries" class="anchor" href="#private-queries">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Private Queries</h2>
+    
+<p><strong>All the queries are private</strong>.
+This decision forces developers to define intention revealing API, instead of leaking storage API details outside of a repository.</p>
+
+<p>Look at the following code:</p>
+<pre class="language-ruby ruby"><code><span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">author_id: </span><span class="mi">23</span><span class="p">).</span><span class="nf">order</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">).</span><span class="nf">limit</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</code></pre>
+
+<p>This is <strong>bad</strong> for a variety of reasons:</p>
+
+<ul>
+<li><p>The caller has an intimate knowledge of the internal mechanisms of the Repository.</p></li>
+<li><p>The caller works on several levels of abstraction.</p></li>
+<li><p>It doesn&#39;t express a clear intent, it&#39;s just a chain of methods.</p></li>
+<li><p>The caller can&#39;t be easily tested in isolation.</p></li>
+<li><p>If we change the storage, we are forced to change the code of the caller(s).</p></li>
+</ul>
+
+<p>There is a better way:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/book_repository.rb</span>
+<span class="k">class</span> <span class="nc">BookRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="k">def</span> <span class="nf">most_recent_by_author</span><span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="ss">limit: </span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">books</span>
+      <span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">author_id: </span><span class="n">author</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="ss">:published_at</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">limit</span><span class="p">(</span><span class="n">limit</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This is a <strong>huge improvement</strong>, because:</p>
+
+<ul>
+<li><p>The caller doesn&#39;t know how the repository fetches the entities.</p></li>
+<li><p>The caller works on a single level of abstraction. It doesn&#39;t even know about records, only works with entities.</p></li>
+<li><p>It expresses a clear intent.</p></li>
+<li><p>The caller can be easily tested in isolation. It&#39;s just a matter of stubbing this method.</p></li>
+<li><p>If we change the storage, the callers aren&#39;t affected.</p></li>
+</ul>
+
+<div class="convention">
+  <p>
+    Hanami queries are based on gems from <strong>ROM</strong> project, namely
+    <code>rom-repository</code> and <code>rom-sql</code>.
+    The gem <code>rom-sql</code> is itself based on <strong>Sequel</strong> project.
+  </p>
+  <p>
+    Learn more on how to craft queries with
+    <a href="http://rom-rb.org/current/learn/sql/queries/">ROM</a>
+    and <a href="http://sequel.jeremyevans.net/documentation.html">Sequel</a>.
+  </p>
+</div>
+
+      <h2 id="timestamps" class="title"><a name="timestamps" class="anchor" href="#timestamps">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Timestamps</h2>
+    
+<p>To have a track of when a record has been created or updated is important when running a project in production.</p>
+
+<p>When creating a new table, if we add the following columns, a repository will take care of keeping the values updated.</p>
+<pre class="language-ruby ruby"><code><span class="no">Hanami</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">migration</span> <span class="k">do</span>
+  <span class="n">up</span> <span class="k">do</span>
+    <span class="n">create_table</span> <span class="ss">:books</span> <span class="k">do</span>
+      <span class="c1"># ...</span>
+      <span class="n">column</span> <span class="ss">:created_at</span><span class="p">,</span> <span class="no">DateTime</span>
+      <span class="n">column</span> <span class="ss">:updated_at</span><span class="p">,</span> <span class="no">DateTime</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="language-ruby ruby"><code><span class="n">repository</span> <span class="o">=</span> <span class="no">BookRepository</span><span class="p">.</span><span class="nf">new</span>
+
+<span class="n">book</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s2">"Hanami"</span><span class="p">)</span>
+
+<span class="n">book</span><span class="p">.</span><span class="nf">created_at</span> <span class="c1"># =&gt; 2016-11-14 08:20:44 UTC</span>
+<span class="n">book</span><span class="p">.</span><span class="nf">updated_at</span> <span class="c1"># =&gt; 2016-11-14 08:20:44 UTC</span>
+
+<span class="n">book</span> <span class="o">=</span> <span class="n">repository</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">book</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="ss">title: </span><span class="s2">"Hanami Book"</span><span class="p">)</span>
+
+<span class="n">book</span><span class="p">.</span><span class="nf">created_at</span> <span class="c1"># =&gt; 2016-11-14 08:20:44 UTC</span>
+<span class="n">book</span><span class="p">.</span><span class="nf">updated_at</span> <span class="c1"># =&gt; 2016-11-14 08:22:40 UTC</span>
+</code></pre>
+
+<p class="convention">
+  When a database table has <code>created_at</code> and <code>updated_at</code> timestamps, a repository will automatically update their values.
+</p>
+
+<p class="notice">
+  Timestamps are on UTC timezone.
+</p>
+
+      <h2 id="legacy-databases" class="title"><a name="legacy-databases" class="anchor" href="#legacy-databases">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Legacy Databases</h2>
+    
+<p>By default, a repository performs auto-mapping of corresponding database table and creates an <a href="/guides/1.0/models/entities#automatic-schema">automatic schema</a> for the associated entity.</p>
+
+<p>When working with legacy databases we can resolve the naming mismatch between the table name, the columns, with repositories defaults and entities attributes.</p>
+
+<p>Let&#39;s say we have a database table like this:</p>
+<pre class="language-ruby sql"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">t_operator</span> <span class="p">(</span>
+    <span class="n">operator_id</span> <span class="n">integer</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">s_name</span> <span class="n">text</span>
+<span class="p">);</span>
+</code></pre>
+
+<p>We can setup our repository with the following code:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/repositories/operator_repository.rb</span>
+<span class="k">class</span> <span class="nc">OperatorRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="nb">self</span><span class="p">.</span><span class="nf">relation</span> <span class="o">=</span> <span class="ss">:t_operator</span>
+
+  <span class="n">mapping</span> <span class="k">do</span>
+    <span class="n">attribute</span> <span class="ss">:id</span><span class="p">,</span>   <span class="ss">from: :operator_id</span>
+    <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">from: :s_name</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>While the entity can stay with the basic setup:</p>
+<pre class="language-ruby ruby"><code><span class="c1"># lib/bookshelf/entities/operator.rb</span>
+<span class="k">class</span> <span class="nc">Operator</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Entity</span>
+<span class="k">end</span>
+</code></pre>
+
+<hr>
+
+<p>The entity now gets the mapping we defined in the repository:</p>
+<pre class="language-ruby ruby"><code><span class="n">operator</span> <span class="o">=</span> <span class="no">Operator</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"Jane"</span><span class="p">)</span>
+<span class="n">operator</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># =&gt; "Jane"</span>
+</code></pre>
+
+<p>The repository can use the same mapped attributes:</p>
+<pre class="language-ruby ruby"><code><span class="n">operator</span> <span class="o">=</span> <span class="no">OperatorRepository</span><span class="p">.</span><span class="nf">new</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"Jane"</span><span class="p">)</span>
+  <span class="c1"># =&gt; #&lt;Operator:0x007f8e43cbcea0 @attributes={:id=&gt;1, :name=&gt;"Jane"}&gt;</span>
+</code></pre>
+
+      <h2 id="count" class="title"><a name="count" class="anchor" href="#count">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Count</h2>
+    
+<p>Count is a concept not generally available to all the databases. SQL databases have it, but others don&#39;t.</p>
+
+<p>You can define a method, if you&#39;re using a SQL database:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">BookRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="k">def</span> <span class="nf">count</span>
+    <span class="n">books</span><span class="p">.</span><span class="nf">count</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Or you can expose specific conditions:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">BookRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="c1"># ...</span>
+
+  <span class="k">def</span> <span class="nf">on_sale_count</span>
+    <span class="n">books</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">on_sale: </span><span class="kp">true</span><span class="p">).</span><span class="nf">count</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If you want to use raw SQL you can do:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">BookRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="c1"># ...</span>
+
+  <span class="k">def</span> <span class="nf">old_books_count</span>
+    <span class="n">books</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"SELECT id FROM books WHERE created_at &lt; (NOW() - 1 * interval '1 year')"</span><span class="p">).</span><span class="nf">count</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+      <h2 id="retrieving-the-first-and-last-records" class="title"><a name="retrieving-the-first-and-last-records" class="anchor" href="#retrieving-the-first-and-last-records">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Retrieving the first and last records</h2>
+    
+<p>A repository provides default <code>#first</code> and <code>#last</code> methods, but they don&#39;t have any sorting policy.</p>
+
+<p>If you need to specify a custom sorting policy you can use <code>#order</code>:</p>
+<pre class="language-ruby ruby"><code><span class="k">class</span> <span class="nc">BookRepository</span> <span class="o">&lt;</span> <span class="no">Hanami</span><span class="o">::</span><span class="no">Repository</span>
+  <span class="c1"># ...</span>
+
+  <span class="k">def</span> <span class="nf">newest_book</span>
+    <span class="n">books</span><span class="p">.</span><span class="nf">order</span> <span class="p">{</span> <span class="n">created_at</span> <span class="p">}.</span><span class="nf">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">one</span>
+    <span class="c1"># Passing a symbol instead works too: books.order(:created_at).one</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">oldest_book</span>
+    <span class="n">books</span><span class="p">.</span><span class="nf">order</span> <span class="p">{</span> <span class="n">created_at</span><span class="p">.</span><span class="nf">desc</span> <span class="p">}.</span><span class="nf">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">one</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>When <code>#one</code> is used if no record is find, it returns <code>nil</code>.</p>
+
+<p>Please remember to always use <code>limit(1)</code>, otherwise <code>#one</code> will raise an exception.</p>
+
+<p>You can read more in <a href="https://github.com/hanami/model/issues/380">this issue</a>.</p>
+
+
+      <hr>
+
+      
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami.html">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2017 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.autocomplete.min.js" type="text/javascript"></script>
+<script src="/javascripts/excerpt-search.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/search.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>
