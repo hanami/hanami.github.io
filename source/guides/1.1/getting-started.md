@@ -285,7 +285,7 @@ Hanami ships with various **generators** to save on typing some of the code invo
 In our terminal, enter:
 
 ```
-% bundle exec hanami generate action web books#index
+% bundle exec hanami generate action web books/index
 ```
 
 This will generate a new action _index_ in the _books_ controller of the _web_ application.
@@ -672,7 +672,7 @@ We'll speed things up a little, so we can quickly get to the good parts.
 First, create a new action for our "New Book" page:
 
 ```
-% bundle exec hanami generate action web books#new
+% bundle exec hanami generate action web books/new
 ```
 
 This adds a new route to our app:
@@ -720,7 +720,7 @@ To submit our form, we need yet another action.
 Let's create a `Books::Create` action:
 
 ```
-% bundle exec hanami generate action web books#create
+% bundle exec hanami generate action web books/create
 ```
 
 This adds a new route to our app:
