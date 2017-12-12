@@ -103,8 +103,6 @@ module Web::Views::Dashboard
 end
 ```
 
-
-
 ## Custom Rendering
 
 Hanami performs rendering by calling `#render` on a view and it expects a string in return.
