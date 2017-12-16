@@ -163,7 +163,7 @@ repository.remove_book(author, book.id)
 
 ### Querying
 
-An association can be [queried](/guides/1.1/models/sql-queries):
+An association can be [queried](/guides/1.1/repositories/sql-queries):
 
 ```ruby
 # lib/bookshelf/repositories/author_repository.rb
