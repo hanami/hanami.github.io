@@ -87,3 +87,23 @@ JSON is parseable and more machine-oriented. It works great with log aggregators
 ```json
 {"app":"bookshelf","severity":"INFO","time":"2017-02-10T22:31:51Z","http":"HTTP/1.1","verb":"GET","status":"200","ip":"127.0.0.1","path":"/books/1","query":"","length":"451","elapsed":0.000391478}
 ```
+
+## Not logging request params
+
+If you want to disable logging of the request params completely, it can be
+easily achieved with custom formatter:
+
+```ruby
+class NoParamsFormatter < ::Hanami::Logger::Formatter
+  def _format(hash)
+    hash.delete :params
+    super hash
+  end
+end
+```
+
+and than just telling logger to use our new formatter for logging
+
+```ruby
+logger level: :debug, formatter: NoParamsFormatter.new
+```
