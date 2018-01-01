@@ -108,7 +108,7 @@ Hanami.configure do
     # ...
 
     mailer do
-      production MandrillDeliveryMethod, api_key: ENV['MANDRILL_API_KEY']
+      delivery MandrillDeliveryMethod, api_key: ENV['MANDRILL_API_KEY']
     end
   end
 end
