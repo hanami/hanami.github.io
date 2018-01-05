@@ -20,17 +20,10 @@ end
 
 activate :breadcrumbs
 
-###
-# Page options, layouts, aliases and proxies
-###
-
 page '/',         layout: 'home'
 page '/atom.xml', layout: false
 page '/ml/*',     layout: false
-
-with_layout :guides do
-  page '/guides/*'
-end
+page '/guides/*', layout: 'layouts/guides'
 
 ###
 # Helpers
@@ -55,10 +48,10 @@ configure :development do
   activate :livereload if defined?(::Middleman::LiveReloadExtension)
 end
 
-activate :deploy do |deploy|
-  deploy.method = :git
-  deploy.branch = 'master'
-end
+#activate :deploy do |deploy|
+#  deploy.method = :git
+#  deploy.branch = 'master'
+#end
 
 set :url_root, 'http://hanamirb.org'
 activate :search_engine_sitemap
@@ -69,7 +62,7 @@ helpers do
   # BLOG
   #
 
-  def articles(limit = 5)
+  def blog_articles(limit = 5)
     blog.articles.first(limit)
   end
 
