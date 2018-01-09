@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require 'mechanize'
+require 'middleman-core'
+require 'middleman-core/preview_server'
+require 'middleman-core/profiling'
+
+@server_thread = Thread.new do
+  ::Middleman::PreviewServer.start
+end
+
+# find the way to track preview server is loaded
+sleep(5)
+
+agent = Mechanize.new
+
+todo = ["http://localhost/"]
+ALLOWED_HOSTS = ["localhost"]
+bad_urls = []
+visited = []
+
+while (current_uri = todo.pop) != nil
+  visited.push current_uri
+  begin
+    page = agent.get(current_uri)
+    if page.is_a?(Mechanize::Page)
+      page.search("a").each do |a|
+        href = a['href']
+        break if href.start_with?('#')
+        unless href.nil?
+          uri = URI.join(page.uri, a['href'])
+          if ALLOWED_HOSTS.include?(uri.host) && !todo.include?(uri.to_s) && !visited.include?(uri.to_s)
+            todo.push uri.to_s
+          end
+        end
+      end
+    end
+  rescue Mechanize::ResponseCodeError, Net::HTTP::Persistent::Error => e
+    bad_urls << current_uri
+    puts "BROKEN: #{current_uri}"
+  end
+end
+
+Middleman::PreviewServer.shutdown
+exit(bad_urls.empty?)

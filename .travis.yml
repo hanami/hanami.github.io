@@ -2,9 +2,6 @@ language: ruby
 sudo: false
 install: bundle install --without development --jobs=3 --retry=3
 cache: bundler
-branches:
-  only:
-  - build
 env:
   global:
     - SITE_ENV=deploy
@@ -15,4 +12,5 @@ before_script:
 - git remote add origin https://davydovanton:${GH_TOKEN}@github.com/hanami/hanami.github.io.git
 - mkdir build
 script:
-- bin/site build && bundle exec middleman deploy
+- bundle exec bin/brokenurl
+- if [ "$TRAVIS_BRANCH" = "build" ]; then ./bin/site build && bundle exec middleman deploy; fi

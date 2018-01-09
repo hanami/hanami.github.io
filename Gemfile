@@ -12,4 +12,5 @@ gem 'httparty'
 
 group :development do
   gem 'middleman-livereload',          '~> 3.1'
+  gem 'mechanize'
 end
