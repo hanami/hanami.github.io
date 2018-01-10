@@ -66,7 +66,7 @@ Then we can use the new `hanami` executable to generate a new project:
 
 ```
 % gem install hanami
-% hanami new bookshelf
+% hanami new bookshelf --test=rspec
 ```
 
 <p class="notice">
@@ -150,7 +150,7 @@ describe 'Visit home' do
   it 'is successful' do
     visit '/'
 
-    page.body.must_include('Bookshelf')
+    expect(page).to have_content('Bookshelf')
   end
 end
 ```
@@ -271,7 +271,7 @@ describe 'List books' do
     visit '/books'
 
     within '#books' do
-      assert page.has_css?('.book', count: 2), 'Expected to find 2 books'
+      expect(page).to have_css('.book', count: 2)
     end
   end
 end
@@ -440,7 +440,7 @@ require 'spec_helper'
 describe Book do
   it 'can be initialized with attributes' do
     book = Book.new(title: 'Refactoring')
-    book.title.must_equal 'Refactoring'
+    expect(book.title).to eq('Refactoring')
   end
 end
 ```
@@ -516,12 +516,12 @@ describe Web::Views::Books::Index do
   let(:rendered)  { view.render }
 
   it 'exposes #books' do
-    view.books.must_equal exposures.fetch(:books)
+    expect(view.books).to eq(exposures.fetch(:books))
   end
 
   describe 'when there are no books' do
     it 'shows a placeholder message' do
-      rendered.must_include('<p class="placeholder">There are no books yet.</p>')
+      expect(rendered).to include('<p class="placeholder">There are no books yet.</p>')
     end
   end
 
@@ -531,13 +531,13 @@ describe Web::Views::Books::Index do
     let(:exposures) { Hash[books: [book1, book2]] }
 
     it 'lists them all' do
-      rendered.scan(/class="book"/).count.must_equal 2
-      rendered.must_include('Refactoring')
-      rendered.must_include('Domain Driven Design')
+      expect(rendered.scan(/class="book"/).length).to eq(2)
+      expect(rendered).to include('Refactoring')
+      expect(rendered).to include('Domain Driven Design')
     end
 
     it 'hides the placeholder message' do
-      rendered.wont_include('<p class="placeholder">There are no books yet.</p>')
+      expect(rendered).to_not include('<p class="placeholder">There are no books yet.</p>')
     end
   end
 end
@@ -589,7 +589,7 @@ describe Web::Controllers::Books::Index do
 
   it 'is successful' do
     response = action.call(params)
-    response[0].must_equal 200
+    expect(response[0]).to eq(200)
   end
 
   it 'exposes all books' do
@@ -660,8 +660,8 @@ describe 'Add a book' do
       click_button 'Create'
     end
 
-    current_path.must_equal('/books')
-    assert page.has_content?('New book')
+    expect(page).to have_current_path('/books')
+    expect(page).to have_content('New book')
   end
 end
 ```
@@ -755,15 +755,14 @@ describe Web::Controllers::Books::Create do
     action.call(params)
     book = repository.last
 
-    book.id.wont_be_nil
-    book.title.must_equal params.dig(:book, :title)
+    expect(book.id).to_not be_nil
   end
 
   it 'redirects the user to the books listing' do
     response = action.call(params)
 
-    response[0].must_equal 302
-    response[1]['Location'].must_equal '/books'
+    expect(response[0]).to eq(302)
+    expect(response[1]['Location']).to eq('/books')
   end
 end
 ```
@@ -831,19 +830,19 @@ describe Web::Controllers::Books::Create do
   describe 'with valid params' do
     let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
 
-    it 'creates a book' do
+    it 'creates a new book' do
       action.call(params)
       book = repository.last
 
-      book.id.wont_be_nil
-      book.title.must_equal params.dig(:book, :title)
+      expect(book.id).to_not be_nil
+      expect(book.title).to eq(params.dig(:book, :title))
     end
 
     it 'redirects the user to the books listing' do
       response = action.call(params)
 
-      response[0].must_equal 302
-      response[1]['Location'].must_equal '/books'
+      expect(response[0]).to eq(302)
+      expect(response[1]['Location']).to eq('/books')
     end
   end
 
@@ -852,15 +851,15 @@ describe Web::Controllers::Books::Create do
 
     it 'returns HTTP client error' do
       response = action.call(params)
-      response[0].must_equal 422
+      expect(response[0]).to eq(422)
     end
 
     it 'dumps errors in params' do
       action.call(params)
       errors = action.params.errors
 
-      errors.dig(:book, :title).must_equal  ['is missing']
-      errors.dig(:book, :author).must_equal ['is missing']
+      expect(errors.dig(:book, :title)).to eq(['is missing'])
+      expect(errors.dig(:book, :author)).to eq(['is missing'])
     end
   end
 end
