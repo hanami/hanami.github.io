@@ -156,8 +156,8 @@ _(Hanami architecture is heavily inspired by [Clean Architecture](https://blog.8
 
 ## Writing Our First Test
 
-The opening screen we see when we point our browser at our app, is a
-default page which is displayed when there are no routes defined.
+The opening screen we see when we point our browser at our app,
+is a default page which is displayed when there are no routes defined.
 
 Hanami encourages [Behavior Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) (BDD) as a way to write web applications.
 In order to get our first custom page to display, we'll write a high-level feature test:
@@ -175,14 +175,10 @@ describe 'Visit home' do
 end
 ```
 
-Note that, although Hanami is ready for a Behavior Driven Development workflow out of the box, **it is in no way bound to any particular testing framework** -- nor does it come with special integrations or libraries.
-
-We'll go with [Minitest](https://github.com/seattlerb/minitest) here (which is the default), but we can use [RSpec](http://rspec.info) by creating the project with `--test=rspec` option.
-Hanami will then generate helpers and stub files for it.
-
-<p class="notice">
-  Please check .env.test in case you need to tweak the database URL.
-</p>
+Hanami is ready for a Behavior Driven Development workflow out of the box,
+but **it is in no way bound to any particular testing framework**.
+It does not come with any special testing integrations or libraries,
+so if you know RSpec (or Minitest), there's nothing new to learn there.
 
 We have to migrate our schema in the test database by running:
 
@@ -190,7 +186,13 @@ We have to migrate our schema in the test database by running:
 % HANAMI_ENV=test bundle exec hanami db prepare
 ```
 
-As you can see, we have set `HANAMI_ENV` environment variable to instruct our command about the environment to use.
+The `HANAMI_ENV` at the beginning is an environment variable,
+which tells Hanami to use the `test` environment.
+This is necessary here because the default is `HANAMI_ENV=development`.
+
+<p class="notice">
+  If you have trouble, your <tt>DATABASE_URL</tt> is defined in <tt>.env.test</tt>
+</p>
 
 ### Following a Request
 
