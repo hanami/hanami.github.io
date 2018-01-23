@@ -200,23 +200,25 @@ Now we have a test, we can see it fail:
 
 ```
 % rake test
-Run options: --seed 44759
+F.
 
-# Running:
+Failures:
 
-F
+  1) Visit home is successful
+     Failure/Error: expect(page).to have_content('Bookshelf')
+       expected to find text "Bookshelf" in "404 - Not Found"
+     # ./spec/web/features/visit_home_spec.rb:7:in `block (2 levels) in <top (required)>'
 
-Finished in 0.018611s, 53.7305 runs/s, 53.7305 assertions/s.
+Finished in 0.02604 seconds (files took 1.14 seconds to load)
+2 examples, 1 failure
 
-  1) Failure:
-Homepage#test_0001_is successful [/Users/hanami/bookshelf/spec/web/features/visit_home_spec.rb:6]:
-Expected "<!DOCTYPE html>\n<html>\n  <head>\n    <title>Not Found</title>\n  </head>\n  <body>\n    <h1>Not Found</h1>\n  </body>\n</html>\n" to include "Bookshelf".
+Failed examples:
 
-1 runs, 1 assertions, 1 failures, 0 errors, 0 skips
+rspec ./spec/web/features/visit_home_spec.rb:4 # Visit home is successful
 ```
 
 Now let's make it pass.
-Lets add the code required to make this test pass, step-by-step.
+We'll add the code required to make this test pass, step-by-step.
 
 The first thing we need to add is a route:
 
@@ -225,8 +227,12 @@ The first thing we need to add is a route:
 root to: 'home#index'
 ```
 
-We pointed our application's root URL to the `index` action of the `home` controller (see the [routing guide](/guides/1.1/routing/overview) for more information).
-Now we can create the index action.
+We pointed our app's root URL to the `index` action of the `home` controller
+(see the [routing guide](/guides/1.1/routing/overview) for more information).
+
+If we run our tests, we'll get an error that the endpoint cannot be found.
+
+That makes sense, because we need to create the `home#index` action.
 
 ```ruby
 # apps/web/controllers/home/index.rb
@@ -240,8 +246,10 @@ module Web::Controllers::Home
 end
 ```
 
-This is an empty action that doesn't implement any business logic.
-Each action has a corresponding view, which is a Ruby object and needs to be added in order to complete the request.
+This is an empty action that doesn't do anything special.
+Each action in Hanami is defined by [its own class](https://en.wikipedia.org/wiki/Single_responsibility_principle), which makes it simple to test and work on.
+And, each action has a corresponding view, which is also defined by its own class.
+This one needs to be added in order to complete the request.
 
 ```ruby
 # apps/web/views/home/index.rb
@@ -252,27 +260,27 @@ module Web::Views::Home
 end
 ```
 
-...which, in turn, is empty and does nothing more than render its template.
-This is the file we need to edit in order to make our test pass. All we need to do is add the bookshelf heading.
+It's also empty, and doesn't do anything special.
+Its only responsibility is to render a template, which is what views do by default.
+
+This template is what we need to add, in order to make our tests pass.
+All we need to do is add the bookshelf heading.
 
 ```erb
 # apps/web/templates/home/index.html.erb
 <h1>Bookshelf</h1>
 ```
 
-Save your changes, run your test again and it now passes. Great!
+Now let's run our test suite again.
 
 ```shell
-Run options: --seed 19286
+..
 
-# Running:
-
-.
-
-Finished in 0.011854s, 84.3600 runs/s, 168.7200 assertions/s.
-
-1 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+Finished in 0.01394 seconds (files took 1.03 seconds to load)
+2 examples, 0 failures
 ```
+
+This means all our tests pass!
 
 ## Generating New Actions
 
