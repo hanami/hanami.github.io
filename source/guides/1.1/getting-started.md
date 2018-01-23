@@ -84,6 +84,7 @@ Let's see what it contains:
 % tree -L 1
 .
 ├── Gemfile
+├── README.md
 ├── Rakefile
 ├── apps
 ├── config
@@ -93,12 +94,13 @@ Let's see what it contains:
 ├── public
 └── spec
 
-6 directories, 3 files
+6 directories, 4 files
 ```
 
 Here's what we need to know:
 
 * `Gemfile` defines our Rubygems dependencies (using Bundler).
+* `README.md` tells us how to setup and use the project.
 * `Rakefile` describes our Rake tasks.
 * `apps` contains one or more web applications compatible with Rack.
   Here we can find the first generated Hanami application called `Web`.
