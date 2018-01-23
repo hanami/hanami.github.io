@@ -422,33 +422,41 @@ It's the perfect place to put our repeating headers and footers.
 ## Modeling Our Data With Entities
 
 Hard-coding books in our templates is, admittedly, kind of cheating.
-Let's add some dynamic data to our application.
+Let's add some dynamic data to our application!
 
 We'll store books in our database and display them on our page.
 To do so, we need a way to read and write to our database.
-Enter entities and repositories:
+There are two types of objects that we'll use for this:
 
-* an **entity** is a domain object (eg. `Book`) uniquely identified by its identity.
-* a **repository** mediates between entities and the persistence layer.
+* an **entity** is a domain object (a `Book`) that is uniquely identified by its identity,
+* a **repository** is what we use to persist, retrieve, and delete data for an entity, in the persistence layer.
 
 Entities are totally unaware of the database.
 This makes them **lightweight** and **easy to test**.
 
-For this reason we need a repository to persist the data that a `Book` depends on.
+Since entities are completely decoupled from the database,
+we use repositories to persist the data behind a `Book`.
+
+_(We also use repositories to turn the data from the database back into a `Book`,
+and delete that data, too.)_
+
 Read more about entities and repositories in the [models guide](/guides/1.1/models/overview).
 
-Hanami ships with a generator for models, so let's use it to create a `Book` entity and the corresponding repository:
+Hanami ships with a generator for models,
+so let's use it to create a `Book` entity and its corresponding repository:
 
-```
+```shell
 % bundle exec hanami generate model book
 create  lib/bookshelf/entities/book.rb
 create  lib/bookshelf/repositories/book_repository.rb
-create  db/migrations/20161115110038_create_books.rb
+create  db/migrations/20180115110038_create_books.rb
 create  spec/bookshelf/entities/book_spec.rb
 create  spec/bookshelf/repositories/book_repository_spec.rb
 ```
 
-The generator gives us an entity, a repository, a migration, and accompanying test files.
+The generator gives us an entity, a repository, and their associated test files.
+
+It also gives a database migration.
 
 ### Migrations To Change Our Database Schema
 
