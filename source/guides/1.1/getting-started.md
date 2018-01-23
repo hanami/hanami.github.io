@@ -322,26 +322,44 @@ Let's create a new action to fix that.
 
 ### Hanami Generators
 
-Hanami ships with various **generators** to save on typing some of the code involved in adding new functionality.
-In our terminal, enter:
+Hanami ships with a number of **generators**.
+These are tools that write some basic code for you, to help us write less code.
 
-```
+In our terminal, let's run:
+
+```shell
 % bundle exec hanami generate action web books#index
 ```
 
-This will generate a new action _index_ in the _books_ controller of the _web_ application.
-It gives us an empty action, view and template; it also adds a default route to `apps/web/config/routes.rb`:
+<p class="notice">
+  If you're using ZSH and that doesn't work
+  (with an error like <tt>zsh: no matches found: books#index</tt>),
+  Hanami lets us write this instead: <tt>hanami generate action web books/index</tt>
+</p>
+
+This does a lot for us:
+
+- Creating an action at `apps/web/controllers/books/index.rb` (and spec for it),
+- Creating a view at `apps/web/views/books/index.rb` (and a spec for it),
+- Creating a template at `apps/web/templates/books/index.html.erb`.
+
+_(If you're confused by 'action' vs. 'controller', here's a tip:
+Hanami only has `action` classes,
+so a controller is just a module to group several related actions together.)_
+
+They files are all pretty much empty.
+They have some basic code in there, so Hanami knows how to use the class.
+Thankfully we don't have to manually create those five files,
+with that specific code in them.
+
+The generator also adds a new route for us in the `web` app's routes file (`apps/web/config/routes.rb`).
 
 ```ruby
 get '/books', to: 'books#index'
 ```
 
-If you're using ZSH, you may get `zsh: no matches found: books#index`. In that case, you can use:
-```
-% hanami generate action web books/index
-```
-
-To make our test pass, we need to edit our newly generated template file in `apps/web/templates/books/index.html.erb`:
+To make our tests pass,
+we need to edit our newly generated template file in `apps/web/templates/books/index.html.erb`:
 
 ```html
 <h1>Bookshelf</h1>
@@ -360,14 +378,20 @@ To make our test pass, we need to edit our newly generated template file in `app
 </div>
 ```
 
-Save your changes and see your tests pass!
+Now our tests pass!
 
-The terminology of controllers and actions might be confusing, so let's clear this up: actions form the basis of our Hanami applications; controllers are mere modules that group several actions together.
-So while the "controller" is _conceptually_ present in our project, in practice we only deal with actions.
+We've used a generator to create a new end-point (page) in our application.
 
-We've used a generator to create a new endpoint in our application.
-But one thing you may have noticed is that our new template contains the same `<h1>` as our `home/index.html.erb` template.
-Let's fix that.
+But, we've started to repeat ourselves.
+
+In both our `books/index.html.erb` template,
+and our `homes/index.html.erb` template from above,
+we have `<h1>Bookshelf</h1>`.
+
+This is not a huge deal, but in a real application,
+we'll likely have a logo or a common navigation shared across all of the pages in our `app`.
+
+Let's fix that repetition, to show how that works.
 
 ### Layouts
 
