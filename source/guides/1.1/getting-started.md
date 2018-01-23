@@ -284,11 +284,13 @@ This means all our tests pass!
 
 ## Generating New Actions
 
-Let's use our new knowledge about the major Hanami components to add a new action.
-The purpose of our Bookshelf project is to manage books.
+Let's use our new knowledge about Hanami __routes__, __actions__, __views__, and __templates__.
+
+The purpose of our sample Bookshelf project is to manage books.
 
 We'll store books in our database and let the user manage them with our project.
-A first step would be to show a listing of all the books in our system.
+
+Our first step will be list out all the books we know about.
 
 Let's write a new feature test describing what we want to achieve:
 
@@ -307,7 +309,16 @@ describe 'List books' do
 end
 ```
 
-The test is simple enough, and fails because the URL `/books` is not currently recognised in our application. We'll create a new controller action to fix that.
+This test means that when we go to (/books)[http://localhost:2300/books],
+we'll see two HTML elements that have class `book`,
+and both will be inside of an HTML element that has an id of `books`.
+
+Our test suite is `Unable to find visible css "#books"`.
+
+Not only are we missing that element,
+we don't even have a page to put that element on!
+
+Let's create a new action to fix that.
 
 ### Hanami Generators
 
