@@ -124,17 +124,35 @@ And... bask in the glory of your first Hanami project at
 
 <p><img src="/images/welcome-page.png" alt="Hanami welcome page" class="img-responsive"></p>
 
-## Hanami Architecture
+## Hanami's Architecture
 
-Hanami architecture **can host several Hanami (and Rack) applications in the same Ruby process**.
+Hanami's architecture revolves around your project containing many `apps`.
+These all live together in the same codebase, and are run in the same Ruby process.
 
-These applications live under `apps/`.
-Each of them can be a component of our product, such as the user facing web interface, the admin pane, metrics, HTTP API etc..
+They live under `apps/`.
 
-All these parts are a _delivery mechanism_ to the business logic that lives under `lib/`.
-This is the place where our models are defined, and interact with each other to compose the **features** that our product provides.
+By default, we have a `web` app,
+which can be thought of as the normal, user-facing web interface.
+This is the most popular, so you'll probably want to keep it in your future Hanami projects.
+But, just so you know, there's nothing special or different about this app,
+it's just so common that Hanami generates it for us.
 
-Hanami architecture is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
+Later (in a real project), we would add other apps,
+such as an `admin` panel, a JSON `api`, or an analytics `dashboard`.
+
+We could also break our `web` app into smaller. Hanami fully supports that, too!
+
+Different `apps` represent __delivery mechanisms__.
+
+That means they're different ways of interacting with the core of your project,
+or the "business logic".
+
+Hanami doesn't want us to [repeat ourselves](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself),
+so that "business logic" is shared.
+Web applications almost always store and interact with data stored in a database.
+Both our 'business logic' and our persistence live in `lib/`.
+
+_(Hanami architecture is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).)_
 
 ## Writing Our First Test
 
