@@ -395,14 +395,14 @@ Let's fix that repetition, to show how that works.
 
 ### Layouts
 
-To avoid repeating ourselves in every single template, we can use a layout.
-Open up the file `apps/web/templates/application.html.erb` and edit it to look like this:
+To avoid repeating ourselves in every single template, we can modify our layout template.
+Let's edit `apps/web/templates/application.html.erb` to look like this:
 
 ```rhtml
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookshelf</title>
+    <title>Web</title>
     <%= favicon %>
   </head>
   <body>
@@ -412,9 +412,10 @@ Open up the file `apps/web/templates/application.html.erb` and edit it to look l
 </html>
 ```
 
-Now you can remove the duplicate lines from the other templates.
+And remove the duplicate lines from the other templates,
+since they're duplicated now.
 
-A **layout** is like any other template, but it is used to wrap your regular templates.
+A **layout template** is like any other template, but it is used to wrap your regular templates.
 The `yield` line is replaced with the contents of our regular template.
 It's the perfect place to put our repeating headers and footers.
 
