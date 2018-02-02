@@ -69,6 +69,25 @@ The output will be:
 <script integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" src="https://code.jquery.com/jquery-3.1.0.min.js" type="text/javascript" crossorigin="anonymous"></script>
 ```
 
+### Content Security Policy (CSP)
+
+By default, Hanami sets a Content-Security-Policy header which does not allow for the execution of external JavaScript code.
+
+Let's say we want to use [Bootstrap](https://getbootstrap.com/) in our `web` application, we have to explicitly allow for the use of the relevant CDNs in `app/web/application.rb` by appending them in the `script-src` field:
+
+```ruby
+      security.content_security_policy %{
+        …
+        script-src 'self' \
+                   https://code.jquery.com \
+                   https://cdnjs.cloudflare.com \
+                   https://maxcdn.bootstrapcdn.com;
+        …
+      }
+```
+
+Read more about the CSP header in the [security guide](/guides/1.1/projects/security/#content-security-policy).
+
 ### Local Assets
 
 The security problem described above doesn't concern only CDNs, but local files too.

@@ -128,7 +128,7 @@ helpers do
 
   def latest_stable_version_guides_path
     latest_stable_version = Dir.glob("#{GUIDES_ROOT}/*").each_with_object([]) do |version, result|
-      next unless ::File.directory?(version)
+      next unless ::File.directory?(version) && version =~ /[\d]+\.[\d]+\z/
       result << ::File.basename(version)
     end.compact.sort.last
 

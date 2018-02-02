@@ -12,7 +12,7 @@
         <p id="motto" class="lead m-b-lg p-b-md">The web, with simplicity</p>
         <div class="app-block-cta">
           <a href="#install" class="btn btn-primary m-t">Install v<%= hanami_version %></a>
-          <a href="/guides/getting-started" target="_blank" class="btn btn-default btn-outline m-t">Getting Started</a>
+          <a href="<%= latest_stable_version_guides_path %>/getting-started" target="_blank" class="btn btn-default btn-outline m-t">Getting Started</a>
           <br>
           <em class="hanami-release-date">Released on <%= hanami_release_date %></em>
         </div>
@@ -76,6 +76,35 @@
                 </p>
               </li>
             </ul>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text-center m-b-lg">
+            <p class="lead m-x-auto">Trusted by</p>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-sm-4">
+            <a href="https://dnsimple.com/opensource" rel="noopener noreferrer" target="_blank">
+              <img src="/images/companies/dnsimple.png" alt="DNSimple">
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a href="https://www.freework.com" rel="noopener noreferrer" target="_blank">
+              <img src="/images/companies/freework.png" alt="Freework">
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a href="https://www.advanon.com" rel="noopener noreferrer" target="_blank">
+              <img src="/images/companies/advanon.png" alt="Freework">
+            </a>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text-center">
+            <p class="m-x-auto"><a href="https://github.com/hanami/hanami.github.io/edit/build/source/layouts/home.erb" rel="noopener noreferrer" target="_blank">Are you using Hanami in production? Let us know!</a></p>
           </div>
         </div>
       </div>

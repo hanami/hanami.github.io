@@ -86,6 +86,23 @@ end
 Rendering context for a template is made of view methods and exposures.
 </p>
 
+The objects exposed in the controller action are available in the corresponding view. So the values 
+can also be modified, wrapped or reused in some other way. Assuming that the `title` is exposed
+in the action, it can be accessed as follows:
+
+```ruby
+# apps/web/views/dashboard/index.rb
+module Web::Views::Dashboard
+  class Index
+    include Web::View
+    
+    def full_title
+      "The title: " + title
+     end
+  end
+end
+```
+
 ## Custom Rendering
 
 Hanami performs rendering by calling `#render` on a view and it expects a string in return.
