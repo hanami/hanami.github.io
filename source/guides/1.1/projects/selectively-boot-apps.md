@@ -6,19 +6,23 @@ version: 1.1
 # Selectively boot apps
 
 With Hanami you can build your project by following the [Monolith-First](/guides/1.1/architecture/overview/#monolith-first) principle.
-You add more and more code to the project, but growing it organically, by using several Hanami apps.
+As you add more code to the project, you can grow it organically, by splitting the project into several Hanami apps.
 
-There are cases of real world products using a **dozen of Hanami apps in the same project** (eg `web` for the frontend, `admin` for the administration, etc..)
-They deploy the project on several servers, by booting only a subset of these apps.
-So the servers A, B, and C are for customers (`web` application), D is for administration (`admin` application), while E, and F are for API (`api` application)
+A real world Hanami project could have **dozens of Hanami apps in the same project** (for example, `web` for the front-end, `admin` for the administration, `api` for a JSON API, etc...)
+You might want to deploy them to different servers, even though they're all a part of the same project.
+For example, most of the servers could be used for the `web` app (for customers on the site), a couple could be used for an `api` (perhaps for customers using mobile apps), and you could have a single server running and `admin` application, since it'll likely get less traffic than the other two.
 
-To serve this purpose we introduced _selective booting_ feature.
-
+We support this, with _selective booting_:
 
 ```ruby
 # config/environment.rb
 # ...
 Hanami.configure do
+  if Hanami.app?(:web)
+    require_relative '../apps/web/application'
+    mount Api::Application, at: '/'
+  end
+
   if Hanami.app?(:api)
     require_relative '../apps/api/application'
     mount Api::Application, at: '/api'
@@ -28,18 +32,14 @@ Hanami.configure do
     require_relative '../apps/admin/application'
     mount Api::Application, at: '/admin'
   end
-
-  if Hanami.app?(:web)
-    require_relative '../apps/web/application'
-    mount Api::Application, at: '/'
-  end
 end
 ```
 
-Then from the CLI, you use the `HANAMI_APPS` env var.
+You can declare which apps to use with the `HANAMI_APPS` environment variable.
+You can provide a single app, or several apps (joined with commas):
 
 ```shell
-$ HANAMI_APPS=web,api bundle exec hanami server
+% HANAMI_APPS=web,api bundle exec hanami server
 ```
 
-With the command above we start only `web` and `api` applications.
+This would start only the `web` and `api` applications.
