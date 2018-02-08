@@ -108,9 +108,10 @@ require 'spec_helper'
 
 describe AddBook do
   let(:interactor) { AddBook.new }
+  let(:attributes) { Hash.new }
 
   it "succeeds" do
-    expect(interactor.call).to be_a_success
+    expect(interactor.call(attributes)).to be_a_success
   end
 end
 ```
