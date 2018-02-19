@@ -15,14 +15,15 @@ module Web::Controllers::Dashboard
     include Web::Action
 
     def call(params)
-      puts request.path_info      # => "/dashboard"
-      puts request.request_method # => "GET"
-      puts request.get?           # => true
-      puts request.post?          # => false
-      puts request.xhr?           # => false
-      puts request.referer        # => "http://example.com/"
-      puts request.user_agent     # => "Mozilla/5.0 Macintosh; ..."
-      puts request.ip             # => "127.0.0.1"
+      puts request.path_info                 # => "/dashboard"
+      puts request.request_method            # => "GET"
+      puts request.get?                      # => true
+      puts request.post?                     # => false
+      puts request.xhr?                      # => false
+      puts request.referer                   # => "http://example.com/"
+      puts request.user_agent                # => "Mozilla/5.0 Macintosh; ..."
+      puts request.ip                        # => "127.0.0.1"
+      puts request.env['HTTP_AUTHORIZATION'] # => "Basic abc123"
     end
   end
 end
