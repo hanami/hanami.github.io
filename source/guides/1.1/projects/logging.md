@@ -83,6 +83,24 @@ end
 
 Note that `billing => address => number` wasn't filtered while `billing => credit_card => number` was filtered instead.
 
+If you want to disable logging of the body completely, it can be easily achieved
+with custom formatter:
+
+```ruby
+class NoParamsFormatter < ::Hanami::Logger::Formatter
+  def _format(hash)
+    hash.delete :params
+    super hash
+  end
+end
+```
+
+and than just telling logger to use our new formatter for logging
+
+```ruby
+logger level: :debug, formatter: NoParamsFormatter.new
+```
+
 ## Arbitrary Arguments
 
 You can speficy [arbitrary arguments](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html#class-Logger-label-How+to+create+a+logger), that are compatible with Ruby's `Logger`.
