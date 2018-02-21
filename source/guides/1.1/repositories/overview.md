@@ -246,7 +246,7 @@ class OperatorRepository < Hanami::Repository
   end
 
   def by_name(name)
-    t_operator.where(s_name: name)
+    root.where(s_name: name)
   end
 end
 ```
