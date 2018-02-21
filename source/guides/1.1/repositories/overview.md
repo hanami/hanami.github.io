@@ -217,14 +217,14 @@ operator = OperatorRepository.new.create(name: "Jane")
   # => #<Operator:0x007f8e43cbcea0 @attributes={:id=>1, :name=>"Jane"}>
 ```
 
-There's a few caveats tho (as always with legacy databases):
+There are few caveats though (as there always are, with legacy databases):
 
-Note that all attributes need to be mapped or you will get an error when booting up the application that will look like this:
+Note that **all** attributes need to be mapped or you will get an error when booting up the application that will look like this:
 
 ```ruby
 class OperatorRepository < Hanami::Repository
   self.relation = :t_operator
-  
+
   mapping do
     attribute :id, from: :operator_id
   end
@@ -232,48 +232,48 @@ end
 
   # => Hanami::Model::Error: key not found: :s_name
 ```
-That happens because we infer the schema for the table and mapping only really changes the `Hanami::Entity` and commands that operate over it (like `create` and `update`).
+That happens because the Repository infers the schema for the table and `mapping` only affects the `Hanami::Entity` and commands that operate over it (like `create` and `update`).
 
-A query on the other hand will still need to use the original attribute name:
+A query, on the other hand, will still need to use the original attribute name:
 
 ```ruby
 class OperatorRepository < Hanami::Repository
   self.relation = :t_operator
-  
+
   mapping do
     attribute :id,   from: :operator_id
     attribute :name, from: :s_name
   end
-  
+
   def by_name(name)
     t_operator.where(s_name: name)
   end
 end
 ```
 
-If you want to use the more semantic names (or with just a subset of attributes) you'll need to define a schema and a mapping:
+If you want to use the more semantic, aliased names (or with just a subset of attributes) you'll need to define both a `schema` and a `mapping`:
 
 ```ruby
 class OperatorRepository < Hanami::Repository
   self.relation = :t_operator
-  
+
   schema do
     attribute :operator_id, Hanami::Model::Sql::Types::Int.meta(primary_key: true, alias: :id)
     attribute :s_name, Hanami::Model::Sql::Types::String.meta(alias: :name)
   end
-  
+
   mapping do
     attribute :id,   from: :operator_id
     attribute :name, from: :s_name
   end
-  
+
   def by_name(name)
     t_operator.where(name: name)
   end
 end
 ```
 
-Then you can use the more semantic names both on queries as well as entities:
+Then you can use the aliased names on both queries and entities:
 
 ```ruby
 operator = OperatorRepository.new.create(name: 'Jane')
