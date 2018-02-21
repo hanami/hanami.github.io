@@ -5,25 +5,29 @@ version: 1.1
 
 # Use Your Own ORM
 
-Hanami components are decoupled each other.
+Hanami components are decoupled from each other.
 This level of separation allows you to use the ORM (data layer) of your choice.
 
 Here's how to do it:
 
 1. Edit your `Gemfile`:
-    1. Remove `hanami-model`
-    1. Add the gem(s) of your ORM
-1. Run `bundle install`.
-1. If you want to keep the mailer code:
-    1. Remove the `lib/projectname/entities` and `lib/projectname/repositories` directories.  (Don't erase `lib/projectname/mailers`.)
-1. If you don't want to keep the mailer code:
-    1. Remove the `lib/` directory (eg. `rm -rf lib`).
-1. Remove the corresponding directories (`entities`, `repositories`; and also `mailers` if you're not keeping the mailers) from the `spec/` directory.
-1. Open `config/environment.rb`, then:
-    1. remove `require 'hanami/model'`
-    1. remove `require_relative '../lib/projectname'`
-    1. remove `model` block in `Hanami.configure`
-    1. if not keeping the mailers, then remove the `mailer` block, too.
-1. Open `Rakefile` and remove `require 'hanami/rake_tasks'`.
+    - Remove `hanami-model`.
+    - Add the gem(s) for your ORM.
+2. Run `bundle install`.
+3. Remove folders that are no longer needed:
+    - Remove `lib/project_name/entities/` and `lib/projectname/repositories/`
+    - Remove `spec/project_name/entities/` and `spec/project_name/repositories/`.
+5. Edit `config/environment.rb`:
+    - Remove `require 'hanami/model'`
+    - Remove `require_relative '../lib/projectname'`
+    - Remove `model` block in `Hanami.configure`
+6. Edit `Rakefile`:
+    - Remove `require 'hanami/rake_tasks'`.
 
-Please notice that if `hanami-model` is removed from the project features like [database commands](/guides/1.1/command-line/database) and [migrations](/guides/1.1/migrations/overview) won't be available.
+In general, `lib/project_name/` is a good place to put code that's used across
+apps, so we don't recommend getting rid of it entirely. That's also where
+Hanami's mailers live. We recommend that you put your new ORM code into that
+folder, but you're free to put it elsewhere, and get rid of `lib/` entirely, if
+you choose.
+
+Please be aware that if `hanami-model` is removed from the project features like [database commands](/guides/1.1/command-line/database) and [migrations](/guides/1.1/migrations/overview) won't be available.
