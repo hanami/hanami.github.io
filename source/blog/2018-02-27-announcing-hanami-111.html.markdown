@@ -33,7 +33,7 @@ This is a patch release for bug fixes and minor enhancements:
 
   * `hanami-1.1.1`
   * `hanami-assets-1.1.1`
-  * `hanami-cli-1.1.1`
+  * `hanami-cli-0.1.1`
   * `hanami-helpers-1.1.1`
   * `hanami-view-1.1.1`
   * `hanami-controller-1.1.1`
