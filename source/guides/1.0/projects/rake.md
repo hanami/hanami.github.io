@@ -63,3 +63,32 @@ For instance, Heroku expects to find the following Rake tasks in a Ruby applicat
 For Heroku, there isn't a way to customize the deploy, so we're supporting these "standard" Rake tasks from Ruby on Rails.
 
 **If you are in control of your deployment, don't rely on these Rake tasks, but please use `hanami` [command line](/guides/1.0/command-line/database), instead.**
+
+## Custom rake tasks
+
+If you want to create a custom rake tasks you can create a `rakelib` folder in project root:
+
+```
+% mkdir rakelib/
+```
+
+And after that create `*.rake` file, `export.rake` for example:
+
+```ruby
+# in rakelib/export.rake
+
+namespace :export do
+  desc 'Export books to algolia service'
+  task :books do
+    ExportInteractor.new.call
+  end
+end
+```
+
+Now you can see your custom rake task in the list:
+
+```
+% bundle exec rake -T
+rake export:books  # Export books to algolia service
+rake environment   # Load the full project
+rake spec          # Run RSpec code examples
