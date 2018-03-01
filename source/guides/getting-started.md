@@ -513,8 +513,16 @@ require_relative '../../../../apps/web/views/books/index'
 
 describe Web::Views::Books::Index do
   let(:exposures) { Hash[books: []] }
-  let(:template)  { Hanami::View::Template.new('apps/web/templates/books/index.html.erb') }
-  let(:view)      { Web::Views::Books::Index.new(template, exposures) }
+  let(:template)  do
+    Hanami::View::Template.new(
+      'apps/web/templates/books/index.html.erb'
+    )
+  end
+
+  let(:view) do
+    Web::Views::Books::Index.new(template, exposures)
+  end
+
   let(:rendered)  { view.render }
 
   it 'exposes #books' do
@@ -528,8 +536,20 @@ describe Web::Views::Books::Index do
   end
 
   describe 'when there are books' do
-    let(:book1)     { Book.new(title: 'Refactoring', author: 'Martin Fowler') }
-    let(:book2)     { Book.new(title: 'Domain Driven Design', author: 'Eric Evans') }
+    let(:book1) do
+      Book.new(
+        title: 'Refactoring',
+        author: 'Martin Fowler'
+      )
+    end
+
+    let(:book2) do
+      Book.new(
+        title: 'Domain Driven Design',
+        author: 'Eric Evans'
+      )
+    end
+
     let(:exposures) { Hash[books: [book1, book2]] }
 
     it 'lists them all' do
@@ -746,7 +766,9 @@ require_relative '../../../../apps/web/controllers/books/create'
 
 describe Web::Controllers::Books::Create do
   let(:action) { Web::Controllers::Books::Create.new }
-  let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
+  let(:params) do
+    { book: { title: 'Confident Ruby', author: 'Avdi Grimm' } }
+  end
   let(:repository) { BookRepository.new }
 
   before do
@@ -831,7 +853,9 @@ describe Web::Controllers::Books::Create do
   end
 
   describe 'with valid params' do
-    let(:params) { Hash[book: { title: 'Confident Ruby', author: 'Avdi Grimm' }] }
+    let(:params) do
+      { book: { title: 'Confident Ruby', author: 'Avdi Grimm' } }
+    end
 
     it 'is creates a book' do
       action.call(params)
@@ -942,9 +966,21 @@ require 'ostruct'
 require_relative '../../../../apps/web/views/books/new'
 
 describe Web::Views::Books::New do
-  let(:params)    { OpenStruct.new(valid?: false, error_messages: ['Title must be filled', 'Author must be filled']) }
+  let(:params) do
+    OpenStruct.new(
+      valid?: false,
+      error_messages: [
+        'Title must be filled',
+        'Author must be filled'
+      ]
+    )
+  end
   let(:exposures) { Hash[params: params] }
-  let(:template)  { Hanami::View::Template.new('apps/web/templates/books/new.html.erb') }
+
+  let(:template) do
+    Hanami::View::Template.new('apps/web/templates/books/new.html.erb')
+  end
+
   let(:view)      { Web::Views::Books::New.new(template, exposures) }
   let(:rendered)  { view.render }
 
