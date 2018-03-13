@@ -120,7 +120,7 @@ user.avatar
   # => nil
 ```
 
-Because we haven't [explicitly loaded](/guides/1.1/associations/overview#explicit-loading) the associated record, `user.avar` is `nil`.
+Because we haven't [explicitly loaded](/guides/1.1/associations/overview#explicit-loading) the associated record, `user.avatar` is `nil`.
 We can use the method that we have defined on before (`#find_with_avatar`):
 
 ```ruby
