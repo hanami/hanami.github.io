@@ -22,12 +22,13 @@
           </optgroup>
         <% end %>
       </select>
+
       <ul id="markdown-toc">
         <li></li>
         <li><%= guides_edit_article(current_page.source_file) %></li>
 
         <% guides.categories.each do |category| %>
-          <li class="toc-group">
+          <li class="toc-group <%= toc_group_opened_class(category, current_page) %>">
             <span><%= guide_title(category) %></span>
             <ul>
               <% category.pages.each do |page| %>

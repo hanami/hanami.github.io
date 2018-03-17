@@ -145,6 +145,13 @@ helpers do
     File.join(path, category.path, page.path)
   end
 
+  def toc_group_opened_class(category, current_page)
+    regexp = "/#{category.path}/"
+    res = current_page.path =~ Regexp.new(regexp)
+
+    res ? 'opened' : nil
+  end
+
   def guide_pager(current_page, guides, version = nil)
     current_url = current_page.url.tr('/', '')
     flat_guides = guides.categories.flat_map { |category|

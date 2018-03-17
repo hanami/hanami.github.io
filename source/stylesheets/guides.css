@@ -264,6 +264,9 @@ body {
   font-size: 16px;
   list-style: none;
 }
+#markdown-toc span {
+  cursor: pointer;
+}
 #markdown-toc a {
   display: block;
   padding: 2px 10px 2px 10px;
@@ -280,6 +283,10 @@ body {
 #markdown-toc ul {
   list-style: none;
   padding-left: 20px;
+  display: none;
+}
+#markdown-toc li.opened ul {
+  display: block;
 }
 #markdown-toc ul ul {
   display: none;
@@ -291,7 +298,7 @@ body {
   #markdown-toc {
     float: right;
     width: 220px;
-    margin-right: -250px;
+    margin-right: -260px;
   }
   #markdown-toc a {
     color: #555555;
