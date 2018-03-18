@@ -10,7 +10,8 @@ require 'lib/github_style_titles'
 require File.expand_path('../extensions/build_cleaner.rb', __FILE__)
 
 activate :search do |search|
-  search.resources = ['guides/']
+  latest_stable_version = Dir.glob('./source/guides/*').select {|f| File.directory?(f)}.sort.last.split("/").last(2).join('/') + '/'
+  search.resources = [latest_stable_version]
   search.fields = {
     title:   { boost: 100, store: true, required: true },
     content: { boost: 50, store: true },
