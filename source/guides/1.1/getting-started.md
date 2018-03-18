@@ -173,7 +173,7 @@ As you can see, we have set the `HANAMI_ENV` environment variable to instruct ou
 
 ### Following a Request
 
-Now we have a test, we can see it fail:
+With the specs at `spec/web/views/application_layout_spec.rb` commented out for now, we should have a test that fails with a similar report like:
 
 ```
 % bundle exec rake test
