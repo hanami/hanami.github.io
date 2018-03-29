@@ -20,7 +20,7 @@ We support this, with _selective booting_:
 Hanami.configure do
   if Hanami.app?(:web)
     require_relative '../apps/web/application'
-    mount Api::Application, at: '/'
+    mount Web::Application, at: '/'
   end
 
   if Hanami.app?(:api)
@@ -30,7 +30,7 @@ Hanami.configure do
 
   if Hanami.app?(:admin)
     require_relative '../apps/admin/application'
-    mount Api::Application, at: '/admin'
+    mount Admin::Application, at: '/admin'
   end
 end
 ```
