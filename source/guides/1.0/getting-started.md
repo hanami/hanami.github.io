@@ -100,8 +100,7 @@ Here's what we need to know:
 
 * `Gemfile` defines our Rubygems dependencies (using Bundler).
 * `Rakefile` describes our Rake tasks.
-* `apps` contains one or more web applications compatible with Rack.
-  Here we can find the first generated Hanami application called `Web`.
+* `apps` contains one or more web applications compatible with Rack, where we can find the first generated Hanami application called `web`.
   It's the place where we find our controllers, views, routes and templates.
 * `config` contains configuration files.
 * `config.ru` is for Rack servers.
@@ -122,17 +121,17 @@ And... bask in the glory of your first Hanami project at
 
 <p><img src="/images/welcome-page.png" alt="Hanami welcome page" class="img-responsive"></p>
 
-## Hanami Architecture
+## Hanami's Architecture
 
-Hanami architecture **can host several Hanami (and Rack) applications in the same Ruby process**.
+Hanami's architecture **can host several Hanami (and Rack) applications in the same Ruby process**.
 
 These applications live under `apps/`.
 Each of them can be a component of our product, such as the user facing web interface, the admin pane, metrics, HTTP API etc..
 
 All these parts are a _delivery mechanism_ to the business logic that lives under `lib/`.
-This is the place where our models are defined, and interact with each other to compose the **features** that our product provides.
+This is where our models are defined and interact with each other to compose the **features** that our product provides.
 
-Hanami architecture is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
+Hanami's architecture is heavily inspired by [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
 ## Writing Our First Test
 
@@ -170,11 +169,11 @@ We have to migrate our schema in the test database by running:
 % HANAMI_ENV=test bundle exec hanami db prepare
 ```
 
-As you can see, we have set `HANAMI_ENV` environment variable to instruct our command about the environment to use.
+As you can see, we have set the `HANAMI_ENV` environment variable to instruct our command about the environment to use.
 
 ### Following a Request
 
-Now we have a test, we can see it fail:
+With the specs at `spec/web/views/application_layout_spec.rb` commented out for now, we should have a test that fails with a similar report like:
 
 ```
 % bundle exec rake test
