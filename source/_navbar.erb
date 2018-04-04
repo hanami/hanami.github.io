@@ -1,4 +1,4 @@
-<nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded text-uppercase app-navbar">
+<nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded app-navbar">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand text-uppercase" href="/">
         <span>Hanami</span>
       </a>
     </div>
@@ -16,9 +16,10 @@
     <div class="navbar-collapse collapse" id="navbar-collapse">
       <form action="" class="navbar-form form-inline pull-left visible-lg-block" id="search-form">
         <input type="search" class="form-control" id="search" placeholder="Search guides...">
+
       </form>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right text-uppercase">
         <li>
           <a href="<%= latest_stable_version_guides_path %>">Guides</a>
         </li>
@@ -38,3 +39,13 @@
     </div><!--/.nav-collapse -->
   </div>
 </nav>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+ apiKey: '688fca832b36348b694ee05d43f22560',
+ indexName: 'hanamirb',
+ inputSelector: '#search',
+ algoliaOptions: { 'facetFilters': ["version:1.1", "tags:guides"] },
+ debug: false
+});
+</script>
