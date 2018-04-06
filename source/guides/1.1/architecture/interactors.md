@@ -543,8 +543,8 @@ RSpec.describe Web::Controllers::Books::Create do
   describe 'with invalid params' do
     let(:params) { Hash[book: {}] }
 
-    it 'calls interactor' do
-      expect(interactor).to receive(:call)
+    it 'does not call the interactor' do
+      expect(interactor).not_to receive(:call)
       response = action.call(params)
     end
 
