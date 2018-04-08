@@ -256,7 +256,7 @@ Finished in 0.011854s, 84.3600 runs/s, 168.7200 assertions/s.
 Let's use our new knowledge about the major Hanami components to add a new action.
 The purpose of our Bookshelf project is to manage books.
 
-We'll store books in our database and let the user manage them with our application.
+We'll store books in our database and let the user manage them with our project.
 A first step would be to show a listing of all the books in our system.
 
 Let's write a new feature test describing what we want to achieve:
