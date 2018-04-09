@@ -1,0 +1,151 @@
+categories:
+  - path: /
+    title: Introduction
+    pages:
+      - path: getting-started
+  - path: architecture
+    pages:
+      - path: overview
+      - path: interactors
+  - path: projects
+    pages:
+      - path: code-reloading
+      - path: rake
+      - path: logging
+      - path: initializers
+      - path: security
+      - path: selectively-boot-apps
+  - path: routing
+    pages:
+      - path: overview
+      - path: basic-usage
+      - path: restful-resources
+        title: RESTful Resource(s)
+      - path: testing
+  - path: actions
+    pages:
+      - path: overview
+      - path: basic-usage
+      - path: parameters
+      - path: request-and-response
+        title: Request & Response
+      - path: exposures
+      - path: rack-integration
+      - path: mime-types
+        title: MIME Types
+      - path: cookies
+      - path: sessions
+      - path: exception-handling
+      - path: control-flow
+      - path: http-caching
+        title: HTTP Caching
+      - path: share-code
+      - path: testing
+  - path: views
+    pages:
+      - path: overview
+      - path: basic-usage
+      - path: templates
+      - path: mime-types
+        title: MIME Types
+      - path: layouts
+      - path: custom-error-pages
+      - path: share-code
+      - path: testing
+  - path: models
+    pages:
+      - path: overview
+      - path: database-configuration
+      - path: use-your-own-orm
+        title: Use Your Own ORM
+  - path: repositories
+    pages:
+      - path: overview
+      - path: sql-queries
+        title: SQL Queries
+      - path: postgresql
+        title: PostgreSQL
+  - path: entities
+    pages:
+      - path: overview
+      - path: custom-schema
+      - path: data-types
+  - path: associations
+    pages:
+      - path: overview
+      - path: has-many
+      - path: belongs-to
+      - path: has-one
+      - path: has-many-through
+  - path: migrations
+    pages:
+      - path: overview
+      - path: create-table
+      - path: alter-table
+  - path: validations
+    pages:
+      - path: overview
+      - path: boolean-logic
+      - path: custom-predicates
+      - path: advanced-usage
+  - path: helpers
+    pages:
+      - path: overview
+      - path: html5
+        title: HTML5
+      - path: forms
+      - path: routing
+      - path: assets
+      - path: links
+      - path: escape
+        title: Markup Escape
+      - path: numbers
+      - path: custom-helpers
+  - path: mailers
+    pages:
+      - path: overview
+      - path: basic-usage
+      - path: templates
+      - path: delivery
+      - path: share-code
+      - path: testing
+  - path: assets
+    pages:
+      - path: overview
+      - path: preprocessors
+      - path: compressors
+      - path: content-delivery-network
+        title: Content Delivery Network (CDN)
+      - path: use-your-own-assets-management-tool
+        title: Use Your Own Assets Management Tool
+  - path: command-line
+    pages:
+      - path: applications
+      - path: generators
+      - path: destroy
+      - path: database
+      - path: assets
+      - path: routes
+      - path: version
+      - path: plugins
+  - path: upgrade-notes
+    pages:
+      - path: v060
+        title: v0.6.0
+      - path: v070
+        title: v0.7.0
+      - path: v080
+        title: v0.8.0
+      - path: v090
+        title: v0.9.0
+      - path: v100
+        title: v1.0.0
+      - path: v110
+        title: v1.1.0
+  - path: /
+    title: Guide Versions
+    pages:
+      - path: ''
+        title: 'v1.1'
+      - path: '1.0'
+        title: v1.0
