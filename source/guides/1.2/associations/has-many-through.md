@@ -1,6 +1,6 @@
 ---
 title: "Guides - Associations: Has Many Through"
-version: 1.1
+version: 1.2
 ---
 
 # Has Many Through

@@ -1,6 +1,6 @@
 ---
 title: "Guides - Entities: Data Types"
-version: 1.1
+version: 1.2
 ---
 
 # Data Types

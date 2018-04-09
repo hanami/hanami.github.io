@@ -1,6 +1,6 @@
 ---
 title: Guides - Getting Started
-version: 1.1
+version: 1.2
 ---
 
 # Getting Started

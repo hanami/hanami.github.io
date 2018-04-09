@@ -1,6 +1,6 @@
 ---
 title: Guides - Routing Helpers
-version: 1.1
+version: 1.2
 ---
 
 ## Routing Helpers

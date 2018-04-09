@@ -1,6 +1,6 @@
 ---
 title: Guides - Request & Response
-version: 1.1
+version: 1.2
 ---
 
 # Rack Integration

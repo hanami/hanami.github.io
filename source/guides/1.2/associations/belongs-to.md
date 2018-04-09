@@ -1,6 +1,6 @@
 ---
 title: "Guides - Associations: Belongs To"
-version: 1.1
+version: 1.2
 ---
 
 # Belongs To

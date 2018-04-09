@@ -1,6 +1,6 @@
 ---
 title: Guides - Basic Usage
-version: 1.1
+version: 1.2
 ---
 
 # Basic Usage

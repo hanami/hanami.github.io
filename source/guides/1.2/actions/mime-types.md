@@ -1,6 +1,6 @@
 ---
 title: Guides - Action MIME Types
-version: 1.1
+version: 1.2
 ---
 
 # MIME Types

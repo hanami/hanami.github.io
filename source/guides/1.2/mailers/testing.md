@@ -1,6 +1,6 @@
 ---
 title: Guides - Mailers Testing
-version: 1.1
+version: 1.2
 ---
 
 # Testing

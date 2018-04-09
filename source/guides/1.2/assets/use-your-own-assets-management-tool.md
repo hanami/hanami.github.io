@@ -1,6 +1,6 @@
 ---
 title: Guides - Use Your Own Assets Management
-version: 1.1
+version: 1.2
 ---
 
 # Use Your Own Assets Management

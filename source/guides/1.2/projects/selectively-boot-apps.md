@@ -1,6 +1,6 @@
 ---
 title: Guides - Selectively boot apps
-version: 1.1
+version: 1.2
 ---
 
 # Selectively boot apps

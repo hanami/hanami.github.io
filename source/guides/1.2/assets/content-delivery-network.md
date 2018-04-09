@@ -1,6 +1,6 @@
 ---
 title: Guides - Assets Content Delivery Network (CDN)
-version: 1.1
+version: 1.2
 ---
 
 # Assets

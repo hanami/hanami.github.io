@@ -1,6 +1,6 @@
 ---
 title: Guides - Models Overview
-version: 1.1
+version: 1.2
 ---
 
 # Models

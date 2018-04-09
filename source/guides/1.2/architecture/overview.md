@@ -1,6 +1,6 @@
 ---
 title: "Guides - Architectures: Container"
-version: 1.1
+version: 1.2
 ---
 
 # Architectures

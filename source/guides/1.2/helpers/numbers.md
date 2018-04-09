@@ -1,6 +1,6 @@
 ---
 title: Guides - Number Helpers
-version: 1.1
+version: 1.2
 ---
 
 ## Number Helpers

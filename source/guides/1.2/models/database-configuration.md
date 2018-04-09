@@ -1,6 +1,6 @@
 ---
 title: Guides - Database Configuration
-version: 1.1
+version: 1.2
 ---
 
 # Database Configuration

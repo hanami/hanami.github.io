@@ -1,6 +1,6 @@
 ---
 title: Guides - Action Share Code
-version: 1.1
+version: 1.2
 ---
 
 # Share Code

@@ -1,6 +1,6 @@
 ---
 title: Guides - Custom Error Pages
-version: 1.1
+version: 1.2
 ---
 
 # Custom Error Pages

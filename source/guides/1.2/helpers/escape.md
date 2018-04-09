@@ -1,6 +1,6 @@
 ---
 title: Guides - Markup Escape Helpers
-version: 1.1
+version: 1.2
 ---
 
 ## Markup Escape Helpers

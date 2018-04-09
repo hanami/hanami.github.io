@@ -1,6 +1,6 @@
 ---
 title: Guides - HTML5 Helpers
-version: 1.1
+version: 1.2
 ---
 
 ## HTML5 Helpers

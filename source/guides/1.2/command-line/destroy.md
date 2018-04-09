@@ -1,6 +1,6 @@
 ---
 title: "Guides - Command Line: Destroy"
-version: 1.1
+version: 1.2
 ---
 
 # Destroy
