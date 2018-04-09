@@ -5,7 +5,7 @@ version: 1.2
 
 # Code Reloading
 
-_Code reloading_ allows us to edit code and see the changes with a browser refresh, without needing to stop and restart the [server](/guides/1.1/command-line/applications).
+_Code reloading_ allows us to edit code and see the changes with a browser refresh, without needing to stop and restart the [server](/guides/1.2/command-line/applications).
 
 ## Development Environment
 
@@ -16,7 +16,7 @@ New generated projects have this entry in their `Gemfile`:
 ```ruby
 group :development do
   # Code reloading
-  # See: http://hanamirb.org/guides/1.1/projects/code-reloading
+  # See: http://hanamirb.org/guides/1.2/projects/code-reloading
   gem 'shotgun'
 end
 ```

@@ -96,6 +96,6 @@ It enforces **data integrity** via exceptions:
 Book.new(created_at: "foo") # => ArgumentError
 ```
 
-If we use this feature, in combination with [database constraints](/guides/1.1/migrations/create-table#constraints) and validations, we can guarantee a **strong** level of **data integrity** for our projects.
+If we use this feature, in combination with [database constraints](/guides/1.2/migrations/create-table#constraints) and validations, we can guarantee a **strong** level of **data integrity** for our projects.
 
-**You can set your own set of attributes via [custom schema](/guides/1.1/entities/custom-schema).**
+**You can set your own set of attributes via [custom schema](/guides/1.2/entities/custom-schema).**

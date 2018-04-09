@@ -50,7 +50,7 @@ It supports the following options:
 
 <p class="convention">
   Note that Hanami natively supports <strong>PostgreSQL data types</strong>.
-  Learn more about them in the <a href="/guides/1.1/models/postgresql/">dedicated article</a>.
+  Learn more about them in the <a href="/guides/1.2/models/postgresql/">dedicated article</a>.
 </p>
 
 ## Primary Key

@@ -5,7 +5,7 @@ version: 1.2
 
 # Basic Usage
 
-In the [previous section](/guides/1.1/views/overview) we generated a view. Let's use it.
+In the [previous section](/guides/1.2/views/overview) we generated a view. Let's use it.
 
 ## Default Rendering
 
@@ -54,7 +54,7 @@ We still see `<h1>Dashboard</h1>` when we visit `/dashboard`.
 
 ### Exposures
 
-There is another source for our context: [_exposures_](/guides/1.1/actions/exposures).
+There is another source for our context: [_exposures_](/guides/1.2/actions/exposures).
 They are a payload that comes from the action.
 
 ```ruby
@@ -132,4 +132,4 @@ The template isn't used and it can be deleted.
 
 ## Bypass Rendering
 
-If an action assigns the body of the response with `#body=`, the rendering of the view is [bypassed](/guides/1.1/actions/basic-usage).
+If an action assigns the body of the response with `#body=`, the rendering of the view is [bypassed](/guides/1.2/actions/basic-usage).

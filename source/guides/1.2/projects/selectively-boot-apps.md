@@ -5,7 +5,7 @@ version: 1.2
 
 # Selectively boot apps
 
-With Hanami you can build your project by following the [Monolith-First](/guides/1.1/architecture/overview/#monolith-first) principle.
+With Hanami you can build your project by following the [Monolith-First](/guides/1.2/architecture/overview/#monolith-first) principle.
 As you add more code to the project, you can grow it organically, by splitting the project into several Hanami apps.
 
 A real world Hanami project could have **dozens of Hanami apps in the same project** (for example, `web` for the front-end, `admin` for the administration, `api` for a JSON API, etc...)

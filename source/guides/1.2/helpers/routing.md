@@ -6,7 +6,7 @@ version: 1.2
 ## Routing Helpers
 
 Routing helpers are made of one **public method** (`#routes`), available for actions, views and templates.
-It's a factory to generate **relative** or **absolute URLs**, starting from [named routes](/guides/1.1/routing/basic-usage).
+It's a factory to generate **relative** or **absolute URLs**, starting from [named routes](/guides/1.2/routing/basic-usage).
 
 <p class="convention">
   For a given route named <code>:home</code>, we can use <code>home_path</code> or <code>home_url</code> to generate relative or absolute URLs, respectively.

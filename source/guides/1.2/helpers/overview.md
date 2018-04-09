@@ -58,7 +58,7 @@ Our view responds to `#link_to`, because it includes `Hanami::Helpers::LinkToHel
 ## Clean Context
 
 There are some helpers that have a huge interface.
-Think of the [HTML5](/guides/1.1/helpers/html5) or the [routing](/guides/1.1/helpers/routing) helpers, they provide hundreds of methods to map tags or application routes.
+Think of the [HTML5](/guides/1.2/helpers/html5) or the [routing](/guides/1.2/helpers/routing) helpers, they provide hundreds of methods to map tags or application routes.
 
 Making them available directly in the view context, would be source of confusion, slow method dispatch times and name collisions.
 

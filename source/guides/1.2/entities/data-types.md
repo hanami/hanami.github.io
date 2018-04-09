@@ -5,7 +5,7 @@ version: 1.2
 
 # Data Types
 
-Data types are available for custom [entities schema](/guides/1.1/entities/custom-schema), which are *completely optional*.
+Data types are available for custom [entities schema](/guides/1.2/entities/custom-schema), which are *completely optional*.
 
 We have 5 data types:
 

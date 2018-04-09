@@ -152,4 +152,4 @@ User.new(id: 1, name: "Luca", age: 35, email: "foo")
 
 ---
 
-**Learn more about data types in the [dedicated article](/guides/1.1/entities/data-types).**
+**Learn more about data types in the [dedicated article](/guides/1.2/entities/data-types).**
