@@ -142,10 +142,14 @@ categories:
         title: v1.0.0
       - path: v110
         title: v1.1.0
+      - path: v120
+        title: v1.2.0
   - path: /
     title: Guide Versions
     pages:
       - path: ''
+        title: 'v1.2'
+      - path: '1.1'
         title: 'v1.1'
       - path: '1.0'
-        title: v1.0
+        title: 'v1.0'
