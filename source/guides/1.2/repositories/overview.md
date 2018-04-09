@@ -255,3 +255,17 @@ class BookRepository < Hanami::Repository
   end
 end
 ```
+
+## Custom commands
+
+`Hanami::Repository` interface exposes standard [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations.
+If you need custom queries, you have a flexible querying API, but we were missing the same flexibility for writing operations (commands).
+Let's say you want create records in bulk, here's how to define a command for that:
+
+```ruby
+class TaskRepository < Hanami::Repository
+  def create_many(data)
+    command(create: :tasks, result: :many).call(data)
+  end
+end
+```
