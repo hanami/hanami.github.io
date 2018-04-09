@@ -13,6 +13,7 @@ categories:
       - path: rake
       - path: logging
       - path: initializers
+      - path: rack-middleware
       - path: security
       - path: http2-early-hints
         title: "HTTP/2 Early Hints"
