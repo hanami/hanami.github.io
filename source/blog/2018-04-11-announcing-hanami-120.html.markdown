@@ -1,6 +1,6 @@
 ---
 title: Announcing Hanami v1.2.0
-date: 2018-04-11 13:52 UTC
+date: 2018-04-11 12:21 UTC
 tags: announcements
 author: Luca Guidi
 image: true
@@ -185,14 +185,6 @@ For the entire list of changes, please have a look at our [CHANGELOG](https://gi
   * `hanami-webconsole-0.1.0` - [CHANGELOG](https://github.com/hanami/webconsole/blob/master/CHANGELOG.md)
   * `hanami-ujs-0.1.0` - [CHANGELOG](https://github.com/hanami/ujs/blob/master/CHANGELOG.md)
 
-## Contributors 🏳️‍🌈👩🏿‍👳🏾👩🏼‍👦🏾‍👨🙋🏾👩👨🏽‍🔬👨🏻‍💻👧🏻‍🕊
-
-We're grateful for each person who contributed to this release. 💚
-These lovely people are:
-
-  * [Alfonso Uceda](https://github.com/AlfonsoUceda)
-  * []()
-
 ## How to install
 
 ```shell
@@ -222,6 +214,12 @@ For a detailed explanation, check the [upgrade guide](http://hanamirb.org/guides
 We'll work to improve the integration between our three projects, to offer a rock solid, unified set of solutions for the Ruby ecosystem. 💎❤️
 
 Starting from tomorrow we'll work in parallel on Hanami 2.0 and 1.3.
+If you want to follow along the progress, keep an eye on the branches in our [GitHub repositories](https://github.com/hanami):
+
+  * `master` targets `1.2` (bugfixes)
+  * `develop` targets `1.3` (new features, deprecations for 2.0)
+  * `unstable` targets `2.0` (new features, breaking changes)
+
 While we don't have an ETA for 2.0, the **first beta for 1.3** will be released on **August 2018**.
 
 Happy coding! 🌸
