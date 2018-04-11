@@ -146,8 +146,8 @@ Successfully installed hanami-<%= hanami_version %>
                       </code></pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="develop">
-                      <pre class="language-ruby plaintext"><code><span class="command">% cd bookshelf &amp;&amp; echo "ruby '2.4.2'" &gt;&gt; Gemfile &amp;&amp; bundle</span>
-Bundle complete! 8 Gemfile dependencies, 50 gems now installed.
+                      <pre class="language-ruby plaintext"><code><span class="command">% cd bookshelf &amp;&amp; echo "ruby '2.5.1'" &gt;&gt; Gemfile &amp;&amp; bundle</span>
+Bundle complete! 9 Gemfile dependencies, 54 gems now installed.
 <br>
 <span class="command">% git add . &amp;&amp; git commit -m "Initial commit"</span>
 [master (root-commit) b6df611] Initial commit
@@ -161,7 +161,15 @@ https://cherry-blossom-1234.herokuapp.com/ | https://git.heroku.com/cherry-bloss
 <br>
 <span class="command">% heroku config:add SERVE_STATIC_ASSETS=true</span>
 Setting SERVE_STATIC_ASSETS and restarting ⬢ cherry-blossom-1234... done, v2
-SERVE_STATIC_ASSETS: true
+<br>
+<span class="command">% heroku config:add SMTP_HOST=""</span>
+Setting SMTP_HOST and restarting ⬢ cherry-blossom-1234... done, v3
+<br>
+<span class="command">% heroku config:add SMTP_PORT=""</span>
+Setting SMTP_PORT and restarting ⬢ cherry-blossom-1234... done, v4
+<br>
+<span class="command">% git add . &amp;&amp; git commit -m "Initial commit"</span>
+# ...
 <br>
 <span class="command">% git push heroku master</span>
 # ...
