@@ -139,6 +139,24 @@ Hanami.configure do
 end
 ```
 
+## Automatic Logging
+
+All HTTP requests, SQL queries, and database operations are automatically logged.
+
+When a project is used in development mode, the logging format is human readable:
+
+```ruby
+[bookshelf] [INFO] [2017-02-11 15:42:48 +0100] HTTP/1.1 GET 200 127.0.0.1 /books/1  451 0.018576
+[bookshelf] [INFO] [2017-02-11 15:42:48 +0100] (0.000381s) SELECT "id", "title", "created_at", "updated_at" FROM "books" WHERE ("book"."id" = '1') ORDER BY "books"."id"
+```
+
+For production environment, the default format is JSON.
+JSON is parseable and more machine-oriented. It works great with log aggregators or SaaS logging products.
+
+```json
+{"app":"bookshelf","severity":"INFO","time":"2017-02-10T22:31:51Z","http":"HTTP/1.1","verb":"GET","status":"200","ip":"127.0.0.1","path":"/books/1","query":"","length":"451","elapsed":0.000391478}
+```
+
 ## Custom Loggers
 
 You can specify a custom logger in cases where you desire different logging behaviour. For example,
@@ -162,21 +180,57 @@ end
 Use this logger as normal via `Hanami.logger`. It's important to note that any logger chosen
 must conform to the default `::Logger` interface.
 
+## Colorization
 
-## Automatic Logging
+### Disable colorization
 
-All HTTP requests, SQL queries, and database operations are automatically logged.
-
-When a project is used in development mode, the logging format is human readable:
+In order to disable the colorization:
 
 ```ruby
-[bookshelf] [INFO] [2017-02-11 15:42:48 +0100] HTTP/1.1 GET 200 127.0.0.1 /books/1  451 0.018576
-[bookshelf] [INFO] [2017-02-11 15:42:48 +0100] (0.000381s) SELECT "id", "title", "created_at", "updated_at" FROM "books" WHERE ("book"."id" = '1') ORDER BY "books"."id"
+# config/environment.rb
+# ...
+
+Hanami.configure do
+  # ...
+
+  environment :development do
+    logger level: :info, colorizer: false
+  end
+end
 ```
 
-For production environment, the default format is JSON.
-JSON is parseable and more machine-oriented. It works great with log aggregators or SaaS logging products.
+### Custom colorizer
 
-```json
-{"app":"bookshelf","severity":"INFO","time":"2017-02-10T22:31:51Z","http":"HTTP/1.1","verb":"GET","status":"200","ip":"127.0.0.1","path":"/books/1","query":"","length":"451","elapsed":0.000391478}
+You can build your own colorization strategy
+
+```ruby
+# config/environment.rb
+# ...
+require_relative "./logger_colorizer"
+
+Hanami.configure do
+  # ...
+
+  environment :development do
+    logger level: :info, colorizer: LoggerColorizer.new
+  end
+end
+```
+
+```ruby
+# config/logger_colorizer.rb
+require "hanami/logger"
+require "paint" # gem install paint
+
+class LoggerColorizer < Hanami::Logger::Colorizer
+  def initialize(colors: { app: [:red, :bright], severity: [:red, :blue], datetime: [:italic, :yellow] })
+    super
+  end
+
+  private
+
+  def colorize(message, color:)
+    Paint[message, *color]
+  end
+end
 ```
