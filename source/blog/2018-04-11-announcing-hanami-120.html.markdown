@@ -180,7 +180,7 @@ For the entire list of changes, please have a look at our [CHANGELOG](https://gi
   * `hanami-view-1.2.0` - [CHANGELOG](https://github.com/hanami/view/blob/master/CHANGELOG.md)
   * `hamami-controller-1.2.0` - [CHANGELOG](https://github.com/hanami/controller/blob/master/CHANGELOG.md)
   * `hanami-router-1.2.0` - [CHANGELOG](https://github.com/hanami/router/blob/master/CHANGELOG.md)
-  * `hanami-validations-1.2.0` - [CHANGELOG](https://github.com/validations/model/blob/master/CHANGELOG.md)
+  * `hanami-validations-1.2.0` - [CHANGELOG](https://github.com/hanami/validations/blob/master/CHANGELOG.md)
   * `hanami-utils-1.2.0` - [CHANGELOG](https://github.com/hanami/utils/blob/master/CHANGELOG.md)
   * `hanami-webconsole-0.1.0` - [CHANGELOG](https://github.com/hanami/webconsole/blob/master/CHANGELOG.md)
   * `hanami-ujs-0.1.0` - [CHANGELOG](https://github.com/hanami/ujs/blob/master/CHANGELOG.md)
