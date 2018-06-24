@@ -47,8 +47,8 @@ There are two important directories:
   * `lib/bookshelf/entities`
   * `lib/bookshelf/repositories`
 
-They contain [entities](/guides/1.2/models/entities) that are Ruby objects at the core of our model domain, and they aren't aware of any persistence mechanism.
-For this purpose we have a separate concept, [repositories](/guides/1.2/models/repositories), which are a mediator between our entities and the underlying database.
+They contain [entities](/guides/1.2/entities/overview) that are Ruby objects at the core of our model domain, and they aren't aware of any persistence mechanism.
+For this purpose we have a separate concept, [repositories](/guides/1.2/repositories/overview), which are a mediator between our entities and the underlying database.
 
 For each entity named `Book` we can have a `BookRepository`.
 
