@@ -22,22 +22,6 @@ The following methods are available for table alterations:
   * `#set_column_allow_null` (accepts the **name** of the column)
   * `#set_column_not_null` (accepts the **name** of the column)
 
-Those methods accept the **name of the target table as first argument**, then the other args.
-There is a convenient shortcut for this: `#alter_table`. It accepts the **name of the table** and a **block** that describes the alterations.
-
-The following syntaxes are **equivalent**.
-
-```ruby
-Hanami::Model.migration do
-  change do
-    add_column         :users, :email, String,  null: false, unique: true
-    set_column_default :users, :visits_counts, default: 0
-  end
-end
-```
-
-The code above can be DRY'd with:
-
 ```ruby
 Hanami::Model.migration do
   change do
@@ -49,6 +33,26 @@ Hanami::Model.migration do
   end
 end
 ```
+
+Some methods can be used without `alter_table` block. Those methods **accept the name of the target table as first argument**, then the other args.
+
+```ruby
+add_index :users, :email
+#instead of
+alter_table(:users) do
+  add_index :email
+end
+```
+
+ List of available methods which are shortcuts to the same methods in `alter_table`:
+
+  * `#add_column`
+  * `#drop_column`
+  * `#rename_column`
+  * `#add_index`
+  * `#drop_index`
+  * `#set_column_default`
+  * `#set_column_type`
 
 ## Rename Table
 
