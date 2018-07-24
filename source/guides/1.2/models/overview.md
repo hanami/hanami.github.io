@@ -5,7 +5,7 @@ version: 1.2
 
 # Models
 
-Hanami's model domain is implemented in a way that separates the behavior that we want to express ([entities](/guides/1.2/models/entities)) from the persistence layer ([repositories](/guides/1.2/models/repositories) and database).
+Hanami's model domain is implemented in a way that separates the behavior that we want to express ([entities](/guides/1.2/entities/overview)) from the persistence layer ([repositories](/guides/1.2/repositories/overview) and database).
 This design helps keep the interface of our objects small and therefore keeps them fast and reusable.
 
 ## Basic Usage
