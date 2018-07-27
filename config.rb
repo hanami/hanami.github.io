@@ -141,7 +141,7 @@ helpers do
 
   def guide_url(category, page, version = nil)
     path = version == 'head' ? '/guides/head' : "/guides/#{version}"
-    path = '/guides' if %w[head 1.0].include?(page.path)
+    path = '/guides' if %w[head 1.0 1.1].include?(page.path)
     File.join(path, category.path, page.path)
   end
 
@@ -260,11 +260,11 @@ helpers do
   end
 
   def hanami_version
-    '1.1.1'
+    '1.2.0'
   end
 
   def hanami_release_date
-    Date.parse("2018-02-27").strftime("%B %-d, %Y")
+    Date.parse("2018-04-11").strftime("%B %-d, %Y")
   end
 end
 

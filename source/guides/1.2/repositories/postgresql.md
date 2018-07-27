@@ -1,6 +1,6 @@
 ---
 title: "Guides - Repositories: PostgreSQL"
-version: 1.1
+version: 1.2
 ---
 
 # PostgreSQL
@@ -17,7 +17,7 @@ Here's how to use UUID for a column:
 # db/migrations/20161113184557_create_projects.rb
 Hanami::Model.migration do
   up do
-    execute 'CREATE EXTENSION IF NOT EXISTS "pgcrypto"'
+    execute 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
 
     create_table :projects do
       primary_key :id
@@ -28,7 +28,7 @@ Hanami::Model.migration do
 
   down do
     drop_table :projects
-    execute 'DROP EXTENSION IF EXISTS "pgcrypto"'
+    execute 'DROP EXTENSION IF EXISTS "uuid-ossp"'
   end
 end
 ```
@@ -45,17 +45,17 @@ ProjectRepository.new.create(name: "Hanami", token: SecureRandom.uuid)
 ```ruby
 Hanami::Model.migration do
   up do
-    execute 'CREATE EXTENSION IF NOT EXISTS "pgcrypto"'
+    execute 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
 
     create_table :project_files do
-      primary_key :id, 'uuid', null: false, default: Hanami::Model::Sql.function(:gen_random_uuid)
+      primary_key :id, 'uuid', null: false, default: Hanami::Model::Sql.function(:uuid_generate_v4)
       column :name, String
     end
   end
 
   down do
     drop_table :project_files
-    execute 'DROP EXTENSION IF EXISTS "pgcrypto"'
+    execute 'DROP EXTENSION IF EXISTS "uuid-ossp"'
   end
 end
 ```

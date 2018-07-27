@@ -9,10 +9,16 @@ env:
   global:
     - SITE_ENV=deploy
 before_script:
-- git config --global user.email "antondavyodv.o@gmail.com"
-- git config --global user.name "Anton Davydov"
-- git remote rm origin
-- git remote add origin https://davydovanton:${GH_TOKEN}@github.com/hanami/hanami.github.io.git
 - mkdir build
 script:
-- bin/site build && bundle exec middleman deploy
+- bin/site build
+deploy:
+  fqdn: hanamirb.org
+  local_dir: build
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: false
+  target-branch: master
+  on:
+    branch: build

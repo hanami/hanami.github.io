@@ -1,6 +1,6 @@
 ---
 title: Architecture - Interactors
-version: 1.1
+version: 1.2
 ---
 
 # Overview
@@ -543,8 +543,8 @@ RSpec.describe Web::Controllers::Books::Create do
   describe 'with invalid params' do
     let(:params) { Hash[book: {}] }
 
-    it 'does not call the interactor' do
-      expect(interactor).not_to receive(:call)
+    it 'calls interactor' do
+      expect(interactor).to receive(:call)
       response = action.call(params)
     end
 
