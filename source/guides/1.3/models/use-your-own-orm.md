@@ -1,6 +1,6 @@
 ---
 title: Guides - Use Your Own ORM
-version: 1.2
+version: 1.3
 ---
 
 # Use Your Own ORM
@@ -30,4 +30,4 @@ Hanami's mailers live. We recommend that you put your new ORM code into that
 folder, but you're free to put it elsewhere, and get rid of `lib/` entirely, if
 you choose.
 
-Please be aware that if `hanami-model` is removed from the project features like [database commands](/guides/1.2/command-line/database) and [migrations](/guides/1.2/migrations/overview) won't be available.
+Please be aware that if `hanami-model` is removed from the project features like [database commands](guides/1.3/command-line/database) and [migrations](guides/1.3/migrations/overview) won't be available.

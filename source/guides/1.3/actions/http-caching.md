@@ -1,6 +1,6 @@
 ---
 title: Guides - Action HTTP Caching
-version: 1.2
+version: 1.3
 ---
 
 # HTTP Caching

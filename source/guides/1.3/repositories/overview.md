@@ -1,6 +1,6 @@
 ---
 title: Guides - Repositories Overview
-version: 1.2
+version: 1.3
 ---
 
 # Repositories
@@ -167,7 +167,7 @@ book.updated_at # => 2016-11-14 08:22:40 UTC
 
 ## Legacy Databases
 
-By default, a repository performs auto-mapping of corresponding database table and creates an [automatic schema](/guides/1.2/models/entities#automatic-schema) for the associated entity.
+By default, a repository performs auto-mapping of corresponding database table and creates an [automatic schema](guides/1.3/models/entities#automatic-schema) for the associated entity.
 
 When working with legacy databases we can resolve the naming mismatch between the table name, the columns, with repositories defaults and entities attributes.
 

@@ -1,6 +1,6 @@
 ---
 title: Guides - Action Control Flow
-version: 1.2
+version: 1.3
 ---
 
 # Control Flow
@@ -176,7 +176,7 @@ When `#halt` is used, **Hanami** renders a default status page with the HTTP sta
 
 <p><img src="/images/default-template.png" alt="Hanami default template" class="img-responsive"></p>
 
-To customize the UI for the HTTP 404 error, you can use a [custom error page](/guides/1.2/views/custom-error-pages).
+To customize the UI for the HTTP 404 error, you can use a [custom error page](guides/1.3/views/custom-error-pages).
 
 ## HTTP Status
 

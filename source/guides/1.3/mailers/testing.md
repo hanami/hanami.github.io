@@ -1,12 +1,12 @@
 ---
 title: Guides - Mailers Testing
-version: 1.2
+version: 1.3
 ---
 
 # Testing
 
 During development and testing we don't want to accidentally send emails to the real world.
-The [delivery method](/guides/1.2/mailers/delivery) for these two envs is set to `:test`.
+The [delivery method](guides/1.3/mailers/delivery) for these two envs is set to `:test`.
 
 In order to assert that a mailer sent a message, we can look at `Hanami::Mailer.deliveries`.
 It's an array of messages that the framework pretended to deliver during a test.

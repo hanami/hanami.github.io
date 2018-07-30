@@ -1,6 +1,6 @@
 ---
 title: "Guides - Command Line: Database"
-version: 1.2
+version: 1.3
 ---
 
 # Database
@@ -13,7 +13,7 @@ We can manage our database via the command line.
   * MySQL
   * SQLite3
 
-The [adapter](/guides/1.2/models/overview) is set in `config/environment.rb`.
+The [adapter](guides/1.3/models/overview) is set in `config/environment.rb`.
 It uses an environment variable, defined in the `.env.*` files at the root of the project.
 
 ## Create
@@ -44,7 +44,7 @@ In order to preserve production data, this command can't be run in the productio
 
 ## Migrate
 
-With `db migrate` we can run [migrations](/guides/1.2/migrations/overview) found in `db/migrations`.
+With `db migrate` we can run [migrations](guides/1.3/migrations/overview) found in `db/migrations`.
 
 Given the following migrations:
 

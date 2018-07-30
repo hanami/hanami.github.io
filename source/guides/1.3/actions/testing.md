@@ -1,6 +1,6 @@
 ---
 title: Guides - Action Testing
-version: 1.2
+version: 1.3
 ---
 
 # Testing
@@ -30,7 +30,7 @@ end
 ```
 
 In the example above, `action` is an instance of `Web::Controllers::Dashboard::Index`, we can invoke `#call` on it, passing a Hash of parameters.
-The [implicit returning value](/guides/1.2/actions/rack-integration) is a serialized Rack response.
+The [implicit returning value](guides/1.3/actions/rack-integration) is a serialized Rack response.
 We're asserting that the status code (`response[0]`) is successful (equals to `200`).
 
 ### Running Tests
@@ -114,7 +114,7 @@ Imagine we have a classic user profile page, like depicted in the example above.
 The action asks for a record that corresponds to the given id, and then set a `@user` instance variable.
 How do we verify that the record is the one that we are looking for?
 
-Because we want to make `@user` available to the outside world, we're going to use an [_exposure_](/guides/1.2/actions/exposures).
+Because we want to make `@user` available to the outside world, we're going to use an [_exposure_](guides/1.3/actions/exposures).
 They are used to pass a data payload between an action and the corresponding view.
 When we do `expose :user`, Hanami creates a getter (`#user`), so we can easily assert if the record is the right one.
 

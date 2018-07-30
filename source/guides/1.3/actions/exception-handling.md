@@ -1,6 +1,6 @@
 ---
 title: Guides - Action Exception Handling
-version: 1.2
+version: 1.3
 ---
 
 # Exception Handling

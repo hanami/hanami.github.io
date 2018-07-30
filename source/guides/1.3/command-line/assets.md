@@ -1,6 +1,6 @@
 ---
 title: "Guides - Command Line: Assets"
-version: 1.2
+version: 1.3
 ---
 
 # Assets
@@ -17,7 +17,7 @@ This command is useful for **deployment** purposes.
 
 The first step it precompiles and copies all the assets from all the applications and third party gems under `public/assets/` directory.
 
-Then it [compress](/guides/1.2/assets/compressors) all the javascripts and stylesheets, in order to save browsers bandwidth.
+Then it [compress](guides/1.3/assets/compressors) all the javascripts and stylesheets, in order to save browsers bandwidth.
 
 As last thing, it generates a copy of each asset, by appending its checksum to the file name.
 This trick makes assets cacheable by browsers.

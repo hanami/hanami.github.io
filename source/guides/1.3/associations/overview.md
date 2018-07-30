@@ -1,6 +1,6 @@
 ---
 title: Guides - Associations Overview
-version: 1.2
+version: 1.3
 ---
 
 # Associations
@@ -46,7 +46,7 @@ Please remember that `author.books` is just an array, its mutation **won't be re
 
 ## Types Of Associations
 
-  * [Has Many](/guides/1.2/associations/has-many)
-  * [Belongs To](/guides/1.2/associations/belongs-to)
-  * [Has One](/guides/1.2/associations/has-one)
-  * [Has Many Through](/guides/1.2/associations/has-many-through)
+  * [Has Many](guides/1.3/associations/has-many)
+  * [Belongs To](guides/1.3/associations/belongs-to)
+  * [Has One](guides/1.3/associations/has-one)
+  * [Has Many Through](guides/1.3/associations/has-many-through)

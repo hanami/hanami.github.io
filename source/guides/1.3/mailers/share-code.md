@@ -1,6 +1,6 @@
 ---
 title: Guides - Mailes Share Code
-version: 1.2
+version: 1.3
 ---
 
 # Share Code
@@ -38,7 +38,7 @@ Hanami.configure do
   mailer do
     root 'lib/bookshelf/mailers'
 
-    # See http://hanamirb.org/guides/1.2/mailers/delivery
+    # See http://hanamirb.orgguides/1.3/mailers/delivery
     delivery :test
     
     prepare do

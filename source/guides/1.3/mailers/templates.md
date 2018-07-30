@@ -1,6 +1,6 @@
 ---
 title: Guides - View Templates
-version: 1.2
+version: 1.3
 ---
 
 # Templates
@@ -8,7 +8,7 @@ version: 1.2
 A template is a file that contains a body for a specific format of a multipart email.
 For instance, `welcome.html.erb` describes the markup of the HTML part of the message, while `welcome.txt.erb` is for the textual part.
 
-It is rendered by bounding the [context](/guides/1.2/mailers/basic-usage) of a mailer and using a _template engine_.
+It is rendered by bounding the [context](guides/1.3/mailers/basic-usage) of a mailer and using a _template engine_.
 
 ## Naming
 

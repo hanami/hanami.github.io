@@ -1,11 +1,11 @@
 ---
 title: Guides - Custom Helpers
-version: 1.2
+version: 1.3
 ---
 
 ## Custom Helpers
 
-In the [overview](/guides/1.2/helpers/overview) section, we introduced the design for helpers.
+In the [overview](guides/1.3/helpers/overview) section, we introduced the design for helpers.
 They are modules that enrich views behaviors.
 Because they are just Ruby modules, **we can create our own helpers**.
 
@@ -39,7 +39,7 @@ end
 </p>
 
 Then let's add that directory to the load paths of the application, so it can be eagerly loaded.
-As third step, we include the module in all the views. See [View's Share Code](/guides/1.2/views/share-code) section for low level details.
+As third step, we include the module in all the views. See [View's Share Code](guides/1.3/views/share-code) section for low level details.
 
 ```ruby
 # apps/web/application.rb

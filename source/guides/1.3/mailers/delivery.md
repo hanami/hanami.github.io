@@ -1,6 +1,6 @@
 ---
 title: Guides - Mailers Delivery
-version: 1.2
+version: 1.3
 ---
 
 # Delivery
@@ -68,7 +68,7 @@ Hanami.configure do
   mailer do
     root Hanami.root.join("lib", "bookshelf", "mailers")
 
-    # See http://hanamirb.org/guides/1.2/mailers/delivery
+    # See http://hanamirb.orgguides/1.3/mailers/delivery
     delivery :test
   end
 

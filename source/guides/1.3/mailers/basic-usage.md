@@ -1,11 +1,11 @@
 ---
 title: Guides - Mailers Basic Usage
-version: 1.2
+version: 1.3
 ---
 
 # Basic Usage
 
-In the [previous section](/guides/1.2/mailers/overview), we generated a mailer, let's use it.
+In the [previous section](guides/1.3/mailers/overview), we generated a mailer, let's use it.
 
 ## Information
 
@@ -70,7 +70,7 @@ end
 ### Locals
 
 In the previous section, we have referenced an `user` variable, where does it come from?
-Similarly to a [view](/guides/1.2/views/basic-usage), a mailer can have a set of _locals_ that can be passed as an argument in order to make them available during the rendering.
+Similarly to a [view](guides/1.3/views/basic-usage), a mailer can have a set of _locals_ that can be passed as an argument in order to make them available during the rendering.
 
 ```ruby
 u = User.new(name: 'Luca', email: 'luca@example.com')

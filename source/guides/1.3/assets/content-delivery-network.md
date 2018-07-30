@@ -1,6 +1,6 @@
 ---
 title: Guides - Assets Content Delivery Network (CDN)
-version: 1.2
+version: 1.3
 ---
 
 # Assets
@@ -36,7 +36,7 @@ module Web
 end
 ```
 
-Once _CDN mode_ is on, all the [asset helpers](/guides/1.2/helpers/assets) will return **absolute URLs**.
+Once _CDN mode_ is on, all the [asset helpers](guides/1.3/helpers/assets) will return **absolute URLs**.
 
 ```erb
 <%= stylesheet 'application' %>
@@ -86,7 +86,7 @@ Let's say we want to use [Bootstrap](https://getbootstrap.com/) in our `web` app
       }
 ```
 
-Read more about the CSP header in the [security guide](/guides/1.2/projects/security/#content-security-policy).
+Read more about the CSP header in the [security guide](guides/1.3/projects/security/#content-security-policy).
 
 ### Local Assets
 
@@ -94,7 +94,7 @@ The security problem described above doesn't concern only CDNs, but local files 
 Imagine we have a compromised file system and someone was able to replace our javascripts with evil files: we would be vulnerable to the same kind of attack.
 
 As a defense against this security problem, Hanami **enables Subresource Integrity by default in production.**
-When we [precompile assets](/guides/1.2/command-line/assets) at deploy time, Hanami calculates the checksum of all our assets and it adds a special HTML attribute `integrity` to our asset tags like `<script>`.
+When we [precompile assets](guides/1.3/command-line/assets) at deploy time, Hanami calculates the checksum of all our assets and it adds a special HTML attribute `integrity` to our asset tags like `<script>`.
 
 ```erb
 <%= javascript 'application' %>

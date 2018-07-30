@@ -1,6 +1,6 @@
 ---
 title: "Guides - Command Line: Generators"
-version: 1.2
+version: 1.3
 ---
 
 # Generators
@@ -72,7 +72,7 @@ The default HTTP method is `GET`, except for actions named:
 - `update`, which will use `PATCH`
 - `destroy`, which will use `DELETE`
 
-This should help you route using [RESTful resources](/guides/1.2/routing/restful-resources).
+This should help you route using [RESTful resources](guides/1.3/routing/restful-resources).
 
 You can also set the HTTP method by specifying a `--method` argument when calling `hanami generate action`.
 

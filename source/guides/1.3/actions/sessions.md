@@ -1,6 +1,6 @@
 ---
 title: Guides - Action Sessions
-version: 1.2
+version: 1.3
 ---
 
 # Sessions

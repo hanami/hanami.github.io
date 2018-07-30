@@ -1,6 +1,6 @@
 ---
 title: Guides - Migrations Alter Tables
-version: 1.2
+version: 1.3
 ---
 
 # Alter Tables

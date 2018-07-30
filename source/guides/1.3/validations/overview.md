@@ -1,6 +1,6 @@
 ---
 title: Guides - Validations Overview
-version: 1.2
+version: 1.3
 ---
 
 # Overview

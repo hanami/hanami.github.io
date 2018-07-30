@@ -1,6 +1,6 @@
 ---
 title: Guides - Rake Tasks
-version: 1.2
+version: 1.3
 ---
 
 # Rake Tasks
@@ -62,7 +62,7 @@ For instance, Heroku expects to find the following Rake tasks in a Ruby applicat
 
 For Heroku, there isn't a way to customize the deploy, so we're supporting these "standard" Rake tasks from Ruby on Rails.
 
-**If you are in control of your deployment, don't rely on these Rake tasks, but please use `hanami` [command line](/guides/1.2/command-line/database), instead.**
+**If you are in control of your deployment, don't rely on these Rake tasks, but please use `hanami` [command line](guides/1.3/command-line/database), instead.**
 
 ## Custom rake tasks
 

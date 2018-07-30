@@ -1,6 +1,6 @@
 ---
 title: Guides - Routing Testing
-version: 1.2
+version: 1.3
 ---
 
 # Testing
@@ -12,7 +12,7 @@ Hanami has builtin facilities for routing unit tests.
 We can assert the generated routes, to do so, we're gonna create a spec file for the purpose.
 `Web.routes` is the class that holds all the routes for the application named `Web`.
 
-It exposes a method to generate a path, which takes the [name of a route](/guides/1.2/routing/basic-usage#named-routes) as a symbol.
+It exposes a method to generate a path, which takes the [name of a route](guides/1.3/routing/basic-usage#named-routes) as a symbol.
 Here's how to test it.
 
 ```ruby

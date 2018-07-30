@@ -1,6 +1,6 @@
 ---
 title: "Guides - Associations: Has One"
-version: 1.2
+version: 1.3
 ---
 
 # Has One
@@ -90,7 +90,7 @@ class UserRepository < Hanami::Repository
 end
 ```
 
-We have defined [explicit methods](/guides/1.2/associations/overview#explicit-interface) only for the operations that we need for our model domain.
+We have defined [explicit methods](guides/1.3/associations/overview#explicit-interface) only for the operations that we need for our model domain.
 In this way, we avoid to bloat `UserRepository` with dozen of unneeded methods.
 
 Let's create an user with an avatar **single database operation**:
@@ -120,7 +120,7 @@ user.avatar
   # => nil
 ```
 
-Because we haven't [explicitly loaded](/guides/1.2/associations/overview#explicit-loading) the associated record, `user.avatar` is `nil`.
+Because we haven't [explicitly loaded](guides/1.3/associations/overview#explicit-loading) the associated record, `user.avatar` is `nil`.
 We can use the method that we have defined on before (`#find_with_avatar`):
 
 ```ruby

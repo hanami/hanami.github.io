@@ -1,6 +1,6 @@
 ---
 title: Guides - Boolean Logic
-version: 1.2
+version: 1.3
 ---
 
 # Boolean Logic

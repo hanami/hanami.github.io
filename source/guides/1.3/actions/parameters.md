@@ -1,6 +1,6 @@
 ---
 title: Guides - Action Parameters
-version: 1.2
+version: 1.3
 ---
 
 # Parameters
@@ -12,7 +12,7 @@ They are similar to a Ruby Hash, but they offer an expanded set of features.
 
 Params can come from:
 
-  * [Router variables](/guides/1.2/routing/basic-usage) (eg. `/books/:id`)
+  * [Router variables](guides/1.3/routing/basic-usage) (eg. `/books/:id`)
   * Query string (eg. `/books?title=Hanami`)
   * Request body (eg. a `POST` request to `/books`)
 

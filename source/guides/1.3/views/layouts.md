@@ -1,6 +1,6 @@
 ---
 title: Guides - View Layouts
-version: 1.2
+version: 1.3
 ---
 
 # Layouts

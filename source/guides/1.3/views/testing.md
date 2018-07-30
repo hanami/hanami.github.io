@@ -1,6 +1,6 @@
 ---
 title: Guides - View Testing
-version: 1.2
+version: 1.3
 ---
 
 # View Testing

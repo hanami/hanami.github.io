@@ -1,6 +1,6 @@
 ---
 title: Guides - Migrations Create Tables
-version: 1.2
+version: 1.3
 ---
 
 # Create Tables
@@ -50,7 +50,7 @@ It supports the following options:
 
 <p class="convention">
   Note that Hanami natively supports <strong>PostgreSQL data types</strong>.
-  Learn more about them in the <a href="/guides/1.2/models/postgresql/">dedicated article</a>.
+  Learn more about them in the <a href="guides/1.3/models/postgresql/">dedicated article</a>.
 </p>
 
 ## Primary Key

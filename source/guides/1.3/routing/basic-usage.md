@@ -1,13 +1,13 @@
 ---
 title: Guides - Basic Usage
-version: 1.2
+version: 1.3
 ---
 
 # Basic Usage
 
 ## Path matching
 
-In [our initial example](/guides/1.2/routing/overview) we have introduced a really basic relative URI: `/hello`.
+In [our initial example](guides/1.3/routing/overview) we have introduced a really basic relative URI: `/hello`.
 This is what we call _fixed path matching_.
 It is called this because the segment is responsible for responding only to an **exact match**.
 If we visit `/hello`, we get a response.

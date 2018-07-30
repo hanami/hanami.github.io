@@ -1,17 +1,17 @@
 ---
 title: "Guides - Command Line: Destroy"
-version: 1.2
+version: 1.3
 ---
 
 # Destroy
 
-Hanami has convenient [code generators](/guides/1.2/command-line/generators) to speed up our development process.
+Hanami has convenient [code generators](guides/1.3/command-line/generators) to speed up our development process.
 If we commit a mistake, we can destroy what we just generated via `hanami destroy` command.
 
 ## Applications
 
 With the Container architecture, we can have multiple Hanami applications running under `apps/`.
-We can [generate new applications](/guides/1.2/command-line/generators) for different components that we want to add to our project.
+We can [generate new applications](guides/1.3/command-line/generators) for different components that we want to add to our project.
 
 To destroy one of them:
 

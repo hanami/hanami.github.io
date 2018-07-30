@@ -1,6 +1,6 @@
 ---
 title: Guides - Link Helpers
-version: 1.2
+version: 1.3
 ---
 
 ## Link Helpers
@@ -68,4 +68,4 @@ Output:
 ## Security
 
 There are two aspects to consider when we use links in our markup: **whitelisted URLs** and **escaped attributes**.
-Please visit the [Markup Escape](/guides/1.2/helpers/escape) section for a detailed explanation.
+Please visit the [Markup Escape](guides/1.3/helpers/escape) section for a detailed explanation.

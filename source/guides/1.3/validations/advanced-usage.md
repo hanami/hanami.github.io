@@ -1,6 +1,6 @@
 ---
 title: Guides - Advanced Usage
-version: 1.2
+version: 1.3
 ---
 
 # Advanced Usage

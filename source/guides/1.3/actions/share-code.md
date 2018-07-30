@@ -1,6 +1,6 @@
 ---
 title: Guides - Action Share Code
-version: 1.2
+version: 1.3
 ---
 
 # Share Code
@@ -46,9 +46,9 @@ module Web
 end
 ```
 
-Once included by an action, it will set a [before callback](/guides/1.2/actions/control-flow) that executes `:authenticate!` for each request.
+Once included by an action, it will set a [before callback](guides/1.3/actions/control-flow) that executes `:authenticate!` for each request.
 If not logged in, a `401` is returned, otherwise the flow can go ahead and hit `#call`.
-It also exposes `current_user` for all the views (see [Exposures](/guides/1.2/actions/exposures)).
+It also exposes `current_user` for all the views (see [Exposures](guides/1.3/actions/exposures)).
 
 It will be really tedious to include this module for all the actions of our app.
 We can use `controller.prepare` for the scope.

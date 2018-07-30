@@ -1,6 +1,6 @@
 ---
 title: "Guides - Associations: Belongs To"
-version: 1.2
+version: 1.3
 ---
 
 # Belongs To
@@ -84,7 +84,7 @@ class BookRepository < Hanami::Repository
 end
 ```
 
-We have defined [explicit methods](/guides/1.2/associations/overview#explicit-interface) only for the operations that we need for our model domain.
+We have defined [explicit methods](guides/1.3/associations/overview#explicit-interface) only for the operations that we need for our model domain.
 In this way, we avoid to bloat `BookRepository` with dozen of unneeded methods.
 
 Let's create a book:
@@ -105,7 +105,7 @@ book.author
   # => nil
 ```
 
-Because we haven't [explicitly loaded](/guides/1.2/associations/overview#explicit-loading) the associated records, `book.author` is `nil`.
+Because we haven't [explicitly loaded](guides/1.3/associations/overview#explicit-loading) the associated records, `book.author` is `nil`.
 We can use the method that we have defined on before (`#find_with_author`):
 
 ```ruby

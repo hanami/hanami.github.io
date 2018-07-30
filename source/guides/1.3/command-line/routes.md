@@ -1,6 +1,6 @@
 ---
 title: "Guides - Command Line: Routes"
-version: 1.2
+version: 1.3
 ---
 
 # Routes

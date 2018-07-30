@@ -1,6 +1,6 @@
 ---
 title: Guides - HTML5 Helpers
-version: 1.2
+version: 1.3
 ---
 
 ## HTML5 Helpers
@@ -185,7 +185,7 @@ end
   # => "<div><p>&lt;script&gt;alert(&apos;xss&apos;)&lt;&#x2F;script&gt;</p></div>"
 ```
 
-**HTML attributes aren't automatically escaped**, in case we need to use a value that comes from a user input, we suggest to use `#ha`, which is the escape helper designed for this case. See [Escape Helpers](/guides/1.2/helpers/escape) for a deep explanation.
+**HTML attributes aren't automatically escaped**, in case we need to use a value that comes from a user input, we suggest to use `#ha`, which is the escape helper designed for this case. See [Escape Helpers](guides/1.3/helpers/escape) for a deep explanation.
 
 ## View Context
 

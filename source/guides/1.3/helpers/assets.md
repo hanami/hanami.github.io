@@ -1,6 +1,6 @@
 ---
 title: Guides - Assets Helpers
-version: 1.2
+version: 1.3
 ---
 
 ## Assets Helpers
@@ -10,7 +10,7 @@ These helpers are HTML5 generators that target specific assets features.
 They are following the settings of the application that uses them.
 For instance, if we have a project with two applications `Web` and `Admin` mounted at `/` and `/admin`, respectively, all the asset URLs will respect these prefixes.
 
-They also respect [_Fingerprint mode_](/guides/1.2/assets/overview#fingerprint-mode) and [_CDN mode_](/guides/1.2/assets/content-delivery-network) for each application.
+They also respect [_Fingerprint mode_](guides/1.3/assets/overview#fingerprint-mode) and [_CDN mode_](guides/1.3/assets/content-delivery-network) for each application.
 
 The following helpers are available for views and templates:
 
@@ -305,7 +305,7 @@ https://code.jquery.com/jquery-2.1.1.min.js
 
 #### Fingerprint Mode
 
-When [_Fingerprint Mode_](/guides/1.2/assets/overview#fingerprint-mode) is on (usually in _production_ env), the relative URL contains a checksum suffix.
+When [_Fingerprint Mode_](guides/1.3/assets/overview#fingerprint-mode) is on (usually in _production_ env), the relative URL contains a checksum suffix.
 
 ```erb
 <%= asset_path 'application.css' %>
@@ -317,7 +317,7 @@ When [_Fingerprint Mode_](/guides/1.2/assets/overview#fingerprint-mode) is on (u
 
 #### CDN Mode
 
-When [_CDN Mode_](/guides/1.2/assets/content-delivery-network) is on (usually in _production_ env), it returns an absolute URL that reference the CDN settings.
+When [_CDN Mode_](guides/1.3/assets/content-delivery-network) is on (usually in _production_ env), it returns an absolute URL that reference the CDN settings.
 
 ```erb
 <%= asset_path 'application.css' %>
@@ -363,7 +363,7 @@ https://code.jquery.com/jquery-2.1.1.min.js
 
 #### Fingerprint Mode
 
-When [_Fingerprint Mode_](/guides/1.2/assets/overview#fingerprint-mode) is on (usually in _production_ env), the relative URL contains a checksum suffix.
+When [_Fingerprint Mode_](guides/1.3/assets/overview#fingerprint-mode) is on (usually in _production_ env), the relative URL contains a checksum suffix.
 
 ```erb
 <%= asset_url 'application.css' %>
@@ -375,7 +375,7 @@ https://bookshelf.org/assets/application-9ab4d1f57027f0d40738ab8ab70aba86.css
 
 #### CDN Mode
 
-When [_CDN Mode_](/guides/1.2/assets/content-delivery-network) is on (usually in _production_ env), it returns an absolute URL that reference the CDN settings.
+When [_CDN Mode_](guides/1.3/assets/content-delivery-network) is on (usually in _production_ env), it returns an absolute URL that reference the CDN settings.
 
 ```erb
 <%= asset_url 'application.css' %>

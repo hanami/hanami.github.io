@@ -1,6 +1,6 @@
 ---
 title: Guides - HTTP/2 Early Hints
-version: 1.2
+version: 1.3
 ---
 
 # HTTP/2 Early Hints
@@ -45,7 +45,7 @@ As of today, only Puma supports Early Hints.
 
 ## Assets helpers
 
-In order to automatically push your assets, you have to use our [assets helpers](/guides/1.2/helpers/assets).
+In order to automatically push your assets, you have to use our [assets helpers](guides/1.3/helpers/assets).
 But given to browser limitations (only up to 100 assets can be pushed), Hanami by default sends stylesheets and javascripts only.
 
 <table class="table table-bordered">

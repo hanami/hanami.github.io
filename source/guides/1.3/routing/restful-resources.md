@@ -1,6 +1,6 @@
 ---
 title: Guides - RESTful Resource(s)
-version: 1.2
+version: 1.3
 ---
 
 # REST

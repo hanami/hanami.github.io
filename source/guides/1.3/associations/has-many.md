@@ -1,6 +1,6 @@
 ---
 title: "Guides - Associations: Has Many"
-version: 1.2
+version: 1.3
 ---
 
 # Has Many
@@ -88,7 +88,7 @@ class AuthorRepository < Hanami::Repository
 end
 ```
 
-We have defined [explicit methods](/guides/1.2/associations/overview#explicit-interface) only for the operations that we need for our model domain.
+We have defined [explicit methods](guides/1.3/associations/overview#explicit-interface) only for the operations that we need for our model domain.
 In this way, we avoid to bloat `AuthorRepository` with dozen of unneeded methods.
 
 Let's create an author with a collection of books with a **single database operation**:
@@ -116,7 +116,7 @@ author.books
   # => nil
 ```
 
-Because we haven't [explicitly loaded](/guides/1.2/associations/overview#explicit-loading) the associated records, `author.books` is `nil`.
+Because we haven't [explicitly loaded](guides/1.3/associations/overview#explicit-loading) the associated records, `author.books` is `nil`.
 We can use the method that we have defined on before (`#find_with_books`):
 
 ```ruby
@@ -163,7 +163,7 @@ repository.remove_book(author, book.id)
 
 ### Querying
 
-An association can be [queried](/guides/1.2/repositories/sql-queries):
+An association can be [queried](guides/1.3/repositories/sql-queries):
 
 ```ruby
 # lib/bookshelf/repositories/author_repository.rb

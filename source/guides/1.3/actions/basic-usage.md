@@ -1,13 +1,13 @@
 ---
 title: Guides - Actions Basic Usage
-version: 1.2
+version: 1.3
 ---
 
 # Basic Usage
 
 ## Requests Handling
 
-In the [previous section](/guides/1.2/actions/overview), we generated an action.  Now let's use it.
+In the [previous section](guides/1.3/actions/overview), we generated an action.  Now let's use it.
 
 First, we check our routes:
 
