@@ -9,7 +9,9 @@ For complex use cases we may want to pass data to views in order to present it t
 Hanami puts emphasis on explicitness: data isn't shared between the controller action and the view unless we tell it to do so.
 
 We use a simple and powerful mechanism to achieve our goal: _**exposures**_.
-Exposures create a _getter_ on the action for the given name(s) and only the whitelisted instance variables are made available to the corresponding view.
+Each exposure first looks for a method matching the given name.
+If no method is found, a _getter_ is created with `#attr_reader`.
+Only the whitelisted exposures are made available to the corresponding view.
 
 ```ruby
 # apps/web/controllers/dashboard/index.rb
