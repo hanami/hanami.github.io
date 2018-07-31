@@ -22,7 +22,7 @@ class UserRepository < Hanami::Repository
   end
 
   def alphabetical_reverse
-    users.order { name.asc }
+    users.order { name.desc }
   end
 
   def sort_via_other_relation
