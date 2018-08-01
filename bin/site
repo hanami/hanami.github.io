@@ -1,6 +1,7 @@
 #!/bin/bash
 
 command="$1"
+stable_version="1.2"
 
 function _middleman {
   local command="$@"
@@ -12,7 +13,7 @@ function start_server {
 }
 
 function build_site {
-  cp -fR ./source/guides/1.0/* ./source/guides
+  cp -fR "./source/guides/${stable_version}/*" ./source/guides
   _middleman build
 }
 
