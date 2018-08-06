@@ -142,7 +142,14 @@ helpers do
   def guide_url(category, page, version = nil)
     path = version == 'head' ? '/guides/head' : "/guides/#{version}"
     path = '/guides' if %w[head 1.0 1.1].include?(page.path)
-    File.join(path, category.path, page.path)
+    File.join(path, category.path, page.path, '/')
+  end
+
+  def toc_group_opened_class(category, current_page)
+    regexp = "/#{category.path}/"
+    res = current_page.path =~ Regexp.new(regexp)
+
+    res ? 'opened' : nil
   end
 
   def guide_pager(current_page, guides, version = nil)
