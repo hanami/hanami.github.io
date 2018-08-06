@@ -20,12 +20,10 @@ pre {
 
 
 /* navbar */
-.app-navbar {
-  font-size: 13px;
+.app-navbar .navbar-brand,
+.app-navbar .nav {
+  font-weight: 400;
   letter-spacing: .15em;
-  font-weight: 700;
-}
-.app-navbar .navbar-brand {
   font-size: 13px;
 }
 

@@ -11,4 +11,8 @@ $(function () {
   $("select.mobile-guides").change(function() {
     window.location = $(this).find(":selected").val();
   });
+
+  $toc.find('span').click(function() {
+    $(this).parent().toggleClass('opened')
+  })
 })
