@@ -487,7 +487,7 @@ Finally, we need to call this interactor from our action.
 
 Edit the action file, `apps/web/controllers/books/create.rb`:
 
-```
+```ruby
   def call(params)
     if params.valid?
       @book = AddBook.new.call(params[:book])
@@ -517,7 +517,7 @@ But first, let's the spec `spec/web/controllers/books/create_spec.rb`.
 We're going to remove references to `BookRepository`,
 and leverage a double for our `AddBook` interactor:
 
-```
+```ruby
 require 'spec_helper'
 
 RSpec.describe Web::Controllers::Books::Create do
@@ -568,7 +568,7 @@ because we haven't overridden our initialize.
 Let's do that now,
 and leverage our new instance variable in the `call` method:
 
-```
+```ruby
   ...
   def initialize(interactor: AddBook.new)
     @interactor = interactor

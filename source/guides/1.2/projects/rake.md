@@ -68,7 +68,7 @@ For Heroku, there isn't a way to customize the deploy, so we're supporting these
 
 If you want to create a custom rake tasks you can create a `rakelib` folder in project root:
 
-```
+```shell
 % mkdir rakelib/
 ```
 
@@ -87,8 +87,9 @@ end
 
 Now you can see your custom rake task in the list:
 
-```
+```shell
 % bundle exec rake -T
 rake export:books  # Export books to algolia service
 rake environment   # Load the full project
 rake spec          # Run RSpec code examples
+```

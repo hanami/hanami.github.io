@@ -7,7 +7,7 @@ version: 1.2
 
 In order to print the routes defined by all the applications, use:
 
-```
+```shell
 % bundle exec hanami routes
 
                      GET, HEAD  /               Web::Controllers::Home::Index

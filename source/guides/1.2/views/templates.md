@@ -23,7 +23,7 @@ For a given view named <code>Web::Views::Dashboard::Index</code>, there must be 
 ## Nested Templates
 To render a partial in other template call `render` method with `partial` option:
 
-```
+```erb
 # Given a partial under:
 #   templates/shared/_sidebar.html.erb
 #
@@ -35,7 +35,7 @@ To render a partial in other template call `render` method with `partial` option
 
 To render a template in other template call `render` method with `template` option:
 
-```
+```erb
 # Given a template under:
 #   templates/articles/index.html.erb
 #

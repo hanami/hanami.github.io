@@ -9,7 +9,7 @@ When we check data, we expect only two outcomes: an input can be valid or not. N
 
 To better recognise the pattern, let’s get back to the example above. This time we will map the natural language rules with programming language rules.
 
-```
+```ruby
 required(:name) { filled? & str? & size? (3..64) }
 ```
 
