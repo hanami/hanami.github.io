@@ -35,12 +35,12 @@ After your database variables setup is done you need to create the database and 
 
 In your terminal, enter:
 
-```
+```shell
 % bundle exec hanami db prepare
 ```
 
 To setup your test environment database, enter:
 
-```
+```shell
 % HANAMI_ENV=test bundle exec hanami db prepare
 ```

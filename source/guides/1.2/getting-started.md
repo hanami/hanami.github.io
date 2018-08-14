@@ -64,7 +64,7 @@ If you want to follow along, make sure you have a working installation of Ruby 2
 To create a new Hanami project, we need to install the Hanami gem from Rubygems.
 Then we can use the new `hanami` executable to generate a new project:
 
-```
+```shell
 % gem install hanami
 % hanami new bookshelf
 ```
@@ -79,7 +79,7 @@ Then we can use the new `hanami` executable to generate a new project:
 This will create a new directory `bookshelf` in our current location.
 Let's see what it contains:
 
-```
+```shell
 % cd bookshelf
 % tree -L 1
 .
@@ -111,7 +111,7 @@ Here's what we need to know:
 
 Go ahead and install our gem dependency with Bundler; then we can launch a development server:
 
-```
+```shell
 % bundle install
 % bundle exec hanami server
 ```
@@ -175,7 +175,7 @@ As you can see, we have set the `HANAMI_ENV` environment variable to instruct ou
 
 With the specs at `spec/web/views/application_layout_spec.rb` commented out for now, we should have a test that fails with a similar report like:
 
-```
+```shell
 % bundle exec rake test
 Run options: --seed 44759
 
@@ -283,7 +283,7 @@ The test is simple enough, and fails because the URL `/books` is not currently r
 Hanami ships with various **generators** to save on typing some of the code involved in adding new functionality.
 In our terminal, enter:
 
-```
+```shell
 % bundle exec hanami generate action web books#index
 ```
 
@@ -295,7 +295,7 @@ get '/books', to: 'books#index'
 ```
 
 If you're using ZSH, you may get `zsh: no matches found: books#index`. In that case, you can use:
-```
+```shell
 % hanami generate action web books/index
 ```
 
@@ -332,7 +332,7 @@ Let's fix that.
 To avoid repeating ourselves in every single template, we can use a layout.
 Open up the file `apps/web/templates/application.html.erb` and edit it to look like this:
 
-```rhtml
+```erb
 <!DOCTYPE html>
 <html>
   <head>
@@ -372,7 +372,7 @@ Read more about entities and repositories in the [models guide](/guides/1.2/mode
 
 Hanami ships with a generator for models, so let's use it to create a `Book` entity and the corresponding repository:
 
-```
+```shell
 % bundle exec hanami generate model book
 create  lib/bookshelf/entities/book.rb
 create  lib/bookshelf/repositories/book_repository.rb
@@ -411,7 +411,7 @@ about how migrations work in the [migrations' guide](/guides/1.2/migrations/over
 In this case, we define a new table with columns for each of our entities' attributes.
 Let's prepare our database for the development and test environments:
 
-```
+```shell
 % bundle exec hanami db prepare
 % HANAMI_ENV=test bundle exec hanami db prepare
 ```
@@ -449,7 +449,7 @@ end
 Now we are ready to play around with our repository.
 We can use Hanami's `console` command to launch IRb with our application pre-loaded, so we can use our objects:
 
-```
+```shell
 % bundle exec hanami console
 >> repository = BookRepository.new
 => => #<BookRepository relations=[:books]>
@@ -670,7 +670,7 @@ By now, we should be familiar with the working of actions, views and templates.
 We'll speed things up a little, so we can quickly get to the good parts.
 First, create a new action for our "New Book" page:
 
-```
+```shell
 % bundle exec hanami generate action web books#new
 ```
 
@@ -718,7 +718,7 @@ container `<div>` using Hanami's [HTML builder helper](/guides/1.2/helpers/html5
 To submit our form, we need yet another action.
 Let's create a `Books::Create` action:
 
-```
+```shell
 % bundle exec hanami generate action web books#create
 ```
 
@@ -1030,7 +1030,7 @@ resources :books, only: [:index, :new, :create]
 To get a sense of what routes are defined, now we've made this change, you can
 run `bundle exec hanami routes` on your command-line to inspect the end result:
 
-```
+```shell
 % bundle exec hanami routes
      Name Method     Path                           Action
 

@@ -164,7 +164,7 @@ Assets are recursively searched under these paths.
 
 New projects have a default directory where application assets can be put:
 
-```
+```shell
 % tree apps/web/assets
 apps/web/assets
 ├── favicon.ico
