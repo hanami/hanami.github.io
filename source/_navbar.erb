@@ -14,14 +14,9 @@
     </div>
 
     <div class="navbar-collapse collapse" id="navbar-collapse">
-      <form action="" class="navbar-form form-inline pull-left visible-lg-block" id="search-form">
-        <input type="search" class="form-control" id="search" placeholder="Search guides...">
-
-      </form>
-
       <ul class="nav navbar-nav navbar-right text-uppercase">
         <li>
-          <a href="<%= latest_stable_version_guides_path %>">Guides</a>
+          <a href="https://guides.hanamirb.org" target="_blank">Guides</a>
         </li>
         <li>
           <a href="/community">Community</a>
@@ -39,13 +34,3 @@
     </div><!--/.nav-collapse -->
   </div>
 </nav>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
-<script type="text/javascript"> docsearch({
- apiKey: '688fca832b36348b694ee05d43f22560',
- indexName: 'hanamirb',
- inputSelector: '#search',
- algoliaOptions: { 'facetFilters': ["version:1.2", "tags:guides"] },
- debug: false
-});
-</script>

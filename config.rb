@@ -10,7 +10,6 @@ require 'lib/github_style_titles'
 require File.expand_path('../extensions/build_cleaner.rb', __FILE__)
 
 activate :search do |search|
-  search.resources = ['guides/']
   search.fields = {
     title:   { boost: 100, store: true, required: true },
     content: { boost: 50, store: true },
@@ -27,10 +26,6 @@ activate :breadcrumbs
 page '/',         layout: 'home'
 page '/atom.xml', layout: false
 page '/ml/*',     layout: false
-
-with_layout :guides do
-  page '/guides/*'
-end
 
 ###
 # Helpers
@@ -104,146 +99,6 @@ helpers do
     end
 
     "#{ path }/cover.jpg"
-  end
-
-  #
-  # GUIDES
-  #
-
-  GUIDES_ROOT     = 'source/guides'.freeze
-  GUIDES_EDIT_URL = 'https://github.com/hanami/hanami.github.io/edit/build/'.freeze
-
-  def guides
-    @guides ||= {}
-    version = current_page.data.version
-    raise "missing version for #{current_page.path}" if version.nil?
-    version = version.to_s
-    return @guides[version] if @guides.key?(version)
-
-    yaml = YAML.load_file("#{GUIDES_ROOT}/#{version}/guides.yml")
-    @guides[version] = JSON.parse(yaml.to_json, object_class: OpenStruct)
-  end
-
-  def latest_stable_version_guides_path
-    latest_stable_version = Dir.glob("#{GUIDES_ROOT}/*").each_with_object([]) do |version, result|
-      next unless ::File.directory?(version) && version =~ /[\d]+\.[\d]+\z/
-      result << ::File.basename(version)
-    end.compact.sort.last
-
-    "/guides/#{latest_stable_version}"
-  end
-
-  def guide_title(item, version = nil)
-    item.title || item.path.split('-').map(&:capitalize).join(' ')
-  end
-
-  def guide_url(category, page, version = nil)
-    path = version == 'head' ? '/guides/head' : "/guides/#{version}"
-    path = '/guides' if %w[head 1.0 1.1 1.2].include?(page.path)
-    File.join(path, category.path, page.path, '/')
-  end
-
-  def toc_group_opened_class(category, current_page)
-    regexp = "/#{category.path}/"
-    res = current_page.path =~ Regexp.new(regexp)
-
-    res ? 'opened' : nil
-  end
-
-  def guide_pager(current_page, guides, version = nil)
-    current_url = current_page.url.tr('/', '')
-    flat_guides = guides.categories.flat_map { |category|
-      category.pages.map { |page|
-        OpenStruct.new(
-          category: category,
-          page: page,
-        )
-      }
-    }
-    current_guide_index = flat_guides.index { |guide_page|
-      guide_url(guide_page.category, guide_page.page).tr('/', '') == current_url
-    }
-    if current_guide_index
-      links = []
-      prev_guide = flat_guides[current_guide_index - 1]
-      if 0 < current_guide_index && prev_guide
-        prev_url = guide_url(prev_guide.category, prev_guide.page, version)
-        prev_title = "#{guide_title(prev_guide.category)} - #{guide_title(prev_guide.page)}"
-        links << %(<div class="pull-left">Prev: <a href="#{prev_url}">#{prev_title}</a></div>)
-      end
-
-      next_guide = flat_guides[current_guide_index + 1]
-      if next_guide
-        next_url = guide_url(next_guide.category, next_guide.page, version)
-        next_title = "#{guide_title(next_guide.category)} - #{guide_title(next_guide.page)}"
-        links << %(<div class="pull-right">Next: <a href="#{next_url}">#{next_title}</a></div>)
-      end
-      links.join
-    end
-  end
-
-  def guides_navigation
-    result = ''
-
-    Dir.glob("#{ GUIDES_ROOT }/*").each do |section|
-      next unless ::File.directory?(section)
-      result << guides_section(section)
-    end
-
-    result
-  end
-
-  def guides_section(section)
-    title = section.sub("#{ GUIDES_ROOT }/", '').titleize
-
-    %(<li>
-  <span class="heading">#{ title }</span>
-  <ul class="nav">
-    #{ guides_section_articles(section) }
-  </ul>
-</li>)
-  end
-
-  def guides_section_articles(section)
-    result = ''
-    Dir.glob("#{ section }/*").each do |article|
-      article = article.gsub("#{ section }/", '').gsub(/\.md\z/, '')
-      url     = section.sub("#{ GUIDES_ROOT }", '') + article
-
-      result << %(<li class="active"><a href="#{ url }">#{ article.titleize }</a></li>)
-    end
-
-    result
-  end
-
-  def guides_edit_article(source)
-    url = GUIDES_EDIT_URL + source.gsub("#{ Dir.pwd }/", '')
-    %(<a href="#{ url }" target="_blank"><span class="icon icon-pencil" id="edit-guides-article" title="Edit this article"></span></a>)
-  end
-
-  ROOT_GUIDE_PAGE_REGEXP = %r(\A/guides/([\d\.|head]+/)?\z)
-
-  def breadcrumbs(page, guides)
-    metadata = page.metadata
-    version = metadata[:page]['version']
-    version_text = version == 'head' ? nil : "/ #{link_to(version, "/guides/#{version}")} "
-    page_title = metadata[:page]['title'].split(' - ').last
-
-    category = guides.categories.select do |c|
-      c['pages'].map { |p| p['path'] }.include?(page.url.split('/').last)
-    end.first
-
-    if page.url[ROOT_GUIDE_PAGE_REGEXP]
-      full_page_title = ''
-    else
-      full_page_title = "/ #{category_title(category)} / #{page_title}"
-    end
-
-    "#{link_to('Guides', '/guides')} #{version_text} #{full_page_title}"
-  end
-
-  def category_title(category)
-    category['title'] || category['path'].split('-').map(&:capitalize).join(' ')
   end
 
   #
