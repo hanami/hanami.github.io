@@ -13,7 +13,6 @@ function start_server {
 }
 
 function build_site {
-  cp -fR "./source/guides/${stable_version}/*" ./source/guides
   _middleman build
 }
 
