@@ -5,7 +5,7 @@ tags: announcements
 author: Luca Guidi
 image: true
 excerpt: >
-  Switch to RSpec, deprecations, minor enhancements, and bug fixes.
+  Switch to RSpec, deprecations, minor enhancements, and bug fixes. New Guides website.
 ---
 
 Hello wonderful community!
@@ -157,6 +157,11 @@ hanami new bookshelf
 ```
 
 If you're upgrading, please read the [related Guides article](https://guides.hanamirb.org/upgrade-notes/v130/).
+
+## New Guides website 📖
+
+We reworked the Guides website, which is now available at [https://guides.hanamirb.org](https://guides.hanamirb.org).
+It now has a cleaner design and can be [downloaded](https://github.com/hanami/guides/releases) for offline consultation.
 
 ## What's next? ⏰
 
