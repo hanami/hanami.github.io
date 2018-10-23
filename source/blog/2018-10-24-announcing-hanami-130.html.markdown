@@ -99,7 +99,7 @@ module Web
 end
 ```
 
-Please the corresponding webserver (eg. Nginx) feature, a Rack middleware (eg. `rack-ssl-enforcer`), or another strategy to force HTTPS connection.
+Please use the corresponding webserver (eg. Nginx) feature, a Rack middleware (eg. `rack-ssl-enforcer`), or another strategy to force HTTPS connection.
 
 ### Action's parsed_body 🚫
 
