@@ -1,6 +1,6 @@
 ---
 title: Announcing Hanami v1.3.0
-date: 2018-10-24 07:54:21 UTC
+date: 2018-10-24 07:23:18 UTC
 tags: announcements
 author: Luca Guidi
 image: true
