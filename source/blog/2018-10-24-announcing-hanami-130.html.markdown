@@ -25,9 +25,9 @@ Back in the days, when I started Hanami ([which used to be known as Lotus](/blog
 
 But I recognized that I rarely used it for web apps. For this kind of Ruby code, the completeness of RSpec makes my life easier.
 
-Because Hanami is an _opinionated software_, because we want to offer what we thing it's the best experience, we decided to promote RSpec as the default testing framework.
+Because Hanami is an _opinionated software_, because we want to offer what we think is the best experience, we decided to promote RSpec as the default testing framework.
 
-Since now on the following command will generate a new project with RSpec:
+From now on, the following command will generate a new project with RSpec:
 
 ```shell
 $ hanami new bookshelf
@@ -45,7 +45,7 @@ $ hanami new bookshelf --test=minitest
 
 We deprecated `Hanami::Utils::String` and `Hanami::Utils::Hash` as Ruby objects to be instantiated.
 
-Since 2.0 it won't be possible to do `Hanami::Utils::String.new("foo").underscore` anymore.
+From 2.0 onward it won't be possible to do `Hanami::Utils::String.new("foo").underscore` anymore.
 Please use the corresponding class method: `Hanami::Utils::String.underscore("foo")`.
 
 From 2.0 these two classes will be turned into modules.
@@ -57,7 +57,7 @@ From future versions, Hanami will use [`dry-inflector`](http://dry-rb.org/gems/d
 
 ### Body parsers 📃
 
-We deprecated `body_parsers` as setting in Hanami apps.
+We deprecated `body_parsers` as a setting in Hanami apps.
 
 ```ruby
 # apps/web/application.rb
@@ -168,7 +168,7 @@ It now has a cleaner design and can be [downloaded](https://github.com/hanami/gu
 This release will be the last minor version of `1.x` series.
 You may see patch versions to be released for bug fixes or deprecations.
 
-**Since now on, our focus will be for 2.0!**
+**From now on, our focus will be for 2.0!**
 
 We'll deeply integrate Hanami, [ROM](https://rom-rb.org/), & [DRY](https://dry-rb.org/). ❤️
 If you're interested, keep an eye on the `unstable` branches of our [GitHub repositories](https://github.com/hanami).
