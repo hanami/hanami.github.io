@@ -163,6 +163,12 @@ If you're upgrading, please read the [related Guides article](https://guides.han
 We reworked the Guides website, which is now available at [https://guides.hanamirb.org](https://guides.hanamirb.org).
 It now has a cleaner design and can be [downloaded](https://github.com/hanami/guides/releases) for offline consultation.
 
+## New team member 👱
+
+[Kai Kuchenbecker](https://twitter.com/kaikuchn) joined our core team!
+If you ever asked a quesion in our [chat](http://chat.hanamirb.org) it's very likely you have been answered by him.
+Kai will continue to help people in chat and to ease the process from question to solution or bugfix.
+
 ## What's next? ⏰
 
 This release will be the last minor version of `1.x` series.
