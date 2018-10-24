@@ -113,7 +113,7 @@ We deprecated `Hanami::Action#parsed_body`, and it will be removed in future rel
   * CLI: Introduce array type for arguments (`foo exec test spec/bookshelf/entities spec/bookshelf/repositories`)
   * CLI: Introduce array type for options (`foo generate config --apps=web,api`)
   * CLI: Introduce variadic arguments (`foo run ruby:latest -- ruby -v`)
-  * Swappable JSON backed for `Hanami::Action::Flash` based on `Hanami::Utils::Json`
+  * Swappable JSON backend for `Hanami::Action::Flash` based on `Hanami::Utils::Json`
   * Added `Hanami::Mailer.reply_to`
   * Added `Hanami::Utils::Files.inject_line_before_last` and `.inject_line_after_last`
 
