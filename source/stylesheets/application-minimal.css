@@ -283,6 +283,7 @@ table.status td {
 }
 
 .hanami-release-date {
+  margin-top: 1em;
   font-weight: 200;
   color: #777;
 }
