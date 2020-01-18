@@ -21,7 +21,7 @@
          <name><%= article_author(article) %></name>
        </author>
        <summary>
-         <%= article_summary(article) %>
+         <%= ERB::Util.html_escape(article_summary(article)) %>
        </summary>
        <content type="html"><![CDATA[<%= article.body %>]]></content>
      </entry>
