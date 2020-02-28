@@ -51,7 +51,7 @@ configure :development do
 end
 
 activate :deploy do |deploy|
-  deploy.method = :git
+  deploy.deploy_method = :git
   deploy.branch = 'master'
 end
 
@@ -98,7 +98,7 @@ helpers do
       "/images"
     end
 
-    "#{ path }/cover.jpg"
+    "#{ path }cover.jpg"
   end
 
   #
