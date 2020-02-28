@@ -113,19 +113,25 @@ Based on [`jeremyevans/r10k`](https://github.com/jeremyevans/r10k), `Hanami::API
 
 Runtime to complete 20,000 requests (lower is better).
 
+<a href="/blog/2020/02/26/introducing-hanami-api/runtime.png" rel="Runtime benchmark">
 ![Runtime benchmark](/blog/2020/02/26/introducing-hanami-api/runtime.png "Runtime benchmark")
+</a>
 
 #### Memory
 
 Memory footprint for 10,000 routes app (lower is better).
 
+<a href="/blog/2020/02/26/introducing-hanami-api/memory.png" rel="Memory benchmark">
 ![Memory benchmark](/blog/2020/02/26/introducing-hanami-api/memory.png "Memory benchmark")
+</a>
 
 #### Requests per second
 
 Requests per second hitting the 1st and the 10,000th route to measure the best and worst case scenario (higher is better).
 
+<a href="/blog/2020/02/26/introducing-hanami-api/requests-per-second.png" rel="Requests per second">
 ![Requests per second benchmark](/blog/2020/02/26/introducing-hanami-api/requests-per-second.png "Requests per second")
+</a>
 
 ## Conclusion
 
