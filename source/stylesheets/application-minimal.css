@@ -182,7 +182,8 @@ p.summary {
   font-size: 1.4em;
 }
 
-div.container-article {
+div.container-article,
+div.container-blog {
   line-height: 1.6;
   font-size: 1.2rem;
 }
@@ -198,6 +199,10 @@ div.container-article h4 {
 
 div.container-article img {
   width: 100%;
+}
+
+a.read_more {
+  font-size: 1.6rem;
 }
 
 p.lead {
