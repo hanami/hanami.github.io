@@ -24,7 +24,7 @@ page '/ml/*',     layout: false
 ###
 
 activate :directory_indexes
-activate :syntax
+activate :syntax, inline_theme: Rouge::Themes::Github.new
 
 activate :blog do |blog|
   blog.prefix    = 'blog'
