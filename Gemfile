@@ -9,7 +9,7 @@ gem 'middleman-search'
 gem 'middleman-breadcrumbs'
 gem 'redcarpet',                       '~> 3.2'
 gem 'httparty'
-gem 'nokogiri',                        '~> 1.8.1'
+gem 'nokogiri',                        '~> 1.10.8'
 
 group :development do
   gem 'middleman-livereload',          '~> 3.1'
