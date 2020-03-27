@@ -293,6 +293,12 @@ table.status td {
   z-index: 1000;
 }
 
+@media (max-width: 768px) {
+  .gitter-open-chat-button {
+    display: none;
+  }
+}
+
 .hanami-release-date {
   margin-top: 1em;
   font-weight: 200;
