@@ -182,12 +182,27 @@ p.summary {
   font-size: 1.4em;
 }
 
+div.container-article,
+div.container-blog {
+  line-height: 1.6;
+  font-size: 1.2rem;
+}
+
 div.container-article h2 {
   font-weight: 600;
 }
 
-div.container-article h3 {
-  font-weight: 400;
+div.container-article h3,
+div.container-article h4 {
+  font-weight: bold;
+}
+
+div.container-article img {
+  width: 100%;
+}
+
+a.read_more {
+  font-size: 1.6rem;
 }
 
 p.lead {
@@ -276,6 +291,12 @@ table.status td {
 
 .gitter-chat-embed {
   z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .gitter-open-chat-button {
+    display: none;
+  }
 }
 
 .hanami-release-date {

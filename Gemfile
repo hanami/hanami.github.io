@@ -1,16 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'middleman',                       '~> 3.3'
-gem 'middleman-blog',                  '~> 3.5'
-gem 'middleman-syntax',                '~> 2.0'
-gem 'middleman-deploy',                '~> 1.0'
-gem 'middleman-search_engine_sitemap', '~> 1.3'
+gem 'middleman'
+gem 'middleman-blog'
+gem 'middleman-syntax'
+gem 'middleman-deploy', '2.0.0.pre.alpha'
 gem 'middleman-search'
 gem 'middleman-breadcrumbs'
-gem 'redcarpet',                       '~> 3.2'
+gem 'redcarpet'
 gem 'httparty'
-gem 'nokogiri',                        '~> 1.10.8'
-
-group :development do
-  gem 'middleman-livereload',          '~> 3.1'
-end
+gem 'nokogiri'

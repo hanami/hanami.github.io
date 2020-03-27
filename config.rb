@@ -9,14 +9,6 @@ require 'middleman-syntax'
 require 'lib/github_style_titles'
 require File.expand_path('../extensions/build_cleaner.rb', __FILE__)
 
-activate :search do |search|
-  search.fields = {
-    title:   { boost: 100, store: true, required: true },
-    content: { boost: 50, store: true },
-    url:     { index: false, store: true }
-  }
-end
-
 activate :breadcrumbs
 
 ###
@@ -32,7 +24,7 @@ page '/ml/*',     layout: false
 ###
 
 activate :directory_indexes
-activate :syntax, css_class: 'language-ruby'
+activate :syntax, inline_theme: Rouge::Themes::Github.new
 
 activate :blog do |blog|
   blog.prefix    = 'blog'
@@ -45,18 +37,12 @@ end
 # Automatic image dimensions on image_tag helper
 # activate :automatic_image_sizes
 
-# Reload the browser automatically whenever files change
-configure :development do
-  activate :livereload if defined?(::Middleman::LiveReloadExtension)
-end
-
 activate :deploy do |deploy|
-  deploy.method = :git
+  deploy.deploy_method = :git
   deploy.branch = 'master'
 end
 
 set :url_root, 'http://hanamirb.org'
-activate :search_engine_sitemap
 
 # Methods defined in the helpers block are available in templates
 helpers do
@@ -64,7 +50,7 @@ helpers do
   # BLOG
   #
 
-  def articles(limit = 5)
+  def blog_articles(limit = 5)
     blog.articles.first(limit)
   end
 
@@ -98,7 +84,7 @@ helpers do
       "/images"
     end
 
-    "#{ path }/cover.jpg"
+    "#{ path }cover.jpg"
   end
 
   #

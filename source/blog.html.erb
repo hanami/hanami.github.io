@@ -19,7 +19,7 @@ pageable: true
         <h4>Posted by <strong class="author"><%= article_author(article) %></strong> on <em><%= article_date(article) %></em></h4>
 
         <p class="summary"><%= article_summary(article) %></p>
-        <%= link_to 'Read more...', article %>
+        <%= link_to 'Read more...', article, class: 'read_more' %>
         <hr>
       </div>
     </div>
