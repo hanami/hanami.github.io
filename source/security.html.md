@@ -17,7 +17,7 @@ We actively ship security improvements and assess for new vulnerabilities.
 
 If you find a vulnerability, please be responsible and do not share it publicly. Instead, please contact us:
 
-  1. Email to [security@hanamirb.org](mailto:security@hanamirb.org), you should receive a reply within 24 hours
+  1. Email to [admin@hanamirb.org](mailto:admin@hanamirb.org), you should receive a reply within 24 hours
   2. If you don't get an answer, please contact privately [Luca Guidi](mailto:me@lucaguidi.com) or another member of the [core team](/team)
   3. If none of those worked, please announce on the [chat](http://chat.hanamirb.org) that you have a security problem to report. Please do **NOT** share the problem in chat, as it's a public channel
 
