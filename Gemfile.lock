@@ -33,7 +33,6 @@ GEM
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     kramdown (1.17.0)
-    libv8 (3.16.14.19)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -79,10 +78,6 @@ GEM
       middleman-core (>= 3.2)
       net-sftp
       ptools
-    middleman-search (0.10.0)
-      middleman-core (>= 3.2)
-      nokogiri (~> 1.6)
-      therubyracer (~> 0.12.2)
     middleman-syntax (2.1.0)
       middleman-core (>= 3.2)
       rouge (~> 1.0)
@@ -111,15 +106,11 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.0)
-    ref (2.0.0)
     rouge (1.10.1)
     sassc (2.2.1)
       ffi (~> 1.9)
     servolux (0.13.0)
     temple (0.8.2)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -137,7 +128,6 @@ DEPENDENCIES
   middleman-blog
   middleman-breadcrumbs
   middleman-deploy (= 2.0.0.pre.alpha)
-  middleman-search
   middleman-syntax
   nokogiri
   redcarpet
