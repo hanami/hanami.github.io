@@ -73,7 +73,7 @@ helpers do
 
   def article_image(article)
     if article.data.image
-      %(<img src="#{ article_image_url(article) }">)
+      %(<img src="#{ article_image_url(article) }" loading="lazy">)
     end
   end
 
