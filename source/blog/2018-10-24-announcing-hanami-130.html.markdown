@@ -101,9 +101,9 @@ end
 
 Please use the corresponding webserver (eg. Nginx) feature, a Rack middleware (eg. `rack-ssl-enforcer`), or another strategy to force HTTPS connection.
 
-### Action's parsed_body 🚫
+### Action's parsed_request_body 🚫
 
-We deprecated `Hanami::Action#parsed_body`, and it will be removed in future releases of Hanami.
+We deprecated `Hanami::Action#parsed_request_body`, and it will be removed in future releases of Hanami.
 
 ## Minor Enhancements 🆙
 
