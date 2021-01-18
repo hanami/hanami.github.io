@@ -329,3 +329,19 @@ table.status td {
 .block-background img {
   filter: brightness(50%);
 }
+
+.status-hanami-2-yes {
+  background-color: lightgreen;
+}
+
+.status-hanami-2-wip {
+  background-color: lightsalmon;
+}
+
+.status-hanami-2-no {
+  background-color: tomato;
+}
+
+.status-hanami-2-na {
+  background-color: silver;
+}
