@@ -219,19 +219,19 @@ div.supporters {
   font-weight: 300;
 }
 
-#lotus {
+#lotus, #hanami2 {
   color: #fff;
   background-color: #685D9F;
   line-height: 5em;
   margin-top: 2em;
 }
 
-#lotus a {
+#lotus a, #hanami2 a {
   color: #fff;
   text-decoration: underline;
 }
 
-#lotus a.anchor {
+#lotus a.anchor, #hanami2 a.anchor {
   text-decoration: none;
   position: relative;
   left: -20px;
@@ -239,7 +239,7 @@ div.supporters {
   opacity: 0;
 }
 
-#lotus:hover a.anchor {
+#lotus:hover a.anchor, #hanami2:hover a.anchor {
   opacity: 1;
 }
 
