@@ -340,10 +340,26 @@ end
 
 The engine underpinning the new router also offers amazing performance, with Hanami::API benchmarks showing it [outperforming nearly all others](https://hanamirb.org/blog/2020/02/26/introducing-hanami-api/).
 
-## What's nexet?
+## A framework for all applications
 
-- Coming next:
-  - More refinement
-  - CLI with generators
-  - ROM integration
-  - Pls follow our trello board
+Many of the new features we’ve seen so far would empower any kind of application, not just web applications. So with this alpha, we’re making the first release of a truly “unbundled” Hanami, with the hanami-controller, hanami-router, and hanami-view gem dependencies being moved outside of the main gem and into the Gemfiles of the generated applications.
+
+This means you can now use the hanami gem to help you better organise any kind of Ruby application.  All you’ll need to do is opt out of the web mode when booting your application.
+
+```
+Hanami.boot web: false
+```
+
+In future releases, we’ll work to make this an even smoother process.
+
+## Application template
+
+To help you try everything we’ve shared today, we have an [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template) which you can clone to get started. This prepares a full stack web application ready for you to use.
+
+## What’s next?
+
+While we’ve covered so much ground since the last alpha, there’s still many rough edges to smooth over, as well as a few big pieces left to get in place, such as an application CLI with generators, first-class integration with [rom-rb](https://rom-rb.org) for a persistence layer, front-end assets integration, and a standard collection of view helpers.
+
+If you’d like to follow along, we’re tracking the remaining work in our public [Hanami 2.0 trello board](https://trello.com/b/lFifnBti/hanami-20).
+
+Thank you for your interest in Hanami, and for support of a diverse, flourishing Ruby ecosystem! We can’t wait to hear your thoughts about everything in this alpha release.
