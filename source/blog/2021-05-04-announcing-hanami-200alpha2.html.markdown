@@ -10,7 +10,7 @@ excerpt: >
 
 Hello, Hanami community! It is my great honor to make my first post here and announce the release of Hanami v2.0.0.alpha2! 🎉
 
-It’s been a little while since [the last alpha release](https://hanamirb.org/blog/2019/01/30/announcing-hanami-200alpha1/), but we’ve been hard at work, and the close collaboration between the Hanami, dry-rb, and rom-rb teams has been going exceedingly well. Together, we're delighted to present a **revolutionary vision** for Hanami 2.0! In this alpha, we have:
+It’s been a little while since [the last alpha release](https://hanamirb.org/blog/2019/01/30/announcing-hanami-200alpha1/), but we’ve been hard at work, and the close collaboration between the Hanami, dry-rb, and rom-rb teams has been going exceedingly well. Together, we’re delighted to present a **revolutionary vision** for Hanami 2.0! In this alpha, we have:
 
 - A **completely rewritten application core**, offering advanced application-level state management and code loading capabilities
 - An **always-there auto-injection mixin**, making it easy to model your behavior as functional, composable objects
@@ -178,7 +178,7 @@ module Admin
 end
 ```
 
-Each slice also automatically imports the components from the application, which contains some common facilities (like the logger), the app's top-level bootable components, as well as any other classes you define in `lib/`. These are available under an `"application."` namespace in the slice, making it just as easy to inject these as dependencies.
+Each slice also automatically imports the components from the application, which contains some common facilities (like the logger), the app’s top-level bootable components, as well as any other classes you define in `lib/`. These are available under an `"application."` namespace in the slice, making it just as easy to inject these as dependencies.
 
 ```ruby
 module Admin
@@ -209,9 +209,9 @@ module MyApp
 end
 ```
 
-With this, the slices themslves form their own clear graph of your application's high-level functionality.
+With this, the slices themslves form their own clear graph of your application’s high-level functionality.
 
-While the slices are already incredibly powerful thanks to the built-in features of the container, we'll be spending future release cycles bolstering these even further, such as making it possible to load slices conditionally.
+While the slices are already incredibly powerful thanks to the built-in features of the container, we’ll be spending future release cycles bolstering these even further, such as making it possible to load slices conditionally.
 
 ## Functional Hanami::Action
 
@@ -259,7 +259,7 @@ module Admin
 end
 ```
 
-Every exposure's value is decorated by a matching view part class, which you can use to provide view-specific behaviour attached to specific domain objects, including anything possible from within the templates, such as rendering partials and accessing all aspects of the general view rendering context.
+Every exposure’s value is decorated by a matching view part class, which you can use to provide view-specific behaviour attached to specific domain objects, including anything possible from within the templates, such as rendering partials and accessing all aspects of the general view rendering context.
 
 ```ruby
 module Admin
