@@ -1,16 +1,16 @@
 ---
 title: Announcing Hanami v2.0.0.alpha2
-date: 2021-05-04 21:30:00 GMT+11
+date: 2021-05-04 13:45:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  NEXT preview of the 2.0 series. App simplification, new router, rewritten actions, fresh code reloading strategy.
+  After two years of work, presenting a reviolutionary new vision for Hanami 2.0.
 ---
 
 Hello, Hanami community! It is my great honor to make my first post here and announce the release of Hanami v2.0.0.alpha2! 🎉
 
-It’s been a little while since the last alpha release, but we’ve been hard at work, and the close collaboration between the Hanami, dry-rb, and rom-rb teams has been going exceedingly well. Together, we're delighted to present a **revolutionary vision** for Hanami 2.0! In this alpha, we have:
+It’s been a little while since [the last alpha release](https://hanamirb.org/blog/2019/01/30/announcing-hanami-200alpha1/), but we’ve been hard at work, and the close collaboration between the Hanami, dry-rb, and rom-rb teams has been going exceedingly well. Together, we're delighted to present a **revolutionary vision** for Hanami 2.0! In this alpha, we have:
 
 - A **completely rewritten application core**, offering advanced application-level state management and code loading capabilities
 - An **always-there auto-injection mixin**, making it easy to model your behavior as functional, composable objects
