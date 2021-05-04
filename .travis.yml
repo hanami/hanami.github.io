@@ -14,7 +14,7 @@ script:
 - bin/site build
 deploy:
   fqdn: hanamirb.org
-  local_dir: build
+  local_dir: build_site
   provider: pages
   skip-cleanup: true
   github-token: $GH_TOKEN
