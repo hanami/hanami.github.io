@@ -16,7 +16,7 @@ It’s been a little while since the last alpha release, but we’ve been hard a
 - An **always-there auto-injection mixin**, making it easy to model your behavior as functional, composable objects
 - Built-in **application settings**, providing first-class support for your
 - New **Slices** for organizing your application’s key areas of functionality
-- A **rewritten Action class**, now truly stateless and oriented to work with application components as dependencies
+- A **reoriented Action class**, now truly stateless and oriented to work with application components as dependencies
 - A **brand new, standalone view layer** boasting a full range of abstractions for better organising your view code
 - A **blazing fast new router**
 - A novel approach for **zero-boilerplate integration and configuration of application components**
@@ -211,9 +211,115 @@ module MyApp
 end
 ```
 
-With this, the slices themslves can form their own clear graph of your application's high-level functionality.
+With this, the slices themslves form their own clear graph of your application's high-level functionality.
 
 While the slices are already incredibly powerful thanks to the built-in features of the container, we'll be spending future release cycles bolstering these even further, such as making it possible to load slices conditionally.
+
+## Functional Hanami::Action
+
+`Hanami::Action` has been reoriented to provide immutable, callable action classes that fit well with all other parts of the new framework. Actions can declare dependencies to interact with the rest of the application, access the request and prepare a response in their `#handle` method, then the class will take care of the rest.
+
+```ruby
+module Admin
+  module Actions
+    module Articles
+      class Show < Admin::Action
+        include Deps["article_repo"]
+
+        def handle(req, res)
+          article = article_repo.find(req.params[:id])
+
+          res.body = JSON.generate(article)
+        end
+      end
+    end
+  end
+end
+```
+
+Actions are still callable and Rack-compatible, and continue to offer the same range of HTTP-related features from their 1.x counterparts, reoriented to fit this new structure.
+
+## Brand new view layer
+
+Hanami 2.0 will sport an entirely new view layer, with [dry-view](https://dry-rb.org/gems/dry-view) joining the Hanami family as the new hanami-view. With years of development behind it, it offers a sophisticated set of abstractions for designing well-factored views.
+
+A view in Hanami 2.0 is a standalone, callable class that can declare dependencies to interact with the rest of the application (are you catching the theme here?). It can access parameters and then prepare named exposures to make available to its corresponding template.
+
+```ruby
+module Admin
+  module Views
+    module Articles
+      class Show < Admin::View
+        include Deps["article_repo"]
+
+        expose :article do |id:|
+          article_repo.find(id)
+        end
+      end
+    end
+  end
+end
+```
+
+Every exposure's value is decorated by a matching view part class, which you can use to provide view-specific behaviour attached to specific domain objects, including anything possible from within the templates, such as rendering partials and accessing all aspects of the general view rendering context.
+
+```ruby
+module Admin
+  module View
+    module Parts
+      class Article < Admin::Part
+        def preview_text
+          body_text.to_s[0..300]
+        end
+
+        def render_social_preview
+          render(:social_preview, title: title, text: preview_text)
+        end
+      end
+    end
+  end
+end
+```
+
+Views also integrate nicely with actions, allowing you to keep your actions clean and focused on HTTP responsibilities only.
+
+```ruby
+module Admin
+  module Actions
+    module Articles
+      class Show < Admin::Action
+        include Deps[view: "views.articles.show"]
+
+        def handle(req, res)
+          res.render view, id: req.params[:id]
+        end
+      end
+    end
+  end
+end
+```
+
+Since views are independent, addressable, callable objects just like any other component within an Hanami application, they can also be put to a wide range of uses alongside the standard rendering of web page HTML, such as rendering emails or even preparing API responses.
+
+## Zero-boilerplate integration of application components
+
+A strong focus of our effort in building Hanami 2.0 has been to allow each component, such as a view or action, to remain useful outside of Hanami, while also fitting seamlessly when used within a full Hanami application. A view used outside of Hanami, for example, looks like this:
+
+```ruby
+class MyView < Hanami::View
+  config.template = "my_view"
+end
+```
+
+And this same view used within Hanami looks like this:
+
+```ruby
+class MyView < Hanami::View
+end
+```
+
+There’s almost no difference! Once you understand how to use `Hanami::View` once, you can use it everywhere. Even inside an Hanami app, where the app seamlessly integrates the views (in the case above, inferring the template name automatically, among other things), you can still access the full extent of the view configuration, allowing you to ”eject” from the configured defaults if you ever need.
+
 
 
 
