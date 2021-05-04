@@ -320,12 +320,25 @@ end
 
 There’s almost no difference! Once you understand how to use `Hanami::View` once, you can use it everywhere. Even inside an Hanami app, where the app seamlessly integrates the views (in the case above, inferring the template name automatically, among other things), you can still access the full extent of the view configuration, allowing you to ”eject” from the configured defaults if you ever need.
 
+## Blazing fast new router
 
+With all your actions and views in place, you’ll want a way to write them up to URLs. Hanami 2.0’s router will offer a familiar DSL to make this happen.
 
+```ruby
+Hanami.application.routes do
+  mount :main, at: "/" do
+    # Will resolve "actions.home.index" from the Main slice
+    root to: "home#index"
+  end
 
+  mount :admin, at: "/admin" do
+    # Will resolve "actions.home.index" from the Admin slice
+    root to: "home#index"
+  end
+end
+```
 
-
-
+The engine underpinning the new router also offers amazing performance, with Hanami::API benchmarks showing it [outperforming nearly all others](https://hanamirb.org/blog/2020/02/26/introducing-hanami-api/).
 
 ## What's nexet?
 
