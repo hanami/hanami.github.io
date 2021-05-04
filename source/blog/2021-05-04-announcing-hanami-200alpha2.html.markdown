@@ -95,11 +95,11 @@ Hanami.application.keys
 # ]
 ```
 
-This allows your app to grow gracefully, gives you flexibility in when and how you load your code, and keeps the developer experience snappy all the while. The Hanami console, for example, only partially boots the application, meaning you get a prompt in under 1s, no matter how large the application!
+This allows your app to grow gracefully, gives you flexibility in when and how you load your code, and keeps the developer experience snappy all the while. The Hanami console, for example, only partially boots the application, meaning **you get a prompt in under 1s, no matter how large the application!**
 
 ## Auto-injection mixin
 
-With application components addressable via abstract identifiers (instead of concrete class names), you can then use Hanami 2.0’s always-available `Deps` auto-injection mixin to write classes oriented around dependency injection as the way to bring together different application behaviors.
+With application components addressable via abstract identifiers (instead of concrete class names), you can then use Hanami 2.0’s always-available `Deps` auto-injection mixin to write classes oriented around dependency injection as the way to compose different application behaviors.
 
 ```ruby
 class CreateThing
