@@ -12,7 +12,7 @@ Hello, Hanami community! It is my great honor to make my first post here and ann
 
 It’s been a little while since the last alpha release, but we’ve been hard at work, and the close collaboration between the Hanami, dry-rb, and rom-rb teams has been going exceedingly well. Together, we're delighted to present a **revolutionary vision** for Hanami 2.0! In this alpha, we have:
 
-- A **completely rewritten application core** built around dry-system, offering advanced application-level state management and code loading capabilities
+- A **completely rewritten application core**, offering advanced application-level state management and code loading capabilities
 - An **always-there auto-injection mixin**, making it easy to model your behavior as functional, composable objects
 - Built-in **application settings**, providing first-class support for your
 - New **Slices** for organizing your application’s key areas of functionality
@@ -27,22 +27,18 @@ That’s a lot of great stuff! Let’s dive in and take a look.
 
 ## New application core
 
-Every Hanami 2.0 application now features a [dry-system](http://dry-rb.org/gems/dry-system) container at its core. From this simple app definition, you now get a next-level system for organizing your application components.
+Every Hanami 2.0 application provides a next-level system for organizing your application’s components. After defining your application, it can vend ready-to-use instances of your application’s objects.
 
 ```ruby
 module MyApp
   class Application < Hanami::Application
   end
 end
-```
 
-This application class can then vend instances of your components, ready to use:
-
-```ruby
 Hanami.application["commands.create_article"] # => #<MyApp::Commands::CreateArticle>
 ```
 
-You can also define **bootable** components in your `config/boot`, with their own lifecycle events and clear dependencies:
+You can also define **bootable** components in your `config/boot/`, with their own lifecycle events and clear dependencies.
 
 ```ruby
 Hanami.application.register_bootable :some_service do |container|
@@ -58,13 +54,13 @@ Hanami.application.register_bootable :some_service do |container|
 end
 ```
 
-These bootable components can be resolved from the application container just like everything else:
+You can then get these bootable components from the application, just like any other.
 
 ```ruby
 Hanami.application["some_service.client"] # => #<SomeService::Client api_key="xyz">
 ```
 
-When a Hanami application boots in full, it will automatically register container entries for all the components represented by your Ruby source files:
+When a Hanami application boots in full, it will automatically register entries for all components represented by your Ruby source files.
 
 ```ruby
 Hanami.boot
@@ -80,7 +76,7 @@ Hanami.application.keys
 # ]
 ```
 
-As your application grows, this boot process will naturally slow; we've all experienced these frustratingly slow boot times for large Ruby applications. To help with this, Hanami 2.0 applications can be partially booted, requiring the bare minimum of files to setup the base container, and then lazy load your dependencies as required:
+As your application grows, this boot process will naturally slow; we’ve all experienced the frustratingly long wait as large Ruby applications boot. To help with this, Hanami 2.0 applications can be **partially booted**, requiring a bare minimum of files, then lazy load your components as they’re accessed.
 
 ```ruby
 Hanami.init
@@ -99,11 +95,11 @@ Hanami.application.keys
 # ]
 ```
 
-This allows your app to grow gracefully, giving you flexibility in when and how you load your code, as well as keeping the developer experience snappy at all times (the Hanami console will always partially boot the application, meaning you get to a prompt in under 1s, no matter how large the application!).
+This allows your app to grow gracefully, gives you flexibility in when and how you load your code, and keeps the developer experience snappy all the while. The Hanami console, for example, only partially boots the application, meaning you get a prompt in under 1s, no matter how large the application!
 
 ## Auto-injection mixin
 
-A key benefit of the container is that it gives us abstract names (instead of concrete classes) for representing the application's components. Combined with Hanami 2's always-available `Deps` auto-injection mixin, this makes it easy to write classes oriented around dependency injection as the way to bring togehter different parts of the application:
+With application components addressable via abstract identifiers (instead of concrete class names), you can then use Hanami 2.0’s always-available `Deps` auto-injection mixin to write classes oriented around dependency injection as the way to bring together different application behaviors.
 
 ```ruby
 class CreateThing
@@ -117,19 +113,19 @@ class CreateThing
 end
 ```
 
-With this code in place, a new instance of `CreateThing` will use the `:some_service` bootable component from our earlier examples:
+With this code in place, a new instance of `CreateThing` will use the `:some_service` bootable component from our earlier examples.
 
 ```ruby
 CreateThing.new # => #<CreateThing service_client=#<SomeService::Client api_key="xyz">>
 ```
 
-This is exactly the same as when we resolve it from the container, such as when `"create_thing"` is used as a dependency of _another_ component:
+This is exactly the same as when you resolve it from the container, such as when `"create_thing"` is used as a dependency of _another_ component.
 
 ```ruby
 Hanami.application["create_thing"] # => #<CreateThing service_client=#<SomeService::Client api_key="xyz">>
 ```
 
-Over in our unit tests, however, if we want to test `CreateThing` in isolation from our `service_client`, we can pass in an explicit replacement for this default dependency:
+Over in the unit tests, however, if you want to test `CreateThing` in isolation from the `service_client`, you can pass in an explicit replacement for this default dependency.
 
 ```ruby
 subject(:create_thing) {
@@ -139,7 +135,7 @@ subject(:create_thing) {
 let(:service_client) { spy(:service_client) }
 ```
 
-This low friction approach to dependency injection means we can much more readily decompose our application behaviour into easier-to-understand, easier-to-test single-responsibility components.
+This low friction approach to dependency injection means you can much more readily decompose our application behaviour into smaller, easier-to-understand, easier-to-test, single-responsibility components.
 
 ## Application settings
 
@@ -155,13 +151,15 @@ An optional type object can be provided as a second argument, to coerce and/or t
 
 Settings are read from `.env*` files using [dotenv](https://github.com/bkeepers/dotenv).
 
-The resulting settings object is a struct with methods matching your setting names. It's available as `Hanami.application.settings` as well as via the `"settings"` container registration, allowing you to auto-inject it into your application components as required.
+The resulting settings object is a struct with methods matching your setting names. It’s available as `Hanami.application.settings` as well as via the `"settings"` component, allowing you to auto-inject it into your application components as required.
 
 ## Application and slices
 
 So far our examples have been from a single all-in-one application. But as our apps grow in complexity, it can be helpful to separate them into distinct, well-bounded high-level concerns. To serve in this role, Hanami 2 offers **Slices**.
 
-Slices live inside the `slices/` directory. Each slice maps onto a single Ruby module namespace, and has its own dedicated container. For an application with the following directories:
+Slices live inside the `slices/` directory. Each slice maps onto a single Ruby module namespace, and has its own dedicated instance for managing its components.
+
+For an application with the following directories:
 
 ```ruby
 slices/
@@ -170,7 +168,7 @@ slices/
   search/
 ```
 
-It would have `Admin`, `Main`, and `Search` slices. Each slice container is loaded and managed exactly the same as the application container that we've described so far, so a class defined in `admin/create_article.rb` would be available from the `Admin::Slice` as `Admin::Slice["create_article"]`, and it can inject other dependencies from the admin slice:
+It would have corresponding `Admin`, `Main`, and `Search` slices. Each slice is loaded and managed just like the application itself, so a class defined in `admin/create_article.rb` would be available from `Admin::Slice` as `Admin::Slice["create_article"]`, and can in turn inject other dependencies from the admin slice.
 
 ```ruby
 module Admin
@@ -180,7 +178,7 @@ module Admin
 end
 ```
 
-Each slice also automatically imports the core application slice, which by default contains some common app facilities (like the logger), the app's top-level bootable components, as well as any other classes you define in `lib/`. These are available under an `"application."` namespace in the slice's container registrations, making them just as easy to inject as other dependencies from within the slice:
+Each slice also automatically imports the components from the application, which contains some common facilities (like the logger), the app's top-level bootable components, as well as any other classes you define in `lib/`. These are available under an `"application."` namespace in the slice, making it just as easy to inject these as dependencies.
 
 ```ruby
 module Admin
@@ -198,7 +196,7 @@ module Admin
 end
 ```
 
-Slices can also import _each other_:
+Slices can also _import each other._
 
 ```ruby
 module MyApp
@@ -352,14 +350,27 @@ Hanami.boot web: false
 
 In future releases, we’ll work to make this an even smoother process.
 
-## Application template
+## What’s included?
 
-To help you try everything we’ve shared today, we have an [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template) which you can clone to get started. This prepares a full stack web application ready for you to use.
+Today we’re releasing the following gems:
+
+- `hanami` v2.0.0.alpha2
+- `hanami-cli` v2.0.0.alpha2
+- `hanami-view` v2.0.0.alpha2
+- `hanami-controller` v2.0.0.alpha2
+- `hanami-router` v2.0.0.alpha5
+- `hanami-utils` v2.0.0.alpha2
+
+## How can I try it?
+
+We’ve prepared an [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template) which you can clone to get started with an app and try everything we’ve shared today. The template provides it’s own installation instructions and scripts, and prepares a full stack web application ready for you to use.
+
+There’s so much more to this release than we’ve been able to share in this brief post, so we’d love for you to try everything out. We can’t wait to hear your thoughts!
 
 ## What’s next?
 
-While we’ve covered so much ground since the last alpha, there’s still many rough edges to smooth over, as well as a few big pieces left to get in place, such as an application CLI with generators, first-class integration with [rom-rb](https://rom-rb.org) for a persistence layer, front-end assets integration, and a standard collection of view helpers.
+While we’ve covered so much ground since the last alpha, there are still many rough edges to smooth over, as well as a few big pieces to put in place, such as an application CLI with generators, first-class integration with [rom-rb](https://rom-rb.org) for a persistence layer, front-end assets integration, and a standard collection of view helpers.
 
 If you’d like to follow along, we’re tracking the remaining work in our public [Hanami 2.0 trello board](https://trello.com/b/lFifnBti/hanami-20).
 
-Thank you for your interest in Hanami, and for support of a diverse, flourishing Ruby ecosystem! We can’t wait to hear your thoughts about everything in this alpha release.
+Thank you for your interest in Hanami, and for support of a diverse, flourishing Ruby ecosystem!
