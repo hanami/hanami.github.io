@@ -373,4 +373,4 @@ While we’ve covered so much ground since the last alpha, there are still many 
 
 If you’d like to follow along, we’re tracking the remaining work in our public [Hanami 2.0 trello board](https://trello.com/b/lFifnBti/hanami-20).
 
-Thank you for your interest in Hanami, and for support of a diverse, flourishing Ruby ecosystem! 🌸
+Thank you for your continued interest in Hanami, and for your support of a diverse, flourishing Ruby ecosystem! 🌸
