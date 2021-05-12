@@ -14,7 +14,7 @@ It’s been a little while since [the last alpha release](https://hanamirb.org/b
 
 - A **completely rewritten application core**, offering advanced application-level state management and code loading capabilities
 - An **always-there auto-injection mixin**, making it easy to model your behavior as functional, composable objects
-- Built-in **application settings**, providing first-class support for your
+- Built-in **application settings** with first-class support
 - New **Slices** for organizing your application’s key areas of functionality
 - A **reoriented Action class**, now truly stateless and oriented to work with application components as dependencies
 - A **brand new, standalone view layer** boasting a full range of abstractions for better organising your view code
