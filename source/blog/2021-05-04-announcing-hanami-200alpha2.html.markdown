@@ -5,7 +5,7 @@ tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  After two years of work, presenting a reviolutionary new vision for Hanami 2.0.
+  After two years of work, presenting a revolutionary new vision for Hanami 2.0.
 ---
 
 Hello, Hanami community! It is my great honor to make my first post here and announce the release of Hanami v2.0.0.alpha2! 🎉
