@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Announcing Hanami v1.1.0.beta1</title>
+
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+    <meta property="og:site_name"   content="Hanami"/>
+    <meta property="og:title"       content="Announcing Hanami v1.1.0.beta1">
+    <meta property="og:url"         content="http://hanamirb.org/blog/2017/08/11/announcing-hanami-110beta1/">
+    <meta property="og:description" content="New associations (<code>belongs_to</code>, <code>has_one</code>, <code>has_many :through</code>), rewritten CLI with registrable commands for third-party gems, new extra behaviors for entity manual schema, selectively boot apps, logger filtering, bug fixes.">
+    <meta property="og:image"       content="http://hanamirb.org/blog/2017/08/11/announcing-hanami-110beta1/cover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@hanamirb">
+    <meta name="twitter:creator"     content="@hanamirb">
+    <meta name="twitter:url"         content="http://hanamirb.org/blog/2017/08/11/announcing-hanami-110beta1/">
+    <meta name="twitter:title"       content="Announcing Hanami v1.1.0.beta1">
+    <meta name="twitter:description" content="New associations (<code>belongs_to</code>, <code>has_one</code>, <code>has_many :through</code>), rewritten CLI with registrable commands for third-party gems, new extra behaviors for entity manual schema, selectively boot apps, logger filtering, bug fixes.">
+    <meta name="twitter:image:src"   content="http://hanamirb.org/blog/2017/08/11/announcing-hanami-110beta1/cover.jpg">
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand text-uppercase" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right text-uppercase">
+        <li>
+          <a href="https://guides.hanamirb.org" target="_blank">Guides</a>
+        </li>
+        <li>
+          <a href="https://docs.hanamirb.org" target="_blank">API</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div id="hanami2" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      We're working on <strong>Hanami 2.0</strong>. Read the <a href="/blog/2021/05/04/announcing-hanami-200alpha2/">latest announcement</a> and follow the <a href="https://github.com/hanami/hanami/tree/unstable">progress</a> on GitHub.
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="container">
+      <div class="block block-inverse text-center">
+        <div class="block-foreground">
+          <h1 class="block-title">Announcing Hanami v1.1.0.beta1</h1>
+          <h4 class="text-muted">Posted by <strong>Luca Guidi</strong> on <em>August 11, 2017</em></h4>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-facebook"></span>
+            Share
+          </button>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-twitter"></span>
+            Tweet
+          </button>
+        </div>
+        <div class="block-background">
+          <img src="/blog/2017/08/11/announcing-hanami-110beta1/cover.jpg" loading="lazy">
+        </div>
+      </div>
+
+      <div class="container container-article">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 col-md-offset-1">
+            <p class="lead">New associations (<code>belongs_to</code>, <code>has_one</code>, <code>has_many :through</code>), rewritten CLI with registrable commands for third-party gems, new extra behaviors for entity manual schema, selectively boot apps, logger filtering, bug fixes.</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-md-9 col-md-offset-1">
+            <div class="article-body">
+              <p>Hello wonderful community!</p>
+
+<p>This hot summer ☀ has some fresh news brought to you by Hanami 🌸 and its cool 😎 new features. 🍉</p>
+
+<p>Today we&#39;re happy to announce <code>v1.1.0.beta1</code> release 🙌 , with the stable release (<code>v1.1.0</code>) scheduled for <strong>October 2017</strong>.</p>
+
+<p>Between now and then, we&#39;ll release other <em>beta</em> and <em>release candidate</em> versions.</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+<p>So what&#39;s new and exiciting in the Hanami world?</p>
+
+      <h3 id="new-repository-associations" class="title"><a name="new-repository-associations" class="anchor" href="#new-repository-associations">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New repository associations</h3>
+    
+<p>We added new useful associations. 🎉
+Let&#39;s quickly see them in action.</p>
+
+      <h4 id="many-to-one-code-belongs_to-code-" class="title"><a name="many-to-one-code-belongs_to-code-" class="anchor" href="#many-to-one-code-belongs_to-code-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Many-to-One (<code>belongs_to</code>)</h4>
+    <pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">BookRepository</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Repository</span>
+  <span style="background-color: #f8f8f8">associations</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">belongs_to</span> <span style="color: #990073">:author</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">find_with_author</span><span style="background-color: #f8f8f8">(</span><span style="color: #0086B3">id</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">aggregate</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:author</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">where</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #0086B3">id</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">map_to</span><span style="background-color: #f8f8f8">(</span><span style="color: #008080">Book</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">one</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+      <h4 id="one-to-one-code-has_one-code-" class="title"><a name="one-to-one-code-has_one-code-" class="anchor" href="#one-to-one-code-has_one-code-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>One-to-one (<code>has_one</code>)</h4>
+    <pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">UserRepository</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Repository</span>
+  <span style="background-color: #f8f8f8">associations</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">has_one</span> <span style="color: #990073">:avatar</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">find_with_avatar</span><span style="background-color: #f8f8f8">(</span><span style="color: #0086B3">id</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">aggregate</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:avatar</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">where</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #0086B3">id</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">map_to</span><span style="background-color: #f8f8f8">(</span><span style="color: #008080">User</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">one</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">create_with_avatar</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">assoc</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:avatar</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">create</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">remove_avatar</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">user</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">assoc</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:avatar</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">user</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">delete</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">add_avatar</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">user</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">assoc</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:avatar</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">user</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">add</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">update_avatar</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">user</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">assoc</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:avatar</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">user</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">update</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">replace_avatar</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">user</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">assoc</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:avatar</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">user</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">replace</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+      <h4 id="many-to-many-code-has_many-through-code-" class="title"><a name="many-to-many-code-has_many-through-code-" class="anchor" href="#many-to-many-code-has_many-through-code-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Many-to-many (<code>has_many :through</code>)</h4>
+    <pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">AuthorRepository</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Repository</span>
+  <span style="background-color: #f8f8f8">associations</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">has_many</span> <span style="color: #990073">:books</span>
+    <span style="background-color: #f8f8f8">has_many</span> <span style="color: #990073">:reviews</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">through: :books</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">find_with_reviews</span><span style="background-color: #f8f8f8">(</span><span style="color: #0086B3">id</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">aggregate</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:reviews</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">where</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">authors__id: </span><span style="color: #0086B3">id</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">map_to</span><span style="background-color: #f8f8f8">(</span><span style="color: #008080">Author</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">one</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">top_reviews_for</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">author</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">assoc</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:reviews</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">author</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">where</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"usefulness_count &gt; 10"</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">to_a</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+      <h3 id="rewritten-cli" class="title"><a name="rewritten-cli" class="anchor" href="#rewritten-cli">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Rewritten CLI</h3>
+    
+<p>We have rewritten from scratch our CLI, by replacing <code>thor</code> with a new gem <code>hanami-cli</code>.</p>
+
+<p>Despite the name, <a href="https://github.com/hanami/cli"><code>hanami-cli</code></a> is <strong>not</strong> about Hanami commands (eg. <code>hanami server</code>), but instead it&#39;s a <strong>general purpose Command Line Interface (CLI) framework for Ruby</strong>.
+We worked with <a href="http://dry-rb.org">dry-rb</a> team to ship this new gem, which is be used by Hanami, and it will be used soon by dry-rb, <a href="http://rom-rb.org/">ROM</a> and <a href="http://trailblazer.to/">Trailblazer</a> to build their CLI too.</p>
+
+<p>Thanks to <code>hanami-cli</code> we built a new CLI architecture that allows third-party developers to integrate with Hanami CLI.
+Let&#39;s say we want to build a fictional gem <code>hanami-webpack</code>.</p>
+<pre class="highlight ruby"><code><span style="color: #0086B3">require</span> <span style="color: #d14">"hanami/cli/commands"</span>
+
+<span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Hanami</span>
+  <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Webpack</span>
+    <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">CLI</span>
+      <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Commands</span>
+        <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Configuration</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">CLI</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Commands</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Command</span>
+          <span style="background-color: #f8f8f8">desc</span> <span style="color: #d14">"Generate Webpack configuration"</span>
+
+          <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">call</span><span style="background-color: #f8f8f8">(</span><span style="color: #000000;font-weight: bold">*</span><span style="background-color: #f8f8f8">)</span>
+            <span style="color: #999988;font-style: italic"># generate configuration</span>
+          <span style="color: #000000;font-weight: bold">end</span>
+        <span style="color: #000000;font-weight: bold">end</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+
+<span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">CLI</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">register</span> <span style="color: #d14">"generate webpack"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Webpack</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">CLI</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Commands</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Configuration</span>
+</code></pre>
+
+<p>When a developer adds <code>hanami-webpack</code> to their <code>Gemfile</code>, then the command is available.</p>
+<pre class="highlight shell"><code><span style="color: #555555">$ </span>bundle <span style="color: #0086B3">exec </span>hanami generate
+Commands:
+  hanami generate action APP ACTION                <span style="color: #999988;font-style: italic"># Generate an action for app</span>
+  hanami generate app APP                          <span style="color: #999988;font-style: italic"># Generate an app</span>
+  hanami generate mailer MAILER                    <span style="color: #999988;font-style: italic"># Generate a mailer</span>
+  hanami generate migration MIGRATION              <span style="color: #999988;font-style: italic"># Generate a migration</span>
+  hanami generate model MODEL                      <span style="color: #999988;font-style: italic"># Generate a model</span>
+  hanami generate secret <span style="color: #000000;font-weight: bold">[</span>APP]                     <span style="color: #999988;font-style: italic"># Generate session secret</span>
+  hanami generate webpack                          <span style="color: #999988;font-style: italic"># Generate Webpack configuration</span>
+</code></pre>
+
+      <h3 id="extra-behaviors-for-entity-manual-schema" class="title"><a name="extra-behaviors-for-entity-manual-schema" class="anchor" href="#extra-behaviors-for-entity-manual-schema">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Extra behaviors for entity manual schema</h3>
+    
+<p>Entities by default infer their schema (set of attributes) from the corresponding database table.
+For instance, if <code>people</code> table has <code>id</code>, <code>name</code>, <code>created_at</code>, and <code>updated_at</code> columns, then <code>Person</code> will have the same attributes.</p>
+
+<p>It may happen that you&#39;re not happy with this inferring, and you want to customize the schema.
+We call it this feature <a href="/guides/1.0/models/entities/#manual-schema">&quot;manual schema&quot;</a>.</p>
+
+<p>It was introduced with Hanami 1.0 and this is how it works:</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Person</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Entity</span>
+  <span style="background-color: #f8f8f8">attributes</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">attribute</span> <span style="color: #990073">:id</span><span style="background-color: #f8f8f8">,</span>   <span style="color: #008080">Types</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Int</span>
+    <span style="background-color: #f8f8f8">attribute</span> <span style="color: #990073">:name</span><span style="background-color: #f8f8f8">,</span> <span style="color: #008080">Types</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">String</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span>
+<span style="color: #000000;font-weight: bold">=&gt;</span> <span style="color: #999988;font-style: italic">#&lt;Person:0x007ff859e34118 @attributes={}&gt;</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #009999">1</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; #&lt;Person:0x007ff85acbcfc8 @attributes={:id=&gt;1}&gt;</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #d14">"1"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; #&lt;Person:0x007ff85a04d558 @attributes={:id=&gt;"1"}&gt;</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #009999">1</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">name: </span><span style="color: #d14">"Luca"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; #&lt;Person:0x007ff85ab20200 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #009999">1</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">name: </span><span style="color: #d14">"Luca"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">foo: </span><span style="color: #d14">"bar"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; #&lt;Person:0x007ff859e44ea0 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">foo: </span><span style="color: #d14">"bar"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; #&lt;Person:0x007ff859e4d1e0 @attributes={}&gt;</span>
+</code></pre>
+
+<p>With Hanami 1.1, you can expand the behavior of your <em>manual schema</em>.
+Do you want a stricter policy for entity initialization? You got it!</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Person</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Entity</span>
+  <span style="background-color: #f8f8f8">attributes</span> <span style="color: #990073">:strict</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">attribute</span> <span style="color: #990073">:id</span><span style="background-color: #f8f8f8">,</span>   <span style="color: #008080">Types</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Strict</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Int</span>
+    <span style="background-color: #f8f8f8">attribute</span> <span style="color: #990073">:name</span><span style="background-color: #f8f8f8">,</span> <span style="color: #008080">Types</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Strict</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">String</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span>
+<span style="color: #999988;font-style: italic"># =&gt; ArgumentError: :id is missing in Hash input</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #009999">1</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; ArgumentError: :name is missing in Hash input</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #009999">1</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">name: </span><span style="color: #d14">"Luca"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; #&lt;Person:0x007f8476816c88 @attributes={:id=&gt;1, :name=&gt;"Luca"}&gt;</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #009999">1</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">name: </span><span style="color: #d14">"Luca"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">foo: </span><span style="color: #d14">"bar"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; ArgumentError: unexpected keys [:foo] in Hash input</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">foo: </span><span style="color: #d14">"bar"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; ArgumentError: unexpected keys [:foo] in Hash input</span>
+
+<span style="color: #008080">Person</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="color: #d14">"1"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">name: </span><span style="color: #d14">"Luca"</span><span style="background-color: #f8f8f8">)</span>
+<span style="color: #999988;font-style: italic"># =&gt; TypeError: "1" (String) has invalid type for :id violates constraints (type?(Integer, "1") failed)</span>
+</code></pre>
+
+      <h3 id="selectively-boot-apps" class="title"><a name="selectively-boot-apps" class="anchor" href="#selectively-boot-apps">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Selectively boot apps</h3>
+    
+<p>With Hanami you can build your project by following the <a href="/guides/1.0/architecture/overview/#monolith-first">Monolith-First</a> principle.
+You add more and more code to the project, but growing it organically, by using several Hanami apps.</p>
+
+<p>There are cases of real world products using a <strong>dozen of Hanami apps in the same project</strong> (eg <code>web</code> for the frontend, <code>admin</code> for the administration, etc..)
+They deploy the project on several servers, by booting only a subset of these apps.
+So the servers A, B, and C are for customers (<code>web</code> application), D is for administration (<code>admin</code> application), while E, and F are for API (<code>api</code> application)</p>
+
+<p>To serve this purpose we introduced <em>selective booting</em> feature.</p>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># config/environment.rb</span>
+<span style="color: #999988;font-style: italic"># ...</span>
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">configure</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="color: #000000;font-weight: bold">if</span> <span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">app?</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:api</span><span style="background-color: #f8f8f8">)</span>
+    <span style="color: #0086B3">require_relative</span> <span style="color: #d14">'../apps/api/application'</span>
+    <span style="background-color: #f8f8f8">mount</span> <span style="color: #008080">Api</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Application</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">at: </span><span style="color: #d14">'/api'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">if</span> <span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">app?</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:admin</span><span style="background-color: #f8f8f8">)</span>
+    <span style="color: #0086B3">require_relative</span> <span style="color: #d14">'../apps/admin/application'</span>
+    <span style="background-color: #f8f8f8">mount</span> <span style="color: #008080">Api</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Application</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">at: </span><span style="color: #d14">'/admin'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="color: #000000;font-weight: bold">if</span> <span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">app?</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:web</span><span style="background-color: #f8f8f8">)</span>
+    <span style="color: #0086B3">require_relative</span> <span style="color: #d14">'../apps/web/application'</span>
+    <span style="background-color: #f8f8f8">mount</span> <span style="color: #008080">Api</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Application</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">at: </span><span style="color: #d14">'/'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>Then from the CLI, you use the <code>HANAMI_APPS</code> env var.</p>
+<pre class="highlight shell"><code><span style="color: #555555">$ </span><span style="color: #008080">HANAMI_APPS</span><span style="color: #000000;font-weight: bold">=</span>web,api bundle <span style="color: #0086B3">exec </span>hanami server
+</code></pre>
+
+<p>With the command above we start only <code>web</code> and <code>api</code> applications.</p>
+
+      <h3 id="logger-filtering" class="title"><a name="logger-filtering" class="anchor" href="#logger-filtering">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Logger filtering</h3>
+    
+<p>With this release, we automatically log the payload from non-GET HTTP requests.
+When a user submits a form, all the fields and their values will appear in the log:</p>
+<pre class="highlight shell"><code><span style="color: #000000;font-weight: bold">[</span>bookshelf] <span style="color: #000000;font-weight: bold">[</span>INFO] <span style="color: #000000;font-weight: bold">[</span>2017-08-11 18:17:54 +0200] HTTP/1.1 POST 302 ::1 /signup 5 <span style="color: #000000;font-weight: bold">{</span><span style="color: #d14">"signup"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #000000;font-weight: bold">{</span><span style="color: #d14">"username"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"jodosha"</span>, <span style="color: #d14">"password"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"secret"</span>, <span style="color: #d14">"password_confirmation"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"secret"</span>, <span style="color: #d14">"bio"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"lorem"</span><span style="color: #000000;font-weight: bold">}}</span> 0.00593
+</code></pre>
+
+<p>To avoid sensitive informations to be logged, you can filter them:</p>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># config/environment.rb</span>
+<span style="color: #999988;font-style: italic"># ...</span>
+
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">configure</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="color: #999988;font-style: italic"># ...</span>
+  <span style="background-color: #f8f8f8">environment</span> <span style="color: #990073">:development</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">logger</span> <span style="color: #990073">level: :debug</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">filter: </span><span style="color: #d14">%w[password password_confirmation]</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>Now the output will be:</p>
+<pre class="highlight shell"><code><span style="color: #000000;font-weight: bold">[</span>bookshelf] <span style="color: #000000;font-weight: bold">[</span>INFO] <span style="color: #000000;font-weight: bold">[</span>2017-08-11 18:17:54 +0200] HTTP/1.1 POST 302 ::1 /signup 5 <span style="color: #000000;font-weight: bold">{</span><span style="color: #d14">"signup"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #000000;font-weight: bold">{</span><span style="color: #d14">"username"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"jodosha"</span>, <span style="color: #d14">"password"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"[FILTERED]"</span>, <span style="color: #d14">"password_confirmation"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"[FILTERED]"</span>, <span style="color: #d14">"bio"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"lorem"</span><span style="color: #000000;font-weight: bold">}}</span> 0.00593
+</code></pre>
+
+<p>It also supports fine grained patterns to disambiguate params with the same name.
+For instance, we have a billing form with street number and credit card number, and we want only to filter the credit card:</p>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># config/environment.rb</span>
+<span style="color: #999988;font-style: italic"># ...</span>
+
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">configure</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="color: #999988;font-style: italic"># ...</span>
+  <span style="background-color: #f8f8f8">environment</span> <span style="color: #990073">:development</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">logger</span> <span style="color: #990073">level: :debug</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">filter: </span><span style="color: #d14">%w[credit_card.number]</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+<pre class="highlight shell"><code><span style="color: #000000;font-weight: bold">[</span>bookshelf] <span style="color: #000000;font-weight: bold">[</span>INFO] <span style="color: #000000;font-weight: bold">[</span>2017-08-11 18:43:04 +0200] HTTP/1.1 PATCH 200 ::1 /billing 2 <span style="color: #000000;font-weight: bold">{</span><span style="color: #d14">"billing"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #000000;font-weight: bold">{</span><span style="color: #d14">"name"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"Luca"</span>, <span style="color: #d14">"address"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #000000;font-weight: bold">{</span><span style="color: #d14">"street"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"Centocelle"</span>, <span style="color: #d14">"number"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"23"</span>, <span style="color: #d14">"city"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"Rome"</span><span style="color: #000000;font-weight: bold">}</span>, <span style="color: #d14">"credit_card"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #000000;font-weight: bold">{</span><span style="color: #d14">"number"</span><span style="color: #000000;font-weight: bold">=</span>&gt;<span style="color: #d14">"[FILTERED]"</span><span style="color: #000000;font-weight: bold">}}}</span> 0.009782
+</code></pre>
+
+<p>Note that <code>billing =&gt; address =&gt; number</code> wasn&#39;t filtered while <code>billing =&gt; credit_card =&gt; number</code> was filtered instead.</p>
+
+      <h3 id="minor-changes" class="title"><a name="minor-changes" class="anchor" href="#minor-changes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Minor Changes</h3>
+    
+<p>For the entire list of changes, please have a look at our <a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md">CHANGELOG</a> and <a href="https://github.com/hanami/hanami/blob/master/FEATURES.md">features list</a>.</p>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.1.0.beta1</code></li>
+<li><code>hanami-model-1.1.0.beta1</code></li>
+<li><code>hanami-assets-1.1.0.beta1</code></li>
+<li><code>hanami-cli-0.1.0.beta1</code></li>
+<li><code>hanami-mailer-1.1.0.beta1</code></li>
+<li><code>hanami-helpers-1.1.0.beta1</code></li>
+<li><code>hanami-view-1.1.0.beta1</code></li>
+<li><code>hamami-controller-1.1.0.beta1</code></li>
+<li><code>hanami-router-1.1.0.beta1</code></li>
+<li><code>hanami-validations-1.1.0.beta1</code></li>
+<li><code>hanami-utils-1.1.0.beta1</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/bbonislawski">Bartosz Bonisławski</a></li>
+<li><a href="https://github.com/binarylogic">Ben Johnson</a></li>
+<li><a href="https://github.com/cveneziani">Cecile Veneziani</a></li>
+<li><a href="https://github.com/damireh">Daniel Amireh</a></li>
+<li><a href="https://github.com/ddymko">David Dymko</a></li>
+<li><a href="https://github.com/moofkit">Dmitriy Ivliev</a></li>
+<li><a href="https://github.com/nerdinand">Ferdinand Niedermann</a></li>
+<li><a href="https://github.com/gizotti">Gabriel Gizotti</a></li>
+<li><a href="https://github.com/gernot">Gernot Poetsch</a></li>
+<li><a href="https://github.com/hlegius">Hélio Costa e Silva</a></li>
+<li><a href="https://github.com/jaymiejones86">Jaymie Jones</a></li>
+<li><a href="https://github.com/jphager2">John Hager</a></li>
+<li><a href="https://github.com/kaikuchn">Kai Kuchenbecker</a></li>
+<li><a href="https://github.com/Nikamura">Karolis Mažukna</a></li>
+<li><a href="https://github.com/koic">Koichi ITO</a></li>
+<li><a href="https://github.com/jodosha">Luca Guidi</a></li>
+<li><a href="https://github.com/beauby">Lucas Hosseini</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/olistik">Maurizio De Magnis</a></li>
+<li><a href="https://github.com/nplusp">Nick Pridorozhko</a></li>
+<li><a href="https://github.com/flash-gordon">Nikita Shilnikov</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/katafrakt">Paweł Świątkowski</a></li>
+<li><a href="https://github.com/radanskoric">Radan Skorić</a></li>
+<li><a href="https://github.com/rogeriozambon">Rogério Zambon</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/artofhuman">Semyon Pupkov</a></li>
+<li><a href="https://github.com/linchus">Sergey Sein</a></li>
+<li><a href="https://github.com/timriley">Tim Riley</a></li>
+<li><a href="https://github.com/tudorpavel">Tudor Pavel</a></li>
+<li><a href="https://github.com/akhramov">akhramov</a></li>
+<li><a href="https://github.com/autopp">autopp</a></li>
+<li><a href="https://github.com/chenge">chenge</a></li>
+<li><a href="https://github.com/derekpovah">derekpovah</a></li>
+<li><a href="https://github.com/jarosluv">jarosluv</a></li>
+<li><a href="https://github.com/mbajur">mbajur</a></li>
+<li><a href="https://github.com/milovidov">milovidov</a></li>
+<li><a href="https://github.com/morrme">morrme</a></li>
+<li><a href="https://github.com/ryu39">ryu39</a></li>
+<li><a href="https://github.com/sovetnik">sovetnik</a></li>
+<li><a href="https://github.com/yjukaku">yjukaku</a></li>
+</ul>
+
+      <h2 id="how-to-try-it" class="title"><a name="how-to-try-it" class="anchor" href="#how-to-try-it">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to try it</h2>
+    <pre class="highlight shell"><code>gem install hanami --pre
+hanami new bookshelf
+</code></pre>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s next?</h2>
+    
+<p>We&#39;ll release the stable release on <strong>October 2017</strong>, in the meantime, please try this beta and report issues.
+Happy coding! 🌸</p>
+
+            </div>
+
+           <hr>
+
+           <a href="https://github.com/hanami/hanami" title="Star on GitHub" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-github"></span>
+             Star
+           </a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2017%2F08%2F11%2Fannouncing-hanami-110beta1%2F" title="Like on Facebook" class="btn btn-default-outline" target="_blank">
+             <span class="icon icon-thumbs-up"></span>
+             Like
+           </a>
+           <a href="https://twitter.com/home?status=Announcing+Hanami+v1.1.0.beta1+-+http%3A%2F%2Fhanamirb.org%2Fblog%2F2017%2F08%2F11%2Fannouncing-hanami-110beta1%2F+%2Fvia+%40hanamirb+%23hanamirb" title="Share on Twitter" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-twitter"></span>
+             Tweet
+           </a>
+           <a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2017%2F08%2F11%2Fannouncing-hanami-110beta1%2F&t=Announcing Hanami v1.1.0.beta1" class="btn btn-default-outline" title="Vote on HackerNews">
+             <span class="icon"><strong>HN</strong></span>
+             Vote
+           </a>
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fhanamirb.org%2Fblog%2F2017%2F08%2F11%2Fannouncing-hanami-110beta1%2F" target="_blank" title="Share on Reddit" class="btn btn-default-outline">
+             <span class="icon"><strong>R</strong></span>
+             Share
+            </a>
+
+            <br>
+            <br>
+
+            <div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,300+ developers.
+    </p>
+    <form action="https://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="https://guides.hanamirb.org/" target="_blank">Guides</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;" loading="lazy"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2021 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

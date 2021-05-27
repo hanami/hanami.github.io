@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Announcing Hanami v1.2.0</title>
+
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+    <meta property="og:site_name"   content="Hanami"/>
+    <meta property="og:title"       content="Announcing Hanami v1.2.0">
+    <meta property="og:url"         content="http://hanamirb.org/blog/2018/04/11/announcing-hanami-120/">
+    <meta property="og:description" content="HTTP/2 Early Hints, Unobtrusive JavaScript (UJS), new error page based on <code>better_errors</code>, CLI hooks, project middleware, enhanced support for plugins, custom repositories commands, coloured logging, bug fixes. Big announcement for the future!">
+    <meta property="og:image"       content="http://hanamirb.org/blog/2018/04/11/announcing-hanami-120/cover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@hanamirb">
+    <meta name="twitter:creator"     content="@hanamirb">
+    <meta name="twitter:url"         content="http://hanamirb.org/blog/2018/04/11/announcing-hanami-120/">
+    <meta name="twitter:title"       content="Announcing Hanami v1.2.0">
+    <meta name="twitter:description" content="HTTP/2 Early Hints, Unobtrusive JavaScript (UJS), new error page based on <code>better_errors</code>, CLI hooks, project middleware, enhanced support for plugins, custom repositories commands, coloured logging, bug fixes. Big announcement for the future!">
+    <meta name="twitter:image:src"   content="http://hanamirb.org/blog/2018/04/11/announcing-hanami-120/cover.jpg">
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand text-uppercase" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right text-uppercase">
+        <li>
+          <a href="https://guides.hanamirb.org" target="_blank">Guides</a>
+        </li>
+        <li>
+          <a href="https://docs.hanamirb.org" target="_blank">API</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div id="hanami2" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      We're working on <strong>Hanami 2.0</strong>. Read the <a href="/blog/2021/05/04/announcing-hanami-200alpha2/">latest announcement</a> and follow the <a href="https://github.com/hanami/hanami/tree/unstable">progress</a> on GitHub.
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="container">
+      <div class="block block-inverse text-center">
+        <div class="block-foreground">
+          <h1 class="block-title">Announcing Hanami v1.2.0</h1>
+          <h4 class="text-muted">Posted by <strong>Luca Guidi</strong> on <em>April 11, 2018</em></h4>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-facebook"></span>
+            Share
+          </button>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-twitter"></span>
+            Tweet
+          </button>
+        </div>
+        <div class="block-background">
+          <img src="/blog/2018/04/11/announcing-hanami-120/cover.jpg" loading="lazy">
+        </div>
+      </div>
+
+      <div class="container container-article">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 col-md-offset-1">
+            <p class="lead">HTTP/2 Early Hints, Unobtrusive JavaScript (UJS), new error page based on <code>better_errors</code>, CLI hooks, project middleware, enhanced support for plugins, custom repositories commands, coloured logging, bug fixes. Big announcement for the future!</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-md-9 col-md-offset-1">
+            <div class="article-body">
+              <p>Hello wonderful community, it&#39;s the <a href="https://en.wikipedia.org/wiki/Hanami">hanami</a> season!
+To celebrate, we&#39;re thrilled to release <code>v1.2.0</code>.</p>
+
+      <h2 id="features-" class="title"><a name="features-" class="anchor" href="#features-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features 🍒</h2>
+    
+<p>So what this fresh spring 💐 has brought to you from the Hanami world?</p>
+
+      <h3 id="http-2-early-hints" class="title"><a name="http-2-early-hints" class="anchor" href="#http-2-early-hints">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>HTTP/2 Early Hints</h3>
+    
+<p>I experimented with <a href="https://en.wikipedia.org/wiki/HTTP/2_Server_Push">HTTP/2 Push Promise</a> in the summer of 2015, when Hanami was still called <a href="/blog/2016/01/22/lotus-is-now-hanami.html">Lotus</a>. I presented the results at the <a href="https://www.youtube.com/watch?v=XCgsXUKLsOc&amp;feature=youtu.be&amp;t=31m4s">RubyDay of that year</a> and build a <a href="https://github.com/jodosha/instants">demo app</a>.</p>
+
+<p>We didn&#39;t ship that feature because Rack and web servers didn&#39;t support Push Promise, so I had to write <a href="https://github.com/jodosha/panther">a toy HTTP/2 web server for Rack</a>.</p>
+
+<p>Given the adoption of HTTP/2 is slow, the IETF <em>&quot;backported&quot;</em> this feature to HTTP/1.
+This feature today is known as <a href="https://tools.ietf.org/html/draft-ietf-httpbis-early-hints">Early Hints (103)</a> status code.</p>
+
+<p>A web application can tell the browser which resources to fetch in advance in order to boost the page loading.</p>
+
+<p>Given that now Rack and <a href="https://github.com/puma/puma/pull/1403">Puma support</a> Early Hints (103) and we had already in place the code to support this kind of feature, we&#39;re excited to release it today!</p>
+
+      <h4 id="setup" class="title"><a name="setup" class="anchor" href="#setup">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Setup</h4>
+    
+<p>In order to use it, you need to use Puma with Early Hints feature enabled.</p>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># config/puma.rb</span>
+<span style="color: #999988;font-style: italic"># ...</span>
+<span style="background-color: #f8f8f8">early_hints</span> <span style="color: #000000;font-weight: bold">true</span>
+</code></pre>
+
+<p>Inside the project configuration you can simply enable like this:</p>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># config/environment.rb</span>
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">configure</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="color: #999988;font-style: italic"># ...</span>
+  <span style="background-color: #f8f8f8">early_hints</span> <span style="color: #000000;font-weight: bold">true</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>As last step, you need a web server that supports HTTP/2 and Early Hints like <a href="https://h2o.examp1e.net/">h2o</a>.
+When you&#39;ll start the server and visit the page, javascripts and stylesheets will be pushed.</p>
+
+<p>If you&#39;re looking for a full working example, please check this <a href="https://github.com/jodosha/hall_of_fame">demo app</a>.</p>
+
+      <h3 id="unobtrusive-javascript-ujs-" class="title"><a name="unobtrusive-javascript-ujs-" class="anchor" href="#unobtrusive-javascript-ujs-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Unobtrusive JavaScript (UJS)</h3>
+    
+<p>Today we introduce a new gem in the Hanami family: <code>hanami-ujs</code>.</p>
+
+<p>It provides JS features to submit forms and links via AJAX, disable buttons, confirm actions, only with <strong>pure JavaScript</strong>.
+<code>hanami-ujs</code> is based on the really good <a href="https://rubygems.org/gems/vanilla-ujs"><code>vanilla-ujs</code></a> gem.</p>
+
+      <h4 id="usage" class="title"><a name="usage" class="anchor" href="#usage">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Usage</h4>
+    
+<p>As first thing, you must add <code>hanami-ujs</code> to your <code>Gemfile</code> and run <code>bundle install</code>.</p>
+
+<p>Then you have to add two lines to the application layout (eg. <code>apps/web/templates/application.html.erb</code>):</p>
+
+<ol>
+<li><code>&lt;%= csrf_meta_tags %&gt;</code> inside <code>&lt;head&gt;</code></li>
+<li><code>&lt;%= javascript &quot;hanami-ujs&quot; %&gt;</code> the location is optional, but before <code>&lt;/body&gt;</code> is a good spot.</li>
+</ol>
+
+<p>Now we can use the new option for <code>form_for</code>: <code>remote: true</code></p>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span>
+  <span style="background-color: #f8f8f8">form_for</span> <span style="color: #990073">:search</span><span style="background-color: #f8f8f8">,</span> <span style="color: #d14">"/search"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">remote: </span><span style="color: #000000;font-weight: bold">true</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="color: #999988;font-style: italic"># ...</span>
+
+    <span style="background-color: #f8f8f8">submit</span> <span style="color: #d14">"Search"</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+
+<p>When you will push &quot;Search&quot; the form will be sent via AJAX.</p>
+
+      <h3 id="new-development-error-page" class="title"><a name="new-development-error-page" class="anchor" href="#new-development-error-page">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New Development Error Page</h3>
+    
+<p>New Hanami projects will be generated with a new gem in <code>Gemfile</code>: <code>hanami-webconsole</code>.</p>
+
+<p>It&#39;s is an improved development error page with a built-in REPL to debug Ruby code from the browser.
+This feature is based on <code>better_errors</code> gem, which historically didn&#39;t play well with Hanami.</p>
+
+<p>So we packaged into a Hanami plugin to make the developer experience frictionless.</p>
+
+      <h3 id="cli-hooks" class="title"><a name="cli-hooks" class="anchor" href="#cli-hooks">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>CLI hooks</h3>
+    
+<p>Since <code>v1.1.0</code> you can enhance the CLI experience of <code>hanami</code> by registering your own commands (eg. <code>hanami generate webpack</code> ).
+Starting from today you can register callbacks for existing commands to hook into their execution.</p>
+
+<p>Imagine to build a gem <code>hanami-database-analyzer</code> to print the number of tables from the development database:</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">CLI</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">after</span><span style="background-color: #f8f8f8">(</span><span style="color: #d14">"db migrate"</span><span style="background-color: #f8f8f8">)</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="color: #0086B3">puts</span> <span style="color: #d14">"the database has 23 tables"</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>When a user will execute <code>hanami db migrate</code>, that callback will be called:</p>
+<pre class="highlight shell"><code><span style="color: #555555">% </span>bundle <span style="color: #0086B3">exec </span>hanami db migrate
+<span style="color: #999988;font-style: italic"># migrations output ...</span>
+the database has 23 tables
+</code></pre>
+
+<p>Alternatively, you can use objects:</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">DatabaseTableCounter</span>
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">call</span><span style="background-color: #f8f8f8">(</span><span style="color: #000000;font-weight: bold">*</span><span style="background-color: #f8f8f8">)</span>
+    <span style="color: #0086B3">puts</span> <span style="color: #d14">"the database has 23 tables"</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+
+<span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">CLI</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">after</span> <span style="color: #d14">"db migrate"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #008080">DatabaseTableCounter</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span>
+</code></pre>
+
+      <h3 id="project-rack-middleware" class="title"><a name="project-rack-middleware" class="anchor" href="#project-rack-middleware">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Project Rack middleware</h3>
+    
+<p>With this release we&#39;re introducing Rack middleware stack at the project level.</p>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># config/environment.rb</span>
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">configure</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="background-color: #f8f8f8">middleware</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">use</span> <span style="color: #008080">MyRackMiddleware</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>This is equivalent to use a middleware from <code>config.ru</code>, the main difference is that the new Rack middleware can be programmatically manipulated by third-party gems (aka plugins). (See the next feature).</p>
+
+      <h3 id="enhanced-support-for-plugins" class="title"><a name="enhanced-support-for-plugins" class="anchor" href="#enhanced-support-for-plugins">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Enhanced support for plugins</h3>
+    
+<p>Third-party gems (aka plugins) can now manipulate the Hanami configuration of a project.</p>
+
+<p>For instance from the <code>hanami-webconsole</code> gem, we <a href="https://github.com/hanami/webconsole/blob/master/lib/hanami/webconsole/plugin.rb">mount</a> a Rack middleware into the host project:</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">plugin</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="background-color: #f8f8f8">middleware</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">use</span> <span style="color: #008080">BetterErrors</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Middleware</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+      <h3 id="custom-repositories-commands" class="title"><a name="custom-repositories-commands" class="anchor" href="#custom-repositories-commands">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Custom repositories commands</h3>
+    
+<p><code>Hanami::Repository</code> interface exposes standard <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> operations.
+If you need custom queries, you have a flexible querying API, but we were missing the same flexibility for writing operations (commands).</p>
+
+<p>Let&#39;s say you want create records in bulk, here&#39;s how to define a command for that:</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">TaskRepository</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Repository</span>
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">create_many</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+    <span style="background-color: #f8f8f8">command</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">create: :tasks</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">result: :many</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">call</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">data</span><span style="background-color: #f8f8f8">)</span>
+   <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+      <h3 id="minor-changes" class="title"><a name="minor-changes" class="anchor" href="#minor-changes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Minor Changes</h3>
+    
+<p>For the entire list of changes, please have a look at our <a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md">CHANGELOG</a> and <a href="https://github.com/hanami/hanami/blob/master/FEATURES.md">features list</a>.</p>
+
+      <h2 id="released-gems-" class="title"><a name="released-gems-" class="anchor" href="#released-gems-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems 💎</h2>
+    
+<ul>
+<li><code>hanami-1.2.0</code> - <a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-model-1.2.0</code> - <a href="https://github.com/hanami/model/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-assets-1.2.0</code> - <a href="https://github.com/hanami/assets/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-cli-0.2.0</code> - <a href="https://github.com/hanami/cli/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-mailer-1.2.0</code> - <a href="https://github.com/hanami/mailer/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-helpers-1.2.0</code> - <a href="https://github.com/hanami/helpers/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-view-1.2.0</code> - <a href="https://github.com/hanami/view/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hamami-controller-1.2.0</code> - <a href="https://github.com/hanami/controller/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-router-1.2.0</code> - <a href="https://github.com/hanami/router/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-validations-1.2.0</code> - <a href="https://github.com/hanami/validations/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-utils-1.2.0</code> - <a href="https://github.com/hanami/utils/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-webconsole-0.1.0</code> - <a href="https://github.com/hanami/webconsole/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+<li><code>hanami-ujs-0.1.0</code> - <a href="https://github.com/hanami/ujs/blob/master/CHANGELOG.md">CHANGELOG</a></li>
+</ul>
+
+      <h2 id="how-to-install" class="title"><a name="how-to-install" class="anchor" href="#how-to-install">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to install</h2>
+    <pre class="highlight shell"><code>gem install hanami
+hanami new bookshelf
+</code></pre>
+
+<p>Then follow our <a href="/guides/1.2/getting-started">getting started guide</a>.</p>
+
+      <h2 id="how-to-upgrade" class="title"><a name="how-to-upgrade" class="anchor" href="#how-to-upgrade">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How to upgrade</h2>
+    
+<p>Update <code>hanami</code> and <code>hanami-model</code> in your <code>Gemfile</code>:</p>
+<pre class="highlight shell"><code>gem <span style="color: #d14">"hanami"</span>,       <span style="color: #d14">"~&gt; 1.2"</span>
+gem <span style="color: #d14">"hanami-model"</span>, <span style="color: #d14">"~&gt; 1.2"</span>
+</code></pre>
+
+<p>Then run <code>bundle update hanami hanami-model</code>.</p>
+
+<p>For a detailed explanation, check the <a href="http://hanamirb.org/guides/1.2/upgrade-notes/v120">upgrade guide</a>.</p>
+
+      <h2 id="what-39-s-next-" class="title"><a name="what-39-s-next-" class="anchor" href="#what-39-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What&#39;s next?</h2>
+    
+<p><strong>We&#39;re gonna join our forces with <a href="http://rom-rb.org/">ROM</a> &amp; <a href="http://dry-rb.org/">dry-rb</a> teams to work together on Hanami 2.0, ROM 5.0, and dry 1.0! 🎉</strong></p>
+
+<p>We&#39;ll work to improve the integration between our three projects, to offer a rock solid, unified set of solutions for the Ruby ecosystem. 💎❤️</p>
+
+<p>Starting from tomorrow we&#39;ll work in parallel on Hanami 2.0 and 1.3.
+If you want to follow along the progress, keep an eye on the branches in our <a href="https://github.com/hanami">GitHub repositories</a>:</p>
+
+<ul>
+<li><code>master</code> targets <code>1.2</code> (bugfixes)</li>
+<li><code>develop</code> targets <code>1.3</code> (new features, deprecations for 2.0)</li>
+<li><code>unstable</code> targets <code>2.0</code> (new features, breaking changes)</li>
+</ul>
+
+<p>While we don&#39;t have an ETA for 2.0, the <strong>first beta for 1.3</strong> will be released on <strong>August 2018</strong>.</p>
+
+<p>Happy coding! 🌸</p>
+
+            </div>
+
+           <hr>
+
+           <a href="https://github.com/hanami/hanami" title="Star on GitHub" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-github"></span>
+             Star
+           </a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2018%2F04%2F11%2Fannouncing-hanami-120%2F" title="Like on Facebook" class="btn btn-default-outline" target="_blank">
+             <span class="icon icon-thumbs-up"></span>
+             Like
+           </a>
+           <a href="https://twitter.com/home?status=Announcing+Hanami+v1.2.0+-+http%3A%2F%2Fhanamirb.org%2Fblog%2F2018%2F04%2F11%2Fannouncing-hanami-120%2F+%2Fvia+%40hanamirb+%23hanamirb" title="Share on Twitter" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-twitter"></span>
+             Tweet
+           </a>
+           <a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2018%2F04%2F11%2Fannouncing-hanami-120%2F&t=Announcing Hanami v1.2.0" class="btn btn-default-outline" title="Vote on HackerNews">
+             <span class="icon"><strong>HN</strong></span>
+             Vote
+           </a>
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fhanamirb.org%2Fblog%2F2018%2F04%2F11%2Fannouncing-hanami-120%2F" target="_blank" title="Share on Reddit" class="btn btn-default-outline">
+             <span class="icon"><strong>R</strong></span>
+             Share
+            </a>
+
+            <br>
+            <br>
+
+            <div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,300+ developers.
+    </p>
+    <form action="https://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="https://guides.hanamirb.org/" target="_blank">Guides</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;" loading="lazy"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2021 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

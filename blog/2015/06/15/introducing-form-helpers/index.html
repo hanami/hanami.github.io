@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Introducing Form Helpers</title>
+
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+    <meta property="og:site_name"   content="Hanami"/>
+    <meta property="og:title"       content="Introducing Form Helpers">
+    <meta property="og:url"         content="http://hanamirb.org/blog/2015/06/15/introducing-form-helpers/">
+    <meta property="og:description" content="New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.">
+    <meta property="og:image"       content="http://hanamirb.org/imagescover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@hanamirb">
+    <meta name="twitter:creator"     content="@hanamirb">
+    <meta name="twitter:url"         content="http://hanamirb.org/blog/2015/06/15/introducing-form-helpers/">
+    <meta name="twitter:title"       content="Introducing Form Helpers">
+    <meta name="twitter:description" content="New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.">
+    <meta name="twitter:image:src"   content="http://hanamirb.org/imagescover.jpg">
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand text-uppercase" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right text-uppercase">
+        <li>
+          <a href="https://guides.hanamirb.org" target="_blank">Guides</a>
+        </li>
+        <li>
+          <a href="https://docs.hanamirb.org" target="_blank">API</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div id="hanami2" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      We're working on <strong>Hanami 2.0</strong>. Read the <a href="/blog/2021/05/04/announcing-hanami-200alpha2/">latest announcement</a> and follow the <a href="https://github.com/hanami/hanami/tree/unstable">progress</a> on GitHub.
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="container">
+      <div class="block block-inverse text-center">
+        <div class="block-foreground">
+          <h1 class="block-title">Introducing Form Helpers</h1>
+          <h4 class="text-muted">Posted by <strong>Luca Guidi</strong> on <em>June 15, 2015</em></h4>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-facebook"></span>
+            Share
+          </button>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-twitter"></span>
+            Tweet
+          </button>
+        </div>
+        <div class="block-background">
+          
+        </div>
+      </div>
+
+      <div class="container container-article">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 col-md-offset-1">
+            <p class="lead">New feature for the upcoming v0.4.0: form helpers. HTML5 form generators with automatic values, CSRF protection, method override, infinite nested fields and ORM agnostic.</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-md-9 col-md-offset-1">
+            <div class="article-body">
+              
+      <h2 id="introduction" class="title"><a name="introduction" class="anchor" href="#introduction">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Introduction</h2>
+    
+<p>Lotus v0.4.0 (Jun 23), will include a new useful and highly requested feature: <strong>form helpers</strong>.</p>
+
+<p>It provides a powerful Ruby API to describe HTML5 forms, to be used both with views and templates. It ships with:</p>
+
+<ul>
+<li>Support for complex markup without the need of concatenation</li>
+<li>Auto closing HTML5 tags</li>
+<li>Support for view local variables</li>
+<li>Method override support (<code>PUT</code>/<code>PATCH</code>/<code>DELETE</code> HTTP verbs aren&#39;t understood by browsers)</li>
+<li>Automatic generation of HTML attributes for inputs: <code>id</code>, <code>name</code>, <code>value</code></li>
+<li>Allow to override automatic HTML attributes</li>
+<li>Read values from request params and/or given entities, to autofill <code>value</code> attributes</li>
+<li>Automatic selection of current value for radio button and select inputs</li>
+<li>CSRF Protection</li>
+<li>Infinite nested fields</li>
+<li>ORM Agnostic</li>
+</ul>
+
+      <h2 id="technical-notes" class="title"><a name="technical-notes" class="anchor" href="#technical-notes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Technical notes</h2>
+    
+      <h3 id="zero-monkey-patching" class="title"><a name="zero-monkey-patching" class="anchor" href="#zero-monkey-patching">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Zero monkey-patching</h3>
+    
+<p>This feature has a similar syntax to other Ruby gems with the same purpose, but it has a different usage if compared with Rails or Padrino.</p>
+
+<p>Those frameworks allow a syntax like this:</p>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span> <span style="background-color: #f8f8f8">form_for</span> <span style="color: #990073">:book</span> <span style="color: #000000;font-weight: bold">do</span> <span style="color: #000000;font-weight: bold">|</span><span style="background-color: #f8f8f8">f</span><span style="color: #000000;font-weight: bold">|</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+  <span style="color: #000080">&lt;div&gt;</span>
+    <span style="color: #999999;font-weight: bold">&lt;%=</span> <span style="background-color: #f8f8f8">f</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">text_field</span> <span style="color: #990073">:title</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+  <span style="color: #000080">&lt;/div&gt;</span>
+<span style="color: #999999;font-weight: bold">&lt;%</span> <span style="color: #000000;font-weight: bold">end</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+
+<p>The code above <strong>isn&#39;t a valid ERB template</strong>. To make it work, Rails uses monkey-patches ERB, and Padrino supports only HAML with that syntax.</p>
+
+<p>One of the pillars of Lotus is <em>&quot;zero monkey-patch of Ruby core and stdlib&quot;</em>. We want to keep this principle for this feature too.</p>
+
+      <h3 id="template-engine-independent" class="title"><a name="template-engine-independent" class="anchor" href="#template-engine-independent">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Template engine independent</h3>
+    
+<p>Avoiding monkey-patching has a big advantage: <strong>form helpers are designed to be independent from the template engine</strong>. That means we can use Slim, HAML, or ERB and keep the same Ruby syntax.</p>
+
+      <h3 id="one-output-block" class="title"><a name="one-output-block" class="anchor" href="#one-output-block">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>One output block</h3>
+    
+<p>The technical compromise for the principles described above is to use the form builder in an unique output block.</p>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span>
+  <span style="background-color: #f8f8f8">form_for</span> <span style="color: #990073">:book</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">routes</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">books_path</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:title</span>
+
+    <span style="background-color: #f8f8f8">submit</span> <span style="color: #d14">'Create'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+
+<p>This will produce</p>
+<pre class="highlight html"><code><span style="color: #000080">&lt;form</span> <span style="color: #008080">action=</span><span style="color: #d14">"/books"</span> <span style="color: #008080">id=</span><span style="color: #d14">"book-form"</span> <span style="color: #008080">method=</span><span style="color: #d14">"POST"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_csrf_token"</span> <span style="color: #008080">value=</span><span style="color: #d14">"0a800d6a8fc3c24e7eca319186beb287689a91c2a719f1cbb411f721cacd79d4"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"book[title]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"book-id"</span> <span style="color: #008080">value=</span><span style="color: #d14">""</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;button</span> <span style="color: #008080">type=</span><span style="color: #d14">"submit"</span><span style="color: #000080">&gt;</span>Create<span style="color: #000080">&lt;/button&gt;</span>
+<span style="color: #000080">&lt;/form&gt;</span>
+</code></pre>
+
+      <h3 id="method-in-views" class="title"><a name="method-in-views" class="anchor" href="#method-in-views">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Method in views</h3>
+    
+<p>An <strong>alternative usage</strong> is to define a concrete method in a view and to use it in the template:</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Web::Views::Books</span>
+  <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">New</span>
+    <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Web</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">View</span>
+
+    <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">form</span>
+      <span style="background-color: #f8f8f8">form_for</span> <span style="color: #990073">:book</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">routes</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">books_path</span> <span style="color: #000000;font-weight: bold">do</span>
+        <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:title</span>
+
+        <span style="background-color: #f8f8f8">submit</span> <span style="color: #d14">'Create'</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span> <span style="background-color: #f8f8f8">form</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+
+      <h2 id="examples" class="title"><a name="examples" class="anchor" href="#examples">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Examples</h2>
+    
+      <h3 id="basic-usage" class="title"><a name="basic-usage" class="anchor" href="#basic-usage">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Basic usage</h3>
+    
+<p>The API is really clean and concise, <strong>it doesn&#39;t require concatenation</strong> between the returning value of the block (<code>submit</code>) and the previous lines (<code>div</code>).</p>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span>
+  <span style="background-color: #f8f8f8">form_for</span> <span style="color: #990073">:book</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">routes</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">books_path</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">class: </span><span style="color: #d14">'form-horizontal'</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">div</span> <span style="color: #000000;font-weight: bold">do</span>
+      <span style="background-color: #f8f8f8">label</span>      <span style="color: #990073">:title</span>
+      <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:title</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">class: </span><span style="color: #d14">'form-control'</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+
+    <span style="background-color: #f8f8f8">submit</span> <span style="color: #d14">'Create'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+<pre class="highlight html"><code><span style="color: #000080">&lt;form</span> <span style="color: #008080">action=</span><span style="color: #d14">"/books"</span> <span style="color: #008080">id=</span><span style="color: #d14">"book-form"</span> <span style="color: #008080">method=</span><span style="color: #d14">"POST"</span> <span style="color: #008080">class=</span><span style="color: #d14">"form-horizontal"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_csrf_token"</span> <span style="color: #008080">value=</span><span style="color: #d14">"1825a0a7ea92bbe3fd60cc8b6a0ea00ce3c52030afbf4037370d937bc5248acb"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;div&gt;</span>
+    <span style="color: #000080">&lt;label</span> <span style="color: #008080">for=</span><span style="color: #d14">"book-title"</span><span style="color: #000080">&gt;</span>Title<span style="color: #000080">&lt;/label&gt;</span>
+    <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"book[title]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"book-title"</span> <span style="color: #008080">value=</span><span style="color: #d14">"Test Driven Development"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;/div&gt;</span>
+
+  <span style="color: #000080">&lt;button</span> <span style="color: #008080">type=</span><span style="color: #d14">"submit"</span><span style="color: #000080">&gt;</span>Create<span style="color: #000080">&lt;/button&gt;</span>
+<span style="color: #000080">&lt;/form&gt;</span>
+</code></pre>
+
+      <h3 id="method-override" class="title"><a name="method-override" class="anchor" href="#method-override">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Method override</h3>
+    
+<p>Browsers don&#39;t understand HTTP methods outside of <code>GET</code> and <code>POST</code>. On the other hand, Lotus embraces REST conventions, that goes beyond that two verbs. When we specify a method via <code>:method</code>, it adds a special hidden field <code>_method</code>, that&#39;s understood by the application.</p>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span>
+  <span style="background-color: #f8f8f8">form_for</span> <span style="color: #990073">:book</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">routes</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">book_path</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">book</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">id</span><span style="background-color: #f8f8f8">),</span> <span style="color: #990073">method: :put</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:title</span>
+
+    <span style="background-color: #f8f8f8">submit</span> <span style="color: #d14">'Update'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+<pre class="highlight html"><code><span style="color: #000080">&lt;form</span> <span style="color: #008080">action=</span><span style="color: #d14">"/books/23"</span> <span style="color: #008080">id=</span><span style="color: #d14">"book-form"</span> <span style="color: #008080">method=</span><span style="color: #d14">"POST"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_method"</span> <span style="color: #008080">value=</span><span style="color: #d14">"PUT"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_csrf_token"</span> <span style="color: #008080">value=</span><span style="color: #d14">"5f1029dd15981648a0882ec52028208410afeaeffbca8f88975ef199e2988ce7"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"book[title]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"book-title"</span> <span style="color: #008080">value=</span><span style="color: #d14">"Test Driven Development"</span><span style="color: #000080">&gt;</span>
+
+  <span style="color: #000080">&lt;button</span> <span style="color: #008080">type=</span><span style="color: #d14">"submit"</span><span style="color: #000080">&gt;</span>Update<span style="color: #000080">&lt;/button&gt;</span>
+<span style="color: #000080">&lt;/form&gt;</span>
+</code></pre>
+
+      <h3 id="csrf-protection" class="title"><a name="csrf-protection" class="anchor" href="#csrf-protection">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>CSRF Protection</h3>
+    
+<p>Cross Site Request Forgery (CSRF) is one of the most common attacks on the web. Lotus offers a security mechanism based on a technique called: <em>Synchronizer Token Pattern</em>.</p>
+
+<p>When we enable sessions, it stores them to store a random token for each user.
+Forms are rendered with a special hidden field (<code>_csrf_token</code>) which contains this token.</p>
+
+<p>On form submission, Lotus matches this input with the value from the session. If they match, the request can continue. If not, it resets the sesssion and raises an exception.</p>
+
+<p>Developers can customize attack handling.</p>
+
+      <h3 id="nested-fields" class="title"><a name="nested-fields" class="anchor" href="#nested-fields">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Nested fields</h3>
+    <pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span>
+  <span style="background-color: #f8f8f8">form_for</span> <span style="color: #990073">:delivery</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">routes</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">deliveries_path</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:customer_name</span>
+
+    <span style="background-color: #f8f8f8">fields_for</span> <span style="color: #990073">:address</span> <span style="color: #000000;font-weight: bold">do</span>
+      <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:city</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+
+    <span style="background-color: #f8f8f8">submit</span> <span style="color: #d14">'Create'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+<pre class="highlight html"><code><span style="color: #000080">&lt;form</span> <span style="color: #008080">action=</span><span style="color: #d14">"/deliveries"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-form"</span> <span style="color: #008080">method=</span><span style="color: #d14">"POST"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_csrf_token"</span> <span style="color: #008080">value=</span><span style="color: #d14">"4800d585b3a802682ae92cb72eed1cdd2894da106fb4e9e25f8a262b862c52ce"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"delivery[customer_name]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-customer-name"</span> <span style="color: #008080">value=</span><span style="color: #d14">""</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"delivery[address][city]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-address-city"</span> <span style="color: #008080">value=</span><span style="color: #d14">""</span><span style="color: #000080">&gt;</span>
+
+  <span style="color: #000080">&lt;button</span> <span style="color: #008080">type=</span><span style="color: #d14">"submit"</span><span style="color: #000080">&gt;</span>Create<span style="color: #000080">&lt;/button&gt;</span>
+<span style="color: #000080">&lt;/form&gt;</span>
+</code></pre>
+
+      <h2 id="automatic-values" class="title"><a name="automatic-values" class="anchor" href="#automatic-values">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Automatic values</h2>
+    
+<p>Form fields are <strong>automatically filled with the right value</strong>. Lotus looks up for explicit values passed in the form constructor and for the params of the current request. It compares the form hierarchy (including nested fields), with these two sources. For each match, it fills the associated value.</p>
+
+      <h4 id="example" class="title"><a name="example" class="anchor" href="#example">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Example</h4>
+    
+<p>Imagine we want to update data for <code>delivery</code>. We have two objects: <code>delivery</code> and <code>customer</code>, which are plain objects (no ORM involved). They respond to the following methods:</p>
+<pre class="highlight ruby"><code><span style="background-color: #f8f8f8">delivery</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">id</span>   <span style="color: #999988;font-style: italic"># =&gt; 1</span>
+<span style="background-color: #f8f8f8">delivery</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">code</span> <span style="color: #999988;font-style: italic"># =&gt; 123</span>
+
+<span style="background-color: #f8f8f8">customer</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">name</span> <span style="color: #999988;font-style: italic"># =&gt; "Luca"</span>
+
+<span style="background-color: #f8f8f8">customer</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">address</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">class</span> <span style="color: #999988;font-style: italic"># =&gt; Address</span>
+<span style="background-color: #f8f8f8">customer</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">address</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">city</span>  <span style="color: #999988;font-style: italic"># =&gt; "Rome"</span>
+</code></pre>
+
+<p>Let&#39;s compose the form.</p>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span>
+  <span style="background-color: #f8f8f8">form_for</span> <span style="color: #990073">:delivery</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">routes</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">delivery_path</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">id: </span><span style="background-color: #f8f8f8">delivery</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">id</span><span style="background-color: #f8f8f8">),</span> <span style="color: #990073">method: :patch</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">values: </span><span style="background-color: #f8f8f8">{</span><span style="color: #990073">delivery: </span><span style="background-color: #f8f8f8">delivery</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">customer: </span><span style="background-color: #f8f8f8">customer</span><span style="background-color: #f8f8f8">}</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:code</span>
+
+    <span style="background-color: #f8f8f8">fields_for</span> <span style="color: #990073">:customer</span> <span style="color: #000000;font-weight: bold">do</span>
+      <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:name</span>
+
+      <span style="background-color: #f8f8f8">fields_for</span> <span style="color: #990073">:address</span> <span style="color: #000000;font-weight: bold">do</span>
+        <span style="background-color: #f8f8f8">text_field</span> <span style="color: #990073">:city</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+
+    <span style="background-color: #f8f8f8">submit</span> <span style="color: #d14">'Update'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+<pre class="highlight html"><code><span style="color: #000080">&lt;form</span> <span style="color: #008080">action=</span><span style="color: #d14">"/deliveries/1"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-form"</span> <span style="color: #008080">method=</span><span style="color: #d14">"POST"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_method"</span> <span style="color: #008080">value=</span><span style="color: #d14">"PATCH"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_csrf_token"</span> <span style="color: #008080">value=</span><span style="color: #d14">"4800d585b3a802682ae92cb72eed1cdd2894da106fb4e9e25f8a262b862c52ce"</span><span style="color: #000080">&gt;</span>
+
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"delivery[code]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-code"</span> <span style="color: #008080">value=</span><span style="color: #d14">"123"</span><span style="color: #000080">&gt;</span>
+
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"delivery[customer][name]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-customer-name"</span> <span style="color: #008080">value=</span><span style="color: #d14">"Luca"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"delivery[customer][address][city]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-customer-address-city"</span> <span style="color: #008080">value=</span><span style="color: #d14">"Rome"</span><span style="color: #000080">&gt;</span>
+
+  <span style="color: #000080">&lt;button</span> <span style="color: #008080">type=</span><span style="color: #d14">"submit"</span><span style="color: #000080">&gt;</span>Update<span style="color: #000080">&lt;/button&gt;</span>
+<span style="color: #000080">&lt;/form&gt;</span>
+</code></pre>
+
+<p>Please note the <code>:values</code> option that we pass to <code>#form_for</code>. It maps the <code>name</code> attributes that we have in the form with the objects that we want to use to fill the values. For instance <code>delivery[code]</code> corresponds to <code>delivery.code</code> (<code>123</code>), <code>delivery[customer][address][city]</code> to <code>customer.address.city</code> (<code>&quot;Rome&quot;</code>) and so on..</p>
+
+      <h3 id="read-values-from-params" class="title"><a name="read-values-from-params" class="anchor" href="#read-values-from-params">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Read Values From Params</h3>
+    
+<p><strong>Params are automatically passed to form helpers</strong>, to read values and try to autofill fields. If a value is present both in params and explicit values (<code>:values</code>), the first takes precendence. The reason is simple: params sometimes represent a failed form submission attempt.</p>
+
+      <h4 id="example" class="title"><a name="example" class="anchor" href="#example">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Example</h4>
+    
+<p>Imagine the form described above, and that our user enters <code>&quot;foo&quot;</code> as delivery code. This value isn&#39;t acceptable for our model domain rules, so we render again the form, presenting a validation error. Our params are now carrying on the values filled by our user. For instance: <code>params.get(&#39;delivery.code&#39;)</code> returns <code>&quot;foo&quot;</code>.</p>
+
+<p>Here how the form is rendered:</p>
+<pre class="highlight html"><code><span style="color: #000080">&lt;form</span> <span style="color: #008080">action=</span><span style="color: #d14">"/deliveries/1"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-form"</span> <span style="color: #008080">method=</span><span style="color: #d14">"POST"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_method"</span> <span style="color: #008080">value=</span><span style="color: #d14">"PATCH"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"hidden"</span> <span style="color: #008080">name=</span><span style="color: #d14">"_csrf_token"</span> <span style="color: #008080">value=</span><span style="color: #d14">"4800d585b3a802682ae92cb72eed1cdd2894da106fb4e9e25f8a262b862c52ce"</span><span style="color: #000080">&gt;</span>
+
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"delivery[code]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-code"</span> <span style="color: #008080">value=</span><span style="color: #d14">"foo"</span><span style="color: #000080">&gt;</span>
+
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"delivery[customer][name]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-customer-name"</span> <span style="color: #008080">value=</span><span style="color: #d14">"Luca"</span><span style="color: #000080">&gt;</span>
+  <span style="color: #000080">&lt;input</span> <span style="color: #008080">type=</span><span style="color: #d14">"text"</span> <span style="color: #008080">name=</span><span style="color: #d14">"delivery[customer][address][city]"</span> <span style="color: #008080">id=</span><span style="color: #d14">"delivery-customer-address-city"</span> <span style="color: #008080">value=</span><span style="color: #d14">"Rome"</span><span style="color: #000080">&gt;</span>
+
+  <span style="color: #000080">&lt;button</span> <span style="color: #008080">type=</span><span style="color: #d14">"submit"</span><span style="color: #000080">&gt;</span>Update<span style="color: #000080">&lt;/button&gt;</span>
+<span style="color: #000080">&lt;/form&gt;</span>
+</code></pre>
+
+      <h2 id="release-date" class="title"><a name="release-date" class="anchor" href="#release-date">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Release Date</h2>
+    
+<p>Form helpers will be available with <code>lotusrb-0.4.0</code>, expected for <strong>June 23, 2015</strong>.</p>
+
+            </div>
+
+           <hr>
+
+           <a href="https://github.com/hanami/hanami" title="Star on GitHub" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-github"></span>
+             Star
+           </a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2015%2F06%2F15%2Fintroducing-form-helpers%2F" title="Like on Facebook" class="btn btn-default-outline" target="_blank">
+             <span class="icon icon-thumbs-up"></span>
+             Like
+           </a>
+           <a href="https://twitter.com/home?status=Introducing+Form+Helpers+-+http%3A%2F%2Fhanamirb.org%2Fblog%2F2015%2F06%2F15%2Fintroducing-form-helpers%2F+%2Fvia+%40hanamirb+%23hanamirb" title="Share on Twitter" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-twitter"></span>
+             Tweet
+           </a>
+           <a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2015%2F06%2F15%2Fintroducing-form-helpers%2F&t=Introducing Form Helpers" class="btn btn-default-outline" title="Vote on HackerNews">
+             <span class="icon"><strong>HN</strong></span>
+             Vote
+           </a>
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fhanamirb.org%2Fblog%2F2015%2F06%2F15%2Fintroducing-form-helpers%2F" target="_blank" title="Share on Reddit" class="btn btn-default-outline">
+             <span class="icon"><strong>R</strong></span>
+             Share
+            </a>
+
+            <br>
+            <br>
+
+            <div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,300+ developers.
+    </p>
+    <form action="https://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="https://guides.hanamirb.org/" target="_blank">Guides</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;" loading="lazy"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2021 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

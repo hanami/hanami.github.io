@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Announcing Hanami v0.8.0</title>
+
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+    <meta property="og:site_name"   content="Hanami"/>
+    <meta property="og:title"       content="Announcing Hanami v0.8.0">
+    <meta property="og:url"         content="http://hanamirb.org/blog/2016/07/22/announcing-hanami-080/">
+    <meta property="og:description" content="New validations syntax with predicates, high level rules and error messages. JSON logger format, faster static assets serving. Subresource Integrity, updated Content Security Policy, and new HTTP security headers.">
+    <meta property="og:image"       content="http://hanamirb.org/blog/2016/07/22/announcing-hanami-080/cover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@hanamirb">
+    <meta name="twitter:creator"     content="@hanamirb">
+    <meta name="twitter:url"         content="http://hanamirb.org/blog/2016/07/22/announcing-hanami-080/">
+    <meta name="twitter:title"       content="Announcing Hanami v0.8.0">
+    <meta name="twitter:description" content="New validations syntax with predicates, high level rules and error messages. JSON logger format, faster static assets serving. Subresource Integrity, updated Content Security Policy, and new HTTP security headers.">
+    <meta name="twitter:image:src"   content="http://hanamirb.org/blog/2016/07/22/announcing-hanami-080/cover.jpg">
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand text-uppercase" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right text-uppercase">
+        <li>
+          <a href="https://guides.hanamirb.org" target="_blank">Guides</a>
+        </li>
+        <li>
+          <a href="https://docs.hanamirb.org" target="_blank">API</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div id="hanami2" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      We're working on <strong>Hanami 2.0</strong>. Read the <a href="/blog/2021/05/04/announcing-hanami-200alpha2/">latest announcement</a> and follow the <a href="https://github.com/hanami/hanami/tree/unstable">progress</a> on GitHub.
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="container">
+      <div class="block block-inverse text-center">
+        <div class="block-foreground">
+          <h1 class="block-title">Announcing Hanami v0.8.0</h1>
+          <h4 class="text-muted">Posted by <strong>Luca Guidi</strong> on <em>July 22, 2016</em></h4>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-facebook"></span>
+            Share
+          </button>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-twitter"></span>
+            Tweet
+          </button>
+        </div>
+        <div class="block-background">
+          <img src="/blog/2016/07/22/announcing-hanami-080/cover.jpg" loading="lazy">
+        </div>
+      </div>
+
+      <div class="container container-article">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 col-md-offset-1">
+            <p class="lead">New validations syntax with predicates, high level rules and error messages. JSON logger format, faster static assets serving. Subresource Integrity, updated Content Security Policy, and new HTTP security headers.</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-md-9 col-md-offset-1">
+            <div class="article-body">
+              <p>This is the first minor release after the <a href="/blog/2016/01/22/lotus-is-now-hanami.html">project rebranding</a> that happened a few months ago.</p>
+
+<p>We waited so long to release this version in order to have the largest possible feedback cycle. (Actually, the longest gap in releases since this project was started four years ago!)
+We&#39;ve had a lot of new contributions: new features, bug fixes, and real world experiences.
+At this point <strong>we&#39;re really close to 1.0</strong>.</p>
+
+<p>In the meantime, we&#39;ve started tech alliances with <a href="http://dry-rb.org">dry-rb</a> and <a href="http://rom-rb.org">ROM</a>.
+We&#39;re working closely with these two amazing projects (and communities) to make the Ruby ecosystem stronger.</p>
+
+<p>As result of this collaboration, today we can ship a new, powerful validation syntax based on <a href="http://dry-rb.org/gems/dry-validation">dry-validation</a>.</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+      <h3 id="new-validations-syntax" class="title"><a name="new-validations-syntax" class="anchor" href="#new-validations-syntax">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New Validations Syntax</h3>
+    
+<p>This new powerful syntax overcomes the limitations that we have reached with the old design: no control on the order of execution and lack of extensibility.
+We realized that complex validation rules are hard to describe with DSL options, so we made it possible to express these rules with Ruby macros.</p>
+
+<p>The results are astonishing: besides being more expressive, we can now guarantee type safety and we&#39;ve seen performance improvements.</p>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># apps/web/controllers/books/create.rb</span>
+<span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Web::Controllers::Books</span>
+  <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Create</span>
+    <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Web</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Action</span>
+
+    <span style="background-color: #f8f8f8">params</span> <span style="color: #000000;font-weight: bold">do</span>
+      <span style="background-color: #f8f8f8">required</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:book</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">schema</span> <span style="color: #000000;font-weight: bold">do</span>
+        <span style="background-color: #f8f8f8">required</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:title</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">filled</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:str?</span><span style="background-color: #f8f8f8">)</span>
+        <span style="background-color: #f8f8f8">required</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:price</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">filled</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:float?</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">gt?</span><span style="background-color: #f8f8f8">:</span> <span style="color: #009999">0</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #009999">0</span><span style="background-color: #f8f8f8">)</span>
+        <span style="background-color: #f8f8f8">optional</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:sale</span><span style="background-color: #f8f8f8">).</span><span style="color: #990000;font-weight: bold">filled</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:bool?</span><span style="background-color: #f8f8f8">)</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+
+    <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">call</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">params</span><span style="background-color: #f8f8f8">)</span>
+      <span style="color: #000000;font-weight: bold">if</span> <span style="background-color: #f8f8f8">params</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">valid?</span>
+        <span style="color: #999988;font-style: italic"># persist</span>
+      <span style="color: #000000;font-weight: bold">else</span>
+        <span style="color: #0086B3">self</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">status</span> <span style="color: #000000;font-weight: bold">=</span> <span style="color: #009999">422</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># apps/web/views/books/create.rb</span>
+<span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Web::Views::Books</span>
+  <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Create</span>
+    <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Web</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">View</span>
+    <span style="background-color: #f8f8f8">template</span> <span style="color: #d14">'books/new'</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+<pre class="highlight erb"><code># apps/web/templates/books/new.html.erb
+<span style="color: #999999;font-weight: bold">&lt;%</span> <span style="color: #000000;font-weight: bold">unless</span> <span style="background-color: #f8f8f8">params</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">valid?</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+  <span style="color: #000080">&lt;div&gt;</span>
+    <span style="color: #000080">&lt;p&gt;</span>There was a problem<span style="color: #000080">&lt;/p&gt;</span>
+    <span style="color: #000080">&lt;ul&gt;</span>
+      <span style="color: #999999;font-weight: bold">&lt;%</span> <span style="background-color: #f8f8f8">params</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">error_messages</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">each</span> <span style="color: #000000;font-weight: bold">do</span> <span style="color: #000000;font-weight: bold">|</span><span style="background-color: #f8f8f8">message</span><span style="color: #000000;font-weight: bold">|</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+        <span style="color: #000080">&lt;li&gt;</span><span style="color: #999999;font-weight: bold">&lt;%=</span> <span style="background-color: #f8f8f8">message</span> <span style="color: #999999;font-weight: bold">%&gt;</span><span style="color: #000080">&lt;/li&gt;</span>
+      <span style="color: #999999;font-weight: bold">&lt;%</span> <span style="color: #000000;font-weight: bold">end</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+    <span style="color: #000080">&lt;/ul&gt;</span>
+  <span style="color: #000080">&lt;/div&gt;</span>
+<span style="color: #999999;font-weight: bold">&lt;%</span> <span style="color: #000000;font-weight: bold">end</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+
+      <h3 id="subresource-integrity" class="title"><a name="subresource-integrity" class="anchor" href="#subresource-integrity">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Subresource Integrity</h3>
+    
+<p>A CDN can dramatically improve page speed, but it can potentially open a security breach.
+If the CDN that we&#39;re using is compromised and serves evil javascript or stylesheet files, we&#39;re exposing our users to security attacks like Cross Site Scripting (XSS).</p>
+
+<p>To solve this problem, browsers vendors introduced a defense called <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">Subresource Integrity</a>.</p>
+
+<p>When enabled, the browser verifies that the checksum of the downloaded file, matches with the declared one.</p>
+
+      <h4 id="from-a-cdn" class="title"><a name="from-a-cdn" class="anchor" href="#from-a-cdn">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>From A CDN</h4>
+    
+<p>If we&#39;re using jQuery from their CDN, we should find the checksum of the <code>.js</code> file on their website and write:</p>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span> <span style="background-color: #f8f8f8">javascript</span> <span style="color: #d14">'https://code.jquery.com/jquery-3.1.0.min.js'</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">integrity: </span><span style="color: #d14">'sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s='</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+
+<p>The output will be:</p>
+<pre class="highlight html"><code><span style="color: #000080">&lt;script </span><span style="color: #008080">integrity=</span><span style="color: #d14">"sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="</span> <span style="color: #008080">src=</span><span style="color: #d14">"https://code.jquery.com/jquery-3.1.0.min.js"</span> <span style="color: #008080">type=</span><span style="color: #d14">"text/javascript"</span> <span style="color: #008080">crossorigin=</span><span style="color: #d14">"anonymous"</span><span style="color: #000080">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+      <h4 id="local-assets" class="title"><a name="local-assets" class="anchor" href="#local-assets">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Local Assets</h4>
+    
+<p>The security problem described above doesn&#39;t concern only CDNs, but local files too.
+Imagine we have a compromised file system and someone was able to replace our javascripts with evil files: we would be vulnerable to the same kind of attack.</p>
+
+<p>As a defense against this security problem, Hanami <strong>enables Subresource Integrity by default in production.</strong>
+When we <a href="/guides/command-line/assets">precompile assets</a> at deploy time, Hanami calculates the checksum of all our assets and it adds a special HTML attribute <code>integrity</code> to our asset tags like <code>&lt;script&gt;</code>.</p>
+<pre class="highlight erb"><code><span style="color: #999999;font-weight: bold">&lt;%=</span> <span style="background-color: #f8f8f8">javascript</span> <span style="color: #d14">'application'</span> <span style="color: #999999;font-weight: bold">%&gt;</span>
+</code></pre>
+<pre class="highlight html"><code><span style="color: #000080">&lt;script </span><span style="color: #008080">src=</span><span style="color: #d14">"/assets/application-92cab02f6d2d51253880cd98d91f1d0e.js"</span> <span style="color: #008080">type=</span><span style="color: #d14">"text/javascript"</span> <span style="color: #008080">integrity=</span><span style="color: #d14">"sha256-WB2pRuy8LdgAZ0aiFxLN8DdfRjKJTc4P4xuEw31iilM="</span> <span style="color: #008080">crossorigin=</span><span style="color: #d14">"anonymous"</span><span style="color: #000080">&gt;&lt;/script&gt;</span>
+</code></pre>
+
+      <h3 id="security-updates" class="title"><a name="security-updates" class="anchor" href="#security-updates">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Security Updates</h3>
+    
+<p>We&#39;ve updated our default security settings to support <a href="https://content-security-policy.com">Content Security Policy</a> 1.1 and 2.0 (1.0 is still supported).</p>
+
+<p>Along with this improvement, we have now turned on two extra security HTTP headers: <code>X-Content-Type-Options</code> and <code>X-XSS-Protection</code>.</p>
+
+      <h3 id="misc" class="title"><a name="misc" class="anchor" href="#misc">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Misc</h3>
+    
+<ul>
+<li><p>New settings for logging: Hanami now supports per-environment stream (standard output, file, etc..), level and formatter.
+Because of JSON parseability, for the production environment, there is now a JSON formatter for the logger.</p></li>
+<li><p>Hanami no longer supports Ruby 2.0 and 2.1</p></li>
+<li><p><code>params</code> can now be accessed only with <code>:symbols</code>, not &#39;strings&#39;. That is, we have removed indifferent access.</p></li>
+</ul>
+
+      <h2 id="upgrade-notes" class="title"><a name="upgrade-notes" class="anchor" href="#upgrade-notes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Upgrade Notes</h2>
+    
+<p>Please have a look at the <a href="/guides/upgrade-notes/v080">upgrade notes for v0.8.0</a>.</p>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release.
+These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/rickenharp">Alexander Gräfe</a></li>
+<li><a href="https://github.com/KELiON">Alexandr Subbotin</a></li>
+<li><a href="https://github.com/cyphactor">Andrew De Ponte</a></li>
+<li><a href="https://github.com/aderyabin">Andrey Deryabin</a></li>
+<li><a href="https://github.com/accessd">Andrey Morskov</a></li>
+<li><a href="https://github.com/davydovanton">Anton Davydov</a></li>
+<li><a href="https://github.com/ariejan">Ariejan de Vroom</a></li>
+<li><a href="https://github.com/ADone">Artem Nistratov</a></li>
+<li><a href="https://github.com/beatrichartz">Beat</a></li>
+<li><a href="https://github.com/berfarah">Bernardo Farah</a></li>
+<li><a href="https://github.com/bruz">Bruz Marzolf</a></li>
+<li><a href="https://github.com/hoksilato">Cang Ta</a></li>
+<li><a href="https://github.com/daneb">Dane Balia</a></li>
+<li><a href="https://github.com/ericfreese">Eric Freese</a></li>
+<li><a href="https://github.com/Erol">Erol Fornoles</a></li>
+<li><a href="https://github.com/fespinoza">Felipe Espinoza</a></li>
+<li><a href="https://github.com/hieuk09">Hiếu Nguyễn</a></li>
+<li><a href="https://github.com/jbodah">Josh Bodah</a></li>
+<li><a href="https://github.com/duduribeiro">Kadu Ribeiro</a></li>
+<li><a href="https://github.com/karimmtarek">Karim Tarek</a></li>
+<li><a href="https://github.com/vyper">Leonardo Saraiva</a></li>
+<li><a href="https://github.com/jodosha">Luca Guidi</a></li>
+<li><a href="https://github.com/lucasallan">Lucas Amorim</a></li>
+<li><a href="https://github.com/maheshm">Mahesh</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/vanetix">Matt McFarland</a></li>
+<li><a href="https://github.com/accuser">Matthew Gibbons</a></li>
+<li><a href="https://github.com/mdorfin">Maxim Dorofienko</a></li>
+<li><a href="https://github.com/oreoshake">Neil Matatall</a></li>
+<li><a href="https://github.com/nicolaracco">Nicola Racco</a></li>
+<li><a href="https://github.com/flash-gordon">Nikita Shilnikov</a></li>
+<li><a href="https://github.com/killthekitten">Nikolay Shebanov</a></li>
+<li><a href="https://github.com/sakuro">Ozawa Sakuro</a></li>
+<li><a href="https://github.com/pascalbetz">Pascal Betz</a></li>
+<li><a href="https://github.com/habutre">Rogério Ramos</a></li>
+<li><a href="https://github.com/rogeriozambon">Rogério Zambon</a></li>
+<li><a href="https://github.com/cllns">Sean Collins</a></li>
+<li><a href="https://github.com/sebastjan-hribar">Sebastjan Hribar</a></li>
+<li><a href="https://github.com/artofhuman">Semyon Pupkov</a></li>
+<li><a href="https://github.com/stevehook">Steve Hook</a></li>
+<li><a href="https://github.com/TheSmartnik">TheSmartnik</a></li>
+<li><a href="https://github.com/duykhoa">Tran Duy Khoa</a></li>
+<li><a href="https://github.com/joneslee85">Trung Lê</a></li>
+<li><a href="https://github.com/vasspilka">Vasilis Spilka</a></li>
+<li><a href="https://github.com/akhramov">akhramov</a></li>
+<li><a href="https://github.com/deepj">deepj</a></li>
+<li><a href="https://github.com/nessur">nessur</a></li>
+</ul>
+
+<p>Thank you all!</p>
+
+            </div>
+
+           <hr>
+
+           <a href="https://github.com/hanami/hanami" title="Star on GitHub" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-github"></span>
+             Star
+           </a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2016%2F07%2F22%2Fannouncing-hanami-080%2F" title="Like on Facebook" class="btn btn-default-outline" target="_blank">
+             <span class="icon icon-thumbs-up"></span>
+             Like
+           </a>
+           <a href="https://twitter.com/home?status=Announcing+Hanami+v0.8.0+-+http%3A%2F%2Fhanamirb.org%2Fblog%2F2016%2F07%2F22%2Fannouncing-hanami-080%2F+%2Fvia+%40hanamirb+%23hanamirb" title="Share on Twitter" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-twitter"></span>
+             Tweet
+           </a>
+           <a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2016%2F07%2F22%2Fannouncing-hanami-080%2F&t=Announcing Hanami v0.8.0" class="btn btn-default-outline" title="Vote on HackerNews">
+             <span class="icon"><strong>HN</strong></span>
+             Vote
+           </a>
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fhanamirb.org%2Fblog%2F2016%2F07%2F22%2Fannouncing-hanami-080%2F" target="_blank" title="Share on Reddit" class="btn btn-default-outline">
+             <span class="icon"><strong>R</strong></span>
+             Share
+            </a>
+
+            <br>
+            <br>
+
+            <div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,300+ developers.
+    </p>
+    <form action="https://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="https://guides.hanamirb.org/" target="_blank">Guides</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;" loading="lazy"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2021 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

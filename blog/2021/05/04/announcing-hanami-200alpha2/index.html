@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Announcing Hanami v2.0.0.alpha2</title>
+
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+    <meta property="og:site_name"   content="Hanami"/>
+    <meta property="og:title"       content="Announcing Hanami v2.0.0.alpha2">
+    <meta property="og:url"         content="http://hanamirb.org/blog/2021/05/04/announcing-hanami-200alpha2/">
+    <meta property="og:description" content="After two years of work, presenting a revolutionary new vision for Hanami 2.0.">
+    <meta property="og:image"       content="http://hanamirb.org/blog/2021/05/04/announcing-hanami-200alpha2/cover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@hanamirb">
+    <meta name="twitter:creator"     content="@hanamirb">
+    <meta name="twitter:url"         content="http://hanamirb.org/blog/2021/05/04/announcing-hanami-200alpha2/">
+    <meta name="twitter:title"       content="Announcing Hanami v2.0.0.alpha2">
+    <meta name="twitter:description" content="After two years of work, presenting a revolutionary new vision for Hanami 2.0.">
+    <meta name="twitter:image:src"   content="http://hanamirb.org/blog/2021/05/04/announcing-hanami-200alpha2/cover.jpg">
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand text-uppercase" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right text-uppercase">
+        <li>
+          <a href="https://guides.hanamirb.org" target="_blank">Guides</a>
+        </li>
+        <li>
+          <a href="https://docs.hanamirb.org" target="_blank">API</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div id="hanami2" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      We're working on <strong>Hanami 2.0</strong>. Read the <a href="/blog/2021/05/04/announcing-hanami-200alpha2/">latest announcement</a> and follow the <a href="https://github.com/hanami/hanami/tree/unstable">progress</a> on GitHub.
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="container">
+      <div class="block block-inverse text-center">
+        <div class="block-foreground">
+          <h1 class="block-title">Announcing Hanami v2.0.0.alpha2</h1>
+          <h4 class="text-muted">Posted by <strong>Tim Riley</strong> on <em>May 04, 2021</em></h4>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-facebook"></span>
+            Share
+          </button>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-twitter"></span>
+            Tweet
+          </button>
+        </div>
+        <div class="block-background">
+          <img src="/blog/2021/05/04/announcing-hanami-200alpha2/cover.jpg" loading="lazy">
+        </div>
+      </div>
+
+      <div class="container container-article">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 col-md-offset-1">
+            <p class="lead">After two years of work, presenting a revolutionary new vision for Hanami 2.0.</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-md-9 col-md-offset-1">
+            <div class="article-body">
+              <p>Hello, Hanami community! It is my great honor to make my first post here and announce the release of Hanami v2.0.0.alpha2! 🎉</p>
+
+<p>It’s been a little while since <a href="https://hanamirb.org/blog/2019/01/30/announcing-hanami-200alpha1/">the last alpha release</a>, but we’ve been hard at work, and the close collaboration between the Hanami, dry-rb, and rom-rb teams has been going exceedingly well. Together, we’re delighted to present a <strong>revolutionary vision</strong> for Hanami 2.0! In this alpha, we have:</p>
+
+<ul>
+<li>A <strong>completely rewritten application core</strong>, offering advanced application-level state management and code loading capabilities</li>
+<li>An <strong>always-there auto-injection mixin</strong>, making it easy to model your behavior as functional, composable objects</li>
+<li>Built-in <strong>application settings</strong> with first-class support</li>
+<li>New <strong>Slices</strong> for organizing your application’s key areas of functionality</li>
+<li>A <strong>reoriented Action class</strong>, now truly stateless and oriented to work with application components as dependencies</li>
+<li>A <strong>brand new, standalone view layer</strong> boasting a full range of abstractions for better organising your view code</li>
+<li>A <strong>blazing fast new router</strong></li>
+<li>A novel approach for <strong>zero-boilerplate integration and configuration of application components</strong></li>
+<li>An opt-in mode to help you <strong>manage all kinds of applications</strong>, not just web applications</li>
+<li>And an <strong>application template</strong> to help you give all of this a try</li>
+</ul>
+
+<p>That’s a lot of great stuff! Let’s dive in and take a look.</p>
+
+      <h2 id="new-application-core" class="title"><a name="new-application-core" class="anchor" href="#new-application-core">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>New application core</h2>
+    
+<p>Every Hanami 2.0 application provides a next-level system for organizing your application’s components. After defining your application, it can vend ready-to-use instances of your application’s objects.</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">MyApp</span>
+  <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Application</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Application</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">[</span><span style="color: #d14">"commands.create_article"</span><span style="background-color: #f8f8f8">]</span> <span style="color: #999988;font-style: italic"># =&gt; #&lt;MyApp::Commands::CreateArticle&gt;</span>
+</code></pre>
+
+<p>You can also define <strong>bootable</strong> components in your <code>config/boot/</code>, with their own lifecycle events and clear dependencies.</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">register_bootable</span> <span style="color: #990073">:some_service</span> <span style="color: #000000;font-weight: bold">do</span> <span style="color: #000000;font-weight: bold">|</span><span style="background-color: #f8f8f8">container</span><span style="color: #000000;font-weight: bold">|</span>
+  <span style="background-color: #f8f8f8">init</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="color: #0086B3">require</span> <span style="color: #d14">"some_service/client"</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="background-color: #f8f8f8">start</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">register</span> <span style="color: #d14">"some_service.client"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #008080">SomeService</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Client</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span>
+      <span style="color: #990073">api_key: </span><span style="background-color: #f8f8f8">container</span><span style="background-color: #f8f8f8">[</span><span style="color: #990073">:settings</span><span style="background-color: #f8f8f8">].</span><span style="color: #990000;font-weight: bold">some_service_api_key</span>
+    <span style="background-color: #f8f8f8">)</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>You can then get these bootable components from the application, just like any other.</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">[</span><span style="color: #d14">"some_service.client"</span><span style="background-color: #f8f8f8">]</span> <span style="color: #999988;font-style: italic"># =&gt; #&lt;SomeService::Client api_key="xyz"&gt;</span>
+</code></pre>
+
+<p>When a Hanami application boots in full, it will automatically register entries for all components represented by your Ruby source files.</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">boot</span>
+
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">keys</span>
+<span style="color: #999988;font-style: italic"># =&gt; [</span>
+<span style="color: #999988;font-style: italic">#   "logger",</span>
+<span style="color: #999988;font-style: italic">#   "some_service.client",</span>
+<span style="color: #999988;font-style: italic">#   "commands.create_article",</span>
+<span style="color: #999988;font-style: italic">#   "commands.update_article",</span>
+<span style="color: #999988;font-style: italic">#   "commands.delete_article",</span>
+<span style="color: #999988;font-style: italic">#   ...</span>
+<span style="color: #999988;font-style: italic"># ]</span>
+</code></pre>
+
+<p>As your application grows, this boot process will naturally slow; we’ve all experienced the frustratingly long wait as large Ruby applications boot. To help with this, Hanami 2.0 applications can be <strong>partially booted</strong>, requiring a bare minimum of files, then lazy load your components as they’re accessed.</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">init</span>
+
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">keys</span>
+<span style="color: #999988;font-style: italic"># =&gt; [</span>
+<span style="color: #999988;font-style: italic">#   "logger",</span>
+<span style="color: #999988;font-style: italic"># ]</span>
+
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">[</span><span style="color: #d14">"commands.create_article"</span><span style="background-color: #f8f8f8">]</span>
+
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">keys</span>
+<span style="color: #999988;font-style: italic"># =&gt; [</span>
+<span style="color: #999988;font-style: italic">#   "logger",</span>
+<span style="color: #999988;font-style: italic">#   "commands.create_article",</span>
+<span style="color: #999988;font-style: italic"># ]</span>
+</code></pre>
+
+<p>This allows your app to grow gracefully, gives you flexibility in when and how you load your code, and keeps the developer experience snappy all the while. The Hanami console, for example, only partially boots the application, meaning <strong>you get a prompt in under 1s, no matter how large the application!</strong></p>
+
+      <h2 id="auto-injection-mixin" class="title"><a name="auto-injection-mixin" class="anchor" href="#auto-injection-mixin">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Auto-injection mixin</h2>
+    
+<p>With application components addressable via abstract identifiers (instead of concrete class names), you can then use Hanami 2.0’s always-available <code>Deps</code> auto-injection mixin to write classes oriented around dependency injection as the way to compose different application behaviors.</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">CreateThing</span>
+  <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Deps</span><span style="background-color: #f8f8f8">[</span><span style="color: #990073">service_client: </span><span style="color: #d14">"some_service.client"</span><span style="background-color: #f8f8f8">]</span>
+
+  <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">call</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">attrs</span><span style="background-color: #f8f8f8">)</span>
+    <span style="color: #999988;font-style: italic"># Validate attrs, etc.</span>
+
+    <span style="background-color: #f8f8f8">service_client</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">create</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">attrs</span><span style="background-color: #f8f8f8">)</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>With this code in place, a new instance of <code>CreateThing</code> will use the <code>:some_service</code> bootable component from our earlier examples.</p>
+<pre class="highlight ruby"><code><span style="color: #008080">CreateThing</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span> <span style="color: #999988;font-style: italic"># =&gt; #&lt;CreateThing service_client=#&lt;SomeService::Client api_key="xyz"&gt;&gt;</span>
+</code></pre>
+
+<p>This is exactly the same as when you resolve it from the container, such as when <code>&quot;create_thing&quot;</code> is used as a dependency of <em>another</em> component.</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">[</span><span style="color: #d14">"create_thing"</span><span style="background-color: #f8f8f8">]</span> <span style="color: #999988;font-style: italic"># =&gt; #&lt;CreateThing service_client=#&lt;SomeService::Client api_key="xyz"&gt;&gt;</span>
+</code></pre>
+
+<p>Over in the unit tests, however, if you want to test <code>CreateThing</code> in isolation from the <code>service_client</code>, you can pass in an explicit replacement for this default dependency.</p>
+<pre class="highlight ruby"><code><span style="background-color: #f8f8f8">subject</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:create_thing</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">{</span>
+  <span style="color: #008080">CreateThing</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">new</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">service_client: </span><span style="background-color: #f8f8f8">service_client</span><span style="background-color: #f8f8f8">)</span>
+<span style="background-color: #f8f8f8">}</span>
+
+<span style="background-color: #f8f8f8">let</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:service_client</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">{</span> <span style="background-color: #f8f8f8">spy</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:service_client</span><span style="background-color: #f8f8f8">)</span> <span style="background-color: #f8f8f8">}</span>
+</code></pre>
+
+<p>This low friction approach to dependency injection means you can much more readily decompose our application behaviour into smaller, easier-to-understand, easier-to-test, single-responsibility components.</p>
+
+      <h2 id="application-settings" class="title"><a name="application-settings" class="anchor" href="#application-settings">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Application settings</h2>
+    
+<p>Application settings loading is now built-in. You can define these in <code>config/settings.rb</code>:</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">settings</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="background-color: #f8f8f8">setting</span> <span style="color: #990073">:some_service_api_key</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>An optional type object can be provided as a second argument, to coerce and/or type check the setting values. This works well with <a href="https://dry-rb.org/gems/dry-types">dry-types</a> type objects.</p>
+
+<p>Settings are read from <code>.env*</code> files using <a href="https://github.com/bkeepers/dotenv">dotenv</a>.</p>
+
+<p>The resulting settings object is a struct with methods matching your setting names. It’s available as <code>Hanami.application.settings</code> as well as via the <code>&quot;settings&quot;</code> component, allowing you to auto-inject it into your application components as required.</p>
+
+      <h2 id="application-and-slices" class="title"><a name="application-and-slices" class="anchor" href="#application-and-slices">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Application and slices</h2>
+    
+<p>So far our examples have been from a single all-in-one application. But as our apps grow in complexity, it can be helpful to separate them into distinct, well-bounded high-level concerns. To serve in this role, Hanami 2 offers <strong>Slices</strong>.</p>
+
+<p>Slices live inside the <code>slices/</code> directory. Each slice maps onto a single Ruby module namespace, and has its own dedicated instance for managing its components.</p>
+
+<p>For an application with the following directories:</p>
+<pre class="highlight ruby"><code><span style="background-color: #f8f8f8">slices</span><span style="color: #000000;font-weight: bold">/</span>
+  <span style="background-color: #f8f8f8">admin</span><span style="color: #000000;font-weight: bold">/</span>
+  <span style="background-color: #f8f8f8">main</span><span style="color: #000000;font-weight: bold">/</span>
+  <span style="background-color: #f8f8f8">search</span><span style="color: #000000;font-weight: bold">/</span>
+</code></pre>
+
+<p>It would have corresponding <code>Admin</code>, <code>Main</code>, and <code>Search</code> slices. Each slice is loaded and managed just like the application itself, so a class defined in <code>admin/create_article.rb</code> would be available from <code>Admin::Slice</code> as <code>Admin::Slice[&quot;create_article&quot;]</code>, and can in turn inject other dependencies from the admin slice.</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Admin</span>
+  <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">CreateArticle</span>
+    <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Deps</span><span style="background-color: #f8f8f8">[</span><span style="color: #d14">"contracts.article_contract"</span><span style="background-color: #f8f8f8">]</span> <span style="color: #999988;font-style: italic"># defaults to Admin::Contracts::ArticleContract</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>Each slice also automatically imports the components from the application, which contains some common facilities (like the logger), the app’s top-level bootable components, as well as any other classes you define in <code>lib/</code>. These are available under an <code>&quot;application.&quot;</code> namespace in the slice, making it just as easy to inject these as dependencies.</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Admin</span>
+  <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">CreateArticle</span>
+    <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Deps</span><span style="background-color: #f8f8f8">[</span>
+      <span style="color: #d14">"contracts.article_contract"</span><span style="background-color: #f8f8f8">,</span>
+      <span style="color: #d14">"application.logger"</span><span style="background-color: #f8f8f8">,</span>
+    <span style="background-color: #f8f8f8">]</span>
+
+    <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">call</span>
+      <span style="background-color: #f8f8f8">logger</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">info</span> <span style="color: #d14">"creating article"</span>
+      <span style="color: #999988;font-style: italic"># ...</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>Slices can also <em>import each other.</em></p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">MyApp</span>
+  <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Application</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Application</span>
+    <span style="background-color: #f8f8f8">config</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">slice</span> <span style="color: #990073">:admin</span> <span style="color: #000000;font-weight: bold">do</span>
+      <span style="color: #999988;font-style: italic"># Inside `Admin`, registrations from the `Search` slice will be available under the `"search."` container namespace</span>
+      <span style="background-color: #f8f8f8">import</span> <span style="color: #990073">:search</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>With this, the slices themslves form their own clear graph of your application’s high-level functionality.</p>
+
+<p>While the slices are already incredibly powerful thanks to the built-in features of the container, we’ll be spending future release cycles bolstering these even further, such as making it possible to load slices conditionally.</p>
+
+      <h2 id="functional-hanami-action" class="title"><a name="functional-hanami-action" class="anchor" href="#functional-hanami-action">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Functional Hanami::Action</h2>
+    
+<p><code>Hanami::Action</code> has been reoriented to provide immutable, callable action classes that fit well with all other parts of the new framework. Actions can declare dependencies to interact with the rest of the application, access the request and prepare a response in their <code>#handle</code> method, then the class will take care of the rest.</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Admin</span>
+  <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Actions</span>
+    <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Articles</span>
+      <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Show</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Admin</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Action</span>
+        <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Deps</span><span style="background-color: #f8f8f8">[</span><span style="color: #d14">"article_repo"</span><span style="background-color: #f8f8f8">]</span>
+
+        <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">handle</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">req</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">res</span><span style="background-color: #f8f8f8">)</span>
+          <span style="background-color: #f8f8f8">article</span> <span style="color: #000000;font-weight: bold">=</span> <span style="background-color: #f8f8f8">article_repo</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">find</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">req</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">params</span><span style="background-color: #f8f8f8">[</span><span style="color: #990073">:id</span><span style="background-color: #f8f8f8">])</span>
+
+          <span style="background-color: #f8f8f8">res</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">body</span> <span style="color: #000000;font-weight: bold">=</span> <span style="color: #008080">JSON</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">generate</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">article</span><span style="background-color: #f8f8f8">)</span>
+        <span style="color: #000000;font-weight: bold">end</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>Actions are still callable and Rack-compatible, and continue to offer the same range of HTTP-related features from their 1.x counterparts, reoriented to fit this new structure.</p>
+
+      <h2 id="brand-new-view-layer" class="title"><a name="brand-new-view-layer" class="anchor" href="#brand-new-view-layer">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Brand new view layer</h2>
+    
+<p>Hanami 2.0 will sport an entirely new view layer, with <a href="https://dry-rb.org/gems/dry-view">dry-view</a> joining the Hanami family as the new hanami-view. With years of development behind it, it offers a sophisticated set of abstractions for designing well-factored views.</p>
+
+<p>A view in Hanami 2.0 is a standalone, callable class that can declare dependencies to interact with the rest of the application (are you catching the theme here?). It can access parameters and then prepare named exposures to make available to its corresponding template.</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Admin</span>
+  <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Views</span>
+    <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Articles</span>
+      <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Show</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Admin</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">View</span>
+        <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Deps</span><span style="background-color: #f8f8f8">[</span><span style="color: #d14">"article_repo"</span><span style="background-color: #f8f8f8">]</span>
+
+        <span style="background-color: #f8f8f8">expose</span> <span style="color: #990073">:article</span> <span style="color: #000000;font-weight: bold">do</span> <span style="color: #000000;font-weight: bold">|</span><span style="color: #0086B3">id</span><span style="color: #990073">:|</span>
+          <span style="background-color: #f8f8f8">article_repo</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">find</span><span style="background-color: #f8f8f8">(</span><span style="color: #0086B3">id</span><span style="background-color: #f8f8f8">)</span>
+        <span style="color: #000000;font-weight: bold">end</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>Every exposure’s value is decorated by a matching view part class, which you can use to provide view-specific behaviour attached to specific domain objects, including anything possible from within the templates, such as rendering partials and accessing all aspects of the general view rendering context.</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Admin</span>
+  <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">View</span>
+    <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Parts</span>
+      <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Article</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Admin</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Part</span>
+        <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">preview_text</span>
+          <span style="background-color: #f8f8f8">body_text</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">to_s</span><span style="background-color: #f8f8f8">[</span><span style="color: #009999">0</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">.</span><span style="color: #009999">300</span><span style="background-color: #f8f8f8">]</span>
+        <span style="color: #000000;font-weight: bold">end</span>
+
+        <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">render_social_preview</span>
+          <span style="background-color: #f8f8f8">render</span><span style="background-color: #f8f8f8">(</span><span style="color: #990073">:social_preview</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">title: </span><span style="background-color: #f8f8f8">title</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">text: </span><span style="background-color: #f8f8f8">preview_text</span><span style="background-color: #f8f8f8">)</span>
+        <span style="color: #000000;font-weight: bold">end</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>Views also integrate nicely with actions, allowing you to keep your actions clean and focused on HTTP responsibilities only.</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Admin</span>
+  <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Actions</span>
+    <span style="color: #000000;font-weight: bold">module</span> <span style="color: #555555">Articles</span>
+      <span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">Show</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Admin</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Action</span>
+        <span style="color: #000000;font-weight: bold">include</span> <span style="color: #008080">Deps</span><span style="background-color: #f8f8f8">[</span><span style="color: #990073">view: </span><span style="color: #d14">"views.articles.show"</span><span style="background-color: #f8f8f8">]</span>
+
+        <span style="color: #000000;font-weight: bold">def</span> <span style="color: #990000;font-weight: bold">handle</span><span style="background-color: #f8f8f8">(</span><span style="background-color: #f8f8f8">req</span><span style="background-color: #f8f8f8">,</span> <span style="background-color: #f8f8f8">res</span><span style="background-color: #f8f8f8">)</span>
+          <span style="background-color: #f8f8f8">res</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">render</span> <span style="background-color: #f8f8f8">view</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">id: </span><span style="background-color: #f8f8f8">req</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">params</span><span style="background-color: #f8f8f8">[</span><span style="color: #990073">:id</span><span style="background-color: #f8f8f8">]</span>
+        <span style="color: #000000;font-weight: bold">end</span>
+      <span style="color: #000000;font-weight: bold">end</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>Since views are independent, addressable, callable objects just like any other component within an Hanami application, they can also be put to a wide range of uses alongside the standard rendering of web page HTML, such as rendering emails or even preparing API responses.</p>
+
+      <h2 id="zero-boilerplate-integration-of-application-components" class="title"><a name="zero-boilerplate-integration-of-application-components" class="anchor" href="#zero-boilerplate-integration-of-application-components">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Zero-boilerplate integration of application components</h2>
+    
+<p>A strong focus of our effort in building Hanami 2.0 has been to allow each component, such as a view or action, to remain useful outside of Hanami, while also fitting seamlessly when used within a full Hanami application. A view used outside of Hanami, for example, looks like this:</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">MyView</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">View</span>
+  <span style="background-color: #f8f8f8">config</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">template</span> <span style="color: #000000;font-weight: bold">=</span> <span style="color: #d14">"my_view"</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>And this same view used within Hanami looks like this:</p>
+<pre class="highlight ruby"><code><span style="color: #000000;font-weight: bold">class</span> <span style="color: #445588;font-weight: bold">MyView</span> <span style="color: #000000;font-weight: bold">&lt;</span> <span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">View</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>There’s almost no difference! Once you understand how to use <code>Hanami::View</code> in one place, you can use it everywhere. Even inside an Hanami app, where the app seamlessly integrates the views (in the case above, inferring the template name automatically, among other things), you can still access the full extent of the view configuration, allowing you to ”eject” from the configured defaults if you ever need.</p>
+
+      <h2 id="blazing-fast-new-router" class="title"><a name="blazing-fast-new-router" class="anchor" href="#blazing-fast-new-router">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Blazing fast new router</h2>
+    
+<p>With all your actions and views in place, you’ll want a way to write them up to URLs. Hanami 2.0’s router will offer a familiar DSL to make this happen.</p>
+<pre class="highlight ruby"><code><span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">application</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">routes</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="background-color: #f8f8f8">mount</span> <span style="color: #990073">:main</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">at: </span><span style="color: #d14">"/"</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="color: #999988;font-style: italic"># Will resolve "actions.home.index" from the Main slice</span>
+    <span style="background-color: #f8f8f8">root</span> <span style="color: #990073">to: </span><span style="color: #d14">"home#index"</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+
+  <span style="background-color: #f8f8f8">mount</span> <span style="color: #990073">:admin</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">at: </span><span style="color: #d14">"/admin"</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="color: #999988;font-style: italic"># Will resolve "actions.home.index" from the Admin slice</span>
+    <span style="background-color: #f8f8f8">root</span> <span style="color: #990073">to: </span><span style="color: #d14">"home#index"</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+<p>The engine underpinning the new router also offers amazing performance, with Hanami::API benchmarks showing it <a href="https://hanamirb.org/blog/2020/02/26/introducing-hanami-api/">outperforming nearly all others</a>.</p>
+
+      <h2 id="a-framework-for-all-applications" class="title"><a name="a-framework-for-all-applications" class="anchor" href="#a-framework-for-all-applications">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>A framework for all applications</h2>
+    
+<p>Many of the new features we’ve seen so far would empower any kind of application, not just web applications. So with this alpha, we’re making the first release of a truly “unbundled” Hanami, with the hanami-controller, hanami-router, and hanami-view gem dependencies being moved outside of the main gem and into the Gemfiles of the generated applications.</p>
+
+<p>This means you can now use the hanami gem to help you better organise any kind of Ruby application.  All you’ll need to do is opt out of the web mode when booting your application.</p>
+<pre class="highlight plaintext"><code>Hanami.boot web: false
+</code></pre>
+
+<p>In future releases, we’ll work to make this an even smoother process.</p>
+
+      <h2 id="what-s-included-" class="title"><a name="what-s-included-" class="anchor" href="#what-s-included-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What’s included?</h2>
+    
+<p>Today we’re releasing the following gems:</p>
+
+<ul>
+<li><code>hanami</code> v2.0.0.alpha2</li>
+<li><code>hanami-cli</code> v2.0.0.alpha2</li>
+<li><code>hanami-view</code> v2.0.0.alpha2</li>
+<li><code>hanami-controller</code> v2.0.0.alpha2</li>
+<li><code>hanami-router</code> v2.0.0.alpha5</li>
+<li><code>hanami-utils</code> v2.0.0.alpha2</li>
+</ul>
+
+      <h2 id="how-can-i-try-it-" class="title"><a name="how-can-i-try-it-" class="anchor" href="#how-can-i-try-it-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How can I try it?</h2>
+    
+<p>We’ve prepared an <a href="https://github.com/hanami/hanami-2-application-template">Hanami 2 application template</a> which you can clone to get started with an app and try everything we’ve shared today. The template provides it’s own installation instructions and scripts, and prepares a full stack web application ready for you to use.</p>
+
+<p>There’s so much more to this release than we’ve been able to share in this brief post, so we’d love for you to try everything out. We can’t wait to hear your thoughts!</p>
+
+      <h2 id="what-s-next-" class="title"><a name="what-s-next-" class="anchor" href="#what-s-next-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>What’s next?</h2>
+    
+<p>While we’ve covered so much ground since the last alpha, there are still many rough edges to smooth over, as well as a few big pieces to put in place, such as an application CLI with generators, first-class integration with <a href="https://rom-rb.org">rom-rb</a> for a persistence layer, front-end assets integration, and a standard collection of view helpers.</p>
+
+<p>If you’d like to follow along, we’re tracking the remaining work in our public <a href="https://trello.com/b/lFifnBti/hanami-20">Hanami 2.0 trello board</a>.</p>
+
+<p>Thank you for your continued interest in Hanami, and for your support of a diverse, flourishing Ruby ecosystem! 🌸</p>
+
+            </div>
+
+           <hr>
+
+           <a href="https://github.com/hanami/hanami" title="Star on GitHub" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-github"></span>
+             Star
+           </a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2021%2F05%2F04%2Fannouncing-hanami-200alpha2%2F" title="Like on Facebook" class="btn btn-default-outline" target="_blank">
+             <span class="icon icon-thumbs-up"></span>
+             Like
+           </a>
+           <a href="https://twitter.com/home?status=Announcing+Hanami+v2.0.0.alpha2+-+http%3A%2F%2Fhanamirb.org%2Fblog%2F2021%2F05%2F04%2Fannouncing-hanami-200alpha2%2F+%2Fvia+%40hanamirb+%23hanamirb" title="Share on Twitter" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-twitter"></span>
+             Tweet
+           </a>
+           <a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2021%2F05%2F04%2Fannouncing-hanami-200alpha2%2F&t=Announcing Hanami v2.0.0.alpha2" class="btn btn-default-outline" title="Vote on HackerNews">
+             <span class="icon"><strong>HN</strong></span>
+             Vote
+           </a>
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fhanamirb.org%2Fblog%2F2021%2F05%2F04%2Fannouncing-hanami-200alpha2%2F" target="_blank" title="Share on Reddit" class="btn btn-default-outline">
+             <span class="icon"><strong>R</strong></span>
+             Share
+            </a>
+
+            <br>
+            <br>
+
+            <div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,300+ developers.
+    </p>
+    <form action="https://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="https://guides.hanamirb.org/" target="_blank">Guides</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;" loading="lazy"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2021 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>

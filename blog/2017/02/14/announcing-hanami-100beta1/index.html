@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Hanami - The web, with simplicity" />
+<meta name="keywords" content="hanami,hanamirb,lotus,lotusrb,web,framework,ruby,open source,oss,os,software,free,free software,architecture,fast,lightweight,testing,tdd,bdd,test driven development,behaviour driven development,full stack,mvc,model view object,pattern,patterns,design patterns,oop,object oriented programming,testability,http,https,routing,router,http router,restful,resource,resources,convention,controller,models,repository,query,sql,interactors,two-step view,view,template,presenters,render,rendering,helpers,erb,haml,tilt,json,xml,yaml,yml,framwork,framewrok,riby,free sowftare"/>
+<meta name="author" content="Luca Guidi">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link href="/atom.xml" rel="alternate" title="Hanami" type="application/atom+xml" />
+<link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+<title>Hanami | Announcing Hanami v1.0.0.beta1</title>
+
+<link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Overpass:200,300,400,700" rel="stylesheet">
+<link href="/stylesheets/toolkit-minimal.css" rel="stylesheet" />
+<link href="/stylesheets/search.css" rel="stylesheet" />
+<link href="/stylesheets/application-minimal.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+    <meta property="og:site_name"   content="Hanami"/>
+    <meta property="og:title"       content="Announcing Hanami v1.0.0.beta1">
+    <meta property="og:url"         content="http://hanamirb.org/blog/2017/02/14/announcing-hanami-100beta1/">
+    <meta property="og:description" content="Feature freeze, project logger, automatic logging of requests, SQL queries, and migrations. Minor bug fixes.">
+    <meta property="og:image"       content="http://hanamirb.org/blog/2017/02/14/announcing-hanami-100beta1/cover.jpg">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@hanamirb">
+    <meta name="twitter:creator"     content="@hanamirb">
+    <meta name="twitter:url"         content="http://hanamirb.org/blog/2017/02/14/announcing-hanami-100beta1/">
+    <meta name="twitter:title"       content="Announcing Hanami v1.0.0.beta1">
+    <meta name="twitter:description" content="Feature freeze, project logger, automatic logging of requests, SQL queries, and migrations. Minor bug fixes.">
+    <meta name="twitter:image:src"   content="http://hanamirb.org/blog/2017/02/14/announcing-hanami-100beta1/cover.jpg">
+  </head>
+
+  <body>
+    <nav id="navigation" class="navbar navbar-default navbar-static-top navbar-padded app-navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed p-x-0" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand text-uppercase" href="/">
+        <span>Hanami</span>
+      </a>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right text-uppercase">
+        <li>
+          <a href="https://guides.hanamirb.org" target="_blank">Guides</a>
+        </li>
+        <li>
+          <a href="https://docs.hanamirb.org" target="_blank">API</a>
+        </li>
+        <li>
+          <a href="/community">Community</a>
+        </li>
+        <li>
+          <a href="/donate">Donate</a>
+        </li>
+        <li>
+          <a href="https://github.com/hanami" target="_blank">Source Code</a>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div id="hanami2" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      We're working on <strong>Hanami 2.0</strong>. Read the <a href="/blog/2021/05/04/announcing-hanami-200alpha2/">latest announcement</a> and follow the <a href="https://github.com/hanami/hanami/tree/unstable">progress</a> on GitHub.
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="container">
+      <div class="block block-inverse text-center">
+        <div class="block-foreground">
+          <h1 class="block-title">Announcing Hanami v1.0.0.beta1</h1>
+          <h4 class="text-muted">Posted by <strong>Luca Guidi & Oana Sipos</strong> on <em>February 14, 2017</em></h4>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-facebook"></span>
+            Share
+          </button>
+          <button class="btn btn-default btn-outline m-t">
+            <span class="icon icon-twitter"></span>
+            Tweet
+          </button>
+        </div>
+        <div class="block-background">
+          <img src="/blog/2017/02/14/announcing-hanami-100beta1/cover.jpg" loading="lazy">
+        </div>
+      </div>
+
+      <div class="container container-article">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 col-md-offset-1">
+            <p class="lead">Feature freeze, project logger, automatic logging of requests, SQL queries, and migrations. Minor bug fixes.</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12 col-md-9 col-md-offset-1">
+            <div class="article-body">
+              <p>This <code>v1.0.0.beta1</code> release marks Hanami&#39;s <a href="https://en.wikipedia.org/wiki/Freeze_(software_engineering)">feature freeze</a> for 1.0, along with a couple new features, and a few bug fixes.</p>
+
+<p>From now on, <strong>Hanami API&#39;s are stable and won&#39;t be changed until 2.0</strong>.</p>
+
+<p>The stable release (<code>v1.0.0</code>) will happen between the end of March and the beginning of April 2017, which coincides with the <a href="http://www.japan-guide.com/sakura/">Hanami season in Japan</a>. 🌸</p>
+
+<p>Between now and then, we&#39;ll release other <em>beta</em> and <em>release candidate</em> versions.</p>
+
+      <h2 id="features" class="title"><a name="features" class="anchor" href="#features">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Features</h2>
+    
+<p>Hanami is now compatible with Ruby 2.3+ (including the latest 2.4) and with Rack 2.0 only.</p>
+
+      <h3 id="project-logger" class="title"><a name="project-logger" class="anchor" href="#project-logger">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Project Logger</h3>
+    
+<p>We added the project logger, available at <code>Hanami.logger</code>.
+If you need to log a piece of information, use it like this: <code>Hanami.logger.debug &quot;hello&quot;</code>.</p>
+
+<p>Because of this change, the application-specific loggers were removed (eg. <code>Web.logger</code>, <code>Admin.logger</code>).
+Therefore, logger settings for individual application are not supported anymore (e.g. inside <code>apps/web/application.rb</code>).
+To configure the logger, please edit <code>config/environment.rb</code>.</p>
+
+      <h3 id="automatic-logging" class="title"><a name="automatic-logging" class="anchor" href="#automatic-logging">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Automatic Logging</h3>
+    
+<p>A project that uses Hanami will automatically log each incoming HTTP request, SQL query and migration.</p>
+
+<p>When a project is used in development mode, the logging format is human readable:</p>
+<pre class="highlight ruby"><code><span style="background-color: #f8f8f8">[</span><span style="background-color: #f8f8f8">bookshelf</span><span style="background-color: #f8f8f8">]</span> <span style="background-color: #f8f8f8">[</span><span style="color: #008080">INFO</span><span style="background-color: #f8f8f8">]</span> <span style="background-color: #f8f8f8">[</span><span style="color: #009999">2017</span><span style="color: #000000;font-weight: bold">-</span><span style="color: #009999">02</span><span style="color: #000000;font-weight: bold">-</span><span style="color: #009999">11</span> <span style="color: #009999">15</span><span style="background-color: #f8f8f8">:</span><span style="color: #009999">42</span><span style="background-color: #f8f8f8">:</span><span style="color: #009999">48</span> <span style="color: #000000;font-weight: bold">+</span><span style="color: #009999">0100</span><span style="background-color: #f8f8f8">]</span> <span style="color: #008080">HTTP</span><span style="color: #000000;font-weight: bold">/</span><span style="color: #009999">1</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #009999">1</span> <span style="color: #008080">GET</span> <span style="color: #009999">200</span> <span style="color: #009999">127</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #009999">0</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #009999">0</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #009999">1</span> <span style="color: #000000;font-weight: bold">/</span><span style="background-color: #f8f8f8">books</span><span style="color: #000000;font-weight: bold">/</span><span style="color: #009999">1</span>  <span style="color: #009999">451</span> <span style="color: #009999">0</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #009999">01</span><span style="color: #009999">8576</span>
+<span style="background-color: #f8f8f8">[</span><span style="background-color: #f8f8f8">bookshelf</span><span style="background-color: #f8f8f8">]</span> <span style="background-color: #f8f8f8">[</span><span style="color: #008080">INFO</span><span style="background-color: #f8f8f8">]</span> <span style="background-color: #f8f8f8">[</span><span style="color: #009999">2017</span><span style="color: #000000;font-weight: bold">-</span><span style="color: #009999">02</span><span style="color: #000000;font-weight: bold">-</span><span style="color: #009999">11</span> <span style="color: #009999">15</span><span style="background-color: #f8f8f8">:</span><span style="color: #009999">42</span><span style="background-color: #f8f8f8">:</span><span style="color: #009999">48</span> <span style="color: #000000;font-weight: bold">+</span><span style="color: #009999">0100</span><span style="background-color: #f8f8f8">]</span> <span style="background-color: #f8f8f8">(</span><span style="color: #009999">0</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #009999">0003</span><span style="color: #009999">81</span><span style="background-color: #f8f8f8">s</span><span style="background-color: #f8f8f8">)</span> <span style="color: #008080">SELECT</span> <span style="color: #d14">"id"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #d14">"title"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #d14">"created_at"</span><span style="background-color: #f8f8f8">,</span> <span style="color: #d14">"updated_at"</span> <span style="color: #008080">FROM</span> <span style="color: #d14">"books"</span> <span style="color: #008080">WHERE</span> <span style="background-color: #f8f8f8">(</span><span style="color: #d14">"book"</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #d14">"id"</span> <span style="color: #000000;font-weight: bold">=</span> <span style="color: #d14">'1'</span><span style="background-color: #f8f8f8">)</span> <span style="color: #008080">ORDER</span> <span style="color: #008080">BY</span> <span style="color: #d14">"books"</span><span style="color: #000000;font-weight: bold">.</span><span style="color: #d14">"id"</span>
+</code></pre>
+
+<p>For the production environment, the default format is <strong>JSON</strong> instead.
+JSON is parseable and more machine-oriented. It works great with log aggregators or SaaS logging products.</p>
+<pre class="highlight json"><code><span style="background-color: #f8f8f8">{</span><span style="color: #000080">"app"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"bookshelf"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"severity"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"INFO"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"time"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"2017-02-10T22:31:51Z"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"http"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"HTTP/1.1"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"verb"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"GET"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"status"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"200"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"ip"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"127.0.0.1"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"path"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"/books/1"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"query"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">""</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"length"</span><span style="background-color: #f8f8f8">:</span><span style="color: #d14">"451"</span><span style="background-color: #f8f8f8">,</span><span style="color: #000080">"elapsed"</span><span style="background-color: #f8f8f8">:</span><span style="color: #009999">0.000391478</span><span style="background-color: #f8f8f8">}</span><span style="color: #bbbbbb">
+</span></code></pre>
+
+<p>Migrations will print on standard output the operations applied to the database schema.</p>
+<pre class="highlight shell"><code>➜ bundle <span style="color: #0086B3">exec </span>hanami db migrate
+
+<span style="color: #000000;font-weight: bold">[</span>hanami] <span style="color: #000000;font-weight: bold">[</span>INFO] Begin applying migration 20170213123250_create_books.rb, direction: up
+<span style="color: #000000;font-weight: bold">[</span>hanami] <span style="color: #000000;font-weight: bold">[</span>INFO] <span style="color: #000000;font-weight: bold">(</span>0.001756s<span style="color: #000000;font-weight: bold">)</span> CREATE TABLE <span style="color: #d14">`</span>books<span style="color: #d14">`</span> <span style="color: #000000;font-weight: bold">(</span><span style="color: #d14">`</span>id<span style="color: #d14">`</span> integer NOT NULL PRIMARY KEY AUTOINCREMENT, <span style="color: #d14">`</span>name<span style="color: #d14">`</span> varchar<span style="color: #000000;font-weight: bold">(</span>255<span style="color: #000000;font-weight: bold">)</span> NOT NULL, <span style="color: #d14">`</span>created_at<span style="color: #d14">`</span> timestamp NOT NULL, <span style="color: #d14">`</span>updated_at<span style="color: #d14">`</span> timestamp NOT NULL<span style="color: #000000;font-weight: bold">)</span>
+<span style="color: #000000;font-weight: bold">[</span>hanami] <span style="color: #000000;font-weight: bold">[</span>INFO] <span style="color: #000000;font-weight: bold">(</span>0.001738s<span style="color: #000000;font-weight: bold">)</span> INSERT INTO <span style="color: #d14">`</span>schema_migrations<span style="color: #d14">`</span> <span style="color: #000000;font-weight: bold">(</span><span style="color: #d14">`</span>filename<span style="color: #d14">`</span><span style="color: #000000;font-weight: bold">)</span> VALUES <span style="color: #000000;font-weight: bold">(</span><span style="color: #d14">'20170213123250_create_books.rb'</span><span style="color: #000000;font-weight: bold">)</span>
+<span style="color: #000000;font-weight: bold">[</span>hanami] <span style="color: #000000;font-weight: bold">[</span>INFO] Finished applying migration 20170213123250_create_books.rb, direction: up, took 0.004091 seconds
+</code></pre>
+
+      <h3 id="improved-model-generator" class="title"><a name="improved-model-generator" class="anchor" href="#improved-model-generator">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Improved Model Generator</h3>
+    
+<p>The model generator now creates a migration file for a given entity.</p>
+<pre class="highlight shell"><code>➜ bundle <span style="color: #0086B3">exec </span>hanami generate model book
+      create  lib/bookshelf/entities/book.rb
+      create  lib/bookshelf/repositories/book_repository.rb
+      create  db/migrations/20170213123250_create_books.rb
+      create  spec/bookshelf/entities/book_spec.rb
+      create  spec/bookshelf/repositories/book_repository_spec.rb
+</code></pre>
+
+<p>It generates an entity with the corresponding repository, migration, and testing code.</p>
+
+<p>The migration will already contain the code for the creation of the table, the primary key and the timestamps:</p>
+<pre class="highlight ruby"><code><span style="color: #999988;font-style: italic"># db/migrations/20170213123250_create_books.rb</span>
+<span style="color: #008080">Hanami</span><span style="color: #000000;font-weight: bold">::</span><span style="color: #008080">Model</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">migration</span> <span style="color: #000000;font-weight: bold">do</span>
+  <span style="background-color: #f8f8f8">change</span> <span style="color: #000000;font-weight: bold">do</span>
+    <span style="background-color: #f8f8f8">create_table</span> <span style="color: #990073">:books</span> <span style="color: #000000;font-weight: bold">do</span>
+      <span style="background-color: #f8f8f8">primary_key</span> <span style="color: #990073">:id</span>
+
+      <span style="background-color: #f8f8f8">column</span> <span style="color: #990073">:created_at</span><span style="background-color: #f8f8f8">,</span> <span style="color: #008080">DateTime</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">null: </span><span style="color: #000000;font-weight: bold">false</span>
+      <span style="background-color: #f8f8f8">column</span> <span style="color: #990073">:updated_at</span><span style="background-color: #f8f8f8">,</span> <span style="color: #008080">DateTime</span><span style="background-color: #f8f8f8">,</span> <span style="color: #990073">null: </span><span style="color: #000000;font-weight: bold">false</span>
+    <span style="color: #000000;font-weight: bold">end</span>
+  <span style="color: #000000;font-weight: bold">end</span>
+<span style="color: #000000;font-weight: bold">end</span>
+</code></pre>
+
+      <h3 id="-code-config-boot-rb-code-" class="title"><a name="-code-config-boot-rb-code-" class="anchor" href="#-code-config-boot-rb-code-">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a><code>config/boot.rb</code></h3>
+    
+<p>New projects will be generated with a new file: <code>config/boot.rb</code></p>
+<pre class="highlight ruby"><code><span style="color: #0086B3">require_relative</span> <span style="color: #d14">'./environment'</span>
+<span style="color: #008080">Hanami</span><span style="background-color: #f8f8f8">.</span><span style="color: #990000;font-weight: bold">boot</span>
+</code></pre>
+
+<p>This is useful to boot a Hanami project <strong>outside of</strong> the server or the console.
+A typical use case is <a href="http://sidekiq.org">Sidekiq</a>.
+If you want to run background jobs with this queue, you can start the process with:</p>
+<pre class="highlight shell"><code>bundle <span style="color: #0086B3">exec </span>sidekiq -r ./config/boot.rb
+</code></pre>
+
+      <h3 id="minor-changes" class="title"><a name="minor-changes" class="anchor" href="#minor-changes">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Minor Changes</h3>
+    
+<p>For the entire list of changes, please have a look at our <a href="https://github.com/hanami/hanami/blob/master/CHANGELOG.md">CHANGELOG</a> and <a href="https://github.com/hanami/hanami/blob/master/FEATURES.md">features list</a>.</p>
+
+      <h2 id="released-gems" class="title"><a name="released-gems" class="anchor" href="#released-gems">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Released Gems</h2>
+    
+<ul>
+<li><code>hanami-1.0.0.beta1</code></li>
+<li><code>hanami-model-1.0.0.beta1</code></li>
+<li><code>hamami-controller-1.0.0.beta1</code></li>
+<li><code>hanami-assets-1.0.0.beta1</code></li>
+<li><code>hanami-mailer-1.0.0.beta1</code></li>
+<li><code>hanami-helpers-1.0.0.beta1</code></li>
+<li><code>hanami-view-1.0.0.beta1</code></li>
+<li><code>hanami-validations-1.0.0.beta1</code></li>
+<li><code>hanami-router-1.0.0.beta1</code></li>
+<li><code>hanami-utils-1.0.0.beta1</code></li>
+</ul>
+
+      <h2 id="contributors" class="title"><a name="contributors" class="anchor" href="#contributors">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>Contributors</h2>
+    
+<p>We&#39;re grateful for each person who contributed to this release. These lovely people are:</p>
+
+<ul>
+<li><a href="https://github.com/aemadrid">Adrian Madrid</a></li>
+<li><a href="https://github.com/AlfonsoUceda">Alfonso Uceda</a></li>
+<li><a href="https://github.com/AMHOL">Andy Holland</a></li>
+<li><a href="https://github.com/bhanuone">Bhanu Prakash</a></li>
+<li><a href="https://github.com/gizotti">Gabriel Gizotti</a></li>
+<li><a href="https://github.com/igneus">Jakub Pavlík</a></li>
+<li><a href="https://github.com/kaikuchn">Kai Kuchenbecker</a></li>
+<li><a href="https://github.com/ksenia-zalesnaya">Ksenia Zalesnaya</a></li>
+<li><a href="https://github.com/vyper">Leonardo Saraiva</a></li>
+<li><a href="https://github.com/beauby">Lucas Hosseini</a></li>
+<li><a href="https://github.com/mereghost">Marcello Rocha</a></li>
+<li><a href="https://github.com/TiteiKo">Marion Duprey</a></li>
+<li><a href="https://github.com/marionschleifer">Marion Schleifer</a></li>
+<li><a href="https://github.com/matiasleidemer">Matias H. Leidemer</a></li>
+<li><a href="https://github.com/mgrachev">Mikhail Grachev</a></li>
+<li><a href="https://github.com/rowlando">Nick Rowlands</a></li>
+<li><a href="https://github.com/flash-gordon">Nikita Shilnikov</a></li>
+<li><a href="https://github.com/oana-sipos">Oana Sipos</a></li>
+<li><a href="https://github.com/sakuro">Ozawa Sakuro</a></li>
+<li><a href="https://github.com/pascalbetz">Pascal Betz</a></li>
+<li><a href="https://github.com/parndt">Philip Arndt</a></li>
+<li><a href="https://github.com/solnic">Piotr Solnica</a></li>
+<li><a href="https://github.com/artofhuman">Semyon Pupkov</a></li>
+<li><a href="https://github.com/thhermansen">Thorbjørn Hermansen</a></li>
+<li><a href="https://github.com/tiagofsilva">Tiago Farias</a></li>
+<li><a href="https://github.com/docStonehenge">Victor Franco</a></li>
+<li><a href="https://github.com/vladra">Vladimir Dralo</a></li>
+<li><a href="https://github.com/alexd16">alexd16</a></li>
+<li><a href="https://github.com/b264">b264</a></li>
+<li><a href="https://github.com/yjukaku">yjukaku</a></li>
+</ul>
+
+      <h2 id="how-to-update-your-project" class="title"><a name="how-to-update-your-project" class="anchor" href="#how-to-update-your-project">      <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+      <path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path>
+      </svg>
+</a>How To Update Your Project</h2>
+    
+<p>If you&#39;re upgrading you project from <code>v0.9</code>, please have a look at the related <a href="/guides/upgrade-notes/v100beta1">upgrade guide article</a>.</p>
+
+            </div>
+
+           <hr>
+
+           <a href="https://github.com/hanami/hanami" title="Star on GitHub" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-github"></span>
+             Star
+           </a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2017%2F02%2F14%2Fannouncing-hanami-100beta1%2F" title="Like on Facebook" class="btn btn-default-outline" target="_blank">
+             <span class="icon icon-thumbs-up"></span>
+             Like
+           </a>
+           <a href="https://twitter.com/home?status=Announcing+Hanami+v1.0.0.beta1+-+http%3A%2F%2Fhanamirb.org%2Fblog%2F2017%2F02%2F14%2Fannouncing-hanami-100beta1%2F+%2Fvia+%40hanamirb+%23hanamirb" title="Share on Twitter" target="_blank" class="btn btn-default-outline">
+             <span class="icon icon-twitter"></span>
+             Tweet
+           </a>
+           <a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fhanamirb.org%2Fblog%2F2017%2F02%2F14%2Fannouncing-hanami-100beta1%2F&t=Announcing Hanami v1.0.0.beta1" class="btn btn-default-outline" title="Vote on HackerNews">
+             <span class="icon"><strong>HN</strong></span>
+             Vote
+           </a>
+            <a href="http://www.reddit.com/submit?url=http%3A%2F%2Fhanamirb.org%2Fblog%2F2017%2F02%2F14%2Fannouncing-hanami-100beta1%2F" target="_blank" title="Share on Reddit" class="btn btn-default-outline">
+             <span class="icon"><strong>R</strong></span>
+             Share
+            </a>
+
+            <br>
+            <br>
+
+            <div class="block block-bordered-lg text-center">
+  <div class="container-fluid">
+    <p class="lead m-b-md">
+    Join a community of over 2,300+ developers.
+    </p>
+    <form action="https://hanamirb.us3.list-manage.com/subscribe/post" method="POST" class="form-inline">
+      <input name="u" value="dcbeefa4ba1ea9ae043857005" type="hidden">
+      <input name="id" value="fb3873a90f" type="hidden">
+      <input name="orig-lang" value="1" type="hidden">
+      <input type="email" class="form-control m-b" placeholder="Email Address" spellcheck="false" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" value="">
+      <button class="btn btn-primary m-b">Subscribe</button>
+    </form>
+    <small class="text-muted">
+      By clicking "Subscribe" I want to subscribe to Hanami mailing list.
+    </small>
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lotus" class="text-xs-center">
+  <div class="container">
+    <div class="row">
+      Looking for <strong>Lotus</strong>? We renamed the project and it's now called <strong>Hanami</strong>. Read the <a href="/blog/2016/01/22/lotus-is-now-hanami">announcement</a>.
+    </div>
+  </div>
+</div>
+
+
+<div class="block app-block-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Project</h6></li>
+          <li><a href="https://github.com/hanami" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/hanamirb" target="_blank">Twitter</a></li>
+          <li><a href="https://rubygems.org/gems/hanami" target="_blank">Rubygems</a></li>
+          <li><a href="/status">Gems Status</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/security">Security</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="https://guides.hanamirb.org/" target="_blank">Guides</a></li>
+          <li><a href="https://docs.hanamirb.org/" target="_blank">Docs</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <li><h6 class="text-uppercase">Community</h6></li>
+          <li><a href="/community#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="http://chat.hanamirb.org" target="_blank">Chat</a></li>
+          <li><a href="https://discourse.hanamirb.org" target="_blank">Forum</a></li>
+          <li><a href="https://stackoverflow.com/questions/tagged/hanami" target="_blank">StackOverflow</a></li>
+          <li><a href="/mailing-list">Mailing List</a></li>
+          <li><a href="http://awesome-hanami.org" target="_blank">Awesome List</a></li>
+          <li><a href="https://www.reddit.com/r/hanamirb/" target="_blank">Reddit</a></li>
+          <li><a href="http://contributors.hanamirb.org" target="_blank">Contributors</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 m-b">
+        <ul class="list-unstyled list-spaced">
+          <a href="http://dnsimple.link/resolving-hanami" target="_blank">
+            <span>Resolving with<br/></span>
+            <img src="https://cdn.dnsimple.com/assets/resolving-with-us/logo-dark.png" alt="DNSimple" style="display:block;margin:0;padding:0;width:100px;" loading="lazy"/>
+          </a>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h6 class="text-uppercase">About</h6>
+        <p>
+          Hanami is a web framework for Ruby &mdash; &copy; 2014-2021 <a href="http://lucaguidi.com" target="_blank">Luca Guidi</a>.<br>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+          <br><br>
+          This project was formerly known as <strong>Lotus</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="/javascripts/toolkit.js" type="text/javascript"></script>
+<script src="/javascripts/application.js" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47369640-1', 'hanamirb.org');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = { room: 'hanami/chat' };
+</script>
+<script src="//sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+  </body>
+</html>
