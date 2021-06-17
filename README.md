@@ -35,6 +35,4 @@ invoke without `./`
 
 ## Production deployment
 
-The deployment is automated with Travis CI. Upon merging PR into `build` branch, deployment script is invoked.
-
-For more details, please consult `.travis.yml` file.
+The deployment is automated with Netifly.
