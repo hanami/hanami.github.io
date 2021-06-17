@@ -50,7 +50,7 @@ puts result.success? # => false
 puts result.errors.to_h # => {:age=>["must be greater than 18"]}
 ```
 
-See more examples in the [`README`](https://github.com/hanami/validations/blob/unstable/README.md) and [`dry-validation` documentation](https://dry-rb.org/gems/dry-validation/)
+See more examples in the [`README`](https://github.com/hanami/validations/blob/main/README.md) and [`dry-validation` documentation](https://dry-rb.org/gems/dry-validation/)
 
 The old `Hanami::Validation` mixin is still present for backwards compatibility.
 
