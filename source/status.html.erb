@@ -2,21 +2,21 @@
 title: Status
 ---
 
-<p>Hanami ecosystem consists of many different gems.</p>
+<h2>Hanami stable and development status</h2>
 
-<p>With so many projects, it can be difficult to keep up on the status
-of each one. Below is a break-down for each part of Hanami, the current
-stable released version, the build status for <tt>master</tt>, <tt>develop</tt>, and <tt>unstable</tt> branches.</p>
+<hr>
+
+<h3>Main Hanami Ruby gems</h3>
 
 <table class="status">
   <tr>
-    <th>Project</th>
-    <th>Stable (1.3.x) </th>
-    <th>Master (1.3.x) </th>
-    <th>Develop (1.3.x) </th>
-    <th>Unstable (2.0.x) </th>
-    <th>Ready for 2.0</th>
+    <th>Ruby gem</th>
+    <th>Stable gem version (Hanami 1)</th>
+    <th>Stable CI build (Hanami 1)</th>
+    <th>Development CI build (Hanami 2)</th>
+    <th>Ready for Hanami 2?</th>
   </tr>
+
   <tr>
     <td>
       <a href="http://github.com/hanami/hanami">
@@ -27,23 +27,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami">
         <img src="https://badge.fury.io/rb/hanami.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/hanami/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/hanami/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/hanami/actions?query=workflow%3Aci+branch%3master">
-        <img src="https://github.com/hanami/hanami/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/hanami/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/hanami/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/hanami/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/hanami/workflows/ci/badge.svg?branch=unstable">
+      <a href="https://github.com/hanami/hanami/actions?query=workflow%3Aci+branch%3main">
+        <img src="https://github.com/hanami/hanami/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-wip">
@@ -53,29 +45,25 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
 
   <tr>
     <td>
-      <a href="http://github.com/hanami/api">
-        API
+      <a href="http://github.com/hanami/cli">
+        CLI
       </a>
     </td>
     <td>
-      <a href="http://badge.fury.io/rb/hanami-api">
-        <img src="https://badge.fury.io/rb/hanami-api.svg">
-      </a>
-      -
-    </td>
-    <td>
-      <a href="https://github.com/hanami/api/actions?query=workflow%3Aci+branch%3master">
-        <img src="https://github.com/hanami/api/workflows/ci/badge.svg?branch=master">
+      <a href="http://badge.fury.io/rb/hanami-cli">
+        <img src="https://badge.fury.io/rb/hanami-cli.svg">
       </a>
     </td>
     <td>
       -
     </td>
     <td>
-      -
+      <a href="https://github.com/hanami/hanami/actions?query=workflow%3Aci+branch%3main">
+        <img src="https://github.com/hanami/hanami/workflows/ci/badge.svg?branch=main">
+      </a>
     </td>
-    <td class="status-hanami-2-yes">
-      Yes
+    <td class="status-hanami-2-wip">
+      Work In Progress
     </td>
   </tr>
 
@@ -89,24 +77,14 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-model">
         <img src="https://badge.fury.io/rb/hanami-model.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/model/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/model/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/model/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/model/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/model/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/model/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/model/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/model/workflows/ci/badge.svg?branch=unstable">
-      </a>
+      -
     </td>
     <td class="status-hanami-2-na">
       N/A (deprecated in favor of ROM)
@@ -123,23 +101,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-assets">
         <img src="https://badge.fury.io/rb/hanami-assets.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/assets/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/assets/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/assets/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/assets/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/assets/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/assets/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/assets/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/assets/workflows/ci/badge.svg?branch=unstable">
+      <a href="https://github.com/hanami/assets/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/assets/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-no">
@@ -157,23 +127,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-mailer">
         <img src="https://badge.fury.io/rb/hanami-mailer.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/mailer/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/mailer/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/mailer/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/mailer/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/mailer/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/mailer/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/mailer/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/mailer/workflows/ci/badge.svg?branch=unstable">
+      <a href="https://github.com/hanami/mailer/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/mailer/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-yes">
@@ -191,23 +153,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-helpers">
         <img src="https://badge.fury.io/rb/hanami-helpers.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/helpers/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/helpers/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/helpers/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/helpers/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/helpers/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/helpers/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/helpers/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/helpers/workflows/ci/badge.svg?branch=unstable">
+      <a href="https://github.com/hanami/helpers/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/helpers/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-wip">
@@ -225,23 +179,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-view">
         <img src="https://badge.fury.io/rb/hanami-view.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/views/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/view/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/views/actions?query=workflow%3Aci+branch%3A1.x-master">
-        <img src="https://github.com/hanami/view/workflows/ci/badge.svg?branch=1.x-master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/views/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/view/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/views/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/view/workflows/ci/badge.svg?branch=master">
+      <a href="https://github.com/hanami/views/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/view/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-wip">
@@ -259,23 +205,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-controller">
         <img src="https://badge.fury.io/rb/hanami-controller.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/controller/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/controller/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/controller/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/controller/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/controller/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/controller/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/controller/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/controller/workflows/ci/badge.svg?branch=unstable">
+      <a href="https://github.com/hanami/controller/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/controller/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-wip">
@@ -293,23 +231,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-router">
         <img src="https://badge.fury.io/rb/hanami-router.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/router/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/router/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/router/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/router/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/router/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/router/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/router/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/router/workflows/ci/badge.svg?branch=unstable">
+      <a href="https://github.com/hanami/router/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/router/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-wip">
@@ -327,23 +257,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-validations">
         <img src="https://badge.fury.io/rb/hanami-validations.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/validations/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/validations/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/validations/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/validations/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/validations/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/validations/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/validations/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/validations/workflows/ci/badge.svg?branch=unstable">
+      <a href="https://github.com/hanami/validations/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/validations/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-yes">
@@ -361,23 +283,15 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
       <a href="http://badge.fury.io/rb/hanami-utils">
         <img src="https://badge.fury.io/rb/hanami-utils.svg">
       </a>
+    </td>
+    <td>
       <a href="https://github.com/hanami/utils/actions?query=workflow%3Aci+branch%3A1.3.x">
         <img src="https://github.com/hanami/utils/workflows/ci/badge.svg?branch=1.3.x">
       </a>
     </td>
     <td>
-      <a href="https://github.com/hanami/utils/actions?query=workflow%3Aci+branch%3Amaster">
-        <img src="https://github.com/hanami/utils/workflows/ci/badge.svg?branch=master">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/utils/actions?query=workflow%3Aci+branch%3Adevelop">
-        <img src="https://github.com/hanami/utils/workflows/ci/badge.svg?branch=develop">
-      </a>
-    </td>
-    <td>
-      <a href="https://github.com/hanami/utils/actions?query=workflow%3Aci+branch%3Aunstable">
-        <img src="https://github.com/hanami/utils/workflows/ci/badge.svg?branch=unstable">
+      <a href="https://github.com/hanami/utils/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/utils/workflows/ci/badge.svg?branch=main">
       </a>
     </td>
     <td class="status-hanami-2-yes">
@@ -386,3 +300,129 @@ stable released version, the build status for <tt>master</tt>, <tt>develop</tt>,
   </tr>
 </table>
 
+<hr>
+
+<h3>Other Hanami Ruby gems</h3>
+
+<table class="status">
+  <tr>
+    <th>Ruby gem</th>
+    <th>Stable gem version</th>
+    <th>Stable CI build</th>
+    <th>Development CI build</th>
+  </tr>
+
+  <tr>
+    <td>
+      <a href="http://github.com/hanami/api">
+        API
+      </a>
+    </td>
+    <td>
+      <a href="http://badge.fury.io/rb/hanami-api">
+        <img src="https://badge.fury.io/rb/hanami-api.svg">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/hanami/api/actions?query=workflow%3Aci+branch%3A0.2.x">
+        <img src="https://github.com/hanami/api/workflows/ci/badge.svg?branch=0.2.x">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/hanami/api/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/api/workflows/ci/badge.svg?branch=main">
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <a href="http://github.com/hanami/webconsole">
+        Webconsole
+      </a>
+    </td>
+    <td>
+      <a href="http://badge.fury.io/rb/hanami-webconsole">
+        <img src="https://badge.fury.io/rb/hanami-webconsole.svg">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/hanami/webconsole/actions?query=workflow%3Aci+branch%3A0.1.x">
+        <img src="https://github.com/hanami/webconsole/workflows/ci/badge.svg?branch=0.1.x">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/hanami/webconsole/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/webconsole/workflows/ci/badge.svg?branch=main">
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <a href="http://github.com/hanami/reloader">
+        Reloader
+      </a>
+    </td>
+    <td>
+      <a href="http://badge.fury.io/rb/hanami-reloader">
+        <img src="https://badge.fury.io/rb/hanami-reloader.svg">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/hanami/reloader/actions?query=workflow%3Aci+branch%3A0.3.x">
+        <img src="https://github.com/hanami/reloader/workflows/ci/badge.svg?branch=0.3.x">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/hanami/reloader/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/reloader/workflows/ci/badge.svg?branch=main">
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <a href="http://github.com/hanami/rspec">
+        RSpec
+      </a>
+    </td>
+    <td>
+      <a href="http://badge.fury.io/rb/hanami-rspec">
+        <img src="https://badge.fury.io/rb/hanami-rspec.svg">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/hanami/rspec/actions?query=workflow%3Aci+branch%3A3.10.x">
+        <img src="https://github.com/hanami/rspec/workflows/ci/badge.svg?branch=3.10.x">
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/hanami/rspec/actions?query=workflow%3Aci+branch%3Amain">
+        <img src="https://github.com/hanami/rspec/workflows/ci/badge.svg?branch=main">
+      </a>
+    </td>
+  </tr>
+
+</table>
+
+<hr>
+
+<h2>Git branches</h2>
+
+<h3>Development: <code>main</code></h3>
+<p><strong>The default Git branch for Hanami repositories is <code>main</code></strong>.<br>
+It is the base branch for <strong>future releases</strong>.<br>
+<strong>New features must be merged there</strong>.<br>
+<strong>New gem pre-releases must happen from <code>main</code></strong>.<br>
+Once a gem is released as stable, create a stable branch counterpart.</p>
+
+Example: a new feature for Hanami 2, must be branched from <code>main</code> and merged in <code>main</code>.
+
+<hr>
+
+<h3>Stable: <code>Major.Minor.x</code> (e.g. <code>1.3.x</code>)</h3>
+<p><strong>Maintenance code of stable versions must be merged in these branches.</strong><br>
+<strong>New gem releases must happen from these branches</strong>.</p>
+
+Example: a bug fix for Hanami 1, must be branched from <code>1.3.x</code> and merged into <code>1.3.x</code>.
