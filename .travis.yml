@@ -19,6 +19,6 @@ deploy:
   skip-cleanup: true
   github-token: $GH_TOKEN
   keep-history: false
-  target-branch: master
+  target-branch: publish
   on:
     branch: build
