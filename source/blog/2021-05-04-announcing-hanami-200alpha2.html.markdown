@@ -209,7 +209,7 @@ module MyApp
 end
 ```
 
-With this, the slices themslves form their own clear graph of your application’s high-level functionality.
+With this, the slices themselves form their own clear graph of your application’s high-level functionality.
 
 While the slices are already incredibly powerful thanks to the built-in features of the container, we’ll be spending future release cycles bolstering these even further, such as making it possible to load slices conditionally.
 
