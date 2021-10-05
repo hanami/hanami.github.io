@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Git
+        run: git config --global build && git config --global user.email "admin@hanamirb.org" && git config --global user.name "Hanami GitHub Actions"
       - name: Set up Ruby
         uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
         with:
           bundler-cache: true
-      - name: Install dependencies
-        run: bundle install
       - name: Publish website
         run: bin/site publish
