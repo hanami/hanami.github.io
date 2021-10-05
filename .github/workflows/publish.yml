@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Set up Git
         run: |
           git config --global init.defaultBranch build
@@ -17,6 +19,5 @@ jobs:
         uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
         with:
           bundler-cache: true
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Publish website
         run: bin/site publish
