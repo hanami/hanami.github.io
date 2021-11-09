@@ -1,6 +1,6 @@
 ---
 title: Announcing Hanami v2.0.0.alpha3
-date: 2021-11-09 12:30:00 UTC
+date: 2021-11-09 13:30:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
