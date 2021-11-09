@@ -25,7 +25,6 @@ Usage:
 Available commands:
   develop - Start the local server to develop the site
   build   - Build the site locally
-  publish - Build the site locally and publish
   help    - Print this help
 ```
 
