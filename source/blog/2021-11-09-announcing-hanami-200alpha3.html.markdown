@@ -12,29 +12,31 @@ Hello Hanami community! It’s Tim here again, and I’m delighted to announce t
 
 This release represents months of work on several foundational aspects of the framework, and brings:
 
-- Streamlined source directories for easier-to-navigate project file trees
-- Reworked application settings, leveraging a regular Ruby class to give you full flexibility with your setting definitions
-- Reworked application routes, to match the above
-- Improvements to view rendering within actions
-- Framework settings ported to dry-configurable
+- Shallow application source directories
+- Reworked application settings
+- Reworked application routes
+- Actions enhancements
+- Framework settings are now powered by dry-configurable
 
-## Streamlined source directories
+## Streamlined application directories
+
+**tl;dr** we simplified the source directory structures, `slices/main/lib/main/my_class.rb` will now be `slices/main/lib/my_class.rb`
 
 In our previous alpha release, we required you to structure your source files in a way that matched the typical Ruby conventions for loading from the `$LOAD_PATH`. So if you had a `main` slice, and a `Main::MyClass` component, it would need to be located at `slices/main/lib/main/my_class.rb`. This worked well enough, but it presented awkwardly deep directory trees with redundant names, especially given we expect all components defined within each slice to live within its own singular namespace anyway. This latter aspect was already made clear by the fact that we removed that redundant leading "main" from the component’s key, with it available from the slice as `Main::Slice["my_class"]`.
 
 So for this release, we made a major overhaul to our code loading to support our ideal source directory structure. Now in your `main` slice, your `Main::MyClass` component can be defined directly within it’s `lib/` directory, at `slices/main/lib/my_class.rb`, while still available from the slice as `Main::Slice["my_class"]`. This means one fewer directory to hop through, one less name to say when you’re communicating your source paths, and a much stronger signal that each slice should fully inhabit its own namespace.
 
-Along with this, we’ve created a new facility to support special categories of components to be kept in their own top-level directories. For this release, this is determined by `Hanami.application.config.component_dir_paths`, which defaults to `["actions", "repositories", "views"]`. This allows you to define an action like `Main::Actions::Posts::Index` in its own special directory, at `slices/main/lib/actions/posts/index.rb`, with the component accessible from the slice as `Main::Slice["actions.posts.index"]`.
+Along with this, you can now keep certain categories of components in their own top-level directories, including `actions/`, `repositories/`, and `views/`. With this, you can define an action like `Main::Actions::Posts::Index` in `slices/main/actions/posts/index.rb`, with the component accessible from the slice as `Main::Slice["actions.posts.index"]`.
 
-Together, these two changes should make finding and navigating both your slice’s business logic and its top-level entry points much easier.
+Together, these changes should make surveying and navigating both your slice’s business logic and its top-level entry points much easier.
 
-Given these changes rely heavily on our configured [Zeitwerk](https://github.com/fxn/zeitwerk) autoloader, we’ve decided to make the autoloader an always-on feature for Hanami 2. While we strive to make most things as configurable as possible behind the scenes, we now consider the autoloader a foundational pillar for the Hanami 2 experience.
+## Application no longer auto-registers components from `lib/`
 
-## Clarified application code loading
+As of this release, classes inside `lib/` (unlike `slices/`) no longer auto-register as application components.
 
-Along with the changes to code loading within slices, we’ve also updated the code loading strategy at the application level, for all the source files in your top-level `lib/` directory. As of this release, classes inside this directory will (unlike the slices) no longer auto-register as components. If you wish to register a component with the application, you should create a file in `config/boot/` like [the examples](https://github.com/hanami/hanami-2-application-template/blob/3ba7724a75272b61d52d628bdbbb6f90416645dc/config/boot/assets.rb) in our current application template.
+If you wish to register a component with the application, you should create a file in `config/boot/` like [this example](https://github.com/hanami/hanami-2-application-template/blob/3ba7724a75272b61d52d628bdbbb6f90416645dc/config/boot/assets.rb) in our current application template.
 
-The idea with this change is to help ensure you minimize the coupling across the application overall. Components within the application are automatically imported into all slices (e.g. with the `Hanami.application["logger"]` also available as `Main::Slice["application.logger"]`), so the fewer application-wide components you carry, the better. In addition, Hanami gives you another option for more intentional sharing of behavior: more slices! If there’s a distinct subset of related components that you want to make accessible to numerous other slices, you should define them within their own slice, and import that wherever needed. You can currently achieve this like so (and we’ll be working to make it more ergonomic in future releases):
+The idea with this change is to help minimize the coupling across the application overall. Components within the application are automatically imported into all slices (e.g. with the `Hanami.application["logger"]` also available as `Main::Slice["application.logger"]`), so the fewer application-wide components you carry, the better. In addition, Hanami gives you another option for more intentional sharing of behavior: more slices! If there’s a distinct subset of related components that you want to make accessible to numerous other slices, you should define them within their own slice, and import that wherever needed. You can currently achieve this like so (and we’ll be working to make it more ergonomic in future releases):
 
 ```ruby
 module MyApp
@@ -126,9 +128,9 @@ end
 
 For now, switching from the anonymous block to the concrete class is the extent of the change, but we expect this will provide a useful hook for your own custom behavior in the future, too. Watch this space.
 
-## Various quality of life improvements to actions
+## Actions enhancements
 
-We have a small assortment of small but improvements to actions for this release:
+We have a assortment of small quality of life improvements to actions for this release:
 
 - Session behavior within actions is now automatically included whenever sessions are enabled via your application-level settings.
 - Automatic view rendering how now been moved out of the default implementation of `Hanami::Action#handle` method, which is the where we expect you to put your own custom logic. With this change, you’ll no longer need to call `super` if you want to keep the automatic view rendering behavior.
@@ -148,8 +150,6 @@ Today we’re releasing the following gems:
 - `hanami-controller` v2.0.0.alpha3
 - `hanami-utils` v2.0.0.alpha3
 
-(We’re not making a new hanami-router release, since it has had no changes, and if we can keep that up for another couple of months – more on that below – the alpha versions can all sync up, which would please me greatly!)
-
 ## How can I try it?
 
 You can check out our [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template), which is up to date for this latest release and ready for you to use out as the starting point for your own app.
@@ -158,6 +158,8 @@ We’d really love for you to give the tires a good kick for this release in thi
 
 ## What’s coming next?
 
-As of this alpha release, we believe we’ve now jumped the biggest hurdles in preparing the overall Hanami 2 structure. From this point forward, we’ll be making monthly alpha release, bringing together all the work from the month and making it easily accessible to you (along with high-level release notes like this on our blog). We’re excited to pick up the pace of development work and to round out the Hanami 2 vision with you along for the ride!
+As of this alpha release, we believe we’ve now jumped the biggest hurdles in preparing the overall Hanami 2 structure.
+
+From this point forward, **we’ll be making monthly alpha releases**, bringing together all the work from the month and making it easily accessible to you, along with high-level release announcements like this one. We’re excited to pick up the pace of development from here, and to round out the Hanami 2 vision with you along for the ride!
 
 Thank you as ever for your support of Hanami! We can’t wait to hear from you about this release, and we’re looking forward to checking in with you again next month. 🙇🏻‍♂️🌸
