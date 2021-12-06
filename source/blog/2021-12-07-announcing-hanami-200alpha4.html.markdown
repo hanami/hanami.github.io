@@ -5,7 +5,7 @@ tags: announcements
 author: Luca Guidi
 image: true
 excerpt: >
-  Streamlined source directories, more flexible settings, better integrated actions, and the beginning of a monthly release cadence.
+  New API for Content Security Policy, Router helpers from actions, CLI enhancements.
 ---
 
 Hello Hanami community! We're thrilled to announce the release of Hanami 2.0.0.alpha4!
@@ -17,6 +17,7 @@ The template is essential for **you** to try Hanami 2, but also for **us** to sh
 
   * Content Security Policy (new API)
   * Router helpers to be accessible from actions
+  * CLI enhancements
 
 ## Content Security Policy
 
@@ -92,12 +93,21 @@ module Admin
 end
 ```
 
+## CLI enhancements
+
+Minor enhancements for the command line:
+
+  * Display a custom prompt when using IRB based console (consistent with PRY based console)
+  * Support `postgresql://` URL schemes (in addition to existing `postgres://` support) for `db` subcommands
+  * Ensure slice helper methods work in console (e.g. top-level `main` method will return `Main::Slice` if an app has a "main" slice defined)
+
 ## What’s included?
 
 Today we’re releasing the following gems:
 
 - `hanami` v2.0.0.alpha4
 - `hanami-controller` v2.0.0.alpha4
+- `hanami-cli` v2.0.0.alpha4
 
 ## How can I try it?
 
