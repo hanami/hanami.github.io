@@ -27,7 +27,7 @@ In Hanami 1 the public API to handle CSP was less than optimal.
 You had to deal with a string blob, with all the complexity of CSP keys and their values.
 That was error prone and – frankly – ugly to see.
 
-Let's start from the last concern: **you won't see CSP setting in newly generated applications**.
+Let's start from the last concern: **you won't see CSP setting in newly generated Hanami 2 applications**.
 Hanami has now defaults shipped with the framework that doesn't require to be generated with the apps.
 First problem solved. 😎
 
