@@ -21,7 +21,7 @@ The template is essential for **you** to try Hanami 2, but also for **us** to sh
 
 ## Content Security Policy
 
-We proudly share this story: Hanami was **the first Ruby framework** to ship with Content Security Policy (CSP) support.
+We proudly share this story: Hanami was **the first Ruby framework** to ship with [Content Security Policy (CSP)](https://en.wikipedia.org/wiki/Content_Security_Policy) support.
 
 In Hanami 1 the public API to handle CSP was less than optimal.
 You had to deal with a string blob, with all the complexity of CSP keys and their values.
