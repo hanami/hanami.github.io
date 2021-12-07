@@ -28,7 +28,7 @@ You had to deal with a string blob, with all the complexity of CSP keys and thei
 That was error prone and – frankly – ugly to see.
 
 Let's start from the last concern: **you won't see CSP setting in newly generated Hanami 2 applications**.
-Hanami has now defaults shipped with the framework that doesn't require to be generated with the apps.
+Hanami 2 now has a default CSP shipped with the framework, instead of generating it during application creation.
 First problem solved. 😎
 
 If you need to change a value, or turn off the feature, the [API is simplified](https://github.com/hanami/controller/pull/353).
