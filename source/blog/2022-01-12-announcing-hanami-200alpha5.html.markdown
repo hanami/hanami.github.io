@@ -201,6 +201,15 @@ Today we’re releasing the following gems:
 - `hanami-controller v2.0.0.alpha5`
 - `hanami-view v2.0.0.alpha5`
 
+## Contributors
+
+Thank you to these fine people for contributing to this release!
+
+- [Luca Guidi](https://github.com/jodosha)
+- [Marc Busqué](https://github.com/waiting-for-dev)
+- [Philip Arndt](https://github.com/parndt/)
+- [Tim Riley](https://github.com/timriley)
+
 ## How can I try it?
 
 You can check out our [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template), which is up to date for this release and ready for you to try as the starting point for your own app.
