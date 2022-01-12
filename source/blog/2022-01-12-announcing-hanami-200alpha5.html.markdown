@@ -13,7 +13,7 @@ Happy new year, Hanami community! To get 2022 started, we're excited to announce
 This release brings the last month of our work on Hanami 2.0 (with an extra week added for good measure, while we all returned from our end of year breaks). It includes:
 
 - Sensible default configuration for the application logger
-- Comprehensive `source_dirs` configuration
+- Comprehensive source dirs configuration (for advanced users)
 - Lazy router and Rack app initialization
 - Access to the application route helpers from the view context
 - RSS support in our default MIME type list
@@ -91,7 +91,7 @@ module MyApp
 end
 ```
 
-## Comprehensive `source_dirs` configuration
+## Comprehensive source dirs configuration (for advanced users)
 
 In the 2.0.0.alpha3 release, we introduced [streamlined source directories](/blog/2021/11/09/announcing-hanami-200alpha3/) for the Ruby source files within each slice. Just like we’re doing with our application logger, we ship a sensible default configuration out of the box. Now with alpha5, we’re introducing a new `config.source_dirs` setting that you can use to fully customise this configuration.
 
@@ -134,7 +134,7 @@ module MyApp
 end
 ```
 
-The `component_dirs` setting is provided by [dry-system’s](http://dry-rb.org/gems/dry-system/0.21/) own `Dry::System::Config::ComponentDirs`, so you can use this to configure every possible aspect of component loading as you require.
+The `config.source_dirs.component_dirs` setting is provided by [dry-system’s](http://dry-rb.org/gems/dry-system/0.21/) own `Dry::System::Config::ComponentDirs`, so you can use this to configure any aspect of component loading as you require.
 
 In addition to component dirs, you can also configure your own autoload paths, for source files you don’t want registered as components, but whose classes you still want to access inside your application. These directories are helpful for any classes that you will directly instantiate with their own data rather than dependencies, such as entities, structs, or any other kind of value class.
 
@@ -154,22 +154,26 @@ end
 
 ## Lazy router and Rack app initialization
 
-One of the most powerful features of Hanami 2 is your ability to partially boot the application, loading only the specific components you need to complete a particular task. This makes unit testing testing considerably faster, but it also opens up flexible deployment opportunities, such as optimising the performance of certain production workloads by only loading particular subsets of your application.
+One of the most powerful features of Hanami 2 is your ability to partially boot the application, loading only the specific components you need to complete a particular task. This makes testing testing considerably faster, but it also opens up flexible deployment opportunities, such as optimising the performance of certain production workloads by only loading particular subsets of your application.
 
-With this release, this flexibility has been extended to the application router and its Rack interface, which are now initialized lazily, allowing you to access the router and rack app even if your application has not fully booted. The rack app is now available as `.rack_app` on your application class, and can be accessed at any time after the initial "init" step:
+With this release, this flexibility has been extended to the application router and its Rack interface, which are now initialized lazily, allowing you to access the router and rack app even if your application has not fully booted. The rack app is now available as `.rack_app` on your application class, and can be accessed at any time after the application’s initial "init" step:
 
 ```ruby
 # Example config.ru
 
 # Loads the Hanami app at config/application.rb and runs Hanami.init
 #
-# n.b. this does _not_ fully boot the application, so most components are not loaded
+# n.b. this does _not_ fully boot the application, so most components are not
+# loaded, but routes are still accessible and their supporting components will
+# also be lazily loaded when required
 require "hanami/init"
 
 run Hanami.rack_app
 ```
 
-Access to the Rack app in this way opens up the possibility of a slimeline deployment of a your application configured to serve only a small subset of its overall routes. In this case, only the minimal subset of components will be loaded to serve the given routes. This may be helpful for fine-grained deployment to resource-constrained targets like serverless functions.
+Access to the Rack app in this way opens up the possibility of a slimline deployment of a your application configured to serve only a small subset of its overall routes. In this case, only the minimal subset of components will be loaded to serve the given routes. This may be helpful for fine-grained deployment to resource-constrained targets like serverless functions.
+
+Closer to home, this is also the first step towards faster code reloading when running the application in development mode. We’ll be working on this in future releases.
 
 ## Route helpers via the view context
 
@@ -193,13 +197,13 @@ You can now configure your Hanami actions to work with RSS formatted requests an
 
 Today we’re releasing the following gems:
 
-- hanami v2.0.0.alpha5
-- hanami-controller v2.0.0.alpha5
-- hanami-view v2.0.0.alpha5
+- `hanami v2.0.0.alpha5`
+- `hanami-controller v2.0.0.alpha5`
+- `hanami-view v2.0.0.alpha5`
 
 ## How can I try it?
 
-You can check out our [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template), which is up to date for this latest release and ready for you to use out as the starting point for your own app.
+You can check out our [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template), which is up to date for this release and ready for you to try as the starting point for your own app.
 
 ## What’s coming next?
 
