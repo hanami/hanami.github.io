@@ -154,7 +154,7 @@ end
 
 ## Lazy router and Rack app initialization
 
-One of the most powerful features of Hanami 2 is your ability to partially boot the application, loading only the specific components you need to complete a particular task. This makes testing testing considerably faster, but it also opens up flexible deployment opportunities, such as optimising the performance of certain production workloads by only loading particular subsets of your application.
+One of the most powerful features of Hanami 2 is your ability to partially boot the application, loading only the specific components you need to complete a particular task. This makes testing considerably faster, but it also opens up flexible deployment opportunities, such as optimising the performance of certain production workloads by only loading particular subsets of your application.
 
 With this release, this flexibility has been extended to the application router and its Rack interface, which are now initialized lazily, allowing you to access the router and rack app even if your application has not fully booted. The rack app is now available as `.rack_app` on your application class, and can be accessed at any time after the application’s initial "init" step:
 
