@@ -24,9 +24,9 @@ In our ongoing effort to strip boilerplate from our [application template](https
 
 The defaults are:
 
-- In **production**, log for level `info`, send logs to `$stdout` in JSON format without colours
-- In **development**, log for level `debug`, send logs to `$stdout` in single-line format with colours
-- In **test**, log for level `debug`, send logs to `log/test.log` in single-line format without colours
+- In **production**, log for level `info`, send logs to `$stdout` in JSON format without colors
+- In **development**, log for level `debug`, send logs to `$stdout` in single-line format with colors
+- In **test**, log for level `debug`, send logs to `log/test.log` in single-line format without colors
 
 These defaults mean we've now achieved sensible behavior for a zero-configuration Hanami application class:
 
@@ -41,7 +41,7 @@ module MyApp
 end
 ```
 
-You can customise the logger config as much as you need:
+You can customize the logger config as much as you need:
 
 ```ruby
 module MyApp
@@ -69,7 +69,7 @@ module MyApp
 end
 ```
 
-You can also customise the config specifically for given environments:
+You can also customize the config specifically for given environments:
 
 ```ruby
 module MyApp
@@ -93,7 +93,7 @@ end
 
 ## Comprehensive source dirs configuration (for advanced users)
 
-In the 2.0.0.alpha3 release, we introduced [streamlined source directories](/blog/2021/11/09/announcing-hanami-200alpha3/) for the Ruby source files within each slice. Just like we’re doing with our application logger, we ship a sensible default configuration out of the box. Now with alpha5, we’re introducing a new `config.source_dirs` setting that you can use to fully customise this configuration.
+In the 2.0.0.alpha3 release, we introduced [streamlined source directories](/blog/2021/11/09/announcing-hanami-200alpha3/) for the Ruby source files within each slice. Just like we’re doing with our application logger, we ship a sensible default configuration out of the box. Now with alpha5, we’re introducing a new `config.source_dirs` setting that you can use to fully customize this configuration.
 
 This will allow you to add and configure your own additional component dirs (which are the directories used to auto-register application components):
 
@@ -113,7 +113,7 @@ module MyApp
 end
 ```
 
-You can also customise the configuration of the default component dirs ("lib", "actions", "repositories", "views"):
+You can also customize the configuration of the default component dirs ("lib", "actions", "repositories", "views"):
 
 ```ruby
 module MyApp
