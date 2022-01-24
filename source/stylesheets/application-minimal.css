@@ -219,19 +219,27 @@ div.supporters {
   font-weight: 300;
 }
 
-#lotus, #hanami2 {
+#hanami2 {
   color: #fff;
   background-color: #685D9F;
-  line-height: 5em;
-  margin-top: 2em;
+  line-height: 2;
+  min-height: 4em;
+  padding: 1em;
 }
 
-#lotus a, #hanami2 a {
+
+@media (max-width: 768px) {
+  #hanami2 {
+    margin-top: 0;
+  }
+}
+
+#hanami2 a {
   color: #fff;
   text-decoration: underline;
 }
 
-#lotus a.anchor, #hanami2 a.anchor {
+#hanami2 a.anchor {
   text-decoration: none;
   position: relative;
   left: -20px;
@@ -239,7 +247,7 @@ div.supporters {
   opacity: 0;
 }
 
-#lotus:hover a.anchor, #hanami2:hover a.anchor {
+#hanami2:hover a.anchor {
   opacity: 1;
 }
 
