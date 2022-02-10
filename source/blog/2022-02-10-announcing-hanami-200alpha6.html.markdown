@@ -10,7 +10,7 @@ excerpt: >
 
 Hello Hanami community! We're thrilled to announce the release of Hanami 2.0.0.alpha6!
 
-With this new cycle of monthly based releases we have smaller set of changes, but delivered more frequently.
+With this new cycle of monthly based releases we have a smaller set of changes, but delivered more frequently.
 
 ## Hanami Container enhancements
 
@@ -21,7 +21,7 @@ Hanami 2 is modeled around dry-system, which powers the booting process and the 
 ### Providers
 
 First thing first, **we renamed _bootable compontents_ into _providers_**.
-This change was reflected into the public API.
+This change was reflected in the public API.
 
 We also renamed the provider `init` lifecycle step to `prepare`.
 
@@ -64,10 +64,10 @@ end
 
 ### Partial Slice Import/Export
 
-A Slice in your application can be used to provide a single responsility functionality.
-Imagine **like a microservices approach in your monolith**, but without the complexity!
+A Slice in your application can be used to provide a single responsibility functionality.
+You can think of it as having **microservices in your monolith** but without the complexity!
 
-For instance, the `search` Slice can expose the search functionalities to other slices.
+For instance, the `search` Slice can expose the search functionality to other slices.
 
 To ensure unwanted functionalities exports, you have the option of declaring which functionalities to export.
 Here's a few examples
@@ -157,10 +157,10 @@ Today we’re releasing the following gems:
 
 ## How can I try it?
 
-You can check out our [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template), which is up to date for this latest release and ready for you to use out as the starting point for your own app.
+You can check out our [Hanami 2 application template](https://github.com/hanami/hanami-2-application-template), which is up to date with this latest release and ready for you to use as the starting point for your own app.
 
-We’d really love for you to give the tires a good kick for this release in this particular: the more real-world testing we can have of our code loading changes, the better!
+We’d really love for you to give the tires a good kick for this release in particular: the more real-world testing we can have of our code loading changes, the better!
 
 ## What’s coming next?
 
-Thank you as ever for your support of Hanami! We can’t wait to hear from you about this release, and we’re looking forward to checking in with you again next month. 🙇🏻‍♂️🌸
+Thank you as always for supporting Hanami! We can’t wait to hear from you about this release, and we’re looking forward to checking in with you again next month. 🙇🏻‍♂️🌸
