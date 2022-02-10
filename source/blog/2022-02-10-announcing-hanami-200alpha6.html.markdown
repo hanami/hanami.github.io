@@ -1,6 +1,6 @@
 ---
 title: Announcing Hanami v2.0.0.alpha6
-date: 2022-02-08 09:28:14 UTC
+date: 2022-02-10 11:04:32 UTC
 tags: announcements
 author: Luca Guidi
 image: true
