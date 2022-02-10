@@ -16,26 +16,26 @@ With this new cycle of monthly based releases we have smaller set of changes, bu
 
 This month we focused mainly on the internals of the framework.
 The work that Tim Riley is doing is epic.
-Hanami 2 is modeled around `dry-system`, which powers the booting process and the dependencies of an app.
+Hanami 2 is modeled around dry-system, which powers the booting process and the dependencies of an app.
 
 ### Providers
 
 First thing first, **we renamed _bootable compontents_ into _providers_**.
 This change was reflected into the public API.
 
-We also changed provider `init` into `prepare`.
+We also renamed the provider `init` lifecycle step to `prepare`.
 
 ```ruby
 Hanami.application.register_provider(:metrics) do
   prepare do
     require "datadog/statsd"
-
-    # see application's config/settings.rb
-    @settings = settings.statsd
   end
 
   start do
-    register "metrics", Datadog::Statsd.new(@settings.host, @settings.port)
+    # See application's config/settings.rb
+    settings = target[:settings].statsd
+
+    register "metrics", Datadog::Statsd.new(settings.host, settings.port)
   end
 
   stop do
@@ -50,7 +50,7 @@ module API
   module Actions
     module Users
       class Create < API::Action
-        include Deps["metrics"]
+        include Deps["application.metrics"]
 
         def handle(req, res)
           # ...
