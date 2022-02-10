@@ -5,20 +5,132 @@ tags: announcements
 author: Luca Guidi
 image: true
 excerpt: >
-  [dry-system changes]. Ruby 3.0+ only.
+  Hanami Container Providers, Partial Slice Import/Export. Ruby 3.0+ only.
 ---
 
 Hello Hanami community! We're thrilled to announce the release of Hanami 2.0.0.alpha6!
 
 With this new cycle of monthly based releases we have smaller set of changes, but delivered more frequently.
 
-# [dry-system changes]
+## Hanami Container enhancements
 
 This month we focused mainly on the internals of the framework.
 The work that Tim Riley is doing is epic.
 Hanami 2 is modeled around `dry-system`, which powers the booting process and the dependencies of an app.
 
-[...]
+### Providers
+
+First thing first, **we renamed _bootable compontents_ into _providers_**.
+This change was reflected into the public API.
+
+We also changed provider `init` into `prepare`.
+
+```ruby
+Hanami.application.register_provider(:metrics) do
+  prepare do
+    require "datadog/statsd"
+
+    # see application's config/settings.rb
+    @settings = settings.statsd
+  end
+
+  start do
+    register "metrics", Datadog::Statsd.new(@settings.host, @settings.port)
+  end
+
+  stop do
+    # triggered when the application is shut down
+    metrics.close
+  end
+end
+```
+
+```ruby
+module API
+  module Actions
+    module Users
+      class Create < API::Action
+        include Deps["metrics"]
+
+        def handle(req, res)
+          # ...
+          metrics.increment("user.create")
+        end
+      end
+    end
+  end
+end
+```
+
+### Partial Slice Import/Export
+
+A Slice in your application can be used to provide a single responsility functionality.
+Imagine **like a microservices approach in your monolith**, but without the complexity!
+
+For instance, the `search` Slice can expose the search functionalities to other slices.
+
+To ensure unwanted functionalities exports, you have the option of declaring which functionalities to export.
+Here's a few examples
+
+Import from `search` slice, uses `search` as the imported key namespace:
+
+```ruby
+# config/application.rb
+
+module MyApp
+  class Application < Hanami::Application
+    config.slice(:admin) do
+      import(from: :search)
+    end
+  end
+end
+```
+
+Import from `search` slice with custom namespace:
+
+```ruby
+# config/application.rb
+
+module MyApp
+  class Application < Hanami::Application
+    config.slice(:admin) do
+      import(from: :search, as: :search_engine)
+    end
+  end
+end
+```
+
+Import specific keys from `search` slice
+
+```ruby
+# config/application.rb
+
+module MyApp
+  class Application < Hanami::Application
+    config.slice(:admin) do
+      import(keys: ["run_query"], from: :search)
+    end
+  end
+end
+```
+
+Export only specific keys from `search` slice, and import them in `admin`
+
+```ruby
+# config/application.rb
+
+module MyApp
+  class Application < Hanami::Application
+    config.slice(:admin) do
+      import(from: :search)
+    end
+
+    config.slice(:search) do
+      container.config.exports = %w[run_query index_item]
+    end
+  end
+end
+```
 
 ## Ruby 3.0+ only
 
