@@ -5,20 +5,18 @@ tags: announcements
 author: Luca Guidi
 image: true
 excerpt: >
-  Hanami Container Providers, Partial Slice Import/Export. Ruby 3.0+ only.
+  Hanami Providers, Partial Slice Import/Export. Ruby 3.0+ only.
 ---
 
 Hello Hanami community! We're thrilled to announce the release of Hanami 2.0.0.alpha6!
 
 With this new cycle of monthly based releases we have a smaller set of changes, but delivered more frequently.
 
-## Hanami Container enhancements
-
 This month we focused mainly on the internals of the framework.
 The work that Tim Riley is doing is epic.
 Hanami 2 is modeled around dry-system, which powers the booting process and the dependencies of an app.
 
-### Providers
+## Hanami Providers
 
 First thing first, **we renamed _bootable compontents_ into _providers_**.
 This change was reflected in the public API.
@@ -62,7 +60,9 @@ module API
 end
 ```
 
-### Partial Slice Import/Export
+Read more about Provider's changes in [CHANGELOG](https://github.com/hanami/hanami/blob/main/CHANGELOG.md#v200alpha6---2022-02-10).
+
+## Partial Slice Import/Export
 
 A Slice in your application can be used to provide a single responsibility functionality.
 You can think of it as having **microservices in your monolith** but without the complexity!
