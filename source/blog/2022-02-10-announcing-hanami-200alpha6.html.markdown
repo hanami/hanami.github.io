@@ -141,8 +141,7 @@ It didn't make sense to still support it.
 We want further than that, given the opportunity that we have with Hanami 2 to "start fresh" with the Ruby versions to support.
 We opted for taking 2.7 out as well.
 
-There are a few inconsistencies that have been fixed in Ruby 3.0.
-And we want to get advantage of those.
+There are a few inconsistencies that have been fixed in Ruby 3.0 and we want to take advantage of this.
 
 ## What’s included?
 
