@@ -141,7 +141,7 @@ Along with these changes, we’ve also streamlined the default view templates di
 Today we’re releasing the following gems:
 
 - `hanami` v2.0.0.alpha7
-- `hanami-view` v2.0.0.alpha6
+- `hanami-view` v2.0.0.alpha7
 
 ## Contributors
 
