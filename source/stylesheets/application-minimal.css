@@ -9,6 +9,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body, mark {
+  background: transparent;
+}
+
 .block {
  overflow: hidden;
 }
