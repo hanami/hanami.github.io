@@ -73,7 +73,7 @@ Thanks very much to our contributors, this release also includes a few small fix
 Today we’re releasing the following gems:
 
 - `hanami` v2.0.0.alpha8
-- `hanami-cli` v2.0.0.alpha8
+- `hanami-cli` v2.0.0.alpha8 (with a follow-up fix available in 2.0.0.alpha8.1)
 - `hanami-controller` v2.0.0.alpha8
 - `hanami-view` v2.0.0.alpha8
 
