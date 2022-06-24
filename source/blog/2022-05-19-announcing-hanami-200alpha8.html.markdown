@@ -19,7 +19,7 @@ This release includes new base classes for actions and views that integrate with
 ```ruby
 # lib/my_app/action/base.rb:
 
-require "hanami/application/view"
+require "hanami/application/action"
 
 module MyApp
   module Action
