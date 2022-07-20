@@ -96,8 +96,8 @@ For this release, things will look complete from a full stack web framework pers
 Today we’re releasing the following gems:
 
 - `hanami` v2.0.0.beta1
-- `hanami-cli` v2.0.0.beta1
 - `hanami-rspec` v3.11.0.beta1 (it follows RSpec’s versioning)
+- `hanami-cli` v2.0.0.beta1
 - `hanami-controller` v2.0.0.beta1
 - `hanami-router` v2.0.0.beta1
 - `hanami-validations` v2.0.0.beta1
