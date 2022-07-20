@@ -12,7 +12,7 @@ Hello Hanami community! We’re thrilled to announce the release of Hanami 2.0.0
 
 ## App-centric revolution
 
-With this release, we’ve revolutionized the Hanami app structure: the **`app/` directory is now the primary home for your code, and **slices are now optional\*\*.
+With this release, we’ve revolutionized the Hanami app structure: the **`app/` directory is the primary home for your code**, and **slices are now optional**.
 
 “What's a slice?,” you may ask! Think of slices as distinct modules of your application. A typical case is to use slices to separate your business domains (e.g. billing, accounting, admin). For our earlier 2.0 alpha releases, slices were the only way to build Hanami apps, which presupposed you wanted a full modular monolith composed of multiple domains.
 
