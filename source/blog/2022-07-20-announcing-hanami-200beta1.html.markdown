@@ -123,7 +123,7 @@ Thank you to these fine people for contributing to this release!
 - [Luca Guidi](https://github.com/jodosha)
 - [Marc Busqué](https://github.com/waiting-for-dev)
 - [Narinda Reeders](https://github.com/narinda)
-- [Peter Solnica](https://github.com/timriley)
+- [Peter Solnica](https://github.com/solnic)
 - [Tim Riley](https://github.com/timriley)
 
 ## Thank you
