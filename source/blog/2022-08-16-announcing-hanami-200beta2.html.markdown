@@ -58,7 +58,9 @@ end
 
 You can also populate this setting directly via an `HANAMI_SLICES` environment variable, using commas to separate the slice names, e.g. `HANAMI_SLICES=blog,shop`.
 
-Any slices not incuded in this list will be completely ignored: their slice class will not be loaded, nor any of their other Ruby source files; effectively, they will not exist. Specifying slices like this will improve boot time and minimize memory usage for specific workloads (imagine a job runner that needs only a single slice), as well as help ensure clean boundaries between your slices.
+Any slices not incuded in this list will be completely ignored: their slice class will not be loaded, nor any of their other Ruby source files; effectively, they will not exist.
+
+Specifying slices like this will **improve boot time and minimize memory usage** for specific workloads (imagine a job runner that needs only a single slice), as well as help ensure clean boundaries between your slices.
 
 ## What’s included?
 
