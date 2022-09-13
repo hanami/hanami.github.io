@@ -44,4 +44,5 @@ We appreciate your support!
   <a href="https://github.com/jasoncharnes">Jason Charnes</a>,
   <a href="https://github.com/hlegius">Hélio Costa (hlegius)</a>,
   <a href="https://github.com/RyanSacha">Ryan Sacha</a>
+  <a href="https://github.com/renuo">Renuo</a>
 </div>
