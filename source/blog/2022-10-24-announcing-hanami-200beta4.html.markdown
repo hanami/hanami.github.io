@@ -1,6 +1,6 @@
 ---
 title: Announcing Hanami v2.0.0.beta4
-date: 2022-10-24 12:15:00 UTC
+date: 2022-10-24 13:15:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
