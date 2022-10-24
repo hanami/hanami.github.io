@@ -12,11 +12,11 @@ Hello again, friends! We’re delighted to share the release of Hanami 2.0.0.bet
 
 ## Improved memory performance for Hanami::Action
 
-Hanami::Action plays a key role in Hanami 2.0 apps, powering each of your HTTP endpoints. For this release, we’ve made considerable improvements to the memory impact of subclassing Hanami::Action, with a memory reduction of over 5x for each subclass. This will help your Hanami apps retain a slim memory footprint even as they grow in size.
+Hanami::Action plays a key role in Hanami 2.0 apps, powering each of your HTTP endpoints. For this release we’ve made big improvements to the memory impact of subclassing Hanami::Action, with a memory reduction of over 5x for each subclass. This will help your Hanami apps retain a slim footprint even as they grow in size.
 
 ## Simplified body parser config
 
-hanami-router’s body parsers are the middleware that parse incoming request bodies to turn them into Ruby structures that you can use within your actions. With this release, configuring a body parser has become easier than ever. No more requires or class names, just provide the name for your parser:
+hanami-router’s body parsers are the middleware that parse incoming request bodies to turn them into Ruby structures that you can use within your actions. Now configuring a body parser has become easier than ever. No more requires or class names, just provide the name for your parser:
 
 ```ruby
 module MyApp
@@ -26,7 +26,7 @@ module MyApp
 end
 ```
 
-You can now also specify both custom action formats and matching body parser configuration in the same place:
+You can now also specify custom action formats and matching body parser configuration both in the same place:
 
 ```ruby
 module MyApp
@@ -39,19 +39,19 @@ end
 
 ## And a whole lot of polish!
 
-We’ve spent much of this release’s development cycle getting everyhing as tidy as possible. Here’s a few highlights:
+We’ve spent much of this release’s development cycle getting everything as tidy as possible. Here are a few highlights:
 
 - Added helpful output and help messages to all `hanami` CLI commands
-- `hanami generate` commands now generate tests for slice-based components under `spec/slices/[slice_name]/`
-- `Hanami::Settings` subclasses have a nested dry-types `Types` module auto-generated, for easy type-checking of settings
+- `hanami generate` now generates tests for slice-based components under `spec/slices/[slice_name]/`
+- `Hanami::Settings` subclasses have a nested dry-types `Types` module auto-generated, for easy type-checking of settings: refer to `Types` inside your settings class and it’ll just work!
 - `Hanami::Settings#inspect` hides values to prevent leakage of sensitive data, with `#inspect_values` as a way to see everything
-- `Hanami.app.configuration` is now `.config`, to better reflect usage in natural language
 - `request` and `response` objects inside Hanami::Action now share the same `session` and `flash` objects, ensuring all session changes are persisted regardless of how they’re made
 - Accessing `session` and `flash` now raise a helpful error message if sessions are not configured
+- `Hanami.app.configuration` is now `.config`, to better reflect usage in natural language
 
 ## 2.0.0 is coming!
 
-This is the last of our beta releases. From here, we expect to make the following two releases:
+This is the very last of our betas! From here, we expect to make two more releases:
 
 - A 2.0.0.rc1 release candidate in two weeks
 - The final 2.0.0 release in another two weeks
