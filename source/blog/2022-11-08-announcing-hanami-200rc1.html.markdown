@@ -19,7 +19,7 @@ Today’s Release Candidate (RC) 2.0.0.rc1 is hopefully the last step before we 
 We’ve spent much of this release’s development cycle getting everything as tidy as possible. Here are a few highlights:
 
 - Allow Rack middleware to be mounted directly inside routing scopes and slice scopes
-- Introduce `Hanami::App.environment` (and Hanami::Slice.environment) to run setup code inside a particular environment only
+- Introduce `Hanami::App.environment` (and `Hanami::Slice.environment`) to run setup code inside a particular environment only
 - Simplify assignment of response format: `response.format = :json` (was `response.format = format(:json)`)
 - Improve error messages for missing action class
 - Remove duplicated `config.sessions` in favor of `config.actions.sessions`
