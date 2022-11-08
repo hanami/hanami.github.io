@@ -5,7 +5,7 @@ tags: announcements
 author: Luca Guidi
 image: true
 excerpt: >
-  First Release Candidate! Preparing for stable release.
+  First Release Candidate! Preparing for the stable release, and sharing a preview of our updated guides.
 ---
 
 Hello, folks!
@@ -39,6 +39,14 @@ Since the last Hanami beta, we’ve released stable 1.0.0 versions of (almost) a
 This means that the Ruby ecosystem will soon have a complete set of modern, **stable** libraries and frameworks to build the next generation of applications.
 
 Between now and then, we need your help: please take the chance to test Hanami 2.0! Pull down this RC and give things a go, and let us know if you hit any issues.
+
+## User guide preview
+
+To help you with your testing, we’re very excited to share a preview of our
+[Hanami 2.0 Getting Started Guide](https://guides.hanamirb.org/v2.0/introduction/getting-started/)!
+
+This is still a work in progress, and we plan to finish it over the next two weeks. Many thanks to
+[Andrew Croome](http://github.com/andrewcroome) and [Seb Wilgosz](https://github.com/swilgosz) for putting this guide together.
 
 ## What’s included?
 
