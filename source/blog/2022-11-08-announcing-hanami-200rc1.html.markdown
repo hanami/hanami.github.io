@@ -21,7 +21,7 @@ We’ve spent much of this release’s development cycle getting everything as t
 - Allow Rack middleware to be mounted directly inside routing scopes and slice scopes
 - Introduce `Hanami::App.environment` (and `Hanami::Slice.environment`) to run setup code inside a particular environment only
 - Simplify assignment of response format: `response.format = :json` (was `response.format = format(:json)`)
-- Improve error messages for missing action class
+- Improve error messages for missing action classes
 - Remove duplicated `config.sessions` in favor of `config.actions.sessions`
 - Fix `hanami routes` inspection of nested named routes
 - Introduce `Hanami::Slice.stop` to properly shutdown all the application slices
