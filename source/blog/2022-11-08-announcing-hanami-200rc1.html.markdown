@@ -49,6 +49,7 @@ Today we’re releasing the following gems:
 - hanami-controller v2.0.0.rc1
 - hanami-router v2.0.0.rc1
 - hanami-validations v2.0.0.rc1
+- hanami-utils v2.0.0.rc1
 - hanami-reloader v2.0.0.rc1 (it now follows Hanami’s versioning)
 - hanami-rspec v2.0.0.rc1 (it now follows Hanami’s versioning)
 
