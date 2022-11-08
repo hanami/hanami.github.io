@@ -26,7 +26,7 @@ We’ve spent much of this release’s development cycle getting everything as t
 - Fix `hanami routes` inspection of nested named routes
 - Introduce `Hanami::Slice.stop` to properly shutdown the app and all slices
 - Expect/define nested slices to be within their parent’s namespace
-- Use Zeitwerk to auto-load the `hanami` gem’s internal classes
+- Use Zeitwerk to autoload the `hanami` gem’s internal classes
 - Remove `Hanami::Logger` from `hanami-utils` in favor of `Dry::Logger` from the new `dry-logger` new gem
 - Ensure `Hanami::Utils::String.underscore` replaces `"."` (dot character) to `"_"` (underscore)
 
