@@ -96,12 +96,12 @@ You can `include Deps` in any the classes in your Hanami app. Provide the keys f
 
 Behind the scenes, the Deps mixin creates an `#initialize` method that expects these dependencies as arguments, then provides the matching objects from your app as default values.
 
-This also makes isolated unit testing a breeze:
+This also makes isolated testing a breeze:
 
 ```ruby
 RSpec.describe MyApp::Emails::DailyUpdate do
   subject(:daily_update) {
-    # (Optionally) provide a test double to isolate email delivery in unit tests
+    # (Optionally) provide a test double to isolate email delivery in tests
     described_class.new(email_service: email_service)
   }
 
