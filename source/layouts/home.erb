@@ -166,22 +166,22 @@
 
                   <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="download">
-                      <pre class="language-ruby plaintext"><code># 🌸 Note: Hanami 1.3 only supports Ruby 2.7. We're actively working on Hanami 2, which will support Ruby 3+.
+                      <pre class="language-ruby plaintext"><code>
 <span class="command">% gem install hanami</span>
 Successfully installed hanami-<%= hanami_version %>
 1 gem installed
 <br>
-<span class="command">% hanami new bookshelf --database=postgresql</span>
+<span class="command">% hanami new bookshelf</span>
 22 files successfully created
                       </code></pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="develop">
-                      <pre class="language-ruby plaintext"><code><span class="command">% cd bookshelf &amp;&amp; echo "ruby '2.6.4'" &gt;&gt; Gemfile &amp;&amp; bundle</span>
-Bundle complete! 9 Gemfile dependencies, 59 gems now installed.
+                      <pre class="language-ruby plaintext"><code><span class="command">% cd bookshelf &amp;&amp; echo 'ruby "<%= current_ruby_version %>"' &gt;&gt; Gemfile &amp;&amp; bundle</span>
+Bundle complete! 12 Gemfile dependencies, 59 gems now installed.
 <br>
-<span class="command">% git add . &amp;&amp; git commit -m "Initial commit"</span>
-[master (root-commit) 2dd2fad] Initial commit
- 40 files changed, 808 insertions(+)
+<span class="command">% git init . &amp;&amp; git add . &amp;&amp; git commit -m "Initial commit"</span>
+[main (root-commit) 5cf03f1] Initial commit
+ 21 files changed, 359 insertions(+)
                       </code></pre>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="deploy">
@@ -189,27 +189,11 @@ Bundle complete! 9 Gemfile dependencies, 59 gems now installed.
 Creating app... done, ⬢ Creating cherry-blossom-1234
 https://cherry-blossom-1234.herokuapp.com/ | https://git.heroku.com/cherry-blossom-1234.git
 <br>
-<span class="command">% heroku config:add SERVE_STATIC_ASSETS=true</span>
-Setting SERVE_STATIC_ASSETS and restarting ⬢ cherry-blossom-1234... done, v2
-<br>
-<span class="command">% heroku config:add SMTP_HOST=""</span>
-Setting SMTP_HOST and restarting ⬢ cherry-blossom-1234... done, v3
-<br>
-<span class="command">% heroku config:add SMTP_PORT=""</span>
-Setting SMTP_PORT and restarting ⬢ cherry-blossom-1234... done, v4
-<br>
-<span class="command">% git add . &amp;&amp; git commit -m "Initial commit"</span>
-# ...
-<br>
-<span class="command">% git push heroku master</span>
+<span class="command">% git push heroku main</span>
 # ...
 remote: Verifying deploy... done.
 To https://git.heroku.com/cherry-blossom-1234.git
- * [new branch]      master -&gt; master
-<br>
-<span class="command">% heroku run bundle exec hanami db migrate</span>
-Running bundle exec hanami db migrate on ⬢ cherry-blossom-1234... up, run.9274 (Free)
-# ...
+ * [new branch]      main -&gt; main
 <br>
 <span class="command">% heroku open</span>
 Opening cherry-blossom-1234... done
