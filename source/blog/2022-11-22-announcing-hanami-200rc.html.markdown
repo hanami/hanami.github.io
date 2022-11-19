@@ -29,6 +29,31 @@ There’s a lot here, and we can’t wait for you to try it out. Let’s take a 
 
 ## State of the art application core
 
+At the heart of every Hanami 2.0 app is an advanced code loading system. Run `hanami new` and you'll have your app defined in `config/app.rb`:
+
+```ruby
+require "hanami"
+
+module MyApp
+  class App < Hanami::App
+  end
+end
+```
+
+From here, you can build your app's logic in `app/`, and then boot the app – loading all your code – as part of launching a web server. This is the usual story. But Hanami 2.0 apps can do so much more.
+
+You can use the app to load and return any individual component:
+
+```ruby
+# Return an instance of the action in app/actions/home/show.rb
+
+Hanami.app["actions.home.show"] # => #<MyApp::Actions::Home::Show>
+```
+
+You can also choose to _prepare_ rather than fully boot your app. This loads the minimal set of files required for your app to load individual components on demand. This is how the Hanami console launches, and how your app is prepared for running unit tests.
+
+This means your experience interacting with your app remains as snappy as possible even as it grows to many hundreds or thousands of components. Your hanami console will always load in milliseconds, and your unit tests will keep you squarely in the TDD flow.
+
 ## Always-there dependencies mixin
 
 ## Blazing fast new router
