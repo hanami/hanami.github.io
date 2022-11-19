@@ -167,7 +167,7 @@ module MyApp
 end
 ```
 
-Actions provide everything you need for a full-featured HTTP layer, including built-in parameter validation, Rack integration, session and cookie handling, flash messages, before/after callbacks and more.
+Actions in Hanami still provide everything you need for a full-featured HTTP layer, including built-in parameter validation, Rack integration, session and cookie handling, flash messages, before/after callbacks and more.
 
 ## Type-safe app settings
 
