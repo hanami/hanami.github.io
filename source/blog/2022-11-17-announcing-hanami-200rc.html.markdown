@@ -92,7 +92,7 @@ module MyApp
 end
 ```
 
-You can `include Deps` in any the classes in your Hanami app. Provide the keys for the components you want as dependencies, and they'll become automatically available to any instance methods.
+You can `include Deps` in any class within your Hanami app. Provide the keys for the components you want as dependencies, and they'll become automatically available to any instance methods.
 
 Behind the scenes, the Deps mixin creates an `#initialize` method that expects these dependencies as arguments, then provides the matching objects from your app as default values.
 
