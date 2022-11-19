@@ -10,6 +10,26 @@ excerpt: >
 
 After more than three years of work, Hanami 2.0 is here! This release marks a new era for Hanami, and presents a revolutionary new vision for Ruby applications!
 
+## What is Hanami, and why does 2.0 matter?
+
+_This is where I'll write something that re-introduces Hanami to anyone that hasn't been paying attention lately. Something that inspires people and tells them exactly what we're all about._
+
+Key points:
+
+- With Hanami 2.0 we have a framework for Ruby apps of ALL shapes and sizes. You can still write your "hello world" with minimal fuss, but at the same time, it provides all the tools and structures you need for your app to grow large without sacrificing maintainability
+- It is the first framework that really provides the necessary core tools for managing and growing your own app's business logic
+- And it does so in a way that it doesn't "take over" your app. Hanami is a framework that is Ruby at its purest, and it works in service of your app, rather than the other way around. The majority of an app using Hanami will be glorious plain old Ruby, with the key Hanami-provided facilities occupying just a few distinct layers, for example routes and actions, with actions intended for negotiating HTTP responsibilities only.
+
+- The 2.0 release is a triumph of indie development, combining years of development across both the Hanami and dry-rb projects.
+- If you've ever had even a passing interest in dry-rb, Hanami provides you with a curated experience and an easy on-ramp. It's time to give it another look!
+- This is also a real boost for Ruby ecosystem diversity; Hanami provides a compelling and distinct vision for Ruby apps, and with this release backed by a caring and dedicated core team, you can feel confident Hanami will be here for the long run.
+
+- Most importantly, this is a framework that will help you level up as a Rubyist. Hanami gives you tools that help you look at app design through a new lens.
+- If you've ever felt dissatisfied with how you're apps have turned out, Hanami is the framework for you.
+- We'd love for you to join us and usher in a new breed of Ruby apps!
+
+## What’s new with 2.0?
+
 Hanami 2.0 is jam packed with goodies:
 
 - An **advanced new application core** offering advanced code loading capabilities
