@@ -1,6 +1,6 @@
 ---
 title: "Hanami 2.0: Awesome Short Summary Here"
-date: 2022-11-22 08:24:53 UTC
+date: 2022-11-17 08:24:53 UTC
 tags: announcements
 author: Tim Riley
 image: true
@@ -55,6 +55,8 @@ You can also choose to _prepare_ rather than fully boot your app. This loads the
 This means your experience interacting with your app remains as snappy as possible even as it grows to many hundreds or thousands of components. Your hanami console will always load in milliseconds, and your unit tests will keep you squarely in the TDD flow.
 
 ## Always-there dependencies mixin
+
+No class is an island.
 
 ## Blazing fast new router
 
