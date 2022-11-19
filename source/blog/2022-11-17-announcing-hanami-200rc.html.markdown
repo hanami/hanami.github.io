@@ -54,7 +54,7 @@ At the heart of every Hanami 2.0 app is an advanced code loading system. It all 
 ```ruby
 require "hanami"
 
-module MyApp
+module Bookshelf
   class App < Hanami::App
   end
 end
@@ -67,7 +67,7 @@ In Hanami 2.0, your app can do so much more. You can use the app object itself t
 ```ruby
 # Return an instance of the action in app/actions/home/show.rb
 
-Hanami.app["actions.home.show"] # => #<MyApp::Actions::Home::Show>
+Hanami.app["actions.home.show"] # => #<Bookshelf::Actions::Home::Show>
 ```
 
 You can also choose to _prepare_ rather than fully boot your app. This loads the minimal set of files required for your app to load individual components on demand. This is how the Hanami console launches, and how your app is prepared for running unit tests.
@@ -79,7 +79,7 @@ This means your experience interacting with your app remains as snappy as possib
 No class is an island. Any Ruby app needs to bring together behavior from multiple classes to deliver features to its users. With Hanami 2.0’s new **Deps mixin**, object composition is now built-in and amazingly easy to use.
 
 ```ruby
-module MyApp
+module Bookshelf
   module Emails
     class DailyUpdate
       include Deps["email_service"]
@@ -99,7 +99,7 @@ Behind the scenes, the Deps mixin creates an `#initialize` method that expects t
 This also makes isolated testing a breeze:
 
 ```ruby
-RSpec.describe MyApp::Emails::DailyUpdate do
+RSpec.describe Bookshelf::Emails::DailyUpdate do
   subject(:daily_update) {
     # (Optionally) provide a test double to isolate email delivery in tests
     described_class.new(email_service: email_service)
@@ -126,7 +126,7 @@ The Deps mixin makes object composition natural and low-friction, making it easy
 Any web app needs a way to let users in, and Hanami 2.0 offers a friendly, intuitive routing DSL. You can add your routes to `config/routes.rb`:
 
 ```ruby
-module MyApp
+module Bookshelf
   class Routes < Hanami::Routes
     root to: "home.show"
 
@@ -146,10 +146,10 @@ From routes we move to actions, the classes for handling individual HTTP endpoin
 In your actions you can now `include Deps` like any other class, which makes it to keep your business logic separate and your actions focused on HTTP interactions only:
 
 ```ruby
-module MyApp
+module Bookshelf
   module Actions
     module Books
-      class Show < MyApp::Action
+      class Show < Bookshelf::Action
         include Deps["book_repo"]
 
         params do
