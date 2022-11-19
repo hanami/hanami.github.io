@@ -56,7 +56,50 @@ This means your experience interacting with your app remains as snappy as possib
 
 ## Always-there dependencies mixin
 
-No class is an island.
+No class is an island. Any Ruby app needs to bring together behavior from multiple classes to deliver features to its users. With Hanami 2.0’s new **Deps mixin**, object composition is now built-in and amazingly easy to use.
+
+```ruby
+module MyApp
+  module Emails
+    class DailyUpdate
+      include Deps["email_service"]
+
+      def deliver(recipient)
+        email_service.send_email(to: recipient, subject: "Your daily update")
+      end
+    end
+  end
+end
+```
+
+You can `include Deps` in any the classes in your Hanami app. Provide the keys for the components you want as dependencies, and they'll become automatically available to any instance methods.
+
+Behind the scenes, the Deps mixin creates an `#initialize` method that expects these dependencies as arguments, then provides the matching objects from your app as default values.
+
+This also makes isolated unit testing a breeze:
+
+```ruby
+RSpec.describe MyApp::Emails::DailyUpdate do
+  subject(:daily_update) {
+    # (Optionally) provide a test double to isolate email delivery in unit tests
+    described_class.new(email_service: email_service)
+  }
+
+  let(:email_service) { spy(:email_service) }
+
+  it "delivers the email" do
+    daily_update.deliver("jane@example.com")
+
+    expect(email_service)
+      .to have_received(:send_email)
+      .with(hash_including(to: "jane@example.com"))
+  end
+end
+```
+
+You can specify as many dependencies as you need to the Deps mixin. With it taking pride of place at the top of each class, it will help you as quickly identify exactly how each object fits within the graph of your app's components.
+
+The Deps mixin makes object composition natural and low-friction, making it easy for you to break down unwieldy classes. Before long you’ll be creating better single-responsibility and reusable components, easier to test and easier to understand. Once you get started, you’ll never want to go back!
 
 ## Blazing fast new router
 
