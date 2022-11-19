@@ -12,7 +12,7 @@ After more than three years of work, Hanami 2.0 is here! This release marks a ne
 
 Hanami 2.0 is jam packed with goodies:
 
-- A **state of the art new application core** offering advanced code loading capabilities
+- An **advanced new application core** offering advanced code loading capabilities
 - An **always-there dependencies mixin**, helping you draw clearer connections between your app's components
 - A **blazing fast new router**
 - Redesigned **functional action classes** that integrate seamlessly with your app's business logic
@@ -27,9 +27,9 @@ With 2.0 Hanami apps are no longer just for the web: Hanami is now **the everyth
 
 There’s a lot here, and we can’t wait for you to try it out. Let’s take a look at the highlights in more detail.
 
-## State of the art application core
+## Advanced application core
 
-At the heart of every Hanami 2.0 app is an advanced code loading system. Run `hanami new` and you'll have your app defined in `config/app.rb`:
+At the heart of every Hanami 2.0 app is an advanced code loading system. It all begins when you run `hanami new` and have your app defined in `config/app.rb`:
 
 ```ruby
 require "hanami"
@@ -40,9 +40,9 @@ module MyApp
 end
 ```
 
-From here, you can build your app's logic in `app/`, and then boot the app – loading all your code – as part of launching a web server. This is the usual story. But Hanami 2.0 apps can do so much more.
+From here you can build your app's logic in `app/`, and then boot the app, which loads all your code, as part of running a web server. This is the usual story.
 
-You can use the app to load and return any individual component:
+In Hanami 2.0, your app can do so much more. You can use the app object itself to load and return any individual component:
 
 ```ruby
 # Return an instance of the action in app/actions/home/show.rb
