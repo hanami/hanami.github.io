@@ -171,6 +171,47 @@ Actions in Hanami still provide everything you need for a full-featured HTTP lay
 
 ## Type-safe app settings
 
+For your app to do its thing, you'll want to give it various settings: behavioral toggles, API keys, external system URLs and the like. Hanami 2.0 provides a built-in settings class along with [dotenv][dotenv] integration for loading these settings from `.env*` files in local development.
+
+You can define your settings along with type constructors in `config/settings.rb`:
+
+```ruby
+module Bookshelf
+  class Settings < Hanami::Settings
+    setting :redis_url, constructor: Types::String
+    setting :emails_enabled, constructor: Types::Params::Bool
+  end
+end
+```
+
+Your settings are then available as a `"settings"` component for you to use from anywhere in your app:
+
+```ruby
+# Given ENV["EMAILS_ENABLED"] = "true"
+Hanami.app["settings"].emails_enabled # => true
+```
+
+This means you can include `"settings"` in a list of `Deps` and access your settings from any class:
+
+```ruby
+module Bookshelf
+  module Emails
+    class DailyUpdate
+      include Deps["email_service", "settings"]
+
+      def deliver(recipient)
+        return unless settings.emails_enabled
+        # ...
+      end
+    end
+  end
+end
+```
+
+Hanami also loads your settings early in app boot and will raise an error for any settings that fail to meet their type expectations, giving you early feedback and ensuring your app doesn’t boot in a potentially invalid state.
+
+[dotenv]: https://github.com/bkeepers/dotenv
+
 ## Providers
 
 ## Slices
