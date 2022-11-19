@@ -141,7 +141,7 @@ We’ve completely rewritten the router’s engine, with benchmarks showing it [
 
 ## Redesigned action classes
 
-From routes, we move to actions, which are classes for handling individual HTTP endpoints. In Hanami 2.0 we’ve redesigned actions to fit seamlessly with the rest of your app.
+From routes we move to actions, the classes for handling individual HTTP endpoints. In Hanami 2.0 we’ve redesigned actions to fit seamlessly with the rest of your app.
 
 In your actions you can now `include Deps` like any other class, which makes it to keep your business logic separate and your actions focused on HTTP interactions only:
 
