@@ -82,10 +82,10 @@ No class is an island. Any Ruby app needs to bring together behavior from multip
 module Bookshelf
   module Emails
     class DailyUpdate
-      include Deps["email_service"]
+      include Deps["email_client"]
 
       def deliver(recipient)
-        email_service.send_email(to: recipient, subject: "Your daily update")
+        email_client.send_email(to: recipient, subject: "Your daily update")
       end
     end
   end
@@ -102,15 +102,15 @@ This also makes isolated testing a breeze:
 RSpec.describe Bookshelf::Emails::DailyUpdate do
   subject(:daily_update) {
     # (Optionally) provide a test double to isolate email delivery in tests
-    described_class.new(email_service: email_service)
+    described_class.new(email_client: email_client)
   }
 
-  let(:email_service) { spy(:email_service) }
+  let(:email_client) { spy(:email_client) }
 
   it "delivers the email" do
     daily_update.deliver("jane@example.com")
 
-    expect(email_service)
+    expect(email_client)
       .to have_received(:send_email)
       .with(hash_including(to: "jane@example.com"))
   end
@@ -178,7 +178,7 @@ You can define your settings along with type constructors in `config/settings.rb
 ```ruby
 module Bookshelf
   class Settings < Hanami::Settings
-    setting :redis_url, constructor: Types::String
+    setting :email_client_api_key, constructor: Types::String
     setting :emails_enabled, constructor: Types::Params::Bool
   end
 end
@@ -197,7 +197,7 @@ This means you can include `"settings"` in a list of `Deps` and access your sett
 module Bookshelf
   module Emails
     class DailyUpdate
-      include Deps["email_service", "settings"]
+      include Deps["email_client", "settings"]
 
       def deliver(recipient)
         return unless settings.emails_enabled
@@ -213,6 +213,27 @@ Hanami also loads your settings early in app boot and will raise an error for an
 [dotenv]: https://github.com/bkeepers/dotenv
 
 ## Providers
+
+So far we’ve seen how your classes and settings can be accessed as components in your app. But what about components that require special handling to initialize? For these, Hanami 2.0 introduces providers. Here’s one for the `"email_client"` component we used earlier, in `config/providers/email_client.rb`:
+
+```ruby
+Hanami.app.register_provider :email_client do
+  prepare do
+    require "acme_email/client"
+  end
+
+  start do
+    client = AcmeEmail::Client.new(
+      api_key: target["settings"].email_client_api_key,
+      default_from: "no-reply@bookshelf.example.com"
+    )
+
+    register "email_client", client
+  end
+end
+```
+
+Every provider has its own set of `prepare`/`start`/`stop` lifecycle steps, which is useful for setting up and using heavyweight components, or components that use tangible resources like database connections.
 
 ## Slices
 
