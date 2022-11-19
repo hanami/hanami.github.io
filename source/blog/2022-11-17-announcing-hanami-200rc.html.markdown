@@ -35,7 +35,7 @@ Hanami 2.0 is jam packed with goodies:
 - An **advanced new application core** offering advanced code loading capabilities
 - An **always-there dependencies mixin**, helping you draw clearer connections between your app's components
 - A **blazing fast new router**
-- Redesigned **functional action classes** that integrate seamlessly with your app's business logic
+- **Redesigned action classes** that integrate seamlessly with your app's business logic
 - **Type-safe app settings** with dotenv integration, ensuring your app has everything it needs in every environment
 - New **providers** for flexibly managing the lifecycle of your app's critical components and integrations
 - New built-in **slices** for gradual modularisation as your app grows
@@ -123,7 +123,51 @@ The Deps mixin makes object composition natural and low-friction, making it easy
 
 ## Blazing fast new router
 
-## Functional action classes
+Any web app needs a way to let users in, and Hanami 2.0 offers a friendly, intuitive routing DSL. You can add your routes to `config/routes.rb`:
+
+```ruby
+module MyApp
+  class Routes < Hanami::Routes
+    root to: "home.show"
+
+    get "/books", to: "books.index"
+    get "/books/:slug", to: "books.show"
+    post "/books/:slug/reviews", to: "books.comments.create"
+  end
+end
+```
+
+We’ve completely rewritten the router’s engine, with benchmarks showing it [outperforms nearly all others](https://hanamirb.org/blog/2020/02/26/introducing-hanami-api/).
+
+## Redesigned action classes
+
+From routes, we move to actions, which are classes for handling individual HTTP endpoints. In Hanami 2.0 we’ve redesigned actions to fit seamlessly with the rest of your app.
+
+In your actions you can now `include Deps` like any other class, which makes it to keep your business logic separate and your actions focused on HTTP interactions only:
+
+```ruby
+module MyApp
+  module Actions
+    module Books
+      class Show < MyApp::Action
+        include Deps["book_repo"]
+
+        params do
+          required(:slug).value(:string)
+        end
+
+        def handle(request, response)
+          book = book_repo.find_by_slug(request.params[:slug])
+
+          response.body = book.to_json
+        end
+      end
+    end
+  end
+end
+```
+
+Actions provide everything you need for a full-featured HTTP layer, including built-in parameter validation, Rack integration, session and cookie handling, flash messages, before/after callbacks and more.
 
 ## Type-safe app settings
 
