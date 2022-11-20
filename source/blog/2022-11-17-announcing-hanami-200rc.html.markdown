@@ -47,7 +47,7 @@ With 2.0 Hanami apps are no longer just for the web: Hanami is now **the everyth
 
 There’s a lot here, and we can’t wait for you to try it out. Let’s take a look at the highlights in more detail.
 
-## Advanced application core
+### Advanced application core
 
 At the heart of every Hanami 2.0 app is an advanced code loading system. It all begins when you run `hanami new` and have your app defined in `config/app.rb`:
 
@@ -74,7 +74,7 @@ You can also choose to _prepare_ rather than fully boot your app. This loads the
 
 This means your experience interacting with your app remains as snappy as possible even as it grows to many hundreds or thousands of components. Your hanami console will always load in milliseconds, and your unit tests will keep you squarely in the TDD flow.
 
-## Always-there dependencies mixin
+### Always-there dependencies mixin
 
 No class is an island. Any Ruby app needs to bring together behavior from multiple classes to deliver features to its users. With Hanami 2.0’s new **Deps mixin**, object composition is now built-in and amazingly easy to use.
 
@@ -119,9 +119,11 @@ end
 
 You can specify as many dependencies as you need to the Deps mixin. With it taking pride of place at the top of each class, it will help you as quickly identify exactly how each object fits within the graph of your app's components.
 
+something something also helps you separate deps from other arguments?
+
 The Deps mixin makes object composition natural and low-friction, making it easy for you to break down unwieldy classes. Before long you’ll be creating better single-responsibility and reusable components, easier to test and easier to understand. Once you get started, you’ll never want to go back!
 
-## Blazing fast new router
+### Blazing fast new router
 
 Any web app needs a way to let users in, and Hanami 2.0 offers a friendly, intuitive routing DSL. You can add your routes to `config/routes.rb`:
 
@@ -139,7 +141,7 @@ end
 
 We’ve completely rewritten the router’s engine, with benchmarks showing it [outperforms nearly all others](https://hanamirb.org/blog/2020/02/26/introducing-hanami-api/).
 
-## Redesigned action classes
+### Redesigned action classes
 
 From routes we move to actions, the classes for handling individual HTTP endpoints. In Hanami 2.0 we’ve redesigned actions to fit seamlessly with the rest of your app.
 
@@ -169,7 +171,7 @@ end
 
 Actions in Hanami still provide everything you need for a full-featured HTTP layer, including built-in parameter validation, Rack integration, session and cookie handling, flash messages, before/after callbacks and more.
 
-## Type-safe app settings
+### Type-safe app settings
 
 For your app to do its thing, you'll want to give it various settings: behavioral toggles, API keys, external system URLs and the like. Hanami 2.0 provides a built-in settings class along with [dotenv][dotenv] integration for loading these settings from `.env*` files in local development.
 
@@ -212,7 +214,7 @@ Hanami also loads your settings early in app boot and will raise an error for an
 
 [dotenv]: https://github.com/bkeepers/dotenv
 
-## Providers
+### Providers
 
 So far we’ve seen how your classes and settings can be accessed as components in your app. But what about components that require special handling to initialize? For these, Hanami 2.0 introduces providers. Here’s one for the `"email_client"` component we used earlier, in `config/providers/email_client.rb`:
 
@@ -235,7 +237,7 @@ end
 
 Every provider has its own set of `prepare`/`start`/`stop` lifecycle steps, which is useful for setting up and using heavyweight components, or components that use tangible resources like database connections.
 
-## Slices
+### Slices
 
 As your app grows up, you may want to draw clear boundaries between its major areas of concern. For this, Hanami 2.0 introduces slices, a built-in facility for organising your code, encouraging maintainable boundaries, and creating operational flexibility.
 
