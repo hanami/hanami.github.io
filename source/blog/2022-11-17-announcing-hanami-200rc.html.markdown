@@ -237,7 +237,68 @@ Every provider has its own set of `prepare`/`start`/`stop` lifecycle steps, whic
 
 ## Slices
 
-## Getting started guide
+As your app grows up, you may want to draw clear boundaries between its major areas of concern. For this, Hanami 2.0 introduces slices, a built-in facility for organising your code, encouraging maintainable boundaries, and creating operational flexibility.
+
+To get started with a slice, create a directory under `slices/` and then start adding your code there, using a matching Ruby namespace. It’s that simple! Here’s a class that imports books for our bookshelf app:
+
+```ruby
+module Feeds
+  class ProcessFeed
+    def call(feed_url)
+      # ...
+    end
+  end
+end
+```
+
+Each slice has its own slice class that behaves just like a miniature Hanami app:
+
+```ruby
+Feeds::Slice["process_feed"] # => #<Feeds::ProcessFeed>
+```
+
+Every slice imports some basic components from the app, like the `"settings"`, `"logger"` and `"inflector"`, and slices can also be configued to import components from each other. If we added an admin slice to our app, we could make it possible for it run feed processing by specifying an import in the slice class at `config/slices/admin.rb`:
+
+```ruby
+module Admin
+  class Slice < Hanami::Slice
+    import keys: ["process_feed"], from: :feeds
+  end
+end
+```
+
+Now the feeds processor is available within the admin slice:
+
+```ruby
+Admin::Slice["feeds.process_feed"] # => #<Feeds::ProcessFeed>
+
+# or as a dep:
+module Admin
+  class SomeClass
+    include Deps["feeds.process_feed"]
+  end
+end
+```
+
+Slices can also be mounted within the router:
+
+```ruby
+module Bookshelf
+  class Routes < Hanami::Routes
+    slice :admin, at: "/admin" do
+      get "/books" to: "books.index"
+    end
+  end
+end
+```
+
+Slices can also be selectively loaded at boot time, which brings great advantages for ensuring best performance of certain production workloads. If you had a process working a Sidekiq queue for jobs from the feeds slice only, then you can set `HANAMI_SLICES=feeds` to load that slice only, giving you code isolation and optimal memory and boot time performance for that process.
+
+Working with slices helps you maintain a clear understanding of the relationship between your app’s high-level concerns, just like how the Deps helps with this for individual components. Slices are the key to helping your app be just as easy to maintain at day 1,000 as it was at day 1.
+
+## Getting started with Hanami 2.0
+
+
 
 ## What’s next
 
