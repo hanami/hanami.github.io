@@ -298,8 +298,63 @@ Working with slices helps you maintain a clear understanding of the relationship
 
 ## Getting started with Hanami 2.0
 
+Hopefully by now you’re excited to give Hanami 2.0 a try! To help you on your way, we’ve completely rewritten our friendly [user guides][guides] to cover all the important concepts for this new release.
 
+A huge thank you to [Andrew Croome][andrew] and [Seb Wilgosz][seb] for delivering these guides!
+
+[guides]: https://guides.hanamirb.org/v2.0/introduction/getting-started/
+[andrew]: http://github.com/andrewcroome
+[seb]: https://github.com/swilgosz
+
+## What’s included?
+
+Today’s release includes the following gems:
+
+- hanami v2.0.0
+- hanami-cli v2.0.0
+- hanami-controller v2.0.0
+- hanami-router v2.0.0
+- hanami-validations v2.0.0
+- hanami-utils v2.0.0
+- hanami-reloader v2.0.0
+- hanami-rspec v2.0.0
+
+For specific changes, please see each gem’s own CHANGELOG and FEATURES files.
+
+## How can I try it?
+
+```shell
+$ gem install hanami --pre
+$ hanami new bookshelf
+$ cd bookshelf
+$ bundle exec hanami --help
+```
 
 ## What’s next
 
-Hanami 2.1 in Q1 of 2023, including database persistence, views, and assets. Full stack is just around the corner.
+For this release, we’ve focused on developing a powerful, polished framework core along with all the tools you need to deliver great web APIs. We hope you enjoy it!
+
+From here we’re going to focus on finishing the rest of the “full stack” Hanami experience. This will include database integration, views, helpers and front end assets. We’re committed to delivering these within the first quarter of 2023.
+
+## Contributors
+
+Thank you to these wonderful people for contributing to Hanami 2.0!
+
+- [Andrew Croome](https://github.com/andrewcroome)
+- [Benjamin Klotz](https://github.com/tak1n)
+- [Luca Guidi](https://github.com/jodosha)
+- [Lucas Mendelowski](https://github.com/lcmen)
+- [Marc Busqué](https://github.com/waiting-for-dev)
+- [Narinda Reeders](https://github.com/narinda)
+- [Pat Allen](https://github.com/pat)
+- [Peter Solnica](https://github.com/solnic)
+- [Philip Arndt](https://github.com/parndt/)
+- [Sean Collins](https://github.com/cllns)
+- [Tim Riley](https://github.com/timriley)
+- [Xavier Noria](https://github.com/fxn)
+
+## Thank you
+
+Thank you so much for your support over the years as we built Hanami 2.0! It’s been a long journey, and we’re absolutely delighted (and only just a little bit tired) to be sharing this major new release with you!
+
+We can’t wait to hear how you use it, and we’re looking forward to being back again to share the rest of our vision with you! 🌸
