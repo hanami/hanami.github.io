@@ -336,19 +336,18 @@ From here we’re going to focus on finishing the rest of the “full stack” H
 
 ## Contributors
 
-Thank you to these wonderful people for contributing to Hanami 2.0!
+Hanami 2.0 is brought to you by the core team of [Luca Guidi](https://github.com/jodosha), [Peter Solnica](https://github.com/solnic) and [Tim Riley](https://github.com/timriley).
+
+Thank you also to these wonderful people for contributing to Hanami 2.0!
 
 - [Andrew Croome](https://github.com/andrewcroome)
 - [Benjamin Klotz](https://github.com/tak1n)
-- [Luca Guidi](https://github.com/jodosha)
 - [Lucas Mendelowski](https://github.com/lcmen)
 - [Marc Busqué](https://github.com/waiting-for-dev)
 - [Narinda Reeders](https://github.com/narinda)
-- [Pat Allen](https://github.com/pat)
-- [Peter Solnica](https://github.com/solnic)
-- [Philip Arndt](https://github.com/parndt/)
+- [Pat Allan](https://github.com/pat)
+- [Philip Arndt](https://github.com/parndt)
 - [Sean Collins](https://github.com/cllns)
-- [Tim Riley](https://github.com/timriley)
 - [Xavier Noria](https://github.com/fxn)
 
 ## Thank you
