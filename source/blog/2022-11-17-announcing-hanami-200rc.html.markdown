@@ -12,21 +12,23 @@ After more than three years of work, Hanami 2.0 is here! This release marks a ne
 
 ## What is Hanami, and why does 2.0 matter?
 
-_This is where I'll write something that re-introduces Hanami to anyone that hasn't been paying attention lately. Something that inspires people and tells them exactly what we're all about._
+Since our beginning we’ve called Hanami a “modern web framework for Ruby.” With today’s release, it becomes so much more. Hanami 2.0 is **the framework for Ruby apps of all shapes and sizes.**
 
-Key points:
+With Hanami 2.0 you can still have your “hello world” app running within minutes, but you’ll be doing so using a framework that provides everything you need for your app to grow without sacrificing maintainability. With its innovative component management, Deps mixin and slices, Hanami is the first Ruby framework to acknowledge the need to organise your business logic and ship with all the tools necessary to do so.
 
-- With Hanami 2.0 we have a framework for Ruby apps of ALL shapes and sizes. You can still write your "hello world" with minimal fuss, but at the same time, it provides all the tools and structures you need for your app to grow large without sacrificing maintainability
-- It is the first framework that really provides the necessary core tools for managing and growing your own app's business logic
-- And it does so in a way that it doesn't "take over" your app. Hanami is a framework that is Ruby at its purest, and it works in service of your app, rather than the other way around. The majority of an app using Hanami will be glorious plain old Ruby, with the key Hanami-provided facilities occupying just a few distinct layers, for example routes and actions, with actions intended for negotiating HTTP responsibilities only.
+The majority of the code you’ll write in an Hanami app will be glorious plain old Ruby. This is a framework that works in service of your code, rather than the other way around. Hanami’s own facilities, such as the router and actions, are designed to occupy their own distinct layers that decorate and call into your code.
 
-- The 2.0 release is a triumph of indie development, combining years of development across both the Hanami and dry-rb projects.
-- If you've ever had even a passing interest in dry-rb, Hanami provides you with a curated experience and an easy on-ramp. It's time to give it another look!
-- This is also a real boost for Ruby ecosystem diversity; Hanami provides a compelling and distinct vision for Ruby apps, and with this release backed by a caring and dedicated core team, you can feel confident Hanami will be here for the long run.
+Hanami will help you level up as a Rubyist. From the very beginning it encourages you to consider separation of concerns, dependencies, and layered applications, and through its own classes, gives you working examples to follow. If you’ve ever felt dissatisfied with how your Ruby apps have turned out, Hanami is for you! It will give you a new lens on Ruby.
 
-- Most importantly, this is a framework that will help you level up as a Rubyist. Hanami gives you tools that help you look at app design through a new lens.
-- If you've ever felt dissatisfied with how you're apps have turned out, Hanami is the framework for you.
-- We'd love for you to join us and usher in a new breed of Ruby apps!
+With 2.0, Hanami apps are no longer just for the web: Hanami is now **the everything framework** for Rubyists. Remove a few lines from your `Gemfile` and you can have everything you need and nothing you don’t. Remove the router and controller, for example, and you can build a chatbot or a Kafka consumer and still take advantage of all the other conveniences the framework provides.
+
+This release is a triumph of indie development. To build Hanami 2.0, we teamed up with the [dry-rb][dry-rb] and rebuilt the framework on top of and around the dry-rb libraries. If you’ve ever had a passing interest in dry-rb, with Hanami 2.0 we’ve spent years putting together a curated experience and easiest possible onramp. It’s time to give it another look!
+
+Hanami 2.0 also marks a major moment for Ruby ecosystem diversity. We’re providing a compelling and distinct new vision for Ruby apps, and with this release backed by a thoughtful and dedicated core team, you can feel confident Hanami will be here for the long run.
+
+We’d love for you to join as and usher in a new breed of Ruby apps!
+
+[dry-rb]: https://dry-rb.org/
 
 ## What’s new with 2.0?
 
@@ -40,12 +42,6 @@ Hanami 2.0 is jam packed with goodies:
 - New **providers** for flexibly managing the lifecycle of your app's critical components and integrations
 - New built-in **slices** for gradual modularisation as your app grows
 - A **rewritten getting started guide** to help you get going with all of the above
-
-To build Hanami 2.0, we’ve brought together with the [dry-rb][dry-rb] and [rom-rb][rom-rb] teams, and together we’re very proud to present BLAH BLAH brought together the best of all of these libraries and provide you with a curated, easy-to-start experience.
-
-With 2.0 Hanami apps are no longer just for the web: Hanami is now **the everything framework** for Rubyists. By removing just a few lines from your `Gemfile`, you can have everything you need and nothing you don’t. Remove the router and controller, for example, and you can build a chatbot or a Kafka consumer and still take advantage of all the other conveniences of Hanami.
-
-There’s a lot here, and we can’t wait for you to try it out. Let’s take a look at the highlights in more detail.
 
 ### Advanced application core
 
