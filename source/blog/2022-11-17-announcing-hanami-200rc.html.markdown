@@ -5,7 +5,7 @@ tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  TODO blah blah
+  Introducing a distinct and compelling new vision for Ruby apps of all shapes and sizes.
 ---
 
 After more than three years of work, Hanami 2.0 is here! This release marks a new era for Hanami, and presents a revolutionary new vision for Ruby applications!
