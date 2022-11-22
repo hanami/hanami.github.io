@@ -1,6 +1,6 @@
 ---
 title: "Hanami 2.0: Better, Faster, Stronger"
-date: 2022-11-17 08:24:53 UTC
+date: 2022-11-22 12:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
@@ -47,7 +47,7 @@ Hanami 2.0 delivers a framework that is at once minimal and powerful:
 - **Top to bottom modularity** enables you to build apps of all kinds, including non-web apps
 - Our **rewritten [getting started guide](https://guides.hanamirb.org/v2.0/introduction/getting-started/)** helps you get going with all of the above
 
-Check out our [Highlights of Hanami 2.0](#) to learn more!
+Check out our [Highlights of Hanami 2.0](https://discourse.hanamirb.org/t/highlights-of-hanami-2-0/728) to learn more.
 
 ## Faster
 
