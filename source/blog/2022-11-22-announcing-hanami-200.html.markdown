@@ -47,7 +47,7 @@ Hanami 2.0 delivers a framework that is at once minimal and powerful:
 - **Top to bottom modularity** enables you to build apps of all kinds, including non-web apps
 - Our **rewritten [getting started guide](https://guides.hanamirb.org/v2.0/introduction/getting-started/)** helps you get going with all of the above
 
-Check out our [Highlights of Hanami 2.0](https://discourse.hanamirb.org/t/highlights-of-hanami-2-0/728) to learn more.
+There’s a lot to dig into for each of these. **[Check out the Highlights of Hanami 2.0](https://discourse.hanamirb.org/t/highlights-of-hanami-2-0/728)** to see more, including code examples.
 
 ## Faster
 
