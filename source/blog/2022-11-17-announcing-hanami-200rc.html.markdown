@@ -22,7 +22,7 @@ Most of the code you’ll write in your Hanami app will be glorious plain old Ru
 
 With 2.0, Hanami apps are no longer just for the web. Hanami is now **the everything framework for Rubyists.** You can have everything you need and nothing you don’t. Remove hanami-router and hanami-controller from your Gemfile, for example, and you can build a chatbot or a Kafka consumer while still enjoying all the other conveniences the framework provides.
 
-This release is **a triumph of indie development.** After years of effort, our small group of volunteer developers has pulled it off! We also joined forces with the [dry-rb][dry-rb] team to rebuild Hanami on top of and around the dry-rb libraries. If you’ve ever had a passing interest in dry-rb, with Hanami 2.0 we’ve put together a curated experience and your easiest possible onramp. It’s time to give it another look!
+This release is **a triumph of indie development.** After years of effort, our small group of volunteer developers has pulled it off! We also joined forces with the [dry-rb][dry-rb] team to rebuild Hanami on top of and around the dry-rb libraries. If you’ve ever had a passing interest in dry-rb, with Hanami 2.0 we’ve put together a curated experience and your easiest possible onramp.
 
 Hanami 2.0 marks a **major moment for Ruby ecosystem diversity.** We’re providing a compelling and distinct new vision for Ruby apps, and with this release backed by a compassionate and dedicated core team, you can feel confident Hanami will be here for the long run.
 
