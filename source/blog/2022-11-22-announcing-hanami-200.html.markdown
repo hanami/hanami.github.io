@@ -14,7 +14,7 @@ After more than three years of work, Hanami 2.0 is here! With this release we en
 
 ## Better
 
-Since the beginning we’ve called Hanami a _modern web framework for Ruby_. These beginnings have given us a solid foundation for the journey to 2.0: our focus on **maintainability**, **testability** your ability to **scale your app** from a small service to a large monolith.
+Since the beginning we’ve called Hanami a _modern web framework for Ruby_. These beginnings have given us a solid foundation for the journey to 2.0: our focus on **maintainability**, **testability**, and your ability to **scale your app** from a small service to a large monolith.
 
 For 2.0 we’ve gone further. We’ve **listened** to our community, we’ve **simplified and simplified again**, we’ve **sought new approaches** for building apps, and we’ve **dared to challenge the status quo.**
 
