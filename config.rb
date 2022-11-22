@@ -37,7 +37,7 @@ end
 # Automatic image dimensions on image_tag helper
 # activate :automatic_image_sizes
 
-set :url_root, 'http://hanamirb.org'
+set :url_root, 'https://hanamirb.org'
 
 # Methods defined in the helpers block are available in templates
 helpers do
@@ -100,12 +100,16 @@ helpers do
    ::Rack::Utils.escape(text)
   end
 
+  def current_ruby_version
+    "3.1.2"
+  end
+
   def hanami_version
-    '1.3.5'
+    '2.0.0'
   end
 
   def hanami_release_date
-    Date.parse("2021-10-18").strftime("%B %-d, %Y")
+    Date.parse("2022-11-22").strftime("%B %-d, %Y")
   end
 end
 
