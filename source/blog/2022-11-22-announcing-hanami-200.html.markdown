@@ -22,7 +22,7 @@ In turn, **we want you to challenge yourself**. We want you to try something new
 
 ### What’s better with 2.0?
 
-The core of Hanami 2.0 is now the `app/` directory. So familiar, yet so powerful. Here you can organize your code however you want, while still enjoying sensible defaults for common components. Then, as your app grows, you can take advantage of slices to separate your code in domains.
+The core of Hanami 2.0 is now the `app/` directory. So familiar, yet so powerful. Here you can organize your code however you want, while still enjoying sensible defaults for common components. Then, as your app grows, you can take advantage of slices to separate your code into domains.
 
 We’ve stripped everything back to its essence. Your new app is now refreshingly simple:
 
@@ -63,7 +63,7 @@ When using Hanami in development, **your app will boot and reload instantly** th
 
 ## Stronger
 
-This release is **a triumph of indie development.** Our small team of volunteer developers have put years effort towards this release, and we’ve pulled it off!!
+This release is **a triumph of indie development.** Our small team of volunteer developers have put years of effort towards this release, and we’ve pulled it off!
 
 We’ve also joined forces with the [dry-rb](https://dry-rb.org/) team. Together we’ve rebuilt Hanami on top of and around the dry-rb libraries. If you’ve ever had an interest in dry-rb, Hanami 2.0 gives you a curated experience and your easiest possible onramp.
 
