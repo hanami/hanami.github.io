@@ -1,51 +1,32 @@
 ---
-title: "Hanami 2.0: Awesome Short Summary Here"
+title: "Hanami 2.0: Better, Faster, Stronger"
 date: 2022-11-17 08:24:53 UTC
 tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  A compelling new vision for Ruby apps of all shapes and sizes.
+  Hanami 2.0 opens a new season for the Ruby Community.
 ---
 
-After more than three years of work, Hanami 2.0 is here! This release marks a new era for Hanami, and presents a revolutionary new vision for Ruby applications!
+After more than three years of work, Hanami 2.0 is here! We're entering the maturity phase of our framework and a new season for the Ruby Community.
 
-## What is Hanami, and why does 2.0 matter?
+**Hanami 2.0 is better, faster, stronger.**
 
-Since our beginning we’ve called Hanami a _modern web framework for Ruby_. With today’s release, it becomes much more. Hanami 2.0 is now **the framework for Ruby apps of all shapes and sizes.**
+## Better
 
-With Hanami 2.0 you’ll still have your “hello world” app running within minutes, and you’ll do it with a framework that also provides everything you need for your app to grow without sacrificing maintainability. With its innovative component management, Deps mixin and slices, Hanami is the first Ruby framework to acknowledge the **critical need to organise your business logic** and ship with all the tools to do so.
+Since its beginning Hanami is _modern web framework for Ruby_. We have started this 2.0 journey on solid foundations: our focus for **maintainability**, **testability**, the ability to **scale up your code base** from a small service to a large monolith.
 
-Most of the code you’ll write in your Hanami app will be glorious plain old Ruby. **Hanami is a framework that works in service of your code, rather than the other way around.** Hanami’s own facilities, such as the router and actions, are designed to occupy their own distinct layers that decorate and call into your code.
+We went beyond that. We spent time to **listen** to our Community, **to simplify and simplify again**, to **try new approaches** to build apps, to **dare to challenge** the status quo.
 
-**Hanami will help you level up as a Rubyist.** From the very beginning it encourages you to consider separation of concerns, object dependencies and layered applications, and gives you working examples to follow from the design of its own classes. If you’ve ever felt dissatisfied with how your Ruby apps turn out, Hanami is for you! It provides a new lens on Ruby.
+**We want you to challenge yourself**. To try, to experiment, to level up as engineer, to dare to change as we did.
 
-With 2.0, Hanami apps are no longer just for the web. Hanami is now **the everything framework for Rubyists.** You can have everything you need and nothing you don’t. Remove hanami-router and hanami-controller from your Gemfile, for example, and you can build a chatbot or a Kafka consumer while still enjoying all the other conveniences the framework provides.
+**Without change, there is no challenge and without challenge, there is no growth.**
 
-This release is **a triumph of indie development.** After years of effort, our small group of volunteer developers has pulled it off! We also joined forces with the [dry-rb][dry-rb] team to rebuild Hanami on top of and around the dry-rb libraries. If you’ve ever had a passing interest in dry-rb, with Hanami 2.0 we’ve put together a curated experience and your easiest possible onramp.
+### What’s new with 2.0?
 
-Hanami 2.0 marks a **major moment for Ruby ecosystem diversity.** We’re providing a compelling and distinct new vision for Ruby apps, and with this release backed by a compassionate and dedicated core team, you can feel confident Hanami will be here for the long run.
+The core of Hanami 2.0 is the `app/` directory. When your codebase will grow, you have the opportunity of using slices to separate code in domains.
 
-Why don’t you take a look? We’d love for you to join us!
-
-[dry-rb]: https://dry-rb.org/
-
-## What’s new with 2.0?
-
-Hanami 2.0 is jam packed with goodies:
-
-- A **new app core** offering advanced code loading capabilities, allowing you to organize your code however you want while providing sensible and familiar defaults
-- An **always-there dependencies mixin**, helping you draw clearer connections between your app's components
-- A **blazing fast new router**
-- **Redesigned action classes** that integrate seamlessly with your app's business logic
-- **Type-safe app settings** with dotenv integration, ensuring your app has everything it needs in every environment
-- New **providers** for managing the lifecycle of your app's critical components and integrations
-- New built-in **slices** for gradual modularisation as your app grows
-- A **rewritten getting started guide** to help you get going with all of the above
-
-### Advanced application core
-
-At the heart of every Hanami 2.0 app is an advanced code loading system. It all begins when you run `hanami new` and have your app defined in `config/app.rb`:
+The application (`config/app.rb`) is now simple, easy on newcomers eyes:
 
 ```ruby
 require "hanami"
@@ -55,6 +36,25 @@ module Bookshelf
   end
 end
 ```
+
+This approach is minimal, yet powerful:
+
+- This **new app core** offers advanced code structure system with [container and components](https://guides.hanamirb.org/v2.0/app/container-and-components/)
+- [Code autoloading](https://guides.hanamirb.org/v2.0/app/autoloading/) capabilities
+- New built-in **[slices](https://guides.hanamirb.org/v2.0/app/slices/)** for gradual modularisation as your app grows
+- An **always-there [dependencies mixin](https://guides.hanamirb.org/v2.0/app/container-and-components/#injecting-dependencies-via-deps)** (`Bookshelf::Deps`), helping you draw clearer connections between your app's components and slices
+- **Redesigned action classes** that integrate seamlessly with your app's business logic
+- **Cached components** (e.g. actions) that help to **save memory**
+- **Type-safe app [settings](https://guides.hanamirb.org/v2.0/app/settings/)** with dotenv integration, ensuring your app has everything it needs in every environment
+- New **[providers](https://guides.hanamirb.org/v2.0/app/providers/)** for managing the lifecycle of your app's critical components and integrations
+- **Full modularity** that allows to build **headless** (non-web) **applications**.
+- A **rewritten [getting started guide](https://guides.hanamirb.org/v2.0/introduction/getting-started/)** to help you get going with all of the above
+
+✂️✂️✂️
+
+### Advanced application core
+
+At the heart of every Hanami 2.0 app is an advanced code loading system. It all begins when you run `hanami new` and have your app defined in `config/app.rb`:
 
 From here you can build your app's logic in `app/`, and then boot the app, which loads all your code, as part of running a web server. This is the usual story.
 
@@ -116,24 +116,6 @@ end
 You can specify as many dependencies as you need to the Deps mixin. With it taking pride of place at the top of each class, it will help you as quickly identify exactly how each object fits within the graph of your app's components.
 
 The Deps mixin makes object composition natural and low-friction, making it easy for you to break down unwieldy classes. Before long you’ll be creating more focused, reusable components, easier to test and easier to understand. Once you get started, you’ll never want to go back!
-
-### Blazing fast new router
-
-Any web app needs a way to let users in, and Hanami 2.0 offers a friendly, intuitive routing DSL. You can add your routes to `config/routes.rb`:
-
-```ruby
-module Bookshelf
-  class Routes < Hanami::Routes
-    root to: "home.show"
-
-    get "/books", to: "books.index"
-    get "/books/:slug", to: "books.show"
-    post "/books/:slug/reviews", to: "books.comments.create"
-  end
-end
-```
-
-We’ve completely rewritten the router’s engine, with benchmarks showing it [outperforms nearly all others](https://hanamirb.org/blog/2020/02/26/introducing-hanami-api/).
 
 ### Redesigned action classes
 
@@ -298,49 +280,47 @@ Slices can also be selectively loaded at boot time, which brings great advantage
 
 Working with slices helps you maintain a clear understanding of the relationship between your app’s high-level concerns, just like how the Deps helps with this for individual components. Slices are the key to helping your app be just as easy to maintain at day 1,000 as it was at day 1.
 
-## Getting started with Hanami 2.0
+✂️✂️✂️
 
-Hopefully by now you’re excited to give Hanami 2.0 a try! To help you on your way, we’ve completely rewritten our friendly [user guides][guides] to cover all the important concepts for this new release.
+## Faster
 
-A huge thank you to [Andrew Croome][andrew] and [Seb Wilgosz][seb] for delivering these guides!
+We’ve completely rewritten the HTTP router’s engine, with benchmarks showing it [outperforms nearly all others](https://hanamirb.org/blog/2020/02/26/introducing-hanami-api/).
 
-[guides]: https://guides.hanamirb.org/v2.0/introduction/getting-started/
-[andrew]: http://github.com/andrewcroome
-[seb]: https://github.com/swilgosz
+You will see actions served in **microseconds**:
 
-## What’s included?
-
-Today’s release includes the following gems:
-
-- hanami v2.0.0
-- hanami-cli v2.0.0
-- hanami-controller v2.0.0
-- hanami-router v2.0.0
-- hanami-validations v2.0.0
-- hanami-utils v2.0.0
-- hanami-reloader v2.0.0
-- hanami-rspec v2.0.0
-
-For specific changes, please see each gem’s own CHANGELOG and FEATURES files.
-
-## How can I try it?
-
-```shell
-$ gem install hanami --pre
-$ hanami new bookshelf
-$ cd bookshelf
-$ bundle exec hanami --help
+```
+[bookshelf] [INFO] [2022-11-22 09:48:41 +0100] GET 200 129µs 127.0.0.1 / -
 ```
 
-## What’s next
+During the development, **the app will boot and reload instantly** due to a combination of lazy loading and autoloading of the code.
 
-For this release, we’ve focused on developing a powerful, polished framework core along with all the tools you need to deliver great web APIs. We hope you enjoy it!
+**No need to wait anymore** to use CLI commands.
 
-From here we’re going to focus on finishing the rest of the “full stack” Hanami experience. This will include database integration, views, helpers and front end assets. We’re committed to delivering these within the first quarter of 2023.
+But that isn't all: Hanami caches your application components (e.g. actions, try with `Hanami.app["actions.home.index"]`) when they are loaded.
+The same cached component is used over and over for each incoming request, resulting in **a huge save in memory consumption**.
 
-## Contributors
+## Stronger
 
-Hanami 2.0 is brought to you by the core team of [Luca Guidi](https://github.com/jodosha), [Peter Solnica](https://github.com/solnic) and [Tim Riley](https://github.com/timriley).
+This release is **a triumph of indie development.**
+
+After years of effort, our small group of volunteer developers has pulled it off! We also joined forces with the [dry-rb][dry-rb] team to rebuild Hanami on top of and around the dry-rb libraries. If you’ve ever had a passing interest in dry-rb, with Hanami 2.0 we’ve put together a curated experience and your easiest possible onramp.
+
+Hanami 2.0 marks a **major moment for Ruby ecosystem diversity.** We’re providing a compelling and distinct new vision for Ruby apps, and with this release backed by a compassionate and dedicated core team, you can feel confident Hanami will be here for the long run.
+
+Why don’t you take a look? We’d love for you to join us!
+
+You're just a few commands away to build **better, faster, stronger apps**:
+
+```shell
+$ gem install hanami
+$ hanami new bookshelf
+$ cd bookshelf
+$ bundle exec hanami server
+```
+
+[dry-rb]: https://dry-rb.org/
+
+Thank you from the Core Team of [Luca Guidi](https://github.com/jodosha), [Peter Solnica](https://github.com/solnic) and [Tim Riley](https://github.com/timriley).
 
 Thank you also to these wonderful people for contributing to Hanami 2.0!
 
@@ -354,8 +334,5 @@ Thank you also to these wonderful people for contributing to Hanami 2.0!
 - [Sean Collins](https://github.com/cllns)
 - [Xavier Noria](https://github.com/fxn)
 
-## Thank you
 
-Thank you so much for your support over the years as we built Hanami 2.0! It’s been a long journey, and we’re absolutely delighted (and only just a little bit tired) to be sharing this major new release with you!
-
-We can’t wait to hear how you use it, and we’re looking forward to being back again to share the rest of our vision with you! 🌸
+🌸
