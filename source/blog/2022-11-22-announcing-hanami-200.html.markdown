@@ -1,6 +1,6 @@
 ---
 title: "Hanami 2.0: Better, Faster, Stronger"
-date: 2022-11-22 12:00 UTC
+date: 2022-11-22 12:10 UTC
 tags: announcements
 author: Tim Riley
 image: true
