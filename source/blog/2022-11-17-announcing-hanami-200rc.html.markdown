@@ -5,28 +5,28 @@ tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  Introducing a distinct and compelling new vision for Ruby apps of all shapes and sizes.
+  A compelling new vision for Ruby apps of all shapes and sizes.
 ---
 
 After more than three years of work, Hanami 2.0 is here! This release marks a new era for Hanami, and presents a revolutionary new vision for Ruby applications!
 
 ## What is Hanami, and why does 2.0 matter?
 
-Since our beginning we’ve called Hanami a _modern web framework for Ruby_. With today’s release, it becomes so much more. Hanami 2.0 is **the framework for Ruby apps of all shapes and sizes.**
+Since our beginning we’ve called Hanami a _modern web framework for Ruby_. With today’s release, it becomes much more. Hanami 2.0 is now **the framework for Ruby apps of all shapes and sizes.**
 
-With Hanami 2.0 you can still have your “hello world” app running within minutes, but you’ll be doing so using a framework that provides everything you need for your app to grow without sacrificing maintainability. With its innovative component management, Deps mixin and slices, Hanami is the first Ruby framework to acknowledge the **critical need to organise your business logic**, and ship with all the tools necessary to do so.
+With Hanami 2.0 you’ll still have your “hello world” app running within minutes, and you’ll do it with a framework that also provides everything you need for your app to grow without sacrificing maintainability. With its innovative component management, Deps mixin and slices, Hanami is the first Ruby framework to acknowledge the **critical need to organise your business logic** and ship with all the tools to do so.
 
-The majority of the code you’ll write in an Hanami app will be glorious plain old Ruby. **This is a framework that works in service of your code, rather than the other way around.** Hanami’s own facilities, such as the router and actions, are designed to occupy their own distinct layers that decorate and call into your code.
+Most of the code you’ll write in your Hanami app will be glorious plain old Ruby. **Hanami is a framework that works in service of your code, rather than the other way around.** Hanami’s own facilities, such as the router and actions, are designed to occupy their own distinct layers that decorate and call into your code.
 
-**Hanami will help you level up as a Rubyist.** From the very beginning it encourages you to consider separation of concerns, dependencies, and layered applications, and through its own classes, gives you working examples to follow. If you’ve ever felt dissatisfied with how your Ruby apps have turned out, Hanami is for you! It will give you a new lens on Ruby.
+**Hanami will help you level up as a Rubyist.** From the very beginning it encourages you to consider separation of concerns, object dependencies and layered applications, and gives you working examples to follow from the design of its own classes. If you’ve ever felt dissatisfied with how your Ruby apps turn out, Hanami is for you! It provides a new lens on Ruby.
 
-With 2.0, Hanami apps are no longer just for the web: Hanami is now **the everything framework for Rubyists.** Remove a few lines from your `Gemfile` and you can have everything you need and nothing you don’t. Remove the router and controller, for example, and you can build a chatbot or a Kafka consumer and still take advantage of all the other conveniences the framework provides.
+With 2.0, Hanami apps are no longer just for the web. Hanami is now **the everything framework for Rubyists.** You can have everything you need and nothing you don’t. Remove hanami-router and hanami-controller from your Gemfile, for example, and you can build a chatbot or a Kafka consumer while still enjoying all the other conveniences the framework provides.
 
-This release is **a triumph of indie development.** To build Hanami 2.0, we teamed up with the [dry-rb][dry-rb] and rebuilt the framework on top of and around the dry-rb libraries. If you’ve ever had a passing interest in dry-rb, with Hanami 2.0 we’ve spent years putting together a curated experience and easiest possible onramp. It’s time to give it another look!
+This release is **a triumph of indie development.** After years of effort, our small group of volunteer developers has pulled it off! We also joined forces with the [dry-rb][dry-rb] team to rebuild Hanami on top of and around the dry-rb libraries. If you’ve ever had a passing interest in dry-rb, with Hanami 2.0 we’ve put together a curated experience and your easiest possible onramp. It’s time to give it another look!
 
-Hanami 2.0 also marks a **major moment for Ruby ecosystem diversity.** We’re providing a compelling and distinct new vision for Ruby apps, and with this release backed by a thoughtful and dedicated core team, you can feel confident Hanami will be here for the long run.
+Hanami 2.0 marks a **major moment for Ruby ecosystem diversity.** We’re providing a compelling and distinct new vision for Ruby apps, and with this release backed by a compassionate and dedicated core team, you can feel confident Hanami will be here for the long run.
 
-We’d love for you to join as and usher in a new breed of Ruby apps!
+Why don’t you take a look? We’d love for you to join us!
 
 [dry-rb]: https://dry-rb.org/
 
@@ -34,12 +34,12 @@ We’d love for you to join as and usher in a new breed of Ruby apps!
 
 Hanami 2.0 is jam packed with goodies:
 
-- An **advanced new application core** offering advanced code loading capabilities
+- A **new app core** offering advanced code loading capabilities, allowing you to organize your code however you want while providing sensible and familiar defaults
 - An **always-there dependencies mixin**, helping you draw clearer connections between your app's components
 - A **blazing fast new router**
 - **Redesigned action classes** that integrate seamlessly with your app's business logic
 - **Type-safe app settings** with dotenv integration, ensuring your app has everything it needs in every environment
-- New **providers** for flexibly managing the lifecycle of your app's critical components and integrations
+- New **providers** for managing the lifecycle of your app's critical components and integrations
 - New built-in **slices** for gradual modularisation as your app grows
 - A **rewritten getting started guide** to help you get going with all of the above
 
@@ -68,7 +68,7 @@ Hanami.app["actions.home.show"] # => #<Bookshelf::Actions::Home::Show>
 
 You can also choose to _prepare_ rather than fully boot your app. This loads the minimal set of files required for your app to load individual components on demand. This is how the Hanami console launches, and how your app is prepared for running unit tests.
 
-This means your experience interacting with your app remains as snappy as possible even as it grows to many hundreds or thousands of components. Your hanami console will always load in milliseconds, and your unit tests will keep you squarely in the TDD flow.
+This means your experience interacting with your app remains as snappy as possible, even as it grows to many hundreds or thousands of components. Your Hanami console will always load within milliseconds, and the fastest possible tests will keep you squarely in the development flow.
 
 ### Always-there dependencies mixin
 
@@ -101,7 +101,7 @@ RSpec.describe Bookshelf::Emails::DailyUpdate do
     described_class.new(email_client: email_client)
   }
 
-  let(:email_client) { spy(:email_client) }
+  let(:email_client) { instance_spy(:email_client, Bookshelf::EmailClient) }
 
   it "delivers the email" do
     daily_update.deliver("jane@example.com")
@@ -115,9 +115,7 @@ end
 
 You can specify as many dependencies as you need to the Deps mixin. With it taking pride of place at the top of each class, it will help you as quickly identify exactly how each object fits within the graph of your app's components.
 
-something something also helps you separate deps from other arguments?
-
-The Deps mixin makes object composition natural and low-friction, making it easy for you to break down unwieldy classes. Before long you’ll be creating better single-responsibility and reusable components, easier to test and easier to understand. Once you get started, you’ll never want to go back!
+The Deps mixin makes object composition natural and low-friction, making it easy for you to break down unwieldy classes. Before long you’ll be creating more focused, reusable components, easier to test and easier to understand. Once you get started, you’ll never want to go back!
 
 ### Blazing fast new router
 
@@ -141,7 +139,7 @@ We’ve completely rewritten the router’s engine, with benchmarks showing it [
 
 From routes we move to actions, the classes for handling individual HTTP endpoints. In Hanami 2.0 we’ve redesigned actions to fit seamlessly with the rest of your app.
 
-In your actions you can now `include Deps` like any other class, which makes it to keep your business logic separate and your actions focused on HTTP interactions only:
+In your actions you can now `include Deps` like any other class, which helps in keeping your business logic separate and your actions focused on HTTP interactions only:
 
 ```ruby
 module Bookshelf
@@ -151,7 +149,7 @@ module Bookshelf
         include Deps["book_repo"]
 
         params do
-          required(:slug).value(:string)
+          required(:slug).filled(:string)
         end
 
         def handle(request, response)
@@ -206,13 +204,13 @@ module Bookshelf
 end
 ```
 
-Hanami also loads your settings early in app boot and will raise an error for any settings that fail to meet their type expectations, giving you early feedback and ensuring your app doesn’t boot in a potentially invalid state.
+Hanami loads your settings early during the app’s boot process and will raise an error for any settings that fail to meet their type expectations, giving you early feedback and ensuring your app doesn’t boot in a potentially invalid state.
 
 [dotenv]: https://github.com/bkeepers/dotenv
 
 ### Providers
 
-So far we’ve seen how your classes and settings can be accessed as components in your app. But what about components that require special handling to initialize? For these, Hanami 2.0 introduces providers. Here’s one for the `"email_client"` component we used earlier, in `config/providers/email_client.rb`:
+So far we’ve seen how your classes and settings can be accessed as components in your app. But what about components that require special handling before they’re registered? For these, Hanami 2.0 introduces providers. Here’s one for the `"email_client"` component we used earlier, in `config/providers/email_client.rb`:
 
 ```ruby
 Hanami.app.register_provider :email_client do
@@ -221,8 +219,11 @@ Hanami.app.register_provider :email_client do
   end
 
   start do
+    # Grab our settings component from the app (the "target" for this provider)
+    settings = target["settings"]
+
     client = AcmeEmail::Client.new(
-      api_key: target["settings"].email_client_api_key,
+      api_key: settings.email_client_api_key,
       default_from: "no-reply@bookshelf.example.com"
     )
 
@@ -231,7 +232,9 @@ Hanami.app.register_provider :email_client do
 end
 ```
 
-Every provider has its own set of `prepare`/`start`/`stop` lifecycle steps, which is useful for setting up and using heavyweight components, or components that use tangible resources like database connections.
+Every provider can use its own set of `prepare`/`start`/`stop` lifecycle steps, which is useful for setting up and using heavyweight components, or components that use tangible resources like database connections.
+
+You can interact directly with these providers and their components, giving you to access to parts of your app in situations where you may only need a single component. A common example here would be running database migrations or precompiling static assets, which are tasks that can run in isolation from the rest of your app.
 
 ### Slices
 
@@ -240,6 +243,7 @@ As your app grows up, you may want to draw clear boundaries between its major ar
 To get started with a slice, create a directory under `slices/` and then start adding your code there, using a matching Ruby namespace. It’s that simple! Here’s a class that imports books for our bookshelf app:
 
 ```ruby
+# slices/feeds/process_feed.rb
 module Feeds
   class ProcessFeed
     def call(feed_url)
@@ -255,7 +259,7 @@ Each slice has its own slice class that behaves just like a miniature Hanami app
 Feeds::Slice["process_feed"] # => #<Feeds::ProcessFeed>
 ```
 
-Every slice imports some basic components from the app, like the `"settings"`, `"logger"` and `"inflector"`, and slices can also be configued to import components from each other. If we added an admin slice to our app, we could make it possible for it run feed processing by specifying an import in the slice class at `config/slices/admin.rb`:
+Every slice imports some basic components from the app, like the `"settings"`, `"logger"` and `"inflector"`, and slices can also be configued to import components from each other. If we added an admin slice to our app, we could allow it to invoke feed processing by specifying an import in the slice class at `config/slices/admin.rb`:
 
 ```ruby
 module Admin
