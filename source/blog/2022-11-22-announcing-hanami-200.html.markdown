@@ -18,7 +18,7 @@ Since the beginning we’ve called Hanami a _modern web framework for Ruby_. The
 
 For 2.0 we’ve gone further. We’ve **listened** to our community, we’ve **simplified and simplified again**, we’ve **sought new approaches** for building apps, and we’ve **dared to challenge the status quo.**
 
-In turn, **we want you to challenge yourself**. We want you to try something new, to experiment, to level up as an engineer, to dare to change, just as as we did. Without change, there is no challenge, and without challenge, there is no growth.
+In turn, **we want you to challenge yourself**. We want you to try something new, to experiment, to level up as an engineer. To dare to change, just as as we did. Without change, there is no challenge, and without challenge, there is no growth.
 
 ### What’s better with 2.0?
 
