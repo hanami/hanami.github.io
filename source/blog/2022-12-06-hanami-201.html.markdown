@@ -1,0 +1,57 @@
+---
+title: "Hanami 2.0.1"
+date: 2022-12-06 12:10 UTC
+tags: announcements
+author: Luca Guidi
+image: true
+excerpt: >
+  Hanami 2.0.1: small enhancements and bug fixes
+---
+
+Hello again, friends! We’re excited to share our release of Hanami 2.0.1!
+
+It ships with small enhancements and minor bug fixes, after our [2.0.0 release](/blog/2022/11/22/announcing-hanami-200/).
+
+## Enhancements and Bug Fixes
+
+  * Ensure `Content-Security-Policy` HTTP response header to be returned as a single line
+  * Ensure to load `.env` files during CLI commands execution
+  * Ensure `hanami server` to respect HTTP port used in `.env` or the value given as CLI argument (`--port`)
+  * Return HTTP response header `Allow` when returning `405` HTTP status
+  * Introduce `Hanami::Middleware::BodyParser::FormParser` to parse multipart file upload
+  * Make `Hanami::Utils::Callbacks::Chain` and `Hanami::Utils::Callbacks::Callback` comparable via `#==` based on their contents, rather than their object identity
+
+## Released Gems
+
+  * `hanami` `2.0.1`
+  * `hanami-reloader` `2.0.1`
+  * `hanami-cli` `2.0.1`
+  * `hanami-router` `2.0.1`
+  * `hanami-utils` `2.0.1`
+
+## How To Upgrade
+
+How to upgrade from a Hanami app:
+
+```shell
+$ bundle update hanami-utils hanami-router hanami-cli hanami-reloader hanami
+```
+
+How to try Hanami for the first time:
+
+```shell
+$ gem install hanami
+$ hanami new bookshelf
+$ cd bookshelf
+$ bundle exec hanami server # visit http://localhost:2300
+```
+
+## Thank You
+
+Thank you also to these wonderful people for contributing to Hanami 2.0.1!
+
+- [Luca Guidi](https://github.com/jodosha)
+- [Tim Riley](https://github.com/timriley)
+- [Armin](https://github.com/wuarmin)
+
+🌸
