@@ -1,6 +1,6 @@
 ---
 title: "Hanami 2.0.1"
-date: 2022-12-06 12:10 UTC
+date: 2022-12-06 07:59:05 UTC
 tags: announcements
 author: Luca Guidi
 image: true
@@ -17,6 +17,7 @@ It ships with small enhancements and minor bug fixes, after our [2.0.0 release](
   * Ensure `Content-Security-Policy` HTTP response header to be returned as a single line
   * Ensure to load `.env` files during CLI commands execution
   * Ensure `hanami server` to respect HTTP port used in `.env` or the value given as CLI argument (`--port`)
+  * Ensure Rack events are on internal notifications system
   * Return HTTP response header `Allow` when returning `405` HTTP status
   * Introduce `Hanami::Middleware::BodyParser::FormParser` to parse multipart file upload
   * Make `Hanami::Utils::Callbacks::Chain` and `Hanami::Utils::Callbacks::Callback` comparable via `#==` based on their contents, rather than their object identity
