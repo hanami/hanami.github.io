@@ -1,0 +1,44 @@
+---
+title: "Hanami 2.0.2"
+date: 2022-12-25 12:59:22 UTC
+tags: announcements
+author: Luca Guidi
+image: true
+excerpt: >
+  Hanami 2.0.2: Official support for Ruby 3.2
+---
+
+Following Ruby tradition to release on Christmas, we want to contribute with our own gift: Hanami 2.0.2!
+
+## Released Gems
+
+  * `hanami` `2.0.2`
+  * `hanami-reloader` `2.0.2`
+  * `hanami-rspec` `2.0.1`
+  * `hanami-cli` `2.0.2`
+  * `hanami-controller` `2.0.1`
+  * `hanami-router` `2.0.2`
+  * `hanami-validations` `2.0.1`
+  * `hanami-utils` `2.0.2`
+
+## How To Upgrade
+
+How to upgrade from a Hanami app:
+
+```shell
+$ bundle update hanami-utils hanami-validations \
+                hanami-router hanami-controller \
+                hanami-cli hanami-rspec \
+                hanami-reloader hanami
+```
+
+How to try Hanami for the first time:
+
+```shell
+$ gem install hanami
+$ hanami new bookshelf
+$ cd bookshelf
+$ bundle exec hanami server # visit http://localhost:2300
+```
+
+🌸

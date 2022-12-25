@@ -101,15 +101,15 @@ helpers do
   end
 
   def current_ruby_version
-    "3.1.2"
+    "3.2.0"
   end
 
   def hanami_version
-    '2.0.1'
+    '2.0.2'
   end
 
   def hanami_release_date
-    Date.parse("2022-12-06").strftime("%B %-d, %Y")
+    Date.parse("2022-12-25").strftime("%B %-d, %Y")
   end
 end
 
