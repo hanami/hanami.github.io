@@ -1,0 +1,128 @@
+---
+title: "Hanami 2.0.3"
+date: 2023-02-01 07:59:05 UTC
+tags: announcements
+author: Luca Guidi
+image: true
+excerpt: >
+  Hanami v2.0.3: params pattern matching, HTTP statuses as symbols, small enhancements and bug fixes
+---
+
+Hello again, friends! New month, new Hanami release: v2.0.3!
+
+It ships with small enhancements and minor bug fixes.
+
+## Params Pattern Matching
+
+Pattern Matching on request params is helpful to expand values into local variables:
+
+```ruby
+# frozen_string_literal: true
+
+module MyApp
+  module Actions
+    module Graphql
+      class Show < MyApp::Action
+        # ...
+
+        def handle(req, res)
+          # ...
+
+          req.params => {query:, variables:}
+          res.body = schema.execute(query, variables:).to_json
+        end
+      end
+    end
+  end
+end
+```
+
+## HTTP Statuses as Symbols
+
+From now on it's possible to reference the HTTP statuses, not only via an `Integer`, but also with a `Symbol`.
+
+Check our guides, for the entire [list of allowed HTTP statuses](https://guides.hanamirb.org/v2.0/actions/status-codes/).
+
+```ruby
+# frozen_string_literal: true
+
+module MyApp
+  module Actions
+    module Account
+      class Show < MyApp::Action
+        def handle(req, res)
+          halt :unauthorized unless logged_in?
+          # ...
+        end
+      end
+    end
+  end
+end
+```
+
+```ruby
+# frozen_string_literal: true
+
+module MyApp
+  module Actions
+    module Account
+      class Update < MyApp::Action
+        def handle(req, res)
+          unless req.params.valid?
+            res.status = :unprocessable_entity
+            # ...
+          end
+        end
+      end
+    end
+  end
+end
+```
+
+## Enhancements and Bug Fixes
+
+  * Ensure to setup a logger in a non-default Hanami env
+  * Use production logger settings for non-default Hanami env
+  * Ensure action accepting the request with a custom MIME Type
+  * Allow slices to have a default for registrations directory
+  * Halting with an unknown HTTP code will raise a `Hanami::Action::UnknownHttpStatusError`
+  * Ensure to run automatically bundle gems when using `hanami new` on Windows
+  * Ensure to generate the correct action identifier in routes when using `hanami generate action` with deeply nested action name
+  * `Hanami::Utils::Blank.blank?` to check if the current object is non-nil
+
+## Released Gems
+
+  * `hanami` `2.0.3`
+  * `hanami-cli` `2.0.3`
+  * `hanami-controller` `2.0.2`
+  * `hanami-utils` `2.0.3`
+
+## How To Upgrade
+
+How to upgrade from a Hanami app:
+
+```shell
+$ bundle update hanami-utils hanami-controller hanami-cli hanami
+```
+
+How to try Hanami for the first time:
+
+```shell
+$ gem install hanami
+$ hanami new bookshelf
+$ cd bookshelf
+$ bundle exec hanami server # visit http://localhost:2300
+```
+
+## Thank You
+
+Thank you also to these wonderful people for contributing to Hanami 2.0.3!
+
+- [Luca Guidi](https://github.com/jodosha)
+- [Pat Allan](https://github.com/pat)
+- [Adam Lassek](https://github.com/alassek)
+- [R Gibim](https://github.com/Drowze)
+- [hi-tech-jazz](https://github.com/hi-tech-jazz)
+- [dsisnero](https://github.com/dsisnero)
+
+🌸
