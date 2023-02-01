@@ -84,6 +84,7 @@ end
   * Ensure to setup a logger in a non-default Hanami env
   * Use production logger settings for non-default Hanami env
   * Ensure action accepting the request with a custom MIME Type
+  * Fix error message for missing format (MIME Type)
   * Allow slices to have a default for registrations directory
   * Halting with an unknown HTTP code will raise a `Hanami::Action::UnknownHttpStatusError`
   * Ensure to run automatically bundle gems when using `hanami new` on Windows
