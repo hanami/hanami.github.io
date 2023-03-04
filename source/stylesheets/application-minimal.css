@@ -357,3 +357,28 @@ table.status td {
 .status-hanami-2-na {
   background-color: silver;
 }
+
+@media (min-width: 768px) {
+  #trusted-by-logos .row {
+    margin: 20px 0;
+  }
+}
+
+#trusted-by-logos a {
+  display: flex;
+  align-items: center;
+  height: 90px;
+}
+
+#trusted-by-logos a img {
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+.p-t-sm {
+  padding-top: 10px;
+}
+
+.p-b-sm {
+  padding-bottom: 10px;
+}
