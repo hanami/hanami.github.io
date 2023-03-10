@@ -48,4 +48,4 @@ The security announcement will contain:
 
 ## Supported versions
 
-We currently support the `1.x` series of Hanami.
+We currently support the `2.x` and `1.x` series of Hanami.
