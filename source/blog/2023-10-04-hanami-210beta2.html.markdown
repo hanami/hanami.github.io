@@ -44,7 +44,7 @@ With your initial assets files in place, you can hop over to your view layout to
 
 And with that, you’re done! Your app is now serving your custom styles and JavaScript behavior.
 
-We provide a [complete range of helpers](https://github.com/hanami/hanami/blob/ccf1a264e28afd3b0072af746d64af733e173b5e/lib/hanami/helpers/assets_helper.rb#L1) for working with your assets in various ways, including `asset_url`, `image_tag` and more.
+We provide a [complete range of helpers](https://github.com/hanami/hanami/blob/ccf1a264e28afd3b0072af746d64af733e173b5e/lib/hanami/helpers/assets_helper.rb#L1) for working with your assets in various ways, including `js`, `css` (or their wordier equivalents, `javascript_tag`, `stylesheet_link_tag`) `asset_url`, `image_tag` and more.
 
 For users of Hanami slices, we have you covered too: assets can live within each slice, in `slices/[slice_name]/assets` directories that can have the same structure as the app-level slices.
 
