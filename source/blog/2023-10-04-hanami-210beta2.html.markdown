@@ -59,16 +59,12 @@ Since our assets support is brand new, we need your help! We’d love you to giv
 Today we’re releasing the following gems:
 
 - hanami v2.1.0.beta2
-- hanami-assets v2.1.0.beta2
-- hanami-cli v2.1.0.beta2
-- hanami-controller v2.1.0.beta2
 - hanami-reloader v2.1.0.beta2
-- hanami-router v2.1.0.beta2
-- hanami-rspec v2.1.0.beta2
-- hanami-utils v2.1.0.beta2
-- hanami-validations v2.1.0.beta2
-- hanami-view v2.1.0.beta2
 - hanami-webconsole v2.1.0.beta2
+- hanami-cli v2.1.0.beta2
+- hanami-assets v2.1.0.beta2
+- hanami-view v2.1.0.beta2
+- hanami-controller v2.1.0.beta2
 
 For specific changes in this beta release, please see each gem’s own CHANGELOG.
 
@@ -83,7 +79,7 @@ For specific changes in this beta release, please see each gem’s own CHANGELOG
 
 ## What’s next for 2.1?
 
-From here, we’ll be working through the small number of “Todo” items remaining on our [Hanami v2.1 proejct board](https://github.com/orgs/hanami/projects/2/views/1). These are mostly just polish and preparation tasks.
+From here, we’ll be working through the small number of “Todo” items remaining on our [Hanami v2.1 project board](https://github.com/orgs/hanami/projects/2/views/1). These are mostly just polish and preparation tasks.
 
 Depending on what we learn from your testing and feedback, this means the full 2.1 release may only be a matter of weeks away! We’ll also be focusing on getting our docs ready to go as well, and we’ll begin to release these as soon as they start to come together.
 
