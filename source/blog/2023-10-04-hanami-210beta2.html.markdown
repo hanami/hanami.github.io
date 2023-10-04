@@ -1,0 +1,120 @@
+---
+title: Hanami 2.1.0.beta2
+date: 2023-10-04 07:24 UTC
+tags: announcements
+author: Tim Riley
+image: true
+excerpt: >
+  Previewing front end assets for Hanami 2.1 and our new CLI command: hanami dev.
+---
+
+**Today we’re excited to release Hanami 2.1.0.beta2 and share a preview of Hanami’s front end assets experience.**
+
+## `hanami dev`
+
+It all starts with a new command: `hanami dev`.
+
+Running `hanami dev` starts the familiar Hanami web server alongside our new **front end assets watcher and compiler**. This is based on [esbuild](https://esbuild.github.io), and uses a [brand new plugin](https://github.com/hanami/assets-js) to make it aware of Hanami’s app structure.
+
+Hanami’s assets support now requires [Node.js](https://nodejs.org) and [npm](https://www.npmjs.com) to work.
+
+## App structure for assets
+
+Your assets live in `app/assets/`. JavaScript files live under `js/` and serve as your main entry points.
+
+Here’s an example `app/assets/app.ts`:
+
+```ts
+import "../css/app.css";
+
+console.log("Hello from app.ts");
+```
+
+As you can see, [TypeScript](https://www.typescriptlang.org) support comes out of the box. Just run `npm install typescript --save-dev`.
+
+With your initial assets files in place, you can hop over to your view layout to include them:
+
+`app/views/layouts/app.html.erb`
+
+```erb
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookshelf</title>
+    <%= favicon %>
+    <%= css "app" %>
+  </head>
+  <body>
+    <%= yield %>
+    <%= js "app" %>
+  </body>
+</html>
+```
+
+And with that, you’re done! Your app is now serving your custom styles and JavaScript behavior.
+
+## View helpers for assets
+
+We provide a [complete range of helpers](https://github.com/hanami/hanami/blob/965aa5aeb25b0a16b9c519866f14b4fa916d290a/lib/hanami/helpers/assets_helper.rb#L1) for working with your assets in various ways, including `js`, `css` (or their fuller equivalents, `javascript` and `stylesheet`) `asset_url`, `image` and more.
+
+## Assets for slices
+
+For users of Hanami slices, we have you covered too: assets can live within each slice, in `slices/[slice_name]/assets` directories that can take the same structure as the app-level assets.
+
+## CLI commands
+
+Along with the `hanami dev` command, you can also use the `hanami assets compile` and `hanami assets watch` commands directly.
+
+## We need your help!
+
+If you’ve been waiting for the full stack Hanami experience, this beta release is a huge step forward.
+
+Since our assets support is brand new, we need your help! We’d love you to give this a try with your favorite front end tools and packages, and [let us know how you go](https://discourse.hanamirb.org).
+
+## What’s included?
+
+Today we’re releasing the following gems:
+
+- hanami v2.1.0.beta2
+- hanami-reloader v2.1.0.beta2
+- hanami-webconsole v2.1.0.beta2
+- hanami-cli v2.1.0.beta2
+- hanami-assets v2.1.0.beta2
+- hanami-view v2.1.0.beta2
+- hanami-controller v2.1.0.beta2
+- hanami-assets v2.1.0-beta.2 (npm package)
+
+For specific changes in this beta release, please see each gem’s own CHANGELOG.
+
+## How can I try it?
+
+```shell
+> gem install foreman
+> gem install hanami --pre
+> hanami new my_app
+> cd my_app
+> bundle exec hanami dev
+```
+
+## What’s next for 2.1?
+
+From here, we’ll be working through the small number of “Todo” items remaining on our [Hanami v2.1 project board](https://github.com/orgs/hanami/projects/2/views/1). These are mostly just polish and preparation tasks.
+
+Depending on what we learn from your testing and feedback, this means **the full 2.1 release may only be a matter of weeks away!** We’ll also be focusing on getting our docs ready to go as well, and we’ll begin to release these as soon as they start to come together.
+
+## Contributors
+
+Thank you to these fine people for contributing to this release!
+
+- [Luca Guidi](https://github.com/jodosha)
+- [Tim Riley](https://github.com/timriley)
+- [Philip Arndt](https://github.com/parndt)
+- [Ryan Bigg](https://github.com/radar)
+
+## Thank you
+
+Thank you as always for supporting Hanami!
+
+We’re very excited to be nearing 2.1, and we can’t wait to hear from you about this beta! 🌸
