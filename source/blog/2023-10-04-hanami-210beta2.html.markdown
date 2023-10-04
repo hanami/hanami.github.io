@@ -5,7 +5,7 @@ tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  Previewing front end assets for Hanami 2.1. New CLI command: `hanami dev`.
+  Previewing front end assets for Hanami 2.1 and our new CLI command: hanami dev.
 ---
 
 **Today we’re excited to release Hanami 2.1.0.beta2 and share a preview of Hanami’s front end assets experience.**
@@ -14,15 +14,15 @@ excerpt: >
 
 It all starts with a new command: `hanami dev`.
 
-Running `hanami dev` starts the familiar Hanami **web server** alongside our new front end **assets watcher** and compiler. This is based on **[esbuild](https://esbuild.github.io)**, and uses a [brand new plugin](https://github.com/hanami/assets-js) to make it aware of Hanami’s app structure.
+Running `hanami dev` starts the familiar Hanami web server alongside our new **front end assets watcher and compiler**. This is based on [esbuild](https://esbuild.github.io), and uses a [brand new plugin](https://github.com/hanami/assets-js) to make it aware of Hanami’s app structure.
 
-Hanami assets management now requires a Node and NPM to work.
+Hanami’s assets support now requires [Node.js](https://nodejs.org) and [npm](https://www.npmjs.com) to work.
 
-## App Structure for Assets
+## App structure for assets
 
-Your assets live in `app/assets/`. JavaScript files live under `js/` and serve as your main entry points. Here’s an example:
+Your assets live in `app/assets/`. JavaScript files live under `js/` and serve as your main entry points.
 
-`app/assets/app.ts`
+Here’s an example `app/assets/app.ts`:
 
 ```ts
 import "../css/app.css";
@@ -55,15 +55,19 @@ With your initial assets files in place, you can hop over to your view layout to
 
 And with that, you’re done! Your app is now serving your custom styles and JavaScript behavior.
 
-## View Helpers for Assets
+## View helpers for assets
 
-We provide a [complete range of helpers](https://github.com/hanami/hanami/blob/965aa5aeb25b0a16b9c519866f14b4fa916d290a/lib/hanami/helpers/assets_helper.rb#L1) for working with your assets in various ways, including `js`, `css` (or their wordier equivalents, `javascript`, `stylesheet`) `asset_url`, `image` and more.
+We provide a [complete range of helpers](https://github.com/hanami/hanami/blob/965aa5aeb25b0a16b9c519866f14b4fa916d290a/lib/hanami/helpers/assets_helper.rb#L1) for working with your assets in various ways, including `js`, `css` (or their fuller equivalents, `javascript` and `stylesheet`) `asset_url`, `image` and more.
+
+## Assets for slices
 
 For users of Hanami slices, we have you covered too: assets can live within each slice, in `slices/[slice_name]/assets` directories that can take the same structure as the app-level assets.
 
-## CLI Commands
+## CLI commands
 
 Along with the `hanami dev` command, you can also use the `hanami assets compile` and `hanami assets watch` commands directly.
+
+## We need your help!
 
 If you’ve been waiting for the full stack Hanami experience, this beta release is a huge step forward.
 
@@ -80,7 +84,7 @@ Today we’re releasing the following gems:
 - hanami-assets v2.1.0.beta2
 - hanami-view v2.1.0.beta2
 - hanami-controller v2.1.0.beta2
-- hanami-assets v2.1.0-beta.2 (NPM Package)
+- hanami-assets v2.1.0-beta.2 (npm package)
 
 For specific changes in this beta release, please see each gem’s own CHANGELOG.
 
