@@ -8,7 +8,7 @@ excerpt: >
   Previewing front end assets for Hanami 2.1 and our new CLI command: hanami dev.
 ---
 
-**Today we’re excited to release Hanami 2.1.0.beta2 and share a preview of Hanami’s front end assets experience.**
+**Today we’re excited to release Hanami `v2.1.0.beta2` and share a preview of Hanami’s front end assets experience.**
 
 ## `hanami dev`
 
@@ -118,3 +118,7 @@ Thank you to these fine people for contributing to this release!
 Thank you as always for supporting Hanami!
 
 We’re very excited to be nearing 2.1, and we can’t wait to hear from you about this beta! 🌸
+
+---
+
+**EDIT: We released `v2.1.0.beta2.1` because one Pull Request wasn't merged before the release. Sorry for the problem.**
