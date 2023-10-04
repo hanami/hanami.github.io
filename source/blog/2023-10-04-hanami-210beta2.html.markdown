@@ -1,6 +1,6 @@
 ---
 title: Hanami 2.1.0.beta2
-date: 2023-10-04 09:00 UTC
+date: 2023-10-04 09:06 UTC
 tags: announcements
 author: Tim Riley
 image: true
