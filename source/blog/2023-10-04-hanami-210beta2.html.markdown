@@ -22,7 +22,7 @@ Hanami’s assets support now requires [Node.js](https://nodejs.org) and [npm](h
 
 Your assets live in `app/assets/`. JavaScript files live under `js/` and serve as your main entry points.
 
-Here’s an example `app/assets/app.ts`:
+Here’s an example `app/assets/js/app.ts`:
 
 ```ts
 import "../css/app.css";
