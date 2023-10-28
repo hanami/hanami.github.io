@@ -5,10 +5,10 @@ tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  A svelte new welcome screen, next level assets flexibility, and our last stop before 2.1.0!
+  A stylish new welcome screen, next level assets flexibility, and our last stop before 2.1.0!
 ---
 
-**Today we’re excited to release Hanami `v2.1.0.rc1`, the final stop before our stable 2.1.0 release!** This release brings a svelte new welcome experience, next level assets flexibility, and a range of view parts and helpers improvements. It is also our last stop before 2.1.0!
+**Today we’re excited to release Hanami `v2.1.0.rc1`, the final stop before our stable 2.1.0 release!** This release brings a stylish new welcome experience, next level assets flexibility, and a range of view parts and helpers improvements. It is also our last stop before 2.1.0!
 
 ## New welcome and error pages
 
