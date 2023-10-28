@@ -74,7 +74,7 @@ This file is yours to own and modify, so you can feel free to add any other dev 
 
 After beta2, we made some refinments to our assets helper names to minimise naming collisions in your views. The adjusted names are `javascript_tag`, `stylesheet_tag`, `favicon_tag`, `image_tag`, `video_tag` and `audio_tag`.
 
-In addition, helpers inside your view part classes are now contained inside a single `helpers` object, ensuring no collisions with the many method names that view parts forwrd to your app’s domain objects. Accessing a helper inside a view part new looks like this:
+In addition, helpers inside your view part classes are now contained inside a single `helpers` object, ensuring no collisions with the many method names that view parts forward to your app’s domain objects. Accessing a helper inside a view part now looks like this:
 
 ```ruby
 module MyApp
