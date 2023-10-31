@@ -1,6 +1,6 @@
 ---
 title: Hanami 2.1.0.rc1
-date: 2023-10-24 12:00 UTC
+date: 2023-11-01 12:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
