@@ -1,0 +1,140 @@
+---
+title: Hanami 2.1.0.rc1
+date: 2023-11-01 09:09 UTC
+tags: announcements
+author: Tim Riley
+image: true
+excerpt: >
+  A stylish new welcome screen, next level assets flexibility, and our last stop before 2.1.0!
+---
+
+**Today we’re excited to release Hanami `v2.1.0.rc1`, the final stop before our stable 2.1.0 release!** This release brings a stylish new welcome experience, next level assets flexibility, and a range of view parts and helpers improvements. It is also our last stop before 2.1.0!
+
+## New welcome and error pages
+
+Your Hanami app now ships with a helpful and downright gorgeous first-run welcome screen, in both light and dark modes:
+
+![Welcome screen in light mode](/blog/2023/11/01/hanami-210rc1/welcome-light.png)
+
+![Welcome screen in dark mode](/blog/2023/11/01/hanami-210rc1/welcome-dark.png)
+
+This welcome screen displays whenever you boot the app without any routes.
+
+Along with this, we’re also giving your app elegant new designs for its production mode 404 and 500 error pages. These pages exist inside your apps `public/` directory, so you can customize these as required, though we wouldn’t blame you at all for rolling with these ones at least for a while:
+
+![Error 404 screen in light mode](/blog/2023/11/01/hanami-210rc1/error-404-light.png)
+
+![Error 404 screen in dark mode](/blog/2023/11/01/hanami-210rc1/error-404-dark.png)
+
+We’d like to extend a **huge thanks** to [Aaron Moodie](https://github.com/aaronmoodie) for designing and building these screens.
+
+## Next level assets flexibility
+
+As of this release, your Hanami app will come with a new `config/assets.mjs` file. By default, it is nice and streamlined:
+
+```js
+import * as assets from "hanami-assets";
+
+await assets.run();
+```
+
+For many apps and their assets, this out of the box arrangement will be enough, and you shouldn’t need to touch this file.
+
+If you need something a little more, you can now use this file to configure and activate any number of [esbuild plugins](https://github.com/esbuild/community-plugins). For example, to use the [postcss plugin](https://github.com/karolis-sh/esbuild-postcss):
+
+```js
+import * as assets from "hanami-assets";
+import postcss from "esbuild-postcss";
+
+await assets.run({
+  esbuildOptionsFn: (args, esbuildOptions) => {
+    const plugins = [...esbuildOptions.plugins, postcss()];
+
+    return {
+      ...esbuildOptions,
+      plugins,
+    };
+  },
+});
+```
+
+With this `esbuildOptionsFn`, you can mix your own [esbuild options](https://esbuild.github.io), into ours, offering support for all kinds of assets setups.
+
+The `hanami assets` now also work via a single `"assets"` script managed within `package.json`, affording you even more flexibility if you need a completely exotic setup for your assets, but want to maintain our standard CLI experience for your developers.
+
+## Streamlined `hanami dev` via `bin/dev`
+
+New Hanami apps will now have their own `bin/dev` script, which will be run by the `hanami dev` CLI command.
+
+By default, this file auto-installs the [Foreman](https://github.com/ddollar/foreman) gem, so you can run your Hanami dev servers without any other setup.
+
+This file is yours to own and modify, so you can feel free to add any other dev server affordances here.
+
+## Parts and helper adjustments
+
+After beta2, we made some refinments to our assets helper names to minimise naming collisions in your views. The adjusted names are `javascript_tag`, `stylesheet_tag`, `favicon_tag`, `image_tag`, `video_tag` and `audio_tag`.
+
+In addition, helpers inside your view part classes are now contained inside a single `helpers` object, ensuring no collisions with the many method names that view parts forward to your app’s domain objects. Accessing a helper inside a view part now looks like this:
+
+```ruby
+module MyApp
+  module Views
+    module Parts
+      class Post
+        def title_header
+          helpers.tag.h1(title)
+        end
+      end
+    end
+  end
+end
+```
+
+Finally, we added a new `hanami generate part` CLI command, which will generate both a new part and a file for its unit tests (standalone testing of view behavior via parts is one of their best features!).
+
+Thanks very much to [Philip Arndt](https://github.com/parndt) for his field testing and feedback in this area.
+
+## We need your help!
+
+Our stable 2.1.0 release is just weeks away! We now consider 2.1.0 to be frozen, and we need your help to shake out any bugs.
+
+Since we introduced our assets support in 2.1.0.beta2 just two weeks ago, early feedback from our users has helped us deliver all the improvements above.
+
+You can help here too! We’d love you to give this a try with your favorite front end tools and packages, and [let us know how you go](https://discourse.hanamirb.org).
+
+## What’s included?
+
+Today we’re releasing the following gems:
+
+- hanami v2.1.0.rc1
+- hanami-rspec v2.1.0.rc1
+- hanami-cli v2.1.0.rc1
+- hanami-assets v2.1.0.rc1
+- hanami-view v2.1.0.rc1
+- hanami-controller v2.1.0.rc1
+- hanami-assets v2.1.0-rc.1 (npm package)
+
+For specific changes in this beta release, please see each gem’s own CHANGELOG.
+
+## How can I try it?
+
+```shell
+> gem install hanami --pre
+> hanami new my_app
+> cd my_app
+> bundle exec hanami dev
+```
+
+## Contributors
+
+Thank you to these fine people for contributing to this release!
+
+- [Aaron Moodie](https://github.com/aaronmoodie)
+- [Luca Guidi](https://github.com/jodosha)
+- [Paweł Świątkowski](https://github.com/katafrakt)
+- [Philip Arndt](https://github.com/parndt)
+- [Tim Riley](https://github.com/timriley)
+
+## Thank you
+
+Thank you as always for supporting Hanami! We can’t wait to hear from you about this release candidate! 🌸
