@@ -1,6 +1,6 @@
 ---
 title: Hanami 2.1.0.rc1
-date: 2023-11-01 12:00 UTC
+date: 2023-11-01 09:09 UTC
 tags: announcements
 author: Tim Riley
 image: true
@@ -107,8 +107,7 @@ You can help here too! We’d love you to give this a try with your favorite fro
 Today we’re releasing the following gems:
 
 - hanami v2.1.0.rc1
-- hanami-reloader v2.1.0.rc1
-- hanami-webconsole v2.1.0.rc1
+- hanami-rspec v2.1.0.rc1
 - hanami-cli v2.1.0.rc1
 - hanami-assets v2.1.0.rc1
 - hanami-view v2.1.0.rc1
@@ -132,6 +131,7 @@ Thank you to these fine people for contributing to this release!
 
 - [Aaron Moodie](https://github.com/aaronmoodie)
 - [Luca Guidi](https://github.com/jodosha)
+- [Paweł Świątkowski](https://github.com/katafrakt)
 - [Philip Arndt](https://github.com/parndt)
 - [Tim Riley](https://github.com/timriley)
 
