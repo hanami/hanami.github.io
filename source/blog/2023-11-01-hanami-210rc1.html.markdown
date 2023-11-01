@@ -14,17 +14,17 @@ excerpt: >
 
 Your Hanami app now ships with a helpful and downright gorgeous first-run welcome screen, in both light and dark modes:
 
-![Welcome screen in light mode](/blog/2023/10/26/hanami-210rc1/welcome-light.png)
+![Welcome screen in light mode](/blog/2023/11/01/hanami-210rc1/welcome-light.png)
 
-![Welcome screen in dark mode](/blog/2023/10/26/hanami-210rc1/welcome-dark.png)
+![Welcome screen in dark mode](/blog/2023/11/01/hanami-210rc1/welcome-dark.png)
 
 This welcome screen displays whenever you boot the app without any routes.
 
 Along with this, we’re also giving your app elegant new designs for its production mode 404 and 500 error pages. These pages exist inside your apps `public/` directory, so you can customize these as required, though we wouldn’t blame you at all for rolling with these ones at least for a while:
 
-![Error 404 screen in light mode](/blog/2023/10/26/hanami-210rc1/error-404-light.png)
+![Error 404 screen in light mode](/blog/2023/11/01/hanami-210rc1/error-404-light.png)
 
-![Error 404 screen in dark mode](/blog/2023/10/26/hanami-210rc1/error-404-dark.png)
+![Error 404 screen in dark mode](/blog/2023/11/01/hanami-210rc1/error-404-dark.png)
 
 We’d like to extend a **huge thanks** to [Aaron Moodie](https://github.com/aaronmoodie) for designing and building these screens.
 
