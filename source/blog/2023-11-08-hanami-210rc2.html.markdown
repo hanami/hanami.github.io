@@ -17,11 +17,15 @@ We discovered a couple of blockers for people generating new apps. These are now
 - The correct helpers in the default `app/templates/layouts/app.html.erb` layout.
 - The proper version string for prerelease versions of our hanami-assets package in `package.json`.
 
+In addition, detailed error messages (controlled via `config.render_detailed_errors`) will now default only show when the app is the development environment. Previously, they also showed in the test environment. This change ensures that error output will not accidentally trigger false positives in your tests.
+
 ## Polish
 
 We now generate the `"type": "module"` [directive](https://nodejs.org/api/packages.html#type) in  `package.json`, so front end JavaScript for new Hanami apps will now use [ES modules](https://nodejs.org/api/esm.html) by default. This allows our assets config at `config/assets.js` to use the conventional `.js` file extension, instead of `.mjs` as previously generated.
 
 Our RSpec support has been made friendlier for full stack apps, with [Capybara](https://github.com/teamcapybara/capybara) support now included by default. Our standard RSpec setup in `spec/support/rspec.rb` now includes code comments detailing the purpose of the various configs, making these easier to use or tailor to your preferences.
+
+The `hanami generate action` and `hanami generate part` CLI command now accept a `--skip-tests` flag to skip test generation.
 
 ## Guides
 
@@ -39,15 +43,15 @@ We’d love you to give this release a try, especially for building views and us
 
 Today we’re releasing the following gems:
 
-- hanami v2.1.0.rc1
-- hanami-assets v2.1.0.rc1
-- hanami-cli v2.1.0.rc1
-- hanami-controller v2.1.0.rc1
-- hanami-reloader v2.1.0.rc1
-- hanami-router v2.1.0.rc1
-- hanami-validations v2.1.0.rc1
-- hanami-view v2.1.0.rc1
-- hanami-webconsole v2.1.0.rc1
+- hanami v2.1.0.rc2
+- hanami-assets v2.1.0.rc2
+- hanami-cli v2.1.0.rc2
+- hanami-controller v2.1.0.rc2
+- hanami-reloader v2.1.0.rc2
+- hanami-router v2.1.0.rc2
+- hanami-validations v2.1.0.rc2
+- hanami-view v2.1.0.rc2
+- hanami-webconsole v2.1.0.rc2
 - hanami-assets v2.1.0-rc.2 (npm package)
 
 For specific changes in this release, please see each gem’s own CHANGELOG.
