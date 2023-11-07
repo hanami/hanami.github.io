@@ -25,7 +25,7 @@ We now generate the `"type": "module"` [directive](https://nodejs.org/api/packag
 
 Our RSpec support has been made friendlier for full stack apps, with [Capybara](https://github.com/teamcapybara/capybara) support now included by default. Our standard RSpec setup in `spec/support/rspec.rb` now includes code comments detailing the purpose of the various configs, making these easier to use or tailor to your preferences.
 
-The `hanami generate action` and `hanami generate part` CLI command now accept a `--skip-tests` flag to skip test generation.
+The `hanami generate action` and `hanami generate part` CLI commands now accept a `--skip-tests` flag to skip test generation.
 
 ## Guides
 
