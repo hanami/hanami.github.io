@@ -62,6 +62,7 @@ For specific changes in this release, please see each gem’s own CHANGELOG.
 
 ```shell
 > gem install hanami --pre
+> gem install hanami-cli --pre
 > hanami new my_app
 > cd my_app
 > bundle exec hanami dev
