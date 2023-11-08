@@ -1,0 +1,81 @@
+---
+title: Hanami 2.1.0.rc2
+date: 2023-11-08 08:19 UTC
+tags: announcements
+author: Tim Riley
+image: true
+excerpt: >
+  Some final fixes and polish, along with a preview of our guides.
+---
+
+We’ve had some very helpful testing and feedback since our 2.1.0.rc1 release last week, so today we’re happy to back with an rc2 release, bringing a range of fixes and polish. We’re also happy to release a preview of our 2.1 guides!
+
+## Fixes
+
+We discovered a couple of blockers for people generating new apps. These are now fixed. `hanami new` will now generate:
+
+- The correct helpers in the default `app/templates/layouts/app.html.erb` layout.
+- The proper version string for prerelease versions of our hanami-assets package in `package.json`.
+
+In addition, detailed error messages (controlled via `config.render_detailed_errors`) will now default only show when the app is the development environment. Previously, they also showed in the test environment. This change ensures that error output will not accidentally trigger false positives in your tests.
+
+## Polish
+
+We now generate the `"type": "module"` [directive](https://nodejs.org/api/packages.html#type) in  `package.json`, so front end JavaScript for new Hanami apps will now use [ES modules](https://nodejs.org/api/esm.html) by default. This allows our assets config at `config/assets.js` to use the conventional `.js` file extension, instead of `.mjs` as previously generated.
+
+Our RSpec support has been made friendlier for full stack apps, with [Capybara](https://github.com/teamcapybara/capybara) support now included by default. Our standard RSpec setup in `spec/support/rspec.rb` now includes code comments detailing the purpose of the various configs, making these easier to use or tailor to your preferences.
+
+The `hanami generate action` and `hanami generate part` CLI commands now accept a `--skip-tests` flag to skip test generation.
+
+## Guides
+
+Our guides for 2.1 are close to ready, so we’re happy to [share a preview](https://guides.hanamirb.org/v2.1/introduction/getting-started/) for you to check out.
+
+The guides include a full, test-driven walkthrough of building your first app, either as a full stack web app or an API. If you’ve been interested in checking out Hanami 2.1, this will help you get started! We’d love to hear your feedback.
+
+## We need your help!
+
+We expect to make our stable 2.1.0 release **just next week!** We consider 2.1.0 to be frozen, and we need your help to shake out any bugs.
+
+We’d love you to give this release a try, especially for building views and using your favorite front end tools and packages. [Let us know how you go](https://discourse.hanamirb.org).
+
+## What’s included?
+
+Today we’re releasing the following gems:
+
+- hanami v2.1.0.rc2
+- hanami-reloader v2.1.0.rc2
+- hanami-rspec v2.1.0.rc2
+- hanami-webconsole v2.1.0.rc2
+- hanami-cli v2.1.0.rc2
+- hanami-assets v2.1.0.rc2
+- hanami-view v2.1.0.rc2
+- hanami-controller v2.1.0.rc2
+- hanami-router v2.1.0.rc2
+- hanami-validations v2.1.0.rc2
+- hanami-utils v2.1.0.rc2
+- hanami-assets v2.1.0-rc.2 (npm package)
+
+For specific changes in this release, please see each gem’s own CHANGELOG.
+
+## How can I try it?
+
+```shell
+> gem install hanami --pre
+> hanami new my_app
+> cd my_app
+> bundle exec hanami dev
+```
+
+## Contributors
+
+Thank you to these fine people for contributing to this release!
+
+- [Luca Guidi](https://github.com/jodosha)
+- [Sean Collins](https://github.com/cllns)
+- [Seb Wilgosz](https://github.com/swilgosz)
+- [Tim Riley](https://github.com/timriley)
+
+## Thank you
+
+Thank you as always for supporting Hanami! We can’t wait to hear from you about this release candidate! 🌸
