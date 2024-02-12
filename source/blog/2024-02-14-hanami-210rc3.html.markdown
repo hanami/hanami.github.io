@@ -1,0 +1,80 @@
+---
+title: Hanami 2.1.0.rc3
+date: 2024-02-14 12:00 UTC
+tags: announcements
+author: Tim Riley
+image: true
+excerpt: >
+  A revised approach to assets, and 2.1.0 coming soon.
+---
+
+After our [last release candidate](/blog/2023/11/08/hanami-210rc2/), we discovered a few limitations in our approach to asset compilation. With the end-of-year break approaching, we decided to step back, look at things fresh, and find an approach that would serve as a solid foundation for the future.
+
+With 2.1.0.rc3, we’re happy to release this new approach!
+
+## Independent assets per slice
+
+Now when you run `hanami assets compile` or `hanami assets watch`, we'll fork and run a separate assets compilation process for each slice in your app containing assets.
+
+These assets will then be compiled into separate directories under `public/assets/`, each with their own manifest file: app assets compile into `public/assets/` (containing  a`public/assets/assets.json` manifest), whereas e.g. an "admin" slice’s assets compile into `public/assets/admin/` (containing `public/assets/admin/assets.json`).
+
+Each slice will then have access to its own assets only, either via the view helpers or direct access using the registered `"assets"` component.
+
+With this, we now deliver the same separations for assets that Hanami offers for every other aspect of slices: complete independence.
+
+Slices may now have their own `config/assets.js` file, allowing you to customize asset compilation on a slice-by-slice basis. Of course, if you don’t require this, a single top-level `config/assets.js` will still work for all slices.
+
+You also no longer require an `"scripts": {"assets": "..."}` entry within your `package.json`. Instead, the Hanami CLI will detect `config/assets.js` files wherever they exist and invoke them directly.
+
+If you’d like to learn more about this new approach, see [this detailed post on our forum](https://discourse.hanamirb.org/t/a-new-approach-to-assets-in-2-1-0-rc3/900).
+
+## We need your help!
+
+This is a fairly significant change to assets, and while we’re confident it’s the right move for Hanami, we still need your help to test this with your apps.
+
+Please give this release a try, especially for building views and using your favorite front end tools and packages. Check out our [new guides](https://guides.hanamirb.org/v2.1/introduction/getting-started/) for an introduction, and then [let us know how you go](https://discourse.hanamirb.org).
+
+## What’s next? 2.1.0!
+
+We want this to be our last release candidate. The next step here is 2.1.0.
+
+## What’s included?
+
+Today we’re releasing the following gems:
+
+- hanami v2.1.0.rc3
+- hanami-reloader v2.1.0.rc3
+- hanami-rspec v2.1.0.rc3
+- hanami-webconsole v2.1.0.rc3
+- hanami-cli v2.1.0.rc3
+- hanami-assets v2.1.0.rc3
+- hanami-view v2.1.0.rc3
+- hanami-controller v2.1.0.rc3
+- hanami-router v2.1.0.rc3
+- hanami-validations v2.1.0.rc3
+- hanami-utils v2.1.0.rc3
+- hanami-assets v2.1.0-rc.3 (npm package)
+
+For specific changes in this release, please see each gem’s own CHANGELOG.
+
+
+## How can I try it?
+
+```shell
+> gem install hanami --pre
+> gem install hanami-cli --pre
+> hanami new my_app
+> cd my_app
+> bundle exec hanami dev
+```
+
+## Contributors
+
+Thank you to these fine people for contributing to this release!
+
+- [Philip Arndt](https://github.com/parndt)
+- [Tim Riley](https://github.com/timriley)
+
+## Thank you
+
+Thank you as always for supporting Hanami! We can’t wait to hear from you about this release candidate! 🌸
