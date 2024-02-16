@@ -20,7 +20,7 @@ These assets will then be compiled into separate directories under `public/asset
 
 Each slice will then have access to its own assets only, either via the view helpers or direct access using the registered `"assets"` component.
 
-With this, we now deliver the same separations for assets that Hanami offers for every other aspect of slices: complete independence.
+**With this, we now deliver the same separations for assets that Hanami offers for every other aspect of slices: complete independence.**
 
 Slices may now have their own `config/assets.js` file, allowing you to customize asset compilation on a slice-by-slice basis. Of course, if you don’t require this, a single top-level `config/assets.js` will still work for all slices.
 
