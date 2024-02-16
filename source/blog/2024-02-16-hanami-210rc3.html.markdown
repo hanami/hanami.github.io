@@ -14,7 +14,7 @@ With 2.1.0.rc3, we’re happy to release this new approach!
 
 ## Independent assets per slice
 
-Now when you run `hanami assets compile` or `hanami assets watch`, we'll fork and run a separate assets compilation process for each slice in your app containing assets.
+Now when you run `hanami assets compile` or `hanami assets watch`, we’ll fork and run a separate assets compilation process for each slice in your app containing assets.
 
 These assets will then be compiled into separate directories under `public/assets/`, each with their own manifest file: app assets compile into `public/assets/` (containing  a`public/assets/assets.json` manifest), whereas e.g. an "admin" slice’s assets compile into `public/assets/admin/` (containing `public/assets/admin/assets.json`).
 
@@ -30,7 +30,7 @@ If you’d like to learn more about this new approach, see [this detailed post o
 
 ## Upgrading from rc2
 
-Once you upgrade from rc2, each slice will only have access to its own assets, and those assets will no longer be namespaced with the slice's name.
+Once you upgrade from rc2, each slice will only have access to its own assets, and those assets will no longer be namespaced with the slice’s name.
 
 For example, if you have an admin slice, you can change `stylesheet_tag("admin/app.css")` just `stylesheet_tag("app.css")`.
 
