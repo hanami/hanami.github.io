@@ -1,6 +1,6 @@
 ---
 title: Hanami 2.1.0.rc3
-date: 2024-02-14 12:00 UTC
+date: 2024-02-16 11:21 UTC
 tags: announcements
 author: Tim Riley
 image: true
@@ -28,6 +28,14 @@ You also no longer require an `"scripts": {"assets": "..."}` entry within your `
 
 If you’d like to learn more about this new approach, see [this detailed post on our forum](https://discourse.hanamirb.org/t/a-new-approach-to-assets-in-2-1-0-rc3/900).
 
+## Upgrading from rc2
+
+Once you upgrade from rc2, each slice will only have access to its own assets, and those assets will no longer be namespaced with the slice's name.
+
+For example, if you have an admin slice, you can change `stylesheet_tag("admin/app.css")` just `stylesheet_tag("app.css")`.
+
+Assets in the app are also isolated, and are accessible only within the app, and not any other slices.
+
 ## We need your help!
 
 This is a fairly significant change to assets, and while we’re confident it’s the right move for Hanami, we still need your help to test this with your apps.
@@ -43,20 +51,19 @@ We want this to be our last release candidate. The next step here is 2.1.0.
 Today we’re releasing the following gems:
 
 - hanami v2.1.0.rc3
-- hanami-reloader v2.1.0.rc3
-- hanami-rspec v2.1.0.rc3
-- hanami-webconsole v2.1.0.rc3
-- hanami-cli v2.1.0.rc3
-- hanami-assets v2.1.0.rc3
-- hanami-view v2.1.0.rc3
-- hanami-controller v2.1.0.rc3
-- hanami-router v2.1.0.rc3
-- hanami-validations v2.1.0.rc3
-- hanami-utils v2.1.0.rc3
 - hanami-assets v2.1.0-rc.3 (npm package)
+- hanami-assets v2.1.0.rc3
+- hanami-cli v2.1.0.rc3
+- hanami-controller v2.1.0.rc3
+- hanami-reloader v2.1.0.rc3
+- hanami-router v2.1.0.rc3
+- hanami-rspec v2.1.0.rc3
+- hanami-utils v2.1.0.rc3
+- hanami-validations v2.1.0.rc3
+- hanami-view v2.1.0.rc3
+- hanami-webconsole v2.1.0.rc3
 
 For specific changes in this release, please see each gem’s own CHANGELOG.
-
 
 ## How can I try it?
 
@@ -72,6 +79,7 @@ For specific changes in this release, please see each gem’s own CHANGELOG.
 
 Thank you to these fine people for contributing to this release!
 
+- [Nishiki (錦華)](https://github.com/nshki)
 - [Philip Arndt](https://github.com/parndt)
 - [Tim Riley](https://github.com/timriley)
 
