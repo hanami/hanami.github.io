@@ -5,16 +5,16 @@ tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  Introducing our view layer and front end assets support.
+  Introducing our view layer and front-end assets support.
 ---
 
-After a year of work, Hanami 2.1 is here! This release introduces our view layer and front end assets support, and brings Hanami a big step closer to our full stack vision.
+After a year of work, Hanami 2.1 is here! This release introduces our view layer and front-end assets support, and brings Hanami a big step closer to our full stack vision.
 
 ## It all starts with `hanami dev`
 
-Working on your app’s front end now starts with a single new command: `hanami dev`.
+Working on your app’s front-end now starts with a single new command: `hanami dev`.
 
-Running `hanami dev` starts the familiar Hanami web server alongside our new **front end assets watcher and compiler**.
+Running `hanami dev` starts the familiar Hanami web server alongside our new **front-end assets watcher and compiler**.
 
 From there, you’re ready to open `http://localhost:2300` and take in our gorgeous new welcome screen, in both light and dark mode.
 
@@ -26,7 +26,7 @@ _Welcome (back!) to Hanami. We’ve been building something special for you!_
 
 ## You’ll love our view on views
 
-To build your new front end, you can start with views. Like actions, **Hanami views are standalone, callable objects**, bringing a new level of clarity and reusability to the view layer.
+To build your new front-end, you can start with views. Like actions, **Hanami views are standalone, callable objects**, bringing a new level of clarity and reusability to the view layer.
 
 ```ruby
 # app/views/posts/index.rb
@@ -130,7 +130,7 @@ As you can see, [TypeScript](https://www.typescriptlang.org) works out of the bo
 
 **Hanami assets are powered by [esbuild](https://esbuild.github.io)**, giving you lightning quick build times.
 
-Modern front end affordances are ready for you out of the box, no configuration required, with our standard assets config a picture of simplicity:
+Modern front-end affordances are ready for you out of the box, no configuration required, with our standard assets config a picture of simplicity:
 
 ```js
 import * as assets from "hanami-assets";
@@ -176,7 +176,7 @@ $ bundle exec hanami dev
 $ open http://localhost:2300
 ```
 
-After 2.1 and views, our next step is the persistence layer. You can look forward to hearing back from us about this early next year.
+With views and assets done, our next step is now the persistence layer. You can look forward to hearing back from us about this later this year.
 
 _Thank you from [Tim Riley](https://github.com/timriley) and [Luca Guidi](https://github.com/jodosha)._
 
