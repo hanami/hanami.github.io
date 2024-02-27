@@ -129,7 +129,7 @@ With your views ready to go, it’s time to explore assets.
 
 Your assets live in `app/assets/`. JavaScript files live under `js/`, with `app` files serving as your entry points:
 
-```
+```js
 import "../css/app.css";
 
 console.log("Hello from app.ts");
