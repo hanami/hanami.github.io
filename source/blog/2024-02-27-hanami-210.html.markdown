@@ -1,6 +1,6 @@
 ---
 title: "Hanami 2.1: Views that are a sight to see"
-date: 2024-02-27 12:55 UTC
+date: 2024-02-27 13:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
@@ -47,7 +47,7 @@ end
 
 **View exposures** explicitly prepare the values we pass to templates, and they work seamlessly with Hanami’s Deps mixin, allowing your view to cleanly access other parts of your app as required.
 
-```
+```erb
 <h1>Posts</h1>
 
 <%= posts.each do |post| %>
@@ -83,7 +83,7 @@ module MyApp
 end
 ```
 
-Helpers can become a mishmash, so Hanami provides **view parts** that encapsulate view logic right alongside the value it relates to. They can even render their own partials! This keeps your templates simple and allows you to use ordinary OO techniques to refactor and independently test more of your view code.
+On their own, helpers can become a bit of a mishmash, so Hanami provides **view parts** that encapsulate your view logic right alongside the value it relates to. They can even render their own partials! This keeps your templates simple and lets you use ordinary OO techniques to refactor and independently test your view code.
 
 ```ruby
 module MyApp
@@ -104,7 +104,7 @@ module MyApp
 end
 ```
 
-```
+```erb
 <ul>
   <% posts.each do |post| %>
     <li>
@@ -135,7 +135,7 @@ import "../css/app.css";
 console.log("Hello from app.ts");
 ```
 
-As you can see, [TypeScript](https://www.typescriptlang.org) works out of the box. Just run `npm install typescript --save-dev`.
+As you can see, [TypeScript](https://www.typescriptlang.org) works out of the box. Just run `npm install typescript`.
 
 ## Your assets come fast and flexible
 
@@ -169,13 +169,13 @@ await assets.run({
 
 ## Slice it your way
 
-As first-class Hanami features, views and assets work great inside slices as well as your `app/`. Every slice can have its own `views/` and `templates/` directories, for your views, parts, helpers and more.
+As first-class Hanami features, views and assets work great inside slices as well as your `app/`. Every slice can have its own `views/`, `templates/` and `assets/` directories, for your views, parts, helpers, assets and more.
 
 With Hanami we want to help you draw the right boundaries to support your app’s domain, and views are no different.
 
 ## The view ahead looks bright
 
-With Hanami 2.1, we are continuing to deliver our vision of a fresh take for Ruby apps. We’d love for you dive in and give our views and assets a try!
+With Hanami 2.1, we are continuing to deliver our vision for a fresh take for Ruby apps. We’d love for you dive in and give our views and assets a try!
 
 Check out our updated [getting started guide](https://guides.hanamirb.org/v2.1/introduction/getting-started/) for your first steps in building a full stack Hanami app. You’re only a few commands away:
 
@@ -187,7 +187,7 @@ $ bundle exec hanami dev
 $ open http://localhost:2300
 ```
 
-With views and assets done, our next step is the persistence layer. You can look forward to hearing back from us about this later this year.
+With views and assets done, our next step is the persistence layer. You can look forward to hearing more about this later this year.
 
 _Thank you from [Tim Riley](https://github.com/timriley) and [Luca Guidi](https://github.com/jodosha)._
 
