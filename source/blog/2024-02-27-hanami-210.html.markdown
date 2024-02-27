@@ -1,0 +1,207 @@
+---
+title: "Hanami 2.1: Views that are a sight to see"
+date: 2024-02-27 13:00 UTC
+tags: announcements
+author: Tim Riley
+image: true
+excerpt: >
+  Introducing our view layer and front-end assets support.
+---
+
+After a year of work, Hanami 2.1 is here! This release introduces our view layer and front-end assets support, and brings Hanami a big step closer to our full stack vision.
+
+## It all starts with `hanami dev`
+
+Working on your app’s front-end now starts with a single new command: `hanami dev`.
+
+Running `hanami dev` starts the familiar Hanami web server alongside our new **front-end assets watcher and compiler**.
+
+From there, you’re ready to open `http://localhost:2300` and take in our gorgeous new welcome screen, in both light and dark mode.
+
+![Welcome screen in light mode](/blog/2024/02/27/hanami-210/welcome-light.png)
+
+![Welcome screen in dark mode](/blog/2024/02/27/hanami-210/welcome-dark.png)
+
+_Welcome (back!) to Hanami. We’ve been building something special for you!_
+
+## You’ll love our view on views
+
+To build your new front-end, you can start with views. Like actions, **Hanami views are standalone, callable objects**, bringing a new level of clarity and reusability to the view layer.
+
+```ruby
+# app/views/posts/index.rb
+module MyApp
+  module Views
+    module Posts
+      class Index < MyApp::View
+        include Deps["posts_repo"]
+
+        expose :posts do |page:|
+          posts_repo.listing(page:)
+        end
+      end
+    end
+  end
+end
+```
+
+**View exposures** explicitly prepare the values we pass to templates, and they work seamlessly with Hanami’s Deps mixin, allowing your view to cleanly access other parts of your app as required.
+
+```erb
+<h1>Posts</h1>
+
+<%= posts.each do |post| %>
+  <h2><%= post.title %></h2>
+<% end %>
+```
+
+Hanami 2.1 delivers a **brand new ERB engine**, providing you a familiar template environment while also allowing for natural Ruby in view-focused methods, with a simple `yield` capturing nested template content, with no special handling required.
+
+Your views have access to **a library of familiar helpers**:
+
+```erb
+<%= form_for :post, routes.path(:create_post) do |f| %>
+  <%= f.label "title" %>
+  <%= f.text_field "title" %>
+<% end %>
+```
+
+You can write **your own helpers**, too:
+
+```ruby
+module MyApp
+  module Views
+    module Helpers
+      def warning_box
+        # tag is Hanami's built-in HTML builder helper
+        tag.div(class: "warning") do
+          yield # captures nested content in the template; so natural!
+        end
+      end
+    end
+  end
+end
+```
+
+On their own, helpers can become a bit of a mishmash, so Hanami provides **view parts** that encapsulate your view logic right alongside the value it relates to. They can even render their own partials! This keeps your templates simple and lets you use ordinary OO techniques to refactor and independently test your view code.
+
+```ruby
+module MyApp
+  module Views
+    module Parts
+      # Every post exposed from a view comes with these methods
+      class Post < MyApp::Views::Part
+        def title_link
+          helpers.tag.a(title, href: context.routes.path(:post, id:))
+        end
+
+        def feature_box
+          render("feature_box", title: title, text: teaser_text)
+        end
+      end
+    end
+  end
+end
+```
+
+```erb
+<ul>
+  <% posts.each do |post| %>
+    <li>
+      <%= post.title_link %>
+      <%= post.feature_box %>
+    </li>
+  <% end>
+</ul>
+```
+
+**Rendering views from actions is a breeze.** From the get go, actions render their matching view automatically, no extra work required. Once your views need certain input, you can also make that wiring clear:
+
+```ruby
+def handle(request, response)
+  response.render(view, id: request.params[:id])
+end
+```
+
+## Say hello to `app/assets/`
+
+With your views ready to go, it’s time to explore assets.
+
+Your assets live in `app/assets/`. JavaScript files live under `js/`, with `app` files serving as your entry points:
+
+```js
+import "../css/app.css";
+
+console.log("Hello from app.ts");
+```
+
+As you can see, [TypeScript](https://www.typescriptlang.org) works out of the box. Just run `npm install typescript`.
+
+## Your assets come fast and flexible
+
+**Hanami assets are powered by [esbuild](https://esbuild.github.io)**, giving you lightning quick build times.
+
+Modern front-end affordances are ready for you out of the box, no configuration required, with our standard assets config a picture of simplicity:
+
+```js
+import * as assets from "hanami-assets";
+
+await assets.run();
+```
+
+If you need more, you can have more! **Assets config can be gracefully extended** to provide advanced esbuild options or [take advantage of its many plugins](https://github.com/esbuild/community-plugins). A fully integrated [PostCSS](https://postcss.org), for example, is just a few lines away:
+
+```js
+import * as assets from "hanami-assets";
+import postcss from "esbuild-postcss";
+
+await assets.run({
+  esbuildOptionsFn: (args, esbuildOptions) => {
+    const plugins = [...esbuildOptions.plugins, postcss()];
+
+    return {
+      ...esbuildOptions,
+      plugins,
+    };
+  },
+});
+```
+
+## Slice it your way
+
+As first-class Hanami features, views and assets work great inside slices as well as your `app/`. Every slice can have its own `views/`, `templates/` and `assets/` directories, for your views, parts, helpers, assets and more.
+
+With Hanami we want to help you draw the right boundaries to support your app’s domain, and views are no different.
+
+## The view ahead looks bright
+
+With Hanami 2.1, we are continuing to deliver our vision for a fresh take for Ruby apps. We’d love for you dive in and give our views and assets a try!
+
+Check out our updated [getting started guide](https://guides.hanamirb.org/v2.1/introduction/getting-started/) for your first steps in building a full stack Hanami app. You’re only a few commands away:
+
+```shell
+$ gem install hanami
+$ hanami new my_app
+$ cd my_app
+$ bundle exec hanami dev
+$ open http://localhost:2300
+```
+
+With views and assets done, our next step is the persistence layer. You can look forward to hearing more about this later this year.
+
+_Thank you from [Tim Riley](https://github.com/timriley) and [Luca Guidi](https://github.com/jodosha)._
+
+Thank you also to these wonderful people for contributing to Hanami 2.1!
+
+- [Aaron Moodie](https://github.com/aaronmoodie)
+- [dsinero](https://github.com/dsinero)
+- [Konnor Rogers](https://github.com/KonnorRogers)
+- [Masanori Ohnishi](https://github.com/MasanoriOnishi)
+- [Nishiki (錦華)](https://github.com/nshki)
+- [Pat Allan](http://github.com/pat)
+- [Paweł Świątkowski](https://github.com/katafrakt)
+- [Philip Arndt](https://github.com/parndt)
+- [Ryan Bigg](https://github.com/radar)
+- [Seb Wilgosz](https://github.com/swilgosz)
+
+🌸
