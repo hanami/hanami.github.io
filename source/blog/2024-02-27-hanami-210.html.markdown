@@ -18,9 +18,9 @@ Running `hanami dev` starts the familiar Hanami web server alongside our new **f
 
 From there, you’re ready to open `http://localhost:2300` and take in our gorgeous new welcome screen, in both light and dark mode.
 
-![Welcome screen in light mode](/blog/2023/11/14/hanami-210/welcome-light.png)
+![Welcome screen in light mode](/blog/2024/02/27/hanami-210/welcome-light.png)
 
-![Welcome screen in dark mode](/blog/2023/11/14/hanami-210/welcome-dark.png)
+![Welcome screen in dark mode](/blog/2024/02/27/hanami-210/welcome-dark.png)
 
 _Welcome (back!) to Hanami. We’ve been building something special for you!_
 
