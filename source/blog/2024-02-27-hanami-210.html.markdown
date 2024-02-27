@@ -83,7 +83,7 @@ module MyApp
 end
 ```
 
-Helpers can quickly become a mishmash, so Hanami provides **view parts** that encapsulate view logic right alongside the value it relates to. They can even render their own partials! This keeps your templates simple and allows you to use ordinary OO techniques to refactor and independently test more of your view code.
+Helpers can become a mishmash, so Hanami provides **view parts** that encapsulate view logic right alongside the value it relates to. They can even render their own partials! This keeps your templates simple and allows you to use ordinary OO techniques to refactor and independently test more of your view code.
 
 ```ruby
 module MyApp
@@ -102,6 +102,17 @@ module MyApp
     end
   end
 end
+```
+
+```
+<ul>
+  <% posts.each do |post| %>
+    <li>
+      <%= post.title_link %>
+      <%= post.feature_box %>
+    </li>
+  <% end>
+</ul>
 ```
 
 **Rendering views from actions is a breeze.** From the get go, actions render their matching view automatically, no extra work required. Once your views need certain input, you can also make that wiring clear:
