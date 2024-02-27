@@ -197,6 +197,8 @@ Thank you also to these wonderful people for contributing to Hanami 2.1!
 - [dsinero](https://github.com/dsinero)
 - [Konnor Rogers](https://github.com/KonnorRogers)
 - [Masanori Ohnishi](https://github.com/MasanoriOnishi)
+- [Nishiki (錦華)](https://github.com/nshki)
+- [Pat Allan](http://github.com/pat)
 - [Paweł Świątkowski](https://github.com/katafrakt)
 - [Philip Arndt](https://github.com/parndt)
 - [Ryan Bigg](https://github.com/radar)
