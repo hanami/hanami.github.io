@@ -1,6 +1,6 @@
 ---
 title: "Hanami 2.1: Views that are a sight to see"
-date: 2023-11-14 09:09 UTC
+date: 2024-02-27 13:00 UTC
 tags: announcements
 author: Tim Riley & Luca Guidi
 image: true
