@@ -176,7 +176,7 @@ $ bundle exec hanami dev
 $ open http://localhost:2300
 ```
 
-With views and assets done, our next step is now the persistence layer. You can look forward to hearing back from us about this later this year.
+With views and assets done, our next step is the persistence layer. You can look forward to hearing back from us about this later this year.
 
 _Thank you from [Tim Riley](https://github.com/timriley) and [Luca Guidi](https://github.com/jodosha)._
 
