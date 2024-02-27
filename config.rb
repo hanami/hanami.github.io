@@ -109,7 +109,7 @@ helpers do
   end
 
   def hanami_release_date
-    Date.parse("2023-11-14").strftime("%B %-d, %Y")
+    Date.parse("2024-02-27").strftime("%B %-d, %Y")
   end
 end
 
