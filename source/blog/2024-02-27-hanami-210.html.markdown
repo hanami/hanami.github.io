@@ -2,7 +2,7 @@
 title: "Hanami 2.1: Views that are a sight to see"
 date: 2024-02-27 13:00 UTC
 tags: announcements
-author: Tim Riley & Luca Guidi
+author: Tim Riley
 image: true
 excerpt: >
   Introducing our view layer and front end assets support.
@@ -178,7 +178,7 @@ $ open http://localhost:2300
 
 After 2.1 and views, our next step is the persistence layer. You can look forward to hearing back from us about this early next year.
 
-_Thank you from core team members [Luca Guidi](https://github.com/jodosha) and [Tim Riley](https://github.com/timriley)._
+_Thank you from [Tim Riley](https://github.com/timriley) and [Luca Guidi](https://github.com/jodosha)._
 
 Thank you also to these wonderful people for contributing to Hanami 2.1!
 
