@@ -45,7 +45,7 @@ module MyApp
 end
 ```
 
-**View exposures** explicitly prepare the values we pass to templates, and they work seamlessly with Hanami’s Deps mixin, allowing you view to cleanly access other parts of your app as required.
+**View exposures** explicitly prepare the values we pass to templates, and they work seamlessly with Hanami’s Deps mixin, allowing your view to cleanly access other parts of your app as required.
 
 ```
 <h1>Posts</h1>
