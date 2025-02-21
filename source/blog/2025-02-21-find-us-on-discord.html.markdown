@@ -3,6 +3,7 @@ title: Find us on Discord! (And other places, too)
 date: 2025-02-21 2025 14:35:18 +1100
 tags: announcements
 author: Tim Riley
+image: true
 excerpt: >
   Chat with us and more!
 ---
