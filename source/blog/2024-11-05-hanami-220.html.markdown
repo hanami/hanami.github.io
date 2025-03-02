@@ -217,7 +217,7 @@ Databases and operations may be the highlights, but Hanami 2.2 brings several ot
 
 **With Hanami’s database layer and operations, our fresh, full stack vision for Ruby apps is now complete!** We’d love for you to dive in and give it a try.
 
-Check out our updated [getting started guide](https://guides.hanamirb.org/v2.1/introduction/getting-started/) for your first steps in building a full stack, database-backed Hanami app. You’re only a few commands away:
+Check out our updated [getting started guide](https://guides.hanamirb.org/v2.2/introduction/getting-started/) for your first steps in building a full stack, database-backed Hanami app. You’re only a few commands away:
 
 ```shell
 $ gem install hanami
