@@ -337,3 +337,56 @@ table.status td {
 .status-hanami-2-na {
   background-color: silver;
 }
+
+.sponsorship-banner {
+  background-color: #fce4ec;
+  color: #ad1457;
+  padding: 2rem 1rem 1.5rem;
+  text-align: center;
+  font-size: 24px;
+  position: relative;
+  border-bottom: 1px solid rgba(239, 89, 164, 0.3); /* Much thinner, more subtle line */
+  width: 100%;
+}
+
+.sponsorship-banner a {
+  color: #ef59a4; /* Your chosen pink color for the link */
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 150ms ease;
+  margin-left: 0.5em;
+  display: inline-block;
+}
+
+.sponsorship-banner a span {
+  border-bottom: 2px solid rgba(239, 89, 164, 0.3); /* Underline with opacity */
+  padding-bottom: 3px;
+  transition: border-bottom 150ms ease;
+}
+
+.sponsorship-banner a:hover {
+  color: #c2185b; /* Slightly darker pink on hover */
+}
+
+.sponsorship-banner a:hover span {
+  border-bottom: 2px solid rgba(194, 24, 91, 0.3); /* Change border color on hover */
+}
+
+.sponsorship-banner a::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 0.1em;
+  position: relative;
+  transition: transform 200ms ease;
+}
+
+.sponsorship-banner a:hover::after {
+  transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+  .sponsorship-banner {
+    font-size: 19px;
+    padding: 1.2rem 1rem;
+  }
+}
