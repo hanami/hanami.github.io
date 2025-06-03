@@ -28,9 +28,9 @@ As of today, we’re already on the way!
 🟩 🟩 🟩 🟩 ⬜ ⬜ ⬜ ⬜ ⬜ ⬜<br>
 _**$26k of $70k** — 37% to our goal!_
 
-We’ve raised $26k so far, thanks to these founding patrons: [**Sidekiq**](https://sidekiq.org), [**Brandon Weaver**](https://github.com/baweaver), [**Honeybadger**](https://www.honeybadger.io/?utm_source=hanami&utm_medium=paid-referral&utm_campaign=founding-patron), [**FastRuby.io**](http://FastRuby.io) and [**AppSignal**](https://www.appsignal.com). Thanks also to [**Ruby Central**](https://rubycentral.org), who are serving as fiscal host for our business patrons.
+We’ve raised $26k so far, thanks to these founding patrons: [**Sidekiq**](https://sidekiq.org), [**Brandon Weaver**](https://github.com/baweaver), [**Honeybadger**](https://www.honeybadger.io/?utm_source=hanami&utm_medium=paid-referral&utm_campaign=founding-patron), [**FastRuby.io**](http://FastRuby.io) and [**AppSignal**](https://www.appsignal.com). Thanks also to [**Ruby Central**](https://rubycentral.org), who are serving as our fiscal host.
 
-[**We’d love for you to join them.**](https://sponsor.hanamirb.org) Hanami patrons receive several direct benefits:
+[**We’d love for you to join our founding patrons.**](https://sponsor.hanamirb.org) As a patron, you’ll receive several direct benefits:
 
 - Private chat with Hanami maintainers.
 - Priority attention on your issues or requests.
