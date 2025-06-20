@@ -18,15 +18,17 @@ Huge thanks to Collin and Joel for making this happen. I had very limited time t
 
 ## Hanami on the Baltic shore
 
-Last week I had another fun Ruby experience, travelling all the way from Australia to Latvia, to attend the wonderful [Baltic Ruby](https://balticruby.org)!
+Last week I had another fun Ruby experience, travelling all the way from Australia to Latvia to attend the wonderful [Baltic Ruby](https://balticruby.org)!
 
-We had a couple of Hanami events at the conference. The first was part of Baltic Ruby’s _OSS Expo_, an unstructured afternoon where conference-goers and open source groups can come together. In our case, we had multiple folks try Hanami for the first time (and fix some documentation bugs), fellow contributor [Krzysztof Piotrowski](https://github.com/krzykamil) continue his work on a `db rollback` command, [Ismael Celis](https://ismaelcelis.com) created [the world’s first event-sourced calculator on Hanami](https://bsky.app/profile/ismaelcelis.com/post/3lrj5ltfvlc2a). _No notes._
+We had a couple of Hanami events at the conference. The first was part of Baltic Ruby’s _OSS Expo_, an unstructured afternoon where conference-goers and open source groups can come together. In our case, we had multiple folks try Hanami for the first time (and even fix some documentation bugs), fellow contributor [Krzysztof Piotrowski](https://github.com/krzykamil) continue his work on a `db rollback` command, and [Ismael Celis](https://ismaelcelis.com) created [the world’s first event-sourced calculator on Hanami](https://bsky.app/profile/ismaelcelis.com/post/3lrj5ltfvlc2a). _No notes._
+
+<blockquote class="bluesky-embed" data-bluesky-uri="at://did:plc:af5ndzzxe7p5vbpmotcxmt6n/app.bsky.feed.post/3lrj5ltfvlc2a" data-bluesky-cid="bafyreid5smcxf3urush7pb2xt4jf74jcnodqakqju5qmxypjicqehurvlm" data-bluesky-embed-color-mode="system"><p lang="en">Today at @balticruby.bsky.social I built what I think is the first ever event-sourced calculator built in Hanami, with @timriley.info &#x27;s help. No notes.<br><br><a href="https://bsky.app/profile/did:plc:af5ndzzxe7p5vbpmotcxmt6n/post/3lrj5ltfvlc2a?ref_src=embed">[image or embed]</a></p>&mdash; Ismael Celis (<a href="https://bsky.app/profile/did:plc:af5ndzzxe7p5vbpmotcxmt6n?ref_src=embed">@ismaelcelis.com</a>) <a href="https://bsky.app/profile/did:plc:af5ndzzxe7p5vbpmotcxmt6n/post/3lrj5ltfvlc2a?ref_src=embed">Jun 13, 2025 at 10:17 pm</a></blockquote><script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>
 
 We even had a familiar face stop by for a chat!
 
 ![Matz joins the Hanami table at Baltic Ruby](/blog/2025/06/20/field-report-from-riga-and-the-rooftop/oss-expo.jpeg "Matz joins the Hanami table at Baltic Ruby")
 
-While not technically part of the OSS expo, during the conference we also found some help from friend-of-the-framework [Charles Nutter](https://www.headius.com)! Charles look a look at the hanami/hanami test suite and homed in on [how we can get to green on JRuby](https://github.com/hanami/hanami/pull/1524). Thank you Charles for your help! I think Hanami on [JRuby](https://www.jruby.org) will make for a formidable combo of performance and code clarity, and I’m excited to make this part of our standard offering.
+While not technically part of the OSS expo, during the conference we also found some help from friend-of-the-framework [Charles Nutter](https://www.headius.com)! Charles reviewed the hanami/hanami test suite and helped identify [how we can get to green on JRuby](https://github.com/hanami/hanami/pull/1524). Thank you Charles for your help! I think Hanami on [JRuby](https://www.jruby.org) could make for a formidable combo of performance and code clarity, and I’m excited to make this part of our standard offering.
 
 ## A new talk from Tim
 
