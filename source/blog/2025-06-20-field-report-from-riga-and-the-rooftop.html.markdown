@@ -53,4 +53,4 @@ This means we’re still sitting at $27.5k:
 🟩 🟩 🟩 🟩 ⬜ ⬜ ⬜ ⬜ ⬜ ⬜<br>
 _**$27.5k of $70k** — 39% to our goal…_
 
-Our first milestone is $40k. That’s not far off! If we can find a couple more business patrons, and maybe a dozen or so community patrons, we’ll reach our first milestone of $40k! I’m sure we can get there. Can you help us?
+Our first milestone is $40k. That’s not far off! If we can find a couple more business patrons, and maybe a dozen or so community patrons, we’ll get there! I’m sure we can get there. Can you help us?
