@@ -274,12 +274,12 @@ table.status {
 }
 
 table.status tr:nth-child(even) {
-background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 table.status th, td {
-    padding: 10px;
-    text-align: left;
+  padding: 10px;
+  text-align: left;
 }
 
 table.status th {
@@ -320,22 +320,6 @@ table.status td {
 
 .block-background img {
   filter: brightness(50%);
-}
-
-.status-hanami-2-yes {
-  background-color: lightgreen;
-}
-
-.status-hanami-2-wip {
-  background-color: lightsalmon;
-}
-
-.status-hanami-2-no {
-  background-color: tomato;
-}
-
-.status-hanami-2-na {
-  background-color: silver;
 }
 
 .sponsorship-banner {
