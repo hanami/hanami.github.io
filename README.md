@@ -4,7 +4,7 @@
 
 ### Requirements
 
-  * Ruby 2+
+  * Ruby 2.7
   * Bundler (`gem install bundler`)
 
 ### Steps
