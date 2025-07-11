@@ -46,7 +46,7 @@ But ten years ago, I began feeling disillusioned in my work writing Rails apps. 
 
 I knew I needed to try something different to break out of that rut, to expose myself to new ideas. But I also didn’t want to leave Ruby, because Ruby felt like home.
 
-Instead, I looked around for the people doing things differently *within* Ruby. I tell you, it felt like a wilderness! But I did find some folks. Peter Solnica and his projects. Jeremy Evans with Roda. And of course, Luca Guidi’s early days with Hanami.
+Instead, I looked around for the people doing things differently *within* Ruby. I tell you, it felt like a wilderness! But I did find some folks. Peter Solnica and his projects. Jeremy Evans with Roda. And of course, Luca Guidi in his early days with Hanami.
 
 From there I started cobbling things together and building and shipping completely different kinds of apps in Ruby. And I learnt so much along the way! Actual *software design* things, more than just colouring in the MVC lines.
 
