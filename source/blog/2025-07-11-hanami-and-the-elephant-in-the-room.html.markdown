@@ -50,7 +50,7 @@ Instead, I looked around for the people doing things differently *within* Ruby. 
 
 From there I started cobbling things together and building and shipping completely different kinds of apps in Ruby. And I learnt so much along the way! Actual *software design* things, more than just colouring in the MVC lines.
 
-Hanami, Dry and Rom are why I’m still with Ruby today. They let me write the Ruby I want to write. The Ruby that fits the way I think. The Ruby that helps me construct apps I feel confident to maintain.
+Hanami, Dry and Rom are why I’m still with Ruby today. They let me write the Ruby I want to write. The Ruby that fits the way I think. The Ruby that helps me build apps I feel confident to maintain.
 
 Thanks to our work, it’s no longer a wilderness out there! Today if you want or need something different, you can install a gem and start playing and learning in minutes.
 
