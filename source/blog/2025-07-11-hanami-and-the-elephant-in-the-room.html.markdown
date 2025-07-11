@@ -76,7 +76,7 @@ So if you’re currently on Rails, those are your reasons for supporting our wor
 
 We offer essential variety to Ruby: gems to help your Rails apps today, opportunities to learn and grow, a framework for when you want the next level, and a caring community to back it all up.
 
-Our community has had its ups and downs, but right now we’re riding a fresh wave of energy and growth. If you love Ruby, this is a place where you can learn, share, and belong, now and for years to come.
+Our community has had its ups and downs, but right now we’re riding a fresh wave of energy and growth. If you love Ruby, this is where you can learn, share, and belong, now and for years to come.
 
 When you sponsor our work, you’re not just supporting our projects, you’re investing in your own future. As you grow and your needs change, we can make sure Ruby grows with you.
 
