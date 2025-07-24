@@ -34,4 +34,6 @@ A huge thank you to [Aaron Moodie](https://aaronmoodie.com) for his work in brin
 
 Since our last update, we’ve had a slew of community patrons [join via GitHub Sponsors](https://github.com/sponsors/hanami). Thank you for your support, [Aaron Allen](https://github.com/aaronmallen), [Pericles Theodorou](https://github.com/PericlesTheo), [Robert Pawlas](https://github.com/hedselu), [Nick Gorbikoff](https://github.com/konung) and [Jared Smith](https://github.com/jaredsmithse)!
 
+We’d love for you to join them and become a patron. [Learn more here](https://sponsor.hanamirb.org).
+
 We’re nearly at the end of our inaugural sponsorship drive. In my next post, I’ll come back to wrap everything up. See you then!
