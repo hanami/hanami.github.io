@@ -31,6 +31,73 @@ pre {
   font-size: 13px;
 }
 
+/* supporters section */
+.supporters-header {
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.patrons-section {
+  margin: 40px 0;
+}
+
+.patron-tier-1,
+.patron-tier-2,
+.patron-tier-3 {
+  margin: 20px 0;
+}
+
+.patron-logo {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 15px;
+  transition: opacity 0.3s ease;
+}
+
+.patron-logo:hover {
+  opacity: 0.8;
+}
+
+.patron-logo-large {
+  max-height: 120px;
+}
+
+.patron-logo-medium {
+  max-height: 80px;
+}
+
+.patron-logo-small {
+  max-height: 60px;
+}
+
+.supporters-footer {
+  margin-top: 30px;
+}
+
+.supporters-footer a {
+  color: #666;
+  text-decoration: none;
+}
+
+.supporters-footer a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .patron-logo-large {
+    max-height: 80px;
+  }
+  
+  .patron-logo-medium {
+    max-height: 60px;
+  }
+  
+  .patron-logo-small {
+    max-height: 45px;
+  }
+}
+
 /* mobile select guides */
 .mobile-guides {
   display: none;
