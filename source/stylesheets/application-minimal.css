@@ -84,6 +84,23 @@ pre {
   text-decoration: underline;
 }
 
+/* footer sponsor */
+.footer-sponsor-logo {
+  max-height: 40px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 5px;
+  transition: opacity 0.3s ease;
+  background-color: white;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+}
+
+.footer-sponsor:hover .footer-sponsor-logo {
+  opacity: 0.8;
+}
+
 @media (max-width: 768px) {
   .patron-logo-large {
     max-height: 80px;
