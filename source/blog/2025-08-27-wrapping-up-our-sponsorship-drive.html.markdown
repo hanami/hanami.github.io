@@ -1,6 +1,6 @@
 ---
 title: Wrapping up our sponsorship drive
-date: 2025-08-25 11:45:00 UTC
+date: 2025-08-27 11:45:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
