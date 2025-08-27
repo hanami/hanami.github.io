@@ -34,7 +34,7 @@ We’ve also established [a partnership with Ruby Central](https://rubycentral.o
 
 Ruby Central went out of their way to set this up for us, and I couldn’t think of a better partner for this. We share the same vision for Ruby’s future, and I’m excited to collaborate with them for many years to come!
 
-After all of this, how did we go? **We’ve raised $29k (so far!). This is short of our initial $40k target, but it’s fortunately still enough to support me at 1 day/week for this first year of paid maintenance.**
+**After all of this, how did we go? We’ve raised $29k (so far!). This is short of our initial $40k target, but fortunately, it’s still enough to support me at 1 day/week for this first year of paid maintenance.**
 
 ## We’re ready. Are you?
 
