@@ -20,6 +20,12 @@ We now support Rack versions 2 and 3, so you can use whichever version suits you
 
 To upgrade your app to Rack 3, update your Hanami gems to this beta release, then `bundle update rack`. You should also check out the [Rack 3 upgrade guide](https://github.com/rack/rack/blob/main/UPGRADE-GUIDE.md). Most changes will be handled for you by the Hanami gems, but you may need to update some of your app code if you're dealing with lower-level request/response details.
 
+## Thank you to our patrons 🌸
+
+This is a our first release since launching our [sponsorship program](https://sponsor.hanamirb.org). I’d like to extend a very warm thank you to the patrons who made this possible: [**Sidekiq**](https://sidekiq.org), [**Brandon Weaver**](https://github.com/baweaver), [**Honeybadger**](https://www.honeybadger.io/?utm_source=hanami&utm_medium=paid-referral&utm_campaign=founding-patron), [**FastRuby.io**](https://www.fastruby.io/) and [**AppSignal**](https://www.appsignal.com/).
+
+Thank you also to all the community members supporting Hanami through our [GitHub Sponsors](https://github.com/sponsors/hanami). There are now 20 of you!
+
 ## Improvements
 
 This beta also brings a range of nice improvements to your Hanami experience:
