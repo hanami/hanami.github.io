@@ -24,7 +24,7 @@ To upgrade your app to Rack 3, update your Hanami gems to this beta release, the
 
 This beta also brings a range of nice improvements to your Hanami experience:
 
-- Cusomize your console experience by including your own modules, via `config.console.include MyModule, AnotherModule` in your app class.
+- Add your own methods to `hanami console` via own modules. Add `config.console.include MyModule, AnotherModule` to your app class.
 - Prefer Pry to IRB? Make it the default with `config.console.engine = :pry`.
 - When you specify `'nonce'` in your content security policy, a nonce is automatically added to `javascript_tag` and `stylesheet_tag`.
 - Access subdomains using `Request#subdomains`, and configure your default TLD length with `config.actions.default_tld_length`.
@@ -32,10 +32,10 @@ This beta also brings a range of nice improvements to your Hanami experience:
 - You can now use single-character slice names.
 - Run any `hanami generate` command inside a slice directory and the slice will automatically be used as the target for the new files.
 - Run `hanami db rollback` to easily rollback a database migration.
-- Running `hanami new` will now initialize a git repository in your new app.
+- Running `hanami new` will now initialize a Git repository in your new app.
 - Run `hanami new` with `--skip-view` to skip generating the view layer.
 - The default `Rakefile` will automatically load custom tasks from the conventional `lib/tasks/` location.
-- the `README.md` in newly generated apps now includes some helpful instructions for next steps.
+- The `README.md` in newly generated apps now includes some helpful instructions for next steps.
 
 ## Fixes
 
@@ -45,7 +45,7 @@ We’ve also fixed a bunch of bugs:
 - Support `include Deps` in repo classes.
 - Avoid false negatives for content type matches in actions.
 - Properly show database errors arising from `hanami db` commands.
-- Skip ENV var processing by foreman (run via `hanami dev` by default) to ensure consistent env loading across environemnts.
+- Skip ENV var processing by Foreman (run via `hanami dev` by default) to ensure consistent ENV loading across environemnts.
 - Respect app inflections when running `hanami generate` commands.
 - Prevent `generate` commands from overwriting files.
 - Convert special characters to underscores in route helper names.
@@ -116,4 +116,4 @@ Thank you to all these amazing people who contributed to this release!
 - [wuarmin](https://github.com/wuarmin)
 - [y-yagi](https://github.com/y-yagi)
 
-And thank you again for giving this a go! We’re looking forward to hearing your feedback.
+And thank you again for giving this beta a try! We’re looking forward to hearing your feedback. 🌸
