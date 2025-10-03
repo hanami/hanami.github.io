@@ -1,11 +1,11 @@
 ---
 title: Announcing Hanami 2.3 beta1
-date: 2025-10-03 08:30:00 UTC
+date: 2025-10-03 08:20:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  Rack 3 support and so much more. We need your help in testing!
+  Rack 3 support and so much more. Help us with your testing!
 ---
 
 After getting set up for [sponsorship](https://sponsor.hanamirb.org) (we still want to hear from you!), we’re back with a new Hanami release. Today we’re pleased to announce the first beta of Hanami 2.3.
