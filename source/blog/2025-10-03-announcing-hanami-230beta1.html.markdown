@@ -12,7 +12,7 @@ After getting set up for [sponsorship](https://sponsor.hanamirb.org) (we still w
 
 ## Rack 3 support
 
-_This one goes up to ~~eleven~~ three._ With this release, we introduce Rack 3 support to Hanami!
+_This one goes up to <s>eleven</s> three._ With this release, we introduce Rack 3 support to Hanami!
 
 We now support Rack versions 2 and 3, so you can use whichever version suits your situation. We still encourage you to upgrade Rack when you can, and we’re happy that Hanami is no longer a blocker on this path.
 
