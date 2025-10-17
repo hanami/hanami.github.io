@@ -5,12 +5,12 @@ tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  Improved action formats, `hanami run` command and more.
+  Improved action formats, hanami run command and more.
 ---
 
 Two weeks after [beta1](/blog/2025/10/03/announcing-hanami-230beta2/), it’s time for 2.3 beta2!
 
-This will be our last beta of 2.3, and we’re aiming for our full release to be in another two weeks. Read on to see what’s new.
+This will be our last beta, and we’re aiming for the full 2.3 release in two weeks. Read on to see what’s new.
 
 ## `hanami run` command
 
@@ -23,13 +23,13 @@ $ bundle exec hanami run 'Hanami.app["repos.commit_repo"].all.count'
 
 ## Improved action formats config
 
-Our [previous approach](https://guides.hanamirb.org/v2.2/actions/formats-and-mime-types/) to action formats config (`config.formats` in action classes or `config.actions.formats` in app or slice classes) made it too hard to configure and use your own custom formats. With this release, we’ve overhauled the config and made it much more flexible.
+Our [previous approach](https://guides.hanamirb.org/v2.2/actions/formats-and-mime-types/) to action formats config (`config.formats` in action classes or `config.actions.formats` in app or slice classes) made it too hard to configure and use your own custom formats. We’ve now overhauled this config and made it much more flexible.
 
-This is an important change and we’d love your help with testing. If you restrict your actions based on formats or use your own custom formats, please pull down the beta and give this a go!
+This is an important change and we’d love your help with testing. If you configure formats for your actions, please pull down this beta and give this a go!
 
 **Use `config.formats.register` to register a new format and its media types.**
 
-This replaces `config.formats.add`. Unlike `.add`, it does _not_ activate the format as being “accepted” at the same time. This makes it easier to `register` your custom formats in app config or a base action class, while maintaining control over which actions apply format restrictions.
+This replaces `config.formats.add`. Unlike `.add`, it does _not_ activate the format as “accepted” at the same time. This makes it easier to `register` your custom formats in app config or a base action class, while maintaining control over where you apply your format restrictions.
 
 A simple registration looks like this:
 
@@ -39,10 +39,10 @@ config.formats.register(:json, "application/json")
 
 `.register` also allows you to register one or more media types for the different stages of request processing:
 
-- Provide `accept_types:` if you want to accept requests based on specific media types in `Accept` request headers.
-- Provide `content_types:` if you want to accept requests based on specific media types in `Content-Type` request headers.
-- The above are are optional. If you do not provide these, then the format’s _default_ media type (the required second argument) is used for each.
-- This default media type is also set as the default `Content-Type` response header for requests that match the format.
+- Provide `accept_types:` to accept requests based on specific `Accept` types in request headers.
+- Provide `content_types:` to accept requests based on specific `Content-Type` request headers.
+- Both the above are are optional. If you do not provide these, then the format’s _default_ media type (the required second argument) is used for each.
+- This default media type is also set as the default `Content-Type` response header when requests match that format.
 
 Together, these allow you to register a format like this:
 
@@ -69,7 +69,7 @@ config.formats.accept :csv # Accepted formats are additive
 config.formats.accepted # => [:html, :json, :csv]
 ```
 
-The first format you give to `accept` will also become the _default format_ for responses from your action, but only if a default has not already been configured (see next).
+The first format you give to `accept` will also become the _default format_ for responses from your action, but _only_ if you haven’t already configured a default using the approach below.
 
 **Use config.formats.default=` to set an action's default format.**
 
@@ -99,13 +99,13 @@ Thank you to our [Hanami patrons](https://sponsor.hanamirb.org) who made this re
 
 Thank you also to all the community members supporting Hanami through our [GitHub Sponsors](https://github.com/sponsors/hanami). There are now more than 20 of you!
 
-We’d love for you to become a patron too. [Read here](https://sponsor.hanamirb.org) to learn more.
+We’d love for you to become a patron too. [Learn more here.](https://sponsor.hanamirb.org)
 
 ## Improvements & fixes
 
 We’ve got even more improvements and fixes in this release:
 
-- The router has a big runtime performance boost for large numbers of routes, addressing a performance regression that was introduced as part of some fixes in Hanami 2.2.
+- The router sees a big runtime performance boost for large numbers of routes, addressing a performance regression that was introduced as part of some fixes in Hanami 2.2.
 - `hanami generate action` now accepts a `--skip-tests` flag.
 - `hanami generate action` will add routes to slice-specific `config/routes.rb` files, if present.
 - `hanami generate` commands now graceully handle names given with mixed cases.
@@ -161,11 +161,12 @@ We expect to be back with 2.3 in a couple of weeks.
 
 Thank you to all these amazing people who contributed to this release!
 
-- [Kyle Plump](https://github.com/kyleplump)
-- [Sean Collins](https://github.com/cllns)
-- [Mina Slater](https://github.com/minaslater)
 - [Andrea Fomera](https://github.com/afomera)
-- [stephannv](https://github.com/stephannv)
 - [Brandon Weaver](https://github.com/baweaver)
+- [Kyle Plump](https://github.com/kyleplump)
+- [Mina Slater](https://github.com/minaslater)
+- [Sean Collins](https://github.com/cllns)
+- [stephannv](https://github.com/stephannv)
+- [Tim Riley](https://github.com/timriley)
 
 And thank you again for giving this beta a try! We’re looking forward to hearing your feedback. 🌸
