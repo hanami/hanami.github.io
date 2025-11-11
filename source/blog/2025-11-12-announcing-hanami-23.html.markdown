@@ -5,72 +5,92 @@ tags: announcements
 author: Tim Riley
 image: true
 excerpt: >
-  TODO WOO
+  Our biggest release yet. Rack 3, resource routes, and so much more.
 ---
+
+Today we are excited to announce Hanami 2.3! With this release, we unlock Rack 3, introduce resource routes, and deliver dozens of quality-of-life improvements that make building with Hanami smoother than ever.
 
 ## Built for Rack 3
 
-With this release, we introduce Rack 3 support to Hanami!
+We are excited to bring Rack 3 support to Hanami! We now support both versions 2 and 3, so you can use whichever version of Rack suits your situation. We encourage you to upgrade Rack when you can, and we’re happy that Hanami can help you on this path.
 
-We now support both versions 2 and 3, so you can use whichever version of Rack suits your situation. We encourage you to upgrade Rack when you can, and we’re happy that Hanami is no longer a blocker on this path.
-
-When you decide to upgrade to Rack 3, check out the [Rack 3 upgrade guide](https://github.com/rack/rack/blob/main/UPGRADE-GUIDE.md). The essential changes are handled for you by Hanami, but you may need to update some of your app code if you’re working with Rack request/response details.
+When you upgrade to Rack 3, check out the [Rack 3 upgrade guide](https://github.com/rack/rack/blob/main/UPGRADE-GUIDE.md). Hanami already handles the essential changes for you, but you may need to update your app code if you’re working with Rack request/response details.
 
 ## Streamlined from route to response
 
-write words here
+More than just Rack, we’ve refined all aspects of our routing and request handling layer. The biggest thing is our re-introduction of resource-based routing.
 
-plus more routing and request handling improvements:
+To follow RESTful conventions, you would previously declare these routes:
 
-- router: scopes with `as:` for name prefix
-- router: route names specifying own prefix
-- The router sees a big runtime performance boost for large numbers of routes, addressing a performance regression that was introduced as part of some fixes in Hanami 2.2.
-- parsing of multipart and JSON request bodies by default
-- Improved action formats config
-- Access subdomains using `Request#subdomains`, and configure your default TLD length with `config.actions.default_tld_length`.
+```ruby
+# Previously...
+get "/books", to: "books.index", as: :books
+get "/books/:id", to: "books.show", as: :book
+get "/books/new", to: "books.new", as: :new_book
+post "/books", to: "books.create"
+get "/books/:id/edit", to: "books.edit", as: :edit_book
+patch "/books/:id", to: "books.update"
+delete "/books/:id", to: "books.destroy"
+```
+
+Now, all you need is one:
+
+```ruby
+# Now! 🥰
+resources :books
+```
+
+Resource routing is integrated with every aspect of routing. Resources can be customized, nested, and combined with scopes and ordinary routes. [Learn more here](#TODO).
+
+The improvements don’t stop there! With this release:
+
+- Route scopes can be given custom name prefixes.
+- Routes can be named with a prefix that precedes scope prefixes.
+- Router runtime performance is considerably improved for large numbers of routes.
+- Multipart form and JSON request bodies are parsed by default.
+- Action format config is [clearer and more flexible](#).
+- You can access your subdomains via `Request#subdomains`, and [configure your TLD length](#).
 - When you specify `'nonce'` in your content security policy, a nonce is automatically added to `javascript_tag` and `stylesheet_tag`.
-- controller: load CSRF tokens from X-CSRF-Token header
+- CSRF tokens are loaded from the `X-CSRF-Token` header in addition to request params.
 
 ## DX in the details
 
-- Running `hanami new` will now initialize a Git repository in your new app.
-- --gem-source option for hanami new
-- new options: --skip-view
-- bin/setup script, improved README
-- bin/hanami binstub (and rake)
+We’ve also improved many more of your day-to-day interactions with Hanami:
+
+- `hanami new` now initializes a Git repository for new apps. You can also provide `--skip-view` to skip the view layer, as well as `--gem-source`, so you can use [gem.coop](https://gem.coop) from the get-go.
+- New apps get a helpful `bin/setup` script as well as an improved README with a handy list of first steps.
+- New apps also receive a `bin/hanami` binstub, so you can invoke `bin/hanami` directly without requiring a `bundle exec`.
 - Run `hanami db rollback` to easily rollback a database migration.
-- Add your own methods to `hanami console` via own modules. Add `config.console.include MyModule, AnotherModule` to your app class.
+- Add your own methods to the `hanami console` via your own modules: add `config.console.include MyModule` in your app class.
 - Prefer Pry to IRB? Make it the default with `config.console.engine = :pry`.
-- print one-time warning when accessing keys in console (plus console --boot flag)
-- The default `Rakefile` will automatically load custom tasks from the conventional `lib/tasks/` location.
-- generate view context class
-- generate improvements
-  - Run any `hanami generate` command inside a slice directory and the slice will automatically be used as the target for the new files.
-  - `hanami generate action` now accepts a `--skip-tests` flag.
-  - `hanami generate action` will add routes to slice-specific `config/routes.rb` files, if present.
-  - `hanami generate` commands now graceully handle names given with mixed cases.
+- The console now prints a one-time warning when you access the `keys` for an un-booted app or slice. You can also chose to boot your app preemptively with `hanami console --boot`.
+- The default `Rakefile` will automatically load custom tasks from `lib/tasks/`.
+- [View context](#) classes are generated by default, so you can more easily see where to put custom view logic.
+- Run `hanami generate` command within a slice directory and the generated file will target that slice automatically.
 
-plus many other small improvements and fixes. check out the CHANGELOGS (todo: link to CHANGELOGs)
+We’ve made dozens more small improvements and fixes. Check out [the changelogs](#) to learn more.
 
-We’re just getting started. We’d love to see you help improve our DX.
+## Try Hanami 2.3
 
-## Try it yourself
+There’s never been a better time to try Hanami. For this release we’ve also made our [getting started guide](https://guides.hanamirb.org/v2.3/introduction/getting-started/) easier to follow, with all testing steps moved to a section at the end. Now you can get up and running faster than ever!
 
-if you have an existing app, check out the upgrade notes.
-
-we've updated our getting started guide to be more concise; tests at the end. give it a look!
+Why don’t you give it a try? Your first Hanami app is just a few commands away:
 
 ```shell
 $ gem install hanami
 $ hanami new my_app
 $ cd my_app
-$ bundle exec hanami dev
+$ bin/hanami dev
 $ open http://localhost:2300
 ```
 
-## How 'bout our team yo
+We’d love to hear how you go! Come join our [Discord](https://discord.gg/KFCxDmk3JQ) or [forum](https://discourse.hanamirb.org) and share your experience with our lovely community.
 
-Our biggest contributing group yet!
+If you’re a certified legend already rocking a Hanami app, make sure to check out the [upgrade notes](https://guides.hanamirb.org/v2.3/upgrade-notes/v2.3/) for 2.3.
+
+## Thank you to our contributors!
+
+Hanami 2.3 is a significant release: it comes courtesy of our **biggest contributors group yet.** Thank you to all these wonderful humans!
 
 - [Aaron Allen](https://github.com/aaronmallen)
 - [Adam Lassek](https://github.com/alassek)
@@ -78,6 +98,7 @@ Our biggest contributing group yet!
 - [Alexander Zagaynov](https://github.com/AlexanderZagaynov)
 - [Andrea Fomera](https://github.com/afomera)
 - [Brandon Weaver](https://github.com/baweaver)
+- [Damian C. Rossney](https://github.com/dcr8898)
 - [David Celis](https://github.com/davidcelis)
 - [Hana Rimawi](https://github.com/hanarimawi)
 - [inouire](https://github.com/inouire)
@@ -89,7 +110,9 @@ Our biggest contributing group yet!
 - [Mina Slater](https://github.com/minaslater)
 - [Paweł Świątkowski](https://github.com/katafrakt)
 - [Petrik de Heus](https://github.com/p8)
+- [Philip Arndt](https://github.com/parndt)
 - [Rob Yurkowski](https://github.com/robyurkowski)
+- [Ryan Bigg](https://github.com/radar)
 - [Sean Collins](https://github.com/cllns)
 - [Simon Thiboutôt](https://github.com/masterT)
 - [stephannv](https://github.com/stephannv)
@@ -100,3 +123,11 @@ Our biggest contributing group yet!
 - [Wout](https://github.com/wout)
 - [wuarmin](https://github.com/wuarmin)
 - [y-yagi](https://github.com/y-yagi)
+
+There’s always room for more. Our community is [inclusive and welcoming](https://hanamirb.org/community/), and we’d love to have you join us.
+
+## Thank you to our patrons! 🌸
+
+This is also our first major release since launching our [sponsorship program](https://sponsor.hanamirb.org). I’d like to extend my deepest thanks to the patrons who made this release possible: [**Sidekiq**](https://sidekiq.org), [**Brandon Weaver**](https://github.com/baweaver), [**Honeybadger**](https://www.honeybadger.io/?utm_source=hanami&utm_medium=paid-referral&utm_campaign=founding-patron), [**FastRuby.io**](https://www.fastruby.io/) and [**AppSignal**](https://www.appsignal.com/).
+
+Thank you also to the individuals supporting Hanami through our [GitHub Sponsors](https://github.com/sponsors/hanami). There are now 21 of you!
