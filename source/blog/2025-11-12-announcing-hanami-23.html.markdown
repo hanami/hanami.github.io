@@ -1,6 +1,6 @@
 ---
 title: "Hanami 2.3: Racked and Ready"
-date: 2025-11-12 12:00:00 UTC
+date: 2025-11-12 13:00:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
@@ -72,7 +72,7 @@ We’ve made dozens more small improvements and fixes. Check out [the changelogs
 
 ## Try Hanami 2.3
 
-There’s never been a better time to try Hanami. For this release we’ve also made our [getting started guide](https://guides.hanamirb.org/v2.3/introduction/getting-started/) easier to follow, with all testing steps moved to a section at the end. Now you can get up and running faster than ever!
+There’s never been a better time to try Hanami. For this release we’ve made our [getting started guide](https://guides.hanamirb.org/v2.3/introduction/getting-started/) more concise and easier to follow. Now you can get up and running faster than ever!
 
 Why don’t you give it a try? Your first Hanami app is just a few commands away:
 
@@ -129,6 +129,8 @@ There’s always room for more. Our community is [inclusive and welcoming](https
 
 ## Thank you to our patrons! 🌸
 
-This is also our first major release since launching our [sponsorship program](https://sponsor.hanamirb.org). I’d like to extend my deepest thanks to the patrons who made this release possible: [**Sidekiq**](https://sidekiq.org), [**Brandon Weaver**](https://github.com/baweaver), [**Honeybadger**](https://www.honeybadger.io/?utm_source=hanami&utm_medium=paid-referral&utm_campaign=founding-patron), [**FastRuby.io**](https://www.fastruby.io/) and [**AppSignal**](https://www.appsignal.com/).
+This is also our first major release since launching our [sponsorship program](https://sponsor.hanamirb.org). I’d like to extend my deepest thanks to our founding patrons: [**Sidekiq**](https://sidekiq.org), [**Brandon Weaver**](https://github.com/baweaver), [**Honeybadger**](https://www.honeybadger.io/?utm_source=hanami&utm_medium=paid-referral&utm_campaign=founding-patron), [**FastRuby.io**](https://www.fastruby.io/) and [**AppSignal**](https://www.appsignal.com/). Without you, this release wouldn’t have been possible.
 
 Thank you also to the individuals supporting Hanami through our [GitHub Sponsors](https://github.com/sponsors/hanami). There are now 21 of you!
+
+We’d love for you to become a patron too. [Learn more here](https://sponsor.hanamirb.org).
