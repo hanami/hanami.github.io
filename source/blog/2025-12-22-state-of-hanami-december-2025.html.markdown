@@ -85,9 +85,10 @@ Once again, we took ourselves to some conferences!
 * [Sean](https://github.com/cllns) attended [Rocky Mountain Ruby](https://rockymtnruby.dev) in Boulder, Colorado, and spoke on [Slicing and Dicing through Complexity with Hanami](https://www.rubyevents.org/talks/slicing-and-dicing-through-complexity-with-hanami?back_to=%2Fevents%2Frocky-mountain-ruby-2025%2Ftalks%3Fscroll_top%3D1872&back_to_title=Rocky+Mountain+Ruby+2025). He also got to spend some quality time with some #HanamiFriends new and old!
 * Tim was lucky enough to reprise his talk at both [XO Ruby San Diego](https://www.xoruby.com/event/san-diego/) and [thoughtbot Open Summit](https://thoughtbot.com/blog/announcing-the-thoughtbot-open-summit-2025-full-schedule). Thanks to XO organiser [Jim Resnik](https://ruby.social/@jremsikjr), the San Diego talk was streamed to the internet, and the Open Summit was a native online event. We saw a good-sized group come together for each one, and I’m really glad I could share Hanami in such an open way. Thank you to Jim and thoughtbot for making these happen!
 
-![Sean on stage at Rocky Mountain Ruby](/blog/2025/12/22/state-of-hanami-december-2025/sean-at-rocky-mountain-ruby.jpeg "Sean on stage at Rocky Mountain Ruby")
-
-![Matz joins the Hanami table at Baltic Ruby](/blog/2025/12/22/state-of-hanami-december-2025/tim-at-baltic-ruby.jpeg "Matz joins the Hanami table at Baltic Ruby")
+<div style="display: flex; gap: 1rem;">
+<img src="/blog/2025/12/22/state-of-hanami-december-2025/sean-at-rocky-mountain-ruby.jpeg" alt="Sean on stage at Rocky Mountain Ruby" style="flex: 1; max-width: 50%;">
+<img src="/blog/2025/12/22/state-of-hanami-december-2025/tim-at-baltic-ruby.jpeg" alt="Matz joins the Hanami table at Baltic Ruby" style="flex: 1; max-width: 50%;">
+</div>
 
 ## We launched our sponsorship program
 
