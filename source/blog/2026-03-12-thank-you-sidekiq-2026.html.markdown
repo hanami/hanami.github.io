@@ -1,6 +1,6 @@
 ---
 title: Thank you Sidekiq for your support in 2026
-date: 2026-03-10 12:30:00 UTC
+date: 2026-03-12 01:15:00 UTC
 tags: announcements
 author: Tim Riley
 image: true
